@@ -1,0 +1,16 @@
+package: d2u_helper
+version: '1.0.0'
+author: Tobias Krais
+supportpage: http://github.com/tobiaskrais/d2u_helper
+
+page:
+    title: 'translate:d2u_helper_meta_title'
+    perm: d2u_helper[]
+    icon: rex-icon fa-cubes
+    subpages:
+        modules: { title: 'translate:d2u_helper_meta_modules', icon: rex-icon rex-icon-module }
+
+requires:
+    redaxo: '>=5.1.0'
+    php:
+        version: '>=5.5'

@@ -1,0 +1,12 @@
+d2u_helper_meta_title = D2U Helper
+d2u_helper_meta_modules = Modulverwaltung
+
+d2u_helper_modules_autoupdate = Autoupdate
+d2u_helper_modules_autoupdate_activated = Autoupdate aktiviert
+d2u_helper_modules_autoupdate_deactivated = Autoupdate deaktiviert
+d2u_helper_modules_d2u_id = ID
+d2u_helper_modules_d2u_module_name = D2U Modulname
+d2u_helper_modules_install_error = Fehler beim Installieren
+d2u_helper_modules_installed = Modul installiert
+d2u_helper_modules_pair_new = Neues Redaxo Modul anlegen
+d2u_helper_modules_paired_rex_module = Zugeordnetes Redaxo Modul
