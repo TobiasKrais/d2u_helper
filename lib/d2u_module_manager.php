@@ -119,7 +119,7 @@ class D2UModuleManager {
 			"04-1 Google Maps - Input.php",
 			"04-1 Google Maps - Output.php",
 			"Google Maps",
-			1);
+			2);
 		$d2u_modules[] = new D2UModule("05-1",
 			"05-1 Artikelweiterleitung - Input.php",
 			"05-1 Artikelweiterleitung - Output.php",

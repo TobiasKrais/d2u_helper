@@ -24,7 +24,7 @@
 	$infotext = "REX_VALUE[id=2 output=html]";
 	$infotext = strtr($infotext, $substitute);
 ?>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js<?php echo $api_key; ?>"></script> 
+	<script type="text/javascript" src="https://maps.google.com/maps/api/js<?php echo $api_key; ?>"></script> 
 	<div id="map_canvas" style="display: block; width: 100%; height: <?php echo $height; ?>"></div> 
 	<script type="text/javascript"> 
 		function createGeocodeMap() {
