@@ -1,6 +1,6 @@
 <?php
 /**
- * Version 1.0
+ * Version 2
  */
 	$cols = "REX_VALUE[20]";
 	if($cols == "") {
