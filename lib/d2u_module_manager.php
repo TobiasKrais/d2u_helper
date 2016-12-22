@@ -27,7 +27,8 @@ class D2UModuleManager {
 	private static $rex_modules = [];
 	
 	/**
-	 * Constructor. Sets values.
+	 * Constructor. Sets values. The path that is constructed is during addon
+	 * update the path of the new addon folder. Otherwise the normal addon path.
 	 * @param D2UModule[] $d2u_modules Array with D2U modules
 	 * @param string $module_folder Folder, in which modules can be found.
 	 * Trailing slash must be included. Default "modules/".
@@ -37,6 +38,10 @@ class D2UModuleManager {
 		$this->d2u_modules = $d2u_modules;
 		$this->module_addon = rex_addon::get($addon_key);
 		$this->module_folder = $this->module_addon->getPath($module_folder);
+		// Path during addon update
+		if(file_exists(str_replace($addon_key, ".new.". $addon_key, $this->module_folder))) {
+			$this->module_folder = str_replace($addon_key, ".new.". $addon_key, $this->module_folder);
+		}
 
 		foreach($this->d2u_modules as $key =>$d2u_module) {
 			$d2u_module->initRedaxoContext($this->module_addon, $this->module_folder);
@@ -49,10 +54,12 @@ class D2UModuleManager {
 	 */
 	public function autoupdate() {
 		foreach($this->d2u_modules as $module) {
-			if($module->isAutoupdateActivated() && $module->isUpdateNeeded()) {
+			// Only check autoupdate, not if needed. That would not work during addon update
+			if($module->isAutoupdateActivated()) {
 				$module->install();
 			}
-		}		
+		}
+		rex_delete_cache();
 	}
 	
 	/**
@@ -372,7 +379,7 @@ class D2UModule {
 		$this->filename_input = $module_folder . $this->filename_input;
 		$this->filename_output = $module_folder . $this->filename_output;
 	}
-	
+
 	/**
 	 * Installes or updates the module in redaxo module table.
 	 * @param int Redaxo module id, if not passed, already available ID is taken.
