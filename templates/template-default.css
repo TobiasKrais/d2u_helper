@@ -1,0 +1,133 @@
+@font-face{
+	font-family:'FontAwesome';
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?v=4.6.3");
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?#iefix&v=4.6.3") format('embedded-opentype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff2?v=4.6.3") format('woff2'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff?v=4.6.3") format('woff'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.6.3") format('truetype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.6.3#fontawesomeregular") format('svg');
+}
+body {
+	-moz-hyphens: auto;
+	-o-hyphens: auto;
+   	-ms-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+a, a:link, a:visited, a:hover
+	{text-decoration: none;}
+img
+	{border: 0px;
+	max-width: 100%;}
+.abstand
+	{margin: 1em auto 0;}
+	
+header {
+	background-size: cover;
+	padding-top: 2em;
+}
+@media screen and (min-width: 1000px) {
+	header {
+		min-height: 390px;
+	}
+}
+#logo {
+}
+#langchooser {
+	float: right;
+}
+#langchooser img {
+	margin: 0 10px 3px 0;
+}
+#langchooser a {
+	color: white;
+}
+
+.subhead {
+	background-color: template_color_03;
+}
+.subhead a {
+	color: template_color_02;
+}
+.subhead a:hover {
+	text-decoration: underline;
+}
+h1.subhead {
+	padding: 0.5em 0;
+}
+#breadcrumbs {
+	padding: 1em 0 0 0;
+}
+#breadcrumbs.subhead, #breadcrumbs.subhead a {
+	color: template_color_02;
+}
+.fa-home {
+	font-family: FontAwesome;
+}
+.fa-home:before {
+	content: "\f015";
+}
+
+nav {
+	background-color: template_color_01;
+	border-bottom: solid 1px white;
+}
+nav a {
+	text-decoration: none;
+}
+.desktop-inner {
+	font-weight: bold;
+	padding: 15px 20px;
+}
+.desktop-navi:hover div.desktop-inner, .desktop-navi div:hover, .desktop-navi a:hover {
+	color: template_color_03 !important;
+	cursor: pointer;
+}
+.desktop-navi:hover {
+	background-color: white !important;
+}
+
+article {
+	font-family: 'Ubuntu', sans-serif;
+	padding: 1em 0;
+}
+article a, article a:visited, #breadcrumbs a {
+	color: #0c419d;
+}
+article a:hover {
+	color: #f00404;
+}
+article h1, article h2, article h3, article h4, article h5, article h6 {
+	color: template_color_01;
+	margin-top: 0;
+}
+article h1, article h2 {
+	font-weight: bold;
+}
+
+section {
+	font-family: 'Ubuntu', sans-serif;
+}
+footer {
+	background-color: template_color_03;	
+	font-family: 'Ubuntu', sans-serif;
+	padding: 1em 1em 0 1em;
+}
+footer a {
+	color: white;
+}
+footer a:hover {
+	color: white;
+	text-decoration: underline;
+}
+.footerbox {
+	background-color: template_color_04;
+	margin-bottom: 1em;
+	padding: 5px 1em;
+}
+
+/* YForm Captcha */
+.input-group-addon {
+	min-width: 150px;
+	padding: 0px !important;
+}

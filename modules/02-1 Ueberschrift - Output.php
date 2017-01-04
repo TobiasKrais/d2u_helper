@@ -7,6 +7,6 @@
 		$cols = 8;
 	}
 ?>
-<div class="col-xs-12 col-sm-<?php echo $cols; ?>">
+<div class="col-xs-12 col-md-<?php echo $cols; ?>">
 	<REX_VALUE[2]>REX_VALUE[1]</REX_VALUE[2]>
 </div>

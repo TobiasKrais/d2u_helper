@@ -75,11 +75,11 @@ class D2UModuleManager {
 				if($function == "autoupdate") {
 					if($module->isAutoupdateActivated()) {
 						$module->disableAutoupdate();
-						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_modules_autoupdate_deactivated'));
+						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_autoupdate_deactivated'));
 					}
 					else {
 						$module->activateAutoupdate();
-						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_modules_autoupdate_activated'));
+						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_autoupdate_activated'));
 					}
 				}
 				else {
@@ -88,12 +88,41 @@ class D2UModuleManager {
 						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_modules_installed'));
 					}
 					else {
-						print rex_view::error($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_modules_install_error'));
+						print rex_view::error($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_install_error'));
 					}
 				}
 				break;
 			}
 		}		
+		rex_delete_cache();
+	}
+	
+	/**
+	 * Get combined CSS styles for installed modules.
+	 * @return string Combined CSS
+	 */
+	public function getAutoCSS() {
+		$css = "";
+		foreach($this->d2u_modules as $module) {
+			if($module->isInstalled() && $module->getCSS() != "") {
+				$css .= $module->getCSS() . PHP_EOL;
+			}
+		}
+		return $css;
+	}
+	
+	/**
+	 * Get combined JavaScript for installed modules.
+	 * @return string Combined JavaScript
+	 */
+	public function getAutoJS() {
+		$js = "";
+		foreach($this->d2u_modules as $module) {
+			if($module->isInstalled() && $module->getJS() != "") {
+				$js .= $module->getJS() . PHP_EOL;
+			}
+		}
+		return $js;
 	}
 	
 	/**
@@ -111,17 +140,30 @@ class D2UModuleManager {
 			"01-1 Texteditor - Input.php",
 			"01-1 Texteditor - Output.php",
 			"Texteditor",
-			1);
+			2);
+		$d2u_modules[] = new D2UModule("01-2",
+			"01-2 Texteditor mit Bild und Ueberschrift - Input.php",
+			"01-2 Texteditor mit Bild und Ueberschrift - Output.php",
+			"Texteditor mit Bild und Überschrift",
+			2,
+			"module-box/module-box.css");
 		$d2u_modules[] = new D2UModule("02-1",
 			"02-1 Ueberschrift - Input.php",
 			"02-1 Ueberschrift - Output.php",
 			"Ueberschrift",
-			1);
+			2);
 		$d2u_modules[] = new D2UModule("03-1",
 			"03-1 Bild - Input.php",
 			"03-1 Bild - Output.php",
 			"Bild",
-			1);
+			2);
+		$d2u_modules[] = new D2UModule("03-2",
+			"03-2 Bildergalliere Ekko Lightbox - Input.php",
+			"03-2 Bildergalliere Ekko Lightbox - Output.php",
+			"Bildergalliere Ekko Lightbox",
+			1,
+			"ekko-lightbox/ekko-lightbox.css",
+			"ekko-lightbox/ekko-lightbox.min.js");
 		$d2u_modules[] = new D2UModule("04-1",
 			"04-1 Google Maps - Input.php",
 			"04-1 Google Maps - Output.php",
@@ -136,7 +178,8 @@ class D2UModuleManager {
 			"06-1 YouTube Video - Input.php",
 			"06-1 YouTube Video - Output.php",
 			"YouTube Video",
-			1);
+			1,
+			"youtube-wrapper/youtube-wrapper.css");
 		return $d2u_modules;
 	}
 	
@@ -173,11 +216,11 @@ class D2UModuleManager {
 
 		print '<thead>';
 		print '<tr>';
-		print '<th class="rex-table-id">'. rex_i18n::msg('d2u_helper_modules_d2u_id') .'</th>';
+		print '<th class="rex-table-id">'. rex_i18n::msg('d2u_helper_d2u_id') .'</th>';
 		print '<th>'. rex_i18n::msg('d2u_helper_modules_d2u_module_name') .'</th>';
 		print '<th>'. rex_i18n::msg('version') .'</th>';
 		print '<th>'. rex_i18n::msg('d2u_helper_modules_paired_rex_module') .'</th>';
-		print '<th>'. rex_i18n::msg('d2u_helper_modules_autoupdate') .'</th>';
+		print '<th>'. rex_i18n::msg('d2u_helper_autoupdate') .'</th>';
 		print '<th>'. rex_i18n::msg('module_functions') .'</th>';
 		print '</tr>';
 		print '</thead>';
@@ -265,6 +308,16 @@ class D2UModule {
 	private $filename_input = "";
 
 	/**
+	 * @var string CSS file for the module
+	 */
+	private $filename_css = "";
+
+	/**
+	 * @var string JS file for the module
+	 */
+	private $filename_js = "";
+
+	/**
 	 * @var string Filename with module output
 	 */
 	private $filename_output = "";
@@ -296,13 +349,17 @@ class D2UModule {
 	 * @param string $filename_output Filename with module output
 	 * @param string $name Modules title or name
 	 * @param int $revision Module version number
+	 * @param string $css Modules CSS filename
+	 * @param string $js Modules JS filename
 	 */
-	public function __construct($d2u_module_id, $filename_input, $filename_output, $name, $revision) {
+	public function __construct($d2u_module_id, $filename_input, $filename_output, $name, $revision, $css = "", $js = "") {
 		$this->d2u_module_id = $d2u_module_id;
 		$this->filename_input = $filename_input;
 		$this->filename_output = $filename_output;
 		$this->name = $name;
 		$this->revision = $revision;
+		$this->filename_css = $css;
+		$this->filename_js = $js;
 	}
 	
 	/**
@@ -322,11 +379,33 @@ class D2UModule {
 	}
 
 	/**
+	 * Get module stylesheets.
+	 * @return string CSS
+	 */
+	public function getCSS() {
+		if($this->filename_css != "" && file_exists($this->filename_css)){
+			return file_get_contents($this->filename_css);
+		}
+		return "";
+	}
+
+	/**
 	 * Get D2U Id.
 	 * @return string D2U Module Id
 	 */
 	public function getD2UId() {
 		return $this->d2u_module_id;
+	}
+
+	/**
+	 * Get module Javacript.
+	 * @return string JS
+	 */
+	public function getJS() {
+		if($this->filename_js != "" && file_exists($this->filename_js)){
+			return file_get_contents($this->filename_js);
+		}
+		return "";
 	}
 
 	/**
@@ -378,6 +457,12 @@ class D2UModule {
 		// Set folders correctly
 		$this->filename_input = $module_folder . $this->filename_input;
 		$this->filename_output = $module_folder . $this->filename_output;
+		if($this->filename_css != "") {
+			$this->filename_css = $this->rex_addon->getAssetsPath($this->filename_css);
+		}
+		if($this->filename_js != "") {
+			$this->filename_js = $this->rex_addon->getAssetsPath($this->filename_js);
+		}
 	}
 
 	/**

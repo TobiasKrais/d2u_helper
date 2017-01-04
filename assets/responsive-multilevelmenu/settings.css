@@ -1,0 +1,38 @@
+.desktop-navi, #mobile-menu {
+	float: left;
+	width: auto;
+}
+.desktop-inner {
+	padding: 15px 20px;
+}
+.dl-menuopen, .dl-submenu {
+	width: 300px !important;
+}
+.dl-menuwrapper button, .dl-menuwrapper button:hover,.dl-menuwrapper button.dl-active, .dl-menuwrapper ul, .dl-menuwrapper li .desktop-navi,  #dl-menu button.dl-active {
+	background: template_color_01;
+}
+button.dl-trigger, button.dl-trigger:hover {
+	background: template_color_01;
+}
+.desktop-navi:hover div.desktop-inner {
+	color: template_color_02;
+}
+.dl-menuwrapper li a, .dl-menuwrapper div a, .desktop-navi div, .desktop-navi a, ul.dl-menu a, .dl-menuwrapper li.dl-back:after {
+	color: template_color_02;
+}
+/* Hover */
+.desktop-navi:hover {
+	background-color: template_color_01
+}
+.dl-menu li:hover, .dl-submenu li:hover {
+	background-color: template_color_02;
+}
+.dl-menu li:hover, .dl-subviewopen .dl-submenu li:hover {
+	background-color: template_color_02;
+}
+.dl-menu li:hover a, .dl-subviewopen .dl-submenu li:hover a {
+	color: template_color_03;
+}
+.dl-subviewopen .dl-submenu li a {
+	color: template_color_02;
+}

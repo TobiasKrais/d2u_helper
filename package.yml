@@ -1,5 +1,5 @@
 package: d2u_helper
-version: '1.0.2'
+version: '1.1.0'
 author: Tobias Krais
 supportpage: http://github.com/tobiaskrais/d2u_helper
 
@@ -9,6 +9,8 @@ page:
     icon: rex-icon fa-cubes
     subpages:
         modules: { title: 'translate:d2u_helper_meta_modules', icon: rex-icon rex-icon-module }
+        settings: { title: 'translate:d2u_helper_meta_settings', icon: rex-icon rex-icon-system }
+        templates: { title: 'translate:d2u_helper_meta_templates', icon: rex-icon rex-icon-template }
 
 requires:
     redaxo: '>=5.1.0'

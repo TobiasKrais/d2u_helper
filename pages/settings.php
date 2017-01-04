@@ -1,0 +1,90 @@
+<?php
+// save settings
+if (filter_input(INPUT_POST, "btn_save") == 'save') {
+	$settings = (array) rex_post('settings', 'array', array());
+
+	// Special treatment for media fields
+	$input_media = (array) rex_post('REX_INPUT_MEDIA', 'array', array());
+	$settings['template_header_pic'] = $input_media['template_header_pic'];
+	$settings['template_logo'] = $input_media['template_logo'];
+
+	// Checkbox also need special treatment if empty
+	if(!array_key_exists('include_bootstrap', $settings)) {
+		$settings['include_bootstrap'] = "false";
+	}
+	if(!array_key_exists('include_module', $settings)) {
+		$settings['include_module'] = "false";
+	}
+	if(!array_key_exists('include_menu', $settings)) {
+		$settings['include_menu'] = "false";
+	}
+	
+	// Save settings
+	if(rex_config::set("d2u_helper", $settings)) {
+		echo rex_view::success(rex_i18n::msg('form_saved'));
+	}
+	else {
+		echo rex_view::error(rex_i18n::msg('form_save_error'));
+	}
+}
+?>
+<form action="<?php print rex_url::currentBackendPage(); ?>" method="post">
+	<div class="panel panel-edit">
+		<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_helper_meta_settings'); ?></div></header>
+		<div class="panel-body">
+			<fieldset>
+				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_meta_settings'); ?></legend>
+				<div class="panel-body-wrapper slide">
+					<?php
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap]', 'true', $this->getConfig('include_bootstrap') == 'true');
+					?>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend><small><i class="rex-icon rex-icon-database"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_module'); ?></legend>
+				<div class="panel-body-wrapper slide">
+					<?php
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_module', 'settings[include_module]', 'true', $this->getConfig('include_module') == 'true');
+					?>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend><small><i class="rex-icon fa-navicon"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_menu'); ?></legend>
+				<div class="panel-body-wrapper slide">
+					<?php
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu', 'settings[include_menu]', 'true', $this->getConfig('include_menu') == 'true');
+						$width_options = [
+							"xs" => rex_i18n::msg('d2u_helper_settings_width_xs'),
+							"sm" => rex_i18n::msg('d2u_helper_settings_width_sm'),
+							"md" => rex_i18n::msg('d2u_helper_settings_width_md'),
+							"lg" => rex_i18n::msg('d2u_helper_settings_width_lg'),
+							"xl" => rex_i18n::msg('d2u_helper_settings_width_xl')
+						];
+						d2u_addon_backend_helper::form_select('d2u_helper_settings_menu_show', 'settings[include_menu_show]', $width_options, array($this->getConfig('include_menu_show')));
+					?>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_template'); ?></legend>
+				<div class="panel-body-wrapper slide">
+					<?php
+						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_header_pic', 'template_header_pic', $this->getConfig('template_header_pic'));
+						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_logo', 'template_logo', $this->getConfig('template_logo'));
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_nav_main_color_01', 'settings[template_color_01]', $this->getConfig('template_color_01'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_nav_main_color_02', 'settings[template_color_02]', $this->getConfig('template_color_02'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_nav_main_color_03', 'settings[template_color_03]', $this->getConfig('template_color_03'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_nav_main_color_04', 'settings[template_color_04]', $this->getConfig('template_color_04'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_nav_main_color_05', 'settings[template_color_05]', $this->getConfig('template_color_05'), FALSE, FALSE, "color");
+					?>
+				</div>
+			</fieldset>
+		</div>
+		<footer class="panel-footer">
+			<div class="rex-form-panel-footer">
+				<div class="btn-toolbar">
+					<button class="btn btn-save rex-form-aligned" type="submit" name="btn_save" value="save"><?php echo rex_i18n::msg('form_save'); ?></button>
+				</div>
+			</div>
+		</footer>
+	</div>
+</form>

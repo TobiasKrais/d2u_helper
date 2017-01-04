@@ -7,7 +7,7 @@
 		$cols = 8;
 	}
 ?>
-<div class="col-xs-12 col-sm-<?php echo $cols; ?>">
+<div class="col-xs-12 col-md-<?php echo $cols; ?>">
 <?php
 if ('REX_VALUE[id=1 isset=1]') {
     echo "REX_VALUE[id=1 output=html]";
