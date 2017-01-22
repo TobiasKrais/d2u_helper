@@ -1,3 +1,4 @@
+d2u_helper_meta_help = Hilfe
 d2u_helper_meta_title = D2U Helper
 d2u_helper_meta_modules = Modulverwaltung
 d2u_helper_meta_settings = Einstellungen
@@ -9,22 +10,32 @@ d2u_helper_autoupdate_deactivated = Autoupdate deaktiviert
 d2u_helper_d2u_id = ID
 d2u_helper_install_error = Fehler beim Installieren
 
+d2u_helper_help_chapter_changelog = Changelog
+d2u_helper_help_chapter_readme = Readme
+d2u_helper_help_chapter_update = Update
+
 d2u_helper_modules_d2u_module_name = D2U Modulname
 d2u_helper_modules_installed = Modul installiert
 d2u_helper_modules_pair_new = Neues Redaxo Modul anlegen
 d2u_helper_modules_paired_rex_module = Zugeordnetes Redaxo Modul
 
+d2u_helper_settings_article_color_bg = Artikel Hintergrundfarbe
+d2u_helper_settings_article_color_box = Artikel Hintergrundfarbe Boxen
+d2u_helper_settings_article_color_h = Artikel Farbe Überschriften
+d2u_helper_settings_footer_color_bg = Hintergrund Footer
+d2u_helper_settings_footer_color_box = Hintergrund Footer Boxen
 d2u_helper_settings_include_bootstrap = Bootstrap 4 mit abhängingen JQuery und Tether CSS / JS automatisch einbinden
 d2u_helper_settings_include_menu = CSS / JS des Responsive MultiLevel Menüs automatisch einbinden
 d2u_helper_settings_include_module = CSS / JS der installierten Module automatisch einbinden
-d2u_helper_settings_nav_main_color_01 = 1. Hauptfarbe (Hintergrundfarbe Navigation, Überschriften)
-d2u_helper_settings_nav_main_color_02 = 2. Hauptfarbe (Schrift und Hintergrund Hover Navigation)
-d2u_helper_settings_nav_main_color_03 = 3. Hauptfarbe (Schrift Hover Navigation, Hintergrund Footer)
-d2u_helper_settings_nav_main_color_04 = 4. Hauptfarbe (Hintergrund Footer Boxen)
-d2u_helper_settings_nav_main_color_05 = Hintergrundfarbe Boxen im Artikel
 d2u_helper_settings_menu = Menü Einstellungen
 d2u_helper_settings_menu_show = Bis zu welcher Bildschirmgröße soll mobiles Menü angezeigt werden?
 d2u_helper_settings_module = Modul Einstellungen
+d2u_helper_settings_navi_color_bg = Navigation Hintegrundfarbe
+d2u_helper_settings_navi_color_font = Navigation Schriftfarbe
+d2u_helper_settings_navi_color_hover_bg = Navigation Hover Hintergrundfarbe
+d2u_helper_settings_navi_color_hover_font = Navigation Hover Schriftfarbe
+d2u_helper_settings_subhead_color_bg = Titel / Breadcrumb Hintergrundfarbe
+d2u_helper_settings_subhead_color_font = Titel / Breadcrumb Schriftfarbe
 d2u_helper_settings_template = Einstellungen für Template, Module und Menü
 d2u_helper_settings_template_header_pic = Standart Bild im Header
 d2u_helper_settings_template_logo = Website Logo

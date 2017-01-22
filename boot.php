@@ -73,15 +73,15 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 		$insert_body .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'"></script>' . PHP_EOL;
 	}
 
-	$helper_head_js = FALSE;
+	$helper_body_js = FALSE;
 	// Module stuff in body
 	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true") {
 		$module_manager = new D2UModuleManager(D2UModuleManager::getD2UHelperModules());
 		if($module_manager->getAutoJS() != "") {
-			$helper_head_js = TRUE;
+			$helper_body_js = TRUE;
 		}
 	}
-	if($helper_head_js) {
+	if($helper_body_js) {
 		$insert_body .= '<script type="text/javascript" src="index.php?position=body&d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
@@ -92,24 +92,20 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
  * @param string $css CSS string
  * @return string replaced CSS
  */
-function applyTemplateCSS($css) {
+function applyColorToCSS($css) {
 	$d2u_helper = rex_addon::get('d2u_helper');
-	// Apply template settings
-	if($d2u_helper->hasConfig("template_color_01")) {
-		$css = str_replace("template_color_01", $d2u_helper->getConfig("template_color_01"), $css);
+
+	// Apply template color settings
+	$colors = ['navi_color_bg', 'navi_color_font', 'navi_color_hover_bg', 'navi_color_hover_font',
+		'subhead_color_bg', 'subhead_color_font',
+		'article_color_bg', 'article_color_h', 'article_color_box',
+		'footer_color_bg', 'footer_color_box'];
+	foreach($colors as $color) {
+		if($d2u_helper->hasConfig($color)) {
+			$css = str_replace($color, $d2u_helper->getConfig($color), $css);
+		}
 	}
-	if($d2u_helper->hasConfig("template_color_02")) {
-		$css = str_replace("template_color_02", $d2u_helper->getConfig("template_color_02"), $css);
-	}
-	if($d2u_helper->hasConfig("template_color_03")) {
-		$css = str_replace("template_color_03", $d2u_helper->getConfig("template_color_03"), $css);
-	}
-	if($d2u_helper->hasConfig("template_color_04")) {
-		$css = str_replace("template_color_04", $d2u_helper->getConfig("template_color_04"), $css);
-	}
-	if($d2u_helper->hasConfig("template_color_05")) {
-		$css = str_replace("template_color_05", $d2u_helper->getConfig("template_color_05"), $css);
-	}
+
 	return $css;
 }
 
@@ -177,7 +173,7 @@ function sendD2UHelperCSS() {
 		}
 
 		// Apply template settings and compress
-		print compressCSS(applyTemplateCSS($css));
+		print compressCSS(applyColorToCSS($css));
 		exit;	
 }
 
@@ -213,7 +209,6 @@ function sendD2UHelperJS($position = "head") {
  */
 function sendD2UHelperTemplateCSS($d2u_template_id = "") {
 		header('Content-type: text/css');
-		$d2u_helper = rex_addon::get('d2u_helper');
 		$css = "";
 		// Template CSS
 		if($d2u_template_id != "") {
@@ -223,7 +218,7 @@ function sendD2UHelperTemplateCSS($d2u_template_id = "") {
 		}
 		
 		// Apply template settings
-		$css = applyTemplateCSS($css);
+		$css = applyColorToCSS($css);
 		
 		// Compress
 		print compressCSS($css);

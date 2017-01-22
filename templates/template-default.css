@@ -23,6 +23,7 @@ img
 	{margin: 1em auto 0;}
 	
 header {
+	background-position: center;
 	background-size: cover;
 	padding-top: 2em;
 }
@@ -44,10 +45,10 @@ header {
 }
 
 .subhead {
-	background-color: template_color_03;
+	background-color: subhead_color_bg;
 }
 .subhead a {
-	color: template_color_02;
+	color: subhead_color_font;
 }
 .subhead a:hover {
 	text-decoration: underline;
@@ -59,7 +60,7 @@ h1.subhead {
 	padding: 1em 0 0 0;
 }
 #breadcrumbs.subhead, #breadcrumbs.subhead a {
-	color: template_color_02;
+	color: subhead_color_font;
 }
 .fa-home {
 	font-family: FontAwesome;
@@ -69,7 +70,7 @@ h1.subhead {
 }
 
 nav {
-	background-color: template_color_01;
+	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
 }
 nav a {
@@ -80,14 +81,15 @@ nav a {
 	padding: 15px 20px;
 }
 .desktop-navi:hover div.desktop-inner, .desktop-navi div:hover, .desktop-navi a:hover {
-	color: template_color_03 !important;
+	color: navi_color_hover_font !important;
 	cursor: pointer;
 }
 .desktop-navi:hover {
-	background-color: white !important;
+	background-color: navi_color_hover_bg !important;
 }
 
 article {
+	background-color: article_color_bg;
 	font-family: 'Ubuntu', sans-serif;
 	padding: 1em 0;
 }
@@ -98,7 +100,7 @@ article a:hover {
 	color: #f00404;
 }
 article h1, article h2, article h3, article h4, article h5, article h6 {
-	color: template_color_01;
+	color: article_color_h;
 	margin-top: 0;
 }
 article h1, article h2 {
@@ -109,7 +111,7 @@ section {
 	font-family: 'Ubuntu', sans-serif;
 }
 footer {
-	background-color: template_color_03;	
+	background-color: footer_color_bg;
 	font-family: 'Ubuntu', sans-serif;
 	padding: 1em 1em 0 1em;
 }
@@ -121,7 +123,7 @@ footer a:hover {
 	text-decoration: underline;
 }
 .footerbox {
-	background-color: template_color_04;
+	background-color: footer_color_box;
 	margin-bottom: 1em;
 	padding: 5px 1em;
 }
@@ -130,4 +132,31 @@ footer a:hover {
 .input-group-addon {
 	min-width: 150px;
 	padding: 0px !important;
+}
+
+/* Machinery Addon */
+.box {
+	background-color: article_color_h;
+	border: 1px solid article_color_h;
+	text-align: center;
+}
+.box div {
+	color: white;
+	padding: 5px;
+}
+.box img {
+	max-width: 100%;
+}
+.nav li a.active {
+	background: url("../assets/addons/d2u_machinery/icon_arrowTabs.svg") no-repeat 50% bottom;
+}
+.nav li, .nav li.active {
+	padding: 0 2em 0 0;
+}
+.nav li a, .nav li.active a {
+	font-weight: bold;
+	padding: 0 0 15px 0;
+}
+.subhead-nav {
+	margin-bottom: 11px;
 }

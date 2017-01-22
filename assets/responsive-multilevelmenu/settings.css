@@ -9,30 +9,30 @@
 	width: 300px !important;
 }
 .dl-menuwrapper button, .dl-menuwrapper button:hover,.dl-menuwrapper button.dl-active, .dl-menuwrapper ul, .dl-menuwrapper li .desktop-navi,  #dl-menu button.dl-active {
-	background: template_color_01;
+	background: navi_color_hover_bg;
 }
 button.dl-trigger, button.dl-trigger:hover {
-	background: template_color_01;
+	background: navi_color_bg;
 }
 .desktop-navi:hover div.desktop-inner {
-	color: template_color_02;
+	color: navi_color_hover_font;
 }
 .dl-menuwrapper li a, .dl-menuwrapper div a, .desktop-navi div, .desktop-navi a, ul.dl-menu a, .dl-menuwrapper li.dl-back:after {
-	color: template_color_02;
+	color: navi_color_font;
 }
 /* Hover */
 .desktop-navi:hover {
-	background-color: template_color_01
+	background-color: navi_color_hover_bg
 }
 .dl-menu li:hover, .dl-submenu li:hover {
-	background-color: template_color_02;
+	background-color: navi_color_hover_bg;
 }
 .dl-menu li:hover, .dl-subviewopen .dl-submenu li:hover {
-	background-color: template_color_02;
+	background-color: navi_color_hover_bg;
 }
 .dl-menu li:hover a, .dl-subviewopen .dl-submenu li:hover a {
-	color: template_color_03;
+	color: navi_color_hover_font;
 }
 .dl-subviewopen .dl-submenu li a {
-	color: template_color_02;
+	color: navi_color_font;
 }

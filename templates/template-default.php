@@ -191,7 +191,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 						}
 					?>
 				</div>
-				<div class="col-xs-12">
+				<div class="col-xs-12 subhead-nav">
 					<?php
 						if($machine !== FALSE) {
 							print '<br><h1 class="subhead">'. $machine->name .'</h1>';
@@ -234,11 +234,11 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 							print '<ul class="nav nav-pills">';
 							$class_active = ' class="active"';
 							if($current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_sale')) {
-								print '<li class="nav-item"><a data-toggle="tab" href="#tab_sale"'. $class_active .'>'. $tag_open .'d2u_machinery_used_machines_offer_sale'. $tag_close .'</a></li>';
+								print '<li class="nav-item"><a data-toggle="tab" href="#tab_sale"'. $class_active .'>'. $tag_open .'d2u_machinery_used_machines_offers_sale'. $tag_close .'</a></li>';
 								$class_active = '';
 							}
 							if($current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_rent')) {
-								print '<li class="nav-item"><a data-toggle="tab" href="#tab_rent"'. $class_active .'>'. $tag_open .'d2u_machinery_used_machines_offer_rent'. $tag_close .'</a></li>';
+								print '<li class="nav-item"><a data-toggle="tab" href="#tab_rent"'. $class_active .'>'. $tag_open .'d2u_machinery_used_machines_offers_rent'. $tag_close .'</a></li>';
 							}
 							print '</ul>';
 						}
