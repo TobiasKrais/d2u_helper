@@ -8,19 +8,28 @@
 .dl-menuopen, .dl-submenu {
 	width: 300px !important;
 }
-.dl-menuwrapper button, .dl-menuwrapper button:hover,.dl-menuwrapper button.dl-active, .dl-menuwrapper ul, .dl-menuwrapper li .desktop-navi,  #dl-menu button.dl-active {
+.dl-menuwrapper button, .dl-menuwrapper button:hover, .dl-menuwrapper button.dl-active, .dl-menuwrapper ul, .dl-menuwrapper li .desktop-navi,  #dl-menu button.dl-active {
 	background: navi_color_hover_bg;
 }
 button.dl-trigger, button.dl-trigger:hover {
 	background: navi_color_bg;
 }
+.desktop-navi div, .desktop-navi a {
+	color: navi_color_font;
+}
+.dl-menuwrapper button:after {
+	background: navi_color_font;
+	box-shadow: 
+		0 10px 0 navi_color_font, 
+		0 20px 0 navi_color_font;
+}
+/* Hover */
 .desktop-navi:hover div.desktop-inner {
 	color: navi_color_hover_font;
 }
-.dl-menuwrapper li a, .dl-menuwrapper div a, .desktop-navi div, .desktop-navi a, ul.dl-menu a, .dl-menuwrapper li.dl-back:after {
-	color: navi_color_font;
+.dl-menuwrapper li a, .dl-menuwrapper div a, ul.dl-menu a, .dl-menuwrapper li.dl-back:after {
+	color: navi_color_hover_font;
 }
-/* Hover */
 .desktop-navi:hover {
 	background-color: navi_color_hover_bg
 }
@@ -35,4 +44,10 @@ button.dl-trigger, button.dl-trigger:hover {
 }
 .dl-subviewopen .dl-submenu li a {
 	color: navi_color_font;
+}
+.dl-menuwrapper button.dl-active:after {
+	background: navi_color_hover_font;
+	box-shadow: 
+		0 10px 0 navi_color_hover_font, 
+		0 20px 0 navi_color_hover_font;
 }
