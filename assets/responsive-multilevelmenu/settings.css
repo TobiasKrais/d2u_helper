@@ -27,7 +27,7 @@ button.dl-trigger, button.dl-trigger:hover {
 .desktop-navi:hover div.desktop-inner {
 	color: navi_color_hover_font;
 }
-.dl-menuwrapper li a, .dl-menuwrapper div a, ul.dl-menu a, .dl-menuwrapper li.dl-back:after {
+.dl-menuwrapper li a, .dl-menuwrapper div a, ul.dl-menu a, .dl-menuwrapper li.dl-back:after, .dl-subview .dl-subviewopen .dl-submenu li a  {
 	color: navi_color_hover_font;
 }
 .desktop-navi:hover {
@@ -50,4 +50,7 @@ button.dl-trigger, button.dl-trigger:hover {
 	box-shadow: 
 		0 10px 0 navi_color_hover_font, 
 		0 20px 0 navi_color_hover_font;
+}
+.dl-back a:hover {
+	text-decoration: none;
 }
