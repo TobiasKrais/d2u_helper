@@ -9,15 +9,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['template_logo'] = $input_media['template_logo'];
 
 	// Checkbox also need special treatment if empty
-	if(!array_key_exists('include_bootstrap', $settings)) {
-		$settings['include_bootstrap'] = "false";
-	}
-	if(!array_key_exists('include_module', $settings)) {
-		$settings['include_module'] = "false";
-	}
-	if(!array_key_exists('include_menu', $settings)) {
-		$settings['include_menu'] = "false";
-	}
+	$settings['include_bootstrap'] = array_key_exists('include_bootstrap', $settings);
+	$settings['include_module'] = array_key_exists('include_module', $settings);
+	$settings['include_menu'] = array_key_exists('include_menu', $settings);
 	
 	// Save settings
 	if(rex_config::set("d2u_helper", $settings)) {
