@@ -4,6 +4,7 @@
 	<ul>
 		<li>Templates hinzugefügt</li>
 		<li>Farbeinstellungen erweitert</li>
+		<li>Responisive MultiLevel Menü hinzugefügt</li>
 	</ul>
 	<p>1.0.2</p>
 	<ul>
