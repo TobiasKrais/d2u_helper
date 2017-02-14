@@ -69,22 +69,26 @@ class d2u_addon_backend_helper {
 	 * @return string HTML String with css tag
 	 */
 	public static function getCSS($addon_name) {
-		$css = '<style type="text/css">'
-			. 'input[type="radio"], input[type="checkbox"] {'
-			. 'width: auto;'
-			. '}'
-			. '/* Slide fieldsets*/'
-			. 'div.panel-body legend {'
-			. 'background: transparent url("' . rex_addon::get($addon_name)->getAssetsUrl('arrows.png') . '") no-repeat 0px 7px;'
-			. 'padding-left: 19px;'
-			. '}'
-			. 'div.panel-body legend.open {'
-			. 'background-position: 0px -36px;'
-			. '}'
-			. '.panel-body-wrapper.slide {'
-			. 'display: none;'
-			. '}'
-			. '</style>';
+		$css =
+'<style type="text/css">
+	input[type="radio"], input[type="checkbox"] {
+		width: auto;
+	}
+	/* Slide fieldsets*/
+	div.panel-body legend {
+		background: transparent url("' . rex_addon::get($addon_name)->getAssetsUrl('arrows.png') . '") no-repeat 0px 7px;
+		padding-left: 19px;
+	}
+	div.panel-body legend.open {
+		background-position: 0px -36px;
+	}
+	.panel-body-wrapper.slide {
+		display: none;
+	}
+	input:required, select:required, textarea:required {
+		background-color: pink;
+	}
+</style>';
 		return $css;
 	}
 
@@ -93,15 +97,24 @@ class d2u_addon_backend_helper {
 	 * @return string HTML String with js tag
 	 */
 	public static function getJS() {
-		$js = '<script type="text/javascript">'
-			. 'jQuery(document).ready(function($) {'
-			// slide fieldsets
-			. "$('legend').click(function(e) {"
-			. "$(this).toggleClass('open');"
-			. "$(this).next('.panel-body-wrapper.slide').slideToggle();"
-			. '});'
-			. '});'
-			. '</script>';
+		$js =
+"<script type='text/javascript'>
+	// slide fieldsets
+	jQuery(document).ready(function($) {
+		$('legend').click(function(e) {
+			$(this).toggleClass('open');
+			$(this).next('.panel-body-wrapper.slide').slideToggle();
+		});
+	});
+	// Open all fieldsets when save was clicked for being able to focus required fields
+	$('button[type=submit]').click(function() {
+		$('legend').each(function() {
+			$(this).addClass('open');
+			$(this).next('.panel-body-wrapper.slide').slideToggle();
+		});
+		return true;
+	});
+</script>";
 		return $js;
 	}
 
