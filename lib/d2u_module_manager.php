@@ -158,10 +158,10 @@ class D2UModuleManager {
 			"Bild",
 			2);
 		$d2u_modules[] = new D2UModule("03-2",
-			"03-2 Bildergalliere Ekko Lightbox - Input.php",
-			"03-2 Bildergalliere Ekko Lightbox - Output.php",
-			"Bildergalliere Ekko Lightbox",
-			1,
+			"03-2 Bildergallerie Ekko Lightbox - Input.php",
+			"03-2 Bildergallerie Ekko Lightbox - Output.php",
+			"Bildergallerie Ekko Lightbox",
+			2,
 			"ekko-lightbox/ekko-lightbox.css",
 			"ekko-lightbox/ekko-lightbox.min.js");
 		$d2u_modules[] = new D2UModule("04-1",
