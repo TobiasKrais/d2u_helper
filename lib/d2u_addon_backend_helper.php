@@ -328,4 +328,17 @@ class d2u_addon_backend_helper {
 		print '</dl>';
 	}
 
+	/**
+	 * Updates url addon scheme article id.
+	 * @param string $table Table/view name used for url scheme. Parameter is used as identifier.
+	 * @param int $article_id Redaxo article id
+	 */
+    public static function update_url_scheme($table, $article_id) {
+		if(rex_addon::get('url')->isAvailable()) {
+			$query = "UPDATE `". rex::getTablePrefix() ."url_generate` SET `article_id` = ". $article_id ." "
+				."WHERE `table` LIKE '%". $table ."'";
+			$sql = rex_sql::factory();
+			$sql->setQuery($query);
+		}
+    }
 }
