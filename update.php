@@ -10,3 +10,8 @@ if(class_exists(D2UTemplateManager)) {
 	$d2u_template_manager = new D2UTemplateManager(D2UTemplateManager::getD2UHelperTemplates());
 	$d2u_template_manager->autoupdate();
 }
+
+// Update standard settings
+if (!$this->hasConfig(subhead_include_articlename)) {
+	$this->setConfig('subhead_include_articlename', '"true"');
+}

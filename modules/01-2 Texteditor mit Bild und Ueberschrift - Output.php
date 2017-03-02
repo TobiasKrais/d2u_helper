@@ -1,14 +1,11 @@
 <?php
-/**
- * Version 1.0
- */
 	$cols = "REX_VALUE[20]";
 	if($cols == "") {
 		$cols = 8;
 	}
 	$type = "REX_VALUE[3]";
 ?>
-<div class="col-xs-12 col-md-6 col-lg-<?php echo $cols; ?> abstand">
+<div class="col-sm-12 col-md-6 col-lg-<?php echo $cols; ?> abstand">
 	<div class="same-height module-box">
 		<?php
 			if ("REX_MEDIA[1]" != '') {

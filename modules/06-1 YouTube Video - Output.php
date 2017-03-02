@@ -21,7 +21,7 @@
 		$cols = 8;
 	}
 ?>
-<div class="col-xs-12 col-sm-<?php echo $cols; ?>">
+<div class="col-sm-12 col-md-<?php echo $cols; ?>">
 	<div class="youtubeWrapper">
 		<?php
 			preg_match(

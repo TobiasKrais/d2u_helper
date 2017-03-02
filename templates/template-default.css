@@ -25,15 +25,19 @@ img
 header {
 	background-position: center;
 	background-size: cover;
-	padding-top: 2em;
+	padding: 2em 0;
 }
 @media screen and (min-width: 1000px) {
 	header {
 		min-height: 390px;
 	}
 }
-#logo {
+@media screen and (max-width: 1000px) {
+	#logo {
+		max-width: 60%;
+	}
 }
+
 #langchooser {
 	float: right;
 }

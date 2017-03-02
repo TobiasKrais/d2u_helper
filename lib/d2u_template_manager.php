@@ -106,7 +106,7 @@ class D2UTemplateManager {
 		$d2u_templates[] = new D2UTemplate("00-1",
 			"template-default.php",
 			"Big Header Template",
-			1,
+			2,
 			"template-default.css",
 			"<p>Empfohlene Addons: yrewrite</p>"
 				. "<p>Unterstützte Addons: d2u_machinery</p>");

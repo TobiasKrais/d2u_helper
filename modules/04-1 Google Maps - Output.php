@@ -1,13 +1,10 @@
 <?php
-/**
- * Version 2
- */
 	$cols = "REX_VALUE[20]";
 	if($cols == "") {
 		$cols = 8;
 	}
 ?>
-<div class="col-xs-12 col-sm-<?php echo $cols; ?>">
+<div class="col-sm-<?php echo $cols; ?>">
 <?php
 	$longitude = "REX_VALUE[4]" == "" ? 0 : "REX_VALUE[4]";
 	$latitude = "REX_VALUE[5]" == "" ? 0 : "REX_VALUE[5]";

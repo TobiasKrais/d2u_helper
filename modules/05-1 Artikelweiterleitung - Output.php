@@ -1,7 +1,4 @@
 <?php
-/**
- * Version 1.0
- */
 $article_id = "REX_LINK[1]";
 
 if($article_id > 0) {
@@ -15,4 +12,3 @@ if($article_id > 0) {
    		exit();
   	}
 }
-?>

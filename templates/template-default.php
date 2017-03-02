@@ -121,7 +121,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 	<header style="background-image: url(<?php echo rex_url::media($header_image); ?>)">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-10 col-sm-6">
+				<div class="col-sm-6">
 					<a href="<?php echo rex_getUrl(rex_article::getSiteStartArticleId()); ?>">
 						<?php
 						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
@@ -137,7 +137,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 	<nav>
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-6 col-sm-9" data-match-height>
+				<div class="col-sm-9" data-match-height>
 					<div class="navi">
 						<?php
 							if(rex_addon::get('d2u_helper')->isAvailable()) {
@@ -149,7 +149,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 				</div>
 				<?php
 					if(count(rex_clang::getAllIds(TRUE)) > 1) {
-						print '<div class="col-xs-6 col-sm-3">';
+						print '<div class="col-sm-3">';
 						print '<div id="langchooser" class="desktop-inner">';
 						// FIXME
 						if(rex_clang::getCurrentId() == 1) {
@@ -170,7 +170,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 	<section id="breadcrumbs" class="subhead">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<?php
 						// Breadcrumbs
 						$startarticle = rex_article::get(rex_article::getSiteStartArticleId());
@@ -191,7 +191,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 						}
 					?>
 				</div>
-				<div class="col-xs-12 subhead-nav">
+				<div class="col-sm-12 subhead-nav">
 					<?php
 						if($machine !== FALSE) {
 							print '<br><h1 class="subhead">'. $machine->name .'</h1>';
@@ -228,7 +228,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 							print '<li class="nav-item"><a data-toggle="tab" href="#tab_request">'. $tag_open .'d2u_machinery_request'. $tag_close .'</a></li>';
 							print '</ul>';
 						}
-						else if (($d2u_machinery->hasConfig('used_machine_article_id_rent') && $current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_rent'))
+						else if(($d2u_machinery->hasConfig('used_machine_article_id_rent') && $current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_rent'))
 								|| ($d2u_machinery->hasConfig('used_machine_article_id_sale') && $current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_sale'))) {
 							print '<h1 class="subhead">'. $current_article->getName() .'</h1>';
 							print '<ul class="nav nav-pills">';
@@ -242,7 +242,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 							}
 							print '</ul>';
 						}
-						else {
+						else if($d2u_helper->hasConfig('subhead_include_articlename') && $d2u_helper->getConfig('subhead_include_articlename') == "true") {
 							print '<h1 class="subhead">'. $current_article->getName() .'</h1>';
 						}
 					?>
@@ -266,7 +266,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 				<?php
 					$rex_articles = rex_article::getRootArticles(true);
 					foreach($rex_articles as $rex_articles) {
-						print '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
+						print '<div class="col-sm-6 col-md-4 col-lg-3">';
 						print '<div class="footerbox">';
 						print '<a href="'. $rex_articles->getUrl() .'">'. $rex_articles->getName() .'</a>';
 						print '</div>';

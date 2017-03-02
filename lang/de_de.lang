@@ -36,6 +36,7 @@ d2u_helper_settings_navi_color_hover_bg = Navigation Hover Hintergrundfarbe
 d2u_helper_settings_navi_color_hover_font = Navigation Hover Schriftfarbe
 d2u_helper_settings_subhead_color_bg = Titel / Breadcrumb Hintergrundfarbe
 d2u_helper_settings_subhead_color_font = Titel / Breadcrumb Schriftfarbe
+d2u_helper_settings_subhead_include_articlename = Artikelname als Titel einblenden?
 d2u_helper_settings_template = Einstellungen für Template, Module und Menü
 d2u_helper_settings_template_header_pic = Standart Bild im Header
 d2u_helper_settings_template_logo = Website Logo

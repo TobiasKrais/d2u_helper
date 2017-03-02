@@ -14,7 +14,7 @@
 	$type_detail = "REX_VALUE[2]";
 	$pics = preg_grep('/^\s*$/s', explode(",", REX_MEDIALIST[1]), PREG_GREP_INVERT)
 ?>
-<div class="col-xs-12 col-md-<?php echo $cols; ?>">
+<div class="col-sm-12 col-md-<?php echo $cols; ?>">
 	<div class="row">
 		<?php
 			foreach($pics as $pic) {

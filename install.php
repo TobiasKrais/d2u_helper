@@ -1,4 +1,3 @@
-
 <?php
 // Standard settings
 if (!$this->hasConfig()) {
@@ -8,6 +7,7 @@ if (!$this->hasConfig()) {
 	$this->setConfig('navi_color_hover_font', '"#4e4e4e"');
 	$this->setConfig('subhead_color_bg', '"#4e4e4e"');
 	$this->setConfig('subhead_color_font', '"#ffffff"');
+	$this->setConfig('subhead_include_articlename', '"true"');
 	$this->setConfig('article_color_bg', '"#ffffff"');
 	$this->setConfig('article_color_h', '"#ffba23"');
 	$this->setConfig('article_color_box', '"#eeeeee"');
