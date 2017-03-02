@@ -3,6 +3,7 @@
 	<p>1.1.2 (Next)</p>
 	<ul>
 		<li>Methode zum aktualisieren von URL Schemata hinzugefügt.</li>
+		<li>Update Bootstrap to alpha-6.</li>
 	</ul>
 	<p>1.1.1</p>
 	<ul>
