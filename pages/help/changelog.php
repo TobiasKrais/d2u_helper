@@ -5,6 +5,7 @@
 		<li>Methode zum aktualisieren von URL Schemata hinzugefügt.</li>
 		<li>Update Bootstrap to alpha-6.</li>
 		<li>Update Ekko Lightbox to 5.1.1.</li>
+		<li>Update Module und Template während Addonupdate bei aktiviertem Autoupdate.</li>
 	</ul>
 	<p>1.1.1</p>
 	<ul>
