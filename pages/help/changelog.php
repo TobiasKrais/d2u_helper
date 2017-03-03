@@ -1,9 +1,10 @@
 <fieldset>
 	<legend>D2U Helper Changelog</legend>
-	<p>1.1.2 (Next)</p>
+	<p>1.1.2</p>
 	<ul>
 		<li>Methode zum aktualisieren von URL Schemata hinzugefügt.</li>
 		<li>Update Bootstrap to alpha-6.</li>
+		<li>Update Ekko Lightbox to 5.1.1.</li>
 	</ul>
 	<p>1.1.1</p>
 	<ul>
