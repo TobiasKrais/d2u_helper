@@ -32,7 +32,7 @@ $used_machine = FALSE;
 $urlParamKey = "";
 if(rex_addon::get("url")->isAvailable()) {
 	$url_data = UrlGenerator::getData();
-	$urlParamKey = $url_data->urlParamKey;
+	$urlParamKey = isset($url_data->urlParamKey) ? $url_data->urlParamKey : "";
 }
 if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 	if(filter_input(INPUT_GET, 'machine_id', FILTER_VALIDATE_INT) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "machine_id")) {
@@ -121,7 +121,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 	<header style="background-image: url(<?php echo rex_url::media($header_image); ?>)">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-9 col-md-6">
 					<a href="<?php echo rex_getUrl(rex_article::getSiteStartArticleId()); ?>">
 						<?php
 						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
