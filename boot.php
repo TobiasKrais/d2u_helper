@@ -172,6 +172,9 @@ function sendD2UHelperCSS() {
 			$css .= d2u_mobile_navi::getAutoCSS();
 		}
 
+		// Apply template settings
+		$css = applyColorToCSS($css);
+		
 		// Apply template settings and compress
 		print compressCSS(applyColorToCSS($css));
 		exit;	
