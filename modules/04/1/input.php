@@ -21,10 +21,17 @@
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
 	<div class="col-xs-4">
-		Google API key (noch optional):
+		Google API key:
 	</div>
 	<div class="col-xs-8">
-		<input type="text" name="REX_INPUT_VALUE[11]" value="REX_VALUE[11]" size="20"/>
+		<?php
+		$d2u_helper = rex_addon::get("d2u_helper");
+		$api_key = "REX_VALUE[11]";
+		if($api_key == "" && $d2u_helper->hasConfig("maps_key")) {
+			$api_key = $d2u_helper->hasConfig("maps_key");
+		}
+		?>
+		<input type="text" name="REX_INPUT_VALUE[11]" value="<?php echo $api_key; ?>" size="20"/>
 	</div>
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>

@@ -12,6 +12,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['include_bootstrap'] = array_key_exists('include_bootstrap', $settings);
 	$settings['include_module'] = array_key_exists('include_module', $settings);
 	$settings['include_menu'] = array_key_exists('include_menu', $settings);
+	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
+	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
 	
 	// Save settings
 	if(rex_config::set("d2u_helper", $settings)) {
@@ -59,7 +61,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				</div>
 			</fieldset>
 			<fieldset>
-				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_template'); ?></legend>
+				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_templates'); ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_header_pic', 'template_header_pic', $this->getConfig('template_header_pic'));
@@ -76,6 +78,34 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_box', 'settings[article_color_box]', $this->getConfig('article_color_box'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_bg', 'settings[footer_color_bg]', $this->getConfig('footer_color_bg'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_box', 'settings[footer_color_box]', $this->getConfig('footer_color_box'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_breadcrumbs', 'settings[show_breadcrumbs]', 'true', $this->getConfig('show_breadcrumbs') == 'true');
+					?>
+				</div>
+			</fieldset>
+			<?php
+				$d2u_templates = D2UTemplateManager::getD2UHelperTemplates();
+				foreach($d2u_templates as $d2u_template) {
+					$d2u_template->initRedaxoContext($this, "templates/");
+					if($d2u_template->getD2UId() === "02-1" && $d2u_template->isInstalled()) {
+			?>
+						<fieldset>
+							<legend><small><i class="rex-icon rex-icon-template"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_template') ." '". $d2u_template->getName() ."'"; ?></legend>
+							<div class="panel-body-wrapper slide">
+								<?php
+									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_1_footer_text', 'settings[template_02_1_footer_text]', $this->getConfig('template_02_1_footer_text'), FALSE, FALSE, "text");
+								?>
+							</div>
+						</fieldset>
+			<?php
+					}
+				}
+			?>
+			<fieldset>
+				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_google'); ?></legend>
+				<div class="panel-body-wrapper slide">
+					<?php
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_google_analytics', 'settings[google_analytics]', $this->getConfig('google_analytics'), FALSE, FALSE, "text");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_google_maps_key', 'settings[maps_key]', $this->getConfig('maps_key'), FALSE, FALSE, "text");
 					?>
 				</div>
 			</fieldset>

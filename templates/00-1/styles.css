@@ -20,19 +20,27 @@ img
 	{border: 0px;
 	max-width: 100%;}
 .abstand
-	{margin: 1em auto 0;}
+	{margin: 1em 0;}
 	
 header {
 	background-position: center;
 	background-size: cover;
 	padding: 2em 0;
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 992px) {
 	header {
 		min-height: 390px;
 	}
 }
-@media screen and (max-width: 1000px) {
+@media screen and (min-width: 768px) and (max-width: 991px)  {
+	header {
+		min-height: 250px;
+	}
+	#logo {
+		max-width: 80%;
+	}
+}
+@media screen and (max-width: 768px) {
 	#logo {
 		max-width: 60%;
 	}

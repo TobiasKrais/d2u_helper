@@ -15,4 +15,5 @@ if (!$this->hasConfig()) {
 	$this->setConfig('footer_color_box', '"#a7a7a7"');
 	$this->setConfig('include_module', '"true"');
 	$this->setConfig('include_menu_show', '"sm"');
+	$this->setConfig('show_breadcrumbs', '"true"');
 }

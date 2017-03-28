@@ -31,7 +31,7 @@ class D2UTemplateManager {
 	 * update the path of the new addon folder. Otherwise the normal addon path.
 	 * @param D2UTemplate[] $d2u_templates Array with D2U templates
 	 * @param string $template_folder Folder, in which templates can be found.
-	 * Trailing slash must be included. Default "templates/".
+	 * Trailing slash must be included. Default "templates".
 	 * @param string $addon_key Redaxo Addon name template belongs to, default "d2u_helper"
 	 */
 	public function __construct($d2u_templates, $template_folder = "templates/", $addon_key = "d2u_helper") {
@@ -83,8 +83,8 @@ class D2UTemplateManager {
 					}
 				}
 				else {
-					$template->install($paired_template_id);
-					if(key_exists($template->getRedaxoId(), D2UTemplateManager::getRexTemplates(TRUE))) {
+					$success = $template->install($paired_template_id);
+					if($success && key_exists($template->getRedaxoId(), D2UTemplateManager::getRexTemplates(TRUE))) {
 						print rex_view::success($template->getD2UId() ." ". $template->getName() .": ". rex_i18n::msg('d2u_helper_templates_installed'));
 					}
 					else {
@@ -104,12 +104,17 @@ class D2UTemplateManager {
 	public static function getD2UHelperTemplates() {
 		$d2u_templates = [];
 		$d2u_templates[] = new D2UTemplate("00-1",
-			"template-default.php",
 			"Big Header Template",
-			2,
-			"template-default.css",
-			"<p>Empfohlene Addons: yrewrite</p>"
-				. "<p>Unterstützte Addons: d2u_machinery</p>");
+			3);
+		$d2u_templates[] = new D2UTemplate("01-1",
+			"Side Picture Template",
+			1);
+		$d2u_templates[] = new D2UTemplate("02-1",
+			"Header Pic Template",
+			1);
+		$d2u_templates[] = new D2UTemplate("99-1",
+			"Feed Generator",
+			1);
 		return $d2u_templates;
 	}
 	
@@ -247,21 +252,6 @@ class D2UTemplate {
 	private $autoupdate = FALSE;
 
 	/**
-	 * @var string Description
-	 */
-	private $description = "";
-
-	/**
-	 * @var string Filename with template
-	 */
-	private $filename = "";
-
-	/**
-	 * @var string Filename template CSS file
-	 */
-	private $filename_css = "";
-
-	/**
 	 * @var string Templates title or name
 	 */
 	private $name = "";
@@ -280,23 +270,22 @@ class D2UTemplate {
 	 * @var rex_addon Redaxo Addon template belongs to
 	 */
 	private $rex_addon;
+	
+	/**
+	 * @var template_folder Redaxo Addon template folder
+	 */
+	private $template_folder;
 
 	/**
 	 * Constructor. Sets values.
 	 * @param string $d2u_template_id D2U Template ID, if known, else set 0
-	 * @param string $filename_input Filename with template input
 	 * @param string $name Template title or name
 	 * @param int $revision Template version number
-	 * @param string $filename_css Template title or name
-	 * @param string $description Template description
 	 */
-	public function __construct($d2u_template_id, $filename_input, $name, $revision, $filename_css, $description = "") {
+	public function __construct($d2u_template_id, $name, $revision) {
 		$this->d2u_template_id = $d2u_template_id;
-		$this->filename = $filename_input;
 		$this->name = $name;
 		$this->revision = $revision;
-		$this->filename_css = $filename_css;
-		$this->description = $description;
 	}
 	
 	/**
@@ -320,7 +309,12 @@ class D2UTemplate {
 	 * @return string Template name
 	 */
 	public function getCSS() {
-		return file_get_contents($this->filename_css);
+		if(file_exists($this->template_folder ."style.css")) {
+			return file_get_contents($this->template_folder ."style.css");
+		}
+		else {
+			return "";
+		}
 	}
 
 	/**
@@ -361,7 +355,7 @@ class D2UTemplate {
 	 * @param string Complete folder string, in which template files can be found.
 	 * Trailing slash must be included.
 	 */
-	public function initRedaxoContext($template_addon, $template_folder) {
+	public function initRedaxoContext($template_addon, $template_folder = "templates/") {
 		$this->rex_addon = $template_addon;
 		if($this->rex_addon->hasConfig("template_". $this->d2u_template_id)) {
 			$config = $this->rex_addon->getConfig("template_". $this->d2u_template_id);
@@ -378,15 +372,22 @@ class D2UTemplate {
 		}
 
 		// Set folders correctly
-		$this->filename = $template_folder . $this->filename;
-		$this->filename_css = $template_folder . $this->filename_css;
+		$this->template_folder = $template_folder . $this->d2u_template_id;
 	}
 
 	/**
 	 * Installes or updates the template in redaxo template table.
 	 * @param int Redaxo template id, if not passed, already available ID is taken.
+	 * @return boolean TRUE if installed, otherwise FALSE
 	 */
 	public function install($rex_template_id = 0) {
+		if(file_exists($this->template_folder ."install.php")) {
+			$success = include $this->template_folder ."install.php";
+			if(!$success) {
+				return FALSE;
+			}
+		}
+		
 		if($this->rex_template_id == 0 && $rex_template_id > 0) {
 			$this->rex_template_id = $rex_template_id;
 		}
@@ -394,7 +395,7 @@ class D2UTemplate {
 		$insertmod = rex_sql::factory();
 		$insertmod->setTable(rex::getTablePrefix() . 'template');
         $insertmod->setValue('name', $this->d2u_template_id ." ". $this->name);
-		$insertmod->setValue('content', file_get_contents($this->filename));
+		$insertmod->setValue('content', file_get_contents($this->template_folder ."template.php"));
 		$insertmod->setValue('active', 1);
 		$insertmod->setValue('revision', $this->revision);
 		if($this->rex_template_id == 0) {
@@ -411,6 +412,8 @@ class D2UTemplate {
 		
 		// save pairing in config
 		$this->setConfig();
+		
+		return TRUE;
 	}
 	
 	/**

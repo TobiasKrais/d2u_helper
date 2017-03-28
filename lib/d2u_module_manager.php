@@ -83,8 +83,8 @@ class D2UModuleManager {
 					}
 				}
 				else {
-					$module->install($paired_module_id);
-					if(key_exists($module->getRedaxoId(), D2UModuleManager::getRexModules(TRUE))) {
+					$success = $module->install($paired_module_id);
+					if($success && key_exists($module->getRedaxoId(), D2UModuleManager::getRexModules(TRUE))) {
 						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_modules_installed'));
 					}
 					else {
@@ -132,54 +132,39 @@ class D2UModuleManager {
 	public static function getD2UHelperModules() {
 		$d2u_modules = [];
 		$d2u_modules[] = new D2UModule("00-1",
-			"00-1 Umbruch ganze Breite - Input.php",
-			"00-1 Umbruch ganze Breite - Output.php",
 			"Umbruch ganze Breite",
 			2);
 		$d2u_modules[] = new D2UModule("01-1",
-			"01-1 Texteditor - Input.php",
-			"01-1 Texteditor - Output.php",
 			"Texteditor",
 			3);
 		$d2u_modules[] = new D2UModule("01-2",
-			"01-2 Texteditor mit Bild und Ueberschrift - Input.php",
-			"01-2 Texteditor mit Bild und Ueberschrift - Output.php",
 			"Texteditor mit Bild und Überschrift",
-			3,
-			"module-box/module-box.css");
+			3);
 		$d2u_modules[] = new D2UModule("02-1",
-			"02-1 Ueberschrift - Input.php",
-			"02-1 Ueberschrift - Output.php",
 			"Ueberschrift",
 			3);
 		$d2u_modules[] = new D2UModule("03-1",
-			"03-1 Bild - Input.php",
-			"03-1 Bild - Output.php",
 			"Bild",
 			3);
 		$d2u_modules[] = new D2UModule("03-2",
-			"03-2 Bildergallerie Ekko Lightbox - Input.php",
-			"03-2 Bildergallerie Ekko Lightbox - Output.php",
 			"Bildergallerie Ekko Lightbox",
-			3,
-			"ekko-lightbox/ekko-lightbox.css",
-			"ekko-lightbox/ekko-lightbox.min.js");
-		$d2u_modules[] = new D2UModule("04-1",
-			"04-1 Google Maps - Input.php",
-			"04-1 Google Maps - Output.php",
-			"Google Maps",
 			3);
+		$d2u_modules[] = new D2UModule("04-1",
+			"Google Maps",
+			4);
 		$d2u_modules[] = new D2UModule("05-1",
-			"05-1 Artikelweiterleitung - Input.php",
-			"05-1 Artikelweiterleitung - Output.php",
 			"Artikelweiterleitung",
 			2);
 		$d2u_modules[] = new D2UModule("06-1",
-			"06-1 YouTube Video - Input.php",
-			"06-1 YouTube Video - Output.php",
 			"YouTube Video",
 			2,
 			"youtube-wrapper/youtube-wrapper.css");
+		$d2u_modules[] = new D2UModule("10-1",
+			"Box mit Bild und Ueberschrift",
+			1);
+		$d2u_modules[] = new D2UModule("10-2",
+			"Box mit Bild und Text",
+			1);
 		return $d2u_modules;
 	}
 	
@@ -303,14 +288,14 @@ class D2UModule {
 	private $autoupdate = FALSE;
 
 	/**
-	 * @var string Filename with module input
-	 */
-	private $filename_input = "";
-
-	/**
 	 * @var string CSS file for the module
 	 */
 	private $filename_css = "";
+
+	/**
+	 * @var string Filename with module input
+	 */
+	private $filename_input = "input.php";
 
 	/**
 	 * @var string JS file for the module
@@ -320,8 +305,14 @@ class D2UModule {
 	/**
 	 * @var string Filename with module output
 	 */
-	private $filename_output = "";
+	private $filename_output = "output.php";
 	
+	/**
+	 * @var string Folder within addon, in which modules can be found. Trailing
+	 * slash must be included.
+	 */
+	private $module_folder = "modules/";
+
 	/**
 	 * @var string Modules title or name
 	 */
@@ -345,17 +336,17 @@ class D2UModule {
 	/**
 	 * Constructor. Sets values.
 	 * @param string $d2u_module_id D2U Module ID, if known, else set 0
-	 * @param string $filename_input Filename with module input
-	 * @param string $filename_output Filename with module output
 	 * @param string $name Modules title or name
 	 * @param int $revision Module version number
 	 * @param string $css Modules CSS filename
 	 * @param string $js Modules JS filename
 	 */
-	public function __construct($d2u_module_id, $filename_input, $filename_output, $name, $revision, $css = "", $js = "") {
+	public function __construct($d2u_module_id, $name, $revision, $css = "", $js = "") {
 		$this->d2u_module_id = $d2u_module_id;
-		$this->filename_input = $filename_input;
-		$this->filename_output = $filename_output;
+		$d2u_module_id_explode = explode("-", $this->d2u_module_id);
+		$this->module_folder .= $d2u_module_id_explode[0]."/". $d2u_module_id_explode[1] ."/";
+		$this->filename_input = "input.php";
+		$this->filename_output = "output.php";
 		$this->name = $name;
 		$this->revision = $revision;
 		$this->filename_css = $css;
@@ -383,8 +374,8 @@ class D2UModule {
 	 * @return string CSS
 	 */
 	public function getCSS() {
-		if($this->filename_css != "" && file_exists($this->filename_css)){
-			return file_get_contents($this->filename_css);
+		if($this->filename_css != "" && file_exists($this->module_folder . $this->filename_css)){
+			return file_get_contents($this->module_folder . $this->filename_css);
 		}
 		return "";
 	}
@@ -402,8 +393,8 @@ class D2UModule {
 	 * @return string JS
 	 */
 	public function getJS() {
-		if($this->filename_js != "" && file_exists($this->filename_js)){
-			return file_get_contents($this->filename_js);
+		if($this->filename_js != "" && file_exists($this->module_folder . $this->filename_js)){
+			return file_get_contents($this->module_folder . $this->filename_js);
 		}
 		return "";
 	}
@@ -455,8 +446,10 @@ class D2UModule {
 		}
 
 		// Set folders correctly
-		$this->filename_input = $module_folder . $this->filename_input;
-		$this->filename_output = $module_folder . $this->filename_output;
+		$d2u_module_id = explode("-", $this->d2u_module_id);
+		$this->module_folder = $module_folder . $d2u_module_id[0] ."/". $d2u_module_id[1] ."/";
+		$this->filename_input = $this->module_folder . $this->filename_input;
+		$this->filename_output = $this->module_folder . $this->filename_output;
 		if($this->filename_css != "") {
 			$this->filename_css = $this->rex_addon->getAssetsPath($this->filename_css);
 		}
@@ -468,8 +461,16 @@ class D2UModule {
 	/**
 	 * Installes or updates the module in redaxo module table.
 	 * @param int Redaxo module id, if not passed, already available ID is taken.
+	 * @return boolean TRUE if installed, otherwise FALSE
 	 */
 	public function install($rex_module_id = 0) {
+		if(file_exists($this->module_folder ."install.php")) {
+			$success = include $this->module_folder ."install.php";
+			if(!$success) {
+				return FALSE;
+			}
+		}
+		
 		if($this->rex_module_id == 0 && $rex_module_id > 0) {
 			$this->rex_module_id = $rex_module_id;
 		}
@@ -493,6 +494,8 @@ class D2UModule {
 		
 		// save pairing in config
 		$this->setConfig();
+		
+		return TRUE;
 	}
 	
 	/**

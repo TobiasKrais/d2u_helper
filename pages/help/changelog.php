@@ -1,5 +1,15 @@
 <fieldset>
 	<legend>D2U Helper Changelog</legend>
+	<p>1.2 (NEXT)</p>
+	<ul>
+		<li>Module "Box mit Überschrift und Bild" hinzugefügt.</li>
+		<li>Bugfix: Hintergrundfarbe bei Box wird wieder angewandt.</li>
+		<li>Template: "Side Picture" und "Header Pic" Template hinzugefügt.</li>
+		<li>Template: "Feed Gernator" Template zum generieren von RSS, ATOM und anderen Feeds hinzugefügt.</li>
+		<li>Templates: Breadcrumbs in Einstellungen ausblendbar.</li>
+		<li>Google Analytics automatisch hinzufügbar.</li>
+		<li>Verbesserter Installationsmodus für Templates und Module.</li>
+	</ul>
 	<p>1.1.2</p>
 	<ul>
 		<li>Methode zum aktualisieren von URL Schemata hinzugefügt.</li>
