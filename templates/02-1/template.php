@@ -164,6 +164,16 @@ $d2u_helper = rex_addon::get("d2u_helper");
 				)
 			}
 		)
+
+		$(window).on("load", function() {
+			var heights = $(".same-height").map(function() {
+				return $(this).innerHeight();
+			}).get(),
+
+			maxHeight = Math.max.apply(null, heights);
+
+			$(".same-height").css("min-height", maxHeight);
+		});
 	</script>
 </body>
 </html>

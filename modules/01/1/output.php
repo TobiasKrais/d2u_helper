@@ -1,13 +1,25 @@
 <?php
-	$cols = "REX_VALUE[20]";
-	if($cols == "") {
-		$cols = 8;
+	$cols_sm = "REX_VALUE[20]";
+	if($cols_sm == "") {
+		$cols_sm = 8;
 	}
+	$cols_md = "REX_VALUE[19]";
+	if($cols_md == "") {
+		$cols_md = $cols_sm;
+		$cols_sm = 12; // Backward compatibility
+	}
+	$cols_lg = "REX_VALUE[18]";
+	if($cols_lg == "") {
+		$cols_lg = $cols_md;
+	}
+	$offset_lg = " offset-lg-REX_VALUE[17]";
+//	if($offset_lg == 0 || $offset_lg == "") {
+//		$offset_lg = "";
+//	}
+	
+	print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
+	if ('REX_VALUE[id=1 isset=1]') {
+		echo "REX_VALUE[id=1 output=html]";
+	}
+	print '</div>';
 ?>
-<div class="col-sm-12 col-md-<?php echo $cols; ?>">
-<?php
-if ('REX_VALUE[id=1 isset=1]') {
-    echo "REX_VALUE[id=1 output=html]";
-}
-?>
-</div>

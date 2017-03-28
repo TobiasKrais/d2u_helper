@@ -136,7 +136,7 @@ class D2UModuleManager {
 			2);
 		$d2u_modules[] = new D2UModule("01-1",
 			"Texteditor",
-			3);
+			4);
 		$d2u_modules[] = new D2UModule("01-2",
 			"Texteditor mit Bild und Überschrift",
 			3);
@@ -165,6 +165,8 @@ class D2UModuleManager {
 		$d2u_modules[] = new D2UModule("10-2",
 			"Box mit Bild und Text",
 			1);
+		// 80-x reserved for MultiNewsletter Addon
+		// 90-x reserved for D2U Machinery Addon
 		return $d2u_modules;
 	}
 	
@@ -192,7 +194,12 @@ class D2UModuleManager {
 	 * Prints list that offers module managing options
 	 */
 	public function showManagerList() {
-		print '<form action="'. rex_url::currentBackendPage() .'" method="post">';
+		$url_params = [];
+		// Compatibility for MultiNewsletter installation site
+		if(filter_input(INPUT_GET, "chapter") != "") {
+			$url_params["chapter"] = filter_input(INPUT_GET, "chapter");
+		}
+		print '<form action="'. rex_url::currentBackendPage($url_params) .'" method="post">';
 		print '<section class="rex-page-section">';
 		print '<div class="panel panel-default">';
 		print '<header class="panel-heading"><div class="panel-title">'. rex_i18n::msg('d2u_helper_meta_modules') .'</div></header>';
@@ -290,7 +297,7 @@ class D2UModule {
 	/**
 	 * @var string CSS file for the module
 	 */
-	private $filename_css = "";
+	private $filename_css = "style.css";
 
 	/**
 	 * @var string Filename with module input
@@ -300,7 +307,7 @@ class D2UModule {
 	/**
 	 * @var string JS file for the module
 	 */
-	private $filename_js = "";
+	private $filename_js = "js.js";
 
 	/**
 	 * @var string Filename with module output
@@ -341,16 +348,12 @@ class D2UModule {
 	 * @param string $css Modules CSS filename
 	 * @param string $js Modules JS filename
 	 */
-	public function __construct($d2u_module_id, $name, $revision, $css = "", $js = "") {
+	public function __construct($d2u_module_id, $name, $revision) {
 		$this->d2u_module_id = $d2u_module_id;
 		$d2u_module_id_explode = explode("-", $this->d2u_module_id);
 		$this->module_folder .= $d2u_module_id_explode[0]."/". $d2u_module_id_explode[1] ."/";
-		$this->filename_input = "input.php";
-		$this->filename_output = "output.php";
 		$this->name = $name;
 		$this->revision = $revision;
-		$this->filename_css = $css;
-		$this->filename_js = $js;
 	}
 	
 	/**
@@ -450,12 +453,6 @@ class D2UModule {
 		$this->module_folder = $module_folder . $d2u_module_id[0] ."/". $d2u_module_id[1] ."/";
 		$this->filename_input = $this->module_folder . $this->filename_input;
 		$this->filename_output = $this->module_folder . $this->filename_output;
-		if($this->filename_css != "") {
-			$this->filename_css = $this->rex_addon->getAssetsPath($this->filename_css);
-		}
-		if($this->filename_js != "") {
-			$this->filename_js = $this->rex_addon->getAssetsPath($this->filename_js);
-		}
 	}
 
 	/**

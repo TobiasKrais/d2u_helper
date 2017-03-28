@@ -372,7 +372,7 @@ class D2UTemplate {
 		}
 
 		// Set folders correctly
-		$this->template_folder = $template_folder . $this->d2u_template_id;
+		$this->template_folder = $template_folder . $this->d2u_template_id ."/";
 	}
 
 	/**

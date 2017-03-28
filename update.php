@@ -7,7 +7,7 @@ if(class_exists(D2UModuleManager)) {
 		2);
 	$d2u_modules[] = new D2UModule("01-1",
 		"Texteditor",
-		3);
+		4);
 	$d2u_modules[] = new D2UModule("01-2",
 		"Texteditor mit Bild und Überschrift",
 		3);
