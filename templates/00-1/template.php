@@ -201,7 +201,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 				<div class="col-12 subhead-nav">
 					<?php
 						if($machine !== FALSE) {
-							print '<br><h1 class="subhead">'. $machine->name .'</h1>';
+							print '<br><h1 class="subhead">'. ($machine->lang_name == "" ? $machine->name : $machine->lang_name) .'</h1>';
 							print '<ul class="nav nav-pills">';
 							print '<li class="nav-item"><a data-toggle="tab" class="active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'</a></li>';
 							if(rex_plugin::get("d2u_machinery", "machine_agitator_extension")->isAvailable() && $machine->agitator_type_id > 0 && $machine->agitator_type_id > 0 && $machine->category->show_agitators == "show") {
