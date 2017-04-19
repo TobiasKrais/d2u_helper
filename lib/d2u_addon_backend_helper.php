@@ -65,10 +65,9 @@ class d2u_addon_backend_helper {
 
 	/**
 	 * Returns CSS for D2U specific forms
-	 * @param string $addon_name Addone name
 	 * @return string HTML String with css tag
 	 */
-	public static function getCSS($addon_name) {
+	public static function getCSS() {
 		$css =
 '<style type="text/css">
 	input[type="radio"], input[type="checkbox"] {
@@ -76,7 +75,7 @@ class d2u_addon_backend_helper {
 	}
 	/* Slide fieldsets*/
 	div.panel-body legend {
-		background: transparent url("' . rex_addon::get($addon_name)->getAssetsUrl('arrows.png') . '") no-repeat 0px 7px;
+		background: transparent url("' . rex_addon::get('d2u_helper')->getAssetsUrl('arrows.png') . '") no-repeat 0px 7px;
 		padding-left: 19px;
 	}
 	div.panel-body legend.open {
@@ -113,6 +112,21 @@ class d2u_addon_backend_helper {
 			$(this).next('.panel-body-wrapper.slide').slideToggle();
 		});
 		return true;
+	});
+</script>";
+		return $js;
+	}
+	
+	/**
+	 * Opens all D2U specific fieldsets 
+	 * @return string HTML String with js tag
+	 */
+	public static function getJSOpenAll() {
+		$js =
+"<script type='text/javascript'>
+	$('legend').each(function() {
+		$(this).addClass('open');
+		$(this).next('.panel-body-wrapper.slide').slideToggle();
 	});
 </script>";
 		return $js;
@@ -208,7 +222,10 @@ class d2u_addon_backend_helper {
 		print '<dd><div class="input-group">';
 		print '<select class="form-control" name="REX_LINKLIST_SELECT[' . $fieldnumber . ']" id="REX_LINKLIST_SELECT_' . $fieldnumber . '" size="10" style="margin: 0">';
 		foreach ($article_ids as $article_id) {
-			print '<option value="' . $article_id . '">' . rex_article::get($article_id, $clang_id)->getValue('name') . '</option>';
+			$article = rex_article::get($article_id, $clang_id);
+			if($article instanceof rex_article) {
+				print '<option value="' . $article_id . '">' . $article->getValue('name') . '</option>';
+			}
 		}
 		print '</select>';
 		print '<input type="hidden" name="REX_INPUT_LINKLIST[' . $fieldnumber . ']" id="REX_LINKLIST_' . $fieldnumber . '" value="' . implode(",", $article_ids) . '">';
