@@ -148,13 +148,16 @@ class D2UModuleManager {
 			3);
 		$d2u_modules[] = new D2UModule("03-2",
 			"Bildergallerie Ekko Lightbox",
-			3);
+			4);
 		$d2u_modules[] = new D2UModule("04-1",
 			"Google Maps",
 			4);
 		$d2u_modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
 			2);
+		$d2u_modules[] = new D2UModule("05-2",
+			"Artikel aus anderer Sprache übernehmen",
+			1);
 		$d2u_modules[] = new D2UModule("06-1",
 			"YouTube Video",
 			2,

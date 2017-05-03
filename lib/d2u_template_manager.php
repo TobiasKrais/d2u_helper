@@ -309,8 +309,8 @@ class D2UTemplate {
 	 * @return string Template name
 	 */
 	public function getCSS() {
-		if(file_exists($this->template_folder ."style.css")) {
-			return file_get_contents($this->template_folder ."style.css");
+		if(file_exists($this->template_folder ."styles.css")) {
+			return file_get_contents($this->template_folder ."styles.css");
 		}
 		else {
 			return "";

@@ -4,6 +4,8 @@ d2u_helper_meta_modules = Modulverwaltung
 d2u_helper_meta_settings = Einstellungen
 d2u_helper_meta_templates = Templateverwaltung
 
+d2u_helper_rex_article_cannot_delete = Artikel kann nicht gelöscht werden, da er noch in folgenden Addons verwendet wird:
+
 d2u_helper_autoupdate = Autoupdate
 d2u_helper_autoupdate_activated = Autoupdate aktiviert
 d2u_helper_autoupdate_deactivated = Autoupdate deaktiviert

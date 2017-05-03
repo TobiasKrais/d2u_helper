@@ -161,9 +161,9 @@ $d2u_helper = rex_addon::get("d2u_helper");
 							i=Math.max.apply(Math,n);
 						t.css("min-height", i+1);
 					}
-				)
+				);
 			}
-		)
+		);
 
 		$(window).on("load", function() {
 			var heights = $(".same-height").map(function() {

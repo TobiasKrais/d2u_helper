@@ -108,8 +108,10 @@ class d2u_addon_backend_helper {
 	// Open all fieldsets when save was clicked for being able to focus required fields
 	$('button[type=submit]').click(function() {
 		$('legend').each(function() {
-			$(this).addClass('open');
-			$(this).next('.panel-body-wrapper.slide').slideToggle();
+			if(!$(this).hasClass('open')) {
+				$(this).addClass('open');
+				$(this).next('.panel-body-wrapper.slide').slideToggle();
+			}
 		});
 		return true;
 	});

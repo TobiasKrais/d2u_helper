@@ -9,6 +9,8 @@
 		<li>Templates: Breadcrumbs in Einstellungen ausblendbar.</li>
 		<li>Google Analytics automatisch hinzufügbar.</li>
 		<li>Verbesserter Installationsmodus für Templates und Module.</li>
+		<li>Bugfix: wenn bei einer neuen Installation noch keine Artikel angelegt wurden.</li>
+		<li>Bugfix: Ekko Lightbox bei mehrfach eingesetztem Modul wurde Lightbox mehrfach geöffnet.</li>
 	</ul>
 	<p>1.1.2</p>
 	<ul>

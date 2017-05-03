@@ -21,12 +21,15 @@ if (rex_addon::get('yrewrite')->isAvailable()) {
 	$title = $yrewrite->getTitleTag();
 }
 
+$current_article = rex_article::getCurrent();
+							
 // Get d2u_helper stuff
 $d2u_helper = rex_addon::get("d2u_helper");
 
 // Get d2u_machinery stuff
 $d2u_machinery = rex_addon::get("d2u_machinery");
 $category = FALSE;
+$industry_sector = FALSE;
 $machine = FALSE;
 $used_machine = FALSE;
 $urlParamKey = "";
@@ -35,7 +38,7 @@ if(rex_addon::get("url")->isAvailable()) {
 	$urlParamKey = isset($url_data->urlParamKey) ? $url_data->urlParamKey : "";
 }
 if(rex_Addon::get('d2u_machinery')->isAvailable()) {
-	if(filter_input(INPUT_GET, 'machine_id', FILTER_VALIDATE_INT) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "machine_id")) {
+	if(filter_input(INPUT_GET, 'machine_id', FILTER_VALIDATE_INT, ['options' => ['default'=> 0]]) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "machine_id")) {
 		$machine_id = filter_input(INPUT_GET, 'machine_id', FILTER_VALIDATE_INT);
 		if(rex_addon::get("url")->isAvailable() && UrlGenerator::getId() > 0) {
 			$machine_id = UrlGenerator::getId();
@@ -46,7 +49,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 		$description = $machine->getMetaDescriptionTag();
 		$title = $machine->getTitleTag();
 	}
-	else if(filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "category_id")) {
+	else if(filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT, ['options' => ['default'=> 0]]) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "category_id")) {
 		$category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
 		if(rex_addon::get("url")->isAvailable() && UrlGenerator::getId() > 0) {
 			$category_id = UrlGenerator::getId();
@@ -57,7 +60,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 		$description = $category->getMetaDescriptionTag();
 		$title = $category->getTitleTag();
 	}
-	else if(rex_plugin::get("d2u_machinery", "industry_sectors")->isAvailable() && (filter_input(INPUT_GET, 'industry_sector_id', FILTER_VALIDATE_INT) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "industry_sector_id"))) {
+	else if(rex_plugin::get("d2u_machinery", "industry_sectors")->isAvailable() && (filter_input(INPUT_GET, 'industry_sector_id', FILTER_VALIDATE_INT, ['options' => ['default'=> 0]]) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "industry_sector_id"))) {
 		$industry_sector_id = filter_input(INPUT_GET, 'industry_sector_id', FILTER_VALIDATE_INT);
 		if(rex_addon::get("url")->isAvailable() && UrlGenerator::getId() > 0) {
 			$industry_sector_id = UrlGenerator::getId();
@@ -68,7 +71,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 		$description = $industry_sector->getMetaDescriptionTag();
 		$title = $industry_sector->getTitleTag();
 	}
-	else if(rex_plugin::get("d2u_machinery", "used_machines")->isAvailable() && (filter_input(INPUT_GET, 'used_machine_id', FILTER_VALIDATE_INT) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "used_machine_id"))) {
+	else if(rex_plugin::get("d2u_machinery", "used_machines")->isAvailable() && (filter_input(INPUT_GET, 'used_machine_id', FILTER_VALIDATE_INT, ['options' => ['default'=> 0]]) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "used_machine_id"))) {
 		$used_machine_id = filter_input(INPUT_GET, 'used_machine_id', FILTER_VALIDATE_INT);
 		if(rex_addon::get("url")->isAvailable() && UrlGenerator::getId() > 0) {
 			$used_machine_id = UrlGenerator::getId();
@@ -181,7 +184,6 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 						if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
 							$startarticle = rex_article::get(rex_article::getSiteStartArticleId());
 							echo '<a href="' . $startarticle->getUrl() . '"><span class="fa-home"></span></a>';
-							$current_article = rex_article::getCurrent();
 							$path = $current_article->getPathAsArray();
 							foreach ($path as $id) {
 								$article = rex_category::get($id);
@@ -296,9 +298,9 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 							i=Math.max.apply(Math,n);
 						t.css("min-height", i+1);
 					}
-				)
+				);
 			}
-		)
+		);
 
 		$(window).on("load", function() {
 			var heights = $(".same-height").map(function() {

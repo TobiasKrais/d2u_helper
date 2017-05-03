@@ -12,14 +12,16 @@
 	}
 	$type_thumb = "REX_VALUE[1]";
 	$type_detail = "REX_VALUE[2]";
-	$pics = preg_grep('/^\s*$/s', explode(",", REX_MEDIALIST[1]), PREG_GREP_INVERT)
+	$pics = preg_grep('/^\s*$/s', explode(",", REX_MEDIALIST[1]), PREG_GREP_INVERT);
+	
+	$lightbox_id = rand();
 ?>
-<div class="col-sm-12 col-md-<?php echo $cols; ?>">
+<div class="col-12 col-md-<?php echo $cols; ?>">
 	<div class="row">
 		<?php
 			foreach($pics as $pic) {
 				$media = rex_media::get($pic);
-				print '<a href="index.php?rex_media_type='. $type_detail .'&rex_media_file='. $pic .'" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-'. $pics_cols .' col-lg-4"';
+				print '<a href="index.php?rex_media_type='. $type_detail .'&rex_media_file='. $pic .'" data-toggle="lightbox'. $lightbox_id .'" data-gallery="example-gallery'. $lightbox_id .'" class="col-sm-'. $pics_cols .' col-lg-4"';
 				if($media instanceof rex_media) {
 					print ' data-title="'. $media->getValue('title') .'"';
 				}
@@ -35,7 +37,7 @@
 	</div>
 </div>
 <script>
-	$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+	$(document).on('click', '[data-toggle="lightbox<?php print $lightbox_id; ?>"]', function(event) {
 		event.preventDefault();
 		$(this).ekkoLightbox({
 			alwaysShowClose: true

@@ -172,6 +172,6 @@ footer a:hover {
 .subhead-nav {
 	margin-bottom: 11px;
 }
-.comparison-header {
+.comparison-header, unit {
 	padding: 0 15px;
 }
