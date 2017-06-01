@@ -5,13 +5,13 @@
 	}
 	$pics_cols = 4;
 	if($cols >= 10) {
-		$pics_cols = 2;
+		$pics_cols = 3;
 	}
 	else if ($cols <= 6) {
 		$pics_cols = 6;
 	}
-	$type_thumb = "REX_VALUE[1]";
-	$type_detail = "REX_VALUE[2]";
+	$type_thumb = "d2u_helper_gallery_thumb";
+	$type_detail = "d2u_helper_gallery_detail";
 	$pics = preg_grep('/^\s*$/s', explode(",", REX_MEDIALIST[1]), PREG_GREP_INVERT);
 	
 	$lightbox_id = rand();
@@ -21,7 +21,7 @@
 		<?php
 			foreach($pics as $pic) {
 				$media = rex_media::get($pic);
-				print '<a href="index.php?rex_media_type='. $type_detail .'&rex_media_file='. $pic .'" data-toggle="lightbox'. $lightbox_id .'" data-gallery="example-gallery'. $lightbox_id .'" class="col-sm-'. $pics_cols .' col-lg-4"';
+				print '<a href="index.php?rex_media_type='. $type_detail .'&rex_media_file='. $pic .'" data-toggle="lightbox'. $lightbox_id .'" data-gallery="example-gallery'. $lightbox_id .'" class="col-4 col-lg-'. $pics_cols .'"';
 				if($media instanceof rex_media) {
 					print ' data-title="'. $media->getValue('title') .'"';
 				}

@@ -11,6 +11,8 @@
 		<li>Verbesserter Installationsmodus für Templates und Module.</li>
 		<li>Bugfix: wenn bei einer neuen Installation noch keine Artikel angelegt wurden.</li>
 		<li>Bugfix: Ekko Lightbox bei mehrfach eingesetztem Modul wurde Lightbox mehrfach geöffnet.</li>
+		<li>Ekko Lightbox hat jetzt vordefinierten Image Type d2u_helper_gallery_thumb und d2u_helper_gallery_detail.</li>
+		<li>Update JQuery to 3.2.1.</li>
 	</ul>
 	<p>1.1.2</p>
 	<ul>
