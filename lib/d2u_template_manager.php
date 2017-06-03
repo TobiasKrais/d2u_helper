@@ -112,6 +112,9 @@ class D2UTemplateManager {
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
 			1);
+		$d2u_templates[] = new D2UTemplate("03-1",
+			"Immo Template - 2 Columns",
+			1);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",
 			1);
@@ -463,6 +466,14 @@ class D2UTemplate {
 		// remove addon config
 		if($this->rex_addon->hasConfig("template_". $this->d2u_template_id)) {
 			$this->rex_addon->removeConfig("template_". $this->d2u_template_id);
+		}
+		
+		// template specific uninstall action
+		if(file_exists($this->template_folder ."install.php")) {
+			$success = include $this->template_folder ."install.php";
+			if(!$success) {
+				return FALSE;
+			}
 		}
 	}
 	
