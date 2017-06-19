@@ -113,15 +113,22 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 
 <body>
 	<?php
+		$header_css = "";
 		if(!$d2u_helper->hasConfig("template_header_pic") || !$d2u_helper->hasConfig("template_logo")) {
 			print "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
 		}
-		$header_image = $d2u_helper->getConfig("template_header_pic");
-		if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
-			$header_image = $this->getValue("art_file");
+		else {
+			$header_image = $d2u_helper->getConfig("template_header_pic");
+			if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
+				$header_image = $this->getValue("art_file");
+				$header_css = 'style="background-image: url('. rex_url::media($header_image) .')"';
+			}
 		}
 	?>
-	<header style="background-image: url(<?php echo rex_url::media($header_image); ?>)">
+	<header <?php echo $header_css; ?>>
+		<?php
+			if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig("template_logo") != "") {
+		?>
 		<div class="container">
 			<div class="row">
 				<div class="col-9 col-md-6">
@@ -136,6 +143,9 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 				</div>
 			</div>
 		</div>
+		<?php
+			}
+		?>
 	</header>
 	<nav>
 		<div class="container">

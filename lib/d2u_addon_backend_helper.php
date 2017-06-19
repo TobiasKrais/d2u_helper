@@ -149,9 +149,13 @@ class d2u_addon_backend_helper {
 			print ' checked="checked"';
 		}
 		if ($readonly) {
-			print ' readonly';
+			print ' disabled';
 		}
-		print ' style="float: right; height: auto; width: auto;" /></dt>';
+		print ' style="float: right; height: auto; width: auto;" />';
+		if ($readonly && $checked) {
+			print '<input type="hidden" name="'. $fieldname .'" value="' . $value . '">';
+		}
+		print '</dt>';
 		print '<dd><label>' . rex_i18n::msg($message_id) . '</label></dd>';
 		print '</dl>';
 	}
@@ -169,7 +173,7 @@ class d2u_addon_backend_helper {
 		print '<dl class="rex-form-group form-group">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><input class="form-control" type="' . $type . '" name="' . $fieldname . '" value="' . $value . '"';
-		if ($required) {
+		if ($required && $readonly !== TRUE) {
 			print ' required';
 		}
 		if ($readonly) {
@@ -336,15 +340,18 @@ class d2u_addon_backend_helper {
 	public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = FALSE, $readonly = FALSE, $use_redactor = TRUE) {
 		print '<dl class="rex-form-group form-group">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
-		$redactor_class = $use_redactor ? ' redactorEditor2-full' : '';
-		print '<dd><textarea cols="1" rows="' . $rows . '" class="form-control' . $redactor_class . '" name="' . $fieldname . '"';
-		if ($required) {
-			print ' required';
-		}
+		$redactor_class = ($use_redactor) ? ' redactorEditor2-full' : '';
 		if ($readonly) {
-			print ' readonly';
+			print '<dd><div class="form-control" style="height: 100px;overflow-y: scroll">'. $value .'</div>'
+				. '<input type="hidden" name="' . $fieldname . '" value="'. $value .'"></dd>';
 		}
-		print '>' . $value . '</textarea></dd>';
+		else { 
+			print '<dd><textarea cols="1" rows="' . $rows . '" class="form-control' . $redactor_class . '" name="' . $fieldname . '"';
+			if ($required) {
+				print ' required';
+			}
+			print '>' . $value . '</textarea></dd>';
+		}
 		print '</dl>';
 	}
 

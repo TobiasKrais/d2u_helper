@@ -65,6 +65,7 @@ class d2u_mobile_navi {
 			$show_class = ' class="hidden-'. $addon->getConfig('include_menu_show') .'-down"';
 		}
 		print '<div id="desktop-menu"'. $show_class .'>';
+		$is_first = TRUE;
 		foreach(d2u_mobile_navi::getCategories($cat_parent_id) as $category) {
 			if(count($category->getChildren(true)) == 0) {
 				// Ohne Untermenü
@@ -72,7 +73,7 @@ class d2u_mobile_navi {
 			}
 			else {
 				print '<div id="dl-menu-'. $category->getId() .'" class="dl-menuwrapper desktop-navi">';
-				print '<div class="dl-trigger desktop-inner">'. $category->getName() .'</div>';
+				print '<div class="dl-trigger desktop-inner'. ($is_first ? ' first' : '') .'"><span class="has-children"></span>'. $category->getName() .'</div>';
 				print '<ul class="dl-menu">';
 				// Mit Untermenü
 				print '<li><a href="'. $category->getUrl() .'">'. strtoupper($category->getName()) .'</a></li>';
@@ -88,6 +89,7 @@ class d2u_mobile_navi {
 				}
 				print '</ul>';
 				print '</div>'; // .dl-menuwrapper
+				$is_first = FALSE;
 			}	
 		}
 		print '<br style="clear: both">';

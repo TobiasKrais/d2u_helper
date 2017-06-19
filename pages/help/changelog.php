@@ -1,6 +1,10 @@
 <fieldset>
 	<legend>D2U Helper Changelog</legend>
-	<p>1.2 (NEXT)</p>
+	<p>Wunschliste nächste Versioin</p>
+	<ul>
+		<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
+	</ul>
+	<p>1.2</p>
 	<ul>
 		<li>Module "Box mit Überschrift und Bild" hinzugefügt.</li>
 		<li>Bugfix: Hintergrundfarbe bei Box wird wieder angewandt.</li>
@@ -13,6 +17,7 @@
 		<li>Bugfix: Ekko Lightbox bei mehrfach eingesetztem Modul wurde Lightbox mehrfach geöffnet.</li>
 		<li>Ekko Lightbox hat jetzt vordefinierten Image Type d2u_helper_gallery_thumb und d2u_helper_gallery_detail.</li>
 		<li>Update JQuery to 3.2.1.</li>
+		<li>Für vorgefertige Templates können jetzt eigene CSS Dateien eingebunden werden.</li>
 	</ul>
 	<p>1.1.2</p>
 	<ul>

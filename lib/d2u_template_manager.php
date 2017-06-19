@@ -115,6 +115,9 @@ class D2UTemplateManager {
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
 			1);
+		$d2u_templates[] = new D2UTemplate("03-2",
+			"Immo Window Advertising Template",
+			1);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",
 			1);

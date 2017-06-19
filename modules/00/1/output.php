@@ -1,1 +1,1 @@
-<div class="col-sm-12 abstand">&nbsp;</div>
+<div class="col-12 abstand">&nbsp;</div>

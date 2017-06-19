@@ -31,7 +31,7 @@ button.dl-trigger, button.dl-trigger:hover {
 	color: navi_color_hover_font;
 }
 .desktop-navi:hover {
-	background-color: navi_color_hover_bg
+	background-color: navi_color_hover_bg;
 }
 .dl-menu li:hover, .dl-submenu li:hover {
 	background-color: navi_color_hover_bg;

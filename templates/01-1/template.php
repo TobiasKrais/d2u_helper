@@ -53,6 +53,9 @@ $d2u_helper = rex_addon::get("d2u_helper");
 
 <body>
 	<header>
+		<?php
+			if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig("template_logo") != "") {
+		?>
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -67,6 +70,9 @@ $d2u_helper = rex_addon::get("d2u_helper");
 				</div>
 			</div>
 		</div>
+		<?php
+			}
+		?>
 	</header>
 	<nav>
 		<div class="container">
@@ -98,9 +104,9 @@ $d2u_helper = rex_addon::get("d2u_helper");
 						if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
 							$header_image = $this->getValue("art_file");
 						}
-						$media_side_pic = rex_media::get($header_image);
-						if($media_side_pic instanceof rex_media) {
-							print '<img src="'. rex_url::media($header_image) .'" alt="'. $media_side_pic->getTitle() .'" title="'. $media_side_pic->getTitle() .'" id="logo">';
+						$media_header_pic = rex_media::get($header_image);
+						if($media_header_pic instanceof rex_media) {
+							print '<img src="'. rex_url::media($header_image) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" id="logo">';
 						}
 					?>
 				</div>

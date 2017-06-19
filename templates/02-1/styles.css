@@ -87,16 +87,29 @@ article {
 	padding: 1em 0;
 }
 article a, article a:visited, #breadcrumbs a {
-	color: #0c419d;
+	color: navi_color_bg;
 }
 article a:hover {
-	color: #f00404;
+	text-decoration: underline;
 }
 article h1     { font-size: 21px; line-height: 24px; font-weight: 400; margin: 0 0 10px 0; }
 article h2     { font-size: 17px; line-height: 20px; font-weight: 400; margin: 0 0 10px 0; }
 article h3     { font-size: 14px; font-weight: 700;  margin: 20px 0 10px 0; }
 article h4, h5 { font-size: 14px; font-weight: 400; margin: 0; }
 article h6     { font-size: 14px; font-weight: 400; margin: 0; }
+article img {
+	max-width: 100%;
+}
+article fieldset {
+	background-color: article_color_box;
+	border: 1px solid navi_color_bg;
+	padding: 1em;
+}
+article legend {
+	font-size: 1.25 rem;
+	font-weight: bold;
+	width: auto;
+}
 
 
 footer {

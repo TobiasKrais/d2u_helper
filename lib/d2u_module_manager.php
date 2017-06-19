@@ -130,47 +130,49 @@ class D2UModuleManager {
 	 * @return D2UModule[] Modules offered by D2U Helper addon
 	 */
 	public static function getD2UHelperModules() {
-		$d2u_modules = [];
-		$d2u_modules[] = new D2UModule("00-1",
+		$modules = [];
+		$modules[] = new D2UModule("00-1",
 			"Umbruch ganze Breite",
 			2);
-		$d2u_modules[] = new D2UModule("01-1",
+		$modules[] = new D2UModule("01-1",
 			"Texteditor",
 			4);
-		$d2u_modules[] = new D2UModule("01-2",
+		$modules[] = new D2UModule("01-2",
 			"Texteditor mit Bild und Überschrift",
 			3);
-		$d2u_modules[] = new D2UModule("02-1",
+		$modules[] = new D2UModule("02-1",
 			"Ueberschrift",
 			3);
-		$d2u_modules[] = new D2UModule("03-1",
+		$modules[] = new D2UModule("03-1",
 			"Bild",
 			3);
-		$d2u_modules[] = new D2UModule("03-2",
+		$modules[] = new D2UModule("03-2",
 			"Bildergallerie Ekko Lightbox",
 			4);
-		$d2u_modules[] = new D2UModule("04-1",
+		$modules[] = new D2UModule("04-1",
 			"Google Maps",
 			4);
-		$d2u_modules[] = new D2UModule("05-1",
+		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
-			2);
-		$d2u_modules[] = new D2UModule("05-2",
+			3);
+		$modules[] = new D2UModule("05-2",
 			"Artikel aus anderer Sprache übernehmen",
 			1);
-		$d2u_modules[] = new D2UModule("06-1",
+		$modules[] = new D2UModule("06-1",
 			"YouTube Video",
 			2,
 			"youtube-wrapper/youtube-wrapper.css");
-		$d2u_modules[] = new D2UModule("10-1",
+		$modules[] = new D2UModule("10-1",
 			"Box mit Bild und Ueberschrift",
 			1);
-		$d2u_modules[] = new D2UModule("10-2",
+		$modules[] = new D2UModule("10-2",
 			"Box mit Bild und Text",
 			1);
+		// 60-x reserved for D2U Guestbook
+		// 70-x reserved for D2U Immo Addon
 		// 80-x reserved for MultiNewsletter Addon
 		// 90-x reserved for D2U Machinery Addon
-		return $d2u_modules;
+		return $modules;
 	}
 	
 	/**
@@ -545,6 +547,11 @@ class D2UModule {
 		// remove addon config
 		if($this->rex_addon->hasConfig("module_". $this->d2u_module_id)) {
 			$this->rex_addon->removeConfig("module_". $this->d2u_module_id);
+		}
+
+		// uninstall action
+		if(file_exists($this->module_folder ."uninstall.php")) {
+			include $this->module_folder ."uninstall.php";
 		}
 	}
 	
