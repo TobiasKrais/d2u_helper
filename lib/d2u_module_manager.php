@@ -160,14 +160,14 @@ class D2UModuleManager {
 			1);
 		$modules[] = new D2UModule("06-1",
 			"YouTube Video",
-			2,
-			"youtube-wrapper/youtube-wrapper.css");
+			2);
 		$modules[] = new D2UModule("10-1",
 			"Box mit Bild und Ueberschrift",
 			1);
 		$modules[] = new D2UModule("10-2",
 			"Box mit Bild und Text",
 			1);
+		// 50-x reserved for D2U References
 		// 60-x reserved for D2U Guestbook
 		// 70-x reserved for D2U Immo Addon
 		// 80-x reserved for MultiNewsletter Addon
