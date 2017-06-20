@@ -129,7 +129,7 @@ class FeedItem extends HtmlDescribable {
 	 * if $value contains markup. This may be abused to embed tags not implemented by
 	 * the FeedCreator class used.
 	 */
-	var $additionalElements = Array();
+	var $additionalElements = [];
 
 	// on hold
 	// var $source;
@@ -402,7 +402,7 @@ class FeedCreator extends HtmlDescribable {
 	/**
 	 * @access private
 	 */
-	var $items = Array();
+	var $items = [];
  	
 	
 	/**
@@ -428,7 +428,7 @@ class FeedCreator extends HtmlDescribable {
 	 * if $value contains markup. This may be abused to embed tags not implemented by
 	 * the FeedCreator class used.
 	 */
-	var $additionalElements = Array();
+	var $additionalElements = [];
    
     
 	/**
@@ -1244,7 +1244,7 @@ class HTMLCreator extends FeedCreator {
 		}
 		
 		// use this array to put the lines in and implode later with "document.write" javascript
-		$feedArray = array();
+		$feedArray = [];
 		if ($this->image!=null) {
 			$imageStr = "<a href='".$this->image->link."'".$targetInsert.">".
 							"<img src='".$this->image->url."' border='0' alt='".
