@@ -179,6 +179,9 @@ class d2u_addon_backend_helper {
 		if ($readonly) {
 			print ' readonly';
 		}
+		if($type == "color" || $type == "number") {
+			print ' style="max-width: 150px;"';
+		}
 		print '/></dd>';
 		print '</dl>';
 	}
