@@ -218,7 +218,6 @@ figure figcaption {
 	padding-right: 1em;
 }
 .expose-navi li a {
-    border: 1px solid #6bef15;
     padding: 5px;
 }
 
@@ -265,6 +264,7 @@ figure figcaption {
 	line-height: 1em;
 }
 .back:before {
+	color: slategrey;
 	content: "\f060";
 }
 .forward:before {
@@ -291,6 +291,7 @@ figure figcaption {
 	content: "\f03e";
 }
 .print:before {
+	color: slategrey;
 	content: "\f02f";
 }
 .reload:before {
