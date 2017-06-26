@@ -123,7 +123,7 @@
 						}
 					?>
 
-					<div id="immo_advertising" class="carousel slide" data-ride="carousel"<?php print $interval ?>>
+					<div id="immo_advertising" class="carousel slide" data-ride="carousel"<?php print $interval ?> data-cycle="true">
 						<div class="carousel-inner" role="listbox">
 							<?php
 								$active = TRUE;
@@ -142,7 +142,7 @@
 										print '<div class="row">';
 										if($advertisement->picture != "") {
 											print '<div class="col-12 col-md-6">';
-											print '<img src="index.php?rex_media_type=d2u_immo_overview&rex_media_file='.
+											print '<img src="index.php?rex_media_type=d2u_helper_sm&rex_media_file='.
 													$advertisement->picture .'" alt='. $advertisement->title .' class="overviewpic">';
 											print '</div>';
 
@@ -184,7 +184,7 @@
 											if($property->object_reserved || $property->object_sold) {
 												print '<div class="reserved">';
 											}
-											print '<img src="index.php?rex_media_type=d2u_immo_overview&rex_media_file='.
+											print '<img src="index.php?rex_media_type=d2u_helper_sm&rex_media_file='.
 													$property->pictures[0] .'" alt='. $property->name .' class="overviewpic">';
 											if($property->object_reserved) {
 												print '<span>'. $tag_open .'d2u_immo_object_reserved'. $tag_close .'</span>';
@@ -373,12 +373,5 @@
 			</div>
 		</footer>
 	</div>
-	<script>
-		$(document).ready(function() {
-			$('#immo_advertising').carousel({
-				cycle: true
-			});
-		});
-	</script>
 </body>
 </html>

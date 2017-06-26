@@ -70,6 +70,9 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 				</div>
 			</div>
 		</header>
+		<?php
+			if($print == "") {
+		?>
 		<div class="row hidden-print">
 			<div class="col-12">
 				<div class="right-border distance-bottom">
@@ -88,26 +91,31 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 				</div>
 			</div>
 		</div>
+		<?php
+			}
+		?>
 		<article>
 			<div class="row">
 				<?php
 					// Breadcrumbs
-					if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
-						print '<div class="col-12 hidden-print">';
-						print '<div id="breadcrumbs">';
-						$startarticle = rex_article::get(rex_article::getSiteStartArticleId());
-						echo '<a href="' . $startarticle->getUrl() . '"><span class="fa-home"></span></a>';
-						$current_article = rex_article::getCurrent();
-						$path = $current_article->getPathAsArray();
-						foreach ($path as $id) {
-							$article = rex_category::get($id);
-							echo ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
+					if($print == "") {
+						if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
+							print '<div class="col-12 hidden-print">';
+							print '<div id="breadcrumbs">';
+							$startarticle = rex_article::get(rex_article::getSiteStartArticleId());
+							echo '<a href="' . $startarticle->getUrl() . '"><span class="fa-home"></span></a>';
+							$current_article = rex_article::getCurrent();
+							$path = $current_article->getPathAsArray();
+							foreach ($path as $id) {
+								$article = rex_category::get($id);
+								echo ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
+							}
+							if(!$current_article->isStartArticle()) {
+								echo ' &nbsp;»&nbsp;&nbsp;<a href="' . $current_article->getUrl() . '">' . $current_article->getName() . '</a>';
+							}
+							print '</div>';
+							print '</div>';
 						}
-						if(!$current_article->isStartArticle()) {
-							echo ' &nbsp;»&nbsp;&nbsp;<a href="' . $current_article->getUrl() . '">' . $current_article->getName() . '</a>';
-						}
-						print '</div>';
-						print '</div>';
 					}
 					if($d2u_helper->hasConfig('subhead_include_articlename') && $d2u_helper->getConfig('subhead_include_articlename') == "true") {
 						print '<div class="col-12">';
@@ -115,7 +123,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 						print '</div>';
 					}
 					else if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
-						// If not title, but breadcrumbs: dhow empty row
+						// If not title, but breadcrumbs: show empty row
 						print '<div class="col-12 abstand hidden-print"></div>';
 					}
 				?>
@@ -166,7 +174,6 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 			?>
 		</div>
 	</div>
-	<div class="visible-print-block" id="print-bug">&nbsp;</div>
 	<script>
 		$(window).on("load",
 			function(e) {

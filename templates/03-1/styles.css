@@ -357,8 +357,10 @@ figure figcaption {
 		margin-bottom: 0;
 	}
 	@media print and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) and (min-width: 768px) { 
-		.print-bug, .container {
-			page-break-after: always;
+		/* See Chrome print bug: https://github.com/twbs/bootstrap/issues/21771 */
+		::first-letter{
+			margin: 0;
+			padding: 0;
 		}
 	}
 }
