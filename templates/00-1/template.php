@@ -121,8 +121,8 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 			$header_image = $d2u_helper->getConfig("template_header_pic");
 			if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
 				$header_image = $this->getValue("art_file");
-				$header_css = 'style="background-image: url('. rex_url::media($header_image) .')"';
 			}
+			$header_css = 'style="background-image: url('. rex_url::media($header_image) .')"';
 		}
 	?>
 	<header <?php echo $header_css; ?>>
