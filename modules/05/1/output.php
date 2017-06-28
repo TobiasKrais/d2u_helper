@@ -4,7 +4,7 @@ $forward_url = "";
 
 if($link_type == "link") {
 	$link = "REX_VALUE[2]";
-	if($link > 0) {
+	if($link != "") {
 		if(rex::isBackend()) {
 			print "Weiterleitung zu URL <a href='". $link ."'>". $link ."</a>";
 		}
@@ -99,4 +99,4 @@ if(!rex::isBackend() && $forward_url != "") {
 	header('Location: '. $forward_url);
 	header("Status: 301");
    	exit();
- }
+}
