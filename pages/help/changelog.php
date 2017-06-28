@@ -3,6 +3,13 @@
 	<p>Wunschliste nächste Versioin</p>
 	<ul>
 		<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
+		<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
+	</ul>
+	<p>1.3</p>
+	<ul>
+		<li>Module "Artikelweiterleitung" kann nun zu beliebigen externen URLs und zu Maschinen,
+			Branchen und Gebrauchtmaschinen aus dem D2U Maschinen Addon weiterleiten.
+			Auch zu Immobilien aus dem D2U Immo Addon.</li>
 	</ul>
 	<p>1.2</p>
 	<ul>
@@ -40,7 +47,7 @@
 	<ul>
 		<li>Bugfix: automatisches Modul Update während Addon Update sollte nun funktionieren.</li>
 	</ul>
-	<p>1.0.2</p>
+	<p>1.0.1</p>
 	<ul>
 		<li>Bugfix: Google Maps Modul</li>
 	</ul>
