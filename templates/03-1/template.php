@@ -113,6 +113,11 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 							if(!$current_article->isStartArticle()) {
 								echo ' &nbsp;»&nbsp;&nbsp;<a href="' . $current_article->getUrl() . '">' . $current_article->getName() . '</a>';
 							}
+							if(rex_Addon::get('d2u_immo')->isAvailable()) {
+								foreach(d2u_immo_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+									echo ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
+								}
+							}
 							print '</div>';
 							print '</div>';
 						}
