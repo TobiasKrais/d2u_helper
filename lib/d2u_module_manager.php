@@ -159,8 +159,11 @@ class D2UModuleManager {
 			"Artikel aus anderer Sprache übernehmen",
 			1);
 		$modules[] = new D2UModule("06-1",
-			"YouTube Video",
+			"YouTube Video einbinden",
 			2);
+		$modules[] = new D2UModule("06-2",
+			"IFrame einbinden",
+			1);
 		$modules[] = new D2UModule("10-1",
 			"Box mit Bild und Ueberschrift",
 			1);

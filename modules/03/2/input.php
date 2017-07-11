@@ -5,7 +5,7 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[20]" >
 		<?php
-		$values = array(4=>"4 von 12 Spalten", 5=>"5 von 12 Spalten", 6=>"6 von 12 Spalten", 7=>"7 von 12 Spalten", 8=>"8 von 12 Spalten", 9=>"9 von 12 Spalten", 10=>"10 von 12 Spalten", 11=>"11 von 12 Spalten", 12=>"12 von 12 Spalten (ganze Breite)");
+		$values = [12=>"12 von 12 Spalten (ganze Breite)", 6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten"];
 		foreach($values as $key => $value) {
 			echo '<option value="'. $key .'" ';
 	
