@@ -80,7 +80,14 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		<textarea name="REX_INPUT_VALUE[1]" class="redactorEditor2-full" >
+		<?php
+			$editor_class = "redactorEditor2-full";
+			if(rex_addon::get('tinymce4')->isAvailable()) {
+				$editor_class = "tinyMCEEditor";
+			}
+		?>
+		<br>
+		<textarea name="REX_INPUT_VALUE[1]" class="form-control <?php print $editor_class; ?>" style="height: 500px">
 		REX_VALUE[1]
 		</textarea>
 	</div>

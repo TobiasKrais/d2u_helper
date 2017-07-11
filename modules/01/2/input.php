@@ -37,7 +37,14 @@
 		Text:<br />
 	</div>
 	<div class="col-xs-12 col-sm-8">
-		<textarea name="REX_INPUT_VALUE[2]" class="redactorEditor2-full" >
+		<?php
+			$editor_class = "redactorEditor2-full";
+			if(rex_addon::get('tinymce4')->isAvailable()) {
+				$editor_class = "tinyMCEEditor";
+			}
+		?>
+		<br>
+		<textarea name="REX_INPUT_VALUE[2]" class="form-control <?php print $editor_class; ?>" style="height: 500px">
 		REX_VALUE[2]
 		</textarea>
 	</div>
