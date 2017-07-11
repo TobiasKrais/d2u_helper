@@ -106,7 +106,7 @@ class d2u_addon_backend_helper {
 		});
 	});
 	// Open all fieldsets when save was clicked for being able to focus required fields
-	$('button[type=submit]').mousedown(function() {
+	$('button[type=submit]').click(function() {
 		$('legend').each(function() {
 			if(!$(this).hasClass('open')) {
 				$(this).addClass('open');
@@ -170,7 +170,7 @@ class d2u_addon_backend_helper {
 	 * @param string $type HTML5 input type, e.g. text, number or email
 	 */
 	public static function form_input($message_id, $fieldname, $value, $required = FALSE, $readonly = FALSE, $type = "text") {
-		print '<dl class="rex-form-group form-group">';
+		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><input class="form-control" type="' . $type . '" name="' . $fieldname . '" value="' . $value . '"';
 		if ($required && $readonly !== TRUE) {
@@ -198,7 +198,7 @@ class d2u_addon_backend_helper {
 		if (!in_array($clang_id, rex_clang::getAllIds())) {
 			$clang_id = rex_clang::getStartId();
 		}
-		print '<dl class="rex-form-group form-group">';
+		print '<dl class="rex-form-group form-group" id="LINK_'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
 		$article = rex_article::get($article_id, $clang_id);
@@ -226,7 +226,7 @@ class d2u_addon_backend_helper {
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
 	 */
 	public static function form_linklistfield($message_id, $fieldnumber, $article_ids, $clang_id, $readonly = FALSE) {
-		print '<dl class="rex-form-group form-group">';
+		print '<dl class="rex-form-group form-group" id="LINKLIST_'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
 		print '<select class="form-control" name="REX_LINKLIST_SELECT[' . $fieldnumber . ']" id="REX_LINKLIST_SELECT_' . $fieldnumber . '" size="10" style="margin: 0">';
@@ -261,7 +261,7 @@ class d2u_addon_backend_helper {
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
 	 */
 	public static function form_mediafield($message_id, $fieldname, $value, $readonly = FALSE) {
-		print '<dl class="rex-form-group form-group">';
+		print '<dl class="rex-form-group form-group" id="MEDIA_'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
 		print '<input class="form-control" type="text" name="REX_INPUT_MEDIA[' . $fieldname . ']" value="' . $value . '" id="REX_MEDIA_' . $fieldname . '" readonly="readonly">';
@@ -282,7 +282,7 @@ class d2u_addon_backend_helper {
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
 	 */
 	public static function form_medialistfield($message_id, $fieldnumber, $values, $readonly = FALSE) {
-		print '<dl class="rex-form-group form-group">';
+		print '<dl class="rex-form-group form-group" id="MEDIALIST_'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
 		print '<select class="form-control" name="REX_MEDIALIST_SELECT[' . $fieldnumber . ']" id="REX_MEDIALIST_SELECT_' . $fieldnumber . '" size="10" style="margin: 0">';
@@ -312,7 +312,7 @@ class d2u_addon_backend_helper {
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
 	 */
 	public static function form_select($message_id, $fieldname, $values, $selected_values = array(), $size = 1, $multiple = FALSE, $readonly = FALSE) {
-		print '<dl class="rex-form-group form-group">';
+		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd>';
 		$multiple_attr = $multiple ? ' multiple="multiple"' : '';
@@ -338,18 +338,24 @@ class d2u_addon_backend_helper {
 	 * @param int $rows Number rows
 	 * @param boolean $required TRUE if field should have required attribute.
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
-	 * @param string $use_redactor Use Rex Redactor 2 as WYSIWYG Editor
+	 * @param string $use_wysiwyg Use WYSIWYG Editor
 	 */
-	public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = FALSE, $readonly = FALSE, $use_redactor = TRUE) {
-		print '<dl class="rex-form-group form-group">';
+	public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = FALSE, $readonly = FALSE, $use_wysiwyg = TRUE) {
+		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
-		$redactor_class = ($use_redactor) ? ' redactorEditor2-full' : '';
+		$wysiwyg_class = '';
+		if($use_wysiwyg && rex_addon::get('tinymce4')->isAvailable()) {
+			$wysiwyg_class = ' tinyMCEEditor';
+		}
+		else if($use_wysiwyg && rex_addon::get('redactor2')->isAvailable()) {
+			$wysiwyg_class = ' redactorEditor2-full';
+		}
 		if ($readonly) {
 			print '<dd><div class="form-control" style="height: 100px;overflow-y: scroll">'. $value .'</div>'
 				. '<input type="hidden" name="' . $fieldname . '" value="'. $value .'"></dd>';
 		}
 		else { 
-			print '<dd><textarea cols="1" rows="' . $rows . '" class="form-control' . $redactor_class . '" name="' . $fieldname . '"';
+			print '<dd><textarea cols="1" rows="' . $rows . '" class="form-control' . $wysiwyg_class . '" name="' . $fieldname . '"';
 			if ($required) {
 				print ' required';
 			}

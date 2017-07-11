@@ -125,9 +125,12 @@
 	</div>
 	<div class="col-xs-12 col-sm-8">
 		<?php
-			$editor_class = "redactorEditor2-full";
+			$editor_class = "";
 			if(rex_addon::get('tinymce4')->isAvailable()) {
-				$editor_class = "tinyMCEEditor";
+				$editor_class = " tinyMCEEditor";
+			}
+			else if(rex_addon::get('redactor2')->isAvailable()) {
+				$editor_class = " redactorEditor2-full";
 			}
 		?>
 		<br>
