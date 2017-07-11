@@ -10,6 +10,7 @@ d2u_helper_autoupdate = Autoupdate
 d2u_helper_autoupdate_activated = Autoupdate aktiviert
 d2u_helper_autoupdate_deactivated = Autoupdate deaktiviert
 d2u_helper_clone = klonen
+d2u_helper_confirm_delete = Wirklich löschen?
 d2u_helper_data_all_lang = Daten für alle Sprachen
 d2u_helper_defaultlang = Ausgangssprache
 d2u_helper_d2u_id = ID
@@ -28,7 +29,7 @@ d2u_helper_metainfo_headerpic = Headerbild
 
 d2u_helper_modules_d2u_module_name = D2U Modulname
 d2u_helper_modules_installed = Modul installiert
-d2u_helper_modules_install_redactor2 = Das Addon Redactor 2 Editor wird für dieses Modul benötigt.
+d2u_helper_modules_install_wysiwyg = Das Addon "TinyMCE 4" oder "Redactor 2 Editor" wird für dieses Modul benötigt.
 d2u_helper_modules_pair_new = Neues Redaxo Modul anlegen
 d2u_helper_modules_paired_rex_module = Zugeordnetes Redaxo Modul
 

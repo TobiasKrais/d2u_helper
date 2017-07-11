@@ -5,11 +5,12 @@
 		<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
 		<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
 	</ul>
-	<p>1.3</p>
+	<p>1.2.1</p>
 	<ul>
-		<li>Module "Artikelweiterleitung" kann nun zu beliebigen externen URLs und zu Maschinen,
+		<li>Modul "Artikelweiterleitung" kann nun zu beliebigen externen URLs und zu Maschinen,
 			Branchen und Gebrauchtmaschinen aus dem D2U Maschinen Addon weiterleiten.
 			Auch zu Immobilien aus dem D2U Immo Addon.</li>
+		<li>Backendfelder durch eine ID ansprechbar um sie ausblenden zu können.</li>
 	</ul>
 	<p>1.2</p>
 	<ul>
