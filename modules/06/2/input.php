@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-4">
-		Vollständige URL:
+		Vollständige URL (inkl. https://):
 	</div>
 	<div class="col-xs-8">
 		<input type="text" size="50" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" placeholder="https://www.redaxo.org/" />

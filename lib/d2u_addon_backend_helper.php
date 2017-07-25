@@ -182,6 +182,9 @@ class d2u_addon_backend_helper {
 		if($type == "color" || $type == "number") {
 			print ' style="max-width: 150px;"';
 		}
+		if($type == "date") {
+			print ' placeholder="Format: JJJJ-MM-TT"';
+		}
 		print '/></dd>';
 		print '</dl>';
 	}

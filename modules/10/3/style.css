@@ -1,0 +1,23 @@
+.download-list {
+	padding: 0;
+}
+.download-list li {
+	background: article_color_box;
+	list-style: none;
+	margin-bottom: 1em;
+	padding: 0.5em 1em;
+}
+
+.icon {
+	font-family: FontAwesome;
+	font-weight: normal;
+	line-height: 1em;
+}
+.file:before {
+	color: darkred;
+	content: "\f1c1";
+}
+.pdf:before {
+	color: darkred;
+	content: "f016";
+}
