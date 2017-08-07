@@ -10,8 +10,8 @@ page:
     subpages:
         modules: { title: 'translate:d2u_helper_meta_modules', icon: rex-icon rex-icon-module }
         templates: { title: 'translate:d2u_helper_meta_templates', icon: rex-icon rex-icon-template }
-        settings: { title: 'translate:d2u_helper_meta_settings', icon: rex-icon rex-icon-system }
-        help: { title: 'translate:d2u_helper_meta_help', icon: rex-icon rex-icon-help }
+        settings: { title: 'translate:d2u_helper_settings', icon: rex-icon rex-icon-system }
+        help: { title: 'translate:d2u_helper_help', icon: rex-icon rex-icon-help }
 
 requires:
     redaxo: '>=5.1.0'
