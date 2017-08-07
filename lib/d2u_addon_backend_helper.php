@@ -229,7 +229,7 @@ class d2u_addon_backend_helper {
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
 	 */
 	public static function form_linklistfield($message_id, $fieldnumber, $article_ids, $clang_id, $readonly = FALSE) {
-		print '<dl class="rex-form-group form-group" id="LINKLIST_'. $fieldname .'">';
+		print '<dl class="rex-form-group form-group" id="LINKLIST_'. $fieldnumber .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
 		print '<select class="form-control" name="REX_LINKLIST_SELECT[' . $fieldnumber . ']" id="REX_LINKLIST_SELECT_' . $fieldnumber . '" size="10" style="margin: 0">';
@@ -285,7 +285,7 @@ class d2u_addon_backend_helper {
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
 	 */
 	public static function form_medialistfield($message_id, $fieldnumber, $values, $readonly = FALSE) {
-		print '<dl class="rex-form-group form-group" id="MEDIALIST_'. $fieldname .'">';
+		print '<dl class="rex-form-group form-group" id="MEDIALIST_'. $fieldnumber .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
 		print '<select class="form-control" name="REX_MEDIALIST_SELECT[' . $fieldnumber . ']" id="REX_MEDIALIST_SELECT_' . $fieldnumber . '" size="10" style="margin: 0">';
@@ -314,7 +314,7 @@ class d2u_addon_backend_helper {
 	 * @param boolean $multiple TRUE if multiple selections are allowed
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
 	 */
-	public static function form_select($message_id, $fieldname, $values, $selected_values = array(), $size = 1, $multiple = FALSE, $readonly = FALSE) {
+	public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size = 1, $multiple = FALSE, $readonly = FALSE) {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd>';
