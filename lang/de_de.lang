@@ -1,7 +1,5 @@
-d2u_helper_meta_help = Hilfe
 d2u_helper_meta_title = D2U Helper
 d2u_helper_meta_modules = Modulverwaltung
-d2u_helper_meta_settings = Einstellungen
 d2u_helper_meta_templates = Templateverwaltung
 
 d2u_helper_rex_article_cannot_delete = Artikel kann nicht gelöscht werden, da er noch in folgenden Addons verwendet wird:
@@ -14,7 +12,10 @@ d2u_helper_confirm_delete = Wirklich löschen?
 d2u_helper_data_all_lang = Daten für alle Sprachen
 d2u_helper_defaultlang = Ausgangssprache
 d2u_helper_d2u_id = ID
+d2u_helper_help = Hilfe
 d2u_helper_install_error = Fehler beim Installieren
+d2u_helper_settings = Einstellungen
+d2u_helper_setup = Setup
 d2u_helper_text_lang = Texte in Sprache
 d2u_helper_translation = Diese Übersetzung ...
 d2u_helper_translation_needs_update = ... muss aktualisiert werden
@@ -93,6 +94,7 @@ d2u_helper_lang_italian = Italienisch
 d2u_helper_lang_polish = Polnisch
 d2u_helper_lang_portuguese = Portugiesisch
 d2u_helper_lang_russian = Russisch
+d2u_helper_lang_slovak = Slowakisch
 d2u_helper_lang_spanish = Spanisch
 d2u_helper_lang_replacements = Sprachersetzungen
 d2u_helper_lang_replacements_install = Voreingestellte Sprachersetzungen aus folgender Sprache übernehmen:

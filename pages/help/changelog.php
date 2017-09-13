@@ -5,6 +5,10 @@
 		<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
 		<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
 	</ul>
+	<p>1.2.2</p>
+	<ul>
+		<li>Update bootstrap 4 beta.</li>
+	</ul>
 	<p>1.2.1</p>
 	<ul>
 		<li>Modul "Artikelweiterleitung" kann nun zu beliebigen externen URLs und zu Maschinen,

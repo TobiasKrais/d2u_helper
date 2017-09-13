@@ -31,10 +31,10 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 ?>
 <form action="<?php print rex_url::currentBackendPage(); ?>" method="post">
 	<div class="panel panel-edit">
-		<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_helper_meta_settings'); ?></div></header>
+		<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_helper_settings'); ?></div></header>
 		<div class="panel-body">
 			<fieldset>
-				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_meta_settings'); ?></legend>
+				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings'); ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap]', 'true', $this->getConfig('include_bootstrap') == 'true');

@@ -64,11 +64,11 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$insert_body = "";
 	// Vor dem </head> einfügen
 	if($addon->getConfig('include_bootstrap') == 'true') {
-		// Bootstrap CSS
-		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'" />' . PHP_EOL;
 		// JavaScript
-		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'"></script>' . PHP_EOL;
-		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/tether.min.js') .'"></script>' . PHP_EOL;
+		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'?v=3.2.1"></script>' . PHP_EOL;
+		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/popper.min.js') .'"></script>' . PHP_EOL;
+		// Bootstrap CSS
+		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.0.0beta" />' . PHP_EOL;
 	}
 
 	$helper_css = FALSE;

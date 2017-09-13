@@ -153,7 +153,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 				<?php
 					// Navi
 					if(count(rex_clang::getAllIds(TRUE)) > 1) {
-						print '<div class="col-9" data-match-height>';
+						print '<div class="col-10" data-match-height>';
 					}
 					else {
 						print '<div class="col-12" data-match-height>';
@@ -167,7 +167,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 					print '</div>';
 					// Languages
 					if(count(rex_clang::getAllIds(TRUE)) > 1) {
-						print '<div class="col-sm-3">';
+						print '<div class="col-sm-2">';
 						print '<div id="langchooser" class="desktop-inner">';
 						// FIXME
 						if(rex_clang::getCurrentId() == 1) {
