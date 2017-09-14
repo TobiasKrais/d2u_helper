@@ -11,7 +11,13 @@ page:
         modules: { title: 'translate:d2u_helper_meta_modules', icon: rex-icon rex-icon-module }
         templates: { title: 'translate:d2u_helper_meta_templates', icon: rex-icon rex-icon-template }
         settings: { title: 'translate:d2u_helper_settings', icon: rex-icon rex-icon-system }
-        help: { title: 'translate:d2u_helper_help', icon: rex-icon rex-icon-help }
+        help:
+            icon: rex-icon rex-icon-help
+            title: 'translate:d2u_helper_help'
+            subpages:
+                readme: { title: 'translate:d2u_helper_help_chapter_readme' }
+                update: { title: 'translate:d2u_helper_help_chapter_update' }
+                changelog: { title: 'translate:d2u_helper_help_chapter_changelog' }
 
 requires:
     redaxo: '>=5.1.0'
