@@ -100,7 +100,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 
 	// Vor dem </body> einfügen
 	if($addon->getConfig('include_bootstrap') == 'true') {
-		$insert_body .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'"></script>' . PHP_EOL;
+		$insert_body .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'?v=4.0.0beta"></script>' . PHP_EOL;
 	}
 
 	$helper_body_js = FALSE;

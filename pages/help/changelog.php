@@ -8,6 +8,7 @@
 	<p>1.2.2</p>
 	<ul>
 		<li>Update bootstrap 4 beta.</li>
+		<li>Update Ekko Lightbox to version 5.2.</li>
 	</ul>
 	<p>1.2.1</p>
 	<ul>

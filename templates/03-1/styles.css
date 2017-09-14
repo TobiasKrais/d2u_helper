@@ -238,7 +238,7 @@ figure figcaption {
 	font-weight: bold;
 	padding: 0.3em 0.75em;
 }
-.nav-item a.active, .nav-item a:hover {
+.nav-pills .nav-item .nav-link.active, .nav-item a:hover {
     background-color: navi_color_bg;
 	color: navi_color_font;
 	text-decoration: none;

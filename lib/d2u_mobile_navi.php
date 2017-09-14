@@ -62,7 +62,24 @@ class d2u_mobile_navi {
 		$addon = rex_addon::get("d2u_helper");
 		$show_class = "";
 		if($addon->hasConfig('include_menu_show')) {
-			$show_class = ' class="hidden-'. $addon->getConfig('include_menu_show') .'-down"';
+			$size = "xs";
+			switch ($addon->getConfig('include_menu_show')) {
+				case "xs":
+					$size = "sm";
+					break;
+				case "sm":
+					$size = "md";
+					break;
+				case "md":
+					$size = "lg";
+					break;
+				case "lg":
+					$size = "xl";
+					break;
+				default:
+					$size = "md";
+			}
+			$show_class = ' class="d-none d-'. $size .'-block"';
 		}
 		print '<div id="desktop-menu"'. $show_class .'>';
 		$is_first = TRUE;
@@ -130,7 +147,7 @@ class d2u_mobile_navi {
 				default:
 					$size = "md";
 			}
-			$show_class = ' class="hidden-'. $size .'-up"';
+			$show_class = ' class="d-'. $size .'-none"';
 		}
 		print '<div id="mobile-menu"'. $show_class .'>';
 		print '<div id="dl-menu" class="dl-menuwrapper">';
