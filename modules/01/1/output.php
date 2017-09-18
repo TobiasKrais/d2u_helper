@@ -15,7 +15,7 @@
 	$offset_lg_cols = intval("REX_VALUE[17]");
 	$offset_lg = "";
 	if($offset_lg_cols > 0) {
-		$offset_lg = " offset-lg-". $offset_lg_cols;
+		$offset_lg = " mr-lg-auto ml-lg-auto ";
 	}
 	
 	print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';

@@ -45,7 +45,7 @@ d2u_helper_settings_footer_color_box = Hintergrund Footer Boxen
 d2u_helper_settings_google = Google Einstellungen
 d2u_helper_settings_google_analytics = Analytics ID (optional)
 d2u_helper_settings_google_maps_key = Maps API Key (optional)
-d2u_helper_settings_include_bootstrap = Bootstrap 4 mit abhängingen JQuery und Tether CSS / JS automatisch einbinden<br>(bitte aktivieren, wenn Templates dieses Addons installiert sind)
+d2u_helper_settings_include_bootstrap = Bootstrap 4 mit abhängingen JQuery und Popper CSS / JS automatisch einbinden<br>(bitte aktivieren, wenn Templates dieses Addons installiert sind)
 d2u_helper_settings_include_menu = CSS / JS des Responsive MultiLevel Menüs automatisch einbinden
 d2u_helper_settings_include_module = CSS / JS der installierten Module automatisch einbinden
 d2u_helper_settings_menu = Menü Einstellungen
@@ -83,6 +83,8 @@ d2u_helper_templates_install_yrewrite = Das Addon YRewrite wird für dieses Temp
 d2u_helper_templates_installed = Template installiert
 d2u_helper_templates_pair_new = Neues Redaxo Template anlegen
 d2u_helper_templates_paired_rex_template = Zugeordnetes Redaxo Template
+
+d2u_helper_lang_icon = Icon
 
 d2u_helper_lang_chinese = Chinesisch
 d2u_helper_lang_czech = Tschechisch

@@ -3,9 +3,14 @@
 	if($cols == "") {
 		$cols = 8;
 	}
+	$offset_lg_cols = intval("REX_VALUE[17]");
+	$offset_lg = "";
+	if($offset_lg_cols > 0) {
+		$offset_lg = " mr-lg-auto ml-lg-auto ";
+	}
 	$type = "REX_VALUE[3]";
 ?>
-<div class="col-sm-12 col-md-6 col-lg-<?php echo $cols; ?> abstand">
+<div class="col-sm-12 col-md-6 col-lg-<?php echo $cols . $offset_lg; ?> abstand">
 	<div class="same-height module-box">
 		<?php
 			if ("REX_MEDIA[1]" != '') {

@@ -6,6 +6,11 @@
 			<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
 			<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
 		</ul>
+		<p>1.2.3</p>
+		<ul>
+			<li>Bessere Anpassungen Templates an URL Addon Version 1.0.0beta5.</li>
+			<li>Mehrsprachige Templates: Icon in Spracheinstellungen konfigurierbar.</li>
+		</ul>
 		<p>1.2.2</p>
 		<ul>
 			<li>Update bootstrap 4 beta.</li>
@@ -23,7 +28,7 @@
 			<li>Module "Box mit Überschrift und Bild" hinzugefügt.</li>
 			<li>Bugfix: Hintergrundfarbe bei Box wird wieder angewandt.</li>
 			<li>Template: "Side Picture" und "Header Pic" Template hinzugefügt.</li>
-			<li>Template: "Feed Gernator" Template zum generieren von RSS, ATOM und anderen Feeds hinzugefügt.</li>
+			<li>Template: "Feed Generator" Template zum generieren von RSS, ATOM und anderen Feeds hinzugefügt.</li>
 			<li>Templates: Breadcrumbs in Einstellungen ausblendbar.</li>
 			<li>Google Analytics automatisch hinzufügbar.</li>
 			<li>Verbesserter Installationsmodus für Templates und Module.</li>

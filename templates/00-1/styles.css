@@ -169,8 +169,8 @@ footer a:hover {
 	font-weight: bold;
 	padding: 0 0 15px 0;
 }
-.subhead-nav {
-	margin-bottom: 11px;
+.nav-link.active {
+	background-color: transparent !important;
 }
 .comparison-header, unit {
 	padding: 0 15px;
