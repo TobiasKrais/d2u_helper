@@ -74,7 +74,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$helper_css = FALSE;
 	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true") {
 		// Module stuff
-		$module_manager = new D2UModuleManager(D2UModuleManager::getD2UHelperModules());
+		$module_manager = new D2UModuleManager(D2UModuleManager::getModules());
 		if($module_manager->getAutoCSS() != "") {
 			$helper_css = TRUE;
 		}
@@ -106,7 +106,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$helper_body_js = FALSE;
 	// Module stuff in body
 	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true") {
-		$module_manager = new D2UModuleManager(D2UModuleManager::getD2UHelperModules());
+		$module_manager = new D2UModuleManager(D2UModuleManager::getModules());
 		if($module_manager->getAutoJS() != "") {
 			$helper_body_js = TRUE;
 		}
@@ -200,7 +200,7 @@ function sendD2UHelperCSS() {
 		$css = "";
 		// Module CSS
 		if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
-			$module_manager = new D2UModuleManager(D2UModuleManager::getD2UHelperModules());
+			$module_manager = new D2UModuleManager(D2UModuleManager::getModules());
 			$css .= $module_manager->getAutoCSS();
 /*
  * FIXME: Not working, because modules later are not loaded yet
@@ -240,7 +240,7 @@ function sendD2UHelperJS($position = "head") {
 		if($position == "body") {
 			// Module JS
 			if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
-				$module_manager = new D2UModuleManager(D2UModuleManager::getD2UHelperModules());
+				$module_manager = new D2UModuleManager(D2UModuleManager::getModules());
 				$js .= $module_manager->getAutoJS();
 			}
 		}

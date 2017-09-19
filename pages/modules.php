@@ -1,5 +1,5 @@
 <?php
-$d2u_module_manager = new D2UModuleManager(D2UModuleManager::getD2UHelperModules());
+$d2u_module_manager = new D2UModuleManager(D2UModuleManager::getModules());
 
 // D2UModuleManager actions
 $d2u_module_id = rex_request('d2u_module_id', 'string');

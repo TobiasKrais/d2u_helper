@@ -129,7 +129,7 @@ class D2UModuleManager {
 	 * Get modules offered by D2U Helper addon.
 	 * @return D2UModule[] Modules offered by D2U Helper addon
 	 */
-	public static function getD2UHelperModules() {
+	public static function getModules() {
 		$modules = [];
 		$modules[] = new D2UModule("00-1",
 			"Umbruch ganze Breite",
