@@ -84,7 +84,7 @@ nav a {
 
 article {
 	background-color: article_color_bg;
-	padding: 1em 0;
+	padding: 2em 0;
 }
 article a, article a:visited, #breadcrumbs a {
 	color: navi_color_bg;
@@ -92,11 +92,14 @@ article a, article a:visited, #breadcrumbs a {
 article a:hover {
 	text-decoration: underline;
 }
-article h1     { font-size: 21px; line-height: 24px; font-weight: 400; margin: 0 0 10px 0; }
-article h2     { font-size: 17px; line-height: 20px; font-weight: 400; margin: 0 0 10px 0; }
-article h3     { font-size: 14px; font-weight: 700;  margin: 20px 0 10px 0; }
-article h4, h5 { font-size: 14px; font-weight: 400; margin: 0; }
-article h6     { font-size: 14px; font-weight: 400; margin: 0; }
+article h1, article h2, article h3, article h4, article h5, article h6 {
+	color: article_color_h;
+}
+article h1     {font-weight: 400; margin: 0 0 10px 0; }
+article h2     {font-weight: 400; margin: 0 0 10px 0; }
+article h3     {font-weight: 700; margin: 20px 0 10px 0; }
+article h4, article h5 {font-weight: 400; margin: 0; }
+article h6     {font-weight: 400; margin: 0; }
 article img {
 	max-width: 100%;
 }
@@ -109,6 +112,10 @@ article legend {
 	font-size: 1.25 rem;
 	font-weight: bold;
 	width: auto;
+}
+article .btn-primary {
+	background-color: article_color_h;
+	border-color: article_color_h;
 }
 
 
