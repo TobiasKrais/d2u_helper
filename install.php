@@ -31,6 +31,7 @@ if($sql->getRows() == 0) {
 
 // Standard settings
 if (!$this->hasConfig()) {
+	$this->setConfig('default_lang', rex_clang::getStartId());
 	$this->setConfig('navi_color_bg', '"#ffba23"');
 	$this->setConfig('navi_color_font', '"#ffffff"');
 	$this->setConfig('navi_color_hover_bg', '"#ffffff"');

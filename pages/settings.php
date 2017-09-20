@@ -37,6 +37,15 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings'); ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
+						// Default language for translations
+						if(count(rex_clang::getAll()) > 1) {
+							$lang_options = [];
+							foreach(rex_clang::getAll() as $rex_clang) {
+								$lang_options[$rex_clang->getId()] = $rex_clang->getName();
+							}
+							d2u_addon_backend_helper::form_select('d2u_helper_defaultlang', 'settings[default_lang]', $lang_options, [$this->getConfig('default_lang')]);
+						}
+
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap]', 'true', $this->getConfig('include_bootstrap') == 'true');
 					?>
 				</div>

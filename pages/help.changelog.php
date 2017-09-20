@@ -6,6 +6,10 @@
 			<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
 			<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
 		</ul>
+		<p>1.2.4 (NEXT)</p>
+		<ul>
+			<li>Default Lang Einstellung D2U Addon übergreifend gemacht.</li>
+		</ul>
 		<p>1.2.3</p>
 		<ul>
 			<li>Bessere Anpassungen Templates an URL Addon Version 1.0.0beta5.</li>

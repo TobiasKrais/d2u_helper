@@ -151,7 +151,7 @@ class D2UModuleManager {
 			4);
 		$modules[] = new D2UModule("04-1",
 			"Google Maps",
-			4);
+			5);
 		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
 			4);
