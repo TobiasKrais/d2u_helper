@@ -13,7 +13,7 @@
 	$height = "REX_VALUE[7]" == "" ? "500" : "REX_VALUE[7]";
 	$height_unit = "REX_VALUE[8]" == "" ? "px" : "REX_VALUE[8]";
 	$height .= $height_unit;
-	$api_key = "REX_VALUE[11]";
+	$api_key = "REX_VALUE[11]" == "" ? rex_config::get('d2u_helper', 'maps_key') : "REX_VALUE[11]";
 	if($api_key != "") {
 		$api_key = "?key=". $api_key;
 	}

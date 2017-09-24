@@ -9,6 +9,7 @@ d2u_helper_autoupdate_activated = Autoupdate aktiviert
 d2u_helper_autoupdate_deactivated = Autoupdate deaktiviert
 d2u_helper_clone = klonen
 d2u_helper_confirm_delete = Wirklich löschen?
+d2u_helper_could_not_delete = Löschen fehlgeschlagen! Objekt wird derzeit noch verwendet von:
 d2u_helper_data_all_lang = Daten für alle Sprachen
 d2u_helper_defaultlang = Ausgangssprache
 d2u_helper_d2u_id = ID

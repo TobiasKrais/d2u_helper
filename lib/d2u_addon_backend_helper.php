@@ -161,6 +161,18 @@ class d2u_addon_backend_helper {
 	}
 
 	/**
+	 * Prints a row with an infotext
+	 * @param string $message_id rex_i18n message id for the info text.
+	 * @param string $fieldname Input field name.
+	 */
+	public static function form_infotext($message_id, $fieldname) {
+		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
+		print '<dt><label></label></dt>';
+		print '<dd>' . htmlspecialchars_decode(rex_i18n::msg($message_id)) . '</dd>';
+		print '</dl>';
+	}
+
+	/**
 	 * Prints a row with an input field
 	 * @param string $message_id rex_i18n message id for the label text.
 	 * @param string $fieldname Input field name.

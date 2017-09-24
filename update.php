@@ -22,7 +22,7 @@ if(class_exists(D2UModuleManager)) {
 		4);
 	$modules[] = new D2UModule("04-1",
 		"Google Maps",
-		5);
+		6);
 	$modules[] = new D2UModule("05-1",
 		"Artikelweiterleitung",
 		4);

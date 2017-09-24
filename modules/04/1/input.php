@@ -25,13 +25,10 @@
 	</div>
 	<div class="col-xs-8">
 		<?php
-		$d2u_helper = rex_addon::get("d2u_helper");
-		$api_key = "REX_VALUE[11]";
-		if($api_key == "" && $d2u_helper->hasConfig("maps_key")) {
-			$api_key = $d2u_helper->getConfig("maps_key");
-		}
+		$api_key = rex_config::get('d2u_helper', 'maps_key');
+		$placeholder = $api_key != '' ? "Wird aus D2U Helper Addon Einstellungen übernommen: ". $api_key : ''
 		?>
-		<input type="text" name="REX_INPUT_VALUE[11]" value="<?php echo $api_key; ?>" size="45"/>
+		<input type="text" name="REX_INPUT_VALUE[11]" value="REX_VALUE[11]" placeholder="<?php print $placeholder; ?>" style="width: 100%"/>
 	</div>
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
