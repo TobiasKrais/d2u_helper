@@ -86,9 +86,13 @@ article {
 	background-color: article_color_bg;
 	padding: 2em 0;
 }
-article a, article a:visited, #breadcrumbs a {
+#breadcrumbs a {
 	color: navi_color_bg;
 }
+article a, article a:hover, article a:visited {
+	color: article_color_h;
+}
+
 article a:hover {
 	text-decoration: underline;
 }
@@ -147,6 +151,7 @@ footer a:hover {
 	padding: 0px !important;
 }
 
+/* Other stuff */
 figure {
   float: left;
   border: 1px solid #cccccc;

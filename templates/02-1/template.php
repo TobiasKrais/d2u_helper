@@ -159,32 +159,5 @@ $d2u_helper = rex_addon::get("d2u_helper");
 			</div>
 		</div>
 	</div>
-	<script>
-		$(window).on("load",
-			function(e) {
-				$("[data-match-height]").each(
-					function() {
-						var e=$(this),
-							t=$(this).find("[data-height-watch]"),
-							n=t.map(function() {
-								return $(this).innerHeight();
-							}).get(),
-							i=Math.max.apply(Math,n);
-						t.css("min-height", i+1);
-					}
-				);
-			}
-		);
-
-		$(window).on("load", function() {
-			var heights = $(".same-height").map(function() {
-				return $(this).innerHeight();
-			}).get(),
-
-			maxHeight = Math.max.apply(null, heights);
-
-			$(".same-height").css("min-height", maxHeight);
-		});
-	</script>
 </body>
 </html>

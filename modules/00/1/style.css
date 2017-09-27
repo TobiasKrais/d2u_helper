@@ -1,0 +1,7 @@
+.spacer {
+	margin-top: 1em;
+	padding-bottom: 1em;
+}
+.line {
+    border-top: 1px article_color_h solid;
+}

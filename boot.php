@@ -181,7 +181,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 			($addon->hasConfig("custom_css") && $addon->getConfig("custom_css") == $filename)
 		) {
 		$message = '<a href="javascript:openPage(\'index.php?page=d2u_helper/settings\')">'.
-			 rex_i18n::msg('d2u_helper_meta_title') ." ". rex_i18n::msg('d2u_helper_meta_settings') . '</a>';
+			 rex_i18n::msg('d2u_helper_meta_title') ." ". rex_i18n::msg('d2u_helper_settings') . '</a>';
 		if(!in_array($message, $warning)) {
 			$warning[] = $message;
 		}

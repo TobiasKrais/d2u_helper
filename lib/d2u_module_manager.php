@@ -139,7 +139,7 @@ class D2UModuleManager {
 			5);
 		$modules[] = new D2UModule("01-2",
 			"Texteditor mit Bild und Überschrift",
-			4);
+			5);
 		$modules[] = new D2UModule("02-1",
 			"Ueberschrift",
 			3);
@@ -157,7 +157,7 @@ class D2UModuleManager {
 			4);
 		$modules[] = new D2UModule("05-2",
 			"Artikel aus anderer Sprache übernehmen",
-			1);
+			2);
 		$modules[] = new D2UModule("06-1",
 			"YouTube Video einbinden",
 			2);
@@ -174,6 +174,7 @@ class D2UModuleManager {
 			"Box mit Download",
 			1);
 		// 20-x reserved for D2U Addresss
+		// 21-x reserved for D2U History
 		// 30-x reserved for D2U Videos
 		// 40-x reserved for D2U News
 		// 50-x reserved for D2U References

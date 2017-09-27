@@ -10,7 +10,7 @@ if(class_exists(D2UModuleManager)) {
 		5);
 	$modules[] = new D2UModule("01-2",
 		"Texteditor mit Bild und Überschrift",
-		4);
+		5);
 	$modules[] = new D2UModule("02-1",
 		"Ueberschrift",
 		3);
@@ -28,7 +28,7 @@ if(class_exists(D2UModuleManager)) {
 		4);
 	$modules[] = new D2UModule("05-2",
 		"Artikel aus anderer Sprache übernehmen",
-		1);
+		2);
 	$modules[] = new D2UModule("06-1",
 		"YouTube Video einbinden",
 		2);

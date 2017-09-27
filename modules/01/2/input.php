@@ -92,6 +92,7 @@
 	</div>
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[3]" >
+			<option value="">Bild im Original einbinden</option>
 		<?php
 			$sql = rex_sql::factory();
 			$result = $sql->setQuery('SELECT name FROM ' . rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
@@ -107,5 +108,37 @@
 			}
 		?>
 		</select>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-4">
+		Position Bild:
+	</div>
+	<div class="col-xs-8">
+		<select name="REX_INPUT_VALUE[4]" >
+			<?php
+				$position = "REX_VALUE[4]";
+				print '<option value="top"'. ($position == "top" ? ' selected="selected"' : '') .'>Bild oberhalb vom Text</option>';
+				print '<option value="left"'. ($position == "left" ? ' selected="selected"' : '') .'>Bild links vom Text</option>';
+			?>
+		</select>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<dl class="rex-form-group form-group">
+			<dt>
+				<input class="form-control" type="checkbox" name="REX_INPUT_VALUE[5]" value="true"<?php if("REX_VALUE[5]" == 'true') { print ' checked="checked"'; } ?> style="float: right; height: auto; width: auto;">
+			</dt>
+			<dd>
+				<label>Soll die Höhe dieses Blocks an die Höhe anderer Blöcke dieses Moduls auf dieser Seite angeglichen werden?</label>
+			</dd>
+		</dl>
 	</div>
 </div>
