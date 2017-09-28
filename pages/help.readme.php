@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">Allgemeine Hinweise</div></header>
 	<div class="panel-body">
-		<p>Der Code wird auf GitHub gebostet. Und zwar hier: <a href="https://github.com/TobiasKrais/d2u_helper" target="_blank">
+		<p>Den Code des Projektes findest du auf GitHub. Und zwar hier: <a href="https://github.com/TobiasKrais/d2u_helper" target="_blank">
 			https://github.com/TobiasKrais/d2u_helper</a>.</p>
 		<p></p>
 	</div>

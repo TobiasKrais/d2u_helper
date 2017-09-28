@@ -25,6 +25,7 @@ if(!rex::isBackend()) {
 	rex_extension::register('OUTPUT_FILTER', 'appendGoogleAnalytics');
 }
 else {
+	rex_extension::register('CLANG_DELETED', 'rex_d2u_helper_clang_deleted');
 	rex_extension::register('MEDIA_IS_IN_USE', 'rex_d2u_helper_media_is_in_use');
 }
 
@@ -158,6 +159,24 @@ function compressCSS($css) {
 	$css = str_replace(' ;', ';', $css);
 	$css = str_replace(';}', '}', $css);
 	return $css;
+}
+
+/**
+ * Deletes language specific configurations and objects
+ * @param rex_extension_point $ep Redaxo extension point
+ * @return string[] Warning message as array
+ */
+function rex_d2u_helper_clang_deleted(rex_extension_point $ep) {
+	$warning = $ep->getSubject();
+	$params = $ep->getParams();
+	$clang_id = $params['id'];
+
+	// Correct settings
+	if(rex_config::get('d2u_helper', 'default_lang', 0) == $clang_id) {
+		rex_config::set('d2u_helper', 'default_lang', rex_clang::getStartId());
+	}
+
+	return $warning;
 }
 
 /**
