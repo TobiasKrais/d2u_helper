@@ -9,6 +9,7 @@
 		<p>1.2.4 (NEXT)</p>
 		<ul>
 			<li>Default Lang Einstellung D2U Addon übergreifend gemacht.</li>
+			<li>Bugfix wenn Standardsprache gelöscht wird.</li>
 		</ul>
 		<p>1.2.3</p>
 		<ul>
