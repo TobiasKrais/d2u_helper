@@ -4,6 +4,7 @@ d2u_helper_meta_templates = Templateverwaltung
 
 d2u_helper_rex_article_cannot_delete = Artikel kann nicht gelöscht werden, da er noch in folgenden Addons verwendet wird:
 
+d2u_helper_article_id = Redaxo Artikel
 d2u_helper_autoupdate = Autoupdate
 d2u_helper_autoupdate_activated = Autoupdate aktiviert
 d2u_helper_autoupdate_deactivated = Autoupdate deaktiviert
@@ -15,6 +16,9 @@ d2u_helper_defaultlang = Ausgangssprache
 d2u_helper_d2u_id = ID
 d2u_helper_help = Hilfe
 d2u_helper_install_error = Fehler beim Installieren
+d2u_helper_online_status = Online
+d2u_helper_picture = Bild
+d2u_helper_pictures = Bilder
 d2u_helper_settings = Einstellungen
 d2u_helper_setup = Setup
 d2u_helper_text_lang = Texte in Sprache

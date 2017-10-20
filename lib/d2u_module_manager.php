@@ -175,6 +175,8 @@ class D2UModuleManager {
 			1);
 		// 20-x reserved for D2U Addresss
 		// 21-x reserved for D2U History
+		// 22-x reserved for D2U Staff
+		// 23-x reserved for D2U Jobs
 		// 30-x reserved for D2U Videos
 		// 40-x reserved for D2U News
 		// 50-x reserved for D2U References
