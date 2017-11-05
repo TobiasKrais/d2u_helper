@@ -1,7 +1,7 @@
 <?php
 $line = "REX_VALUE[1]";
 if(rex::isBackend()) {
-	print "Umbruch mit Linie";
+	print "Umbruch ". ($line == 'line' ? 'mit' : 'ohne') ." Linie";
 }
 else {
 	print '<div class="col-12 ">';

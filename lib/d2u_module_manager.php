@@ -43,7 +43,7 @@ class D2UModuleManager {
 			$this->module_folder = str_replace($addon_key, ".new.". $addon_key, $this->module_folder);
 		}
 
-		foreach($this->d2u_modules as $key =>$d2u_module) {
+		foreach($this->d2u_modules as $key => $d2u_module) {
 			$d2u_module->initRedaxoContext($this->module_addon, $this->module_folder);
 			$this->d2u_modules[$key] = $d2u_module;
 		}
@@ -133,7 +133,7 @@ class D2UModuleManager {
 		$modules = [];
 		$modules[] = new D2UModule("00-1",
 			"Umbruch ganze Breite",
-			2);
+			3);
 		$modules[] = new D2UModule("01-1",
 			"Texteditor",
 			5);
@@ -177,6 +177,8 @@ class D2UModuleManager {
 		// 21-x reserved for D2U History
 		// 22-x reserved for D2U Staff
 		// 23-x reserved for D2U Jobs
+		// 24-x reserved for D2U Linkbox
+		// 25-x reserved for D2U Partner
 		// 30-x reserved for D2U Videos
 		// 40-x reserved for D2U News
 		// 50-x reserved for D2U References

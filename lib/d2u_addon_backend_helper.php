@@ -332,7 +332,10 @@ class d2u_addon_backend_helper {
 		print '<dd>';
 		$multiple_attr = $multiple ? ' multiple="multiple"' : '';
 		if ($readonly) {
-			print '<input type="hidden" name="' . $fieldname . '" value="' . implode(',', $selected_values) . '">';
+			// Submit array
+			foreach ($selected_values as $selected_value) {
+				print '<input type="hidden" name="' . $fieldname . '" value="' . $selected_value . '">';
+			}
 			print '<select class="form-control" name="disabled" disabled size=' . $size . $multiple_attr . '>';
 		} else {
 			print '<select class="form-control" name="' . $fieldname . '" size=' . $size . $multiple_attr . '>';

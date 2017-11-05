@@ -4,7 +4,7 @@ if(class_exists(D2UModuleManager)) {
 	$modules = [];
 	$modules[] = new D2UModule("00-1",
 		"Umbruch ganze Breite",
-		2);
+		3);
 	$modules[] = new D2UModule("01-1",
 		"Texteditor",
 		5);

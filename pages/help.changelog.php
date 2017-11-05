@@ -6,6 +6,10 @@
 			<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
 			<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
 		</ul>
+		<p>1.2.5 (NEXT)</p>
+		<ul>
+			<li>Schwerer Fehler in Backend Helper behoben, wenn versteckte Felder Arrays übermitteln sollen.</li>
+		</ul>
 		<p>1.2.4</p>
 		<ul>
 			<li>Default Lang Einstellung D2U Addon übergreifend gemacht.</li>
