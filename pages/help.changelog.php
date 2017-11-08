@@ -9,6 +9,7 @@
 		<p>1.2.5 (NEXT)</p>
 		<ul>
 			<li>Schwerer Fehler in Backend Helper behoben, wenn versteckte Felder Arrays übermitteln sollen.</li>
+			<li>Option für URL Encoding als Schema Option für YRewrite hinzugefügt.</li>
 		</ul>
 		<p>1.2.4</p>
 		<ul>

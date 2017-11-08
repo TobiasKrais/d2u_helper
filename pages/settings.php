@@ -19,7 +19,24 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['include_menu'] = array_key_exists('include_menu', $settings);
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
+	$settings['activate_rewrite_scheme'] = array_key_exists('activate_rewrite_scheme', $settings);
 	
+	// Update URLs
+	if($settings['activate_rewrite_scheme'] == 'true') {
+		// YRewrite
+		if(rex_addon::get("yrewrite")->isAvailable()) {
+			rex_yrewrite::deleteCache();
+		}
+		else {
+			$settings['activate_rewrite_scheme'] = 'false';
+		}
+		
+		// URL Addon
+		if(rex_addon::get("url")->isAvailable()) {
+			UrlGenerator::generatePathFile([]);
+		}
+	}
+
 	// Save settings
 	if(rex_config::set("d2u_helper", $settings)) {
 		echo rex_view::success(rex_i18n::msg('form_saved'));
@@ -119,6 +136,34 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						</fieldset>
 			<?php
 					}
+				}
+				if(rex_addon::get('yrewrite')->isAvailable()) {
+			?>
+			<fieldset>
+				<legend><small><i class="rex-icon rex-icon-package-addon"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_rewrite'); ?></legend>
+				<div class="panel-body-wrapper slide">
+					<?php
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_rewrite_activate', 'settings[activate_rewrite_scheme]', 'true', $this->getConfig('activate_rewrite_scheme') == 'true');
+						$rewrite_options = [
+							'd2u_helper_settings_rewrite_standard' => 'standard',
+							'd2u_helper_settings_rewrite_urlencode' => 'urlencode'
+						];
+						foreach(rex_clang::getAll() as $rex_clang) {
+							print '<dl class="rex-form-group form-group">';
+							print '<dt><label>'. $rex_clang->getName() .'</label></dt>';
+							print '<dd>';
+							print '<select class="form-control" name="settings[rewrite_scheme_clang_'. $rex_clang->getId() .']">';
+							foreach($rewrite_options as $key => $value) {
+								$selected = $value == $this->getConfig('rewrite_scheme_clang_'. $rex_clang->getId()) ? ' selected="selected"' : '';
+								print '<option value="'. $value .'"'. $selected .'>'. rex_i18n::msg($key) .'</option>';
+							}
+							print '</select>';
+							print '</dl>';
+						}
+					?>
+				</div>
+			</fieldset>
+			<?php
 				}
 			?>
 			<fieldset>
