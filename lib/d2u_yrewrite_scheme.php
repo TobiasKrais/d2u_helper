@@ -15,14 +15,17 @@ class d2u_yrewrite_scheme extends rex_yrewrite_scheme {
 			['Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue', 'ss', 'A', 'a', 'A', 'a', 'c', 'E', 'e', 'E', 'e', 'e', 'I', 'i', 'I', 'i', 'I', 'i', 'O', 'o', 'o', 'O', 'o', 'U', 'u', 'U', 'u', 'C', 'c', 'L', 'l', 'z', '-', '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '',  '-'],
 			$string
 		);
-
-		if(rex_config::get('d2u_helper', 'rewrite_scheme_clang_'. $clang, 'standard') == 'urlencode') {
+		
+		$parent_string = parent::normalize($string);
+		
+		// In case settings require URL encode or normalizing the standard way failed
+		if(rex_config::get('d2u_helper', 'rewrite_scheme_clang_'. $clang, 'standard') == 'urlencode' || ($parent_string == "" || $parent_string == "-")) {
 			$string = strtolower(trim($string));
 			$string = preg_replace('/[+-]+/', '-', $string);
 
 			return $string;
 		}
 
-        return parent::normalize($string);
+        return $parent_string;
     }
 }
