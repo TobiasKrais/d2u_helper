@@ -1,13 +1,15 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>Wunschliste nächste Versioin</p>
+		<p>Wunschliste nächste Versionen</p>
 		<ul>
 			<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
 			<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
+			<li>Automatisches Modulupdate bei Addon Update.</li>
 		</ul>
-		<p>1.2.5 (NEXT)</p>
+		<p>1.3.0</p>
 		<ul>
+			<li>Übersetzungshilfe für Inhalte von D2U Addons hinzugefügt.</li>
 			<li>Schwerer Fehler in Backend Helper behoben, wenn versteckte Felder Arrays übermitteln sollen.</li>
 			<li>Option für URL Encoding als Schema Option für YRewrite hinzugefügt.</li>
 		</ul>
