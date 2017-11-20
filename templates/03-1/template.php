@@ -2,7 +2,7 @@
 // SEO stuff
 $alternate = ""; 
 $canonical = "";
-$current_domain = rex::getServer();
+$current_domain = \rex::getServer();
 $description = "";
 $robots = "";
 $title = "";
@@ -23,7 +23,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 ?>
 
 <!DOCTYPE html>
-<html lang="<?php echo rex_clang::getCurrent()->getCode(); ?>">
+<?php echo '<html lang="'. rex_clang::getCurrent()->getCode() .'">'; ?>
 <head>
 	<meta charset="utf-8" />
 	<base href="<?php echo $current_domain; ?>">

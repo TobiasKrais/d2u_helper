@@ -7,7 +7,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 // SEO stuff
 $alternate = ""; 
 $canonical = "";
-$current_domain = rex::getServer();
+$current_domain = \rex::getServer();
 $description = "";
 $robots = "";
 $title = "";

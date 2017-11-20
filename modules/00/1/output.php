@@ -1,6 +1,6 @@
 <?php
 $line = "REX_VALUE[1]";
-if(rex::isBackend()) {
+if(\rex::isBackend()) {
 	print "Umbruch ". ($line == 'line' ? 'mit' : 'ohne') ." Linie";
 }
 else {

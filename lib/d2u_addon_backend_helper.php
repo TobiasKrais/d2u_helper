@@ -389,7 +389,7 @@ class d2u_addon_backend_helper {
 	 */
     public static function update_url_scheme($table, $article_id) {
 		if(rex_addon::get('url')->isAvailable()) {
-			$query = "UPDATE `". rex::getTablePrefix() ."url_generate` SET `article_id` = ". $article_id ." "
+			$query = "UPDATE `". \rex::getTablePrefix() ."url_generate` SET `article_id` = ". $article_id ." "
 				."WHERE `table` LIKE '%". $table ."'";
 			$sql = rex_sql::factory();
 			$sql->setQuery($query);

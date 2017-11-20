@@ -5,7 +5,7 @@ $forward_url = "";
 if($link_type == "link") {
 	$link = "REX_VALUE[2]";
 	if($link != "") {
-		if(rex::isBackend()) {
+		if(\rex::isBackend()) {
 			print "Weiterleitung zu URL <a href='". $link ."'>". $link ."</a>";
 		}
 		else {
@@ -18,7 +18,7 @@ else if($link_type == "d2u_machinery_machine") {
 		$machine_id = "REX_VALUE[3]";
 		if($machine_id > 0) {
 			$machine = new Machine($machine_id, rex_clang::getCurrentId());
-			if(rex::isBackend()) {
+			if(\rex::isBackend()) {
 				print "Weiterleitung zu D2U Machinen - Maschine <a href='". $machine->getUrl(TRUE) ."'>". $machine->name ."</a>";
 			}
 			else {
@@ -35,7 +35,7 @@ else if($link_type == "d2u_machinery_industry_sector") {
 		$industry_sector_id = "REX_VALUE[4]";
 		if($industry_sector_id > 0) {
 			$industry_sector = new IndustrySector($industry_sector_id, rex_clang::getCurrentId());
-			if(rex::isBackend()) {
+			if(\rex::isBackend()) {
 				print "Weiterleitung zu D2U Machinen - Branche <a href='". $industry_sector->getUrl(TRUE) ."'>". $industry_sector->name ."</a>";
 			}
 			else {
@@ -52,7 +52,7 @@ else if($link_type == "d2u_machinery_used_machine") {
 		$used_machine_id = "REX_VALUE[5]";
 		if($used_machine_id > 0) {
 			$used_machine = new UsedMachine($used_machine_id, rex_clang::getCurrentId());
-			if(rex::isBackend()) {
+			if(\rex::isBackend()) {
 				print "Weiterleitung zu D2U Machinen - Branche <a href='". $used_machine->getUrl(TRUE) ."'>". $used_machine->name ."</a>";
 			}
 			else {
@@ -69,7 +69,7 @@ else if($link_type == "d2u_immo_property") {
 		$property_id = "REX_VALUE[6]";
 		if($property_id > 0) {
 			$property = new Property($property_id, rex_clang::getCurrentId());
-			if(rex::isBackend()) {
+			if(\rex::isBackend()) {
 				print "Weiterleitung zu D2U Immobilien - Immobilie <a href='". $property->getUrl(TRUE) ."'>". $property->name ."</a>";
 			}
 			else {
@@ -84,7 +84,7 @@ else if($link_type == "d2u_immo_property") {
 else { // Backward compatibility module Version <= 3
 	$article_id = "REX_LINK[1]";
 	if($article_id > 0) {
-		if(rex::isBackend()) {
+		if(\rex::isBackend()) {
 			print "Weiterleitung zu Artikel <a href='". rex_url::backendPage('content/edit', array('article_id'=>$article_id)) ."'>"
 			. rex_article::get($article_id)->getValue('name') ." (Artikel ID ". $article_id .")</a>";
 		}
@@ -95,7 +95,7 @@ else { // Backward compatibility module Version <= 3
 }
 
 // Forward
-if(!rex::isBackend() && $forward_url != "") {
+if(!\rex::isBackend() && $forward_url != "") {
 	header('Location: '. $forward_url);
 	header("Status: 301");
    	exit();

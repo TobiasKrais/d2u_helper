@@ -1,10 +1,10 @@
 <?php
 // save settings
 if (filter_input(INPUT_POST, "btn_save") == 'save') {
-	$settings = (array) rex_post('settings', 'array', array());
+	$settings = (array) rex_post('settings', 'array', []);
 
 	// Special treatment for media fields
-	$input_media = (array) rex_post('REX_INPUT_MEDIA', 'array', array());
+	$input_media = (array) rex_post('REX_INPUT_MEDIA', 'array', []);
 	$settings['custom_css'] = $input_media['custom_css'];
 	$settings['template_header_pic'] = $input_media['template_header_pic'];
 	$settings['template_logo'] = $input_media['template_logo'];
@@ -79,7 +79,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							"lg" => rex_i18n::msg('d2u_helper_settings_width_lg'),
 							"xl" => rex_i18n::msg('d2u_helper_settings_width_xl')
 						];
-						d2u_addon_backend_helper::form_select('d2u_helper_settings_menu_show', 'settings[include_menu_show]', $width_options, array($this->getConfig('include_menu_show')));
+						d2u_addon_backend_helper::form_select('d2u_helper_settings_menu_show', 'settings[include_menu_show]', $width_options, [$this->getConfig('include_menu_show')]);
 					?>
 				</div>
 			</fieldset>

@@ -5,11 +5,12 @@ if(rex_config::get('d2u_helper', 'activate_rewrite_scheme', 'false') == 'true') 
 }
 
 // Correct name of rights
-if(rex::isBackend() && is_object(rex::getUser())) {
+if(\rex::isBackend() && is_object(\rex::getUser())) {
 	rex_perm::register('d2u_helper[]', rex_i18n::msg('d2u_helper_rights_all'));
+	rex_perm::register('d2u_helper[settings]', rex_i18n::msg('d2u_helper_rights_settings'), rex_perm::OPTIONS);
 }
 
-if(!rex::isBackend()) {
+if(!\rex::isBackend()) {
 	// If stylesheet is requested
 	if (rex_request('d2u_helper', 'string') == 'helper.css') {
 		sendD2UHelperCSS();

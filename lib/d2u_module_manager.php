@@ -198,7 +198,7 @@ class D2UModuleManager {
 		if($reload || count(D2UModuleManager::$rex_modules) == 0) {
 			D2UModuleManager::$rex_modules = [];
 			// Get Redaxo modules (must be after form actions, in case new module was installed)
-			$query = 'SELECT id, name FROM ' . rex::getTablePrefix() . 'module ORDER BY name';
+			$query = 'SELECT id, name FROM ' . \rex::getTablePrefix() . 'module ORDER BY name';
 			$result = rex_sql::factory();
 			$result->setQuery($query);
 			for($i = 0; $i < $result->getRows(); $i++) {
@@ -492,7 +492,7 @@ class D2UModule {
 		}
 		
 		$insertmod = rex_sql::factory();
-		$insertmod->setTable(rex::getTablePrefix() . 'module');
+		$insertmod->setTable(\rex::getTablePrefix() . 'module');
         $insertmod->setValue('name', $this->d2u_module_id ." ". $this->name);
 		$insertmod->setValue('input', file_get_contents($this->filename_input));
 		$insertmod->setValue('output', file_get_contents($this->filename_output));
@@ -539,7 +539,7 @@ class D2UModule {
 	public function isUpdateNeeded() {
 		if($this->isInstalled()) {
 			// Get redaxo module
-			$query = 'SELECT revision FROM ' . rex::getTablePrefix() . 'module WHERE id = '. $this->rex_module_id;
+			$query = 'SELECT revision FROM ' . \rex::getTablePrefix() . 'module WHERE id = '. $this->rex_module_id;
 			$result = rex_sql::factory();
 			$result->setQuery($query);
 			if($result->getRows() > 0 && $result->getValue("revision") >= $this->revision) {
@@ -554,7 +554,7 @@ class D2UModule {
 	 */
 	public function delete() {
 		$removemod = rex_sql::factory();
-		$removemod->setTable(rex::getTablePrefix() . 'module');
+		$removemod->setTable(\rex::getTablePrefix() . 'module');
 		$removemod->setWhere(['id' => $this->d2u_module_id]);
 		$removemod->delete();
 

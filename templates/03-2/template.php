@@ -5,7 +5,7 @@
 	$tag_open = $sprog->getConfig('wildcard_open_tag');
 	$tag_close = $sprog->getConfig('wildcard_close_tag');
 	
-	$current_domain = rex::getServer();
+	$current_domain = \rex::getServer();
 	if (rex_addon::get('yrewrite')->isAvailable()) {
 		$current_domain = rex_yrewrite::getCurrentDomain()->getUrl();
 	}
@@ -48,8 +48,8 @@
 		$properties = [];
 		$ads = [];
 		if(rex_plugin::get('d2u_immo', 'window_advertising')->isInstalled()) {
-			$properties = Property::getAllWindowAdvertisingProperties(rex_clang::getCurrentId());
-			$ads = Advertisement::getAll(rex_clang::getCurrentId(), TRUE);
+			$properties = D2U_Immo\Property::getAllWindowAdvertisingProperties(rex_clang::getCurrentId());
+			$ads = D2U_Immo\Advertisement::getAll(rex_clang::getCurrentId(), TRUE);
 		}
 		// Mix - not merge - arrays
 		$all_data = [];
@@ -131,7 +131,7 @@
 									print '<div class="carousel-item'.  ($active ? ' active' : '') .'">';
 									print '<div class="row">';
 									$active = FALSE;
-									if($data_row instanceof Advertisement) {
+									if($data_row instanceof D2U_Immo\Advertisement) {
 										$advertisement = $data_row;
 										print '<div class="col-12 contact-advertising"></div>';
 										print '<div class="col-12 print-border-h">';
@@ -159,7 +159,7 @@
 										print '</div>';
 
 									}
-									else if($data_row instanceof Property) {
+									else if($data_row instanceof D2U_Immo\Property) {
 										$property = $data_row;
 										print '<div class="col-12 contact-advertising">';
 										print "<p>". $property->contact->firstname ." ". $property->contact->lastname ."<br />";

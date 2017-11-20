@@ -114,10 +114,10 @@ class D2UTemplateManager {
 			1);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
-			1);
+			2);
 		$d2u_templates[] = new D2UTemplate("03-2",
 			"Immo Window Advertising Template",
-			2);
+			3);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",
 			1);
@@ -147,7 +147,7 @@ class D2UTemplateManager {
 		if($reload || count(D2UTemplateManager::$rex_templates) == 0) {
 			D2UTemplateManager::$rex_templates = [];
 			// Get Redaxo templates (must be after form actions, in case new template was installed)
-			$query = 'SELECT id, name FROM ' . rex::getTablePrefix() . 'template ORDER BY name';
+			$query = 'SELECT id, name FROM ' . \rex::getTablePrefix() . 'template ORDER BY name';
 			$result = rex_sql::factory();
 			$result->setQuery($query);
 			for($i = 0; $i < $result->getRows(); $i++) {
@@ -399,7 +399,7 @@ class D2UTemplate {
 		}
 		
 		$insertmod = rex_sql::factory();
-		$insertmod->setTable(rex::getTablePrefix() . 'template');
+		$insertmod->setTable(\rex::getTablePrefix() . 'template');
         $insertmod->setValue('name', $this->d2u_template_id ." ". $this->name);
 		$insertmod->setValue('content', file_get_contents($this->template_folder ."template.php"));
 		$insertmod->setValue('active', 1);
@@ -447,7 +447,7 @@ class D2UTemplate {
 	public function isUpdateNeeded() {
 		if($this->isInstalled()) {
 			// Get redaxo template
-			$query = 'SELECT revision FROM ' . rex::getTablePrefix() . 'template WHERE id = '. $this->rex_template_id;
+			$query = 'SELECT revision FROM ' . \rex::getTablePrefix() . 'template WHERE id = '. $this->rex_template_id;
 			$result = rex_sql::factory();
 			$result->setQuery($query);
 			if($result->getRows() > 0 && $result->getValue("revision") >= $this->revision) {
@@ -462,7 +462,7 @@ class D2UTemplate {
 	 */
 	public function delete() {
 		$removemod = rex_sql::factory();
-		$removemod->setTable(rex::getTablePrefix() . 'template');
+		$removemod->setTable(\rex::getTablePrefix() . 'template');
 		$removemod->setWhere(['id' => $this->d2u_template_id]);
 		$removemod->delete();
 

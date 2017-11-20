@@ -60,7 +60,7 @@
 		<select name="REX_INPUT_VALUE[1]" >
 		<?php
 			$sql = rex_sql::factory();
-			$result = $sql->setQuery('SELECT name FROM ' . rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
+			$result = $sql->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
 			for($i = 0; $i < $result->getRows(); $i++) {
 				$name = $result->getValue("name");
 				echo '<option value="'. $name .'" ';
