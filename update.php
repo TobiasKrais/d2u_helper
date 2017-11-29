@@ -43,7 +43,7 @@ if(class_exists(D2UModuleManager)) {
 		1);
 	$modules[] = new D2UModule("10-3",
 		"Box mit Download",
-		1);
+		2);
 	$d2u_module_manager = new D2UModuleManager($d2u_modules);
 	$d2u_module_manager->autoupdate();
 }
@@ -96,7 +96,7 @@ if($sql->getRows() == 0) {
 }
 
 // Set default lang
-if (!$this->hasConfig()) {
+if (!$this->hasConfig('default_lang')) {
 	if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		$this->setConfig('default_lang', rex_addon::get('d2u_machinery')->getConfig('default_lang'));
 	}

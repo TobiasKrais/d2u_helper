@@ -172,7 +172,7 @@ class D2UModuleManager {
 			1);
 		$modules[] = new D2UModule("10-3",
 			"Box mit Download",
-			1);
+			2);
 		// 20-x reserved for D2U Addresss
 		// 21-x reserved for D2U History
 		// 22-x reserved for D2U Staff

@@ -6,6 +6,11 @@
 			<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
 			<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
 			<li>Automatisches Modulupdate bei Addon Update.</li>
+			<li>Interface für SEO Methoden.</li>
+		</ul>
+		<p>1.3.1 (NEXT)</p>
+		<ul>
+			<li>Module 10-3 Box mit Downloads prüft Dokumentenrechte, falls ycom/auth_media installiert ist.</li>
 		</ul>
 		<p>1.3.0</p>
 		<ul>

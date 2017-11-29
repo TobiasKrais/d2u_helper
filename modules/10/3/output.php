@@ -20,16 +20,24 @@ $ueberschrift = "REX_VALUE[1]";
 				$filesize = round(filesize(rex_path::media() .'/'. $document) / pow(1024, 2), 2);
 				$filetype = strtoupper(pathinfo(rex_path::media($document), PATHINFO_EXTENSION));
 				$title = $rex_document->getTitle() == "" ? $document : $rex_document->getTitle();
-				
-				print '<li>';
-				if($filetype == 'pdf') {
-					print '<span class="icon pdf"></span>&nbsp;&nbsp;';
+
+				$has_permission = true;
+				// Check permissions
+				if(rex_plugin::get('ycom', 'auth_media')->isAvailable()) {
+					$has_permission = rex_ycom_auth_media::checkPerm($rex_document);
 				}
-				else {
-					print '<span class="icon file"></span>&nbsp;&nbsp;';
+				if($has_permission) {
+
+					print '<li>';
+					if($filetype == 'pdf') {
+						print '<span class="icon pdf"></span>&nbsp;&nbsp;';
+					}
+					else {
+						print '<span class="icon file"></span>&nbsp;&nbsp;';
+					}
+					print '<a href="'. rex_url::media($document) .'" target="_blank">'.
+							$title .' <span>('. $filetype .', '. $filesize .' MB)</span></a></li>';
 				}
-				print '<a href="'. rex_url::media($document) .'" target="_blank">'.
-						$title .' <span>('. $filetype .', '. $filesize .' MB)</span></a></li>';
 			}
 		}
 	?>
