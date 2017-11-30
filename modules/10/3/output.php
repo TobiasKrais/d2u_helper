@@ -21,13 +21,12 @@ $ueberschrift = "REX_VALUE[1]";
 				$filetype = strtoupper(pathinfo(rex_path::media($document), PATHINFO_EXTENSION));
 				$title = $rex_document->getTitle() == "" ? $document : $rex_document->getTitle();
 
-				$has_permission = true;
 				// Check permissions
+				$has_permission = TRUE;
 				if(rex_plugin::get('ycom', 'auth_media')->isAvailable()) {
 					$has_permission = rex_ycom_auth_media::checkPerm($rex_document);
 				}
 				if($has_permission) {
-
 					print '<li>';
 					if($filetype == 'pdf') {
 						print '<span class="icon pdf"></span>&nbsp;&nbsp;';

@@ -18,10 +18,10 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 <p><?php echo rex_i18n::msg('d2u_helper_translations_description'); ?></p>
 
 <?php
-	if(count(rex_clang::getAll()) == 1) {
-		echo rex_view::warning(rex_i18n::msg('d2u_helper_translations_none'));
-	}
-	else {
+if(count(rex_clang::getAll()) == 1) {
+	echo rex_view::warning(rex_i18n::msg('d2u_helper_translations_none'));
+}
+else {
 ?>
 	<form action="<?php print rex_url::currentBackendPage(); ?>" method="post">
 		<div class="panel panel-edit">
@@ -57,7 +57,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 		</div>
 	</form>
 <?php
-	}
 
 	if(rex_addon::get('d2u_address')->isAvailable()) {
 		$countries = D2U_Address\Country::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
@@ -715,3 +714,4 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 print d2u_addon_backend_helper::getCSS();
 print d2u_addon_backend_helper::getJS();
 print d2u_addon_backend_helper::getJSOpenAll();
+}

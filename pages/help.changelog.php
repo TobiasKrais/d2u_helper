@@ -10,6 +10,7 @@
 		</ul>
 		<p>1.3.1 (NEXT)</p>
 		<ul>
+			<li>Backendsprache Englisch hinzugefügt.</li>
 			<li>Module 10-3 Box mit Downloads prüft Dokumentenrechte, falls ycom/auth_media installiert ist.</li>
 		</ul>
 		<p>1.3.0</p>

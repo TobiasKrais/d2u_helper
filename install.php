@@ -31,7 +31,6 @@ if($sql->getRows() == 0) {
 
 // Standard settings
 if (!$this->hasConfig()) {
-	$this->setConfig('default_lang', rex_clang::getStartId());
 	$this->setConfig('navi_color_bg', '"#ffba23"');
 	$this->setConfig('navi_color_font', '"#ffffff"');
 	$this->setConfig('navi_color_hover_bg', '"#ffffff"');
@@ -47,4 +46,7 @@ if (!$this->hasConfig()) {
 	$this->setConfig('include_module', '"true"');
 	$this->setConfig('include_menu_show', '"sm"');
 	$this->setConfig('show_breadcrumbs', '"true"');
+}
+if (!$this->hasConfig('default_lang')) {
+	$this->setConfig('default_lang', rex_clang::getStartId());
 }

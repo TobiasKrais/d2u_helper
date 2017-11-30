@@ -1,0 +1,124 @@
+d2u_helper_meta_title = D2U Helper
+d2u_helper_meta_modules = Module manager
+d2u_helper_meta_templates = Template manager
+d2u_helper_meta_translations = Translation helper
+
+d2u_helper_rex_article_cannot_delete = Error deleting article. It is referenced here:
+
+d2u_helper_article_id = Redaxo article
+d2u_helper_autoupdate = Autoupdate
+d2u_helper_autoupdate_activated = Autoupdate active
+d2u_helper_autoupdate_deactivated = Autoupdate inactive
+d2u_helper_clone = clone
+d2u_helper_confirm_delete = Really delete?
+d2u_helper_could_not_delete = Delete error! Object is referenced here:
+d2u_helper_data_all_lang = Data used in all languages
+d2u_helper_defaultlang = Base language
+d2u_helper_d2u_id = ID
+d2u_helper_help = Help
+d2u_helper_install_error = Install error
+d2u_helper_online_status = Online
+d2u_helper_picture = Picture
+d2u_helper_pictures = Pictures
+d2u_helper_settings = Settings
+d2u_helper_setup = Setup
+d2u_helper_text_lang = Texts in language
+d2u_helper_translation = This translation ...
+d2u_helper_translation_needs_update = ... needs to be updates
+d2u_helper_translation_is_uptodate = ... is up to date
+d2u_helper_translation_delete = ... is currently not planned and should not be saved
+
+d2u_helper_help_chapter_changelog = Changelog
+d2u_helper_help_chapter_readme = Readme
+d2u_helper_help_chapter_update = Update
+
+d2u_helper_metainfo_headerpic = Header picture
+
+d2u_helper_modules_d2u_module_name = D2U module name
+d2u_helper_modules_installed = Module installed
+d2u_helper_modules_install_wysiwyg = Addon "TinyMCE 4" or "Redactor 2 Editor" is needed by this module.
+d2u_helper_modules_pair_new = Add as new Redaxo module
+d2u_helper_modules_paired_rex_module = Assigned Redaxo module
+
+d2u_helper_rights_all = D2U Helper addon
+d2u_helper_rights_settings = D2U Helper addon: settings and setup
+
+d2u_helper_settings_article_color_bg = Article background color
+d2u_helper_settings_article_color_box = Article box background color
+d2u_helper_settings_article_color_h = Color aricle headings
+d2u_helper_settings_custom_css = Additional CSS
+d2u_helper_settings_footer_color_bg = Footer background color
+d2u_helper_settings_footer_color_box = Footer box background color
+d2u_helper_settings_google = Google settings
+d2u_helper_settings_google_analytics = Analytics ID (optional)
+d2u_helper_settings_google_maps_key = Maps API Key (optional)
+d2u_helper_settings_include_bootstrap = Load Bootstrap 4 with JQuery and Popper CSS / JS automatically<br>(please activate if templates of this addon are used)
+d2u_helper_settings_include_menu = Load Responsive MultiLevel menu CSS / JS automatically
+d2u_helper_settings_include_module = Load modules CSS / JS automatically
+d2u_helper_settings_menu = Menu settings
+d2u_helper_settings_menu_show = Show mobile menu up to screen size?
+d2u_helper_settings_navi_color_bg = Navigation background color
+d2u_helper_settings_navi_color_font = Navigation font color
+d2u_helper_settings_navi_color_hover_bg = Navigation hover background color
+d2u_helper_settings_navi_color_hover_font = Navigation hover font color
+d2u_helper_settings_rewrite = YRewrite language settings
+d2u_helper_settings_rewrite_activate = Activate D2U optimizations for YRewrite URL rewrite addon
+d2u_helper_settings_rewrite_standard = Use YRewrite URL Rewrite scheme
+d2u_helper_settings_rewrite_urlencode = Use URL encode, needed for e.g. chinese or russian chars in URL
+d2u_helper_settings_show_breadcrumbs = Show breadcrumbs
+d2u_helper_settings_subhead_color_bg = Title / breadcrumb background color
+d2u_helper_settings_subhead_color_font = Title / breadcrumb font color
+d2u_helper_settings_subhead_include_articlename = Show article name as title?
+d2u_helper_settings_template = Template specific settings
+d2u_helper_settings_template_02_1_footer_text = Footer slogan
+d2u_helper_settings_template_03_1_print_header_pic = Print view header picture
+d2u_helper_settings_template_03_1_print_footer_pic = Print view footer picture
+d2u_helper_settings_template_03_2_header_pic = Window advertising header picture
+d2u_helper_settings_template_03_2_footer_pic = Window advertising footer picture
+d2u_helper_settings_template_03_2_margin_top = Header picture distance (px)
+d2u_helper_settings_template_03_2_time_show_ad = Seconds to show ad
+d2u_helper_settings_template_header_pic = Template default picture
+d2u_helper_settings_template_logo = Website logo
+d2u_helper_settings_templates = Settings for tempalte, module and menu
+d2u_helper_settings_width_xs = Small mobile devices
+d2u_helper_settings_width_sm = Normal mobile devices
+d2u_helper_settings_width_md = Tablets
+d2u_helper_settings_width_lg = Computer screens
+d2u_helper_settings_width_xl = Large computer screens
+
+d2u_helper_templates_d2u_template_name = D2U template name
+d2u_helper_templates_install_d2u_immo_window_advertising = Addon d2u_immo and its plugin window_advertising are needed for this template.
+d2u_helper_templates_install_emailobfuscator = Email-Obfuscator addon (emailobfuscator) should be installed for this addon.
+d2u_helper_templates_install_metainfo = Metainfo addon is needed for this addon.
+d2u_helper_templates_install_yrewrite = YRewrite addon is needed for this addon.
+d2u_helper_templates_installed = Template installed
+d2u_helper_templates_pair_new = Add as new template
+d2u_helper_templates_paired_rex_template = Assinged Redaxo template
+
+d2u_helper_translations_apply = Apply
+d2u_helper_translations_description = Translation helper offers a list of missing or to be updated D2U addons translations.
+d2u_helper_translations_filter = Filter
+d2u_helper_translations_filter_select = Show ...
+d2u_helper_translations_filter_missing = ... missing translations
+d2u_helper_translations_filter_update = ... to be updated translations
+d2u_helper_translations_language = Filter language
+d2u_helper_translations_none = Only one language is installed. Translation helper is not necessary.
+d2u_helper_translations_uptodate_missing = No translations missing.
+d2u_helper_translations_uptodate_update = All translations are up to date.
+
+d2u_helper_lang_icon = Icon
+
+d2u_helper_lang_chinese = Chinese
+d2u_helper_lang_czech = Czech
+d2u_helper_lang_dutch = Dutch
+d2u_helper_lang_english = English
+d2u_helper_lang_french = French
+d2u_helper_lang_german = German
+d2u_helper_lang_italian = Italian
+d2u_helper_lang_polish = Polish
+d2u_helper_lang_portuguese = Portuguese
+d2u_helper_lang_russian = Russian
+d2u_helper_lang_slovak = Slovak
+d2u_helper_lang_spanish = Spanish
+d2u_helper_lang_replacements = Language replacements
+d2u_helper_lang_replacements_install = Use preset language replacements of following language:
