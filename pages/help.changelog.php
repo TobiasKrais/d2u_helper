@@ -10,6 +10,8 @@
 		</ul>
 		<p>1.3.1 (NEXT)</p>
 		<ul>
+			<li>Update bootstrap 4 beta2.</li>
+			<li>Update Ekko Lightbox to version 5.3.</li>
 			<li>Backendsprache Englisch hinzugefügt.</li>
 			<li>Module 10-3 Box mit Downloads prüft Dokumentenrechte, falls ycom/auth_media installiert ist.</li>
 		</ul>
