@@ -111,7 +111,7 @@ class D2UTemplateManager {
 			1);
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
-			1);
+			2);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
 			2);

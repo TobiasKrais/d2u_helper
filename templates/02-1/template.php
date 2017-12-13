@@ -58,6 +58,21 @@ $d2u_helper = rex_addon::get("d2u_helper");
 		</div>
 		<?php
 			}
+			// Navi if above header picture
+			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_02_1_navi_pos', 'bottom') == 'top') {
+				print '<div class="row">';
+				print '<div class="col-12">';
+				print '<nav>';
+				print '<div class="row">';
+				print '<div class="col-12">';
+				d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
+				d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
+				print '</div>';
+				print '</div>';
+				print '</nav>';
+				print '</div>';
+				print '</div>';
+			}
 		?>
 		<div class="row">
 			<div class="col-12">
@@ -78,22 +93,23 @@ $d2u_helper = rex_addon::get("d2u_helper");
 				?>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-12">
-				<nav>
-					<div class="row">
-						<div class="col-12">
-								<?php
-								if(rex_addon::get('d2u_helper')->isAvailable()) {
-									d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
-									d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
-								}
-								?>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</div>
+		<?php
+			// Navi if below header picture
+			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_02_1_navi_pos', 'bottom') == 'bottom') {
+				print '<div class="row">';
+				print '<div class="col-12">';
+				print '<nav>';
+				print '<div class="row">';
+				print '<div class="col-12">';
+				d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
+				d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
+				print '</div>';
+				print '</div>';
+				print '</nav>';
+				print '</div>';
+				print '</div>';
+			}
+		?>
 		<article>
 			<div class="row">
 				<?php
