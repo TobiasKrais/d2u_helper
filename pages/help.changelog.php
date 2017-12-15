@@ -10,6 +10,7 @@
 		</ul>
 		<p>1.3.1 (NEXT)</p>
 		<ul>
+			<li>Modul 03-2 verbessert.</li>
 			<li>Für Template 02-1 kann die Navigation in den Einstellungen auch oberhalb des Headerbildes gesetzt werden.</li>
 			<li>Update bootstrap 4 beta2.</li>
 			<li>Update Ekko Lightbox to version 5.3.</li>

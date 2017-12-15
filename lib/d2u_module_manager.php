@@ -142,13 +142,13 @@ class D2UModuleManager {
 			5);
 		$modules[] = new D2UModule("02-1",
 			"Ueberschrift",
-			3);
+			4);
 		$modules[] = new D2UModule("03-1",
 			"Bild",
 			4);
 		$modules[] = new D2UModule("03-2",
 			"Bildergallerie Ekko Lightbox",
-			4);
+			5);
 		$modules[] = new D2UModule("04-1",
 			"Google Maps",
 			6);
