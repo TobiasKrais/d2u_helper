@@ -88,7 +88,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 
 		if($category_id > 0) {
 			$category = new Category($category_id, rex_clang::getCurrentId());
-			$current_category->setOfferType($offer_type);
+			$category->setOfferType($offer_type);
 			$alternate_tags = $category->getMetaAlternateHreflangTags();
 			$canonical = $category->getCanonicalTag();
 			$description = $category->getMetaDescriptionTag();

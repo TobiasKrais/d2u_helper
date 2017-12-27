@@ -10,6 +10,7 @@
 		</ul>
 		<p>1.3.1 (NEXT)</p>
 		<ul>
+			<li>Template 00-1 Bugfix falls Maschinen Addon verwendet wird.</li>
 			<li>Modul 02-1 (Überschrift) verbessert.</li>
 			<li>Modul 03-2 (Ekko Lightbox) verbessert.</li>
 			<li>Für Template 02-1 kann die Navigation in den Einstellungen auch oberhalb des Headerbildes gesetzt werden.</li>
