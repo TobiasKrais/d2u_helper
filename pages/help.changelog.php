@@ -8,7 +8,7 @@
 			<li>Automatisches Modulupdate bei Addon Update.</li>
 			<li>Interface für SEO Methoden.</li>
 		</ul>
-		<p>1.3.1 (NEXT)</p>
+		<p>1.3.1</p>
 		<ul>
 			<li>Template 00-1 Bugfix falls Maschinen Addon verwendet wird.</li>
 			<li>Modul 02-1 (Überschrift) verbessert.</li>
