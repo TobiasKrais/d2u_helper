@@ -310,15 +310,18 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 						}
 						else if($category !== FALSE && (count($category->getMachines()) > 0 || count($category->getUsedMachines()) > 0)) {
 							print '<br><h1 class="subhead">'. $category->name .'</h1>';
-							print '<ul class="nav nav-pills">';
-							print '<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'</a></li>';
-							if(rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && count($category->getMachines()) > 0) {
-								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_usage_areas">'. $tag_open .'d2u_machinery_usage_areas'. $tag_close .'</a></li>';
+							if((rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && count($category->getMachines()) > 0)
+								&& $d2u_machinery->hasConfig("show_techdata") && $d2u_machinery->getConfig("show_techdata") == "show" && count($category->getMachines()) > 0) {
+								print '<ul class="nav nav-pills">';
+								print '<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'</a></li>';
+								if(rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && count($category->getMachines()) > 0) {
+									print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_usage_areas">'. $tag_open .'d2u_machinery_usage_areas'. $tag_close .'</a></li>';
+								}
+								if($d2u_machinery->hasConfig("show_techdata") && $d2u_machinery->getConfig("show_techdata") == "show" && count($category->getMachines()) > 0) {
+									print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_tech_data">'. $tag_open .'d2u_machinery_tech_data'. $tag_close .'</a></li>';
+								}
+								print '</ul>';
 							}
-							if($d2u_machinery->hasConfig("show_techdata") && $d2u_machinery->getConfig("show_techdata") == "show" && count($category->getMachines()) > 0) {
-								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_tech_data">'. $tag_open .'d2u_machinery_tech_data'. $tag_close .'</a></li>';
-							}
-							print '</ul>';
 						}
 						else if($used_machine !== FALSE) {
 							print '<br><h1 class="subhead">'. $used_machine->manufacturer .' '. $used_machine->name .'</h1>';
