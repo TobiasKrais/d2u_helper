@@ -39,9 +39,9 @@ class D2UModuleManager {
 		$this->module_addon = rex_addon::get($addon_key);
 		$this->module_folder = $this->module_addon->getPath($module_folder);
 		// Path during addon update
-		if(file_exists(str_replace($addon_key, ".new.". $addon_key, $this->module_folder))) {
-			$this->module_folder = str_replace($addon_key, ".new.". $addon_key, $this->module_folder);
-		}
+//		if(file_exists(str_replace($addon_key, ".new.". $addon_key, $this->module_folder))) {
+//			$this->module_folder = str_replace($addon_key, ".new.". $addon_key, $this->module_folder);
+//		}
 
 		foreach($this->d2u_modules as $key => $d2u_module) {
 			$d2u_module->initRedaxoContext($this->module_addon, $this->module_folder);

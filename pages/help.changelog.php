@@ -14,7 +14,7 @@
 			<li>Modul 02-1 (Überschrift) verbessert.</li>
 			<li>Modul 03-2 (Ekko Lightbox) verbessert.</li>
 			<li>Für Template 02-1 kann die Navigation in den Einstellungen auch oberhalb des Headerbildes gesetzt werden.</li>
-			<li>Update bootstrap 4 beta2.</li>
+			<li>Update bootstrap 4.</li>
 			<li>Update Ekko Lightbox to version 5.3.</li>
 			<li>Backendsprache Englisch hinzugefügt.</li>
 			<li>Module 10-3 Box mit Downloads prüft Dokumentenrechte, falls ycom/auth_media installiert ist.</li>

@@ -76,7 +76,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'?v=3.2.1"></script>' . PHP_EOL;
 		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/popper.min.js') .'"></script>' . PHP_EOL;
 		// Bootstrap CSS
-		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.0.0beta2" />' . PHP_EOL;
+		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.0.0" />' . PHP_EOL;
 	}
 
 	$helper_css = FALSE;
@@ -108,7 +108,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 
 	// Vor dem </body> einfügen
 	if($addon->getConfig('include_bootstrap') == 'true') {
-		$insert_body .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'?v=4.0.0beta2"></script>' . PHP_EOL;
+		$insert_body .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'?v=4.0.0"></script>' . PHP_EOL;
 	}
 
 	$helper_body_js = FALSE;
