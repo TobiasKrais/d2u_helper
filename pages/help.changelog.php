@@ -8,6 +8,10 @@
 			<li>Automatisches Modulupdate bei Addon Update.</li>
 			<li>Interface für SEO Methoden.</li>
 		</ul>
+		<p>1.3.2-DEV</p>
+		<ul>
+			<li>Template 03-1 Fehler beim Drucken an Bootstrap 4.0.0 angepasst</li>
+		</ul>
 		<p>1.3.1</p>
 		<ul>
 			<li>Template 00-1 Bugfix falls Maschinen Addon verwendet wird.</li>

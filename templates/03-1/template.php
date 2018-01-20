@@ -64,7 +64,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 							}
 						}
 						if($d2u_helper->hasConfig("template_print_header_pic") || $d2u_helper->getConfig("template_print_header_pic") != "") {
-							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_print_header_pic")) .'" alt="" class="d-print-block">';
+							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_print_header_pic")) .'" alt="" class="d-none d-print-block">';
 						}
 					?>
 				</div>
@@ -171,7 +171,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 				</footer>
 			</div>
 			<?php
-				print '<div class="col-12 d-print-block">';
+				print '<div class="col-12 d-none d-print-block">';
 				if($d2u_helper->hasConfig("template_print_footer_pic") || $d2u_helper->getConfig("template_print_footer_pic") != "") {
 					print '<img src="'. rex_url::media($d2u_helper->getConfig("template_print_footer_pic")) .'" alt="">';
 				}
