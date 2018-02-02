@@ -35,7 +35,11 @@ $d2u_helper = rex_addon::get("d2u_helper");
 	?>
 	<link href="https://fonts.googleapis.com/css?family=Istok+Web:400,700" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="index.php?template_id=02-1&d2u_helper=template.css">
-	<link rel="icon" href="<?php print rex_url::media('favicon.ico') ?>">
+	<?php
+		if(file_exists(rex_path::media('favicon.ico'))) {
+			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
+		}
+	?>
 </head>
 
 <body>

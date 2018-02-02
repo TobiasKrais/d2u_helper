@@ -11,3 +11,7 @@ if($d2u_template_id != "") {
 
 // D2UTemplateManager show list
 $d2u_template_manager->showManagerList();
+?>
+<h2>Hinweise</h2>
+<p>Die Templates können ein Favicon einbinden. Hierzu einfach eine Datei
+	favicon.ico in den Medienpool laden.</p>

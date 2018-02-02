@@ -10,7 +10,9 @@
 		</ul>
 		<p>1.3.2-DEV</p>
 		<ul>
-			<li>Template 03-1 Fehler beim Drucken an Bootstrap 4.0.0 angepasst</li>
+			<li>Template 03-1 Fehler beim Drucken an Bootstrap 4.0.0 angepasst.</li>
+			<li>Template 01-1 Sprachwahl berücksichtigt jetzt auch Kategorien des D2U Maschinen Addons.</li>
+			<li>Favicons werden in Templates nur eingebunden wenn sie im Medienpool existieren.</li>
 		</ul>
 		<p>1.3.1</p>
 		<ul>

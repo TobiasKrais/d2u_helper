@@ -19,7 +19,11 @@
 	<meta name="robots" content="noindex, nofollow">
 	<meta http-equiv="refresh" content="10800; URL=<?php print rex_getUrl(); ?>">
 	<link rel="stylesheet" href="index.php?template_id=03-2&d2u_helper=template.css">
-	<link rel="icon" href="<?php print rex_url::media('favicon.ico') ?>">
+	<?php
+		if(file_exists(rex_path::media('favicon.ico'))) {
+			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
+		}
+	?>
 </head>
 
 <body>

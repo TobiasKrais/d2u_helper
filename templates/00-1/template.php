@@ -93,6 +93,12 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 			$canonical = $category->getCanonicalTag();
 			$description = $category->getMetaDescriptionTag();
 			$title = $category->getTitleTag();
+			foreach(rex_clang::getAll(TRUE) as $this_lang_key => $this_lang_value) {
+				$lang_category = new Category($category_id, $this_lang_key);
+				if($lang_category->translation_needs_update != "delete") {
+					$alternate_urls[$this_lang_key] = $lang_category->getURL();
+				}
+			}
 		}
 	}
 	else if(rex_plugin::get("d2u_machinery", "industry_sectors")->isAvailable() && (filter_input(INPUT_GET, 'industry_sector_id', FILTER_VALIDATE_INT, ['options' => ['default'=> 0]]) > 0 || (rex_addon::get("url")->isAvailable() && $urlParamKey === "industry_sector_id"))) {
@@ -155,8 +161,10 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 	?>
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<link rel="stylesheet" href="index.php?template_id=00-1&d2u_helper=template.css">
-	<link rel="icon" href="<?php print rex_url::media('favicon.ico') ?>">
 	<?php
+		if(file_exists(rex_path::media('favicon.ico'))) {
+			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
+		}
   		if (rex_addon::get('rex_emailobfuscator')->isAvailable()) {
     ?>
     	<link rel="stylesheet" type="text/css" href="<?=rex_url::addonAssets('rex_emailobfuscator', 'rex_emailobfuscator.css');?>">

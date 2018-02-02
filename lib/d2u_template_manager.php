@@ -105,19 +105,19 @@ class D2UTemplateManager {
 		$d2u_templates = [];
 		$d2u_templates[] = new D2UTemplate("00-1",
 			"Big Header Template",
-			4);
+			6);
 		$d2u_templates[] = new D2UTemplate("01-1",
 			"Side Picture Template",
-			1);
+			2);
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
-			2);
+			3);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
-			3);
+			4);
 		$d2u_templates[] = new D2UTemplate("03-2",
 			"Immo Window Advertising Template",
-			3);
+			4);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",
 			1);

@@ -34,9 +34,11 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 		echo $robots .PHP_EOL;
 		echo $alternate .PHP_EOL;
 		echo $canonical .PHP_EOL;
+		if(file_exists(rex_path::media('favicon.ico'))) {
+			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
+		}
 	?>
 	<link rel="stylesheet" href="index.php?template_id=03-1&d2u_helper=template.css">
-	<link rel="icon" href="<?php print rex_url::media('favicon.ico') ?>">
 	<style>
 		.desktop-navi {
 			width: <?php print (100 / count(rex_category::getRootCategories(TRUE)));?>% !important;

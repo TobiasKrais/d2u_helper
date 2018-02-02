@@ -40,8 +40,10 @@ $d2u_helper = rex_addon::get("d2u_helper");
 	?>
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<link rel="stylesheet" href="index.php?template_id=01-1&d2u_helper=template.css">
-	<link rel="icon" href="<?php print rex_url::media('favicon.ico') ?>">
 	<?php
+		if(file_exists(rex_path::media('favicon.ico'))) {
+			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
+		}
   		if (rex_addon::get('rex_emailobfuscator')->isAvailable()) {
     ?>
     	<link rel="stylesheet" type="text/css" href="<?=rex_url::addonAssets('rex_emailobfuscator', 'rex_emailobfuscator.css');?>">
