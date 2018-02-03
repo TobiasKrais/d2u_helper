@@ -99,6 +99,7 @@ d2u_helper_templates_pair_new = Neues Redaxo Template anlegen
 d2u_helper_templates_paired_rex_template = Zugeordnetes Redaxo Template
 
 d2u_helper_translations_apply = Anwenden
+d2u_helper_translations_sort = Sortierung
 d2u_helper_translations_description = Die Übersetzungshilfe bietet eine Liste von Übersetzungen die in D2U Addons fehlen oder aktualisiert werden sollen.
 d2u_helper_translations_filter = Filter
 d2u_helper_translations_filter_select = Anzeige von ...
