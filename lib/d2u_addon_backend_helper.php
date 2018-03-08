@@ -361,12 +361,23 @@ class d2u_addon_backend_helper {
 	public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = FALSE, $readonly = FALSE, $use_wysiwyg = TRUE) {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
-		$wysiwyg_class = '';
-		if($use_wysiwyg && rex_addon::get('tinymce4')->isAvailable()) {
-			$wysiwyg_class = ' tinyMCEEditor';
-		}
-		else if($use_wysiwyg && rex_addon::get('redactor2')->isAvailable()) {
-			$wysiwyg_class = ' redactorEditor2-full';
+		$wysiwyg_class = ' ';
+		if($use_wysiwyg) {
+			if(rex_config::get('d2u_helper', 'editor') == 'tinymce4' && rex_addon::get('tinymce4')->isAvailable()) {
+				$wysiwyg_class .= 'tinyMCEEditor';
+			}
+			else if(rex_config::get('d2u_helper', 'editor') == 'redactor2' && rex_addon::get('redactor2')->isAvailable()) {
+				$wysiwyg_class .= 'redactorEditor2-full';
+			}
+			else if(rex_config::get('d2u_helper', 'editor') == 'ckeditor' && rex_addon::get('ckeditor')->isAvailable()) {
+				$wysiwyg_class .= 'ckeditor';
+			}
+			else if(rex_config::get('d2u_helper', 'editor') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
+				$wysiwyg_class .= 'markitupEditor-markdown_full';
+			}
+			else if(rex_config::get('d2u_helper', 'editor') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
+				$wysiwyg_class .= 'markitupEditor-textile_full';
+			}
 		}
 		if ($readonly) {
 			print '<dd><div class="form-control" style="height: 100px;overflow-y: scroll">'. $value .'</div>'

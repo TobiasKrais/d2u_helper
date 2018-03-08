@@ -61,9 +61,25 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								$lang_options[$rex_clang->getId()] = $rex_clang->getName();
 							}
 							d2u_addon_backend_helper::form_select('d2u_helper_defaultlang', 'settings[default_lang]', $lang_options, [$this->getConfig('default_lang')]);
+							
+							if(rex_addon::get('tinymce4')->isAvailable() || rex_addon::get('redactor2')->isAvailable() || rex_addon::get('ckeditor')->isAvailable() || rex_addon::get('markitup')->isAvailable()) {
+								$options_editor = [];
+								if(rex_addon::get('ckeditor')->isAvailable()) {
+									$options_editor['ckeditor'] = rex_i18n::msg('ckeditor_title');
+								}
+								if(rex_addon::get('markitup')->isAvailable()) {
+									$options_editor['markitup'] = rex_i18n::msg('markitup_title');
+									$options_editor['markitup_textile'] = rex_i18n::msg('markitup_title') ." - Textile";
+								}
+								if(rex_addon::get('redactor2')->isAvailable()) {
+									$options_editor['redactor2'] = rex_i18n::msg('redactor2_title');
+								}
+								if(rex_addon::get('tinymce4')->isAvailable()) {
+									$options_editor['tinymce4'] = "TinyMCE 4";
+								}
+								d2u_addon_backend_helper::form_select('d2u_helper_settings_editor', 'settings[editor]', $options_editor, [$this->getConfig('editor')]);
+							}
 						}
-
-						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap]', 'true', $this->getConfig('include_bootstrap') == 'true');
 					?>
 				</div>
 			</fieldset>
@@ -87,6 +103,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_templates'); ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap]', 'true', $this->getConfig('include_bootstrap') == 'true');
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_module', 'settings[include_module]', 'true', $this->getConfig('include_module') == 'true');
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_header_pic', 'template_header_pic', $this->getConfig('template_header_pic'));
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_logo', 'template_logo', $this->getConfig('template_logo'));

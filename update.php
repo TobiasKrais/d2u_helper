@@ -122,3 +122,20 @@ if (!$this->hasConfig('default_lang')) {
 		$this->setConfig('default_lang', rex_clang::getStartId());
 	}
 }
+if (!$this->hasConfig('editor')) {
+	if(rex_addon::get('tinymce4')->isAvailable()) {
+		$this->setConfig('editor', 'tinymce4');
+	}
+	elseif(rex_addon::get('redactor2')->isAvailable()) {
+		$this->setConfig('editor', 'redactor2');
+	}
+	elseif(rex_addon::get('ckeditor')->isAvailable()) {
+		$this->setConfig('editor', 'ckeditor');
+	}
+	elseif(rex_addon::get('markitup')->isAvailable()) {
+		$this->setConfig('editor', 'markitup');
+	}
+	else {
+		$this->setConfig('editor', 'tinymce4');
+	}
+}
