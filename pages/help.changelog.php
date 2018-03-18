@@ -7,9 +7,13 @@
 			<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
 			<li>Interface für SEO Methoden.</li>
 		</ul>
+		<p>1.3.3-DEV</p>
+		<ul>
+			<li>Bugfix: Lieblingseditor nun auch wählbar wenn nur eine Sprache vorhanden ist.</li>
+		</ul>
 		<p>1.3.2</p>
 		<ul>
-			<li>Automatisches Modulupdate für D2U Addon Module wird ab kommener Version wieder funktionieren.</li>
+			<li>Automatisches Modulupdate für D2U Addon Module wird ab kommender Version wieder funktionieren.</li>
 			<li>Navigation beinhaltet nun auch Maschinen und Kategorien aus D2U Maschinen Addon.</li>
 			<li>Header Slider Template hinzugefügt</li>
 			<li>JQuery Update 3.3.1.</li>
