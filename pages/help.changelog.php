@@ -4,7 +4,7 @@
 		<p>Wunschliste nächste Versionen</p>
 		<ul>
 			<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
-			<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
+			<li>Neue Module nur Modulen zuordnen, die noch keine andere D2U Modul Zuordnung (auch aus anderen Addons) haben.</li>
 			<li>Interface für SEO Methoden.</li>
 		</ul>
 		<p>1.3.3-DEV</p>

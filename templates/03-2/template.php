@@ -155,7 +155,7 @@
 										else {
 											print '<div class="col-12">';
 										}
-										print $advertisement->description;
+										print d2u_addon_frontend_helper::prepareEditorField($advertisement->description);
 
 										print '</div>';
 
