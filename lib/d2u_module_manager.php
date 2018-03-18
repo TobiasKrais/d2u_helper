@@ -39,7 +39,7 @@ class D2UModuleManager {
 	 * Trailing slash must be included. Default is D2UModuleManager::MODULE_FOLDER.
 	 * @param string $addon_key Redaxo Addon name module belongs to, default "d2u_helper"
 	 */
-	public function __construct($d2u_modules, $module_folder, $addon_key = "d2u_helper") {
+	public function __construct($d2u_modules, $module_folder = "", $addon_key = "d2u_helper") {
 		$module_folder = $module_folder == "" ? D2UModuleManager::MODULE_FOLDER : $module_folder;
 		$this->module_addon = rex_addon::get($addon_key);
 		$this->module_folder = $this->module_addon->getPath($module_folder);
@@ -57,11 +57,10 @@ class D2UModuleManager {
 	}
 	
 	/**
-	 * Perform pending module updates.
+	 * Update modules.
 	 */
 	public function autoupdate() {
-		for($i = 0; $i < count($this->d2u_modules); $i++) {
-			$module = $this->d2u_modules[$i];
+		foreach($this->d2u_modules as $module) {
 			// Only check autoupdate, not if needed. That would not work during addon update
 			if($module->isAutoupdateActivated()) {
 				$module->install();

@@ -39,20 +39,20 @@ class D2UTemplateManager {
 	 * Trailing slash must be included. Default is D2UTemplateManager::MODULE_FOLDER.
 	 * @param string $addon_key Redaxo Addon name template belongs to, default "d2u_helper"
 	 */
-	public function __construct($d2u_templates, $template_folder, $addon_key = "d2u_helper") {
-		$template_folder = $template_folder == "" ? D2UTemplateManager::MODULE_FOLDER : $template_folder;
-		$this->d2u_templates = $d2u_templates;
+	public function __construct($d2u_templates, $template_folder = "", $addon_key = "d2u_helper") {
+		$template_folder = $template_folder == "" ? D2UTemplateManager::TEMPLATE_FOLDER : $template_folder;
 		$this->template_addon = rex_addon::get($addon_key);
 		$this->template_folder = $this->template_addon->getPath($template_folder);
 		// Path during addon update
-		$temp_update_folder = $this->module_addon->getPath('../.new.' . $addon_key . '/' . $template_folder);
+		$temp_update_folder = $this->template_addon->getPath('../.new.' . $addon_key . '/' . $template_folder);
 		if(file_exists($temp_update_folder)) {
 			$this->template_folder = $temp_update_folder;
 		}
 
-		foreach($this->d2u_templates as $key =>$d2u_template) {
+		for($i = 0; $i < count($d2u_templates); $i++) {
+			$d2u_template = $d2u_templates[$i];
 			$d2u_template->initRedaxoContext($this->template_addon, $this->template_folder);
-			$this->d2u_templates[$key] = $d2u_template;
+			$this->d2u_templates[$i] = $d2u_template;
 		}
 	}
 	
