@@ -5,11 +5,14 @@
 		<ul>
 			<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
 			<li>Neue Module nur Modulen zuordnen, die noch keine andere Zuordnung haben.</li>
-			<li>Automatisches Modulupdate bei Addon Update.</li>
 			<li>Interface für SEO Methoden.</li>
 		</ul>
 		<p>1.3.2-DEV</p>
 		<ul>
+			<li>Automatisches Modulupdate für D2U Addon Module wird ab kommener Version wieder funktionieren.</li>
+			<li>Navigation beinhaltet nun auch Maschinen und Kategorien aus D2U Maschinen Addon.</li>
+			<li>Header Slider Template hinzugefügt</li>
+			<li>JQuery Update 3.3.1.</li>
 			<li>Auswahl des Lieblings WYSIWYG Editors.</li>
 			<li>Template 03-1 Fehler beim Drucken an Bootstrap 4.0.0 angepasst.</li>
 			<li>Template 01-1 Sprachwahl berücksichtigt jetzt auch Kategorien des D2U Maschinen Addons.</li>

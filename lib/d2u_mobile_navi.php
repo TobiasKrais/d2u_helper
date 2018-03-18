@@ -84,7 +84,8 @@ class d2u_mobile_navi {
 		print '<div id="desktop-menu"'. $show_class .'>';
 		$is_first = TRUE;
 		foreach(d2u_mobile_navi::getCategories($cat_parent_id) as $category) {
-			if(count($category->getChildren(true)) == 0) {
+			$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $category->getId());
+			if(count($category->getChildren(true)) == 0 && !$has_machine_submenu) {
 				// Ohne Untermenü
 				print '<div class="desktop-navi"><a href="'. $category->getUrl() .'"><div class="desktop-inner">'. $category->getName() .'</div></a></div>';
 			}
@@ -94,9 +95,12 @@ class d2u_mobile_navi {
 				print '<ul class="dl-menu">';
 				// Mit Untermenü
 				print '<li><a href="'. $category->getUrl() .'">'. strtoupper($category->getName()) .'</a></li>';
+				if($has_machine_submenu) {
+					d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
+				}
 				foreach($category->getChildren(true) as $lev2) {
 					if(count($lev2->getChildren(true)) == 0) {
-						// Ohne Untermenü
+						// Without Redaxo submenu
 						print '<li><a href="'. $lev2->getUrl() .'">'. $lev2->getName() .'</a></li>';
 					}
 					else {
@@ -155,7 +159,7 @@ class d2u_mobile_navi {
 		print '<ul class="dl-menu">';
 		foreach(d2u_mobile_navi::getCategories($cat_parent_id) as $lev1) {
 			if(count($lev1->getChildren(true)) == 0) {
-				// Ohne Untermenü
+				// Without Redaxo submenu
 				print '<li><a href="'. $lev1->getUrl() .'">'. $lev1->getName() .'</a></li>';
 			}
 			else {
@@ -183,9 +187,13 @@ class d2u_mobile_navi {
 		print '<ul class="dl-submenu">';
 		print '<li class="dl-back"><a href="#">&nbsp;</a></li>';
 		print '<li><a href="'. $rex_category->getUrl() .'">'. strtoupper($rex_category->getName()) .'</a></li>';
+			if(rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_category->getId()) {
+				d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
+			}
 		foreach($rex_category->getChildren(true) as $rex_subcategory) {
-			if(count($rex_subcategory->getChildren(true)) == 0) {
-				// Ohne Untermenü
+			$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_subcategory->getId());
+			if(count($rex_subcategory->getChildren(true)) == 0 && !$has_machine_submenu) {
+				// Without Redaxo submenu
 				print '<li><a href="'. $rex_subcategory->getUrl() .'">'. $rex_subcategory->getName() .'</a></li>';
 			}
 			else {

@@ -304,6 +304,48 @@ else {
 				</div>
 			</fieldset>
 			<?php
+				if(rex_plugin::get('d2u_machinery', 'equipment')->isAvailable()) {
+					$equipments = Equipment::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+					$equipment_groups = EquipmentGroup::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+			?>
+			<br>
+			<fieldset>
+				<legend><small><i class="rex-icon fa-plug"></i></small> <?php echo rex_i18n::msg('d2u_machinery_equipments'); ?></legend>
+				<div class="panel-body-wrapper slide">
+				<?php
+					if(count($equipments) > 0) {
+						print '<ul>';
+						foreach($equipments as $equipment) {
+							print '<li><a href="'. rex_url::backendPage('d2u_machinery/equipment/equipment', ['entry_id' => $equipment->equipment_id, 'func' => 'edit']) .'">'. $equipment->name .'</a></li>';
+						}
+						print '</ul>';
+					}
+					else {
+						print $_SESSION['d2u_helper_translation']['filter'] == 'update' ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+					}
+				?>
+				</div>
+			</fieldset>
+			<br>
+			<fieldset>
+				<legend><small><i class="rex-icon fa-plug"></i></small> <?php echo rex_i18n::msg('d2u_machinery_equipment_groups'); ?></legend>
+				<div class="panel-body-wrapper slide">
+				<?php
+					if(count($equipment_groups) > 0) {
+						print '<ul>';
+						foreach($equipment_groups as $equipment_group) {
+							print '<li><a href="'. rex_url::backendPage('d2u_machinery/equipment/equipment_group', ['entry_id' => $equipment_group->group_id, 'func' => 'edit']) .'">'. $equipment_group->name .'</a></li>';
+						}
+						print '</ul>';
+					}
+					else {
+						print $_SESSION['d2u_helper_translation']['filter'] == 'update' ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+					}
+				?>
+				</div>
+			</fieldset>
+			<?php
+				}
 				if(rex_plugin::get('d2u_machinery', 'industry_sectors')->isAvailable()) {
 					$industry_sectors = IndustrySector::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
 			?>
@@ -541,6 +583,29 @@ else {
 						print '<ul>';
 						foreach($usage_areas as $usage_area) {
 							print '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_usage_area_extension', ['entry_id' => $usage_area->usage_area_id, 'func' => 'edit']) .'">'. $usage_area->name .'</a></li>';
+						}
+						print '</ul>';
+					}
+					else {
+						print $_SESSION['d2u_helper_translation']['filter'] == 'update' ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+					}
+				?>
+				</div>
+			</fieldset>
+			<?php
+				}
+				if(rex_plugin::get('d2u_machinery', 'service_options')->isAvailable()) {
+					$service_options = ServiceOption::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+			?>
+			<br>
+			<fieldset>
+				<legend><small><i class="rex-icon fa-plug"></i></small> <?php echo rex_i18n::msg('d2u_machinery_service_options'); ?></legend>
+				<div class="panel-body-wrapper slide">
+				<?php
+					if(count($service_options) > 0) {
+						print '<ul>';
+						foreach($service_options as $service_option) {
+							print '<li><a href="'. rex_url::backendPage('d2u_machinery/service_option', ['entry_id' => $service_option->service_option_id, 'func' => 'edit']) .'">'. $service_option->name .'</a></li>';
 						}
 						print '</ul>';
 					}

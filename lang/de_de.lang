@@ -77,6 +77,7 @@ d2u_helper_settings_template_02_1_footer_text = Motto im Footer
 d2u_helper_settings_template_02_1_navi_pos_bottom = Unterhalb des Headerbildes
 d2u_helper_settings_template_02_1_navi_pos_text = Position Navigation
 d2u_helper_settings_template_02_1_navi_pos_top = Oberhalb des Headerbildes
+d2u_helper_settings_template_02_2_slider_pics = Header Sliderbilder
 d2u_helper_settings_template_03_1_print_header_pic = Druckansicht Headerbild
 d2u_helper_settings_template_03_1_print_footer_pic = Druckansicht Footerbild
 d2u_helper_settings_template_03_2_header_pic = Schaufenster Headerbild

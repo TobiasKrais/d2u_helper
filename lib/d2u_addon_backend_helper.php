@@ -29,7 +29,7 @@ class d2u_addon_backend_helper {
 	 * @param boolean $isList TRUE if field is a medialist field
 	 * @return string HTML String with buttons
 	 */
-	private static function getMediaManagingButtons($field_id, $isList = FALSE) {
+	public static function getMediaManagingButtons($field_id, $isList = FALSE) {
 		$type_html = "Media";
 		if ($isList) {
 			$type_html = "Medialist";
@@ -51,7 +51,7 @@ class d2u_addon_backend_helper {
 	 * @param string $field_id Name of die media field
 	 * @return string HTML String with buttons
 	 */
-	private static function getMediaPositionButtons($field_id) {
+	public static function getMediaPositionButtons($field_id) {
 		$js_onclick_top = "moveREXMedialist('" . $field_id . "', 'top');return false;";
 		$fields = '<a href="#" class="btn btn-popup" onclick="' . $js_onclick_top . '" title="' . rex_i18n::msg('var_medialist_move_top') . '"><i class="rex-icon rex-icon-top"></i></a>';
 		$js_onclick_up = "moveREXMedialist('" . $field_id . "', 'up');return false;";

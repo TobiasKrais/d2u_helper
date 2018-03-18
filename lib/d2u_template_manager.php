@@ -6,6 +6,11 @@
  */
 class D2UTemplateManager {
 	/**
+	 * Folder where templates can be found.
+	 */
+	const TEMPLATE_FOLDER = 'templates/';
+
+	/**
 	 * @var D2UTemplate[] Array with D2U templates
 	 */
 	var $d2u_templates = [];
@@ -31,16 +36,18 @@ class D2UTemplateManager {
 	 * update the path of the new addon folder. Otherwise the normal addon path.
 	 * @param D2UTemplate[] $d2u_templates Array with D2U templates
 	 * @param string $template_folder Folder, in which templates can be found.
-	 * Trailing slash must be included. Default "templates".
+	 * Trailing slash must be included. Default is D2UTemplateManager::MODULE_FOLDER.
 	 * @param string $addon_key Redaxo Addon name template belongs to, default "d2u_helper"
 	 */
-	public function __construct($d2u_templates, $template_folder = "templates/", $addon_key = "d2u_helper") {
+	public function __construct($d2u_templates, $template_folder, $addon_key = "d2u_helper") {
+		$template_folder = $template_folder == "" ? D2UTemplateManager::MODULE_FOLDER : $template_folder;
 		$this->d2u_templates = $d2u_templates;
 		$this->template_addon = rex_addon::get($addon_key);
 		$this->template_folder = $this->template_addon->getPath($template_folder);
 		// Path during addon update
-		if(file_exists(str_replace($addon_key, ".new.". $addon_key, $this->template_folder))) {
-			$this->template_folder = str_replace($addon_key, ".new.". $addon_key, $this->template_folder);
+		$temp_update_folder = $this->module_addon->getPath('../.new.' . $addon_key . '/' . $template_folder);
+		if(file_exists($temp_update_folder)) {
+			$this->template_folder = $temp_update_folder;
 		}
 
 		foreach($this->d2u_templates as $key =>$d2u_template) {
@@ -112,6 +119,9 @@ class D2UTemplateManager {
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
 			3);
+		$d2u_templates[] = new D2UTemplate("02-2",
+			"Header Slider Template",
+			1);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
 			4);

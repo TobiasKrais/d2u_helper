@@ -13,13 +13,18 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['template_03_2_header_pic'] = isset($input_media['template_03_2_header_pic']) ? $input_media['template_03_2_header_pic'] : '';
 	$settings['template_03_2_footer_pic'] = isset($input_media['template_03_2_footer_pic']) ? $input_media['template_03_2_footer_pic'] : '';
 
+	$input_media_list = (array) rex_post('REX_INPUT_MEDIALIST', 'array', []);
+	foreach(rex_clang::getAllIds() as $clang_id) {
+		$settings['template_02_2_header_slider_pics_clang_'. $clang_id] = $input_media_list[$clang_id];
+	}
+
 	// Checkbox also need special treatment if empty
+	$settings['activate_rewrite_scheme'] = array_key_exists('activate_rewrite_scheme', $settings);
 	$settings['include_bootstrap'] = array_key_exists('include_bootstrap', $settings);
 	$settings['include_module'] = array_key_exists('include_module', $settings);
 	$settings['include_menu'] = array_key_exists('include_menu', $settings);
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
-	$settings['activate_rewrite_scheme'] = array_key_exists('activate_rewrite_scheme', $settings);
 	
 	// Update URLs
 	if($settings['activate_rewrite_scheme'] == 'true') {
@@ -128,7 +133,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				$d2u_templates = D2UTemplateManager::getD2UHelperTemplates();
 				foreach($d2u_templates as $d2u_template) {
 					$d2u_template->initRedaxoContext($this, "templates/");
-					$d2u_template_ids_for_settings = ["02-1", "03-1", "03-2"];
+					$d2u_template_ids_for_settings = ["02-1", "02-2", "03-1", "03-2"];
 					if(in_array($d2u_template->getD2UId(), $d2u_template_ids_for_settings) && $d2u_template->isInstalled()) {
 			?>
 						<fieldset>
@@ -142,6 +147,26 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 											"top" => rex_i18n::msg('d2u_helper_settings_template_02_1_navi_pos_top')
 										];
 										d2u_addon_backend_helper::form_select('d2u_helper_settings_template_02_1_navi_pos_text', 'settings[template_02_1_navi_pos]', $navi_pos_options, [$this->getConfig('template_02_1_navi_pos')]);
+									}
+									else if($d2u_template->getD2UId() === "02-2" && $d2u_template->isInstalled()) {
+										foreach(rex_clang::getAll() as $rex_clang) {
+											print '<dl class="rex-form-group form-group" id="MEDIALIST_'. $rex_clang->getId() .'">';
+											print '<dt><label>' . rex_i18n::msg('d2u_helper_settings_template_02_2_slider_pics') .' - '. $rex_clang->getName() .'</label></dt>';
+											print '<dd><div class="input-group">';
+											print '<select class="form-control" name="REX_MEDIALIST_SELECT[' . $rex_clang->getId() . ']" id="REX_MEDIALIST_SELECT_' . $rex_clang->getId() . '" size="10" style="margin: 0">';
+											$slider_pics = preg_grep('/^\s*$/s', explode(",", $this->getConfig('template_02_2_header_slider_pics_clang_'. $rex_clang->getId())), PREG_GREP_INVERT);
+											foreach ($slider_pics as $slider_pic) {
+												print '<option value="'. $slider_pic .'">'. $slider_pic .'</option>';
+											}
+											print '</select>';
+											print '<input type="hidden" name="REX_INPUT_MEDIALIST[' . $rex_clang->getId() . ']" id="REX_MEDIALIST_' . $rex_clang->getId() . '" value="' . $this->getConfig('template_02_2_header_slider_pics_clang_'. $rex_clang->getId()) . '">';
+											print '<span class="input-group-addon">';
+											print '<div class="btn-group-vertical">' . d2u_addon_backend_helper::getMediaPositionButtons($rex_clang->getId()) . '</div>';
+											print '<div class="btn-group-vertical">' . d2u_addon_backend_helper::getMediaManagingButtons($rex_clang->getId(), TRUE) . '</div>';
+											print '</span>';
+											print '</div><div class="rex-js-media-preview"></div></dd>';
+											print '</dl>';
+										}
 									}
 									else if($d2u_template->getD2UId() === "03-1" && $d2u_template->isInstalled()) {
 										d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_1_print_header_pic', 'template_print_header_pic', $this->getConfig('template_print_header_pic'));

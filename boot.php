@@ -73,7 +73,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	// Vor dem </head> einfügen
 	if($addon->getConfig('include_bootstrap') == 'true') {
 		// JavaScript
-		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'?v=3.2.1"></script>' . PHP_EOL;
+		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'?v=3.3.1"></script>' . PHP_EOL;
 		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/popper.min.js') .'"></script>' . PHP_EOL;
 		// Bootstrap CSS
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.0.0" />' . PHP_EOL;

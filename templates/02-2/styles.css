@@ -12,6 +12,7 @@ body {
 	-o-hyphens: auto;
    	-ms-hyphens: auto;
 	-webkit-hyphens: auto;
+	background-color: article_color_box !important;
 	hyphens: auto;
 }
 a, a:link, a:visited, a:hover
@@ -22,30 +23,6 @@ img
 .abstand
 	{margin: 1em 0;}
 	
-header {
-	background-position: center;
-	background-size: cover;
-	padding: 2em 0;
-}
-@media screen and (min-width: 992px) {
-	header {
-		min-height: 390px;
-	}
-}
-@media screen and (min-width: 768px) and (max-width: 991px)  {
-	header {
-		min-height: 250px;
-	}
-	#logo {
-		max-width: 80%;
-	}
-}
-@media screen and (max-width: 768px) {
-	#logo {
-		max-width: 60%;
-	}
-}
-
 #langchooser {
 	float: right;
 }
@@ -68,13 +45,24 @@ header {
 h1.subhead {
 	padding: 0.5em 0;
 }
-#breadcrumbs {
-	padding: 1em 0 0 0;
+@media screen and (min-width: 767px) and (max-width: 991px) {
+	h1.subhead {
+		font-size: 2em;
+	}
 }
-#breadcrumbs.subhead, #breadcrumbs.subhead a {
+@media screen and (max-width: 767px) {
+	h1.subhead {
+		font-size: 1.5em;
+	}
+}
+#logo {
+	float: right;
+	padding: 0.5em 0;
+}
+.subhead, .subhead a, .subhead a:hover {
 	color: subhead_color_font;
 }
-.fa-home, .fa-icon {
+.fa-icon {
 	font-family: FontAwesome;
 }
 .fa-dropbox:before {
@@ -99,11 +87,11 @@ h1.subhead {
 	padding: 0 0.6em;
 }
 
-nav {
+.navigation {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
 }
-nav a {
+.navigation a {
 	text-decoration: none;
 }
 .desktop-inner {
@@ -118,12 +106,12 @@ nav a {
 	background-color: navi_color_hover_bg !important;
 }
 
-article {
+article, .article {
 	background-color: article_color_bg;
 	font-family: 'Ubuntu', sans-serif;
 	padding: 1em 0;
 }
-article a, article a:visited, article a:hover, #breadcrumbs a {
+article a, article a:visited, article a:hover {
 	color: navi_color_bg;
 }
 article a:hover {
@@ -140,15 +128,15 @@ article h1, article h2 {
 section {
 	font-family: 'Ubuntu', sans-serif;
 }
-footer {
+.footer {
 	background-color: footer_color_bg;
 	font-family: 'Ubuntu', sans-serif;
-	padding: 1em 1em 0 1em;
+	padding: 1em;
 }
-footer a {
+.footer a {
 	color: white;
 }
-footer a:hover {
+.footer a:hover {
 	color: white;
 	text-decoration: underline;
 }

@@ -6,6 +6,11 @@
  */
 class D2UModuleManager {
 	/**
+	 * Folder where modules can be found.
+	 */
+	const MODULE_FOLDER = 'modules/';
+
+	/**
 	 * @var D2UModule[] Array with D2U modules
 	 */
 	var $d2u_modules = [];
@@ -31,16 +36,18 @@ class D2UModuleManager {
 	 * update the path of the new addon folder. Otherwise the normal addon path.
 	 * @param D2UModule[] $d2u_modules Array with D2U modules
 	 * @param string $module_folder Folder, in which modules can be found.
-	 * Trailing slash must be included. Default "modules/".
+	 * Trailing slash must be included. Default is D2UModuleManager::MODULE_FOLDER.
 	 * @param string $addon_key Redaxo Addon name module belongs to, default "d2u_helper"
 	 */
-	public function __construct($d2u_modules, $module_folder = "modules/", $addon_key = "d2u_helper") {
+	public function __construct($d2u_modules, $module_folder, $addon_key = "d2u_helper") {
+		$module_folder = $module_folder == "" ? D2UModuleManager::MODULE_FOLDER : $module_folder;
 		$this->module_addon = rex_addon::get($addon_key);
 		$this->module_folder = $this->module_addon->getPath($module_folder);
-		// Path during addon update TODO
-//		if(file_exists(str_replace($addon_key, ".new.". $addon_key, $this->module_folder))) {
-//			$this->module_folder = str_replace($addon_key, ".new.". $addon_key, $this->module_folder);
-//		}
+		// Path during addon update
+		$temp_update_folder = $this->module_addon->getPath('../.new.' . $addon_key . '/' . $module_folder);
+		if(file_exists($temp_update_folder)) {
+			$this->module_folder = $temp_update_folder;
+		}
 
 		for($i = 0; $i < count($d2u_modules); $i++) {
 			$d2u_module = $d2u_modules[$i];
@@ -53,7 +60,7 @@ class D2UModuleManager {
 	 * Perform pending module updates.
 	 */
 	public function autoupdate() {
-		for($i = 0; $i > count($this->d2u_modules); $i++) {
+		for($i = 0; $i < count($this->d2u_modules); $i++) {
 			$module = $this->d2u_modules[$i];
 			// Only check autoupdate, not if needed. That would not work during addon update
 			if($module->isAutoupdateActivated()) {
