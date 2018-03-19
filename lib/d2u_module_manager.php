@@ -176,7 +176,7 @@ class D2UModuleManager {
 			1);
 		$modules[] = new D2UModule("10-2",
 			"Box mit Bild und Text",
-			1);
+			2);
 		$modules[] = new D2UModule("10-3",
 			"Box mit Download",
 			2);
