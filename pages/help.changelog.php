@@ -11,6 +11,7 @@
 		<ul>
 			<li>Bugfix: Lieblingseditor nun auch wählbar wenn nur eine Sprache vorhanden ist.</li>
 			<li>Module 01-x jetzt mit Lieblingseditor.</li>
+			<li>WiredMinds eMetrics Trackingcode kann automatisiert hinzugefügt werden.</li>
 		</ul>
 		<p>1.3.2</p>
 		<ul>

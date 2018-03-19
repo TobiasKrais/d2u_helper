@@ -30,6 +30,7 @@ if(!\rex::isBackend()) {
 	// Only frontend call
 	rex_extension::register('OUTPUT_FILTER', 'appendToPageD2UHelperFiles');
 	rex_extension::register('OUTPUT_FILTER', 'appendGoogleAnalytics');
+	rex_extension::register('OUTPUT_FILTER', 'appendWiredMindseMetrics');
 }
 else {
 	rex_extension::register('CLANG_DELETED', 'rex_d2u_helper_clang_deleted');
@@ -46,7 +47,7 @@ function appendGoogleAnalytics(rex_extension_point $ep) {
 	$insert_body = "";
 
 	if($d2u_helper->hasConfig("google_analytics") && $d2u_helper->getConfig("google_analytics") !== "") {
-		// Module stuff
+		// Analytics stuff
 		$insert_body = "<script>
 				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -121,6 +122,57 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	}
 	if($helper_body_js) {
 		$insert_body .= '<script type="text/javascript" src="index.php?position=body&d2u_helper=helper.js"></script>' . PHP_EOL;
+	}
+	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
+}
+
+/**
+ * Adds WiredMinds eMetrics stuff if ID is stored in settings
+ * @param rex_extension_point $ep Redaxo extension point
+ */
+function appendWiredMindseMetrics(rex_extension_point $ep) {
+	$insert_body = "";
+
+	if(rex_config::get("d2u_helper", "emetrics_customno", "") !== "") {
+		// eMatrics stuff
+		$insert_body = '
+		<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.9.2 START -->
+		<script type="text/javascript">
+			var wiredminds = [];
+			wiredminds.push(["setTrackParam", "wm_custnum", "'. rex_config::get("d2u_helper", "emetrics_customno", "") .'"]);
+			// Begin own parameters.
+			wiredminds.push(["setTrackParam", "wm_campaign_key", "wmc"]);
+			wiredminds.push(["registerHeatmapEvent", "mousedown"]);
+			wiredminds.push(["setTrackParam", "wm_content_width", ]);
+			// End own parameters.
+			wiredminds.push(["count"]);
+
+			(function() {
+				function wm_async_load() {
+					var wm = document.createElement("script");
+					wm.type = "text/javascript";
+					wm.async = true;
+					wm.src = "https://stats.vertriebsassistent.de/track/count.js";
+					var el = document.getElementsByTagName(\'script\')[0];
+					el.parentNode.insertBefore(wm, el);
+				}
+
+				if (window.addEventListener) {
+					window.addEventListener(\'load\', wm_async_load, false);
+				} else if (window.attachEvent){
+					window.attachEvent(\'onload\', wm_async_load);
+				}
+			})();
+		</script>
+
+		<noscript>
+			<div>
+				<a href="https://www.wiredminds.de">
+					<img src="https://stats.vertriebsassistent.de/track/ctin.php?wm_custnum='. rex_config::get("d2u_helper", "emetrics_customno", "") .'&nojs=1" alt="" style="border:0px;"/>
+				</a>
+			</div>
+		</noscript>
+		<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.9.2 END -->';
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
