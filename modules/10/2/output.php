@@ -10,7 +10,17 @@
 				print '<img src="index.php?rex_media_type='. $type .'&rex_media_file=REX_MEDIA[1]" alt="'. 
 					$media->getValue('title') .'" title="'. $media->getValue('title') .'" class="module-box-pic">';
 			}
+			if ('REX_VALUE[id=1 isset=1]') {
+				if(rex_config::get('d2u_helper', 'editor', '') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
+					print markitup::parseOutput ('markdown', 'REX_VALUE[id=1 output="html"]');
+				}
+				else if(rex_config::get('d2u_helper', 'editor', '') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
+					print markitup::parseOutput ('textile', 'REX_VALUE[id=1 output="html"]');
+				}
+				else {
+					print 'REX_VALUE[id=1 output=html]';
+				}
+			}
 		?>
-		REX_VALUE[id=1 output=html]
 	</div>
 </div>
