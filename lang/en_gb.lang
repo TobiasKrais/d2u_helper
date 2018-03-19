@@ -38,6 +38,7 @@ d2u_helper_metainfo_headerpic = Header picture
 
 d2u_helper_modules_d2u_module_name = D2U module name
 d2u_helper_modules_installed = Module installed
+d2u_helper_modules_install_module_03_2 = If lightbox functionality should be loaded, module 03-2 found in D2U Helper Addon must be installed.
 d2u_helper_modules_install_wysiwyg = Addon "TinyMCE 4", "Redactor 2 Editor", "CKEditor" or "MarkItUp" is needed by this module.
 d2u_helper_modules_pair_new = Add as new Redaxo module
 d2u_helper_modules_paired_rex_module = Assigned Redaxo module
