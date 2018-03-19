@@ -57,7 +57,15 @@
 					print "<b>". $heading ."</b><br>";
 				}
 				if ('REX_VALUE[id=2 isset=1]') {
-					echo "REX_VALUE[id=2 output=html]";
+					if(rex_config::get('d2u_helper', 'editor', '') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
+						print markitup::parseOutput ('markdown', 'REX_VALUE[id=2 output="html"]');
+					}
+					else if(rex_config::get('d2u_helper', 'editor', '') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
+						print markitup::parseOutput ('textile', 'REX_VALUE[id=2 output="html"]');
+					}
+					else {
+						print 'REX_VALUE[id=2 output=html]';
+					}
 				}
 
 				print '</div>';

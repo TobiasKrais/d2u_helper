@@ -20,7 +20,15 @@
 	
 	print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
 	if ('REX_VALUE[id=1 isset=1]') {
-		echo "REX_VALUE[id=1 output=html]";
+		if(rex_config::get('d2u_helper', 'editor', '') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
+			print markitup::parseOutput ('markdown', 'REX_VALUE[id=1 output="html"]');
+		}
+		else if(rex_config::get('d2u_helper', 'editor', '') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
+			print markitup::parseOutput ('textile', 'REX_VALUE[id=1 output="html"]');
+		}
+		else {
+			print 'REX_VALUE[id=1 output=html]';
+		}
 	}
 	print '</div>';
 ?>

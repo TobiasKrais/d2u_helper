@@ -10,6 +10,7 @@
 		<p>1.3.3-DEV</p>
 		<ul>
 			<li>Bugfix: Lieblingseditor nun auch wählbar wenn nur eine Sprache vorhanden ist.</li>
+			<li>Module 01-x jetzt mit Lieblingseditor.</li>
 		</ul>
 		<p>1.3.2</p>
 		<ul>

@@ -143,10 +143,10 @@ class D2UModuleManager {
 			3);
 		$modules[] = new D2UModule("01-1",
 			"Texteditor",
-			5);
+			6);
 		$modules[] = new D2UModule("01-2",
 			"Texteditor mit Bild und Überschrift",
-			5);
+			6);
 		$modules[] = new D2UModule("02-1",
 			"Ueberschrift",
 			4);
