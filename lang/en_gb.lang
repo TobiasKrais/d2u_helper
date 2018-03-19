@@ -41,6 +41,8 @@ d2u_helper_modules_installed = Module installed
 d2u_helper_modules_install_module_03_2 = If lightbox functionality should be loaded, module 03-2 found in D2U Helper Addon must be installed.
 d2u_helper_modules_install_wysiwyg = Addon "TinyMCE 4", "Redactor 2 Editor", "CKEditor" or "MarkItUp" is needed by this module.
 d2u_helper_modules_pair_new = Add as new Redaxo module
+d2u_helper_modules_pair_unlink = Unlink pairing
+d2u_helper_modules_pair_unlinked = Pairing unlinked. Module remains installed independently.
 d2u_helper_modules_paired_rex_module = Assigned Redaxo module
 
 d2u_helper_rights_all = D2U Helper addon
@@ -102,6 +104,7 @@ d2u_helper_templates_install_metainfo = Metainfo addon is needed for this addon.
 d2u_helper_templates_install_yrewrite = YRewrite addon is needed for this addon.
 d2u_helper_templates_installed = Template installed
 d2u_helper_templates_pair_new = Add as new template
+d2u_helper_templates_pair_unlinked = Pairing unlinked. Template remains installed independently.
 d2u_helper_templates_paired_rex_template = Assinged Redaxo template
 
 d2u_helper_translations_apply = Apply

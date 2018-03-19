@@ -9,6 +9,7 @@
 		</ul>
 		<p>1.3.3-DEV</p>
 		<ul>
+			<li>Paarung von installierten Modulen / Templates kann wieder aufgehoben werden.</li>
 			<li>Bugfix: Lieblingseditor nun auch wählbar wenn nur eine Sprache vorhanden ist.</li>
 			<li>Module 01-x jetzt mit Lieblingseditor.</li>
 			<li>WiredMinds eMetrics Trackingcode kann automatisiert hinzugefügt werden.</li>

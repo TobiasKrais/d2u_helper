@@ -77,7 +77,8 @@ class D2UTemplateManager {
 	 */
 	public function doActions($d2u_template_id, $function, $paired_template_id) {
 		// Form actions
-		foreach($this->d2u_templates as $template) {
+		for($i = 0; $i < count($this->d2u_templates); $i++) {
+			$template = $this->d2u_templates[$i];
 			if($template->getD2UId() == $d2u_template_id) {
 				if($function == "autoupdate") {
 					if($template->isAutoupdateActivated()) {
@@ -88,6 +89,11 @@ class D2UTemplateManager {
 						$template->activateAutoupdate();
 						print rex_view::success($template->getD2UId() ." ". $template->getName() .": ". rex_i18n::msg('d2u_helper_autoupdate_activated'));
 					}
+				}
+				else if($function == "unlink") {
+					$template->unlink();
+					$this->d2u_templates[$i] = $template;
+					print rex_view::success($template->getD2UId() ." ". $template->getName() .": ". rex_i18n::msg('d2u_helper_templates_pair_unlinked'));
 				}
 				else {
 					$success = $template->install($paired_template_id);
@@ -216,7 +222,9 @@ class D2UTemplateManager {
 				print $templates_select->get();
 			}
 			else {
+				print '<a href="'. rex_url::currentBackendPage(["function" => "unlink", "d2u_template_id" => $template->getD2UId()]) .'" title="'. rex_i18n::msg('d2u_helper_modules_pair_unlink') .'"><i class="rex-icon fa-chain-broken"></i> ';
 				print $rex_templates[$template->getRedaxoId()];
+				print '</a>';
 			}
 			print '</td>';
 			// Autoupdate
@@ -489,7 +497,7 @@ class D2UTemplate {
 			}
 		}
 	}
-	
+
 	/**
 	 * Save template config.
 	 */
@@ -505,5 +513,13 @@ class D2UTemplate {
 		}
 		$this->rex_addon->setConfig("template_". $this->d2u_template_id, $params);
 
+	}
+	
+	/**
+	 * Remove template pair config.
+	 */
+	public function unlink() {
+		$this->rex_addon->removeConfig("template_". $this->d2u_template_id);
+		$this->rex_template_id = 0;
 	}
 }

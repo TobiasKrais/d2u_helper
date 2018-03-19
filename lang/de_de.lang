@@ -41,6 +41,8 @@ d2u_helper_modules_installed = Modul installiert
 d2u_helper_modules_install_module_03_2 = Um die Lightbox Funktionalität automatisch laden zu können muss das Modul 03-2 aus dem D2U Helper Addon installiert sein.
 d2u_helper_modules_install_wysiwyg = Das Addon "TinyMCE 4", "Redactor 2 Editor", "CKEditor" oder "MarkItUp" wird für dieses Modul benötigt.
 d2u_helper_modules_pair_new = Neues Redaxo Modul anlegen
+d2u_helper_modules_pair_unlink = Paarung aufheben
+d2u_helper_modules_pair_unlinked = Paarung aufgehoben. Modul bleibt unabhängig installiert.
 d2u_helper_modules_paired_rex_module = Zugeordnetes Redaxo Modul
 
 d2u_helper_rights_all = D2U Helper Addon
@@ -102,6 +104,7 @@ d2u_helper_templates_install_metainfo = Das Addon Metainfo wird für dieses Temp
 d2u_helper_templates_install_yrewrite = Das Addon YRewrite wird für dieses Template benötigt.
 d2u_helper_templates_installed = Template installiert
 d2u_helper_templates_pair_new = Neues Redaxo Template anlegen
+d2u_helper_templates_pair_unlinked = Paarung aufgehoben. Template bleibt unabhängig installiert.
 d2u_helper_templates_paired_rex_template = Zugeordnetes Redaxo Template
 
 d2u_helper_translations_apply = Anwenden

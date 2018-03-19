@@ -77,7 +77,8 @@ class D2UModuleManager {
 	 */
 	public function doActions($d2u_module_id, $function, $paired_module_id) {
 		// Form actions
-		foreach($this->d2u_modules as $module) {
+		for($i = 0; $i < count($this->d2u_modules); $i++) {
+			$module = $this->d2u_modules[$i];
 			if($module->getD2UId() == $d2u_module_id) {
 				if($function == "autoupdate") {
 					if($module->isAutoupdateActivated()) {
@@ -88,6 +89,11 @@ class D2UModuleManager {
 						$module->activateAutoupdate();
 						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_autoupdate_activated'));
 					}
+				}
+				else if($function == "unlink") {
+					$module->unlink();
+					$this->d2u_modules[$i] = $module;
+					print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_modules_pair_unlinked'));
 				}
 				else {
 					$success = $module->install($paired_module_id);
@@ -269,7 +275,9 @@ class D2UModuleManager {
 				print $modules_select->get();
 			}
 			else {
+				print '<a href="'. rex_url::currentBackendPage(["function" => "unlink", "d2u_module_id" => $module->getD2UId()]) .'" title="'. rex_i18n::msg('d2u_helper_modules_pair_unlink') .'"><i class="rex-icon fa-chain-broken"></i> ';
 				print $rex_modules[$module->getRedaxoId()];
+				print '</a>';
 			}
 			print '</td>';
 			// Autoupdate
@@ -283,13 +291,13 @@ class D2UModuleManager {
 			// Action
 			print '<td class="rex-table-action"><button type="submit" name="d2u_module_id" class="btn btn-save" value="'. $module->getD2UId() .'">';
 			if(!$module->isInstalled()) {
-				print '<i class="rex-icon rex-icon-package-not-installed"></i> '.rex_i18n::msg('package_install');
+				print '<i class="rex-icon rex-icon-package-not-installed"></i> '. rex_i18n::msg('package_install');
 			}
 			else if($module->isUpdateNeeded()) {
-				print '<i class="rex-icon rex-icon-package-is-installed"></i> '.rex_i18n::msg('update');
+				print '<i class="rex-icon rex-icon-package-is-installed"></i> '. rex_i18n::msg('update');
 			}
 			else {
-				print '<i class="rex-icon rex-icon-package-is-activated"></i> '.rex_i18n::msg('package_reinstall');							
+				print '<i class="rex-icon rex-icon-package-is-activated"></i> '. rex_i18n::msg('package_reinstall');							
 			}
 			print '</button></td>';
 			print '</tr>';
@@ -591,5 +599,13 @@ class D2UModule {
 		}
 		$this->rex_addon->setConfig("module_". $this->d2u_module_id, $params);
 
+	}
+	
+	/**
+	 * Remove module pair config.
+	 */
+	public function unlink() {
+		$this->rex_addon->removeConfig("module_". $this->d2u_module_id);
+		$this->rex_module_id = 0;
 	}
 }
