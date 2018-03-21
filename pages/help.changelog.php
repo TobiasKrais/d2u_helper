@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.4.1-DEV</p>
+		<ul>
+			<li>Bugfix: Falsche Fehlermeldung bei Templateinstallation entfernt.</li>
+		</ul>
 		<p>1.4.0</p>
 		<ul>
 			<li>Modul und JS Cache aktiviert.</li>

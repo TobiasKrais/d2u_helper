@@ -92,7 +92,7 @@ class D2UTemplateManager {
 				}
 				else {
 					$success = $template->install($paired_template_id);
-					if($success && key_exists($template->getRedaxoId(), D2UTemplateManager::getRexTemplates(TRUE))) {
+					if($success && key_exists($template->getRedaxoId(), D2UTemplateManager::getRexTemplates())) {
 						print rex_view::success($template->getD2UId() ." ". $template->getName() .": ". rex_i18n::msg('d2u_helper_templates_installed'));
 					}
 					else {
