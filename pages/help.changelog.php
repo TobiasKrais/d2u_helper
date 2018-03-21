@@ -4,11 +4,12 @@
 		<p>Wunschliste nächste Versionen</p>
 		<ul>
 			<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
-			<li>Neue Module nur Modulen zuordnen, die noch keine andere D2U Modul Zuordnung (auch aus anderen Addons) haben.</li>
 			<li>Interface für SEO Methoden.</li>
 		</ul>
 		<p>1.3.3-DEV</p>
 		<ul>
+			<li>Bei Modulinstallation wird in der Zuordnungsliste nur noch Module
+				angezeigt, die keinem Modul - auch Zuordnungen aus anderen D2U Addons - zugeordnet sind.</li>
 			<li>Paarung von installierten Modulen / Templates kann wieder aufgehoben werden.</li>
 			<li>Bugfix: Lieblingseditor nun auch wählbar wenn nur eine Sprache vorhanden ist.</li>
 			<li>Module 01-x jetzt mit Lieblingseditor.</li>

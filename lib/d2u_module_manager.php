@@ -27,11 +27,6 @@ class D2UModuleManager {
 	private $module_addon;
 	
 	/**
-	 * @var string[] Array with redaxo modules. Key is module id, value is the name.
-	 */
-	private static $rex_modules = [];
-	
-	/**
 	 * Constructor. Sets values. The path that is constructed is during addon
 	 * update the path of the new addon folder. Otherwise the normal addon path.
 	 * @param D2UModule[] $d2u_modules Array with D2U modules
@@ -76,6 +71,7 @@ class D2UModuleManager {
 	 * @param int $paired_module_id Redaxo module ID
 	 */
 	public function doActions($d2u_module_id, $function, $paired_module_id) {
+		$rex_modules = D2UModuleManager::getRexModules();
 		// Form actions
 		for($i = 0; $i < count($this->d2u_modules); $i++) {
 			$module = $this->d2u_modules[$i];
@@ -97,7 +93,7 @@ class D2UModuleManager {
 				}
 				else {
 					$success = $module->install($paired_module_id);
-					if($success && key_exists($module->getRedaxoId(), D2UModuleManager::getRexModules(TRUE))) {
+					if($success && key_exists($module->getRedaxoId(), $rex_modules)) {
 						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_modules_installed'));
 					}
 					else {
@@ -203,23 +199,51 @@ class D2UModuleManager {
 	}
 	
 	/**
+	 * Get paired module ids. 
+	 * @param string $addon_key Redaxo addon key for filtering pairs. If missing,
+	 * pairs of all D2U addons are searched.
+	 * @return string[] Paired module ids. Key is Redaxo module id, value is D2U module id
+	 */
+	public static function getModulePairs($addon_key = "") {
+		$paired_modules = [];
+		$query_paired = 'SELECT * FROM `'. \rex::getTablePrefix() .'config` WHERE `key` LIKE "module_%"'
+			.($addon_key == '' ? '' : ' AND `namespace` = "'. $addon_key .'"');
+		$result_paired = rex_sql::factory();
+		$result_paired->setQuery($query_paired);
+		for($i = 0; $i < $result_paired->getRows(); $i++) {
+			$module_info = json_decode($result_paired->getValue("value"), TRUE);
+			$paired_modules[$module_info['rex_module_id']] = str_replace('module_', '', $result_paired->getValue("key"));
+			$result_paired->next();
+		}
+		return $paired_modules;
+	}
+	
+	/**
 	 * Gets Redaxo Modules.
-	 * @param boolean If TRUE, reload of modules is performed.
+	 * @param boolean If TRUE, only unpaired modules are returned.
 	 * @return string[] Redaxo modules. Key ist the module ID, value ist the module name
 	 */
-	public static function getRexModules($reload = FALSE) {
-		if($reload || count(D2UModuleManager::$rex_modules) == 0) {
-			D2UModuleManager::$rex_modules = [];
-			// Get Redaxo modules (must be after form actions, in case new module was installed)
-			$query = 'SELECT id, name FROM ' . \rex::getTablePrefix() . 'module ORDER BY name';
-			$result = rex_sql::factory();
-			$result->setQuery($query);
-			for($i = 0; $i < $result->getRows(); $i++) {
-				D2UModuleManager::$rex_modules[$result->getValue("id")] = $result->getValue("name");
-				$result->next();
+	public static function getRexModules($upaired_only = FALSE) {
+		$rex_modules = [];
+		// Get Redaxo modules (must be after form actions, in case new module was installed)
+		$query = 'SELECT id, name FROM ' . \rex::getTablePrefix() . 'module ORDER BY name';
+		$result = rex_sql::factory();
+		$result->setQuery($query);
+		for($i = 0; $i < $result->getRows(); $i++) {
+			$rex_modules[$result->getValue("id")] = $result->getValue("name");
+			$result->next();
+		}
+
+		if($upaired_only) {
+			// Remove paired modules
+			foreach(D2UModuleManager::getModulePairs() as $rex_id => $d2u_id) {
+				if(key_exists($rex_id, $rex_modules)) {
+					unset($rex_modules[$rex_id]);
+				}
 			}
 		}
-		return D2UModuleManager::$rex_modules;
+
+		return $rex_modules;
 	}
 	
 	/**
@@ -250,15 +274,10 @@ class D2UModuleManager {
 		print '</thead>';
 
 		print '<tbody>';
-		// Available Redaxo modules
-		$rex_modules = D2UModuleManager::getRexModules(TRUE);
-		// Create arrays with unpaired redaxo modules
-		$unpaired_redaxo_modules = [0 => rex_i18n::msg('d2u_helper_modules_pair_new')] + $rex_modules;
-		foreach($this->d2u_modules as $module) {
-			if($module->getRedaxoId() > 0) {
-				unset($unpaired_redaxo_modules[$module->getRedaxoId()]);
-			}
-		}
+		
+		// All available Redaxo modules
+		$rex_modules = D2UModuleManager::getRexModules();
+		$unpaired_rex_modules = D2UModuleManager::getRexModules(TRUE);
 		foreach($this->d2u_modules as $module) {
 			print '<tr>';
 			print '<td>'. $module->getD2UId() .'</td>';
@@ -268,10 +287,11 @@ class D2UModuleManager {
 			print '<td>';
 			if($module->getRedaxoId() == 0) {
 				$modules_select = new rex_select();
-				$modules_select->addArrayOptions($unpaired_redaxo_modules);
+				$modules_select->addOption(rex_i18n::msg('d2u_helper_modules_pair_new'), 0);
+				$modules_select->addArrayOptions($unpaired_rex_modules);
 				$modules_select->setName("pair_". $module->getD2UId());
 				$modules_select->setAttribute("class", "form-control");
-				$modules_select->setSelected($module->getRedaxoId());
+				$modules_select->setSelected(0);
 				print $modules_select->get();
 			}
 			else {
