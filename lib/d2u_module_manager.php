@@ -284,9 +284,11 @@ class D2UModuleManager {
 		$unpaired_rex_modules = D2UModuleManager::getRexModules(TRUE);
 		// Fix follows: directly after module installation, fresh paired module is not detected as paired
 		$installed_d2u_module_id = rex_request('d2u_module_id', 'string');
-		foreach($unpaired_rex_modules as $rex_id => $name) {
-			if(strpos($name, $installed_d2u_module_id) !== FALSE) {
-				unset($unpaired_rex_modules[$rex_id]);
+		if($installed_d2u_module_id != "") {
+			foreach($unpaired_rex_modules as $rex_id => $name) {
+				if(strpos($name, $installed_d2u_module_id) !== FALSE) {
+					unset($unpaired_rex_modules[$rex_id]);
+				}
 			}
 		}
 
