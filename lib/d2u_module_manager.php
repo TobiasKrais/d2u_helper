@@ -67,7 +67,7 @@ class D2UModuleManager {
 	/**
 	 * Performs actions offerd in manager list function.
 	 * @param string $d2u_module_id D2U Module ID
-	 * @param string $function Possible values: autoupdate
+	 * @param string $function Possible values: autoupdate, unlink
 	 * @param int $paired_module_id Redaxo module ID
 	 */
 	public function doActions($d2u_module_id, $function, $paired_module_id) {
@@ -218,6 +218,7 @@ class D2UModuleManager {
 			];
 			$result_paired->next();
 		}
+
 		return $paired_modules;
 	}
 	
@@ -239,7 +240,7 @@ class D2UModuleManager {
 
 		if($unpaired_only) {
 			// Remove paired modules
-			foreach(array_keys(D2UModuleManager::getModulePairs()) as $rex_id) {
+			foreach(array_keys(self::getModulePairs()) as $rex_id) {
 				if(key_exists($rex_id, $rex_modules)) {
 					unset($rex_modules[$rex_id]);
 				}
@@ -281,7 +282,14 @@ class D2UModuleManager {
 		// Redaxo modules
 		$rex_modules = D2UModuleManager::getRexModules();
 		$unpaired_rex_modules = D2UModuleManager::getRexModules(TRUE);
-		
+		// Fix follows: directly after module installation, fresh paired module is not detected as paired
+		$installed_d2u_module_id = rex_request('d2u_module_id', 'string');
+		foreach($unpaired_rex_modules as $rex_id => $name) {
+			if(strpos($name, $installed_d2u_module_id) !== FALSE) {
+				unset($unpaired_rex_modules[$rex_id]);
+			}
+		}
+
 		foreach($this->d2u_modules as $module) {
 			print '<tr>';
 			print '<td>'. $module->getD2UId() .'</td>';
@@ -569,6 +577,9 @@ class D2UModule {
 		
 		// save pairing in config
 		$this->setConfig();
+		
+		// Delete addon cache for new styles could have been added
+		d2u_addon_frontend_helper::deleteCache();
 		
 		return TRUE;
 	}

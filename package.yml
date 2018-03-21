@@ -1,5 +1,5 @@
 package: d2u_helper
-version: '1.3.3'
+version: '1.4.0'
 author: Tobias Krais
 supportpage: http://github.com/tobiaskrais/d2u_helper
 
@@ -20,6 +20,3 @@ page:
                 readme: { title: 'translate:d2u_helper_help_chapter_readme' }
                 update: { title: 'translate:d2u_helper_help_chapter_update' }
                 changelog: { title: 'translate:d2u_helper_help_chapter_changelog' }
-
-requires:
-    redaxo: '>=5.1.0'

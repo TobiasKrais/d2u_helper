@@ -3,11 +3,11 @@
 	<div class="panel-body">
 		<p>Wunschliste nächste Versionen</p>
 		<ul>
-			<li>CSS im Cache bereit stellen, damit CSS von Modulen anderer Addons verarbeitet werden können.</li>
 			<li>Interface für SEO Methoden.</li>
 		</ul>
-		<p>1.3.3-DEV</p>
+		<p>1.4.0-DEV</p>
 		<ul>
+			<li>Modul und JS Cache aktiviert.</li>
 			<li>Wenn Modul CSS nachgeladen werden soll, wird es nicht nur für
 				Module des D2U Helper Addons nachgeladen, sondern von allen D2U Addons.</li>
 			<li>Bei Modulinstallation wird in der Zuordnungsliste nur noch Module

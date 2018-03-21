@@ -48,22 +48,46 @@ class d2u_addon_frontend_helper {
 	}
 
 	/**
+	 * Delete addon cache.
+	 */
+	public static function deleteCache() {
+		if(is_dir(rex_path::addonCache('d2u_helper'))) {
+			$finder = rex_finder::factory(rex_path::addonCache('d2u_helper'))
+				->filesOnly();
+			rex_dir::deleteIterator($finder);
+		}
+	}
+
+	/**
 	 * Get CSS stuff from modules as one string
 	 * @param string $addon_key If set, only CSS for modules of this addon are returned
 	 * @return string CSS
 	 */
 	public static function getModulesCSS($addon_key = "") {
-		$installed_modules = D2UModuleManager::getModulePairs($addon_key);
-		
-		$css = "";
-		foreach($installed_modules as $installed_module) {
-			$module_css_file = rex_path::addon($installed_module['addon_key'], D2UModuleManager::MODULE_FOLDER . str_replace('-', '/', $installed_module['d2u_id']) .'/'. D2UModule::MODULE_CSS_FILE);
-			if(file_exists($module_css_file)) {
-				$css .= file_get_contents($module_css_file);
-			}	
+		if(file_exists(rex_path::addonCache('d2u_helper', 'modules.css'))) {
+			// Read from cache
+			return file_get_contents(rex_path::addonCache('d2u_helper', 'modules.css'));
 		}
-		
-		return $css;
+		else {
+			// Generate contents
+			$installed_modules = D2UModuleManager::getModulePairs($addon_key);
+
+			$css = "";
+			foreach($installed_modules as $installed_module) {
+				$module_css_file = rex_path::addon($installed_module['addon_key'], D2UModuleManager::MODULE_FOLDER . str_replace('-', '/', $installed_module['d2u_id']) .'/'. D2UModule::MODULE_CSS_FILE);
+				if(file_exists($module_css_file)) {
+					$css .= file_get_contents($module_css_file);
+				}	
+			}
+
+			// Write to cache
+			if(!is_dir(rex_path::addonCache('d2u_helper'))) {
+				mkdir(rex_path::addonCache('d2u_helper'), 0755, TRUE);
+			}
+			file_put_contents(rex_path::addonCache('d2u_helper', 'modules.css'), self::prepareCSS($css));
+
+			return self::prepareCSS($css);
+		}
 	}
 
 	/**
@@ -72,17 +96,29 @@ class d2u_addon_frontend_helper {
 	 * @return string JS
 	 */
 	public static function getModulesJS($addon_key = "") {
-		$installed_modules = D2UModuleManager::getModulePairs($addon_key);
-		
-		$js = "";
-		foreach($installed_modules as $installed_module) {
-			$module_js_file = rex_path::addon($installed_module['addon_key'], D2UModuleManager::MODULE_FOLDER . str_replace('-', '/', $installed_module['d2u_id']) .'/'. D2UModule::MODULE_JS_FILE);
-			if(file_exists($module_js_file)) {
-				$js .= file_get_contents($module_js_file);
-			}	
+		if(file_exists(rex_path::addonCache('d2u_helper', 'modules.jss'))) {
+			// Read from cache
+			return file_get_contents(rex_path::addonCache('d2u_helper', 'modules.jss'));
 		}
-		
-		return $js;
+		else {
+			$installed_modules = D2UModuleManager::getModulePairs($addon_key);
+
+			$js = "";
+			foreach($installed_modules as $installed_module) {
+				$module_js_file = rex_path::addon($installed_module['addon_key'], D2UModuleManager::MODULE_FOLDER . str_replace('-', '/', $installed_module['d2u_id']) .'/'. D2UModule::MODULE_JS_FILE);
+				if(file_exists($module_js_file)) {
+					$js .= file_get_contents($module_js_file);
+				}	
+			}
+
+			// Write to cache
+			if(!is_dir(rex_path::addonCache('d2u_helper'))) {
+				mkdir(rex_path::addonCache('d2u_helper'), 0755, TRUE);
+			}
+			file_put_contents(rex_path::addonCache('d2u_helper', 'modules.js'), $js);
+
+			return $js;
+		}
 	}
 	
 	/**
