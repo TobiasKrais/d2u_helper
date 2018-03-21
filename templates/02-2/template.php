@@ -251,7 +251,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 					// Languages
 					$clangs = rex_clang::getAll(TRUE);
 					if(count($clangs) > 1) {
-						print '<div class="col-sm-2">';
+						print '<div class="col-2">';
 						print '<div id="langchooser" class="desktop-inner">';
 						foreach ($clangs as $clang) {
 							if($clang->getId() != rex_clang::getCurrentId()) {
@@ -272,7 +272,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 	<section id="breadcrumbs">
 		<div class="container subhead">
 			<div class="row">
-				<div class="col-12 col-lg-10">
+				<div class="col-12 col-sm-10">
 					<div class="row">
 						<div class="col-12 d-print-none">
 							<?php
@@ -370,7 +370,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 				</div>
 				<?php
 					if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig("template_logo") != "") {
-						print '<div class="col-12 col-lg-2 d-none d-lg-block"><a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
+						print '<div class="col-12 col-sm-2 d-none d-sm-block"><a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
 						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
 						if($media_logo instanceof rex_media) {
 							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';

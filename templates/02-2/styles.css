@@ -72,7 +72,11 @@ h1.subhead {
 	content: "\f003";
 }
 .fa-file-pdf-o:before {
+	color: #c60000;
 	content: "\f1c1";
+}
+.fa-file-pdf-o {
+	padding-right: 0.25em;
 }
 .fa-home:before {
 	content: "\f015";
