@@ -223,7 +223,7 @@ class D2UModuleManager {
 	 * @param boolean If TRUE, only unpaired modules are returned.
 	 * @return string[] Redaxo modules. Key ist the module ID, value ist the module name
 	 */
-	public static function getRexModules($upaired_only = FALSE) {
+	public static function getRexModules($unpaired_only = FALSE) {
 		$rex_modules = [];
 		// Get Redaxo modules (must be after form actions, in case new module was installed)
 		$query = 'SELECT id, name FROM ' . \rex::getTablePrefix() . 'module ORDER BY name';
@@ -234,7 +234,7 @@ class D2UModuleManager {
 			$result->next();
 		}
 
-		if($upaired_only) {
+		if($unpaired_only) {
 			// Remove paired modules
 			foreach(D2UModuleManager::getModulePairs() as $rex_id => $d2u_id) {
 				if(key_exists($rex_id, $rex_modules)) {
@@ -275,9 +275,10 @@ class D2UModuleManager {
 
 		print '<tbody>';
 		
-		// All available Redaxo modules
+		// Redaxo modules
 		$rex_modules = D2UModuleManager::getRexModules();
 		$unpaired_rex_modules = D2UModuleManager::getRexModules(TRUE);
+		
 		foreach($this->d2u_modules as $module) {
 			print '<tr>';
 			print '<td>'. $module->getD2UId() .'</td>';

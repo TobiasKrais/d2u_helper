@@ -27,11 +27,6 @@ class D2UTemplateManager {
 	private $template_addon;
 	
 	/**
-	 * @var string[] Array with redaxo templates. Key is template id, value is the name.
-	 */
-	private static $rex_templates = [];
-	
-	/**
 	 * Constructor. Sets values. The path that is constructed is during addon
 	 * update the path of the new addon folder. Otherwise the normal addon path.
 	 * @param D2UTemplate[] $d2u_templates Array with D2U templates
@@ -155,23 +150,53 @@ class D2UTemplateManager {
 	}	
 	
 	/**
+	 * Get paired template ids. 
+	 * @param string $addon_key Redaxo addon key for filtering pairs. If missing,
+	 * pairs of all D2U addons are searched.
+	 * @return string[] Paired module ids. Key is Redaxo template id, value is D2U template id
+	 */
+	public static function getTemplatePairs($addon_key = "") {
+		$paired_templates = [];
+		$query_paired = 'SELECT * FROM `'. \rex::getTablePrefix() .'config` WHERE `key` LIKE "template_%"'
+			.($addon_key == '' ? '' : ' AND `namespace` = "'. $addon_key .'"');
+		$result_paired = rex_sql::factory();
+		$result_paired->setQuery($query_paired);
+		for($i = 0; $i < $result_paired->getRows(); $i++) {
+			$template_info = json_decode($result_paired->getValue("value"), TRUE);
+			if(is_array($template_info) && key_exists('rex_template_id', $template_info)) {
+				$paired_templates[$template_info['rex_template_id']] = str_replace('template_', '', $result_paired->getValue("key"));
+			}
+			$result_paired->next();
+		}
+		return $paired_templates;
+	}
+	
+	/**
 	 * Gets Redaxo Templates.
 	 * @param boolean If TRUE, reload of templates is performed.
 	 * @return string[] Redaxo templates. Key ist the template ID, value ist the template name
 	 */
-	public static function getRexTemplates($reload = FALSE) {
-		if($reload || count(D2UTemplateManager::$rex_templates) == 0) {
-			D2UTemplateManager::$rex_templates = [];
-			// Get Redaxo templates (must be after form actions, in case new template was installed)
-			$query = 'SELECT id, name FROM ' . \rex::getTablePrefix() . 'template ORDER BY name';
-			$result = rex_sql::factory();
-			$result->setQuery($query);
-			for($i = 0; $i < $result->getRows(); $i++) {
-				D2UTemplateManager::$rex_templates[$result->getValue("id")] = $result->getValue("name");
-				$result->next();
+	public static function getRexTemplates($unpaired_only = FALSE) {
+		$rex_templates = [];
+		// Get Redaxo modules (must be after form actions, in case new module was installed)
+		$query = 'SELECT id, name FROM ' . \rex::getTablePrefix() . 'template ORDER BY name';
+		$result = rex_sql::factory();
+		$result->setQuery($query);
+		for($i = 0; $i < $result->getRows(); $i++) {
+			$rex_templates[$result->getValue("id")] = $result->getValue("name");
+			$result->next();
+		}
+
+		if($unpaired_only) {
+			// Remove paired modules
+			foreach(D2UTemplateManager::getTemplatePairs() as $rex_id => $d2u_id) {
+				if(key_exists($rex_id, $rex_templates)) {
+					unset($rex_templates[$rex_id]);
+				}
 			}
 		}
-		return D2UTemplateManager::$rex_templates;
+
+		return $rex_templates;
 	}
 	
 	/**
@@ -197,15 +222,11 @@ class D2UTemplateManager {
 		print '</thead>';
 
 		print '<tbody>';
-		// Available Redaxo templates
-		$rex_templates = D2UTemplateManager::getRexTemplates(TRUE);
-		// Create arrays with unpaired redaxo templates
-		$unpaired_redaxo_templates = [0 => rex_i18n::msg('d2u_helper_templates_pair_new')] + $rex_templates;
-		foreach($this->d2u_templates as $template) {
-			if($template->getRedaxoId() > 0) {
-				unset($unpaired_redaxo_templates[$template->getRedaxoId()]);
-			}
-		}
+
+		// Redaxo templates
+		$rex_templates = D2UTemplateManager::getRexTemplates();
+		$unpaired_rex_templates = D2UTemplateManager::getRexTemplates(TRUE);
+
 		foreach($this->d2u_templates as $template) {
 			print '<tr>';
 			print '<td>'. $template->getD2UId() .'</td>';
@@ -215,10 +236,11 @@ class D2UTemplateManager {
 			print '<td>';
 			if($template->getRedaxoId() == 0) {
 				$templates_select = new rex_select();
-				$templates_select->addArrayOptions($unpaired_redaxo_templates);
+				$templates_select->addOption(rex_i18n::msg('d2u_helper_templates_pair_new'), 0);
+				$templates_select->addArrayOptions($unpaired_rex_templates);
 				$templates_select->setName("pair_". $template->getD2UId());
 				$templates_select->setAttribute("class", "form-control");
-				$templates_select->setSelected($template->getRedaxoId());
+				$templates_select->setSelected(0);
 				print $templates_select->get();
 			}
 			else {

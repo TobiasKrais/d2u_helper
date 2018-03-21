@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>Wunschliste nächste Versionen</p>
 		<ul>
-			<li>CSS im Cache bereit stellen, damit CSS von Modulesn anderer Addons verarbeitet werden können.</li>
+			<li>CSS im Cache bereit stellen, damit CSS von Modulen anderer Addons verarbeitet werden können.</li>
 			<li>Interface für SEO Methoden.</li>
 		</ul>
 		<p>1.3.3-DEV</p>
