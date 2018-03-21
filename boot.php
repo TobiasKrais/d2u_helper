@@ -11,21 +11,23 @@ if(\rex::isBackend() && is_object(\rex::getUser())) {
 }
 
 if(!\rex::isBackend()) {
-	// If stylesheet is requested
-	if (rex_request('d2u_helper', 'string') == 'helper.css') {
-		sendD2UHelperCSS();
-	}
-	else if (rex_request('d2u_helper', 'string') == 'helper.js') {
-		if(rex_request('position', 'string') == "head") {
-			sendD2UHelperJS("head");
+    rex_extension::register('PACKAGES_INCLUDED', function ($params) {
+		// If CSS or JS is requested
+		if (rex_request('d2u_helper', 'string') == 'helper.css') {
+			sendD2UHelperCSS();
 		}
-		else {
-			sendD2UHelperJS("body");
+		else if (rex_request('d2u_helper', 'string') == 'helper.js') {
+			if(rex_request('position', 'string') == "head") {
+				sendD2UHelperJS("head");
+			}
+			else {
+				sendD2UHelperJS("body");
+			}
 		}
-	}
-	else if (rex_request('d2u_helper', 'string') == 'template.css' && rex_request('template_id', 'string') != "") {
-		sendD2UHelperTemplateCSS(rex_request('template_id', 'string'));
-	}
+		else if (rex_request('d2u_helper', 'string') == 'template.css' && rex_request('template_id', 'string') != "") {
+			sendD2UHelperTemplateCSS(rex_request('template_id', 'string'));
+		}
+    });
 	
 	// Only frontend call
 	rex_extension::register('OUTPUT_FILTER', 'appendToPageD2UHelperFiles');
@@ -80,28 +82,14 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.0.0" />' . PHP_EOL;
 	}
 
-	$helper_css = FALSE;
-	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true") {
-		// Module stuff
-		$module_manager = new D2UModuleManager(D2UModuleManager::getModules());
-		if($module_manager->getAutoCSS() != "") {
-			$helper_css = TRUE;
-		}
-	}
-	if($addon->hasConfig("include_menu") && $addon->getConfig("include_menu") == "true") {
-		// Menu stuff
-		$helper_css = TRUE;
-		}
-	if($helper_css) {
+	// Consider module css or menu css
+	if(($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true" && d2u_addon_frontend_helper::getModulesCSS() != "")
+			|| ($addon->hasConfig("include_menu") && $addon->getConfig("include_menu") == "true")) {
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="index.php?d2u_helper=helper.css" />' . PHP_EOL;
 	}
 		
-	$helper_head_js = FALSE;
 	// Menu stuff in header
-	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true") {
-		$helper_head_js = TRUE;
-	}
-	if($helper_head_js) {
+	if($addon->hasConfig("include_menu") && $addon->getConfig("include_menu") == "true") {
 		$insert_head .= '<script type="text/javascript" src="index.php?position=head&d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 
@@ -112,15 +100,8 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 		$insert_body .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'?v=4.0.0"></script>' . PHP_EOL;
 	}
 
-	$helper_body_js = FALSE;
 	// Module stuff in body
-	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true") {
-		$module_manager = new D2UModuleManager(D2UModuleManager::getModules());
-		if($module_manager->getAutoJS() != "") {
-			$helper_body_js = TRUE;
-		}
-	}
-	if($helper_body_js) {
+	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true" && d2u_addon_frontend_helper::getModulesJS()) {
 		$insert_body .= '<script type="text/javascript" src="index.php?position=body&d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
@@ -175,49 +156,6 @@ function appendWiredMindseMetrics(rex_extension_point $ep) {
 		<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.9.2 END -->';
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
-}
-
-/**
- * Apply colors from settings
- * @param string $css CSS string
- * @return string replaced CSS
- */
-function applyColorToCSS($css) {
-	$d2u_helper = rex_addon::get('d2u_helper');
-
-	// Apply template color settings
-	$colors = ['navi_color_bg', 'navi_color_font', 'navi_color_hover_bg', 'navi_color_hover_font',
-		'subhead_color_bg', 'subhead_color_font',
-		'article_color_bg', 'article_color_h', 'article_color_box',
-		'footer_color_bg', 'footer_color_box'];
-	foreach($colors as $color) {
-		if($d2u_helper->hasConfig($color)) {
-			$css = str_replace($color, $d2u_helper->getConfig($color), $css);
-		}
-	}
-
-	return $css;
-}
-
-/**
- * Compresses string containing CSS
- * @param string $css CSS string
- * @return string compressed CSS
- */
-function compressCSS($css) {
-	$css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
-	$css = str_replace(array("\r\n","\r","\n","\t",'  ','    ','    '),'',$css);
-	$css = str_replace('{ ', '{', $css);
-	$css = str_replace(' }', '}', $css);
-	$css = str_replace('; ', ';', $css);
-	$css = str_replace(', ', ',', $css);
-	$css = str_replace(' {', '{', $css);
-	$css = str_replace('} ', '}', $css);
-	$css = str_replace(': ', ':', $css);
-	$css = str_replace(' ,', ',', $css);
-	$css = str_replace(' ;', ';', $css);
-	$css = str_replace(';}', '}', $css);
-	return $css;
 }
 
 /**
@@ -278,32 +216,17 @@ function sendD2UHelperCSS() {
 		$css = "";
 		// Module CSS
 		if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
-			$module_manager = new D2UModuleManager(D2UModuleManager::getModules());
-			$css .= $module_manager->getAutoCSS();
-/*
- * FIXME: Not working, because modules later are not loaded yet
-			// D2U Immo Modules
-			if(file_exists(rex_path::addon('d2u_immo', 'lib/d2u_immo_module_manager.php'))) {
-				// Not yet included FIXME: create cache file instead
-				require_once rex_path::addon('d2u_immo', 'lib/d2u_immo_module_manager.php');
-				$immo_module_manager = new D2UModuleManager(D2UImmoModules::getD2UImmoModules());
-				$css .= $immo_module_manager->getAutoCSS();
-			}
-			// D2U Machinery Modules
-			if(class_exists('D2UMachineryModules')) {
-				$immo_module_manager = new D2UModuleManager(D2UMachineryModules::getD2UMachineryModules());
-				$css .= $immo_module_manager->getAutoCSS();
-			}
-*/			
-			
+			$css .= d2u_addon_frontend_helper::getModulesCSS();
 		}
+		
 		// Menu CSS
 		if($d2u_helper->hasConfig("include_menu") && $d2u_helper->getConfig("include_menu") == "true") {
 			$css .= d2u_mobile_navi::getAutoCSS();
 		}
 
 		// Apply template settings and compress
-		print compressCSS(applyColorToCSS($css));
+		print d2u_addon_frontend_helper::prepareCSS($css);
+
 		exit;	
 }
 
@@ -318,8 +241,7 @@ function sendD2UHelperJS($position = "head") {
 		if($position == "body") {
 			// Module JS
 			if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
-				$module_manager = new D2UModuleManager(D2UModuleManager::getModules());
-				$js .= $module_manager->getAutoJS();
+				$js .= d2u_addon_frontend_helper::getModulesJS();
 			}
 		}
 		else if($position == "head") {
@@ -352,11 +274,9 @@ function sendD2UHelperTemplateCSS($d2u_template_id = "") {
 		if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media($d2u_helper->getConfig("custom_css")))) {
 				$css .= file_get_contents(rex_path::media($d2u_helper->getConfig("custom_css")));
 		}		
-		
-		// Apply template settings
-		$css = applyColorToCSS($css);
-		
-		// Compress
-		print compressCSS($css);
+
+		// Apply template settings and compress
+		print d2u_addon_frontend_helper::prepareCSS($css);
+
 		exit;	
 }

@@ -19,7 +19,7 @@ class D2UModuleManager {
 	 * @var string Folder within addon, in which modules can be found. Trailing
 	 * slash must be included.
 	 */
-	var $module_folder = "modules/";
+	var $module_folder = "";
 
 	/**
 	 * @var rex_addon Redaxo Addon module belongs to
@@ -71,7 +71,6 @@ class D2UModuleManager {
 	 * @param int $paired_module_id Redaxo module ID
 	 */
 	public function doActions($d2u_module_id, $function, $paired_module_id) {
-		$rex_modules = D2UModuleManager::getRexModules();
 		// Form actions
 		for($i = 0; $i < count($this->d2u_modules); $i++) {
 			$module = $this->d2u_modules[$i];
@@ -93,7 +92,7 @@ class D2UModuleManager {
 				}
 				else {
 					$success = $module->install($paired_module_id);
-					if($success && key_exists($module->getRedaxoId(), $rex_modules)) {
+					if($success && key_exists($module->getRedaxoId(), D2UModuleManager::getRexModules())) {
 						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_modules_installed'));
 					}
 					else {
@@ -202,7 +201,8 @@ class D2UModuleManager {
 	 * Get paired module ids. 
 	 * @param string $addon_key Redaxo addon key for filtering pairs. If missing,
 	 * pairs of all D2U addons are searched.
-	 * @return string[] Paired module ids. Key is Redaxo module id, value is D2U module id
+	 * @return string[] Paired module ids. Key is Redaxo module id, value is 
+	 * an array width D2U module id (named "d2u_id") and addon key (named "addon_key").
 	 */
 	public static function getModulePairs($addon_key = "") {
 		$paired_modules = [];
@@ -212,7 +212,10 @@ class D2UModuleManager {
 		$result_paired->setQuery($query_paired);
 		for($i = 0; $i < $result_paired->getRows(); $i++) {
 			$module_info = json_decode($result_paired->getValue("value"), TRUE);
-			$paired_modules[$module_info['rex_module_id']] = str_replace('module_', '', $result_paired->getValue("key"));
+			$paired_modules[$module_info['rex_module_id']] = [
+				'd2u_id' => str_replace('module_', '', $result_paired->getValue("key")),
+				'addon_key' => $result_paired->getValue("namespace"),
+			];
 			$result_paired->next();
 		}
 		return $paired_modules;
@@ -236,7 +239,7 @@ class D2UModuleManager {
 
 		if($unpaired_only) {
 			// Remove paired modules
-			foreach(D2UModuleManager::getModulePairs() as $rex_id => $d2u_id) {
+			foreach(array_keys(D2UModuleManager::getModulePairs()) as $rex_id) {
 				if(key_exists($rex_id, $rex_modules)) {
 					unset($rex_modules[$rex_id]);
 				}
@@ -340,6 +343,36 @@ class D2UModuleManager {
  */
 class D2UModule {
 	/**
+	 * CSS file name for modules.
+	 */
+	const MODULE_CSS_FILE = 'style.css';
+
+	/**
+	 * CSS file name for modules.
+	 */
+	const MODULE_JS_FILE = 'js.js';
+
+	/**
+	 * CSS file name for modules.
+	 */
+	const MODULE_INPUT = 'input.php';
+
+	/**
+	 * CSS file name for modules.
+	 */
+	const MODULE_INSTALL = 'install.php';
+
+	/**
+	 * CSS file name for modules.
+	 */
+	const MODULE_OUTPUT = 'output.php';
+
+	/**
+	 * CSS file name for modules.
+	 */
+	const MODULE_UNINSTALL = 'uninstall.php';
+
+	/**
 	 * @var int D2U Module ID
 	 */
 	private $d2u_module_id = "";
@@ -350,30 +383,20 @@ class D2UModule {
 	private $autoupdate = FALSE;
 
 	/**
-	 * @var string CSS file for the module
+	 * @var string Filename with module input including folder
 	 */
-	private $filename_css = "style.css";
-
-	/**
-	 * @var string Filename with module input
-	 */
-	private $filename_input = "input.php";
-
-	/**
-	 * @var string JS file for the module
-	 */
-	private $filename_js = "js.js";
+	private $filename_input = "";
 
 	/**
 	 * @var string Filename with module output
 	 */
-	private $filename_output = "output.php";
+	private $filename_output = "";
 	
 	/**
 	 * @var string Folder within addon, in which modules can be found. Trailing
 	 * slash must be included.
 	 */
-	private $module_folder = "modules/";
+	private $module_folder = "";
 
 	/**
 	 * @var string Modules title or name
@@ -406,7 +429,7 @@ class D2UModule {
 	public function __construct($d2u_module_id, $name, $revision) {
 		$this->d2u_module_id = $d2u_module_id;
 		$d2u_module_id_explode = explode("-", $this->d2u_module_id);
-		$this->module_folder .= $d2u_module_id_explode[0]."/". $d2u_module_id_explode[1] ."/";
+		$this->module_folder = D2UModuleManager::MODULE_FOLDER . $d2u_module_id_explode[0]."/". $d2u_module_id_explode[1] ."/";
 		$this->name = $name;
 		$this->revision = $revision;
 	}
@@ -432,8 +455,8 @@ class D2UModule {
 	 * @return string CSS
 	 */
 	public function getCSS() {
-		if($this->filename_css != "" && file_exists($this->module_folder . $this->filename_css)){
-			return file_get_contents($this->module_folder . $this->filename_css);
+		if(D2UModule::MODULE_CSS_FILE != "" && file_exists($this->module_folder . D2UModule::MODULE_CSS_FILE)){
+			return file_get_contents($this->module_folder . D2UModule::MODULE_CSS_FILE);
 		}
 		return "";
 	}
@@ -451,8 +474,8 @@ class D2UModule {
 	 * @return string JS
 	 */
 	public function getJS() {
-		if($this->filename_js != "" && file_exists($this->module_folder . $this->filename_js)){
-			return file_get_contents($this->module_folder . $this->filename_js);
+		if(D2UModule::MODULE_CSS_FILE != "" && file_exists($this->module_folder . D2UModule::MODULE_CSS_FILE)){
+			return file_get_contents($this->module_folder . D2UModule::MODULE_CSS_FILE);
 		}
 		return "";
 	}
@@ -506,8 +529,8 @@ class D2UModule {
 		// Set folders correctly
 		$d2u_module_id = explode("-", $this->d2u_module_id);
 		$this->module_folder = $module_folder . $d2u_module_id[0] ."/". $d2u_module_id[1] ."/";
-		$this->filename_input = $this->module_folder . $this->filename_input;
-		$this->filename_output = $this->module_folder . $this->filename_output;
+		$this->filename_input = $this->module_folder . D2UModule::MODULE_INPUT;
+		$this->filename_output = $this->module_folder . D2UModule::MODULE_OUTPUT;
 	}
 
 	/**
@@ -516,8 +539,8 @@ class D2UModule {
 	 * @return boolean TRUE if installed, otherwise FALSE
 	 */
 	public function install($rex_module_id = 0) {
-		if(file_exists($this->module_folder ."install.php")) {
-			$success = include $this->module_folder ."install.php";
+		if(file_exists($this->module_folder . D2UModule::MODULE_INSTALL)) {
+			$success = include $this->module_folder . D2UModule::MODULE_INSTALL;
 			if(!$success) {
 				return FALSE;
 			}
@@ -600,8 +623,8 @@ class D2UModule {
 		}
 
 		// uninstall action
-		if(file_exists($this->module_folder ."uninstall.php")) {
-			include $this->module_folder ."uninstall.php";
+		if(file_exists($this->module_folder . D2UModule::MODULE_UNINSTALL)) {
+			include $this->module_folder . D2UModule::MODULE_UNINSTALL;
 		}
 	}
 	

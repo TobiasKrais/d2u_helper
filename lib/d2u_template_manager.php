@@ -19,7 +19,7 @@ class D2UTemplateManager {
 	 * @var string Folder within addon, in which templates can be found. Trailing
 	 * slash must be included.
 	 */
-	var $template_folder = "templates/";
+	var $template_folder = "";
 
 	/**
 	 * @var rex_addon Redaxo Addon template belongs to
@@ -153,7 +153,8 @@ class D2UTemplateManager {
 	 * Get paired template ids. 
 	 * @param string $addon_key Redaxo addon key for filtering pairs. If missing,
 	 * pairs of all D2U addons are searched.
-	 * @return string[] Paired module ids. Key is Redaxo template id, value is D2U template id
+	 * @return string[] Paired template ids. Key is Redaxo template id, value is 
+	 * an array width D2U template id (named "d2u_id") and addon key (named "addon_key").
 	 */
 	public static function getTemplatePairs($addon_key = "") {
 		$paired_templates = [];
@@ -164,7 +165,10 @@ class D2UTemplateManager {
 		for($i = 0; $i < $result_paired->getRows(); $i++) {
 			$template_info = json_decode($result_paired->getValue("value"), TRUE);
 			if(is_array($template_info) && key_exists('rex_template_id', $template_info)) {
-				$paired_templates[$template_info['rex_template_id']] = str_replace('template_', '', $result_paired->getValue("key"));
+				$paired_templates[$template_info['rex_template_id']] =	[
+					'd2u_id' => str_replace('template_', '', $result_paired->getValue("key")),
+					'addon_key' => $result_paired->getValue("key"),
+				];
 			}
 			$result_paired->next();
 		}
@@ -189,7 +193,7 @@ class D2UTemplateManager {
 
 		if($unpaired_only) {
 			// Remove paired modules
-			foreach(D2UTemplateManager::getTemplatePairs() as $rex_id => $d2u_id) {
+			foreach(array_keys(D2UTemplateManager::getTemplatePairs()) as $rex_id) {
 				if(key_exists($rex_id, $rex_templates)) {
 					unset($rex_templates[$rex_id]);
 				}
@@ -288,6 +292,26 @@ class D2UTemplateManager {
  */
 class D2UTemplate {
 	/**
+	 * CSS file name for modules.
+	 */
+	const TEMPLATE_CSS_FILE = 'styles.css';
+
+	/**
+	 * CSS file name for modules.
+	 */
+	const TEMPLATE_FILE = 'template.php';
+
+	/**
+	 * CSS file name for modules.
+	 */
+	const TEMPLATE_INSTALL = 'install.php';
+
+	/**
+	 * CSS file name for modules.
+	 */
+	const TEMPLATE_UNINSTALL = 'uninstall.php';
+
+	/**
 	 * @var int D2U Template ID
 	 */
 	private $d2u_template_id = "";
@@ -355,8 +379,8 @@ class D2UTemplate {
 	 * @return string Template name
 	 */
 	public function getCSS() {
-		if(file_exists($this->template_folder ."styles.css")) {
-			return file_get_contents($this->template_folder ."styles.css");
+		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_CSS_FILE)) {
+			return file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_CSS_FILE);
 		}
 		else {
 			return "";
@@ -401,7 +425,7 @@ class D2UTemplate {
 	 * @param string Complete folder string, in which template files can be found.
 	 * Trailing slash must be included.
 	 */
-	public function initRedaxoContext($template_addon, $template_folder = "templates/") {
+	public function initRedaxoContext($template_addon, $template_folder) {
 		$this->rex_addon = $template_addon;
 		if($this->rex_addon->hasConfig("template_". $this->d2u_template_id)) {
 			$config = $this->rex_addon->getConfig("template_". $this->d2u_template_id);
@@ -427,8 +451,8 @@ class D2UTemplate {
 	 * @return boolean TRUE if installed, otherwise FALSE
 	 */
 	public function install($rex_template_id = 0) {
-		if(file_exists($this->template_folder ."install.php")) {
-			$success = include $this->template_folder ."install.php";
+		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_INSTALL)) {
+			$success = include $this->template_folder . D2UTemplate::TEMPLATE_INSTALL;
 			if(!$success) {
 				return FALSE;
 			}
@@ -441,7 +465,7 @@ class D2UTemplate {
 		$insertmod = rex_sql::factory();
 		$insertmod->setTable(\rex::getTablePrefix() . 'template');
         $insertmod->setValue('name', $this->d2u_template_id ." ". $this->name);
-		$insertmod->setValue('content', file_get_contents($this->template_folder ."template.php"));
+		$insertmod->setValue('content', file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_FILE));
 		$insertmod->setValue('active', 1);
 		$insertmod->setValue('revision', $this->revision);
 		if($this->rex_template_id == 0) {
@@ -512,8 +536,8 @@ class D2UTemplate {
 		}
 		
 		// template specific uninstall action
-		if(file_exists($this->template_folder ."install.php")) {
-			$success = include $this->template_folder ."install.php";
+		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_UNINSTALL)) {
+			$success = include $this->template_folder . D2UTemplate::TEMPLATE_UNINSTALL;
 			if(!$success) {
 				return FALSE;
 			}

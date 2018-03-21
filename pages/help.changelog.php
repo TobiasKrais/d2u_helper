@@ -8,6 +8,8 @@
 		</ul>
 		<p>1.3.3-DEV</p>
 		<ul>
+			<li>Wenn Modul CSS nachgeladen werden soll, wird es nicht nur für
+				Module des D2U Helper Addons nachgeladen, sondern von allen D2U Addons.</li>
 			<li>Bei Modulinstallation wird in der Zuordnungsliste nur noch Module
 				angezeigt, die keinem Modul - auch Zuordnungen aus anderen D2U Addons - zugeordnet sind.</li>
 			<li>Paarung von installierten Modulen / Templates kann wieder aufgehoben werden.</li>
