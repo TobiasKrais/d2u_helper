@@ -1,10 +1,6 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>Wunschliste nächste Versionen</p>
-		<ul>
-			<li>Interface für SEO Methoden.</li>
-		</ul>
 		<p>1.4.0-DEV</p>
 		<ul>
 			<li>Modul und JS Cache aktiviert.</li>
