@@ -341,7 +341,13 @@ class d2u_addon_backend_helper {
 			print '<select class="form-control" name="' . $fieldname . '" size=' . $size . $multiple_attr . '>';
 		}
 		foreach ($values as $key => $value) {
-			$selected = in_array($key, $selected_values) ? ' selected="selected"' : '';
+			$selected = '';
+			if(is_array($selected_values) && in_array($key, $selected_values)) {
+				$selected = ' selected="selected"';
+			}
+			else if($key == $selected_values) {
+				$selected = ' selected="selected"';
+			}
 			print '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
 		}
 		print '</select>';
