@@ -183,21 +183,23 @@ class d2u_addon_backend_helper {
 	 */
 	public static function form_input($message_id, $fieldname, $value, $required = FALSE, $readonly = FALSE, $type = "text") {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
-		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
-		print '<dd><input class="form-control" type="' . $type . '" name="' . $fieldname . '" value="' . $value . '"';
+		$label = '<label>' . rex_i18n::msg($message_id) . '</label>';
+		$input = '<input class="form-control" type="' . $type . '" name="' . $fieldname . '" value="' . $value . '"';
 		if ($required && $readonly !== TRUE) {
-			print ' required';
+			$input .= ' required';
 		}
 		if ($readonly) {
-			print ' readonly';
+			$input .= ' readonly';
 		}
 		if($type == "color" || $type == "number") {
-			print ' style="max-width: 150px;"';
+			$input .= ' style="max-width: 150px;"';
 		}
 		if($type == "date") {
-			print ' placeholder="Format: JJJJ-MM-TT"';
+			$input .= ' placeholder="Format: JJJJ-MM-TT"';
 		}
-		print '/></dd>';
+		$input .=  '/>';
+		print '<dt>'. ($type == "color" ? $input : $label) .'</dt>';
+		print '<dd>'. ($type == "color" ? $label : $input) .'</dd>';
 		print '</dl>';
 	}
 
