@@ -41,6 +41,9 @@ header {
 	}
 }
 @media screen and (max-width: 768px) {
+	header {
+		min-height: 150px;
+	}
 	#logo {
 		max-width: 60%;
 	}
@@ -125,7 +128,7 @@ article {
 	padding: 1em 0;
 }
 article a, article a:visited, article a:hover, #breadcrumbs a {
-	color: navi_color_bg;
+	color: article_color_h;
 }
 article a:hover {
 	text-decoration: underline;

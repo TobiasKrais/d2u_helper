@@ -28,7 +28,7 @@ article {
 	padding: 1em 0;
 }
 article a, article a:visited, article a:hover, article a:focus, #breadcrumbs a {
-	color: navi_color_bg;
+	color: article_color_h;
 }
 article a:hover {
 	text-decoration: underline;

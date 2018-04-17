@@ -169,67 +169,6 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 </head>
 
 <body>
-	<header>
-		<div class="container">
-			<?php
-				$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_02_2_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
-				if(count($slider_pics) > 0) {
-			?>
-			<div class="row d-print-none">
-				<div class="col-12">
-						<?php
-						if(count($slider_pics) == 1) {
-							print '<img src="index.php?rex_media_type=d2u_machinery_list_tile&rex_media_file='.
-								$slider_pics[0] .'" alt="" style="max-width:100%;">';
-						}
-						else if(count($slider_pics) > 1) {
-							// Slider
-							print '<div id="machineCarousel" class="carousel slide" data-ride="carousel" data-pause="hover">';
-
-							// Slider indicators
-							print '<ol class="carousel-indicators">';
-							for($i = 0; $i < count($slider_pics); $i++) {
-								print '<li data-target="#machineCarousel" data-slide-to="'. $i .'"';
-								if($i == 0) {
-									print 'class="active"';
-								}
-								print '></li>';
-							}
-							print '</ol>';
-
-							// Wrapper for slides
-							print '<div class="carousel-inner">';
-							for($i = 0; $i < count($slider_pics); $i++) {
-								print '<div class="carousel-item';
-								if($i == 0) {
-									print ' active';
-								}
-								print '">';
-								print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="">';
-								print '</div>';
-							}
-							print '</div>';
-
-							// Left and right controls
-							print '<a class="carousel-control-prev" href="#machineCarousel" role="button" data-slide="prev">';
-							print '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
-							print '<span class="sr-only">Previous</span>';
-							print '</a>';
-							print '<a class="carousel-control-next" href="#machineCarousel" role="button" data-slide="next">';
-							print '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
-							print '<span class="sr-only">Next</span>';
-							print '</a>';
-
-							print '</div>';
-						}
-					?>
-				</div>
-			</div>
-			<?php
-				}
-			?>
-		</div>
-	</header>
 	<nav>
 		<div class="container d-print-none navigation">
 			<div class="row">
@@ -269,6 +208,63 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 			</div>
 		</div>
 	</nav>
+	<header>
+			<?php
+				$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_02_2_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
+				if(count($slider_pics) > 0) {
+			?>
+			<div class="row d-print-none">
+						<?php
+						if(count($slider_pics) == 1) {
+							print '<img src="index.php?rex_media_type=d2u_machinery_list_tile&rex_media_file='.
+								$slider_pics[0] .'" alt="" style="max-width:100%;">';
+						}
+						else if(count($slider_pics) > 1) {
+							// Slider
+							print '<div id="headerCarousel" class="carousel carousel-fade slide" data-ride="carousel" data-pause="hover">';
+
+							// Slider indicators
+							print '<ol class="carousel-indicators">';
+							for($i = 0; $i < count($slider_pics); $i++) {
+								print '<li data-target="#headerCarousel" data-slide-to="'. $i .'"';
+								if($i == 0) {
+									print 'class="active"';
+								}
+								print '></li>';
+							}
+							print '</ol>';
+
+							// Wrapper for slides
+							print '<div class="carousel-inner">';
+							for($i = 0; $i < count($slider_pics); $i++) {
+								print '<div class="carousel-item';
+								if($i == 0) {
+									print ' active';
+								}
+								print '">';
+								print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="">';
+								print '</div>';
+							}
+							print '</div>';
+
+							// Left and right controls
+							print '<a class="carousel-control-prev" href="#headerCarousel" role="button" data-slide="prev">';
+							print '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+							print '<span class="sr-only">Previous</span>';
+							print '</a>';
+							print '<a class="carousel-control-next" href="#headerCarousel" role="button" data-slide="next">';
+							print '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+							print '<span class="sr-only">Next</span>';
+							print '</a>';
+
+							print '</div>';
+						}
+					?>
+				</div>
+			<?php
+				}
+			?>
+	</header>
 	<section id="breadcrumbs">
 		<div class="container subhead">
 			<div class="row">
@@ -277,7 +273,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 						<div class="col-12 d-print-none">
 							<?php
 								// Breadcrumbs
-								if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
+								if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs") && $current_article->getId() != rex_article::getSiteStartArticleId()) {
 									$startarticle = rex_article::get(rex_article::getSiteStartArticleId());
 									echo '<a href="' . $startarticle->getUrl() . '"><span class="fa-icon fa-home"></span></a>';
 									$path = $current_article->getPathAsArray();

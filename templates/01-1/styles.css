@@ -78,11 +78,8 @@ article {
 	font-family: 'Ubuntu', sans-serif;
 	padding: 1em 0;
 }
-article a, article a:visited, #breadcrumbs a {
-	color: #0c419d;
-}
-article a:hover {
-	color: #f00404;
+article a, article a:visited, article a:hover, article a:focus, #breadcrumbs a {
+	color: article_color_h;
 }
 article h1, article h2, article h3, article h4, article h5, article h6 {
 	color: article_color_h;
@@ -126,34 +123,4 @@ footer a:hover {
 .input-group-addon {
 	min-width: 150px;
 	padding: 0px !important;
-}
-
-/* Machinery Addon */
-.box {
-	background-color: article_color_h;
-	border: 1px solid article_color_h;
-	text-align: center;
-}
-.box div {
-	color: white;
-	padding: 5px;
-}
-.box img {
-	max-width: 100%;
-}
-.nav li a.active {
-	background: url("../assets/addons/d2u_machinery/icon_arrowTabs.svg") no-repeat 50% bottom;
-}
-.nav li, .nav li.active {
-	padding: 0 2em 0 0;
-}
-.nav li a, .nav li.active a {
-	font-weight: bold;
-	padding: 0 0 15px 0;
-}
-.subhead-nav {
-	margin-bottom: 11px;
-}
-.comparison-header {
-	padding: 0 15px;
 }

@@ -4,6 +4,7 @@
 		<p>1.4.1-DEV</p>
 		<ul>
 			<li>Bugfix: Falsche Fehlermeldung bei Templateinstallation entfernt.</li>
+			<li>Upgrade Bootstrap 4.1.0.</li>
 		</ul>
 		<p>1.4.0</p>
 		<ul>

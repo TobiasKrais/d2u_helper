@@ -1,6 +1,6 @@
 <?php
 /**
- * Rewrite scheme for www.kaltenbach.com
+ * Rewrite scheme allowing urls with russian, chinese or other letters
  */
 class d2u_yrewrite_scheme extends rex_yrewrite_scheme {
 	/**
