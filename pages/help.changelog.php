@@ -1,8 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.4.1-DEV</p>
+		<p>1.4.1</p>
 		<ul>
+			<li>CSS aus den Templates in die Module verlagert.</li>
+			<li>Anpassungen EU DSGVO für andere D2U Addon. Bitte Einstellungen anpassen.</li>
 			<li>Tempaltes: Navigation markiert aktuell ausgewähltes Element.</li>
 			<li>Bugfix: Falsche Fehlermeldung bei Templateinstallation entfernt.</li>
 			<li>Templates: Farbe Links der Überschrift angeglichen.</li>
