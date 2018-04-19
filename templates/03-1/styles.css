@@ -130,7 +130,6 @@ article .infobox .right img {
 	padding-bottom: 5px;
 }
 
-
 footer {
 	background-color: footer_color_bg;
 	color: white;
@@ -170,225 +169,18 @@ figure figcaption {
   border-radius: 0 0 3px 3px;
 }
 
-/* YForm Captcha */
+/* YForm */
 .input-group-addon {
 	min-width: 150px;
 	padding: 0px !important;
 }
-
-/* D2U Immo Addon */
-.tab-content {
-	border: 1px solid navi_color_bg;
-	margin-bottom: 1em;
-	padding: 1em
+.input-group-addon img {
+	height: 100%;
 }
-.tab-content ul {
-	margin-bottom: 0;
-	margin-left: -1.25em;
+.formcheckbox {
+    margin-bottom: 1rem;
 }
-.tab-content h1, .tab-content h2 {
-	font-size: 1.25em;
-	font-weight: bold;
-}
-
-.expose {
-	border-left: 1px solid navi_color_bg;
-	border-bottom: 1px solid navi_color_bg;
-	margin-bottom: 2em;
-	padding-left: 1em;
-}
-.expose a, .expose a:hover {
-	text-decoration: none;
-}
-.expose img {
-	margin-bottom: 1em;
-}
-
-.expose-navi {
-	padding-top: 2px;
-	padding-bottom: 1em;
-}
-.expose-navi ul {
-	padding-left: 0px;
-}
-.expose-navi li {
-	float: left;
-	list-style: none;
-	margin-bottom: 1em;
-	padding-right: 1em;
-}
-.expose-navi li a {
-    padding: 5px;
-}
-
-.nolink {
-	color: #3c3c3c;
-}
-
-.nav-item {
-	margin-right: 1px;
-}
-.nav-item a, .nav-item a:focus, .nav-item a:visited {
-    background-color: navi_color_font;
-	border-left: 1px solid navi_color_bg;
-	border-right: 1px solid navi_color_bg;
-	border-top: 1px solid navi_color_bg;
-	color: #3c3c3c;
-	font-size: 0.9em;
-	font-weight: bold;
-	padding: 0.3em 0.75em;
-}
-.nav-pills .nav-item .nav-link.active, .nav-item a:hover {
-    background-color: navi_color_bg;
-	color: navi_color_font;
-	text-decoration: none;
-}
-.nav-item a span.icon {
-	font-size: 1em;
-	font-weight: normal;
-}
-
-.energy-scale-container {
-	height: 35px;
-	margin-top: 10px;
-	position: relative;
-}
-.energy-scale {
-	min-width: 400px;
-}
-
-.icon {
-	color: #3c3c3c;
-	font-family: FontAwesome;
-	font-weight: normal;
-	line-height: 1em;
-}
-.back:before {
-	color: slategrey;
-	content: "\f060";
-}
-.forward:before {
-	content: "\f064";
-}
-.home:before {
-	content: "\f015";
-}
-.mail:before {
-	color: goldenrod;
-	content: "\f003";
-}
-.map:before {
-	content: "\f041";
-}
-.money:before {
-	content: "\f0d6";
-}
-.pdf:before {
-	color: darkred;
-	content: "\f1c1";
-}
-.pic:before {
-	content: "\f03e";
-}
-.print:before {
-	color: slategrey;
-	content: "\f02f";
-}
-.reload:before {
-	content: "\f0e2";
-}
-.request:before {
-	content: "\f29c";
-}
-.reserved {
-	position: relative;
-}
-.reserved span {
-    background-color: white;
-    bottom: 0px;
-    color: red;
-	font-weight: bold;
-    left: 0px;
-    opacity: 0.75;
-    padding: 0.5em 0;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-}
-.expose .reserved span {
-	padding-bottom: 1.5em;
-}
-	
-@media print {
-	body {
-		width: 950px;
-	}
-	
-	input {
-		border: none;
-	}
-	.listpic {
-		width: 50mm;
-	}
-	.overviewpic {
-		max-width: 80mm;
-	}
-	.page-break-avoid {
-		page-break-inside: avoid;
-	}
-	.print-border {
-		border-left: 0.5mm solid navi_color_bg;
-		margin-left: 15px;
-		padding-left: 2.8em !important;
-	}
-	.print-border-h {
-		border-left: 2em solid navi_color_bg;
-		margin-left: 15px;
-		margin-top: 0.75em;
-	}
-	.print-no-border {
-		margin-left: -15px;
-	}
-	.tab-content {
-		border: none;
-		padding: 0;
-	}
-	.col-6 ul {
-		margin-bottom: 0;
-	}
-}
-
-/* D2U Guestbook */
-.right {
-	text-align: right;
-}
-.entry-body {
-	padding: 0.25em 1em 2em 1em;
-}
-.entry-header {
-	background-color: article_color_box;
-	border-bottom: 1px solid navi_color_bg;
-	padding: 0.25em 1em;
-	width: 100%;
-}
-.recommendation-stars {
-	font-size: 1.5em;
-}
-a.recommendation:hover {
-	text-decoration: none;
-}
-.star-full:before {
-	color: gold;
-	content: "\f005";
-}
-.star-half:before {
-	color: gold;
-	content: "\f123";
-}
-.star-empty:before {
-	color: gold;
-	content: "\f006";
-}
-#tab_request icon {
-	cursor: pointer;
+.btn-primary {
+	background-color: article_color_h !important;
+	border: none !important;
 }

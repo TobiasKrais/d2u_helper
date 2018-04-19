@@ -63,7 +63,7 @@ nav {
 	border-bottom: solid 1px white;
 }
 nav a {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 .desktop-inner {
 	padding: 15px 20px;
@@ -80,6 +80,9 @@ nav a {
 }
 .dl-menuopen a:hover {
 	text-decoration: underline;
+}
+.desktop-navi.current, .desktop-navi li.current {
+	background: rgba(255, 255, 255, 0.25);
 }
 
 article {
@@ -145,10 +148,18 @@ footer a:hover {
 	margin: 0;
 }
 
+.btn-primary {
+	background-color: article_color_h !important;
+	border: none !important;
+}
+
 /* YForm Captcha */
 .input-group-addon {
 	min-width: 150px;
 	padding: 0px !important;
+}
+.input-group-addon img {
+	height: 100%;
 }
 
 /* Other stuff */

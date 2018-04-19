@@ -208,20 +208,46 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 			</div>
 		</div>
 	</nav>
+	<?php
+		$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_02_2_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
+		if(count($slider_pics) > 0) {
+	?>
 	<header>
+		<div id="background">
 			<?php
-				$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_02_2_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
-				if(count($slider_pics) > 0) {
-			?>
+				if(count($slider_pics) == 1) {
+					print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" style="max-width:100%;">';
+				}
+				else if(count($slider_pics) > 1) {
+					// Slider
+					print '<div id="headerCarouselbg" class="carousel carousel-fade slide carousel-sync" data-pause="false">';
+
+					// Wrapper for slides
+					print '<div class="carousel-inner">';
+					for($i = 0; $i < count($slider_pics); $i++) {
+						print '<div class="carousel-item';
+						if($i == 0) {
+							print ' active';
+						}
+						print '">';
+						print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="">';
+						print '</div>';
+					}
+					print '</div>';
+					print '</div>';
+				}
+			?>			
+		</div>
+		<div class="container">
 			<div class="row d-print-none">
-						<?php
+				<div class="col-12">
+					<?php
 						if(count($slider_pics) == 1) {
-							print '<img src="index.php?rex_media_type=d2u_machinery_list_tile&rex_media_file='.
-								$slider_pics[0] .'" alt="" style="max-width:100%;">';
+							print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" style="max-width:100%;">';
 						}
 						else if(count($slider_pics) > 1) {
 							// Slider
-							print '<div id="headerCarousel" class="carousel carousel-fade slide" data-ride="carousel" data-pause="hover">';
+							print '<div id="headerCarousel" class="carousel carousel-fade slide carousel-sync" data-ride="carousel" data-pause="false">';
 
 							// Slider indicators
 							print '<ol class="carousel-indicators">';
@@ -248,6 +274,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 							print '</div>';
 
 							// Left and right controls
+/*
 							print '<a class="carousel-control-prev" href="#headerCarousel" role="button" data-slide="prev">';
 							print '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
 							print '<span class="sr-only">Previous</span>';
@@ -256,15 +283,37 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 							print '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
 							print '<span class="sr-only">Next</span>';
 							print '</a>';
-
+*/
 							print '</div>';
 						}
 					?>
 				</div>
-			<?php
-				}
-			?>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function () {
+				// Sync sliders
+				jQuery('#headerCarousel').on('slide.bs.carousel', function() {
+					jQuery('#headerCarouselbg').carousel('next');
+				});
+
+				// Sync events
+				$('.carousel-sync').on('slide.bs.carousel', function(ev) {
+					// get the direction, based on the event which occurs
+					var dir = ev.direction == 'right' ? 'prev' : 'next';
+					// get synchronized non-sliding carousels, and make'em sliding
+					$('.carousel-sync').not('.sliding').addClass('sliding').carousel(dir);
+				});
+				$('.carousel-sync').on('slid.bs.carousel', function(ev) {
+					// remove .sliding class, to allow the next move
+					$('.carousel-sync').removeClass('sliding');
+				});
+			});
+		</script>
 	</header>
+	<?php
+		}
+	?>
 	<section id="breadcrumbs">
 		<div class="container subhead">
 			<div class="row">
@@ -377,16 +426,16 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 			</div>
 		</div>
 	</section>
-	<div class="container article">
-		<article>
+	<article>
+		<div class="container article">
 			<div class="row">
 				<?php
 					// Content follows
 					print $this->getArticle();
 				?>
 			</div>
-		</article>
-	</div>
+		</div>
+	</article>
 	<footer class="d-print-none">
 		<div class="container footer">
 			<div class="row">

@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.4.1-DEV</p>
 		<ul>
+			<li>Tempaltes: Navigation markiert aktuell ausgewähltes Element.</li>
 			<li>Bugfix: Falsche Fehlermeldung bei Templateinstallation entfernt.</li>
 			<li>Templates: Farbe Links der Überschrift angeglichen.</li>
 			<li>Backend: Farbwähler werden besser dargestellt.</li>

@@ -22,7 +22,30 @@ img
 	max-width: 100%;}
 .abstand
 	{margin: 1em 0;}
-	
+
+/* Navi */
+nav {
+	background-color: navi_color_bg;
+	border-bottom: solid 1px white;
+	font-size: 1.15em;
+}
+.navigation a {
+	text-decoration: none !important;
+}
+.desktop-inner {
+	font-weight: bold;
+	padding: 15px 20px;
+}
+.desktop-navi:hover div.desktop-inner, .desktop-navi div:hover, .desktop-navi a:hover {
+	color: navi_color_hover_font !important;
+	cursor: pointer;
+}
+.desktop-navi:hover {
+	background-color: navi_color_hover_bg !important;
+}
+.desktop-navi.current, .dl-menu li.current, .dl-menu li:hover {
+	background: rgba(255, 255, 255, 0.25);
+}
 #langchooser {
 	float: right;
 }
@@ -33,6 +56,24 @@ img
 	color: white;
 }
 
+/* Header*/
+header {
+	overflow: hidden;
+}
+#background {
+	position: absolute;
+	left: 0;
+	right: 0;
+	opacity: 0.4;
+	z-index: -1;
+
+	display: block;
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
+}
 #headerCarousel {
 	width: 100%;
 }
@@ -40,6 +81,7 @@ img
 	transition-duration: 3s !important
 }
 
+/* Subhead and Breadcrumbs */
 #breadcrumbs {
 	background-color: subhead_color_bg;
 }
@@ -98,26 +140,6 @@ h1.subhead {
 	padding: 0 0.6em;
 }
 
-nav {
-	background-color: navi_color_bg;
-	border-bottom: solid 1px white;
-	font-size: 1.15em;
-}
-.navigation a {
-	text-decoration: none;
-}
-.desktop-inner {
-	font-weight: bold;
-	padding: 15px 20px;
-}
-.desktop-navi:hover div.desktop-inner, .desktop-navi div:hover, .desktop-navi a:hover {
-	color: navi_color_hover_font !important;
-	cursor: pointer;
-}
-.desktop-navi:hover {
-	background-color: navi_color_hover_bg !important;
-}
-
 article, .article {
 	background-color: article_color_bg;
 	padding: 1em 0;
@@ -153,10 +175,18 @@ footer {
 	padding: 5px 1em;
 }
 
+.btn-primary {
+	background-color: article_color_h !important;
+	border: none !important;
+}
+
 /* YForm Captcha */
 .input-group-addon {
 	min-width: 150px;
 	padding: 0px !important;
+}
+.input-group-addon img {
+	height: 100%;
 }
 
 /* Machinery Addon */

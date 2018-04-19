@@ -34,6 +34,23 @@ d2u_helper_help_chapter_changelog = Changelog
 d2u_helper_help_chapter_readme = Readme
 d2u_helper_help_chapter_update = Update
 
+d2u_helper_lang_icon = Icon
+
+d2u_helper_lang_chinese = Chinese
+d2u_helper_lang_czech = Czech
+d2u_helper_lang_dutch = Dutch
+d2u_helper_lang_english = English
+d2u_helper_lang_french = French
+d2u_helper_lang_german = German
+d2u_helper_lang_italian = Italian
+d2u_helper_lang_polish = Polish
+d2u_helper_lang_portuguese = Portuguese
+d2u_helper_lang_russian = Russian
+d2u_helper_lang_slovak = Slovak
+d2u_helper_lang_spanish = Spanish
+d2u_helper_lang_replacements = Language replacements
+d2u_helper_lang_replacements_install = Use preset language replacements of following language:
+
 d2u_helper_metainfo_headerpic = Header picture
 
 d2u_helper_modules_d2u_module_name = D2U module name
@@ -55,6 +72,7 @@ d2u_helper_settings_wiredmetrics_costumerno = WiredMinds eMetrics ID (optional)
 d2u_helper_settings_article_color_bg = Article background color
 d2u_helper_settings_article_color_box = Article box background color
 d2u_helper_settings_article_color_h = Color article headings / links
+d2u_helper_settings_article_id_privacy_policy = Link Privacy Policy
 d2u_helper_settings_custom_css = Additional CSS
 d2u_helper_settings_editor = Most liked editor
 d2u_helper_settings_footer_color_bg = Footer background color
@@ -119,19 +137,4 @@ d2u_helper_translations_none = Only one language is installed. Translation helpe
 d2u_helper_translations_uptodate_missing = No translations missing.
 d2u_helper_translations_uptodate_update = All translations are up to date.
 
-d2u_helper_lang_icon = Icon
-
-d2u_helper_lang_chinese = Chinese
-d2u_helper_lang_czech = Czech
-d2u_helper_lang_dutch = Dutch
-d2u_helper_lang_english = English
-d2u_helper_lang_french = French
-d2u_helper_lang_german = German
-d2u_helper_lang_italian = Italian
-d2u_helper_lang_polish = Polish
-d2u_helper_lang_portuguese = Portuguese
-d2u_helper_lang_russian = Russian
-d2u_helper_lang_slovak = Slovak
-d2u_helper_lang_spanish = Spanish
-d2u_helper_lang_replacements = Language replacements
-d2u_helper_lang_replacements_install = Use preset language replacements of following language:
+d2u_helper_gdpr_warning = For making this addon EU GDPR compliant, you have to set your privacy policy article in D2U Helper Addons settings.

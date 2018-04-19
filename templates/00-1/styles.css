@@ -108,7 +108,7 @@ nav {
 	border-bottom: solid 1px white;
 }
 nav a {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 .desktop-inner {
 	font-weight: bold;
@@ -120,6 +120,9 @@ nav a {
 }
 .desktop-navi:hover {
 	background-color: navi_color_hover_bg !important;
+}
+.desktop-navi.current, .desktop-navi li.current {
+	background: rgba(255, 255, 255, 0.25);
 }
 
 article {
@@ -162,10 +165,18 @@ footer a:hover {
 	padding: 5px 1em;
 }
 
+.btn-primary {
+	background-color: article_color_h !important;
+	border: none !important;
+}
+
 /* YForm Captcha */
 .input-group-addon {
 	min-width: 150px;
 	padding: 0px !important;
+}
+.input-group-addon img {
+	height: 100%;
 }
 
 /* Machinery Addon */

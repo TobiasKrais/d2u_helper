@@ -160,6 +160,7 @@ class d2u_addon_backend_helper {
 		print '</dl>';
 	}
 
+
 	/**
 	 * Prints a row with an infotext
 	 * @param string $message_id rex_i18n message id for the info text.

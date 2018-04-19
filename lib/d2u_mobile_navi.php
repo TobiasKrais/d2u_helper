@@ -87,10 +87,11 @@ class d2u_mobile_navi {
 			$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $category->getId());
 			if(count($category->getChildren(true)) == 0 && !$has_machine_submenu) {
 				// Ohne Untermenü
-				print '<div class="desktop-navi"><a href="'. $category->getUrl() .'"><div class="desktop-inner">'. $category->getName() .'</div></a></div>';
+				print '<div class="desktop-navi'. (rex_article::getCurrentId() == $category->getId() ? ' current' : '') .'"><a href="'. $category->getUrl() .'"><div class="desktop-inner">'. $category->getName() .'</div></a></div>';
 			}
 			else {
-				print '<div id="dl-menu-'. $category->getId() .'" class="dl-menuwrapper desktop-navi">';
+				print '<div id="dl-menu-'. $category->getId() .'" class="dl-menuwrapper desktop-navi'.
+					(rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'">';
 				print '<div class="dl-trigger desktop-inner'. ($is_first ? ' first' : '') .'"><span class="has-children"></span>'. $category->getName() .'</div>';
 				print '<ul class="dl-menu">';
 				// Mit Untermenü
@@ -101,7 +102,7 @@ class d2u_mobile_navi {
 				foreach($category->getChildren(true) as $lev2) {
 					if(count($lev2->getChildren(true)) == 0) {
 						// Without Redaxo submenu
-						print '<li><a href="'. $lev2->getUrl() .'">'. $lev2->getName() .'</a></li>';
+						print '<li'. (rex_article::getCurrentId() == $lev2->getId() || in_array($lev2->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $lev2->getUrl() .'">'. $lev2->getName() .'</a></li>';
 					}
 					else {
 						// Mit Untermenü
@@ -160,7 +161,7 @@ class d2u_mobile_navi {
 		foreach(d2u_mobile_navi::getCategories($cat_parent_id) as $lev1) {
 			if(count($lev1->getChildren(true)) == 0) {
 				// Without Redaxo submenu
-				print '<li><a href="'. $lev1->getUrl() .'">'. $lev1->getName() .'</a></li>';
+				print '<li'. (rex_article::getCurrentId() == $lev1->getId() || in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'">'. $lev1->getName() .'</a></li>';
 			}
 			else {
 				// Mit Untermenü
@@ -183,18 +184,18 @@ class d2u_mobile_navi {
 	 * @param rex_category $rex_category Redaxo Kategorie
 	 */
 	private static function getResponsiveMultiLevelSubmenu($rex_category) {
-		print '<li><a href="'. $rex_category->getUrl() .'">'. $rex_category->getName() .'</a>';
+		print '<li'. (rex_article::getCurrentId() == $rex_category->getId() || in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'">'. $rex_category->getName() .'</a>';
 		print '<ul class="dl-submenu">';
 		print '<li class="dl-back"><a href="#">&nbsp;</a></li>';
 		print '<li><a href="'. $rex_category->getUrl() .'">'. strtoupper($rex_category->getName()) .'</a></li>';
-			if(rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_category->getId()) {
-				d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
-			}
+		if(rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_category->getId()) {
+			d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
+		}
 		foreach($rex_category->getChildren(true) as $rex_subcategory) {
 			$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_subcategory->getId());
 			if(count($rex_subcategory->getChildren(true)) == 0 && !$has_machine_submenu) {
 				// Without Redaxo submenu
-				print '<li><a href="'. $rex_subcategory->getUrl() .'">'. $rex_subcategory->getName() .'</a></li>';
+				print '<li'. (rex_article::getCurrentId() == $rex_subcategory->getId() || in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'">'. $rex_subcategory->getName() .'</a></li>';
 			}
 			else {
 				// Mit Untermenü
