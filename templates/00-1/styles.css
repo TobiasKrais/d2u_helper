@@ -138,6 +138,7 @@ article a:hover {
 }
 article h1, article h2, article h3, article h4, article h5, article h6 {
 	color: article_color_h;
+	margin-bottom: 1.5rem;
 	margin-top: 0;
 }
 article h1, article h2 {
@@ -196,7 +197,7 @@ footer a:hover {
 	background: url("../assets/addons/d2u_machinery/icon_arrowTabs.svg") no-repeat 50% bottom;
 }
 .nav li, .nav li.active {
-	padding: 0 2em 0 0;
+	padding: 0 1.5em 0 0;
 }
 .nav li a, .nav li.active a {
 	font-weight: bold;

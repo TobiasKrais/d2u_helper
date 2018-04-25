@@ -1,9 +1,9 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.4.2-DEV</p>
+		<p>1.4.2</p>
 		<ul>
-			<li></li>
+			<li>Impressum Link zu Einstellungen hinzugefügt.</li>
 		</ul>
 		<p>1.4.1</p>
 		<ul>

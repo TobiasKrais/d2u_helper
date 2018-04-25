@@ -12,7 +12,6 @@ body {
 	-o-hyphens: auto;
    	-ms-hyphens: auto;
 	-webkit-hyphens: auto;
-	font-family: Frutiger, Calibri, Arial, sans-serif !important;
 	hyphens: auto;
 }
 a, a:link, a:visited, a:hover
@@ -23,17 +22,27 @@ img
 .abstand
 	{margin: 1em 0;}
 
+nav, header, #breadcrumbs, article, footer {
+	font-family: Frutiger, Calibri, Arial, "Arial Unicode MS", sans-serif;
+}
+	
 /* Navi */
 nav {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
 	font-size: 1.15em;
 }
+.navi {
+	bottom: 0;
+	position: absolute;
+}
+.navigation {
+	padding-bottom: 1em;
+}
 .navigation a {
 	text-decoration: none !important;
 }
 .desktop-inner {
-	font-weight: bold;
 	padding: 15px 20px;
 }
 .desktop-navi:hover div.desktop-inner, .desktop-navi div:hover, .desktop-navi a:hover {
@@ -46,8 +55,16 @@ nav {
 .desktop-navi.current, .dl-menu li.current, .dl-menu li:hover {
 	background: rgba(255, 255, 255, 0.25);
 }
+.desktop-navi.current, .desktop-navi:hover {
+	border-bottom-color: navi_color_hover_bg !important;
+}
+.dl-menuwrapper .dl-menu.dl-menuopen {
+	font-size: 0.8em;
+}
 #langchooser {
-	float: right;
+	position: absolute;
+	right: 0;
+	bottom: 0;
 }
 #langchooser img {
 	margin: 0 10px 3px 0;
@@ -84,6 +101,7 @@ header {
 /* Subhead and Breadcrumbs */
 #breadcrumbs {
 	background-color: subhead_color_bg;
+	padding-top: 0.25em;
 }
 .subhead a {
 	color: subhead_color_font;
@@ -92,12 +110,8 @@ header {
 	text-decoration: underline;
 }
 h1.subhead {
-	padding: 0.5em 0;
-}
-@media screen and (min-width: 767px) and (max-width: 991px) {
-	h1.subhead {
-		font-size: 2em;
-	}
+	font-size: 2em;
+	padding: 0.25em 0;
 }
 @media screen and (max-width: 767px) {
 	h1.subhead {
@@ -114,12 +128,6 @@ h1.subhead {
 .fa-icon {
 	font-family: FontAwesome;
 }
-.fa-dropbox:before {
-	content: "\f16b";
-}
-.fa-envelope-o:before {
-	content: "\f003";
-}
 .fa-file-pdf-o:before {
 	color: #c60000;
 	content: "\f1c1";
@@ -133,9 +141,6 @@ h1.subhead {
 .fa-list-ul:before {
 	content: "\f0ca";
 }
-.fa-plus:before {
-	content: "\f067";
-}
 .nav-link span.fa-icon {
 	padding: 0 0.6em;
 }
@@ -143,6 +148,7 @@ h1.subhead {
 article, .article {
 	background-color: article_color_bg;
 	padding: 1em 0;
+	line-height: 1.25em;
 }
 article a, article a:visited, article a:hover {
 	color: article_color_h;
@@ -156,6 +162,9 @@ article h1, article h2, article h3, article h4, article h5, article h6 {
 }
 article h1, article h2 {
 	font-weight: bold;
+}
+article p, article ul {
+	margin-bottom: .5rem;
 }
 
 footer {
@@ -208,8 +217,12 @@ footer {
 .nav li, .nav li.active {
 	padding: 0 2em 0 0;
 }
+@media screen and (max-width: 991px) {
+	.nav li, .nav li.active {
+		padding: 0 1.5em 0 0;
+	}
+}
 .nav li a, .nav li.active a {
-	font-weight: bold;
 	padding: 0 0 15px 0;
 }
 .nav-link.active {

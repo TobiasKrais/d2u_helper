@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">Updatehinweise</div></header>
 	<div class="panel-body">
+		<p>1.4.2:</p>
+		<ul>
+			<li>Bitte den Artikel des Impressums in den Einstellungen hinterlegen.</li>
+		</ul>
 		<p>1.4.1:</p>
 		<ul>
 			<li>Bitte den Artikel der Datenschutzerklärung in den Einstellungen

@@ -6,6 +6,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	// Linkmap Link needs special treatment
 	$link_ids = filter_input_array(INPUT_POST, array('REX_INPUT_LINK'=> array('filter' => FILTER_VALIDATE_INT, 'flags' => FILTER_REQUIRE_ARRAY)));
 	$settings['article_id_privacy_policy'] = $link_ids["REX_INPUT_LINK"][1];
+	$settings['article_id_impress'] = $link_ids["REX_INPUT_LINK"][2];
 
 	// Special treatment for media fields
 	$input_media = (array) rex_post('REX_INPUT_MEDIA', 'array', []);
@@ -29,6 +30,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['include_menu'] = array_key_exists('include_menu', $settings);
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
+	$settings['template_02_2_header_slider_pics_full_width'] = array_key_exists('template_02_2_header_slider_pics_full_width', $settings);
 	
 	// Update URLs
 	if($settings['activate_rewrite_scheme'] == 'true') {
@@ -91,6 +93,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						}
 						
 						d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_privacy_policy', '1', $this->getConfig('article_id_privacy_policy'), rex_config::get("d2u_helper", "article_id_privacy_policy", rex_clang::getStartId()));
+						d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_impress', '2', $this->getConfig('article_id_impress'), rex_config::get("d2u_helper", "article_id_impress", rex_clang::getStartId()));
 					?>
 				</div>
 			</fieldset>
@@ -159,6 +162,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 									d2u_addon_backend_helper::form_select('d2u_helper_settings_template_02_1_navi_pos_text', 'settings[template_02_1_navi_pos]', $navi_pos_options, [$this->getConfig('template_02_1_navi_pos')]);
 								}
 								else if($d2u_template->getD2UId() === "02-2" && $d2u_template->isInstalled()) {
+									d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_02_2_slider_pics_width', 'settings[template_02_2_header_slider_pics_full_width]', 'full', $this->getConfig('template_02_2_header_slider_pics_full_width') == 'full');
 									foreach(rex_clang::getAll() as $rex_clang) {
 										print '<dl class="rex-form-group form-group" id="MEDIALIST_'. $rex_clang->getId() .'">';
 										print '<dt><label>' . rex_i18n::msg('d2u_helper_settings_template_02_2_slider_pics') .' - '. $rex_clang->getName() .'</label></dt>';
