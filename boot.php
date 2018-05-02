@@ -38,6 +38,13 @@ else {
 	rex_extension::register('CLANG_DELETED', 'rex_d2u_helper_clang_deleted');
 	rex_extension::register('MEDIA_IS_IN_USE', 'rex_d2u_helper_media_is_in_use');
 }
+if(rex_config::get("d2u_helper", "article_id_privacy_policy", 0) > 0 || rex_config::get("d2u_helper", "article_id_impress", 0) > 0) {
+	// Try to replace as last one, esp. after sprog calls OUTPUT_FILTER
+	rex_extension::register('PACKAGES_INCLUDED', function () {
+		rex_extension::register('OUTPUT_FILTER', 'replace_privacy_policy_links');
+	}, rex_extension::LATE);
+}
+
 
 /**
  * Adds Google Analytics stuff if Analytics ID is stored in settings
@@ -156,6 +163,24 @@ function appendWiredMindseMetrics(rex_extension_point $ep) {
 		<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.9.2 END -->';
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
+}
+
+/**
+ * Replaces +++LINK_PRIVACY_POLICY+++ and +++LINK_IMPRESS+++ with URLs
+ * for privacy policy an impress. The article ids are set in D2U Helper settings.
+ * @param rex_extension_point $ep Redaxo extension point
+ */
+function replace_privacy_policy_links(rex_extension_point $ep) {
+	$content = $ep->getSubject();
+
+	if(rex_config::get("d2u_helper", "article_id_privacy_policy", 0) > 0) {
+		$content = str_replace('+++LINK_PRIVACY_POLICY+++', rex_getUrl(rex_config::get("d2u_helper", "article_id_privacy_policy")), $content);
+	}
+	if(rex_config::get("d2u_helper", "article_id_impress", 0) > 0) {
+		$content = str_replace('+++LINK_IMPRESS+++', rex_getUrl(rex_config::get("d2u_helper", "article_id_impress")), $content);
+	}
+
+	$ep->setSubject($content);
 }
 
 /**

@@ -12,6 +12,7 @@ body {
 	-o-hyphens: auto;
    	-ms-hyphens: auto;
 	-webkit-hyphens: auto;
+	font-family: Arial;
 	hyphens: auto;
 }
 a, a:link, a:visited, a:hover
@@ -21,10 +22,6 @@ img
 	max-width: 100%;}
 .abstand
 	{margin: 1em 0;}
-
-nav, header, #breadcrumbs, article, footer {
-	font-family: Frutiger, Calibri, Arial, "Arial Unicode MS", sans-serif;
-}
 	
 /* Navi */
 nav {
@@ -165,6 +162,12 @@ article h1, article h2 {
 }
 article p, article ul {
 	margin-bottom: .5rem;
+}
+article label {
+	margin-bottom: 0;
+}
+article .form-group {
+	margin-bottom: 0.5rem;
 }
 
 footer {

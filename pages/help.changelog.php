@@ -1,6 +1,11 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.4.3-DEV</p>
+		<ul>
+			<li>+++LINK_PRIVACY_POLICY+++ wird durch den in den Einstellungen hinterlegten Artikellink per Outputfilter ersetzt.</li>
+			<li>+++LINK_IMPRESS+++ wird durch den in den Einstellungen hinterlegten Artikellink per Outputfilter ersetzt.</li>
+		</ul>
 		<p>1.4.2</p>
 		<ul>
 			<li>Impressum Link zu Einstellungen hinzugefügt.</li>

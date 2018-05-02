@@ -122,7 +122,7 @@ else {
 		<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_immo'); ?></div></header>
 		<div class="panel-body">
 			<fieldset>
-				<legend><small><i class="rex-icon rex-icon-open-category"></i></small> <?php echo rex_i18n::msg('d2u_immo_categories'); ?></legend>
+				<legend><small><i class="rex-icon rex-icon-open-category"></i></small> <?php echo rex_i18n::msg('d2u_helper_categories'); ?></legend>
 				<div class="panel-body-wrapper slide">
 				<?php
 					if(count($categories) > 0) {
@@ -194,7 +194,7 @@ else {
 		<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_jobs'); ?></div></header>
 		<div class="panel-body">
 			<fieldset>
-				<legend><small><i class="rex-icon rex-icon-open-category"></i></small> <?php echo rex_i18n::msg('d2u_jobs_categories'); ?></legend>
+				<legend><small><i class="rex-icon rex-icon-open-category"></i></small> <?php echo rex_i18n::msg('d2u_helper_category'); ?></legend>
 				<div class="panel-body-wrapper slide">
 				<?php
 					if(count($categories) > 0) {
@@ -269,7 +269,7 @@ else {
 		<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_machinery_meta_title'); ?></div></header>
 		<div class="panel-body">
 			<fieldset>
-				<legend><small><i class="rex-icon rex-icon-open-category"></i></small> <?php echo rex_i18n::msg('d2u_machinery_meta_categories'); ?></legend>
+				<legend><small><i class="rex-icon rex-icon-open-category"></i></small> <?php echo rex_i18n::msg('d2u_helper_categories'); ?></legend>
 				<div class="panel-body-wrapper slide">
 				<?php
 					if(count($categories) > 0) {
