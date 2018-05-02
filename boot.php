@@ -33,18 +33,18 @@ if(!\rex::isBackend()) {
 	rex_extension::register('OUTPUT_FILTER', 'appendToPageD2UHelperFiles');
 	rex_extension::register('OUTPUT_FILTER', 'appendGoogleAnalytics');
 	rex_extension::register('OUTPUT_FILTER', 'appendWiredMindseMetrics');
+	
+	if(rex_config::get("d2u_helper", "article_id_privacy_policy", 0) > 0 || rex_config::get("d2u_helper", "article_id_impress", 0) > 0) {
+		// Try to replace as last one, esp. after sprog calls OUTPUT_FILTER
+		rex_extension::register('PACKAGES_INCLUDED', function () {
+			rex_extension::register('OUTPUT_FILTER', 'replace_privacy_policy_links');
+		}, rex_extension::LATE);
+	}
 }
 else {
 	rex_extension::register('CLANG_DELETED', 'rex_d2u_helper_clang_deleted');
 	rex_extension::register('MEDIA_IS_IN_USE', 'rex_d2u_helper_media_is_in_use');
 }
-if(rex_config::get("d2u_helper", "article_id_privacy_policy", 0) > 0 || rex_config::get("d2u_helper", "article_id_impress", 0) > 0) {
-	// Try to replace as last one, esp. after sprog calls OUTPUT_FILTER
-	rex_extension::register('PACKAGES_INCLUDED', function () {
-		rex_extension::register('OUTPUT_FILTER', 'replace_privacy_policy_links');
-	}, rex_extension::LATE);
-}
-
 
 /**
  * Adds Google Analytics stuff if Analytics ID is stored in settings

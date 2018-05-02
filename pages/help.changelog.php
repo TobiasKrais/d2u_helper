@@ -1,8 +1,13 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.4.3-DEV</p>
+		<p>1.4.4</p>
 		<ul>
+			<li>Anpassungen an D2U News Version >= 1.1.0 (Namespace hinzugefügt).</li>
+		</ul>
+		<p>1.4.3</p>
+		<ul>
+			<li>Übersetzungen für Name und Kategorie aus anderen Addons in dieses Addon verschoben.</li>
 			<li>+++LINK_PRIVACY_POLICY+++ wird durch den in den Einstellungen hinterlegten Artikellink per Outputfilter ersetzt.</li>
 			<li>+++LINK_IMPRESS+++ wird durch den in den Einstellungen hinterlegten Artikellink per Outputfilter ersetzt.</li>
 		</ul>

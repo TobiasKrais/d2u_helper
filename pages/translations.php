@@ -675,11 +675,29 @@ else {
 	}
 	
 	if(rex_addon::get('d2u_news')->isAvailable()) {
-		$news = News::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+		$news = \D2U_News\News::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+		$news_categories = \D2U_News\Category::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_news'); ?></div></header>
 		<div class="panel-body">
+			<fieldset>
+				<legend><small><i class="rex-icon rex-icon-open-category"></i></small> <?php echo rex_i18n::msg('d2u_helper_categories'); ?></legend>
+				<div class="panel-body-wrapper slide">
+				<?php
+					if(count($news_categories) > 0) {
+						print '<ul>';
+						foreach($news_categories as $current_news_category) {
+							print '<li><a href="'. rex_url::backendPage('d2u_news/news', ['entry_id' => $current_news_category->category_id, 'func' => 'edit']) .'">'. $current_news_category->name .'</a></li>';
+						}
+						print '</ul>';
+					}
+					else {
+						print $_SESSION['d2u_helper_translation']['filter'] == 'update' ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+					}
+				?>
+				</div>
+			</fieldset>
 			<fieldset>
 				<legend><small><i class="rex-icon fa-newspaper-o"></i></small> <?php echo rex_i18n::msg('d2u_news_news_title'); ?></legend>
 				<div class="panel-body-wrapper slide">
@@ -697,6 +715,31 @@ else {
 				?>
 				</div>
 			</fieldset>
+			<?php
+				if(rex_plugin::get('d2u_news', 'news_types')->isAvailable()) {
+					$news_types = \D2U_News\Type::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+			?>
+			<br>
+			<fieldset>
+				<legend><small><i class="rex-icon fa-file-text-o"></i></small> <?php echo rex_i18n::msg('d2u_news_types'); ?></legend>
+				<div class="panel-body-wrapper slide">
+				<?php
+					if(count($news_types) > 0) {
+						print '<ul>';
+						foreach($news_types as $news_type) {
+							print '<li><a href="'. rex_url::backendPage('d2u_news/news_types', ['entry_id' => $news_type->type_id, 'func' => 'edit']) .'">'. $news_type->name .'</a></li>';
+						}
+						print '</ul>';
+					}
+					else {
+						print $_SESSION['d2u_helper_translation']['filter'] == 'update' ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+					}
+				?>
+				</div>
+			</fieldset>
+			<?php
+				}
+			?>
 		</div>
 	</div>
 <?php
@@ -776,7 +819,7 @@ else {
 <?php
 	}
 	
-print d2u_addon_backend_helper::getCSS();
-print d2u_addon_backend_helper::getJS();
-print d2u_addon_backend_helper::getJSOpenAll();
+	print d2u_addon_backend_helper::getCSS();
+	print d2u_addon_backend_helper::getJS();
+	print d2u_addon_backend_helper::getJSOpenAll();
 }
