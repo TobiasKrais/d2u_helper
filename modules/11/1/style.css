@@ -1,0 +1,9 @@
+.input-group-btn:last-child > .btn {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.btn-default {
+	background-color: article_color_h;
+	border: 1px solid article_color_h;
+	color: article_color_bg;
+}

@@ -4,6 +4,8 @@
 		<p>1.4.4</p>
 		<ul>
 			<li>Anpassungen an D2U News Version >= 1.1.0 (Namespace hinzugefügt).</li>
+			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)" hinzugefügt.</li>
+			<li>Bootstrap 4.1.1 upgrade.</li>
 		</ul>
 		<p>1.4.3</p>
 		<ul>

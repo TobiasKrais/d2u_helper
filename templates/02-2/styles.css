@@ -64,10 +64,13 @@ nav {
 	bottom: 0;
 }
 #langchooser img {
-	margin: 0 10px 3px 0;
+	margin: 0 10px 12px 0;
 }
 #langchooser a {
 	color: white;
+}
+#mobile-menu {
+	margin-bottom: 15px;
 }
 
 /* Header*/
@@ -117,7 +120,7 @@ h1.subhead {
 }
 #logo {
 	float: right;
-	padding: 0.5em 0;
+	padding: 0.5em 0 25px;
 }
 .subhead, .subhead a, .subhead a:hover {
 	color: subhead_color_font;

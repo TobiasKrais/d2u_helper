@@ -139,3 +139,8 @@ if (!$this->hasConfig('editor')) {
 		$this->setConfig('editor', 'tinymce4');
 	}
 }
+
+// Update translations
+if ($this->hasConfig('lang_replacements_install', 'false') == 'true') {
+	d2u_helper_lang_helper::factory()->install();
+}

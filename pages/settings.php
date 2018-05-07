@@ -31,6 +31,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
 	$settings['template_02_2_header_slider_pics_full_width'] = array_key_exists('template_02_2_header_slider_pics_full_width', $settings);
+	$settings['lang_replacements_install'] = array_key_exists('lang_replacements_install', $settings);
 	
 	// Update URLs
 	if($settings['activate_rewrite_scheme'] == 'true') {
@@ -50,6 +51,19 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 
 	// Save settings
 	if(rex_config::set("d2u_helper", $settings)) {
+		// Install / update language replacements
+		if(rex_addon::get('sprog')->isAvailable()) {
+			if($settings['lang_replacements_install']) {
+				d2u_helper_lang_helper::factory()->install();
+			}
+			else {
+				d2u_helper_lang_helper::factory()->uninstall();
+			}
+		}
+		else {
+			echo rex_view::error(rex_i18n::msg('d2u_helper_settings_install_sprog'));
+		}
+
 		echo rex_view::success(rex_i18n::msg('form_saved'));
 	}
 	else {
@@ -234,6 +248,30 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_analytics_analytics', 'settings[google_analytics]', $this->getConfig('google_analytics'), FALSE, FALSE, "text");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_analytics_maps_key', 'settings[maps_key]', $this->getConfig('maps_key'), FALSE, FALSE, "text");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_wiredmetrics_costumerno', 'settings[emetrics_customno]', $this->getConfig('emetrics_customno'), FALSE, FALSE, "text");
+					?>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend><small><i class="rex-icon rex-icon-language"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_lang_replacements'); ?></legend>
+				<div class="panel-body-wrapper slide">
+					<?php
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_lang_install', 'settings[lang_replacements_install]', 'true', $this->getConfig('lang_replacements_install') == 'true');
+						foreach(rex_clang::getAll() as $rex_clang) {
+							print '<dl class="rex-form-group form-group">';
+							print '<dt><label>'. $rex_clang->getName() .'</label></dt>';
+							print '<dd>';
+							print '<select class="form-control" name="settings[lang_replacement_'. $rex_clang->getId() .']">';
+							$replacement_options = [
+								'd2u_helper_lang_english' => 'english',
+								'd2u_helper_lang_german' => 'german',
+							];
+							foreach($replacement_options as $key => $value) {
+								$selected = $value == $this->getConfig('lang_replacement_'. $rex_clang->getId(), 'none') ? ' selected="selected"' : '';
+								print '<option value="'. $value .'"'. $selected .'>'. rex_i18n::msg('d2u_helper_lang_replacements_install') .' '. rex_i18n::msg($key) .'</option>';
+							}
+							print '</select>';
+							print '</dl>';
+						}
 					?>
 				</div>
 			</fieldset>

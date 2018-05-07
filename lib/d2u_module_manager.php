@@ -181,6 +181,9 @@ class D2UModuleManager {
 		$modules[] = new D2UModule("10-3",
 			"Box mit Download",
 			2);
+		$modules[] = new D2UModule("11-1",
+			"YForm Kontaktformular (DSGVO kompatibel)",
+			1);
 		// 20-x reserved for D2U Addresss
 		// 21-x reserved for D2U History
 		// 22-x reserved for D2U Staff
