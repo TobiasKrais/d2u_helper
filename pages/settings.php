@@ -60,7 +60,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				d2u_helper_lang_helper::factory()->uninstall();
 			}
 		}
-		else {
+		else if ($settings['lang_replacements_install']) {
 			echo rex_view::error(rex_i18n::msg('d2u_helper_settings_install_sprog'));
 		}
 
@@ -263,7 +263,10 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							print '<select class="form-control" name="settings[lang_replacement_'. $rex_clang->getId() .']">';
 							$replacement_options = [
 								'd2u_helper_lang_english' => 'english',
+								'd2u_helper_lang_french' => 'french',
 								'd2u_helper_lang_german' => 'german',
+								'd2u_helper_lang_russian' => 'russian',
+								'd2u_helper_lang_chinese' => 'chinese',
 							];
 							foreach($replacement_options as $key => $value) {
 								$selected = $value == $this->getConfig('lang_replacement_'. $rex_clang->getId(), 'none') ? ' selected="selected"' : '';

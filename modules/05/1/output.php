@@ -83,7 +83,7 @@ else if($link_type == "d2u_immo_property") {
 }
 else { // Backward compatibility module Version <= 3
 	$article_id = "REX_LINK[1]";
-	if($article_id > 0) {
+	if($article_id > 0 && rex_article::get($article_id) instanceof rex_article) {
 		if(\rex::isBackend()) {
 			print "Weiterleitung zu Artikel <a href='". rex_url::backendPage('content/edit', array('article_id'=>$article_id)) ."'>"
 			. rex_article::get($article_id)->getValue('name') ." (Artikel ID ". $article_id .")</a>";

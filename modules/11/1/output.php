@@ -15,9 +15,15 @@
 			}
 		}
 	}
+	
+	$offset_lg_cols = intval("REX_VALUE[17]");
+	$offset_lg = "";
+	if($offset_lg_cols > 0) {
+		$offset_lg = " mr-lg-auto ml-lg-auto ";
+	}
 ?>
 
-<div class="col-sm-12 col-md-8">
+<div class="col-sm-12 col-md-8 <?php print $offset_lg; ?>">
 <?php
 	$ask_address = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
 
@@ -45,7 +51,7 @@
 		validate|email|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_email') .'
 		validate|empty|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_message') .'
 		validate|empty|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_privacy_policy') .'
-		validate|customfunction|validate_timer|yform_validate_timer|10|'.\Sprog\Wildcard::get('d2u_helper_module_11_validate_spambots') .'|';
+		validate|customfunction|validate_timer|yform_validate_timer|9|'.\Sprog\Wildcard::get('d2u_helper_module_11_validate_spambots') .'|';
 
 	$yform = new rex_yform();
 	$yform->setFormData(trim($form_data));
