@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.4.6-DEV</p>
+		<ul>
+			<li>Module Autoupdate Fehler behoben.</li>
+		</ul>
 		<p>1.4.5</p>
 		<ul>
 			<li>Modul 11-1 Kontaktformular: Hinweis zum Datenschutz jetzt optional.</li>

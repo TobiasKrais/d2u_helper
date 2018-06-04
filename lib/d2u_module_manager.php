@@ -396,16 +396,6 @@ class D2UModule {
 	private $autoupdate = FALSE;
 
 	/**
-	 * @var string Filename with module input including folder
-	 */
-	private $filename_input = "";
-
-	/**
-	 * @var string Filename with module output
-	 */
-	private $filename_output = "";
-	
-	/**
 	 * @var string Folder within addon, in which modules can be found. Trailing
 	 * slash must be included.
 	 */
@@ -542,8 +532,6 @@ class D2UModule {
 		// Set folders correctly
 		$d2u_module_id = explode("-", $this->d2u_module_id);
 		$this->module_folder = $module_folder . $d2u_module_id[0] ."/". $d2u_module_id[1] ."/";
-		$this->filename_input = $this->module_folder . D2UModule::MODULE_INPUT;
-		$this->filename_output = $this->module_folder . D2UModule::MODULE_OUTPUT;
 	}
 
 	/**
@@ -555,6 +543,7 @@ class D2UModule {
 		if(file_exists($this->module_folder . D2UModule::MODULE_INSTALL)) {
 			$success = include $this->module_folder . D2UModule::MODULE_INSTALL;
 			if(!$success) {
+print "Module ". $this->d2u_module_id ." ". $this->name ." <b>nicht aktualisiert</b>.<br>";
 				return FALSE;
 			}
 		}
@@ -566,8 +555,8 @@ class D2UModule {
 		$insertmod = rex_sql::factory();
 		$insertmod->setTable(\rex::getTablePrefix() . 'module');
         $insertmod->setValue('name', $this->d2u_module_id ." ". $this->name);
-		$insertmod->setValue('input', file_get_contents($this->filename_input));
-		$insertmod->setValue('output', file_get_contents($this->filename_output));
+		$insertmod->setValue('input', file_get_contents($this->module_folder . D2UModule::MODULE_INPUT));
+		$insertmod->setValue('output', file_get_contents($this->module_folder . D2UModule::MODULE_OUTPUT));
 		$insertmod->setValue('revision', $this->revision);
 		if($this->rex_module_id == 0) {
 			$insertmod->addGlobalCreateFields();
@@ -579,7 +568,7 @@ class D2UModule {
 			$insertmod->setWhere(['id' => $this->rex_module_id]);
 			$insertmod->update();
 		}
-		
+print "Module ". $this->d2u_module_id ." ". $this->name ." <b>aktualisiert</b>.<br>";
 		// save pairing in config
 		$this->setConfig();
 		
