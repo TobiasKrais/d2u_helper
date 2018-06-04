@@ -20,8 +20,9 @@ a, a:link, a:visited, a:hover
 img
 	{border: 0px;
 	max-width: 100%;}
-.abstand
-	{margin: 1em 0;}
+.abstand {
+	margin-bottom: 1em;
+}
 	
 /* Navi */
 nav {
@@ -188,6 +189,9 @@ footer {
 	background-color: footer_color_box;
 	margin-bottom: 1em;
 	padding: 5px 1em;
+}
+#logo-footer {
+	float: right;
 }
 
 .btn-primary {

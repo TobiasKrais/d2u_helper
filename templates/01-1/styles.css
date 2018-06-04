@@ -78,7 +78,7 @@ nav a {
 
 article {
 	background-color: article_color_bg;
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Arial', sans-serif;
 	padding: 1em 0;
 }
 article a, article a:visited, article a:hover, article a:focus, #breadcrumbs a {
@@ -102,11 +102,11 @@ article h3 {
 }
 
 section {
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Arial', sans-serif;
 }
 footer {
 	background-color: footer_color_bg;
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Arial', sans-serif;
 	padding: 1em 1em 0 1em;
 }
 footer a {

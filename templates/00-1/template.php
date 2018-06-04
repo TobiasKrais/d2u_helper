@@ -159,7 +159,6 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 		echo $alternate .PHP_EOL;
 		echo $canonical .PHP_EOL;
 	?>
-	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<link rel="stylesheet" href="index.php?template_id=00-1&d2u_helper=template.css">
 	<?php
 		if(file_exists(rex_path::media('favicon.ico'))) {

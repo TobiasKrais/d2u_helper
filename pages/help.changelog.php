@@ -5,6 +5,7 @@
 		<ul>
 			<li>Modul 05-1 Artikelweiterleitung: Bugfix wenn Artikel auf den weitergeleitet werden soll gelöscht wurde.</li>
 			<li>Übersetzung für Modul 11-1 in Französisch, Russisch und Chinesisch hinzugefügt.</li>
+			<li>Google Fonts aus Templates entfernt um Abmahnungen zu verhindern.</li>
 		</ul>
 		<p>1.4.4</p>
 		<ul>

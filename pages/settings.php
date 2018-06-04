@@ -15,6 +15,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['template_logo'] = $input_media['template_logo'];
 	$settings['template_print_header_pic'] = isset($input_media['template_print_header_pic']) ? $input_media['template_print_header_pic'] : '';
 	$settings['template_print_footer_pic'] = isset($input_media['template_print_footer_pic']) ? $input_media['template_print_footer_pic'] : '';
+	$settings['template_02_2_facebook_icon'] = isset($input_media['template_02_2_facebook_icon']) ? $input_media['template_02_2_facebook_icon'] : '';
 	$settings['template_03_2_header_pic'] = isset($input_media['template_03_2_header_pic']) ? $input_media['template_03_2_header_pic'] : '';
 	$settings['template_03_2_footer_pic'] = isset($input_media['template_03_2_footer_pic']) ? $input_media['template_03_2_footer_pic'] : '';
 
@@ -195,6 +196,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 										print '</div><div class="rex-js-media-preview"></div></dd>';
 										print '</dl>';
 									}
+									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_2_facebook_link', 'settings[template_02_2_facebook_link]', $this->getConfig('template_02_2_facebook_link'), FALSE, FALSE);
+									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_02_2_facebook_icon', 'template_02_2_facebook_icon', $this->getConfig('template_02_2_facebook_icon'));
 								}
 								else if($d2u_template->getD2UId() === "03-1" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_1_print_header_pic', 'template_print_header_pic', $this->getConfig('template_print_header_pic'));

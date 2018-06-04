@@ -113,13 +113,13 @@ class D2UTemplateManager {
 		$d2u_templates = [];
 		$d2u_templates[] = new D2UTemplate("00-1",
 			"Big Header Template",
-			6);
+			7);
 		$d2u_templates[] = new D2UTemplate("01-1",
 			"Side Picture Template",
-			2);
+			3);
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
-			3);
+			4);
 		$d2u_templates[] = new D2UTemplate("02-2",
 			"Header Slider Template",
 			1);
