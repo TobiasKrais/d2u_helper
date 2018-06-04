@@ -1,11 +1,12 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.4.5-DEV</p>
+		<p>1.4.5</p>
 		<ul>
+			<li>Modul 11-1 Kontaktformular: Hinweis zum Datenschutz jetzt optional.</li>
 			<li>Modul 05-1 Artikelweiterleitung: Bugfix wenn Artikel auf den weitergeleitet werden soll gelöscht wurde.</li>
 			<li>Übersetzung für Modul 11-1 in Französisch, Russisch und Chinesisch hinzugefügt.</li>
-			<li>Google Fonts aus Templates entfernt um Abmahnungen zu verhindern.</li>
+			<li>Google Fonts aus Templates entfernt (nachladen von Fonts ohne vorherige Zustimmung wurde abgemahnt).</li>
 		</ul>
 		<p>1.4.4</p>
 		<ul>

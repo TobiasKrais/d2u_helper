@@ -26,6 +26,7 @@
 <div class="col-sm-12 col-md-8 <?php print $offset_lg; ?>">
 <?php
 	$ask_address = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
+	$show_gdpr_hint = "REX_VALUE[3]" == 'true' ? TRUE : FALSE;
 
 	// Form
 	$form_data = 'text|name|'. \Sprog\Wildcard::get('d2u_helper_module_11_name') .' *'. PHP_EOL;
@@ -36,10 +37,11 @@
 	}
 	$form_data .= 'text|phone|'. \Sprog\Wildcard::get('d2u_helper_module_11_phone') .' *
 		text|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_email') .' *
-		textarea|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_message') .'
-		checkbox|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_privacy_policy') .' *|no,yes|no
-
-		html||<br>* '. \Sprog\Wildcard::get('d2u_helper_module_11_required') .'<br><br>
+		textarea|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_message') . PHP_EOL;
+	if($show_gdpr_hint) {
+		$form_data .= 'checkbox|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_privacy_policy') .' *|no,yes|no' . PHP_EOL;
+	}
+	$form_data .= 'html||<br>* '. \Sprog\Wildcard::get('d2u_helper_module_11_required') .'<br><br>
 		php|validate_timer|Spamprotection|<input name="validate_timer" type="hidden" value="'. microtime(true) .'" />|
 		captcha|'. \Sprog\Wildcard::get('d2u_helper_module_11_captcha') .'|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_captcha') .'|'. rex_getUrl(rex_article::getCurrentId()) .'
 
@@ -50,8 +52,10 @@
 		validate|empty|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_email') .'
 		validate|email|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_email') .'
 		validate|empty|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_message') .'
-		validate|empty|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_privacy_policy') .'
 		validate|customfunction|validate_timer|yform_validate_timer|9|'.\Sprog\Wildcard::get('d2u_helper_module_11_validate_spambots') .'|';
+	if($show_gdpr_hint) {
+		$form_data .= 'validate|empty|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_privacy_policy') . PHP_EOL;
+	}
 
 	$yform = new rex_yform();
 	$yform->setFormData(trim($form_data));
