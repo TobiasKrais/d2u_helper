@@ -101,7 +101,11 @@ class D2UTemplateManager {
 				}
 				break;
 			}
-		}		
+		}
+
+		// Save before cache deletion (https://github.com/RexDude/xcore/issues/237)
+		rex_config::save();
+
 		rex_delete_cache();
 	}
 	
@@ -557,7 +561,7 @@ class D2UTemplate {
 		else {
 			$params["autoupdate"] = "inactive";
 		}
-		$this->rex_addon->setConfig("template_". $this->d2u_template_id, $params);
+		rex_addon::get("d2u_helper")->setConfig("template_". $this->d2u_template_id, $params);
 
 	}
 	

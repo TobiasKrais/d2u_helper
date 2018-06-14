@@ -103,6 +103,7 @@ d2u_helper_settings_show_breadcrumbs = Breadcrumbs anzeigen
 d2u_helper_settings_subhead_color_bg = Titel / Breadcrumb Hintergrundfarbe
 d2u_helper_settings_subhead_color_font = Titel / Breadcrumb Schriftfarbe
 d2u_helper_settings_subhead_include_articlename = Artikelname als Titel einblenden?
+d2u_helper_settings_submenu_use_articlename = Im Untermenü Artikelname anzeigen anstatt Kategorienamen zu wiederholen
 d2u_helper_settings_template = Spezifische Einstellungen für Template
 d2u_helper_settings_template_02_1_footer_text = Motto im Footer
 d2u_helper_settings_template_02_1_navi_pos_bottom = Unterhalb des Headerbildes

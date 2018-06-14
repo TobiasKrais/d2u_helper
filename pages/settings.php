@@ -29,8 +29,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['include_bootstrap'] = array_key_exists('include_bootstrap', $settings);
 	$settings['include_module'] = array_key_exists('include_module', $settings);
 	$settings['include_menu'] = array_key_exists('include_menu', $settings);
-	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
+	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
+	$settings['submenu_use_articlename'] = array_key_exists('submenu_use_articlename', $settings);
 	$settings['template_02_2_header_slider_pics_full_width'] = array_key_exists('template_02_2_header_slider_pics_full_width', $settings);
 	$settings['lang_replacements_install'] = array_key_exists('lang_replacements_install', $settings);
 	
@@ -125,6 +126,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							"xl" => rex_i18n::msg('d2u_helper_settings_width_xl')
 						];
 						d2u_addon_backend_helper::form_select('d2u_helper_settings_menu_show', 'settings[include_menu_show]', $width_options, [$this->getConfig('include_menu_show')]);
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_submenu_use_articlename', 'settings[submenu_use_articlename]', 'true', $this->getConfig('submenu_use_articlename') == 'true');
 					?>
 				</div>
 			</fieldset>

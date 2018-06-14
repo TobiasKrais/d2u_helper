@@ -30,10 +30,6 @@ nav {
 	border-bottom: solid 1px white;
 	font-size: 1.15em;
 }
-.navi {
-	bottom: 0;
-	position: absolute;
-}
 .navigation {
 	padding-bottom: 1em;
 }
@@ -121,7 +117,7 @@ h1.subhead {
 }
 #logo {
 	float: right;
-	padding: 0.5em 0 25px;
+	margin: 0.5em 0 25px;
 }
 .subhead, .subhead a, .subhead a:hover {
 	color: subhead_color_font;

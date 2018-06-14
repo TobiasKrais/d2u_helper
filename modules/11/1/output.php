@@ -1,21 +1,4 @@
 <?php
-	if(!function_exists('yform_validate_timer')) {
-		/**
-		 * Timer Spamprotection function
-		 * @param string $label
-		 * @param int $microtime
-		 * @param int $seconds
-		 * @return boolean
-		 */
-		function yform_validate_timer($label, $microtime, $seconds) {
-			if (($microtime + $seconds) > microtime(true)) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-	
 	$offset_lg_cols = intval("REX_VALUE[17]");
 	$offset_lg = "";
 	if($offset_lg_cols > 0) {
@@ -42,7 +25,6 @@
 		$form_data .= 'checkbox|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_privacy_policy') .' *|no,yes|no' . PHP_EOL;
 	}
 	$form_data .= 'html||<br>* '. \Sprog\Wildcard::get('d2u_helper_module_11_required') .'<br><br>
-		php|validate_timer|Spamprotection|<input name="validate_timer" type="hidden" value="'. microtime(true) .'" />|
 		captcha|'. \Sprog\Wildcard::get('d2u_helper_module_11_captcha') .'|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_captcha') .'|'. rex_getUrl(rex_article::getCurrentId()) .'
 
 		submit|submit|'. \Sprog\Wildcard::get('d2u_helper_module_11_send') .'|no_db
@@ -51,16 +33,30 @@
 		validate|empty|phone|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_phone') .'
 		validate|empty|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_email') .'
 		validate|email|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_email') .'
-		validate|empty|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_message') .'
-		validate|customfunction|validate_timer|yform_validate_timer|9|'.\Sprog\Wildcard::get('d2u_helper_module_11_validate_spambots') .'|';
+		validate|empty|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_message') . PHP_EOL;
 	if($show_gdpr_hint) {
 		$form_data .= 'validate|empty|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_privacy_policy') . PHP_EOL;
 	}
 
 	$yform = new rex_yform();
 	$yform->setFormData(trim($form_data));
+
+	// Spam protection
+	$yform->setValueField('php', [
+        'validate_timer',
+        'spamschutz',
+        '<?php echo \'<input name="validate_timer" type="hidden" value="' . microtime(true) . '" />\' ?>'
+    ]);
+	$yform->setValidateField('customfunction', [
+        'validate_timer',
+        'd2u_addon_frontend_helper::yform_validate_timer',
+        '5',
+        \Sprog\Wildcard::get('d2u_helper_module_11_validate_spambots')
+    ]);
+
 	$yform->setObjectparams("form_action", rex_getUrl(rex_article::getCurrentId()));
 	$yform->setObjectparams("Error-occured", \Sprog\Wildcard::get('d2u_helper_module_11_validate_title'));
+	$yform->setObjectparams("real_field_names", TRUE);
 
 	// action - showtext
 	$yform->setActionField("showtext", [\Sprog\Wildcard::get('d2u_helper_module_11_thanks')]);

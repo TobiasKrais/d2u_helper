@@ -102,6 +102,10 @@ class D2UModuleManager {
 				break;
 			}
 		}		
+
+		// Save before cache deletion (https://github.com/RexDude/xcore/issues/237)
+		rex_config::save();
+
 		rex_delete_cache();
 	}
 	
@@ -543,7 +547,6 @@ class D2UModule {
 		if(file_exists($this->module_folder . D2UModule::MODULE_INSTALL)) {
 			$success = include $this->module_folder . D2UModule::MODULE_INSTALL;
 			if(!$success) {
-print "Module ". $this->d2u_module_id ." ". $this->name ." <b>nicht aktualisiert</b>.<br>";
 				return FALSE;
 			}
 		}
@@ -568,10 +571,12 @@ print "Module ". $this->d2u_module_id ." ". $this->name ." <b>nicht aktualisiert
 			$insertmod->setWhere(['id' => $this->rex_module_id]);
 			$insertmod->update();
 		}
-print "Module ". $this->d2u_module_id ." ". $this->name ." <b>aktualisiert</b>.<br>";
 		// save pairing in config
 		$this->setConfig();
 		
+		// Save before cache deletion (https://github.com/RexDude/xcore/issues/237)
+		rex_config::save();
+
 		// Delete addon cache for new styles could have been added
 		d2u_addon_frontend_helper::deleteCache();
 		

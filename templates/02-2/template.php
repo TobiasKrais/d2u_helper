@@ -173,7 +173,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 			<div class="row">
 				<?php
 					// Navi
-					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-md'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '10' : '12') .'">';
+					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-md-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '10' : '12') .'">';
 
 					print '<div class="navi">';
 					if(rex_addon::get('d2u_helper')->isAvailable()) {

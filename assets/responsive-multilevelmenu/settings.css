@@ -10,9 +10,11 @@
 }
 .dl-menuwrapper button, .dl-menuwrapper button:hover, .dl-menuwrapper button.dl-active, .dl-menuwrapper ul, .dl-menuwrapper li .desktop-navi,  #dl-menu button.dl-active {
 	background: navi_color_hover_bg;
+	transition: all 0.5s;
 }
 button.dl-trigger, button.dl-trigger:hover {
 	background: navi_color_bg;
+	transition: all 0.5s;
 }
 .desktop-navi div, .desktop-navi a {
 	color: navi_color_font;
@@ -26,21 +28,27 @@ button.dl-trigger, button.dl-trigger:hover {
 /* Hover */
 .desktop-navi:hover div.desktop-inner {
 	color: navi_color_hover_font;
+	transition: all 0.5s;
 }
 .dl-menuwrapper li a, .dl-menuwrapper div a, ul.dl-menu a, .dl-menuwrapper li.dl-back:after, .dl-subview .dl-subviewopen .dl-submenu li a  {
 	color: navi_color_hover_font;
+	transition: all 0.5s;
 }
 .desktop-navi:hover {
 	background-color: navi_color_hover_bg;
+	transition: all 0.5s;
 }
 .dl-menu li:hover, .dl-submenu li:hover {
 	background-color: navi_color_hover_bg;
+	transition: all 0.5s;
 }
 .dl-menu li:hover, .dl-subviewopen .dl-submenu li:hover {
 	background-color: navi_color_hover_bg;
+	transition: all 0.5s;
 }
 .dl-menu li:hover a, .dl-subviewopen .dl-submenu li:hover a {
 	color: navi_color_hover_font;
+	transition: all 0.5s;
 }
 .dl-subviewopen .dl-submenu li a {
 	color: navi_color_font;
@@ -50,6 +58,7 @@ button.dl-trigger, button.dl-trigger:hover {
 	box-shadow: 
 		0 10px 0 navi_color_hover_font, 
 		0 20px 0 navi_color_hover_font;
+	transition: all 0.5s;
 }
 .dl-back a:hover {
 	text-decoration: none;
