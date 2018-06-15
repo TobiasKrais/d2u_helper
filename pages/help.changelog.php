@@ -1,11 +1,11 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.4.6-DEV</p>
+		<p>1.4.6</p>
 		<ul>
 			<li>Neue Einstellung für Im Multilevel Menü: im Untermenü beim ersten Punkt der Artikelname angezeigen lassen anstatt den Kategorienamen zu wiederholen.</li>
 			<li>Dem Mutltilevel Menu wurden bei Hovereffekten für die Darstellung Transitions hinzugefügt.</li>
-			<li>Anpassungen an Redaxo 5.6 (Hintergrund: https://github.com/RexDude/xcore/issues/237)</li>
+			<li>Anpassungen an Redaxo 5.6 (Hintergrund: https://github.com/redaxo/redaxo/pull/1827)</li>
 			<li>Modul 11-1 eine Zeitsperre als Spamschutz hinzugefügt.</li>
 			<li>Module Autoupdate Fehler behoben.</li>
 		</ul>
