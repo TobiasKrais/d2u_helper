@@ -193,19 +193,24 @@ footer a:hover {
 .box img {
 	max-width: 100%;
 }
-.nav li a.active {
-	background: url("../assets/addons/d2u_machinery/icon_arrowTabs.svg") no-repeat 50% bottom;
-}
 .nav li, .nav li.active {
 	padding: 0 1.5em 0 0;
 }
 .nav li a, .nav li.active a {
 	font-weight: bold;
-	padding: 0 0 15px 0;
+	padding: 0;
 }
 .nav-link.active {
 	background-color: transparent !important;
 }
 .comparison-header, unit {
 	padding: 0 15px;
+}
+a.active div.active-navi-pill {
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 3px solid transparent;
+	border-bottom: 12px white solid;
+    margin: 0 auto;
+    width: 30px;
 }

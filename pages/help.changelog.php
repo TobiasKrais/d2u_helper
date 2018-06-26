@@ -4,6 +4,8 @@
 		<p>1.4.7-DEV</p>
 		<ul>
 			<li>Template 00-1: Darstellung der Sprachauswahl auf kleinen Bildschirmen verbessert.</li>
+			<li>Template 00-1: Pfeil bei Verwendung des Maschinenaddons statt Grafik durch CSS ersetzt.</li>
+			<li>Template 02-2: Pfeil bei Verwendung des Maschinenaddons statt Grafik durch CSS ersetzt.</li>
 		</ul>
 		<p>1.4.6</p>
 		<ul>

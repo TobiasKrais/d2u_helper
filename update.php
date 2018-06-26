@@ -56,7 +56,7 @@ if(class_exists(D2UTemplateManager)) {
 	$d2u_templates = [];
 	$d2u_templates[] = new D2UTemplate("00-1",
 		"Big Header Template",
-		8);
+		9);
 	$d2u_templates[] = new D2UTemplate("01-1",
 		"Side Picture Template",
 		3);
@@ -65,7 +65,7 @@ if(class_exists(D2UTemplateManager)) {
 		4);
 	$d2u_templates[] = new D2UTemplate("02-2",
 		"Header Slider Template",
-		1);
+		2);
 	$d2u_templates[] = new D2UTemplate("03-1",
 		"Immo Template - 2 Columns",
 		4);
