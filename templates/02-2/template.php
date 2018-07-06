@@ -483,7 +483,7 @@ if(rex_Addon::get('d2u_machinery')->isAvailable()) {
 
 						// Facebook Logo
 						if($d2u_helper->getConfig("template_02_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_02_2_facebook_icon", "") != "") {
-							print '<a href="'. $d2u_helper->getConfig("template_02_2_facebook_link") .'">';
+							print '<a href="'. $d2u_helper->getConfig("template_02_2_facebook_link") .'" target="_blank">';
 							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_02_2_facebook_icon")) .'" alt="Facebook" id="facebook">';
 							print '</a>';
 						}
