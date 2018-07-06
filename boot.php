@@ -247,12 +247,10 @@ function sendD2UHelperCSS() {
 		
 		// Menu CSS
 		if($d2u_helper->hasConfig("include_menu") && $d2u_helper->getConfig("include_menu") == "true") {
-			$css .= d2u_mobile_navi::getAutoCSS();
+			$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi::getAutoCSS());
 		}
 
-		// Apply template settings and compress
-		print d2u_addon_frontend_helper::prepareCSS($css);
-
+		print $css;
 		exit;	
 }
 
