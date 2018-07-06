@@ -166,7 +166,7 @@ class D2UModuleManager {
 			6);
 		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
-			5);
+			6);
 		$modules[] = new D2UModule("05-2",
 			"Artikel aus anderer Sprache übernehmen",
 			2);
@@ -194,6 +194,7 @@ class D2UModuleManager {
 		// 23-x reserved for D2U Jobs
 		// 24-x reserved for D2U Linkbox
 		// 25-x reserved for D2U Partner
+		// 26-x reserved for D2U Courses
 		// 30-x reserved for D2U Videos
 		// 40-x reserved for D2U News
 		// 50-x reserved for D2U References

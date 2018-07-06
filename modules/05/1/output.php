@@ -13,6 +13,17 @@ if($link_type == "link") {
 		}
 	}
 }
+else if($link_type == "download") {
+	$link = rex_url::media("REX_MEDIA[1]");
+	if($link != "") {
+		if(\rex::isBackend()) {
+			print "Weiterleitung zu Datei <a href='". $link ."'>REX_MEDIA[1]</a>";
+		}
+		else {
+			$forward_url = $link;
+		}
+	}
+}
 else if($link_type == "d2u_machinery_machine") {
 	if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		$machine_id = "REX_VALUE[3]";

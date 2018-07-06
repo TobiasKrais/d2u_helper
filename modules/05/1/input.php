@@ -12,6 +12,7 @@
 
 		$select_link->addOption("Redaxo Artikel", "article"); 
 		$select_link->addOption("Externer Link", "link"); 
+		$select_link->addOption("PDF Datei aus Medienpool", "download"); 
 		if(rex_addon::get('d2u_immo')->isAvailable()) {
 			$select_link->addOption("D2U Immobilien Addon - Immobilie", "d2u_immo_property");
 		}
@@ -50,6 +51,15 @@
 	</div>
 	<div class="col-xs-8">
 		<input type="text" size="250" name="REX_INPUT_VALUE[2]" value="REX_VALUE[2]" style="max-width: 100%"/>
+	</div>
+</div>
+
+<div class="row" id="download">
+	<div class="col-xs-4">
+		Medienpool PDF Datei
+	</div>
+	<div class="col-xs-8">
+		REX_MEDIA[id="1" type="pdf" widget="1"]
 	</div>
 </div>
 
@@ -145,6 +155,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 		if($('#selector').val() === "article") {
 			$('#article').show();
 			$('#link').hide();
+			$('#download').hide();
 			$('#d2u_machinery_machine').hide();
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').hide();
@@ -153,7 +164,17 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 		else if($('#selector').val() === "link") {
 			$('#article').hide();
 			$('#link').show();
-			$('#d2u_machinery_machine').show();
+			$('#download').hide();
+			$('#d2u_machinery_machine').hide();
+			$('#d2u_machinery_industry_sector').hide();
+			$('#d2u_machinery_used_machine').hide();
+			$('#d2u_immo_property').hide();
+		}
+		else if($('#selector').val() === "download") {
+			$('#article').hide();
+			$('#link').hide();
+			$('#download').show();
+			$('#d2u_machinery_machine').hide();
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').hide();
 			$('#d2u_immo_property').hide();
@@ -161,6 +182,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 		else if($('#selector').val() === "d2u_machinery_machine") {
 			$('#article').hide();
 			$('#link').hide();
+			$('#download').hide();
 			$('#d2u_machinery_machine').show();
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').hide();
@@ -169,6 +191,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 		else if($('#selector').val() === "d2u_machinery_industry_sector") {
 			$('#article').hide();
 			$('#link').hide();
+			$('#download').hide();
 			$('#d2u_machinery_machine').hide();
 			$('#d2u_machinery_industry_sector').show();
 			$('#d2u_machinery_used_machine').hide();
@@ -177,6 +200,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 		else if($('#selector').val() === "d2u_machinery_used_machine") {
 			$('#article').hide();
 			$('#link').hide();
+			$('#download').hide();
 			$('#d2u_machinery_machine').hide();
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').show();
@@ -185,6 +209,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 		else if($('#selector').val() === "d2u_immo_property") {
 			$('#article').hide();
 			$('#link').hide();
+			$('#download').hide();
 			$('#d2u_machinery_machine').hide();
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').hide();
