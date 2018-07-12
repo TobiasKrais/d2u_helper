@@ -185,7 +185,7 @@ class d2u_addon_backend_helper {
 	public static function form_input($message_id, $fieldname, $value, $required = FALSE, $readonly = FALSE, $type = "text") {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		$label = '<label>' . rex_i18n::msg($message_id) . '</label>';
-		$input = '<input class="form-control" type="' . $type . '" name="' . $fieldname . '" value="' . $value . '"';
+		$input = '<input class="form-control" type="' . $type . '" name="' . $fieldname . '" value="' . str_replace('"', "'", $value) . '"';
 		if ($required && $readonly !== TRUE) {
 			$input .= ' required';
 		}
