@@ -390,7 +390,7 @@ class d2u_addon_backend_helper {
 		}
 		if ($readonly) {
 			print '<dd><div class="form-control" style="height: 100px;overflow-y: scroll">'. $value .'</div>'
-				. '<input type="hidden" name="' . $fieldname . '" value="'. $value .'"></dd>';
+				. '<input type="hidden" name="' . $fieldname . '" value="'. str_replace('"', "'", $value) .'"></dd>';
 		}
 		else { 
 			print '<dd><textarea cols="1" rows="' . $rows . '" class="form-control' . $wysiwyg_class . '" name="' . $fieldname . '"';
