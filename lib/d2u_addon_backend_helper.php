@@ -363,7 +363,8 @@ class d2u_addon_backend_helper {
 	 * @param string $fieldname Textarea field name.
 	 * @param string $value Textarea value.
 	 * @param int $rows Number rows
-	 * @param boolean $required TRUE if field should have required attribute.
+	 * @param boolean $required TRUE if field should have required attribute. If
+	 * $use_wysiwyg is TRUE, $required is automatically FALSE
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
 	 * @param string $use_wysiwyg Use WYSIWYG Editor
 	 */
@@ -394,7 +395,8 @@ class d2u_addon_backend_helper {
 		}
 		else { 
 			print '<dd><textarea cols="1" rows="' . $rows . '" class="form-control' . $wysiwyg_class . '" name="' . $fieldname . '"';
-			if ($required) {
+			// Required can only be activated if WYSIWYG Editor is not activated
+			if ($required && !$use_wysiwyg) {
 				print ' required';
 			}
 			print '>' . $value . '</textarea></dd>';

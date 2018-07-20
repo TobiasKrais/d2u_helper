@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.4.7-DEV</p>
 		<ul>
+			<li>Bugfix: Textarea Attributkonflikt Required und UseWYSIWYG: Required wird nicht mehr gesetzt wenn UseWYSIWYG gefordert ist.</li>
 			<li>Bugfix: backend helper für textarea Feld ersetzt " durch '.</li>
 			<li>Verhindert das Löschen von Impressum und Datenschutzerklärung solange sie in den Addoneinstellungen angegeben sind.</li>
 			<li>Module 05-1 Artikelweiterleitung: Option zur Weiterleitung zu Datei im Medienpool hinzugefügt.</li>
