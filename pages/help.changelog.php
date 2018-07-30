@@ -3,6 +3,9 @@
 	<div class="panel-body">
 		<p>1.4.7-DEV</p>
 		<ul>
+			<li>Bootstrap 4.1.3 upgrade.</li>
+			<li>Template 00-1 bis 02-2: Meta Tags vereinheitlicht - mehr D2U Addons untersützt.</li>
+			<li>Template 00-1 bis 02-2: Breadcrumbs um D2U Kurse Addon ergänzt und Ausblenden von Breadcrumbs auf der Startseite.</li>
 			<li>Bugfix: Textarea Attributkonflikt Required und UseWYSIWYG: Required wird nicht mehr gesetzt wenn UseWYSIWYG gefordert ist.</li>
 			<li>Bugfix: backend helper für textarea Feld ersetzt " durch '.</li>
 			<li>Verhindert das Löschen von Impressum und Datenschutzerklärung solange sie in den Addoneinstellungen angegeben sind.</li>
