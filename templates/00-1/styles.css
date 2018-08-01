@@ -58,6 +58,19 @@ header {
 #langchooser a {
 	color: white;
 }
+.cart_link {
+	float: right;
+}
+#cart_symbol {
+	padding-right: 0px !important;
+}
+#cart_symbol img {
+	float: left;
+	height: 25px;
+	min-height: 25px;
+	min-width: 25px;
+	width: 25px;
+}
 
 .subhead {
 	background-color: subhead_color_bg;

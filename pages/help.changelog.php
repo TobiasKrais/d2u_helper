@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.4.7-DEV</p>
+		<p>1.4.7</p>
 		<ul>
 			<li>Bootstrap 4.1.3 upgrade.</li>
 			<li>Template 00-1 bis 02-2: Meta Tags vereinheitlicht - mehr D2U Addons untersützt.</li>
@@ -10,6 +10,7 @@
 			<li>Bugfix: backend helper für textarea Feld ersetzt " durch '.</li>
 			<li>Verhindert das Löschen von Impressum und Datenschutzerklärung solange sie in den Addoneinstellungen angegeben sind.</li>
 			<li>Module 05-1 Artikelweiterleitung: Option zur Weiterleitung zu Datei im Medienpool hinzugefügt.</li>
+			<li>Template 00-1: Warenkorbsymbol hinzugefügt wenn D2U Veranstaltungen Addon installiert ist.</li>
 			<li>Template 00-1: Darstellung der Sprachauswahl auf kleinen Bildschirmen verbessert.</li>
 			<li>Template 00-1: Pfeil bei Verwendung des Maschinenaddons statt Grafik durch CSS ersetzt.</li>
 			<li>Template 02-2: Pfeil bei Verwendung des Maschinenaddons statt Grafik durch CSS ersetzt.</li>

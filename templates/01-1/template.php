@@ -5,20 +5,10 @@ $tag_open = $sprog->getConfig('wildcard_open_tag');
 $tag_close = $sprog->getConfig('wildcard_close_tag');
 
 // SEO stuff
-$alternate = ""; 
-$canonical = "";
 $current_domain = \rex::getServer();
-$description = "";
-$robots = "";
-$title = "";
 if (rex_addon::get('yrewrite')->isAvailable()) {
 	$yrewrite = new rex_yrewrite_seo();
-	$alternate = $yrewrite->getHreflangTags();
-	$canonical = $yrewrite->getCanonicalUrlTag();
 	$current_domain = rex_yrewrite::getCurrentDomain()->getUrl();
-	$description = $yrewrite->getDescriptionTag();
-	$robots = $yrewrite->getRobotsTag();
-	$title = $yrewrite->getTitleTag();
 }
 
 // Get d2u_helper stuff
@@ -32,11 +22,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 	<base href="<?php echo $current_domain; ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
-		echo $title.PHP_EOL;
-		echo $description .PHP_EOL;
-		echo $robots .PHP_EOL;
-		echo $alternate .PHP_EOL;
-		echo $canonical .PHP_EOL;
+		print d2u_addon_frontend_helper::getMetaTags();
 	?>
 	<link rel="stylesheet" href="index.php?template_id=01-1&d2u_helper=template.css">
 	<?php
@@ -112,23 +98,13 @@ $d2u_helper = rex_addon::get("d2u_helper");
 							if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
 								print '<div class="col-12">';
 								print '<div id="breadcrumbs">';
-								$startarticle = rex_article::get(rex_article::getSiteStartArticleId());
-								echo '<a href="' . $startarticle->getUrl() . '"><span class="fa-home"></span></a>';
-								$current_article = rex_article::getCurrent();
-								$path = $current_article->getPathAsArray();
-								foreach ($path as $id) {
-									$article = rex_category::get($id);
-									echo ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
-								}
-								if(!$current_article->isStartArticle()) {
-									echo ' &nbsp;»&nbsp;&nbsp;<a href="' . $current_article->getUrl() . '">' . $current_article->getName() . '</a>';
-								}
+								print d2u_addon_frontend_helper::getBreadcrumbs();
 								print '</div>';
 								print '</div>';
 							}
 							if($d2u_helper->hasConfig('subhead_include_articlename') && $d2u_helper->getConfig('subhead_include_articlename') == "true") {
 								print '<div class="col-12">';
-								print '<h1 class="subhead">'. $current_article->getName() .'</h1>';
+								print '<h1 class="subhead">'. rex_article::getCurrent()->getName() .'</h1>';
 								print '</div>';
 							}
 							// Content follows

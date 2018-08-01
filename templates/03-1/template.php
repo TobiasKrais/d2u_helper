@@ -29,11 +29,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 	<base href="<?php echo $current_domain; ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
-		echo $title.PHP_EOL;
-		echo $description .PHP_EOL;
-		echo $robots .PHP_EOL;
-		echo $alternate .PHP_EOL;
-		echo $canonical .PHP_EOL;
+		print d2u_addon_frontend_helper::getMetaTags();
 		if(file_exists(rex_path::media('favicon.ico'))) {
 			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
 		}
@@ -104,22 +100,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 						if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
 							print '<div class="col-12 d-print-none">';
 							print '<div id="breadcrumbs">';
-							$startarticle = rex_article::get(rex_article::getSiteStartArticleId());
-							echo '<a href="' . $startarticle->getUrl() . '"><span class="fa-home"></span></a>';
-							$current_article = rex_article::getCurrent();
-							$path = $current_article->getPathAsArray();
-							foreach ($path as $id) {
-								$article = rex_category::get($id);
-								echo ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
-							}
-							if(!$current_article->isStartArticle()) {
-								echo ' &nbsp;»&nbsp;&nbsp;<a href="' . $current_article->getUrl() . '">' . $current_article->getName() . '</a>';
-							}
-							if(rex_Addon::get('d2u_immo')->isAvailable()) {
-								foreach(d2u_immo_frontend_helper::getBreadcrumbs() as $breadcrumb) {
-									echo ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-								}
-							}
+							print d2u_addon_frontend_helper::getBreadcrumbs();
 							print '</div>';
 							print '</div>';
 						}

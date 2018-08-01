@@ -59,6 +59,133 @@ class d2u_addon_frontend_helper {
 	}
 
 	/**
+	 * Returns alternate URLs for Redaxo articles and D2U Addons. Key is Redaxo
+	 * language id, value is URL
+	 * @return string[] alternate URLs
+	 */
+	public static function getAlternateURLs() {
+		$alternate_URLs = [];
+		if(rex_addon::get('d2u_courses')->isAvailable() && d2u_courses_frontend_helper::getAlternateURLs() != "") {
+			$alternate_URLs = d2u_courses_frontend_helper::getAlternateURLs();
+		}
+		else if(rex_addon::get('d2u_immo')->isAvailable() && d2u_immo_frontend_helper::getAlternateURLs() != "") {
+			$alternate_URLs = d2u_immo_frontend_helper::getAlternateURLs();
+		}
+		else if(rex_addon::get('d2u_jobs')->isAvailable() && d2u_jobs_frontend_helper::getAlternateURLs() != "") {
+			$alternate_URLs = d2u_jobs_frontend_helper::getAlternateURLs();
+		}
+		else if(rex_addon::get('d2u_machinery')->isAvailable() && d2u_machinery_frontend_helper::getAlternateURLs() != "") {
+			$alternate_URLs = d2u_machinery_frontend_helper::getAlternateURLs();
+		}
+		else if(rex_addon::get('d2u_references')->isAvailable() && d2u_references_frontend_helper::getAlternateURLs() != "") {
+			$alternate_URLs = d2u_references_frontend_helper::getAlternateURLs();
+		}
+		else {
+			foreach (rex_clang::getAllIds(TRUE) as $clang_id) {
+				$article = rex_article::getCurrent($clang_id);
+				if($article->isOnline()) {
+					$alternate_URLs[$clang_id] = $article->getUrl();
+				}
+			}
+		}
+		return $alternate_URLs;
+	}
+	
+	/**
+	 * Returns breadcrumbs for Redaxo articles and all D2U Addons. If start
+	 * article is current article, and no addons are used, nothing is returned.
+	 * @return string[] Breadcrumb elements
+	 */
+	public static function getBreadcrumbs() {
+		$startarticle = rex_article::get(rex_article::getSiteStartArticleId());
+		$breadcrumb_start_only = TRUE;
+		$breadcrumbs = '<a href="' . $startarticle->getUrl() . '"><span class="fa-icon fa-home"></span></a>';
+		$current_article = rex_article::getCurrent();
+		$path = $current_article->getPathAsArray();
+		foreach ($path as $id) {
+			$article = rex_category::get($id);
+			if($id != rex_article::getSiteStartArticleId()) {
+				$breadcrumb_start_only = FALSE;
+			}
+			$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
+		}
+		if(!$current_article->isStartArticle()) {
+			$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $current_article->getUrl() . '">' . $current_article->getName() . '</a>';
+			$breadcrumb_start_only = FALSE;
+		}
+		if(rex_addon::get('d2u_courses')->isAvailable()) {
+			foreach(d2u_courses_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
+				$breadcrumb_start_only = FALSE;
+			}
+		}
+		if(rex_addon::get('d2u_immo')->isAvailable()) {
+			foreach(d2u_immo_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
+				$breadcrumb_start_only = FALSE;
+			}
+		}
+		if(rex_addon::get('d2u_machinery')->isAvailable()) {
+			foreach(d2u_machinery_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
+				$breadcrumb_start_only = FALSE;
+			}
+		}
+		if(rex_addon::get('d2u_references')->isAvailable()) {
+			foreach(d2u_references_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
+				$breadcrumb_start_only = FALSE;
+			}
+		}
+		return ($breadcrumb_start_only ? "" : $breadcrumbs);
+	}
+
+	/**
+	 * Returns Meta Tags fpr Redaxo articles and D2U Addons
+	 * @return string meta Tags
+	 */
+	public static function getMetaTags() {
+		$meta_tags = "";
+		
+		if(rex_addon::get('d2u_courses')->isAvailable() && d2u_courses_frontend_helper::getMetaTags() != "") {
+			$meta_tags = d2u_courses_frontend_helper::getMetaTags();
+		}
+		else if(rex_addon::get('d2u_immo')->isAvailable() && d2u_immo_frontend_helper::getMetaTags() != "") {
+			$meta_tags = d2u_immo_frontend_helper::getMetaTags();
+		}
+		else if(rex_addon::get('d2u_jobs')->isAvailable() && d2u_jobs_frontend_helper::getMetaTags() != "") {
+			$meta_tags = d2u_jobs_frontend_helper::getMetaTags();
+		}
+		else if(rex_addon::get('d2u_machinery')->isAvailable() && d2u_machinery_frontend_helper::getMetaTags() != "") {
+			$meta_tags = d2u_machinery_frontend_helper::getMetaTags();
+		}
+		else if(rex_addon::get('d2u_references')->isAvailable() && d2u_references_frontend_helper::getMetaTags() != "") {
+			$meta_tags = d2u_references_frontend_helper::getMetaTags();
+		}
+		else if(rex_addon::get('yrewrite')->isAvailable()) {
+			$yrewrite = new rex_yrewrite_seo();
+			$meta_tags = $yrewrite->getHreflangTags();
+			$meta_tags .= $yrewrite->getCanonicalUrlTag();
+			$meta_tags .= $yrewrite->getDescriptionTag();
+			$meta_tags .= $yrewrite->getTitleTag();
+		}
+		else {
+			// TODO Use Redaxo default
+		}
+		
+		// Robots tag
+		if(rex_addon::get('yrewrite')->isAvailable()) {
+			$yrewrite = new rex_yrewrite_seo();
+			$meta_tags .= $yrewrite->getRobotsTag();
+		}
+		else {
+			$meta_tags .= '<meta name="robots" content="index, follow">';
+		}
+		
+		return $meta_tags;
+	}
+	
+	/**
 	 * Get CSS stuff from modules as one string
 	 * @param string $addon_key If set, only CSS for modules of this addon are returned
 	 * @return string CSS
