@@ -1,0 +1,15 @@
+d2u_helper_meta_translations = Übersetzungshilfe
+
+d2u_helper_translations_apply = Anwenden
+d2u_helper_translations_sort = Sortierung
+d2u_helper_translations_description = Die Übersetzungshilfe bietet eine Liste von Übersetzungen die in D2U Addons fehlen oder aktualisiert werden sollen.
+d2u_helper_translations_filter = Filter
+d2u_helper_translations_filter_select = Anzeige von ...
+d2u_helper_translations_filter_missing = ... fehlenden Übersetzungen
+d2u_helper_translations_filter_update = ... zu aktualisierenden Übersetzungen
+d2u_helper_translations_language = Anzuzeigende Sprache
+d2u_helper_translations_none = Es ist nur eine Sprache angelegt. Eine Übersetzungshilfe ist nicht nötig.
+d2u_helper_translations_uptodate_missing = Es fehlen keine Übersetzungen.
+d2u_helper_translations_uptodate_update = Alle vorhandenen Übersetzungen sind aktuell.
+
+d2u_helper_translations_rights = D2U Helper Addon: Übersetzungshilfe Plugin

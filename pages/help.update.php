@@ -1,6 +1,12 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">Updatehinweise</div></header>
 	<div class="panel-body">
+		<p>1.5.0:</p>
+		<ul>
+			<li>Übersetzungshilfe in Plugin ausgelagert. Neues Recht
+				d2u_helper[translation_helper] hinzugefügt. Bitte bei Bedarf die
+				Benutzerrechte anpassen.</li>
+		</ul>
 		<p>1.4.2:</p>
 		<ul>
 			<li>Bitte den Artikel des Impressums in den Einstellungen hinterlegen.</li>

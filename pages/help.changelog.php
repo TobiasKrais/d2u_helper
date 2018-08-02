@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.5.0-DEV</p>
+		<ul>
+			<li>Übersetzungshilfe in Plugin ausgelagert.</li>
+		</ul>
 		<p>1.4.7</p>
 		<ul>
 			<li>Bootstrap 4.1.3 upgrade.</li>

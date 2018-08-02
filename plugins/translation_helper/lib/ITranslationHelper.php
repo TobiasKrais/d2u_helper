@@ -1,6 +1,7 @@
 <?php
 
 namespace D2U_Helper;
+
 /**
  * Support for D2U Translation Helper
  */
