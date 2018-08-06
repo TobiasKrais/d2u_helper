@@ -23,4 +23,11 @@
 		?>
 		</div>
 	</div>
+	<header class="panel-heading"><div class="panel-title">Lieblingseditor</div></header>
+	<div class="panel-body">
+		<p>Um den Lieblingseditor für die Module und und die D2U Addons
+			einzustellen einfach in den Einstellungen dieses Addons den gewünschten
+			Editor auswählen.</p>
+		<p></p>
+	</div>
 </div>
