@@ -90,22 +90,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							d2u_addon_backend_helper::form_select('d2u_helper_defaultlang', 'settings[default_lang]', $lang_options, [$this->getConfig('default_lang')]);
 						}
 							
-						if(rex_addon::get('tinymce4')->isAvailable() || rex_addon::get('redactor2')->isAvailable() || rex_addon::get('ckeditor')->isAvailable() || rex_addon::get('markitup')->isAvailable()) {
-							$options_editor = [];
-							if(rex_addon::get('ckeditor')->isAvailable()) {
-								$options_editor['ckeditor'] = rex_i18n::msg('ckeditor_title');
-							}
-							if(rex_addon::get('markitup')->isAvailable()) {
-								$options_editor['markitup'] = rex_i18n::msg('markitup_title');
-								$options_editor['markitup_textile'] = rex_i18n::msg('markitup_title') ." - Textile";
-							}
-							if(rex_addon::get('redactor2')->isAvailable()) {
-								$options_editor['redactor2'] = rex_i18n::msg('redactor2_title');
-							}
-							if(rex_addon::get('tinymce4')->isAvailable()) {
-								$options_editor['tinymce4'] = "TinyMCE 4";
-							}
-							d2u_addon_backend_helper::form_select('d2u_helper_settings_editor', 'settings[editor]', $options_editor, [$this->getConfig('editor')]);
+						if(count(d2u_addon_backend_helper::getWYSIWYGEditors()) > 0) {
+							d2u_addon_backend_helper::form_select('d2u_helper_settings_editor', 'settings[editor]', d2u_addon_backend_helper::getWYSIWYGEditors(), [$this->getConfig('editor')]);
 						}
 						
 						d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_privacy_policy', '1', $this->getConfig('article_id_privacy_policy'), rex_config::get("d2u_helper", "article_id_privacy_policy", rex_clang::getStartId()));
@@ -168,7 +154,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								print '<hr style="border-top: 1px solid #333">';
 								print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 								print '<dt><label></label></dt>';
-								print '<dd><b>' . rex_i18n::msg('d2u_helper_settings_template') ." '". $d2u_template->getName() . '</b></dd>';
+								print '<dd><b>' . rex_i18n::msg('d2u_helper_settings_template') ." '". $d2u_template->getName() . "'</b></dd>";
 								print '</dl>';
 								if($d2u_template->getD2UId() === "02-1" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_1_footer_text', 'settings[template_02_1_footer_text]', $this->getConfig('template_02_1_footer_text'), FALSE, FALSE, "text");

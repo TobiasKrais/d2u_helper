@@ -80,26 +80,8 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		<?php
-			$wysiwyg_class = ' ';
-			if(rex_config::get('d2u_helper', 'editor') == 'tinymce4' && rex_addon::get('tinymce4')->isAvailable()) {
-				$wysiwyg_class .= 'tinyMCEEditor';
-			}
-			else if(rex_config::get('d2u_helper', 'editor') == 'redactor2' && rex_addon::get('redactor2')->isAvailable()) {
-				$wysiwyg_class .= 'redactorEditor2-full';
-			}
-			else if(rex_config::get('d2u_helper', 'editor') == 'ckeditor' && rex_addon::get('ckeditor')->isAvailable()) {
-				$wysiwyg_class .= 'ckeditor';
-			}
-			else if(rex_config::get('d2u_helper', 'editor') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
-				$wysiwyg_class .= 'markitupEditor-markdown_full';
-			}
-			else if(rex_config::get('d2u_helper', 'editor') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
-				$wysiwyg_class .= 'markitupEditor-textile_full';
-			}
-		?>
 		<br>
-		<textarea name="REX_INPUT_VALUE[1]" class="form-control <?php print $wysiwyg_class; ?>" style="height: 500px">
+		<textarea name="REX_INPUT_VALUE[1]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">
 		REX_VALUE[1]
 		</textarea>
 	</div>

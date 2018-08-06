@@ -4,6 +4,7 @@
 		<p>1.5.0-DEV</p>
 		<ul>
 			<li>Übersetzungshilfe in Plugin ausgelagert.</li>
+			<li>Lieblingseditor unterstützt nun CKEditor 5 mitsamt einzelnen Profilen und Profile des CKEditor.</li>
 		</ul>
 		<p>1.4.7</p>
 		<ul>

@@ -8,9 +8,9 @@ page:
     perm: d2u_helper[]
     icon: rex-icon fa-cubes
     subpages:
+        settings: { title: 'translate:d2u_helper_settings', icon: rex-icon rex-icon-system, perm: d2u_helper[settings] }
         modules: { title: 'translate:d2u_helper_meta_modules', icon: rex-icon rex-icon-module, perm: d2u_helper[settings] }
         templates: { title: 'translate:d2u_helper_meta_templates', icon: rex-icon rex-icon-template, perm: d2u_helper[settings] }
-        settings: { title: 'translate:d2u_helper_settings', icon: rex-icon rex-icon-system, perm: d2u_helper[settings] }
         help:
             icon: rex-icon rex-icon-help
             perm: d2u_helper[]

@@ -1,5 +1,6 @@
 <?php
 if(!rex_addon::get('ckeditor')->isAvailable()
+		&& !rex_addon::get('cke5')->isAvailable()
 		&& !rex_addon::get('markitup')->isAvailable()
 		&& !rex_addon::get('redactor2')->isAvailable()
 		&& !rex_addon::get('tinymce4')->isAvailable()) {

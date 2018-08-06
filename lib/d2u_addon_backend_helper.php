@@ -64,6 +64,82 @@ class d2u_addon_backend_helper {
 	}
 
 	/**
+	 * Get available WYSIWYG Editor
+	 * @return string[] WYSIWYG editor classes
+	 */
+	public static function getWYSIWYGEditors() {
+		$options_editor = [];
+		if(rex_addon::get('ckeditor')->isAvailable()) {
+			if(method_exists(rex_ckeditor, 'getProfiles')) {
+				foreach(rex_ckeditor::getProfiles() as $cke_profile_name) {
+					$options_editor['ckeditor_'. $cke_profile_name] = rex_i18n::msg('ckeditor_title') ." - ". $cke_profile_name;
+				}
+			}
+			else {
+				$options_editor['ckeditor'] = rex_i18n::msg('ckeditor_title');
+			}
+		}
+		if(rex_addon::get('cke5')->isAvailable()) {
+			foreach(\Cke5\Creator\Cke5ProfilesApi::getAllProfiles() as $cke5_profile) {
+				$options_editor['cke5-editor_'. $cke5_profile["name"]] = rex_i18n::msg('cke5_title') ." - ". $cke5_profile["name"];
+			}
+		}
+		if(rex_addon::get('markitup')->isAvailable()) {
+			$options_editor['markitup'] = rex_i18n::msg('markitup_title');
+			$options_editor['markitup_textile'] = rex_i18n::msg('markitup_title') ." - Textile";
+		}
+		if(rex_addon::get('redactor2')->isAvailable()) {
+			$options_editor['redactor2'] = rex_i18n::msg('redactor2_title');
+		}
+		if(rex_addon::get('tinymce4')->isAvailable()) {
+			$options_editor['tinymce4'] = "TinyMCE 4";
+		}
+		return $options_editor;
+	}
+	
+	/**
+	 * Get users choice WYSIWYG Editor class
+	 * @return string WYSIWYG editor classes
+	 */
+	public static function getWYSIWYGEditorClass() {
+		$wysiwyg_class = '';
+		if(rex_config::get('d2u_helper', 'editor') == 'tinymce4' && rex_addon::get('tinymce4')->isAvailable()) {
+			$wysiwyg_class = ' tinyMCEEditor';
+		}
+		else if(rex_config::get('d2u_helper', 'editor') == 'redactor2' && rex_addon::get('redactor2')->isAvailable()) {
+			$wysiwyg_class = ' redactorEditor2-full';
+		}
+		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'cke5-editor') !== FALSE && rex_addon::get('cke5')->isAvailable()) {
+			$wysiwyg_class = ' cke5-editor" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang();
+			foreach(\Cke5\Creator\Cke5ProfilesApi::getAllProfiles() as $cke5_profile) {
+				if(rex_config::get('d2u_helper', 'editor') == 'cke5-editor_'. $cke5_profile["name"]) {
+					$wysiwyg_class = ' cke5-editor" data-profile="'. $cke5_profile["name"] .'" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang();
+					break;
+				}
+			}
+		}
+		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'ckeditor') !== FALSE && rex_addon::get('ckeditor')->isAvailable()) {
+			$wysiwyg_class = ' ckeditor" data-ckeditor-profile="standard';
+			if(method_exists(rex_ckeditor, 'getProfiles')) {
+				foreach(rex_ckeditor::getProfiles() as $cke_profile_name) {
+					if(rex_config::get('d2u_helper', 'editor') == 'ckeditor_'. $cke_profile_name) {
+						$wysiwyg_class = ' ckeditor" data-ckeditor-profile="'. $cke_profile_name ;
+						break;
+					}
+				}
+			}
+		}
+		else if(rex_config::get('d2u_helper', 'editor') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
+			$wysiwyg_class .= ' markitupEditor-markdown_full';
+		}
+		else if(rex_config::get('d2u_helper', 'editor') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
+			$wysiwyg_class .= ' markitupEditor-textile_full';
+		}
+
+		return $wysiwyg_class;
+	}
+	
+	/**
 	 * Returns CSS for D2U specific forms
 	 * @return string HTML String with css tag
 	 */
