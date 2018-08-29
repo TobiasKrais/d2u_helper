@@ -24,8 +24,8 @@ if(!\rex::isBackend()) {
 				sendD2UHelperJS("body");
 			}
 		}
-		else if (rex_request('d2u_helper', 'string') == 'template.css' && rex_request('template_id', 'string') != "") {
-			sendD2UHelperTemplateCSS(rex_request('template_id', 'string'));
+		else if (rex_request('d2u_helper', 'string') == 'template.css') {
+			sendD2UHelperTemplateCSS(rex_request('template_id', 'string', ''));
 		}
     });
 	
@@ -77,35 +77,41 @@ function appendGoogleAnalytics(rex_extension_point $ep) {
  * @param rex_extension_point $ep Redaxo extension point
  */
 function appendToPageD2UHelperFiles(rex_extension_point $ep) {
+	$VERSION_JQUERY = '3.3.1';
+	$VERSION_BOOTSTRAP = '4.1.3';
 	$addon = rex_addon::get("d2u_helper");
 
 	$insert_head = "";
 	$insert_body = "";
 	// Vor dem </head> einfügen
-	if($addon->getConfig('include_bootstrap') == 'true') {
+	if($addon->getConfig('include_jquery') == 'true') {
 		// JavaScript
-		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'?v=3.3.1"></script>' . PHP_EOL;
+		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'?v='. $VERSION_JQUERY .'"></script>' . PHP_EOL;
+	}
+	if($addon->getConfig('include_bootstrap4') == 'true') {
+		// Popper JavaScript
 		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/popper.min.js') .'"></script>' . PHP_EOL;
 		// Bootstrap CSS
-		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.1.3" />' . PHP_EOL;
+		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v='. $VERSION_BOOTSTRAP .'" />' . PHP_EOL;
 	}
 
 	// Consider module css or menu css
-	if(($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true" && d2u_addon_frontend_helper::getModulesCSS() != "")
-			|| ($addon->hasConfig("include_menu") && $addon->getConfig("include_menu") == "true")) {
+	if(($addon->getConfig("include_module", "false") == "true" && d2u_addon_frontend_helper::getModulesCSS() != "")
+			|| $addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true"
+		) {
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="index.php?d2u_helper=helper.css" />' . PHP_EOL;
 	}
 		
 	// Menu stuff in header
-	if($addon->hasConfig("include_menu") && $addon->getConfig("include_menu") == "true") {
+	if($addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true") {
 		$insert_head .= '<script type="text/javascript" src="index.php?position=head&d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 
 	$ep->setSubject(str_replace('</head>', $insert_head .'</head>', $ep->getSubject()));
 
 	// Vor dem </body> einfügen
-	if($addon->getConfig('include_bootstrap') == 'true') {
-		$insert_body .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'?v=4.1.3"></script>' . PHP_EOL;
+	if($addon->getConfig('include_bootstrap4') == 'true') {
+		$insert_body .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'?v='. $VERSION_BOOTSTRAP .'"></script>' . PHP_EOL;
 	}
 
 	// Module stuff in body
@@ -276,9 +282,14 @@ function sendD2UHelperCSS() {
 			$css .= d2u_addon_frontend_helper::getModulesCSS();
 		}
 		
-		// Menu CSS
-		if($d2u_helper->hasConfig("include_menu") && $d2u_helper->getConfig("include_menu") == "true") {
+		// Multilevel Menu CSS
+		if($d2u_helper->getConfig("include_menu_multilevel", "false") == "true") {
 			$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi::getAutoCSS());
+		}
+
+		// Slicknav Menu CSS
+		if($d2u_helper->getConfig("include_menu_slicknav", "false") == "true") {
+			$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_slicknav::getAutoCSS());
 		}
 
 		print $css;
@@ -300,9 +311,13 @@ function sendD2UHelperJS($position = "head") {
 			}
 		}
 		else if($position == "head") {
-			// Menu JS
-			if($d2u_helper->hasConfig("include_menu") && $d2u_helper->getConfig("include_menu") == "true") {
+			// MultiLevel menu JS
+			if($d2u_helper->getConfig("include_menu_multilevel", "false") == "true") {
 				$js .= d2u_mobile_navi::getAutoJS();
+			}
+			// Slicknav menu JS
+			if($d2u_helper->getConfig("include_menu_slicknav", "false") == "true") {
+				$js .= d2u_mobile_navi_slicknav::getAutoJS();
 			}
 		}
 		print $js;

@@ -26,9 +26,11 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 
 	// Checkbox also need special treatment if empty
 	$settings['activate_rewrite_scheme'] = array_key_exists('activate_rewrite_scheme', $settings);
-	$settings['include_bootstrap'] = array_key_exists('include_bootstrap', $settings);
+	$settings['include_bootstrap4'] = array_key_exists('include_bootstrap4', $settings);
+	$settings['include_jquery'] = array_key_exists('include_jquery', $settings);
 	$settings['include_module'] = array_key_exists('include_module', $settings);
-	$settings['include_menu'] = array_key_exists('include_menu', $settings);
+	$settings['include_menu_multilevel'] = array_key_exists('include_menu_multilevel', $settings);
+	$settings['include_menu_slicknav'] = array_key_exists('include_menu_slicknav', $settings);
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['submenu_use_articlename'] = array_key_exists('submenu_use_articlename', $settings);
@@ -103,7 +105,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				<legend><small><i class="rex-icon fa-navicon"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_menu'); ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
-						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu', 'settings[include_menu]', 'true', $this->getConfig('include_menu') == 'true');
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_multilevel', 'settings[include_menu_multilevel]', 'true', $this->getConfig('include_menu_multilevel') == 'true');
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_slicknav', 'settings[include_menu_slicknav]', 'true', $this->getConfig('include_menu_slicknav') == 'true');
 						$width_options = [
 							"xs" => rex_i18n::msg('d2u_helper_settings_width_xs'),
 							"sm" => rex_i18n::msg('d2u_helper_settings_width_sm'),
@@ -120,7 +123,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_templates'); ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
-						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap]', 'true', $this->getConfig('include_bootstrap') == 'true');
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_jquery', 'settings[include_jquery]', 'true', $this->getConfig('include_jquery') == 'true');
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap4]', 'true', $this->getConfig('include_bootstrap4') == 'true');
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_module', 'settings[include_module]', 'true', $this->getConfig('include_module') == 'true');
 						print '<hr style="border-top: 1px solid #333">';
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_header_pic', 'template_header_pic', $this->getConfig('template_header_pic'));

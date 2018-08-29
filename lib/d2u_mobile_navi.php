@@ -1,6 +1,6 @@
 <?php
 /**
- * Funktionen rund um eine mobile Navigation.
+ * Class for Responsive MultiLevel Menu (http://tympanus.net/codrops/2013/04/19/responsive-multi-level-menu/)
  *
  * @author Tobias Krais
  */
@@ -39,10 +39,10 @@ class d2u_mobile_navi {
 	}
 
 	/**
-	 * Redaxo Kategorien.
-	 * @param int $cat_parent_id ID der Elternkategorie. Wenn 0 werden die Redaxo
-	 * Root Kategorien ausgegeben
-	 * @return rex_category[] Array mit Redaxo Kategorien.
+	 * Redaxo categories.
+	 * @param int $cat_parent_id Parent category ID. If 0, Redaxo root categories
+	 * are returned
+	 * @return rex_category[] Array containing Redaxo categories
 	 */
 	private static function getCategories($cat_parent_id = 0) {
 		if($cat_parent_id > 0) {
@@ -54,9 +54,8 @@ class d2u_mobile_navi {
 	}
 	
 	/**
-	 * Gibt ein Menü (http://tympanus.net/codrops/2013/04/19/responsive-multi-level-menu/) aus.
-	 * @param int $cat_parent_id Wenn nicht die Root Kategorien verwendet ausgegeben
-	 * werden sollen, muss diese Eltern Kategorie ID übergeben werden.
+	 * Returns a Responsive MultiLevel menu for desktop view
+	 * @param int $cat_parent_id Redaxo category ID, default root categories are returned.
 	 */
 	public static function getResponsiveMultiLevelDesktopMenu($cat_parent_id = 0) {
 		$addon = rex_addon::get("d2u_helper");
@@ -106,7 +105,7 @@ class d2u_mobile_navi {
 					}
 					else {
 						// Mit Untermenü
-						d2u_mobile_navi::getResponsiveMultiLevelSubmenu($lev2);
+						d2u_mobile_navi::getSubmenu($lev2);
 					}
 				}
 				print '</ul>';
@@ -127,9 +126,8 @@ class d2u_mobile_navi {
 	}
 
 	/**
-	 * Gibt ein mobiles Menü (http://tympanus.net/codrops/2013/04/19/responsive-multi-level-menu/) aus.
-	 * @param int $cat_parent_id Wenn nicht die Root Kategorien verwendet ausgegeben
-	 * werden sollen, muss diese Eltern Kategorie ID übergeben werden.
+	 * Returns a Responsive MultiLevel menu for mobile view
+	 * @param int $cat_parent_id Redaxo category ID, default root categories are returned.
 	 */
 	public static function getResponsiveMultiLevelMobileMenu($cat_parent_id = 0) {
 		$addon = rex_addon::get("d2u_helper");
@@ -165,7 +163,7 @@ class d2u_mobile_navi {
 			}
 			else {
 				// Mit Untermenü
-				d2u_mobile_navi::getResponsiveMultiLevelSubmenu($lev1);
+				d2u_mobile_navi::getSubmenu($lev1);
 			}
 		}
 		print '</ul>';
@@ -180,10 +178,10 @@ class d2u_mobile_navi {
 	}
 	
 	/**
-	 * Gibt das Unternemü für ein Mobile Responsive MultiLevel Menu zurück.
-	 * @param rex_category $rex_category Redaxo Kategorie
+	 * Returns Mobile Responsive MultiLevel submenu
+	 * @param rex_category $rex_category Redaxo category
 	 */
-	private static function getResponsiveMultiLevelSubmenu($rex_category) {
+	private static function getSubmenu($rex_category) {
 		print '<li'. (rex_article::getCurrentId() == $rex_category->getId() || in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'">'. $rex_category->getName() .'</a>';
 		print '<ul class="dl-submenu">';
 		print '<li class="dl-back"><a href="#">&nbsp;</a></li>';
@@ -199,7 +197,7 @@ class d2u_mobile_navi {
 			}
 			else {
 				// Mit Untermenü
-				d2u_mobile_navi::getResponsiveMultiLevelSubmenu($rex_subcategory);
+				d2u_mobile_navi::getSubmenu($rex_subcategory);
 			}
 		}
 		print '</ul>';

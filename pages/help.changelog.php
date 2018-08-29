@@ -3,8 +3,12 @@
 	<div class="panel-body">
 		<p>1.5.0-DEV</p>
 		<ul>
+			<li>Modul "01-2 Texteditor mit Bild und Fettschrift" bindet Bilder rechts und unterhalb vom Text ein.</li>
+			<li>Modul "03-1 Bild" bindet Bilder jetzt auch im Original ein.</li>
 			<li>Übersetzungshilfe in Plugin ausgelagert.</li>
-			<li>Lieblingseditor unterstützt nun CKEditor 5 mitsamt einzelnen Profilen und Profile des CKEditor.</li>
+			<li>Lieblingseditor unterstützt nun CKEditor 5 mitsamt einzelnen Profilen und Profile des CKEditor (ab kommender Version 4.9.3).</li>
+			<li>Slicknav als weitere Navigation hinzugefügt (Version 1.0.10, https://github.com/ComputerWolf/SlickNav).</li>
+			<li>JQuery und Bootstrap 4 können jetzt getrennt voneinander eingebunden werden.</li>
 		</ul>
 		<p>1.4.7</p>
 		<ul>

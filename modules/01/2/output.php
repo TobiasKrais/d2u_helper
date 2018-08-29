@@ -24,29 +24,27 @@
 		<div class="row">
 			<?php
 				// Picture
-				if($position == "left") {
-					print '<div class="col-12 col-sm-6 col-md-4">';
-				}
-				else {
-					print '<div class="col-12">';
-				}
+				$html_picture = $position == "left" || $position == "right" ? '<div class="col-12 col-sm-6 col-md-4">' : '<div class="col-12">';
 
 				if ("REX_MEDIA[1]" != '') {
 					$media = rex_media::get("REX_MEDIA[1]");
-					print '<img src="';
+					$html_picture .= '<img src="';
 					if($type == "") {
-						print rex_url::media($picture);
+						$html_picture .= rex_url::media($picture);
 					}
 					else {
-						print 'index.php?rex_media_type='. $type .'&rex_media_file='. $picture;
+						$html_picture .= 'index.php?rex_media_type='. $type .'&rex_media_file='. $picture;
 					}
-					print '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'">';
+					$html_picture .= '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'">';
 				}
 				
-				print '<br><br></div>';
+				$html_picture .= '<br><br></div>';
+				if($position == "left") {
+					print $html_picture;
+				}
 
 				// Heading and Text
-				if($position == "left") {
+				if($position == "left" || $position == "right") {
 					print '<div class="col-12 col-sm-6 col-md-8">';
 				}
 				else {
@@ -69,6 +67,11 @@
 				}
 
 				print '</div>';
+				
+				// Picture right
+				if($position == "right" || $position == "bottom") {
+					print $html_picture;
+				}
 			?>
 		</div>
 	</div>

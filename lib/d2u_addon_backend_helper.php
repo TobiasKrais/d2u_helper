@@ -70,7 +70,7 @@ class d2u_addon_backend_helper {
 	public static function getWYSIWYGEditors() {
 		$options_editor = [];
 		if(rex_addon::get('ckeditor')->isAvailable()) {
-			if(method_exists(rex_ckeditor, 'getProfiles')) {
+			if(method_exists('rex_ckeditor', 'getProfiles')) {
 				foreach(rex_ckeditor::getProfiles() as $cke_profile_name) {
 					$options_editor['ckeditor_'. $cke_profile_name] = rex_i18n::msg('ckeditor_title') ." - ". $cke_profile_name;
 				}
@@ -120,7 +120,7 @@ class d2u_addon_backend_helper {
 		}
 		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'ckeditor') !== FALSE && rex_addon::get('ckeditor')->isAvailable()) {
 			$wysiwyg_class = ' ckeditor" data-ckeditor-profile="standard';
-			if(method_exists(rex_ckeditor, 'getProfiles')) {
+			if(method_exists('rex_ckeditor', 'getProfiles')) {
 				foreach(rex_ckeditor::getProfiles() as $cke_profile_name) {
 					if(rex_config::get('d2u_helper', 'editor') == 'ckeditor_'. $cke_profile_name) {
 						$wysiwyg_class = ' ckeditor" data-ckeditor-profile="'. $cke_profile_name ;

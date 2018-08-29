@@ -58,6 +58,7 @@
 	</div>
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[1]" >
+			<option value="">Bild im Original einbinden</option>
 		<?php
 			$sql = rex_sql::factory();
 			$result = $sql->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');

@@ -9,14 +9,14 @@ if(class_exists(D2UModuleManager)) {
 		"Texteditor",
 		7);
 	$modules[] = new D2UModule("01-2",
-		"Texteditor mit Bild und Überschrift",
-		7);
+		"Texteditor mit Bild und Fettschrift",
+		8);
 	$modules[] = new D2UModule("02-1",
 		"Ueberschrift",
 		4);
 	$modules[] = new D2UModule("03-1",
 		"Bild",
-		4);
+		5);
 	$modules[] = new D2UModule("03-2",
 		"Bildergallerie Ekko Lightbox",
 		5);
@@ -150,6 +150,28 @@ if (!$this->hasConfig('editor')) {
 	else {
 		$this->setConfig('editor', 'tinymce4');
 	}
+}
+
+// 1.5.0 Update
+if($this->hasConfig('include_bootstrap')) {
+	if($this->getConfig('include_bootstrap') == 'true') {
+		$this->setConfig('include_bootstrap4', 'true');
+		$this->setConfig('include_jquery', 'true');
+	}
+	else {
+		$this->setConfig('include_bootstrap4', 'false');
+		$this->setConfig('include_jquery', 'false');
+	}
+	$this->removeConfig('include_bootstrap');
+}
+if($this->hasConfig('include_menu')) {
+	if($this->getConfig('include_menu') == 'true') {
+		$this->setConfig('include_menu_multilevel', 'true');
+	}
+	else {
+		$this->setConfig('include_menu_multilevel', 'false');
+	}
+	$this->removeConfig('include_menu');
 }
 
 // Update translations

@@ -29,7 +29,7 @@ if($sql->getRows() == 0) {
 }
 
 // Standard settings
-if (!$this->hasConfig()) {
+if (!$this->hasConfig('navi_color_bg')) {
 	$this->setConfig('editor', '"tinymce"');
 	$this->setConfig('navi_color_bg', '"#ffba23"');
 	$this->setConfig('navi_color_font', '"#ffffff"');

@@ -43,10 +43,10 @@
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		&Uuml;berschrift:<br />
+		&Uuml;berschrift (Fettschrift, optional):<br />
 	</div>
 	<div class="col-xs-8">
-		<input type="text" size="50" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" />
+		<input type="text" style="width: 100%;" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" />
 	</div>
 </div>
 <div class="row">
@@ -114,6 +114,8 @@
 				$position = "REX_VALUE[4]";
 				print '<option value="top"'. ($position == "top" ? ' selected="selected"' : '') .'>Bild oberhalb vom Text</option>';
 				print '<option value="left"'. ($position == "left" ? ' selected="selected"' : '') .'>Bild links vom Text</option>';
+				print '<option value="right"'. ($position == "right" ? ' selected="selected"' : '') .'>Bild rechts vom Text</option>';
+				print '<option value="bottom"'. ($position == "bottom" ? ' selected="selected"' : '') .'>Bild unterhalb vom Text</option>';
 			?>
 		</select>
 	</div>
