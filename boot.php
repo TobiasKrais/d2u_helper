@@ -86,11 +86,11 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	// Vor dem </head> einfügen
 	if($addon->getConfig('include_jquery') == 'true') {
 		// JavaScript
-		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'?v='. $VERSION_JQUERY .'"></script>' . PHP_EOL;
+		$insert_head .= '<script src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'?v='. $VERSION_JQUERY .'"></script>' . PHP_EOL;
 	}
 	if($addon->getConfig('include_bootstrap4') == 'true') {
 		// Popper JavaScript
-		$insert_head .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/popper.min.js') .'"></script>' . PHP_EOL;
+		$insert_head .= '<script src="'. $addon->getAssetsUrl('bootstrap4/popper.min.js') .'"></script>' . PHP_EOL;
 		// Bootstrap CSS
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v='. $VERSION_BOOTSTRAP .'" />' . PHP_EOL;
 	}
@@ -104,19 +104,19 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 		
 	// Menu stuff in header
 	if($addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true") {
-		$insert_head .= '<script type="text/javascript" src="index.php?position=head&d2u_helper=helper.js"></script>' . PHP_EOL;
+		$insert_head .= '<script src="index.php?position=head&d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 
 	$ep->setSubject(str_replace('</head>', $insert_head .'</head>', $ep->getSubject()));
 
 	// Vor dem </body> einfügen
 	if($addon->getConfig('include_bootstrap4') == 'true') {
-		$insert_body .= '<script type="text/javascript" src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'?v='. $VERSION_BOOTSTRAP .'"></script>' . PHP_EOL;
+		$insert_body .= '<script src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'?v='. $VERSION_BOOTSTRAP .'"></script>' . PHP_EOL;
 	}
 
 	// Module stuff in body
 	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true" && d2u_addon_frontend_helper::getModulesJS()) {
-		$insert_body .= '<script type="text/javascript" src="index.php?position=body&d2u_helper=helper.js"></script>' . PHP_EOL;
+		$insert_body .= '<script src="index.php?position=body&d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
@@ -132,7 +132,7 @@ function appendWiredMindseMetrics(rex_extension_point $ep) {
 		// eMatrics stuff
 		$insert_body = '
 		<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.9.2 START -->
-		<script type="text/javascript">
+		<script>
 			var wiredminds = [];
 			wiredminds.push(["setTrackParam", "wm_custnum", "'. rex_config::get("d2u_helper", "emetrics_customno", "") .'"]);
 			// Begin own parameters.

@@ -7,13 +7,13 @@ if(class_exists(D2UModuleManager)) {
 		3);
 	$modules[] = new D2UModule("01-1",
 		"Texteditor",
-		7);
+		8);
 	$modules[] = new D2UModule("01-2",
 		"Texteditor mit Bild und Fettschrift",
 		8);
 	$modules[] = new D2UModule("02-1",
 		"Ueberschrift",
-		4);
+		5);
 	$modules[] = new D2UModule("03-1",
 		"Bild",
 		5);

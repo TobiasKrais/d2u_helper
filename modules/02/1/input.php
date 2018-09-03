@@ -43,7 +43,7 @@
 		&Uuml;berschrift:<br />
 	</div>
 	<div class="col-xs-8">
-		<input type="text" size="50" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" />
+		<input type="text" size="50" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" style="max-width: 100%;"/>
 		<select name="REX_INPUT_VALUE[2]" >
 		<?php
 		foreach (array("h1","h2","h3","h4","h5","h6") as $value) {

@@ -145,7 +145,7 @@ class d2u_addon_backend_helper {
 	 */
 	public static function getCSS() {
 		$css =
-'<style type="text/css">
+'<style>
 	input[type="radio"], input[type="checkbox"] {
 		width: auto;
 	}

@@ -3,7 +3,8 @@
 	<div class="panel-body">
 		<p>1.5.0-DEV</p>
 		<ul>
-			<li>Modul "01-2 Texteditor mit Bild und Fettschrift" bindet Bilder rechts und unterhalb vom Text ein.</li>
+			<li>Modul "01-1 Texteditor" Jetzt auch 9 von 12 Spalten auswählbar.</li>
+			<li>Modul "01-2 Texteditor mit Bild und Fettschrift" bindet Bilder rechts und unterhalb vom Text ein. Außerdem können Bild und Überschrift nun verlinkt werden</li>
 			<li>Modul "03-1 Bild" bindet Bilder jetzt auch im Original ein.</li>
 			<li>Übersetzungshilfe in Plugin ausgelagert.</li>
 			<li>Lieblingseditor unterstützt nun CKEditor 5 mitsamt einzelnen Profilen und Profile des CKEditor (ab kommender Version 4.9.3).</li>

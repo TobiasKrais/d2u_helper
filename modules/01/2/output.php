@@ -1,58 +1,86 @@
 <?php
-	$cols = "REX_VALUE[20]";
-	if($cols == "") {
-		$cols = 8;
-	}
+	$cols = "REX_VALUE[20]" == "" ? 8 : "REX_VALUE[20]";
 	$offset_lg_cols = intval("REX_VALUE[17]");
 	$offset_lg = "";
 	if($offset_lg_cols > 0) {
 		$offset_lg = " mr-lg-auto ml-lg-auto ";
 	}
-	$picture = "REX_MEDIA[1]";
 	$heading = "REX_VALUE[1]";
-	$type = "REX_VALUE[3]";
-	$position = "REX_VALUE[4]";
 	$same_height = "REX_VALUE[5]" == 'true' ? 'same-height' : '';
+
+	// Link
+	$link_type = "REX_VALUE[7]";
+	$link_url = "";
+	if($link_type == "link") {
+		$link_url = "REX_VALUE[8]";
+	}
+	else if($link_type == "download") {
+		$link_url = rex_url::media("REX_MEDIA[2]");
+	}
+	else if($link_type == "article") {
+		$article_id = "REX_LINK[1]";
+		if($article_id > 0 && rex_article::get($article_id) instanceof rex_article) {
+			$link_url = rex_getUrl($article_id);
+		}
+	}
 	
-	$position_container_classes = "col-12 col-md-6 col-lg-". $cols . $offset_lg;
-	if($position == "left") {
-		$position_container_classes = "col-12 col-lg-". $cols . $offset_lg;
+	// Picture
+	$picture = "REX_MEDIA[1]";
+	$picture_cols = "REX_VALUE[6]" == "" ? 4 : "REX_VALUE[6]";
+	$picture_type = "REX_VALUE[3]";
+	$picture_position = "REX_VALUE[4]";
+	
+	$container_classes = "col-12 col-md-6 col-lg-". $cols . $offset_lg;
+	if($picture_position == "left") {
+		$container_classes = "col-12 col-lg-". $cols . $offset_lg;
 	}
 ?>
-<div class="<?php echo $position_container_classes; ?> abstand">
+<div class="<?php echo $container_classes; ?> abstand">
 	<div class="<?php print $same_height; ?> module-box">
 		<div class="row">
 			<?php
 				// Picture
-				$html_picture = $position == "left" || $position == "right" ? '<div class="col-12 col-sm-6 col-md-4">' : '<div class="col-12">';
+				$html_picture = $picture_position == "left" || $picture_position == "right" ? '<div class="col-12 col-sm-'. ($picture_cols == 2 ? 4 : 6) .' col-md-'. $picture_cols .'">' : '<div class="col-12">';
 
 				if ("REX_MEDIA[1]" != '') {
+					if($link_url != "") {
+						$html_picture .= '<a href="'. $link_url .'">';
+					}
 					$media = rex_media::get("REX_MEDIA[1]");
 					$html_picture .= '<img src="';
-					if($type == "") {
+					if($picture_type == "") {
 						$html_picture .= rex_url::media($picture);
 					}
 					else {
-						$html_picture .= 'index.php?rex_media_type='. $type .'&rex_media_file='. $picture;
+						$html_picture .= 'index.php?rex_media_type='. $picture_type .'&rex_media_file='. $picture;
 					}
 					$html_picture .= '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'">';
+					if($link_url != "") {
+						$html_picture .= '</a>';
+					}
 				}
 				
 				$html_picture .= '<br><br></div>';
-				if($position == "left") {
+				if($picture_position == "left") {
 					print $html_picture;
 				}
 
 				// Heading and Text
-				if($position == "left" || $position == "right") {
-					print '<div class="col-12 col-sm-6 col-md-8">';
+				if($picture_position == "left" || $picture_position == "right") {
+					print '<div class="col-12 col-sm-'. ($picture_cols == 2 ? 8 : 6) .' col-md-'. (12 - $picture_cols) .'">';
 				}
 				else {
 					print '<div class="col-12">';
 				}
 
 				if ($heading != "") {
+					if($link_url != "") {
+						print '<a href="'. $link_url .'">';
+					}
 					print "<b>". $heading ."</b><br>";
+					if($link_url != "") {
+						print '</a>';
+					}
 				}
 				if ('REX_VALUE[id=2 isset=1]') {
 					if(rex_config::get('d2u_helper', 'editor', '') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
@@ -69,7 +97,7 @@
 				print '</div>';
 				
 				// Picture right
-				if($position == "right" || $position == "bottom") {
+				if($picture_position == "right" || $picture_position == "bottom") {
 					print $html_picture;
 				}
 			?>

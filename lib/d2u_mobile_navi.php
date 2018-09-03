@@ -117,7 +117,7 @@ class d2u_mobile_navi {
 		print '</div>'; // desktop-menu
 		
 		// Nötige JS einfügen
-		print '<script type="text/javascript" src="'. $addon->getAssetsUrl('responsive-multilevelmenu/jquery.dlmenu.js') .'"></script>' . PHP_EOL;
+		print '<script src="'. $addon->getAssetsUrl('responsive-multilevelmenu/jquery.dlmenu.js') .'"></script>' . PHP_EOL;
 		print '<script>$(function() {';
 		foreach(d2u_mobile_navi::getCategories($cat_parent_id) as $category) {
 			print "$( '#dl-menu-". $category->getId() ."' ).dlmenu({ animationClasses : { classin : 'dl-animate-in-2', classout : 'dl-animate-out-2' } });";
@@ -171,7 +171,7 @@ class d2u_mobile_navi {
 		print '</div>'; // mobile-menu
 
 		// Nötige JS einfügen
-		print '<script type="text/javascript" src="'. $addon->getAssetsUrl('responsive-multilevelmenu/jquery.dlmenu.js') .'"></script>' . PHP_EOL;
+		print '<script src="'. $addon->getAssetsUrl('responsive-multilevelmenu/jquery.dlmenu.js') .'"></script>' . PHP_EOL;
 		print '<script>$(function() {';
 		print "$( '#dl-menu' ).dlmenu({ animationClasses : { classin : 'dl-animate-in-2', classout : 'dl-animate-out-2' } });";
 		print ' });</script>';
