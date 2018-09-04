@@ -61,7 +61,7 @@
 				}
 				
 				$html_picture .= '<br><br></div>';
-				if($picture_position == "left") {
+				if($picture_position == "left" || $picture_position == "top") {
 					print $html_picture;
 				}
 
