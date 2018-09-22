@@ -159,7 +159,7 @@ class D2UModuleManager {
 			"Bild",
 			5);
 		$modules[] = new D2UModule("03-2",
-			"Bildergallerie Ekko Lightbox",
+			"Bildergalerie Ekko Lightbox",
 			5);
 		$modules[] = new D2UModule("04-1",
 			"Google Maps",
@@ -188,6 +188,9 @@ class D2UModuleManager {
 		$modules[] = new D2UModule("11-1",
 			"YForm Kontaktformular (DSGVO kompatibel)",
 			2);
+		$modules[] = new D2UModule("12-1",
+			"YFeed Stream Galerie",
+			1);
 		// 20-x reserved for D2U Addresss
 		// 21-x reserved for D2U History
 		// 22-x reserved for D2U Staff

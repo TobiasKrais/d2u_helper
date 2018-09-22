@@ -231,6 +231,10 @@
 												print '<div class="col-6">'. $tag_open .'d2u_immo_additional_costs'. $tag_close .':</div>';
 												print '<div class="col-6">'. number_format($property->additional_costs, 2, ",", ".") .'&nbsp;'. $property->currency_code .'</div>';
 											}
+											if($property->rent_plus_vat) {
+												print '<div class="col-12">'. $tag_open .'d2u_immo_rent_plus_vat'. $tag_close .'</div>';
+												print '<div class="col-12">&nbsp;</div>';
+											}
 											if($property->deposit != "") {
 												print '<div class="col-6">'. $tag_open .'d2u_immo_deposit'. $tag_close .':</div>';
 												print '<div class="col-6">'. $property->deposit .'</div>';
@@ -311,7 +315,7 @@
 											}
 										}
 
-										if(strlen($property->energy_pass) > 5) {
+										if($property->object_type != "grundstueck" && strlen($property->energy_pass) > 5) {
 											print '<div class="col-6">'. $tag_open .'d2u_immo_energy_pass'. $tag_close .'</div>';
 											print '<div class="col-6">'. $tag_open .'d2u_immo_energy_pass_'. $property->energy_pass . $tag_close .'</div>';
 

@@ -3,9 +3,9 @@
 		Breite des Blocks:
 	</div>
 	<div class="col-xs-8">
-		<select name="REX_INPUT_VALUE[20]" >
+		<select name="REX_INPUT_VALUE[20]" class="form-control">
 		<?php
-		$values = [12=>"12 von 12 Spalten (ganze Breite)", 6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten"];
+		$values = [12=>"12 von 12 Spalten (ganze Breite)", 8=>"8 von 12 Spalten", 6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten"];
 		foreach($values as $key => $value) {
 			echo '<option value="'. $key .'" ';
 	
@@ -24,6 +24,6 @@
 		Vollständige Youtube Video URL:
 	</div>
 	<div class="col-xs-8">
-		<input type="text" style="width: 100%;" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" placeholder="https://www.youtube.com/watch?v=n7TSs57R4fA" />
+		<input type="text" class="form-control" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" placeholder="https://www.youtube.com/watch?v=n7TSs57R4fA" />
 	</div>
 </div>

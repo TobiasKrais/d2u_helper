@@ -22,7 +22,7 @@
 		else {
 			print 'index.php?rex_media_type='. $picture_type .'&rex_media_file='. $picture;
 		}
-		print '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'">';
+		print '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'" class="module_3_1_image">';
 	}
 ?>
 </div>

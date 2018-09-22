@@ -1,21 +1,4 @@
 <?php
-/**
- * Version 1.0
- * Add the following lines to your stylesheet:
- * .youtubeWrapper {
- *	position: relative;
- *	padding-bottom: 56.25%;
- *	padding-top: 25px;
- *	height: 0;
- * }
- * .youtubeWrapper iframe {
- *	position: absolute;
- *	top: 0;
- *	left: 0;
- *	width: 100%;
- *	height: 100%;
- * }
- */
 	$cols = "REX_VALUE[20]";
 	if($cols == "") {
 		$cols = 8;

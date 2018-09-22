@@ -80,6 +80,11 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$VERSION_JQUERY = '3.3.1';
 	$VERSION_BOOTSTRAP = '4.1.3';
 	$addon = rex_addon::get("d2u_helper");
+	
+	// If insertion should be prevented, detect class "prevent_d2u_helper_styles"
+	if(strpos($ep->getSubject(), 'prevent_d2u_helper_styles') !== FALSE) {
+		return;
+	}
 
 	$insert_head = "";
 	$insert_body = "";

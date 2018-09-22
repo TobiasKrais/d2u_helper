@@ -219,7 +219,7 @@ class d2u_addon_backend_helper {
 	 * @param boolean $readonly TRUE if field should have readonly attribute.
 	 */
 	public static function form_checkbox($message_id, $fieldname, $value, $checked = FALSE, $readonly = FALSE) {
-		print '<dl class="rex-form-group form-group">';
+		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><input class="form-control" type="checkbox" name="' . $fieldname . '" value="' . $value . '"';
 		if ($checked) {
 			print ' checked="checked"';

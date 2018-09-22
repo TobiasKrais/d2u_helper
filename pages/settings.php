@@ -107,6 +107,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 					<?php
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_multilevel', 'settings[include_menu_multilevel]', 'true', $this->getConfig('include_menu_multilevel') == 'true');
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_slicknav', 'settings[include_menu_slicknav]', 'true', $this->getConfig('include_menu_slicknav') == 'true');
+						d2u_addon_backend_helper::form_infotext('d2u_helper_settings_include_prevent', 'prevent_include_info');
 						$width_options = [
 							"xs" => rex_i18n::msg('d2u_helper_settings_width_xs'),
 							"sm" => rex_i18n::msg('d2u_helper_settings_width_sm'),
@@ -126,6 +127,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_jquery', 'settings[include_jquery]', 'true', $this->getConfig('include_jquery') == 'true');
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap4]', 'true', $this->getConfig('include_bootstrap4') == 'true');
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_module', 'settings[include_module]', 'true', $this->getConfig('include_module') == 'true');
+						d2u_addon_backend_helper::form_infotext('d2u_helper_settings_include_prevent', 'prevent_include_info');
 						print '<hr style="border-top: 1px solid #333">';
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_header_pic', 'template_header_pic', $this->getConfig('template_header_pic'));
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_logo', 'template_logo', $this->getConfig('template_logo'));

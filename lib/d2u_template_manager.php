@@ -132,7 +132,7 @@ class D2UTemplateManager {
 			5);
 		$d2u_templates[] = new D2UTemplate("03-2",
 			"Immo Window Advertising Template",
-			4);
+			5);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",
 			1);
