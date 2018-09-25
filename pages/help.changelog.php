@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.5.1</p>
+		<ul>
+			<li>Bugfix d2u_addon_frontend_helper::getAlternateURLs()</li>
+		</ul>
 		<p>1.5.0</p>
 		<ul>
 			<li>Einige von anderen abhängige Einstellungen werden ausgeblendet wenn sie nicht relevant sind.</li>

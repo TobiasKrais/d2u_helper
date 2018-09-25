@@ -65,19 +65,19 @@ class d2u_addon_frontend_helper {
 	 */
 	public static function getAlternateURLs() {
 		$alternate_URLs = [];
-		if(rex_addon::get('d2u_courses')->isAvailable() && d2u_courses_frontend_helper::getAlternateURLs() != "") {
+		if(rex_addon::get('d2u_courses')->isAvailable() && count(d2u_courses_frontend_helper::getAlternateURLs()) > 0) {
 			$alternate_URLs = d2u_courses_frontend_helper::getAlternateURLs();
 		}
-		else if(rex_addon::get('d2u_immo')->isAvailable() && d2u_immo_frontend_helper::getAlternateURLs() != "") {
+		else if(rex_addon::get('d2u_immo')->isAvailable() && count(d2u_immo_frontend_helper::getAlternateURLs()) > 0) {
 			$alternate_URLs = d2u_immo_frontend_helper::getAlternateURLs();
 		}
-		else if(rex_addon::get('d2u_jobs')->isAvailable() && d2u_jobs_frontend_helper::getAlternateURLs() != "") {
+		else if(rex_addon::get('d2u_jobs')->isAvailable() && count(d2u_jobs_frontend_helper::getAlternateURLs()) > 0) {
 			$alternate_URLs = d2u_jobs_frontend_helper::getAlternateURLs();
 		}
-		else if(rex_addon::get('d2u_machinery')->isAvailable() && d2u_machinery_frontend_helper::getAlternateURLs() != "") {
+		else if(rex_addon::get('d2u_machinery')->isAvailable() && count(d2u_machinery_frontend_helper::getAlternateURLs()) > 0) {
 			$alternate_URLs = d2u_machinery_frontend_helper::getAlternateURLs();
 		}
-		else if(rex_addon::get('d2u_references')->isAvailable() && d2u_references_frontend_helper::getAlternateURLs() != "") {
+		else if(rex_addon::get('d2u_references')->isAvailable() && count(d2u_references_frontend_helper::getAlternateURLs()) > 0) {
 			$alternate_URLs = d2u_references_frontend_helper::getAlternateURLs();
 		}
 		else {
