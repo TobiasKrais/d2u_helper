@@ -1,7 +1,6 @@
 d2u_helper_meta_translations = Translation helper
 
 d2u_helper_translations_apply = Apply
-d2u_helper_translations_sort = Sort
 d2u_helper_translations_description = Translation helper offers a list of missing or to be updated D2U addons translations.
 d2u_helper_translations_filter = Filter
 d2u_helper_translations_filter_select = Show ...

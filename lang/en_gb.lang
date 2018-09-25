@@ -27,6 +27,7 @@ d2u_helper_picture = Picture
 d2u_helper_pictures = Pictures
 d2u_helper_settings = Settings
 d2u_helper_setup = Setup
+d2u_helper_sort = Sorting
 d2u_helper_text_lang = Texts in language
 d2u_helper_translation = This translation ...
 d2u_helper_translation_needs_update = ... needs to be updates

@@ -221,7 +221,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							'd2u_helper_settings_rewrite_urlencode' => 'urlencode'
 						];
 						foreach(rex_clang::getAll() as $rex_clang) {
-							print '<dl class="rex-form-group form-group">';
+							print '<dl class="rex-form-group form-group" id="settings[rewrite_scheme_clang_'. $rex_clang->getId() .']">';
 							print '<dt><label>'. $rex_clang->getName() .'</label></dt>';
 							print '<dd>';
 							print '<select class="form-control" name="settings[rewrite_scheme_clang_'. $rex_clang->getId() .']">';
@@ -233,6 +233,32 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							print '</dl>';
 						}
 					?>
+					<script>
+						function changeRewriteType() {
+							if($('input[name="settings\\[activate_rewrite_scheme\\]"]').is(':checked')) {
+								<?php
+									foreach(rex_clang::getAll() as $rex_clang) {
+										print "$('#settings\\\\[rewrite_scheme_clang_". $rex_clang->getId() ."\\\\]').fadeIn();";
+									}
+								?>
+								
+							}
+							else {
+								<?php
+									foreach(rex_clang::getAll() as $rex_clang) {
+										print "$('#settings\\\\[rewrite_scheme_clang_". $rex_clang->getId() ."\\\\]').hide();";
+									}
+								?>
+							}
+						}
+
+						// On init
+						changeRewriteType();
+						// On change
+						$('input[name="settings\\[activate_rewrite_scheme\\]"]').on('change', function() {
+							changeRewriteType();
+						});
+					</script>
 				</div>
 			</fieldset>
 			<?php
@@ -254,7 +280,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 					<?php
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_lang_install', 'settings[lang_replacements_install]', 'true', $this->getConfig('lang_replacements_install') == 'true');
 						foreach(rex_clang::getAll() as $rex_clang) {
-							print '<dl class="rex-form-group form-group">';
+							print '<dl class="rex-form-group form-group" id="settings[lang_replacement_'. $rex_clang->getId() .']">';
 							print '<dt><label>'. $rex_clang->getName() .'</label></dt>';
 							print '<dd>';
 							print '<select class="form-control" name="settings[lang_replacement_'. $rex_clang->getId() .']">';
@@ -273,6 +299,32 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							print '</dl>';
 						}
 					?>
+					<script>
+						function changeLangType() {
+							if($('input[name="settings\\[lang_replacements_install\\]"]').is(':checked')) {
+								<?php
+									foreach(rex_clang::getAll() as $rex_clang) {
+										print "$('#settings\\\\[lang_replacement_". $rex_clang->getId() ."\\\\]').fadeIn();";
+									}
+								?>
+								
+							}
+							else {
+								<?php
+									foreach(rex_clang::getAll() as $rex_clang) {
+										print "$('#settings\\\\[lang_replacement_". $rex_clang->getId() ."\\\\]').hide();";
+									}
+								?>
+							}
+						}
+
+						// On init
+						changeLangType();
+						// On change
+						$('input[name="settings\\[lang_replacements_install\\]"]').on('change', function() {
+							changeLangType();
+						});
+					</script>
 				</div>
 			</fieldset>
 		</div>

@@ -1,12 +1,14 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.5.0-DEV</p>
+		<p>1.5.0</p>
 		<ul>
+			<li>Einige von anderen abhängige Einstellungen werden ausgeblendet wenn sie nicht relevant sind.</li>
+			<li>Modul "12-1 YFeed Stream Galerie" hinzugefügt. Voraussetzung ist aber dieser Pull Request: https://github.com/yakamara/redaxo_yfeed/pull/68</li>
 			<li>Modul "06-1 YouTube Video einbinden" fügt jetzt einen 15px Abstand unterhalb des Videos ein und kann nun 8 Spalten breit sein.</li>
 			<li>Wenn in den Einstellungen die Option zum Automatischen hinzufügen von Bootstrap und JQuery aktiviert ist, gab es bisher keine Möglichkeit einzelne Templates auszunehmen. Das ist jetzt möglich, wenn im body Tag die Klasse 'prevent_d2u_helper_styles' hinzugefügt wird.</li>
 			<li>Modul "01-1 Texteditor" Jetzt auch 9 von 12 Spalten auswählbar.</li>
-			<li>Modul "01-2 Texteditor mit Bild und Fettschrift" bindet Bilder rechts und unterhalb vom Text ein. Außerdem können Bild und Überschrift nun verlinkt werden</li>
+			<li>Modul "01-2 Texteditor mit Bild und Fettschrift" bindet Bilder rechts und unterhalb vom Text ein. Außerdem können Bild und Überschrift nun verlinkt werden.</li>
 			<li>Modul "03-1 Bild" bindet Bilder jetzt auch im Original ein.</li>
 			<li>Übersetzungshilfe in Plugin ausgelagert.</li>
 			<li>Lieblingseditor unterstützt nun CKEditor 5 mitsamt einzelnen Profilen und Profile des CKEditor (ab kommender Version 4.9.3).</li>
