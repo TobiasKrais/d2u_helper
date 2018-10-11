@@ -3,7 +3,7 @@
 		Breite des Blocks auf größeren Geräten:
 	</div>
 	<div class="col-xs-8">
-		<select name="REX_INPUT_VALUE[20]" >
+		<select name="REX_INPUT_VALUE[20]" class="form-control">
 		<?php
 		$values = [12=>"12 von 12 Spalten (ganze Breite)", 8=>"8 von 12 Spalten", 6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten"];
 		foreach($values as $key => $value) {
@@ -23,7 +23,7 @@
 		Offset (Seitenabstand) auf größeren Geräten:
 	</div>
 	<div class="col-xs-8">
-		<select name="REX_INPUT_VALUE[17]" >
+		<select name="REX_INPUT_VALUE[17]" class="form-control">
 		<?php
 		$values = array(0=>"Kein Offset", 1=>"Offset");
 		foreach($values as $key => $value) {
@@ -43,7 +43,7 @@
 		&Uuml;berschrift:<br />
 	</div>
 	<div class="col-xs-8">
-		<input type="text" size="50" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" style="max-width: 100%;"/>
+		<input type="text" size="50" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" class="form-control"/>
 		<select name="REX_INPUT_VALUE[2]" >
 		<?php
 		foreach (array("h1","h2","h3","h4","h5","h6") as $value) {

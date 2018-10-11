@@ -163,12 +163,12 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								print '<dd><b>' . rex_i18n::msg('d2u_helper_settings_template') ." '". $d2u_template->getName() . "'</b></dd>";
 								print '</dl>';
 								if($d2u_template->getD2UId() === "02-1" && $d2u_template->isInstalled()) {
-									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_1_footer_text', 'settings[template_02_1_footer_text]', $this->getConfig('template_02_1_footer_text'), FALSE, FALSE, "text");
 									$navi_pos_options = [
 										"bottom" => rex_i18n::msg('d2u_helper_settings_template_02_1_navi_pos_bottom'),
 										"top" => rex_i18n::msg('d2u_helper_settings_template_02_1_navi_pos_top')
 									];
 									d2u_addon_backend_helper::form_select('d2u_helper_settings_template_02_1_navi_pos_text', 'settings[template_02_1_navi_pos]', $navi_pos_options, [$this->getConfig('template_02_1_navi_pos')]);
+									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_1_footer_text', 'settings[template_02_1_footer_text]', $this->getConfig('template_02_1_footer_text'), FALSE, FALSE, "text");
 								}
 								else if($d2u_template->getD2UId() === "02-2" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_02_2_slider_pics_width', 'settings[template_02_2_header_slider_pics_full_width]', 'full', $this->getConfig('template_02_2_header_slider_pics_full_width') == 'full');

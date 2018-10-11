@@ -32,9 +32,8 @@ $d2u_helper = rex_addon::get("d2u_helper");
 		<?php
 			if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig("template_logo") != "") {
 		?>
-		<div class="row abstand">
-			<div class="col-4 col-sm-7">&nbsp;</div>
-			<div class="col-8 col-sm-5">
+		<div class="row abstand" id="headerdiv">
+			<div class="col-12">
 				<a href="<?php echo rex_getUrl(rex_article::getSiteStartArticleId()); ?>">
 					<?php
 					$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
@@ -73,7 +72,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 						}
 						$media_header_pic = rex_media::get($header_image);
 						if($media_header_pic instanceof rex_media) {
-							print '<img src="'. rex_url::media($header_image) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" id="logo" width="1200px">';
+							print '<img src="'. rex_url::media($header_image) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" id="header" width="1200px">';
 						}
 					}
 				?>

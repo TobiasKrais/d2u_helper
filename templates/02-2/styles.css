@@ -242,3 +242,9 @@ a.active div.active-navi-pill {
     margin: 0 auto;
     width: 30px;
 }
+/* D2U Courses Addon */
+#cart_symbol {
+	background-color: article_color_h;
+	float: right;
+	width: 65px;
+}

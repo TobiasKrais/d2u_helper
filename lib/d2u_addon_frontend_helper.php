@@ -141,7 +141,7 @@ class d2u_addon_frontend_helper {
 	}
 
 	/**
-	 * Returns Meta Tags fpr Redaxo articles and D2U Addons
+	 * Returns Meta Tags for Redaxo articles and D2U Addons
 	 * @return string meta Tags
 	 */
 	public static function getMetaTags() {

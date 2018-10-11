@@ -281,16 +281,34 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	<section id="breadcrumbs">
 		<div class="container subhead">
 			<div class="row">
-				<div class="col-12 d-print-none">
-					<small>
-					<?php
+				<?php
+					$show_cart = (rex_addon::get('d2u_courses')->isAvailable() && rex_config::get('d2u_courses', 'article_id_shopping_cart', 0) > 0) ? TRUE : FALSE;
+					if($d2u_helper->getConfig("show_breadcrumbs", FALSE) || $show_cart) {
 						// Breadcrumbs
-						if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs") && $current_article->getId() != rex_article::getSiteStartArticleId()) {
+						if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
+							if($show_cart) {
+								print '<div class="col-8 col-sm-10 col-lg-11 d-print-none">';
+							}
+							else {
+								print '<div class="col-12 d-print-none">';
+							}
+							print '<small>';
 							print d2u_addon_frontend_helper::getBreadcrumbs();
+							print '</small>';
+							print '</div>';
 						}
-					?>
-					</small>
-				</div>
+						// D2U Courses cart
+						if($show_cart) {
+							print '<div class="col-4 col-sm-2 col-lg-1">';
+							print '<a href="'. rex_getUrl(rex_config::get('d2u_courses', 'article_id_shopping_cart')) .'" class="cart_link">';
+							print '<div id="cart_symbol" class="desktop-inner">';
+							print '<img src="'. rex_url::addonAssets('d2u_courses', 'cart_only.png') .'" alt="'. rex_article::get(rex_config::get('d2u_courses', 'article_id_shopping_cart', 0))->getName() .'">';
+							print '</div>';
+							print '</a>';
+							print '</div>';
+						}
+					}
+				?>
 				<div class="col-12 subhead-nav">
 					<?php
 						if($machine !== FALSE) {

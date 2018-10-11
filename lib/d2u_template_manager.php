@@ -123,10 +123,10 @@ class D2UTemplateManager {
 			4);
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
-			5);
+			6);
 		$d2u_templates[] = new D2UTemplate("02-2",
 			"Header Slider Template",
-			3);
+			4);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
 			5);

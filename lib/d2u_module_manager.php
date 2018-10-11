@@ -154,7 +154,7 @@ class D2UModuleManager {
 			8);
 		$modules[] = new D2UModule("02-1",
 			"Ueberschrift",
-			5);
+			6);
 		$modules[] = new D2UModule("03-1",
 			"Bild",
 			5);
@@ -175,7 +175,7 @@ class D2UModuleManager {
 			2);
 		$modules[] = new D2UModule("06-2",
 			"IFrame einbinden",
-			1);
+			2);
 		$modules[] = new D2UModule("10-1",
 			"Box mit Bild und Ueberschrift",
 			1);

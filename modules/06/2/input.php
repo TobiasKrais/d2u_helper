@@ -3,16 +3,16 @@
 		Vollständige URL (inkl. https://):
 	</div>
 	<div class="col-xs-8">
-		<input type="text" size="50" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" placeholder="https://www.redaxo.org/" />
+		<input type="text" class="form-control" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" placeholder="https://www.redaxo.org/" />
 	</div>
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
 	<div class="col-xs-4">
-		Breite des IFrames in Pixel:
+		Maximale Breite des IFrames in Pixel:
 	</div>
 	<div class="col-xs-8">
-		<input type="number" size="4" name="REX_INPUT_VALUE[2]" value="REX_VALUE[2]" />
+		<input type="number" size="4" name="REX_INPUT_VALUE[2]" value="REX_VALUE[2]" class="form-control" />
 	</div>
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
@@ -21,7 +21,7 @@
 		Höhe des IFrames in Pixel:
 	</div>
 	<div class="col-xs-8">
-		<input type="number" size="4" name="REX_INPUT_VALUE[3]" value="REX_VALUE[3]" />
+		<input type="number" size="4" name="REX_INPUT_VALUE[3]" value="REX_VALUE[3]" class="form-control" />
 	</div>
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
@@ -30,7 +30,7 @@
 		Scrollen im IFrame erlauben?:
 	</div>
 	<div class="col-xs-8">
-		<select name="REX_INPUT_VALUE[4]" >
+		<select name="REX_INPUT_VALUE[4]" class="form-control">
 		<?php
 		$values = array('auto'=>"Automatisch erlauben", 'scroll'=>"Scrollbars immer anzeigen", 'hidden'=>"Nie scrollen");
 		foreach($values as $key => $value) {

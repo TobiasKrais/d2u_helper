@@ -1,6 +1,6 @@
 <?php
 // Rewrite Scheme
-if(rex_config::get('d2u_helper', 'activate_rewrite_scheme', 'false') == 'true') {
+if(rex_addon::get('yrewrite')->isAvailable() && rex_config::get('d2u_helper', 'activate_rewrite_scheme', 'false') == 'true') {
 	rex_yrewrite::setScheme(new d2u_yrewrite_scheme());
 }
 
