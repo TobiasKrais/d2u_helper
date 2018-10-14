@@ -27,9 +27,13 @@ header {
 	background-size: cover;
 	padding: 2em 0;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1200px) {
 	header {
 		min-height: 390px;
+	}
+}@media screen and (min-width: 992px) and (max-width: 1199px) {
+	header {
+		min-height: 300px;
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 991px)  {
