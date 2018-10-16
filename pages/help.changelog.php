@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.5.1</p>
 		<ul>
+			<li>Sliderbilder, die im Template 02-2 verwendet werden können nun nicht mehr aus dem Medienpool gelöscht werden.</li>
 			<li>Template 02-2 zeigt bei installiertem D2U Veranstaltungen Addon einen Warenkorb neben den Breadcrumbs. Bei diesen wurde ein Fehler behoben.</li>
 			<li>Breite des Logobereiches in Template 02-1 auf die ganze Breite erweitert. Einschränkungen müssen im Custom CSS hinterlegt werden.</li>
 			<li>Eingabe der Module 02-1 und 06-2 optisch verbessert.</li>

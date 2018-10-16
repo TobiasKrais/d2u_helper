@@ -255,6 +255,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 
 	// Settings
 	$addon = rex_addon::get("d2u_helper");
+    $is_in_use = FALSE;
 	if(($addon->hasConfig("template_header_pic") && $addon->getConfig("template_header_pic") == $filename) ||
 			($addon->hasConfig("template_logo") && $addon->getConfig("template_logo") == $filename) ||
 			($addon->hasConfig("template_print_header_pic") && $addon->getConfig("template_print_header_pic") == $filename) ||
@@ -264,12 +265,19 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 			($addon->hasConfig("template_03_2_footer_pic") && $addon->getConfig("template_03_2_footer_pic") == $filename) ||
 			($addon->hasConfig("custom_css") && $addon->getConfig("custom_css") == $filename)
 		) {
+			$is_in_use = TRUE;
+	}
+    foreach(rex_clang::getAllIds() as $clang_id) {
+		if(($addon->hasConfig('template_02_2_header_slider_pics_clang_'. $clang_id) && strpos($addon->getConfig('template_02_2_header_slider_pics_clang_'. $clang_id), $filename) !== FALSE)) {
+			$is_in_use = TRUE;
+		}
+	}
+    if($is_in_use) {
 		$message = '<a href="javascript:openPage(\'index.php?page=d2u_helper/settings\')">'.
 			 rex_i18n::msg('d2u_helper_meta_title') ." ". rex_i18n::msg('d2u_helper_settings') . '</a>';
 		if(!in_array($message, $warning)) {
 			$warning[] = $message;
-		}
-	}
+		}    }
 
 	return $warning;
 }
