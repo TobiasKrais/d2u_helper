@@ -280,10 +280,9 @@ class d2u_addon_frontend_helper {
 		// Convert redaxo://123 to URL
 		$final_html = preg_replace_callback(
 					'@redaxo://(\d+)(?:-(\d+))?/?@i',
-					create_function(
-							'$matches',
-							'return rex_getUrl($matches[1], isset($matches[2]) ? $matches[2] : "");'
-					),
+					function($matches) {
+						return rex_getUrl($matches[1], isset($matches[2]) ? $matches[2] : "");
+					},
 					$html
 			);
 		
