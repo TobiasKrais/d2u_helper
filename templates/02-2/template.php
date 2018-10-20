@@ -261,7 +261,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 				// Sync events
 				$('.carousel-sync').on('slide.bs.carousel', function(ev) {
 					// get the direction, based on the event which occurs
-					var dir = ev.direction == 'right' ? 'prev' : 'next';
+					var dir = ev.direction === 'right' ? 'prev' : 'next';
 					// get synchronized non-sliding carousels, and make'em sliding
 					$('.carousel-sync').not('.sliding').addClass('sliding').carousel(dir);
 				});

@@ -125,6 +125,12 @@ class d2u_addon_frontend_helper {
 				$breadcrumb_start_only = FALSE;
 			}
 		}
+		if(rex_addon::get('d2u_jobs')->isAvailable()) {
+			foreach(d2u_jobs_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
+				$breadcrumb_start_only = FALSE;
+			}
+		}
 		if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			foreach(d2u_machinery_frontend_helper::getBreadcrumbs() as $breadcrumb) {
 				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;

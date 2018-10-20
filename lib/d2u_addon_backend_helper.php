@@ -160,7 +160,7 @@ class d2u_addon_backend_helper {
 	.panel-body-wrapper.slide {
 		display: none;
 	}
-	input:required, select:required, textarea:required {
+	input:invalid, select:invalid, textarea:invalid {
 		background-color: pink;
 	}
 </style>';
@@ -449,21 +449,7 @@ class d2u_addon_backend_helper {
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		$wysiwyg_class = ' ';
 		if($use_wysiwyg) {
-			if(rex_config::get('d2u_helper', 'editor') == 'tinymce4' && rex_addon::get('tinymce4')->isAvailable()) {
-				$wysiwyg_class .= 'tinyMCEEditor';
-			}
-			else if(rex_config::get('d2u_helper', 'editor') == 'redactor2' && rex_addon::get('redactor2')->isAvailable()) {
-				$wysiwyg_class .= 'redactorEditor2-full';
-			}
-			else if(rex_config::get('d2u_helper', 'editor') == 'ckeditor' && rex_addon::get('ckeditor')->isAvailable()) {
-				$wysiwyg_class .= 'ckeditor';
-			}
-			else if(rex_config::get('d2u_helper', 'editor') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
-				$wysiwyg_class .= 'markitupEditor-markdown_full';
-			}
-			else if(rex_config::get('d2u_helper', 'editor') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
-				$wysiwyg_class .= 'markitupEditor-textile_full';
-			}
+			$wysiwyg_class .= self::getWYSIWYGEditorClass();
 		}
 		if ($readonly) {
 			print '<dd><div class="form-control" style="height: 100px;overflow-y: scroll">'. $value .'</div>'

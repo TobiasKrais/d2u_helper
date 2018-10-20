@@ -8,6 +8,8 @@
 			<li>Breite des Logobereiches in Template 02-1 auf die ganze Breite erweitert. Einschränkungen müssen im Custom CSS hinterlegt werden.</li>
 			<li>Eingabe der Module 02-1 und 06-2 optisch verbessert.</li>
 			<li>Bugfix d2u_addon_frontend_helper::getAlternateURLs()</li>
+			<li>Bugfix d2u_addon_frontend_helper::getBreadcrumbs() nun auch mit D2U Jobs Unterstützung</li>
+			<li>Pflichtfelder im Backend werden nur noch markiert, wenn Eingabe fehlt oder inkorrekt ist.</li>
 		</ul>
 		<p>1.5.0</p>
 		<ul>
