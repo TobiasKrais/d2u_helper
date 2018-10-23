@@ -12,15 +12,15 @@
 	$show_gdpr_hint = "REX_VALUE[3]" == 'true' ? TRUE : FALSE;
 
 	// Form
-	$form_data = 'text|name|'. \Sprog\Wildcard::get('d2u_helper_module_11_name') .' *'. PHP_EOL;
+	$form_data = 'text|name|'. \Sprog\Wildcard::get('d2u_helper_module_11_name') .' *|||{"required":"required"}'. PHP_EOL;
 	if($ask_address) {
 		$form_data .= 'text|street|'. \Sprog\Wildcard::get('d2u_helper_module_11_street') .'
 			text|zip|'. \Sprog\Wildcard::get('d2u_helper_module_11_zip') .'
 			text|city|'. \Sprog\Wildcard::get('d2u_helper_module_11_city') . PHP_EOL;
 	}
-	$form_data .= 'text|phone|'. \Sprog\Wildcard::get('d2u_helper_module_11_phone') .' *
-		text|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_email') .' *
-		textarea|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_message') . PHP_EOL;
+	$form_data .= 'text|phone|'. \Sprog\Wildcard::get('d2u_helper_module_11_phone') .' *|||{"required":"required"}
+		text|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_email') .' *|||{"required":"required"}
+		textarea|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_message') .' *|||{"required":"required"}'. PHP_EOL;
 	if($show_gdpr_hint) {
 		$form_data .= 'checkbox|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_privacy_policy') .' *|no,yes|no' . PHP_EOL;
 	}

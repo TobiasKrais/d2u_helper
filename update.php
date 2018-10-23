@@ -46,7 +46,10 @@ if(class_exists('D2UModuleManager')) {
 		2);
 	$modules[] = new D2UModule("11-1",
 		"YForm Kontaktformular (DSGVO kompatibel)",
-		2);
+		3);
+	$modules[] = new D2UModule("12-1",
+		"YFeed Stream Galerie",
+		1);
 	$d2u_module_manager = new D2UModuleManager($modules);
 	$d2u_module_manager->autoupdate();
 }

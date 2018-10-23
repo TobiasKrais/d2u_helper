@@ -7,3 +7,14 @@
 	border: 1px solid article_color_h;
 	color: article_color_bg;
 }
+input:invalid, textarea:invalid {
+    background-color: #fff2f4;
+}
+input:focus, textarea:focus {
+    border-left: 5px solid solid article_color_h;
+}
+input, select, textarea {
+    background-color: white;
+    border: 1px solid article_color_h;
+    width: 100%;
+}
