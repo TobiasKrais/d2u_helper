@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.5.2V</p>
+		<p>1.5.2</p>
 		<ul>
 			<li>Bugfix: Deaktiviertes Addon zu deinstallieren führte zu fatal error.</li>
 			<li>In den Einstellungen gibt es jetzt eine Option, eigene Übersetzungen in SProg dauerhaft zu erhalten.</li>
