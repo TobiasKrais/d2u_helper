@@ -13,3 +13,10 @@ if($sql->getRows() > 0) {
 	$sql->setQuery("DELETE FROM ". \rex::getTablePrefix() ."media_manager_type_effect WHERE `type_id` = ". $id);
 	$sql->setQuery("DELETE FROM ". \rex::getTablePrefix() ."media_manager_type WHERE `type_id` = ". $id);
 }
+
+// Delete language replacements
+if(!class_exists('d2u_helper_lang_helper')) {
+	// Load class in case addon is deactivated
+	require_once 'lib/d2u_helper_lang_helper.php';
+}
+d2u_helper_lang_helper::factory()->uninstall();

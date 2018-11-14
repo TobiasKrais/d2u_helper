@@ -178,6 +178,10 @@ if($this->hasConfig('include_menu')) {
 }
 
 // Update translations
-if ($this->hasConfig('lang_replacements_install', 'false') == 'true') {
+if ($this->getConfig('lang_replacements_install', 'false') == 'true') {
+	if(!class_exists('d2u_address_lang_helper')) {
+		// Load class in case addon is deactivated
+		require_once 'lib/d2u_address_lang_helper.php';
+	}
 	d2u_helper_lang_helper::factory()->install();
 }

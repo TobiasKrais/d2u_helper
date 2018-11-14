@@ -58,7 +58,7 @@ abstract class ALangHelper {
 			return FALSE;
 		}
 		
-		$select_pid_query = "SELECT pid FROM ". \rex::getTablePrefix() ."sprog_wildcard WHERE wildcard = '". $key ."' AND clang_id = ". $clang_id;
+		$select_pid_query = "SELECT pid FROM ". \rex::getTablePrefix() ."sprog_wildcard WHERE wildcard = '". $key ."' AND clang_id = ". $clang_id .";";
 		$select_pid_sql = \rex_sql::factory();
 		$select_pid_sql->setQuery($select_pid_query);
 		if($select_pid_sql->getRows() > 0) {
@@ -68,7 +68,7 @@ abstract class ALangHelper {
 					."`replace` = '". addslashes($value) ."', "
 					."updatedate = '". \rex_sql::datetime() ."', "
 					."updateuser = '". \rex::getUser()->getValue('login') ."' "
-					."WHERE pid = ". $select_pid_sql->getValue('pid');
+					."WHERE pid = ". $select_pid_sql->getValue('pid') .";COMMIT;";
 				$sql = \rex_sql::factory();
 				$sql->setQuery($query);
 				return !$sql->hasError();
@@ -84,7 +84,7 @@ abstract class ALangHelper {
 				."createdate = '". \rex_sql::datetime() ."', "
 				."createuser = '". \rex::getUser()->getValue('login') ."', "
 				."updatedate = '". \rex_sql::datetime() ."', "
-				."updateuser = '". \rex::getUser()->getValue('login') ."'";
+				."updateuser = '". \rex::getUser()->getValue('login') ."';";
 			$sql = \rex_sql::factory();
 			$sql->setQuery($query);
 			return !$sql->hasError();
@@ -101,7 +101,7 @@ abstract class ALangHelper {
 			if(\rex_addon::get('sprog')->isAvailable()) {
 				// Delete 
 				$query = "DELETE FROM ". \rex::getTablePrefix() ."sprog_wildcard "
-					."WHERE wildcard = '". $key ."'". ($clang_id > 0 ? " AND clang_id = ". $clang_id : "") ;
+					."WHERE wildcard = '". $key ."'". ($clang_id > 0 ? " AND clang_id = ". $clang_id : "") .";";
 				$select = \rex_sql::factory();
 				$select->setQuery($query);
 			}
