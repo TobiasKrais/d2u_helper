@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.5.2-DEV</p>
+		<ul>
+			<li>In den Einstellungen gibt es jetzt eine Option, eigene Übersetzungen in SProg dauerhaft zu erhalten.</li>
+		</ul>
 		<p>1.5.1</p>
 		<ul>
 			<li>Usability Modul 11-1 verbessert.</li>

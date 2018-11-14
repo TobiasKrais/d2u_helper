@@ -31,6 +31,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['include_module'] = array_key_exists('include_module', $settings);
 	$settings['include_menu_multilevel'] = array_key_exists('include_menu_multilevel', $settings);
 	$settings['include_menu_slicknav'] = array_key_exists('include_menu_slicknav', $settings);
+	$settings['lang_wildcard_overwrite'] = array_key_exists('lang_wildcard_overwrite', $settings) ? "true" : "false";
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['submenu_use_articlename'] = array_key_exists('submenu_use_articlename', $settings);
@@ -279,6 +280,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				<div class="panel-body-wrapper slide">
 					<?php
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_lang_install', 'settings[lang_replacements_install]', 'true', $this->getConfig('lang_replacements_install') == 'true');
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_lang_wildcard_overwrite', 'settings[lang_wildcard_overwrite]', 'true', $this->getConfig('lang_wildcard_overwrite') == 'true');
 						foreach(rex_clang::getAll() as $rex_clang) {
 							print '<dl class="rex-form-group form-group" id="settings[lang_replacement_'. $rex_clang->getId() .']">';
 							print '<dt><label>'. $rex_clang->getName() .'</label></dt>';
@@ -304,6 +306,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							if($('input[name="settings\\[lang_replacements_install\\]"]').is(':checked')) {
 								<?php
 									foreach(rex_clang::getAll() as $rex_clang) {
+										print "$('#settings\\\\[lang_wildcard_overwrite\\\\]').fadeIn();";
 										print "$('#settings\\\\[lang_replacement_". $rex_clang->getId() ."\\\\]').fadeIn();";
 									}
 								?>
@@ -312,6 +315,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							else {
 								<?php
 									foreach(rex_clang::getAll() as $rex_clang) {
+										print "$('#settings\\\\[lang_wildcard_overwrite\\\\]').hide();";
 										print "$('#settings\\\\[lang_replacement_". $rex_clang->getId() ."\\\\]').hide();";
 									}
 								?>

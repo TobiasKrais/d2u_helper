@@ -55,6 +55,7 @@ d2u_helper_lang_slovak = Slovak
 d2u_helper_lang_spanish = Spanish
 d2u_helper_lang_replacements = Language replacements
 d2u_helper_lang_replacements_install = Use preset language replacements of following language:
+d2u_helper_lang_wildcard_overwrite = Overwrite custom translations during addon update. This may be useful to keep translations automatically up to date.
 
 d2u_helper_metainfo_headerpic = Header picture
 
