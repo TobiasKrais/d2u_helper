@@ -191,6 +191,9 @@ class D2UModuleManager {
 		$modules[] = new D2UModule("12-1",
 			"YFeed Stream Galerie",
 			1);
+		$modules[] = new D2UModule("13-1",
+			"Lauftext",
+			1);
 		// 20-x reserved for D2U Addresss
 		// 21-x reserved for D2U History
 		// 22-x reserved for D2U Staff

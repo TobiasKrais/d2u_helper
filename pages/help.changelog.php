@@ -3,7 +3,8 @@
 	<div class="panel-body">
 		<p>1.5.3-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 13-1 Lauftext hinzugefügt.</li>
+			<li>Modul 11-2 YFrom Kontaktformular: Einrückung des Textes bei Checkboxen verbessert.</li>
 		</ul>
 		<p>1.5.2</p>
 		<ul>

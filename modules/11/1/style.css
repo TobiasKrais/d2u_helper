@@ -18,3 +18,10 @@ input, select, textarea {
     border: 1px solid article_color_h;
     width: 100%;
 }
+.checkbox label {
+	padding-left: 2em;
+	text-indent: -2em;
+}
+input[type=checkbox] {
+	width: 1.75em;
+}

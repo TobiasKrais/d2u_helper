@@ -50,6 +50,9 @@ if(class_exists('D2UModuleManager')) {
 	$modules[] = new D2UModule("12-1",
 		"YFeed Stream Galerie",
 		1);
+	$modules[] = new D2UModule("13-1",
+		"Lauftext",
+		1);
 	$d2u_module_manager = new D2UModuleManager($modules);
 	$d2u_module_manager->autoupdate();
 }
@@ -179,9 +182,9 @@ if($this->hasConfig('include_menu')) {
 
 // Update translations
 if ($this->getConfig('lang_replacements_install', 'false') == 'true') {
-	if(!class_exists('d2u_address_lang_helper')) {
+	if(!class_exists('d2u_helper_lang_helper')) {
 		// Load class in case addon is deactivated
-		require_once 'lib/d2u_address_lang_helper.php';
+		require_once 'lib/d2u_helper_lang_helper.php';
 	}
 	d2u_helper_lang_helper::factory()->install();
 }
