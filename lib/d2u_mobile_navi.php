@@ -78,7 +78,7 @@ class d2u_mobile_navi {
 				default:
 					$size = "md";
 			}
-			$show_class = ' class="d-none d-'. $size .'-block"';
+			$show_class = ' class="d-none '. ($addon->getConfig('include_menu_show') == "xl" ? '' : 'd-'. $size .'-block') .'"';
 		}
 		print '<div id="desktop-menu"'. $show_class .'>';
 		$is_first = TRUE;
