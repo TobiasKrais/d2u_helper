@@ -145,52 +145,52 @@ class D2UModuleManager {
 		$modules = [];
 		$modules[] = new D2UModule("00-1",
 			"Umbruch ganze Breite",
-			3);
+			4);
 		$modules[] = new D2UModule("01-1",
 			"Texteditor",
-			8);
+			9);
 		$modules[] = new D2UModule("01-2",
 			"Texteditor mit Bild und Fettschrift",
-			8);
+			9);
 		$modules[] = new D2UModule("02-1",
 			"Ueberschrift",
-			6);
+			7);
 		$modules[] = new D2UModule("03-1",
 			"Bild",
-			5);
+			6);
 		$modules[] = new D2UModule("03-2",
 			"Bildergalerie Ekko Lightbox",
-			5);
+			6);
 		$modules[] = new D2UModule("04-1",
 			"Google Maps",
-			6);
+			7);
 		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
-			6);
+			7);
 		$modules[] = new D2UModule("05-2",
 			"Artikel aus anderer Sprache übernehmen",
-			2);
+			3);
 		$modules[] = new D2UModule("06-1",
 			"YouTube Video einbinden",
-			2);
+			3);
 		$modules[] = new D2UModule("06-2",
 			"IFrame einbinden",
-			2);
+			3);
 		$modules[] = new D2UModule("10-1",
 			"Box mit Bild und Ueberschrift",
-			1);
+			2);
 		$modules[] = new D2UModule("10-2",
 			"Box mit Bild und Text",
-			3);
+			4);
 		$modules[] = new D2UModule("10-3",
 			"Box mit Download",
-			2);
+			3);
 		$modules[] = new D2UModule("11-1",
 			"YForm Kontaktformular (DSGVO kompatibel)",
-			3);
+			4);
 		$modules[] = new D2UModule("12-1",
 			"YFeed Stream Galerie",
-			1);
+			2);
 		$modules[] = new D2UModule("13-1",
 			"Lauftext",
 			1);

@@ -36,7 +36,7 @@
 	}
 ?>
 <div class="<?php echo $container_classes; ?> abstand">
-	<div class="<?php print $same_height; ?> module-box">
+	<div class="<?php print $same_height; ?> module-box wysiwyg_content">
 		<div class="row">
 			<?php
 				// Picture

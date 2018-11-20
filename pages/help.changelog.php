@@ -4,6 +4,7 @@
 		<p>1.5.3-DEV</p>
 		<ul>
 			<li>Bugfix d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu(): Menü konnte auf großen Bildschirmen trotz Einstellung nicht ausgeblendet werden.</li>
+			<li>Alle Module: Backend Eingabefelder Style Redaxo konform gestaltet.</li>
 			<li>Modul 13-1 Lauftext hinzugefügt.</li>
 			<li>Modul 11-2 YFrom Kontaktformular: Einrückung des Textes bei Checkboxen verbessert.</li>
 		</ul>

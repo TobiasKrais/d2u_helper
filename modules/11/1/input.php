@@ -1,11 +1,11 @@
 <div class="row">
 	<div class="col-xs-4">
-		Offset (Seitenabstand) auf größeren Geräten:
+		Auf größeren Bildschirmen zentrieren?
 	</div>
 	<div class="col-xs-8">
-		<select name="REX_INPUT_VALUE[17]" >
+		<select name="REX_INPUT_VALUE[17]" class="form-control">
 		<?php
-		$values = array(0=>"Kein Offset", 1=>"Offset");
+		$values = [0=>"Nicht zentrieren.", 1=>"Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird"];
 		foreach($values as $key => $value) {
 			echo '<option value="'. $key .'" ';
 	
@@ -26,7 +26,7 @@
 		E-Mail Empfänger:<br />
 	</div>
 	<div class="col-xs-8">
-		<input type="text" style="width:100%" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" />
+		<input type="text" style="width:100%" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" class="form-control"/>
 	</div>
 </div>
 <div class="row">

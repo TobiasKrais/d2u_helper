@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-xs-12">
 		Dieser Block erzeugt einen Umbruch. Alle nachfolgenden Elemente werden
-		neu aufgereiht, auch wenn im vorhergehenden Bereich noch Platz wäre
+		unterhalb des Umbruches dargestellt.
 	</div>
 </div>
 <div class="row">
@@ -12,7 +12,7 @@
 		Soll eine Linie zur Abgrenzung eingefügt werden?
 	</div>
 	<div class="col-xs-8">
-		<select name="REX_INPUT_VALUE[1]" >
+		<select name="REX_INPUT_VALUE[1]" class="form-control">
 			<?php
 				$line = "REX_VALUE[1]";
 				print '<option value="">ohne Linie</option>';

@@ -19,14 +19,17 @@
 	</div>
 </div>
 <div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
 	<div class="col-xs-4">
-		Offset (Seitenabstand) auf größeren Geräten:
+		Auf größeren Bildschirmen zentrieren?
 	</div>
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[17]" class="form-control">
 		<?php
-		$values = array(0=>"Kein Offset", 1=>"Offset");
-		foreach($values as $key => $value) {
+		$values_offset = [0=>"Nicht zentrieren.", 1=>"Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird"];
+		foreach($values_offset as $key => $value) {
 			echo '<option value="'. $key .'" ';
 	
 			if ("REX_VALUE[17]" == $key) {
@@ -39,12 +42,17 @@
 	</div>
 </div>
 <div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
 	<div class="col-xs-4">
 		&Uuml;berschrift:<br />
 	</div>
-	<div class="col-xs-8">
+	<div class="col-xs-7">
 		<input type="text" size="50" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" class="form-control"/>
-		<select name="REX_INPUT_VALUE[2]" >
+	</div>
+	<div class="col-xs-1">
+		<select name="REX_INPUT_VALUE[2]" class="form-control">
 		<?php
 		foreach (array("h1","h2","h3","h4","h5","h6") as $value) {
 			echo '<option value="'.$value.'" ';

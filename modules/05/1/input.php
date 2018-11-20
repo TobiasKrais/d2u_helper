@@ -50,7 +50,7 @@
 		Link URL:
 	</div>
 	<div class="col-xs-8">
-		<input type="text" size="250" name="REX_INPUT_VALUE[2]" value="REX_VALUE[2]" style="max-width: 100%"/>
+		<input type="text" size="250" name="REX_INPUT_VALUE[2]" value="REX_VALUE[2]" class="form-control"/>
 	</div>
 </div>
 

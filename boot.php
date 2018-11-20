@@ -27,6 +27,9 @@ if(!\rex::isBackend()) {
 		else if (rex_request('d2u_helper', 'string') == 'template.css') {
 			sendD2UHelperTemplateCSS(rex_request('template_id', 'string', ''));
 		}
+		else if (rex_request('d2u_helper', 'string') == 'custom.css') {
+			sendD2UHelperCustomCSS();
+		}
     });
 	
 	// Only frontend call
@@ -334,6 +337,25 @@ function sendD2UHelperJS($position = "head") {
 			}
 		}
 		print $js;
+		exit;	
+}
+
+/**
+ * Sends CustomCSS file and exits PHP Script.
+ */
+function sendD2UHelperCustomCSS() {
+		header('Content-type: text/css');
+		$css = "";
+
+		// Custom CSS
+		$d2u_helper = rex_addon::get('d2u_helper');
+		if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media($d2u_helper->getConfig("custom_css")))) {
+				$css .= file_get_contents(rex_path::media($d2u_helper->getConfig("custom_css")));
+		}		
+
+		// Apply template settings and compress
+		print d2u_addon_frontend_helper::prepareCSS($css);
+
 		exit;	
 }
 
