@@ -20,16 +20,14 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
-</div>
-<div class="row">
 	<div class="col-xs-4">
 		Auf größeren Bildschirmen zentrieren?
 	</div>
 	<div class="col-xs-8">
-		<select name="REX_INPUT_VALUE[17]" class="form-control">
+		<select name="REX_INPUT_VALUE[17]"  class="form-control">
 		<?php
-		$values = [0=>"Nicht zentrieren.", 1=>"Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird"];
-		foreach($values as $key => $value) {
+		$values_offset = [0=>"Nicht zentrieren.", 1=>"Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird"];
+		foreach($values_offset as $key => $value) {
 			echo '<option value="'. $key .'" ';
 	
 			if ("REX_VALUE[17]" == $key) {
@@ -41,8 +39,28 @@
 		</select>
 	</div>
 </div>
+<script>
+	function offset_changer(value) {
+		if (value === "12") {
+			$("select[name='REX_INPUT_VALUE[17]']").parent().parent().slideUp();
+		}
+		else {
+			$("select[name='REX_INPUT_VALUE[17]']").parent().parent().slideDown();
+		}
+	}
+
+	// Hide on document load
+	$(document).ready(function() {
+		offset_changer($("select[name='REX_INPUT_VALUE[20]']").val());
+	});
+
+	// Hide on selection change
+	$("select[name='REX_INPUT_VALUE[20]']").on('change', function(e) {
+		offset_changer($(this).val());
+	});
+</script>
 <div class="row">
-	<div class="col-xs-12" style="border-top: 1px solid #3bb594; margin-top: 15px;">&nbsp;</div>
+	<div class="col-xs-12"><div style="border-top: 1px darkgrey solid; margin: 1em 0;"></div></div>
 </div>
 <div class="row">
 	<div class="col-xs-4">

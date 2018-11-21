@@ -290,26 +290,26 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
  * css.
  */
 function sendD2UHelperCSS() {
-		header('Content-type: text/css');
-		$d2u_helper = rex_addon::get('d2u_helper');
-		$css = "";
-		// Module CSS
-		if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
-			$css .= d2u_addon_frontend_helper::getModulesCSS();
-		}
-		
-		// Multilevel Menu CSS
-		if($d2u_helper->getConfig("include_menu_multilevel", "false") == "true") {
-			$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi::getAutoCSS());
-		}
+	header('Content-type: text/css');
+	$d2u_helper = rex_addon::get('d2u_helper');
+	$css = "";
+	// Module CSS
+	if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
+		$css .= d2u_addon_frontend_helper::getModulesCSS();
+	}
 
-		// Slicknav Menu CSS
-		if($d2u_helper->getConfig("include_menu_slicknav", "false") == "true") {
-			$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_slicknav::getAutoCSS());
-		}
+	// Multilevel Menu CSS
+	if($d2u_helper->getConfig("include_menu_multilevel", "false") == "true") {
+		$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi::getAutoCSS());
+	}
 
-		print $css;
-		exit;	
+	// Slicknav Menu CSS
+	if($d2u_helper->getConfig("include_menu_slicknav", "false") == "true") {
+		$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_slicknav::getAutoCSS());
+	}
+
+	print $css;
+	exit;
 }
 
 /**
@@ -317,46 +317,46 @@ function sendD2UHelperCSS() {
  * @param string $position JS position ("head" oder "body") 
  */
 function sendD2UHelperJS($position = "head") {
-		header('Content-type: text/javascript');
-		$d2u_helper = rex_addon::get('d2u_helper');
-		$js = "";
-		if($position == "body") {
-			// Module JS
-			if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
-				$js .= d2u_addon_frontend_helper::getModulesJS();
-			}
+	header('Content-type: text/javascript');
+	$d2u_helper = rex_addon::get('d2u_helper');
+	$js = "";
+	if($position == "body") {
+		// Module JS
+		if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
+			$js .= d2u_addon_frontend_helper::getModulesJS();
 		}
-		else if($position == "head") {
-			// MultiLevel menu JS
-			if($d2u_helper->getConfig("include_menu_multilevel", "false") == "true") {
-				$js .= d2u_mobile_navi::getAutoJS();
-			}
-			// Slicknav menu JS
-			if($d2u_helper->getConfig("include_menu_slicknav", "false") == "true") {
-				$js .= d2u_mobile_navi_slicknav::getAutoJS();
-			}
+	}
+	else if($position == "head") {
+		// MultiLevel menu JS
+		if($d2u_helper->getConfig("include_menu_multilevel", "false") == "true") {
+			$js .= d2u_mobile_navi::getAutoJS();
 		}
-		print $js;
-		exit;	
+		// Slicknav menu JS
+		if($d2u_helper->getConfig("include_menu_slicknav", "false") == "true") {
+			$js .= d2u_mobile_navi_slicknav::getAutoJS();
+		}
+	}
+	print $js;
+	exit;
 }
 
 /**
  * Sends CustomCSS file and exits PHP Script.
  */
 function sendD2UHelperCustomCSS() {
-		header('Content-type: text/css');
-		$css = "";
+	header('Content-type: text/css');
+	$css = "";
 
-		// Custom CSS
-		$d2u_helper = rex_addon::get('d2u_helper');
-		if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media($d2u_helper->getConfig("custom_css")))) {
-				$css .= file_get_contents(rex_path::media($d2u_helper->getConfig("custom_css")));
-		}		
+	// Custom CSS
+	$d2u_helper = rex_addon::get('d2u_helper');
+	if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media($d2u_helper->getConfig("custom_css")))) {
+			$css .= file_get_contents(rex_path::media($d2u_helper->getConfig("custom_css")));
+	}		
 
-		// Apply template settings and compress
-		print d2u_addon_frontend_helper::prepareCSS($css);
+	// Apply template settings and compress
+	print d2u_addon_frontend_helper::prepareCSS($css);
 
-		exit;	
+	exit;
 }
 
 /**
@@ -365,23 +365,23 @@ function sendD2UHelperCustomCSS() {
  * @param string $d2u_template_id
  */
 function sendD2UHelperTemplateCSS($d2u_template_id = "") {
-		header('Content-type: text/css');
-		$css = "";
-		// Template CSS
-		if($d2u_template_id != "") {
-			$template_manager = new D2UTemplateManager(D2UTemplateManager::getD2UHelperTemplates());
-			$current_template = $template_manager->getTemplate($d2u_template_id);
-			$css .= $current_template->getCSS();
-		}
+	header('Content-type: text/css');
+	$css = "";
+	// Template CSS
+	if($d2u_template_id != "") {
+		$template_manager = new D2UTemplateManager(D2UTemplateManager::getD2UHelperTemplates());
+		$current_template = $template_manager->getTemplate($d2u_template_id);
+		$css .= $current_template->getCSS();
+	}
 
-		// Custom CSS
-		$d2u_helper = rex_addon::get('d2u_helper');
-		if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media($d2u_helper->getConfig("custom_css")))) {
-				$css .= file_get_contents(rex_path::media($d2u_helper->getConfig("custom_css")));
-		}		
+	// Custom CSS
+	$d2u_helper = rex_addon::get('d2u_helper');
+	if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media($d2u_helper->getConfig("custom_css")))) {
+			$css .= file_get_contents(rex_path::media($d2u_helper->getConfig("custom_css")));
+	}		
 
-		// Apply template settings and compress
-		print d2u_addon_frontend_helper::prepareCSS($css);
+	// Apply template settings and compress
+	print d2u_addon_frontend_helper::prepareCSS($css);
 
-		exit;	
+	exit;	
 }
