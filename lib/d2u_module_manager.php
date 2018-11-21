@@ -153,8 +153,11 @@ class D2UModuleManager {
 			"Texteditor mit Bild und Fettschrift",
 			9);
 		$modules[] = new D2UModule("02-1",
-			"Ueberschrift",
+			"Überschrift",
 			7);
+		$modules[] = new D2UModule("02-2",
+			"Überschrift mit Klapptext",
+			1);
 		$modules[] = new D2UModule("03-1",
 			"Bild",
 			6);

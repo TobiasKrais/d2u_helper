@@ -1,0 +1,22 @@
+@font-face{
+	font-family:'FontAwesome';
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?v=4.7.0");
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff2?v=4.7.0") format('woff2'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff?v=4.7.0") format('woff'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
+}
+.fa-icon {
+	font-family: FontAwesome;
+}
+.h_toggle {
+	float: right;
+	padding-right: 1em;
+}
+.icon_down::before {
+	content: "\f078";
+}
+.icon_up::before {
+	content: "\f077";
+}
