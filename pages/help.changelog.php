@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.5.3-DEV</p>
 		<ul>
+			<li>d2u_mobile_navi und d2u_mobile_navi_slicknav Klassen für die Navigation beinhalten jetzt das title Attribut bei Links.</li>
 			<li>Bugfix d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu(): Menü konnte auf großen Bildschirmen trotz Einstellung nicht ausgeblendet werden.</li>
 			<li>Alle Module: Backend Eingabefelder Style Redaxo konform gestaltet und unnötige Felder ausgeblendet.</li>
 			<li>Modul 13-1 "Lauftext" hinzugefügt.</li>

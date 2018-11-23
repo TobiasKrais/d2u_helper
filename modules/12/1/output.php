@@ -42,7 +42,7 @@
 		<?php
 			foreach($items as $item) {
 				$link_url = $link_type == 'feed' ? $item->getUrl() : 'index.php?rex_media_type=d2u_helper_yfeed_large&rex_media_file='. $item->getId() .'.yfeed';
-				print '<a href="'. $link_url .'" data-toggle="lightbox'. $lightbox_id .'" data-gallery="example-gallery'. $lightbox_id .'" class="'. $pics_cols .'" data-title="'. $stream->getTitle() .'" data-footer="<a href=\''. $item->getUrl() .'\' target=\'_blank\'>'. $item->getTitle() .'</a>">';
+				print '<a href="'. $link_url .'" data-toggle="lightbox'. $lightbox_id .'" data-gallery="example-gallery'. $lightbox_id .'" class="'. $pics_cols .'" data-title="'. $stream->getTitle() .'" title="'. $stream->getTitle() .'" data-footer="<a href=\''. $item->getUrl() .'\' target=\'_blank\' title=\''. $item->getTitle() .'\'>'. $item->getTitle() .'</a>">';
                 print '<img src="index.php?rex_media_type='. ($pics_per_line > 2 ? 'd2u_helper_yfeed_small' : 'd2u_helper_yfeed_large') .'&rex_media_file='. $item->getId() .'.yfeed" class="img-fluid gallery-pic-box" alt="'. implode(' ', array_slice(explode(' ', $item->getTitle()), 0, 5)) .'" title="'. implode(' ', array_slice(explode(' ', $item->getTitle()), 0, 5)) .'">';
 				print '</a>';
 			}
