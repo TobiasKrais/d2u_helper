@@ -19,28 +19,38 @@
 	}
 	
 	// Number pics per row
+	$number_pics = "REX_VALUE[1]";
 	$pics_cols = 'col-6';
-	if($cols_sm == 12) {
+	if ($number_pics == "3") {
 		$pics_cols .= ' col-sm-4';
 	}
+	else if ($number_pics == "4") {
+		$pics_cols .= ' col-sm-4 col-lg-3';		
+	}
+	else {
+		// Backward compatibility
+		if($cols_sm == 12) {
+			$pics_cols .= ' col-sm-4';
+		}
+
+		if($cols_md == 12) {
+			$pics_cols .= ' col-md-3';
+		}
+		elseif($cols_md == 8) {
+			$pics_cols .= ' col-md-4';
+		}
+
+		if($cols_lg == 12) {
+			$pics_cols .= ' col-lg-2';
+		}
+		elseif($cols_lg == 8) {
+			$pics_cols .= ' col-lg-3';
+		}
+		elseif($cols_lg == 6) {
+			$pics_cols .= ' col-lg-4';
+		}
+	}
 	
-	if($cols_md == 12) {
-		$pics_cols .= ' col-md-3';
-	}
-	elseif($cols_md == 8) {
-		$pics_cols .= ' col-md-4';
-	}
-
-	if($cols_lg == 12) {
-		$pics_cols .= ' col-lg-2';
-	}
-	elseif($cols_lg == 8) {
-		$pics_cols .= ' col-lg-3';
-	}
-	elseif($cols_lg == 6) {
-		$pics_cols .= ' col-lg-4';
-	}
-
 	$type_thumb = "d2u_helper_gallery_thumb";
 	$type_detail = "d2u_helper_gallery_detail";
 	$pics = preg_grep('/^\s*$/s', explode(",", REX_MEDIALIST[1]), PREG_GREP_INVERT);

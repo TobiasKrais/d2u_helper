@@ -22,7 +22,7 @@ if(class_exists('D2UModuleManager')) {
 		6);
 	$modules[] = new D2UModule("03-2",
 		"Bildergalerie Ekko Lightbox",
-		6);
+		7);
 	$modules[] = new D2UModule("04-1",
 		"Google Maps",
 		7);
