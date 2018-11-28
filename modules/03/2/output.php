@@ -27,6 +27,9 @@
 	else if ($number_pics == "4") {
 		$pics_cols .= ' col-sm-4 col-lg-3';		
 	}
+	else if ($number_pics == "6") {
+		$pics_cols .= ' col-sm-3 col-md-4 col-lg-2';		
+	}
 	else {
 		// Backward compatibility
 		if($cols_sm == 12) {
