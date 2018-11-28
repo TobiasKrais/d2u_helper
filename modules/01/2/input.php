@@ -219,7 +219,7 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[6]" class="form-control">
 		<?php
-		$values = [4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten", 2=>"2 von 12 Spalten"];
+		$values = [6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten", 2=>"2 von 12 Spalten"];
 		foreach($values as $key => $value) {
 			echo '<option value="'. $key .'" ';
 	

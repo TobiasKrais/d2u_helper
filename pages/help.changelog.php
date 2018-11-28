@@ -10,6 +10,7 @@
 			<li>Modul 11-2 "YFrom Kontaktformular": Einrückung des Textes bei Checkboxen verbessert.</li>
 			<li>Modul 03-2 "Ekkolightbox Galerie" hat jetzt Option wie viele Bilder pro Reihe dargestellt werden sollen.</li>
 			<li>Modul 02-2 "Überschrift mit Klapptext" hinzugefügt.</li>
+			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift" kann Bild nun auch 6 Spalten breit einbinden.</li>
 		</ul>
 		<p>1.5.2</p>
 		<ul>
