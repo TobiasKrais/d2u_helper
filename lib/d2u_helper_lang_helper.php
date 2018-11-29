@@ -69,7 +69,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_captcha' => 'Um Missbrauch vorzubeugen bitten wir Sie das Captcha einzugeben.',
 		'd2u_helper_module_11_city' => 'Ort',
 		'd2u_helper_module_11_contact_request' => 'Kontaktanfrage',
-		'd2u_helper_module_11_contact_request_intro' => 'In das Anfrage-Formular wurden folgende Werte wurden eingetragen',
+		'd2u_helper_module_11_contact_request_intro' => 'In das Anfrage-Formular wurden folgende Werte eingetragen',
 		'd2u_helper_module_11_email' => 'E-Mail Adresse',
 		'd2u_helper_module_11_message' => 'Nachricht',
 		'd2u_helper_module_11_name' => 'Name',
