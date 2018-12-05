@@ -30,7 +30,7 @@
 	$picture_type = "REX_VALUE[3]";
 	$picture_position = "REX_VALUE[4]";
 	
-	$container_classes = "col-12 col-md-6 col-lg-". $cols . $offset_lg;
+	$container_classes = "col-12 col-lg-". $cols . $offset_lg;
 	if($picture_position == "left") {
 		$container_classes = "col-12 col-lg-". $cols . $offset_lg;
 	}
