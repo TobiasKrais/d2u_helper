@@ -42,11 +42,6 @@
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
-	<div class="col-xs-12">
-		Wenn Google Maps die Adresse nicht korrekt geocodiert, k&ouml;nnen
-		optional die L&auml;ngen- und Breitengrade eingegeben werden (z.B. 7.69295).
-		(<a href="http://www.linkr.de/2009/03/24/mit-google-maps-laengen-breitengrade-ermitteln-freies-geocoding-skript/" target="_blank">L&auml;ngen- und Breitengradrechner</a>.)
-	</div>
 	<div class="col-xs-4">
 		L&auml;ngengrad:
 	</div>

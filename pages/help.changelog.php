@@ -9,6 +9,7 @@
 			<li>Alle Module: Backend Eingabefelder Style Redaxo konform gestaltet und unnötige Felder ausgeblendet.</li>
 			<li>Modul 13-1 "Lauftext" hinzugefügt.</li>
 			<li>Modul 11-2 "YFrom Kontaktformular": Einrückung des Textes bei Checkboxen verbessert.</li>
+			<li>Modul 04-1 "Google Maps" Geocoding Link entfernt, da er nicht mehr existiert.</li>
 			<li>Modul 03-2 "Ekkolightbox Galerie" hat jetzt Option wie viele Bilder pro Reihe dargestellt werden sollen.</li>
 			<li>Modul 02-2 "Überschrift mit Klapptext" hinzugefügt.</li>
 			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift" kann Bild nun auch 6 Spalten breit einbinden.</li>

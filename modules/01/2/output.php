@@ -6,7 +6,7 @@
 		$offset_lg = " mr-lg-auto ml-lg-auto ";
 	}
 	$heading = "REX_VALUE[1]";
-	$same_height = "REX_VALUE[5]" == 'true' ? 'same-height' : '';
+	$same_height = "REX_VALUE[5]" == 'true' ? 'same-height ' : '';
 
 	// Link
 	$link_type = "REX_VALUE[7]";
@@ -36,7 +36,7 @@
 	}
 ?>
 <div class="<?php echo $container_classes; ?> abstand">
-	<div class="<?php print $same_height; ?> module-box wysiwyg_content">
+	<div class="<?php print $same_height; ?>module-box wysiwyg_content">
 		<div class="row">
 			<?php
 				// Picture
