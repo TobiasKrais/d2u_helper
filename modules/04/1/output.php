@@ -30,7 +30,7 @@
 			var address = "<?php print 'REX_VALUE[1]'; ?>";
 			if (geocoder) {
 				geocoder.geocode( { 'address': address}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
+					if (status === google.maps.GeocoderStatus.OK) {
 						map.setCenter(results[0].geometry.location);
 						var marker = new google.maps.Marker({
 							map: map,
@@ -54,7 +54,7 @@
 			var myOptions = {
 				zoom: <?php echo $zoom ?>,
 				mapTypeId: google.maps.MapTypeId.<?php echo $maptype ?>
-			}
+			};
 			map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 		}
 
@@ -64,7 +64,7 @@
 				zoom: <?php echo $zoom ?>,
 				center: myLatlng,
 				mapTypeId: google.maps.MapTypeId.<?php echo $maptype ?>
-			}
+			};
 			var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
 			var marker = new google.maps.Marker({

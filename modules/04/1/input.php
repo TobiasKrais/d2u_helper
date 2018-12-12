@@ -42,6 +42,11 @@
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
+	<div class="col-xs-12">
+		Wenn Google Maps die Adresse nicht korrekt geocodiert, k&ouml;nnen
+		optional die L&auml;ngen- und Breitengrade eingegeben werden (z.B. 7.69295).
+		(<a href="https://wiki.opennet-initiative.de/wiki/Koordinaten_Bestimmung" target="_blank">Koordinaten Bestimmung</a>.)
+	</div>
 	<div class="col-xs-4">
 		L&auml;ngengrad:
 	</div>
