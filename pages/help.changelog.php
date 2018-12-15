@@ -1,7 +1,11 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.5.3-DEV</p>
+		<p>1.5.4-DEV</p>
+		<ul>
+			<li>Modul 04-1 "Google Maps" Geocoding im Modul hinzugefügt.</li>
+		</ul>
+		<p>1.5.3</p>
 		<ul>
 			<li>Bugfix: Deaktiviertes Addon zu deinstallieren führte zu fatal error.</li>
 			<li>d2u_mobile_navi und d2u_mobile_navi_slicknav Klassen für die Navigation beinhalten jetzt das title Attribut bei Links.</li>

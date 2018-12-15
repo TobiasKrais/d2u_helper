@@ -21,38 +21,84 @@
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
 	<div class="col-xs-4">
-		Google API key:
-	</div>
-	<div class="col-xs-8">
-		<?php
-		$api_key = rex_config::get('d2u_helper', 'maps_key');
-		$placeholder = $api_key != '' ? "Wird aus D2U Helper Addon Einstellungen übernommen: ". $api_key : ''
-		?>
-		<input type="text" name="REX_INPUT_VALUE[11]" value="REX_VALUE[11]" placeholder="<?php print $placeholder; ?>" class="form-control"/>
-	</div>
-</div>
-<div class="row"><div class="col-xs-12">&nbsp;</div></div>
-<div class="row">
-	<div class="col-xs-4">
 		Adresse (Straße Nr., PLZ Ort, DE):
 	</div>
 	<div class="col-xs-8">
 		<input type="text" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" class="form-control"/>
 	</div>
 </div>
+<?php
+if(rex_config::get("d2u_helper", "maps_key", "") == "") {
+?>
+	<div class="row"><div class="col-xs-12">&nbsp;</div></div>
+	<div class="row">
+		<div class="col-xs-4">
+			Google API key:
+		</div>
+		<div class="col-xs-8">
+			<input type="text" name="REX_INPUT_VALUE[11]" value="REX_VALUE[11]"  class="form-control"/>
+		</div>
+	</div>
+<?php
+}
+else {
+?>
+	<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo rex_config::get("d2u_helper", "maps_key", ""); ?>"></script>
+	<script>
+		function geocode() {
+			if($("input[name='REX_INPUT_VALUE[1]']").val() === "") {
+				alert("<?php echo rex_i18n::msg('d2u_helper_geocode_fields'); ?>");
+				return;
+			}
+
+			// Geocode
+			var geocoder = new google.maps.Geocoder();
+			geocoder.geocode({'address': $("input[name='REX_INPUT_VALUE[1]']").val()}, function(results, status) {
+				if (status === google.maps.GeocoderStatus.OK) {
+					$("input[name='REX_INPUT_VALUE[5]']").val(results[0].geometry.location.lat);
+					$("input[name='REX_INPUT_VALUE[4]']").val(results[0].geometry.location.lng);
+					// Show check geolocation button and set link to button
+					$("#check_geocode").attr('href', "https://maps.google.com/?q=" + $("input[name='REX_INPUT_VALUE[5]']").val() + "," + $("input[name='REX_INPUT_VALUE[4]']").val() + "&z=17");
+					$("#check_geocode").parent().show();
+				}
+				else {
+					alert("<?php echo rex_i18n::msg('d2u_helper_geocode_failure'); ?>");
+				}
+			});
+		}
+	</script>
+	<div class="row"><div class="col-xs-12">&nbsp;</div></div>
+	<div class="row">
+		<div class="col-xs-4"></div>
+		<div class="col-xs-8">
+			<input type="submit" value="<?php echo rex_i18n::msg('d2u_helper_geocode'); ?>" onclick="geocode(); return false;" class="btn btn-save">
+			<div class="btn btn-abort"><a href="https://maps.google.com/?q=REX_VALUE[4],REX_VALUE[5]&z=17" id="check_geocode" target="_blank"><?php echo rex_i18n::msg('d2u_helper_geocode_check'); ?></a></div>
+		</div>
+	</div>
+<?php
+	$latitude = "REX_VALUE[4]";
+	$longitude = "REX_VALUE[5]";
+	if($latitude == "" && $longitude == "") {
+		print '<script>jQuery(document).ready(function($) { $("#check_geocode").parent().hide(); });</script>';
+	}
+}
+?>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
-	<div class="col-xs-12">
-		Wenn Google Maps die Adresse nicht korrekt geocodiert, k&ouml;nnen
-		optional die L&auml;ngen- und Breitengrade eingegeben werden (z.B. 7.69295).
-		(<a href="https://wiki.opennet-initiative.de/wiki/Koordinaten_Bestimmung" target="_blank">Koordinaten Bestimmung</a>.)
-	</div>
+	<div class="col-xs-4"></div>
+	<div class="col-xs-8"><?php print htmlspecialchars_decode(rex_i18n::msg('d2u_helper_geocode_hint')); ?></div>
+</div>
+<div class="row"><div class="col-xs-12">&nbsp;</div></div>
+<div class="row">
 	<div class="col-xs-4">
 		L&auml;ngengrad:
 	</div>
 	<div class="col-xs-8">
 		<input type="text" size="12" name="REX_INPUT_VALUE[4]" value="REX_VALUE[4]" class="form-control"/>
 	</div>
+</div>
+<div class="row"><div class="col-xs-12">&nbsp;</div></div>
+<div class="row">
 	<div class="col-xs-4">
 		Breitengrad:
 	</div>

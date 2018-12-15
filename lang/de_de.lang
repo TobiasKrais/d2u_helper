@@ -18,6 +18,11 @@ d2u_helper_defaultlang = Ausgangssprache
 d2u_helper_deleted = Objekt erfolgreich gelöscht.
 d2u_helper_description = Beschreibung
 d2u_helper_d2u_id = ID
+d2u_helper_geocode = Adresse geocodieren
+d2u_helper_geocode_check = Geocodierung prüfen
+d2u_helper_geocode_failure = Geocoding schlug fehl.
+d2u_helper_geocode_fields = Für eine Geocodierung müssen die Strasse, die PLZ und der Ort ausgefüllt sein.
+d2u_helper_geocode_hint = Wenn Google Maps die Adresse dieses Ortes nicht korrekt geocodiert, können optional die Längen- und Breitengrade manuell eingegeben werden. (<a href="https://wiki.opennet-initiative.de/wiki/Koordinaten_Bestimmung" target="_blank" style="color: blue">Koordinaten Bestimmung</a>)
 d2u_helper_help = Hilfe
 d2u_helper_install_error = Fehler beim Installieren
 d2u_helper_name = Name
