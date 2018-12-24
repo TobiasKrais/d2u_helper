@@ -3,7 +3,10 @@
 	<div class="panel-body">
 		<p>1.5.4-DEV</p>
 		<ul>
+			<li>Methode D2UModule::isModuleIDInstalled() hinzugefügt.</li>
 			<li>Modul 04-1 "Google Maps" Geocoding im Modul hinzugefügt.</li>
+			<li>Template D2U ID 02-2 in 04-2 geändert.</li>
+			<li>Template 04-1 "Header Slider Template with Slogan" hinzugefügt.</li>
 		</ul>
 		<p>1.5.3</p>
 		<ul>

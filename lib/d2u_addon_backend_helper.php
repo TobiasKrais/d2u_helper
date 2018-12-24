@@ -327,11 +327,11 @@ class d2u_addon_backend_helper {
 		foreach ($article_ids as $article_id) {
 			$article = rex_article::get($article_id, $clang_id);
 			if($article instanceof rex_article) {
-				print '<option value="' . $article_id . '">' . $article->getValue('name') . '</option>';
+				print '<option value="'. $article_id .'">'. $article->getValue('name') .' ['. $article_id .']</option>';
 			}
 		}
 		print '</select>';
-		print '<input type="hidden" name="REX_INPUT_LINKLIST[' . $fieldnumber . ']" id="REX_LINKLIST_' . $fieldnumber . '" value="' . implode(",", $article_ids) . '">';
+		print '<input type="hidden" name="REX_INPUT_LINKLIST[' . $fieldnumber . ']" id="REX_LINKLIST_' . $fieldnumber . '" value="' . (is_array($article_ids) ? implode(",", $article_ids) : $article_ids) . '">';
 		print '<span class="input-group-addon"><div class="btn-group-vertical">';
 		if (!$readonly) {
 			print d2u_addon_backend_helper::getLinkPositionButtons($fieldnumber);

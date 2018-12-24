@@ -4,9 +4,11 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings = (array) rex_post('settings', 'array', []);
 
 	// Linkmap Link needs special treatment
-	$link_ids = filter_input_array(INPUT_POST, array('REX_INPUT_LINK'=> array('filter' => FILTER_VALIDATE_INT, 'flags' => FILTER_REQUIRE_ARRAY)));
+	$link_ids = filter_input_array(INPUT_POST, ['REX_INPUT_LINK'=> ['filter' => FILTER_VALIDATE_INT, 'flags' => FILTER_REQUIRE_ARRAY]]);
 	$settings['article_id_privacy_policy'] = $link_ids["REX_INPUT_LINK"][1];
 	$settings['article_id_impress'] = $link_ids["REX_INPUT_LINK"][2];
+	$linklist_ids = filter_input_array(INPUT_POST, ['REX_INPUT_LINKLIST'=> ['flags' => FILTER_REQUIRE_ARRAY]]);
+	$settings['template_02_3_footer_linklist'] = $linklist_ids["REX_INPUT_LINKLIST"][1];
 
 	// Special treatment for media fields
 	$input_media = (array) rex_post('REX_INPUT_MEDIA', 'array', []);
@@ -15,13 +17,14 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['template_logo'] = $input_media['template_logo'];
 	$settings['template_print_header_pic'] = isset($input_media['template_print_header_pic']) ? $input_media['template_print_header_pic'] : '';
 	$settings['template_print_footer_pic'] = isset($input_media['template_print_footer_pic']) ? $input_media['template_print_footer_pic'] : '';
-	$settings['template_02_2_facebook_icon'] = isset($input_media['template_02_2_facebook_icon']) ? $input_media['template_02_2_facebook_icon'] : '';
+	$settings['template_04_2_facebook_icon'] = isset($input_media['template_04_2_facebook_icon']) ? $input_media['template_04_2_facebook_icon'] : '';
+	$settings['template_04_1_footer_logo'] = isset($input_media['template_04_1_footer_logo']) ? $input_media['template_04_1_footer_logo'] : '';
 	$settings['template_03_2_header_pic'] = isset($input_media['template_03_2_header_pic']) ? $input_media['template_03_2_header_pic'] : '';
 	$settings['template_03_2_footer_pic'] = isset($input_media['template_03_2_footer_pic']) ? $input_media['template_03_2_footer_pic'] : '';
 
 	$input_media_list = (array) rex_post('REX_INPUT_MEDIALIST', 'array', []);
 	foreach(rex_clang::getAllIds() as $clang_id) {
-		$settings['template_02_2_header_slider_pics_clang_'. $clang_id] = $input_media_list[$clang_id];
+		$settings['template_04_header_slider_pics_clang_'. $clang_id] = $input_media_list[$clang_id];
 	}
 
 	// Checkbox also need special treatment if empty
@@ -35,7 +38,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['submenu_use_articlename'] = array_key_exists('submenu_use_articlename', $settings);
-	$settings['template_02_2_header_slider_pics_full_width'] = array_key_exists('template_02_2_header_slider_pics_full_width', $settings);
+	$settings['template_04_header_slider_pics_full_width'] = array_key_exists('template_04_header_slider_pics_full_width', $settings);
 	$settings['lang_replacements_install'] = array_key_exists('lang_replacements_install', $settings);
 	
 	// Update URLs
@@ -156,7 +159,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						$d2u_templates = D2UTemplateManager::getD2UHelperTemplates();
 						foreach($d2u_templates as $d2u_template) {
 							$d2u_template->initRedaxoContext($this, "templates/");
-							$d2u_template_ids_for_settings = ["02-1", "02-2", "03-1", "03-2"];
+							$d2u_template_ids_for_settings = ["02-1", "03-1", "03-2", "04-1", "04-2",];
 							if(in_array($d2u_template->getD2UId(), $d2u_template_ids_for_settings) && $d2u_template->isInstalled()) {
 								print '<hr style="border-top: 1px solid #333">';
 								print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
@@ -171,29 +174,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 									d2u_addon_backend_helper::form_select('d2u_helper_settings_template_02_1_navi_pos_text', 'settings[template_02_1_navi_pos]', $navi_pos_options, [$this->getConfig('template_02_1_navi_pos')]);
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_1_footer_text', 'settings[template_02_1_footer_text]', $this->getConfig('template_02_1_footer_text'), FALSE, FALSE, "text");
 								}
-								else if($d2u_template->getD2UId() === "02-2" && $d2u_template->isInstalled()) {
-									d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_02_2_slider_pics_width', 'settings[template_02_2_header_slider_pics_full_width]', 'full', $this->getConfig('template_02_2_header_slider_pics_full_width') == 'full');
-									foreach(rex_clang::getAll() as $rex_clang) {
-										print '<dl class="rex-form-group form-group" id="MEDIALIST_'. $rex_clang->getId() .'">';
-										print '<dt><label>' . rex_i18n::msg('d2u_helper_settings_template_02_2_slider_pics') .' - '. $rex_clang->getName() .'</label></dt>';
-										print '<dd><div class="input-group">';
-										print '<select class="form-control" name="REX_MEDIALIST_SELECT[' . $rex_clang->getId() . ']" id="REX_MEDIALIST_SELECT_' . $rex_clang->getId() . '" size="10" style="margin: 0">';
-										$slider_pics = preg_grep('/^\s*$/s', explode(",", $this->getConfig('template_02_2_header_slider_pics_clang_'. $rex_clang->getId())), PREG_GREP_INVERT);
-										foreach ($slider_pics as $slider_pic) {
-											print '<option value="'. $slider_pic .'">'. $slider_pic .'</option>';
-										}
-										print '</select>';
-										print '<input type="hidden" name="REX_INPUT_MEDIALIST[' . $rex_clang->getId() . ']" id="REX_MEDIALIST_' . $rex_clang->getId() . '" value="' . $this->getConfig('template_02_2_header_slider_pics_clang_'. $rex_clang->getId()) . '">';
-										print '<span class="input-group-addon">';
-										print '<div class="btn-group-vertical">' . d2u_addon_backend_helper::getMediaPositionButtons($rex_clang->getId()) . '</div>';
-										print '<div class="btn-group-vertical">' . d2u_addon_backend_helper::getMediaManagingButtons($rex_clang->getId(), TRUE) . '</div>';
-										print '</span>';
-										print '</div><div class="rex-js-media-preview"></div></dd>';
-										print '</dl>';
-									}
-									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_2_facebook_link', 'settings[template_02_2_facebook_link]', $this->getConfig('template_02_2_facebook_link'), FALSE, FALSE);
-									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_02_2_facebook_icon', 'template_02_2_facebook_icon', $this->getConfig('template_02_2_facebook_icon'));
-								}
 								else if($d2u_template->getD2UId() === "03-1" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_1_print_header_pic', 'template_print_header_pic', $this->getConfig('template_print_header_pic'));
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_1_print_footer_pic', 'template_print_footer_pic', $this->getConfig('template_print_footer_pic'));
@@ -203,6 +183,31 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_2_footer_pic', 'template_03_2_footer_pic', $this->getConfig('template_03_2_footer_pic'));
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_margin_top', 'settings[template_03_2_margin_top]', $this->getConfig('template_03_2_margin_top'), FALSE, FALSE, "number");
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_time_show_ad', 'settings[template_03_2_time_show_ad]', $this->getConfig('template_03_2_time_show_ad'), FALSE, FALSE, "number");
+								}
+								else if(($d2u_template->getD2UId() === "04-1" || $d2u_template->getD2UId() === "04-2") && $d2u_template->isInstalled()) {
+									d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'full', $this->getConfig('template_04_header_slider_pics_full_width') == 'full');
+									if($d2u_template->getD2UId() === "04-2" && $d2u_template->isInstalled()) {
+										d2u_addon_backend_helper::form_input('d2u_helper_settings_template_04_2_facebook_link', 'settings[template_04_2_facebook_link]', $this->getConfig('template_04_2_facebook_link'), FALSE, FALSE);
+										d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_04_2_facebook_icon', 'template_04_2_facebook_icon', $this->getConfig('template_04_2_facebook_icon'));
+									}
+									if($d2u_template->getD2UId() === "04-1" && $d2u_template->isInstalled()) {
+										d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_04_1_footer_logo', 'template_04_1_footer_logo', $this->getConfig('template_04_1_footer_logo'));
+									}
+									// Language specific settings
+									foreach(rex_clang::getAll() as $rex_clang) {
+										print '<div style="background-color: white; margin-bottom: 1em; padding: 1em;">';
+										print '<dl class="rex-form-group form-group" id="specific_clang'. $rex_clang->getId() .'">';
+										print '<dt><label></label></dt>';
+										print '<dd><b>'. rex_i18n::msg('d2u_helper_settings_lang_specific') .' '. $rex_clang->getName() .'</b></dd>';
+										print '</dl>';
+										$slider_pics = preg_grep('/^\s*$/s', explode(",", $this->getConfig('template_04_header_slider_pics_clang_'. $rex_clang->getId())), PREG_GREP_INVERT);
+										d2u_addon_backend_helper::form_medialistfield('d2u_helper_settings_template_04_slider_pics', $rex_clang->getId(), $slider_pics);
+										if($d2u_template->getD2UId() === "04-1" && $d2u_template->isInstalled()) {
+											d2u_addon_backend_helper::form_textarea('d2u_helper_settings_template_04_1_slogan', 'settings[template_04_1_slider_slogan_clang_' . $rex_clang->getId() . ']', $this->getConfig('template_04_1_slider_slogan_clang_' . $rex_clang->getId()), 3, FALSE, FALSE, FALSE);
+											d2u_addon_backend_helper::form_textarea('d2u_helper_settings_template_04_1_footer_text', 'settings[template_04_1_footer_text_clang_' . $rex_clang->getId() . ']', $this->getConfig('template_04_1_footer_text_clang_' . $rex_clang->getId()), 8, FALSE, FALSE, FALSE);
+										}
+										print '</div>';
+									}
 								}
 							}
 						}

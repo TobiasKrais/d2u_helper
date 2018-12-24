@@ -61,6 +61,25 @@ if(class_exists('D2UModuleManager')) {
 }
 
 // Update templates
+if (rex_string::versionCompare($this->getVersion(), '1.5.4', '<')) {
+	// Rename template 02-2 to 04-2
+	if(rex_config::has('d2u_helper', 'template_02-2')) {
+		$result = rex_sql::factory();
+		$result->setQuery('UPDATE ' . \rex::getTablePrefix() . 'config SET `key` = "template_04-2" WHERE `namespace` = "d2u_helper" AND `key` = "template_02-2";');
+		$result->setQuery('UPDATE ' . \rex::getTablePrefix() . 'config SET `key` = REPLACE(`key`, "template_02_2", "template_04_2") WHERE `namespace` = "d2u_helper";');
+		$result->setQuery('UPDATE ' . \rex::getTablePrefix() . 'config SET `key` = REPLACE(`key`, "template_04_2_header_slider_pics", "template_04_header_slider_pics") WHERE `namespace` = "d2u_helper";');
+		$result->setQuery('UPDATE ' . \rex::getTablePrefix() . 'template SET `name` = REPLACE(`name`, "02-2 Header Slider Template", "04-2 Header Slider Template");');
+		// Force template update
+		ob_start();
+		$d2u_templates[] = new D2UTemplate("04-2",
+			"Header Slider Template",
+			5);
+		$d2u_template_manager = new D2UTemplateManager($d2u_templates);
+		$d2u_template_manager->doActions("04-2", "", rex_config::get('d2u_helper', 'template_02-2')['rex_template_id']);
+		ob_end_clean();
+		rex_delete_cache();
+	}
+}
 if(class_exists('D2UTemplateManager')) {
 	$d2u_templates = [];
 	$d2u_templates[] = new D2UTemplate("00-1",
@@ -72,14 +91,17 @@ if(class_exists('D2UTemplateManager')) {
 	$d2u_templates[] = new D2UTemplate("02-1",
 		"Header Pic Template",
 		6);
-	$d2u_templates[] = new D2UTemplate("02-2",
-		"Header Slider Template",
-		4);
 	$d2u_templates[] = new D2UTemplate("03-1",
 		"Immo Template - 2 Columns",
 		5);
 	$d2u_templates[] = new D2UTemplate("03-2",
 		"Immo Window Advertising Template",
+		5);
+	$d2u_templates[] = new D2UTemplate("04-1",
+		"Header Slider Template with Slogan",
+		1);
+	$d2u_templates[] = new D2UTemplate("04-2",
+		"Header Slider Template",
 		5);
 	$d2u_templates[] = new D2UTemplate("99-1",
 		"Feed Generator",

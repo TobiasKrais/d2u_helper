@@ -10,8 +10,7 @@ if(!rex_addon::get('yrewrite')->isAvailable()) {
 }
 
 if(!rex_addon::get('emailobfuscator')->isAvailable()) {
-	print rex_view::error(rex_i18n::msg('d2u_helper_templates_install_emailobfuscator'));
-	return FALSE;
+	print rex_view::warning(rex_i18n::msg('d2u_helper_templates_install_emailobfuscator'));
 }
 
 // Add art_file as Metainfo

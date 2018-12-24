@@ -16,6 +16,31 @@ $current_article = rex_article::getCurrent();
 // Get d2u_helper stuff
 $d2u_helper = rex_addon::get("d2u_helper");
 
+/**
+* Convert a hexa decimal color code to its RGB equivalent
+* @param string $hexStr (hexadecimal color value)
+* @param boolean $returnAsString (if set true, returns the value separated by the separator character. Otherwise returns associative array)
+* @param string $seperator (to separate RGB values. Applicable only if second parameter is true.)
+* @return array or string (depending on second parameter. Returns False if invalid hex color value)
+*/                                                                                                
+function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
+    $hexStr = preg_replace("/[^0-9A-Fa-f]/", '', $hexStr); // Gets a proper hex string
+    $rgbArray = array();
+    if (strlen($hexStr) == 6) { //If a proper hex code, convert using bitwise operation. No overhead... faster
+        $colorVal = hexdec($hexStr);
+        $rgbArray['red'] = 0xFF & ($colorVal >> 0x10);
+        $rgbArray['green'] = 0xFF & ($colorVal >> 0x8);
+        $rgbArray['blue'] = 0xFF & $colorVal;
+    } elseif (strlen($hexStr) == 3) { //if shorthand notation, need some string manipulations
+        $rgbArray['red'] = hexdec(str_repeat(substr($hexStr, 0, 1), 2));
+        $rgbArray['green'] = hexdec(str_repeat(substr($hexStr, 1, 1), 2));
+        $rgbArray['blue'] = hexdec(str_repeat(substr($hexStr, 2, 1), 2));
+    } else {
+        return false; //Invalid hex color code
+    }
+    return $returnAsString ? implode($seperator, $rgbArray) : $rgbArray; // returns the rgb string or the associative array
+}
+
 // Get d2u_machinery stuff
 $d2u_machinery = rex_addon::get("d2u_machinery");
 $category = FALSE;
@@ -105,7 +130,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	<?php
 		print d2u_addon_frontend_helper::getMetaTags();
 	?>
-	<link rel="stylesheet" href="index.php?template_id=00-1&d2u_helper=template.css">
+	<link rel="stylesheet" href="index.php?template_id=04-1&d2u_helper=template.css">
 	<?php
 		if(file_exists(rex_path::media('favicon.ico'))) {
 			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
@@ -114,82 +139,34 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 </head>
 
 <body>
-	<?php
-		$header_css = "";
-		if(!$d2u_helper->hasConfig("template_header_pic") || !$d2u_helper->hasConfig("template_logo")) {
-			print "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
-		}
-		else {
-			$header_image = $d2u_helper->getConfig("template_header_pic");
-			if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
-				$header_image = $this->getValue("art_file");
-			}
-			$header_css = 'style="background-image: url('. rex_url::media($header_image) .')"';
-		}
-	?>
-	<header <?php echo $header_css; ?>>
-		<?php
-			if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig("template_logo") != "") {
-		?>
-		<div class="container">
+	<nav>
+		<div class="container d-print-none navigation">
 			<div class="row">
-				<div class="col-9 col-md-6">
-					<a href="<?php echo rex_getUrl(rex_article::getSiteStartArticleId()); ?>">
-						<?php
+				<?php
+					// Logo
+					if($d2u_helper->getConfig("template_logo", "") != "") {
+						print '<div class="col-6 col-md-4 col-lg-3">';
+						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
 						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
 						if($media_logo instanceof rex_media) {
 							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
 						}
-						?>
-					</a>
-				</div>
-			</div>
-		</div>
-		<?php
-			}
-		?>
-	</header>
-	<nav class="d-print-none">
-		<div class="container">
-			<div class="row">
-				<?php
-					// Navi
-					$show_lang_chooser = count(rex_clang::getAllIds(TRUE)) > 1 ? TRUE : FALSE;
-					$show_cart = (rex_addon::get('d2u_courses')->isAvailable() && rex_config::get('d2u_courses', 'article_id_shopping_cart', 0) > 0) ? TRUE : FALSE;
-					if($show_lang_chooser && $show_cart) {
-						print '<div class="col-4 col-sm-4 col-md-7 col-lg-9" data-match-height>';
-					}
-					else if($show_cart) {
-						print '<div class="col-8 col-sm-10 col-md-10 col-lg-11" data-match-height>';
-					}
-					else if($show_lang_chooser) {
-						print '<div class="col-6 col-sm-6 col-md-9 col-lg-10" data-match-height>';
-					}
-					else {
-						print '<div class="col-12" data-match-height>';
-					}
-					print '<div class="navi">';
-							if(rex_addon::get('d2u_helper')->isAvailable()) {
-								d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
-								d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
-							}
-					print '</div>';
-					print '</div>';
-					// D2U Courses cart
-					if($show_cart) {
-						print '<div class="col-2 col-sm-2 col-md-2 col-lg-1">';
-						print '<a href="'. rex_getUrl(rex_config::get('d2u_courses', 'article_id_shopping_cart')) .'" class="cart_link">';
-						print '<div id="cart_symbol" class="desktop-inner">';
-						print '<img src="'. rex_url::addonAssets('d2u_courses', 'cart_only.png') .'" alt="'. rex_article::get(rex_config::get('d2u_courses', 'article_id_shopping_cart', 0))->getName() .'">';
-						print '</div>';
 						print '</a>';
 						print '</div>';
 					}
+
+					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '6' : '12') .' col-md-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .'">';
+					print '<div class="row">';
+					
+					// Mobile Navi
+					print '<div class="col-12">';
+					if(rex_addon::get('d2u_helper')->isAvailable()) {
+						d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
+					}
 					// Languages
-					if($show_lang_chooser) {
-						$clangs = rex_clang::getAll(TRUE);
-						print '<div class="col-6 col-sm-6 col-md-3 col-lg-2">';
-						print '<div id="langchooser" class="desktop-inner">';
+					$clangs = rex_clang::getAll(TRUE);
+					if(count($clangs) > 1) {
+						print '<div id="langchooser">';
 						$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
 						foreach ($clangs as $clang) {
 							if($clang->getId() != rex_clang::getCurrentId()) {
@@ -197,25 +174,173 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 								if($clang->getValue('clang_icon') != "") {
 									print '<img src="'. rex_url::media($clang->getValue('clang_icon')) .'" alt="'. $clang->getName() .'">';
 								}
-								print (count($clangs) == 2 ? $clang->getName() : '') .'</a>';							
+								print '</a>';							
 							}
 						}
-						print '</div>';
-						print '</div>';
 					}
+					print '</div>';
+					print '</div>';
+
+					// Desktop Navi
+					print '<div class="col-12">';
+					print '<div class="navi">';
+					if(rex_addon::get('d2u_helper')->isAvailable()) {
+						d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
+					}
+					print '</div>';
+					print '</div>';
+
+					print '</div>';
+					print '</div>';
 				?>
 			</div>
 		</div>
 	</nav>
-	<section id="breadcrumbs" class="subhead">
+	<?php
+		$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
+		if(count($slider_pics) > 0) {
+	?>
+	<header>
+		<?php 
+			if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", FALSE) == FALSE) {
+				// START Only if slider background slider is shown
+		?>
+		<div id="background">
+			<?php
+				if(count($slider_pics) == 1) {
+					print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" style="max-width:100%;">';
+				}
+				else if(count($slider_pics) > 1) {
+					// Slider
+					print '<div id="headerCarouselbg" class="carousel carousel-fade slide carousel-sync" data-pause="false">';
+
+					// Wrapper for slides
+					print '<div class="carousel-inner">';
+					for($i = 0; $i < count($slider_pics); $i++) {
+						print '<div class="carousel-item';
+						if($i == 0) {
+							print ' active';
+						}
+						print '">';
+						print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="">';
+						print '</div>';
+					}
+					print '</div>';
+					print '</div>';
+				}
+			?>			
+		</div>
 		<div class="container">
+			<div class="row d-print-none">
+				<div class="col-12">
+					<?php
+			}  // END Only if slider background slider is shown
+						if(count($slider_pics) == 1) {
+							print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" style="max-width:100%;">';
+						}
+						else if(count($slider_pics) > 1) {
+							// Slider
+							print '<div id="headerCarousel" class="carousel carousel-fade slide carousel-sync" data-ride="carousel" data-pause="false">';
+
+							// Slider indicators
+							print '<ol class="carousel-indicators">';
+							for($i = 0; $i < count($slider_pics); $i++) {
+								print '<li data-target="#headerCarousel" data-slide-to="'. $i .'"';
+								if($i == 0) {
+									print ' class="active"';
+								}
+								print '></li>';
+							}
+							print '</ol>';
+
+							// Wrapper for slides
+							print '<div class="carousel-inner">';
+							for($i = 0; $i < count($slider_pics); $i++) {
+								$slider_pic = rex_media::get($slider_pics[$i]);
+								if($slider_pic instanceof rex_media) {
+									print '<div class="carousel-item';
+									if($i == 0) {
+										print ' active';
+									}
+									print '">';
+									// Image
+									$ratio = $slider_pic->getWidth() / $slider_pic->getHeight();
+									$ratio_min_style = ' style="min-height: 250px; min-width:'. round(250 * $ratio).'px;"';
+									print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="'. $slider_pic->getTitle() .'"'. $ratio_min_style .'>';
+									// Slogan
+									$slogan_text = $this->getValue('art_slogan') != "" ? $this->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId());
+									$slogan = '<span class="slogan-text-row">'. str_replace('<br>', '</span><span class="slogan-text-row">', nl2br($slogan_text, FALSE)) .'</span>';
+									if($slogan != "") {
+										print '<div class="slogan"><div class="container"><span class="slogan-text">'. $slogan .'</span></div></div>';
+									}
+									print '</div>';
+								}
+							}
+							print '</div>';
+							print '</div>';
+						}
+			if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", FALSE) == FALSE) {
+				// START Only if slider background slider is shown
+					?>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function () {
+				// Sync sliders
+				jQuery('#headerCarousel').on('slide.bs.carousel', function() {
+					jQuery('#headerCarouselbg').carousel('next');
+				});
+
+				// Sync events
+				$('.carousel-sync').on('slide.bs.carousel', function(ev) {
+					// get the direction, based on the event which occurs
+					var dir = ev.direction === 'right' ? 'prev' : 'next';
+					// get synchronized non-sliding carousels, and make'em sliding
+					$('.carousel-sync').not('.sliding').addClass('sliding').carousel(dir);
+				});
+				$('.carousel-sync').on('slid.bs.carousel', function(ev) {
+					// remove .sliding class, to allow the next move
+					$('.carousel-sync').removeClass('sliding');
+				});
+			});
+		</script>
+		<?php
+			} // END Only if slider background slider is shown
+		?>
+	</header>
+	<?php
+		}
+	?>
+	<section id="breadcrumbs">
+		<div class="container subhead">
 			<div class="row">
 				<?php
-					// Breadcrumbs
-					if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
-						print '<div class="col-12 d-print-none">';
-						print d2u_addon_frontend_helper::getBreadcrumbs();
-						print '</div>';
+					$show_cart = (rex_addon::get('d2u_courses')->isAvailable() && rex_config::get('d2u_courses', 'article_id_shopping_cart', 0) > 0) ? TRUE : FALSE;
+					if($d2u_helper->getConfig("show_breadcrumbs", FALSE) || $show_cart) {
+						// Breadcrumbs
+						if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
+							if($show_cart) {
+								print '<div class="col-8 col-sm-10 col-lg-11 d-print-none">';
+							}
+							else {
+								print '<div class="col-12 d-print-none">';
+							}
+							print '<div id="breadcrumbs-inner"><small>';
+							print d2u_addon_frontend_helper::getBreadcrumbs();
+							print '</small></div>';
+							print '</div>';
+						}
+						// D2U Courses cart
+						if($show_cart) {
+							print '<div class="col-4 col-sm-2 col-lg-1">';
+							print '<a href="'. rex_getUrl(rex_config::get('d2u_courses', 'article_id_shopping_cart')) .'" class="cart_link">';
+							print '<div id="cart_symbol" class="desktop-inner">';
+							print '<img src="'. rex_url::addonAssets('d2u_courses', 'cart_only.png') .'" alt="'. rex_article::get(rex_config::get('d2u_courses', 'article_id_shopping_cart', 0))->getName() .'">';
+							print '</div>';
+							print '</a>';
+							print '</div>';
+						}
 					}
 				?>
 				<div class="col-12 subhead-nav">
@@ -242,7 +367,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 								}
 							}
 							if(rex_plugin::get("d2u_machinery", "service_options")->isAvailable() && count($machine->service_option_ids) > 0) {
-								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_service_options">'. $tag_open .'d2u_machinery_construction_equipment_service'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
+								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_service_options">'. $tag_open .'d2u_machinery_construction_equipment_service'. $tag_close .'</a></li>';
 							}
 							if(rex_plugin::get("d2u_machinery", "equipment")->isAvailable() && count($machine->equipment_ids) > 0) {
 								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_equipment"><span class="fa-icon fa-plus d-block d-lg-none" title="'. $tag_open .'d2u_machinery_equipment'. $tag_close .'"></span><span class="d-none d-lg-block">'. $tag_open .'d2u_machinery_equipment'. $tag_close .'</span><div class="active-navi-pill"></div></a></li>';
@@ -297,7 +422,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		</div>
 	</section>
 	<article>
-		<div class="container">
+		<div class="container article">
 			<div class="row">
 				<?php
 					// Content follows
@@ -307,15 +432,46 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		</div>
 	</article>
 	<footer class="d-print-none">
-		<div class="container">
+		<div class="container footer">
 			<div class="row">
 				<?php
+					print '<div class="col-12 col-md-6 col-lg-8">';
+					// Logo
+					if($d2u_helper->getConfig("template_04_1_footer_logo", "") != "") {
+							print '<div class="row">';
+							print '<div class="col-12 col-sm-6">';
+							print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
+							$media_logo = rex_media::get($d2u_helper->getConfig("template_04_1_footer_logo"));
+							if($media_logo instanceof rex_media) {
+								print '<img src="'. rex_url::media($d2u_helper->getConfig("template_04_1_footer_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer">';
+							}
+							print '</a>';
+							print '</div>';
+							print '</div>';
+					}
+					// Article links
 					$rex_articles = rex_article::getRootArticles(true);
-					foreach($rex_articles as $rex_articles) {
-						print '<div class="col-sm-6 col-md-4 col-lg-3">';
-						print '<div class="footerbox">';
-						print '<a href="'. $rex_articles->getUrl() .'">'. $rex_articles->getName() .'</a>';
-						print '</div>';
+					print '<div class="row">';
+					print '<div class="col-12"><br>';
+					$delimiter = FALSE;
+					foreach($rex_articles as $rex_article) {
+						if($delimiter) {
+							print ' | ';
+						}
+						else {
+							$delimiter = TRUE;
+						}
+						print '<a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a>';
+					}
+					print '</div>';
+					print '</div>';
+					print '</div>';
+
+					// Custom field
+					if($d2u_helper->getConfig("template_04_1_footer_text_clang_". rex_clang::getCurrentId(), "") != "") {
+						print '<div class="col-12 d-block d-md-none"><br><br></div>';
+						print '<div class="col-12 col-md-6 col-lg-4">';
+						print '<p class="text-md-right">'. nl2br($d2u_helper->getConfig("template_04_1_footer_text_clang_". rex_clang::getCurrentId(), "")) .'</p>';
 						print '</div>';
 					}
 				?>

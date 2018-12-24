@@ -31,7 +31,8 @@ header {
 	header {
 		min-height: 390px;
 	}
-}@media screen and (min-width: 992px) and (max-width: 1199px) {
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
 	header {
 		min-height: 300px;
 	}

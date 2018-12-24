@@ -103,7 +103,7 @@ class D2UTemplateManager {
 			}
 		}
 
-		// Save before cache deletion (https://github.com/RexDude/xcore/issues/237)
+		// Save before cache deletion
 		rex_config::save();
 
 		rex_delete_cache();
@@ -124,14 +124,17 @@ class D2UTemplateManager {
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
 			6);
-		$d2u_templates[] = new D2UTemplate("02-2",
-			"Header Slider Template",
-			4);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
 			5);
 		$d2u_templates[] = new D2UTemplate("03-2",
 			"Immo Window Advertising Template",
+			5);
+		$d2u_templates[] = new D2UTemplate("04-1",
+			"Header Slider Template with Slogan",
+			1);
+		$d2u_templates[] = new D2UTemplate("04-2",
+			"Header Slider Template",
 			5);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",

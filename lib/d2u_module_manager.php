@@ -613,6 +613,18 @@ class D2UModule {
 	}
 
 	/**
+	 * Static method equivalent to isInstalled()
+	 * @param string $d2u_module_id D2U Module ID, e.g. "03-2"
+	 * @return boolean TRUE if D2U module is installed, otherwise FALSE
+	 */
+	public static function isModuleIDInstalled($d2u_module_id) {
+		$query = 'SELECT * FROM ' . \rex::getTablePrefix() . 'config WHERE `key` = "module_'. $d2u_module_id .'"';
+		$result = rex_sql::factory();
+		$result->setQuery($query);
+		return $result->getRows() > 0 ? TRUE : FALSE;
+	}
+
+	/**
 	 * Checks id module in Redaxo DB needs update or needs to be installed.
 	 */
 	public function isUpdateNeeded() {

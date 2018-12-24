@@ -105,7 +105,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	<?php
 		print d2u_addon_frontend_helper::getMetaTags();
 	?>
-	<link rel="stylesheet" href="index.php?template_id=02-2&d2u_helper=template.css">
+	<link rel="stylesheet" href="index.php?template_id=04-2&d2u_helper=template.css">
 	<?php
 		if(file_exists(rex_path::media('favicon.ico'))) {
 			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
@@ -163,12 +163,12 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		</div>
 	</nav>
 	<?php
-		$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_02_2_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
+		$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
 		if(count($slider_pics) > 0) {
 	?>
 	<header>
 		<?php 
-			if($d2u_helper->getConfig("template_02_2_header_slider_pics_full_width", FALSE) == FALSE) {
+			if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", FALSE) == FALSE) {
 				// START Only if slider background slider is shown
 		?>
 		<div id="background">
@@ -183,13 +183,16 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					// Wrapper for slides
 					print '<div class="carousel-inner">';
 					for($i = 0; $i < count($slider_pics); $i++) {
-						print '<div class="carousel-item';
-						if($i == 0) {
-							print ' active';
+						$slider_pic = rex_media::get($slider_pics[$i]);
+						if($slider_pic instanceof rex_media) {
+							print '<div class="carousel-item';
+							if($i == 0) {
+								print ' active';
+							}
+							print '">';
+							print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="'. $slider_pic->getTitle() .'">';
+							print '</div>';
 						}
-						print '">';
-						print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="">';
-						print '</div>';
 					}
 					print '</div>';
 					print '</div>';
@@ -213,7 +216,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 							for($i = 0; $i < count($slider_pics); $i++) {
 								print '<li data-target="#headerCarousel" data-slide-to="'. $i .'"';
 								if($i == 0) {
-									print 'class="active"';
+									print ' class="active"';
 								}
 								print '></li>';
 							}
@@ -222,18 +225,21 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 							// Wrapper for slides
 							print '<div class="carousel-inner">';
 							for($i = 0; $i < count($slider_pics); $i++) {
-								print '<div class="carousel-item';
-								if($i == 0) {
-									print ' active';
+								$slider_pic = rex_media::get($slider_pics[$i]);
+								if($slider_pic instanceof rex_media) {
+									print '<div class="carousel-item';
+									if($i == 0) {
+										print ' active';
+									}
+									print '">';
+									print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="'. $slider_pic->getTitle() .'">';
+									print '</div>';
 								}
-								print '">';
-								print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="">';
-								print '</div>';
 							}
 							print '</div>';
 
 							// Left and right controls
-							if($d2u_helper->getConfig("template_02_2_header_slider_pics_full_width", FALSE)) {
+							if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", FALSE)) {
 								print '<a class="carousel-control-prev" href="#headerCarousel" role="button" data-slide="prev">';
 								print '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
 								print '<span class="sr-only">Previous</span>';
@@ -245,7 +251,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 							}
 							print '</div>';
 						}
-			if($d2u_helper->getConfig("template_02_2_header_slider_pics_full_width", FALSE) == FALSE) {
+			if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", FALSE) == FALSE) {
 				// START Only if slider background slider is shown
 					?>
 				</div>
@@ -360,6 +366,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 							print '<h1 class="subhead">'. $used_machine->manufacturer .' '. $used_machine->name .'</h1>';
 							print '<ul class="nav nav-pills">';
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
+							if(rex_config::get('d2u_machinery', 'used_machines_pic_type', 'slider') == 'lightbox') {
+								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_pics">'. $tag_open .'d2u_machinery_pics'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
+							}
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_request"><span class="fa-icon fa-envelope-o d-block d-lg-none" title="'. $tag_open .'d2u_machinery_request'. $tag_close .'"></span><span class="d-none d-lg-block">'. $tag_open .'d2u_machinery_request'. $tag_close .'</span><div class="active-navi-pill"></div></a></li>';
 							print '</ul>';
 						}
@@ -398,10 +407,10 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		<div class="container footer">
 			<div class="row">
 				<?php
-					if($d2u_helper->getConfig("template_logo", "") != "" || ($d2u_helper->getConfig("template_02_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_02_2_facebook_icon", "") != "")) {
+					if($d2u_helper->getConfig("template_logo", "") != "" || ($d2u_helper->getConfig("template_04_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_04_2_facebook_icon", "") != "")) {
 						print '<div class="col-8 col-md-9">';
 					}
-					else if($d2u_helper->getConfig("template_logo", "") != "" || $d2u_helper->getConfig("template_02_2_facebook_link", "") != "") {
+					else if($d2u_helper->getConfig("template_logo", "") != "" || $d2u_helper->getConfig("template_04_2_facebook_link", "") != "") {
 						print '<div class="col-8 col-md-9 col-lg-10">';
 					}
 					else {
@@ -409,37 +418,37 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					}
 					$rex_articles = rex_article::getRootArticles(true);
 					print '<div class="row">';
-					foreach($rex_articles as $rex_articles) {
+					foreach($rex_articles as $rex_article) {
 						print '<div class="col-md-6 col-lg-4">';
 						print '<div class="footerbox">';
-						print '<a href="'. $rex_articles->getUrl() .'">'. $rex_articles->getName() .'</a>';
+						print '<a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a>';
 						print '</div>';
 						print '</div>';
 					}
 					print '</div>';
 					print '</div>';
 
-					if($d2u_helper->getConfig("template_logo", "") != "" || ($d2u_helper->getConfig("template_02_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_02_2_facebook_icon", "") != "")) {
-						if($d2u_helper->getConfig("template_logo", "") != "" || ($d2u_helper->getConfig("template_02_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_02_2_facebook_icon", "") != "")) {
+					if($d2u_helper->getConfig("template_logo", "") != "" || ($d2u_helper->getConfig("template_04_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_04_2_facebook_icon", "") != "")) {
+						if($d2u_helper->getConfig("template_logo", "") != "" || ($d2u_helper->getConfig("template_04_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_04_2_facebook_icon", "") != "")) {
 							print '<div class="col-4 col-sm-4 col-md-3">';
 						}
-						else if($d2u_helper->getConfig("template_logo", "") != "" || $d2u_helper->getConfig("template_02_2_facebook_link", "") != "") {
+						else if($d2u_helper->getConfig("template_logo", "") != "" || $d2u_helper->getConfig("template_04_2_facebook_link", "") != "") {
 							print '<div class="col-4 col-sm-4 col-md-3 col-lg-2">';
 						}
 
-						if($d2u_helper->getConfig("template_logo", "") != "" && ($d2u_helper->getConfig("template_02_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_02_2_facebook_icon", "") != "")) {
+						if($d2u_helper->getConfig("template_logo", "") != "" && ($d2u_helper->getConfig("template_04_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_04_2_facebook_icon", "") != "")) {
 							print '<div class="row">';
 							print '<div class="col-12 col-lg-6 facebook-logo-div">';
 						}
 
 						// Facebook Logo
-						if($d2u_helper->getConfig("template_02_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_02_2_facebook_icon", "") != "") {
-							print '<a href="'. $d2u_helper->getConfig("template_02_2_facebook_link") .'" target="_blank">';
-							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_02_2_facebook_icon")) .'" alt="Facebook" id="facebook">';
+						if($d2u_helper->getConfig("template_04_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_04_2_facebook_icon", "") != "") {
+							print '<a href="'. $d2u_helper->getConfig("template_04_2_facebook_link") .'" target="_blank">';
+							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_04_2_facebook_icon")) .'" alt="Facebook" id="facebook">';
 							print '</a>';
 						}
 
-						if($d2u_helper->getConfig("template_logo", "") != "" && ($d2u_helper->getConfig("template_02_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_02_2_facebook_icon", "") != "")) {
+						if($d2u_helper->getConfig("template_logo", "") != "" && ($d2u_helper->getConfig("template_04_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_04_2_facebook_icon", "") != "")) {
 							print '</div>';
 							print '<div class="d-block d-lg-none col-lg-6">&nbsp;</div>';
 							print '<div class="col-12 col-lg-6">';
@@ -455,7 +464,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 							print '</a>';
 						}
 
-						if($d2u_helper->getConfig("template_logo", "") != "" && ($d2u_helper->getConfig("template_02_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_02_2_facebook_icon", "") != "")) {
+						if($d2u_helper->getConfig("template_logo", "") != "" && ($d2u_helper->getConfig("template_04_2_facebook_link", "") != "" && $d2u_helper->getConfig("template_04_2_facebook_icon", "") != "")) {
 							print '</div>';
 							print '</div>';
 						}
