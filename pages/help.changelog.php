@@ -3,8 +3,8 @@
 	<div class="panel-body">
 		<p>1.5.4</p>
 		<ul>
-			<li>Updates popper to 1.14.6</li>
-			<li>Updates bootstrap to 4.2.1.</li>
+			<li>Popper auf Version 1.14.6 aktualisiert.</li>
+			<li>Bootstrap auf Version 4.2.1 aktualisiert.</li>
 			<li>Methode D2UModule::isModuleIDInstalled() hinzugefügt.</li>
 			<li>Modul 04-1 "Google Maps" Geocoding im Modul hinzugefügt.</li>
 			<li>Template D2U ID 02-2 in 04-2 geändert.</li>
