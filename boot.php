@@ -81,7 +81,8 @@ function appendGoogleAnalytics(rex_extension_point $ep) {
  */
 function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$VERSION_JQUERY = '3.3.1';
-	$VERSION_BOOTSTRAP = '4.1.3';
+	$VERSION_BOOTSTRAP = '4.2.1';
+	$VERSION_POPPER = '1.14.6';
 	$addon = rex_addon::get("d2u_helper");
 	
 	// If insertion should be prevented, detect class "prevent_d2u_helper_styles"
@@ -98,7 +99,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	}
 	if($addon->getConfig('include_bootstrap4') == 'true') {
 		// Popper JavaScript
-		$insert_head .= '<script src="'. $addon->getAssetsUrl('bootstrap4/popper.min.js') .'"></script>' . PHP_EOL;
+		$insert_head .= '<script src="'. $addon->getAssetsUrl('bootstrap4/popper.min.js') .'?v='. $VERSION_POPPER .'"></script>' . PHP_EOL;
 		// Bootstrap CSS
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v='. $VERSION_BOOTSTRAP .'" />' . PHP_EOL;
 	}
