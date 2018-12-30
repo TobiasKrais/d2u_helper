@@ -456,7 +456,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					$delimiter = FALSE;
 					foreach($rex_articles as $rex_article) {
 						if($delimiter) {
-							print ' | ';
+							print '  |  ';
 						}
 						else {
 							$delimiter = TRUE;

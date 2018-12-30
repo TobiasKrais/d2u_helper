@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.5.4-DEV</p>
+		<p>1.5.4</p>
 		<ul>
 			<li>Methode D2UModule::isModuleIDInstalled() hinzugefügt.</li>
 			<li>Modul 04-1 "Google Maps" Geocoding im Modul hinzugefügt.</li>
