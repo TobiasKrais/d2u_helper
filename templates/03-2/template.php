@@ -237,7 +237,7 @@
 											}
 											if($property->deposit != "") {
 												print '<div class="col-6">'. $tag_open .'d2u_immo_deposit'. $tag_close .':</div>';
-												print '<div class="col-6">'. $property->deposit .'</div>';
+												print '<div class="col-6">'.  number_format($property->deposit, 2, ",", ".") .'&nbsp;'. $property->currency_code .'</div>';
 											}
 											print '<div class="col-6">'. $tag_open .'d2u_immo_courtage'. $tag_close .'</div>';
 											if($property->courtage == "") {
@@ -315,7 +315,7 @@
 											}
 										}
 
-										if($property->object_type != "grundstueck" && strlen($property->energy_pass) > 5) {
+										if(($property->object_type != "grundstueck" && $property->object_type != "parken") && strlen($property->energy_pass) > 5) {
 											print '<div class="col-6">'. $tag_open .'d2u_immo_energy_pass'. $tag_close .'</div>';
 											print '<div class="col-6">'. $tag_open .'d2u_immo_energy_pass_'. $property->energy_pass . $tag_close .'</div>';
 
