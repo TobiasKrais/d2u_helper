@@ -173,7 +173,7 @@ class d2u_addon_backend_helper {
 	 */
 	public static function getJS() {
 		$js =
-"<script type='text/javascript'>
+"<script>
 	// slide fieldsets
 	jQuery(document).ready(function($) {
 		$('legend').click(function(e) {
@@ -201,7 +201,7 @@ class d2u_addon_backend_helper {
 	 */
 	public static function getJSOpenAll() {
 		$js =
-"<script type='text/javascript'>
+"<script>
 	$('legend').each(function() {
 		$(this).addClass('open');
 		$(this).next('.panel-body-wrapper.slide').slideToggle();

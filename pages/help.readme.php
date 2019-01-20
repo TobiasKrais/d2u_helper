@@ -127,4 +127,14 @@
 			gewählt bleiben.</p>
 		<p></p>
 	</div>
+	<header class="panel-heading"><div class="panel-title">Wo wird in den Templates das Impressum ausgegeben?</div></header>
+	<div class="panel-body">
+		<p>Im Footer werden die Artikel der Root Kategorie aufgelistet. Einfach
+			einen Artikel mit dem Impressum in der Root Kategorie anlegen. Der
+			Artikel muss online sein. Tipp: das Impressum und auch die
+			Datenschutzerklärung sollten aus dem Webseitenindex entfernt werden,
+			damit Abmahnanwälte durch eine Google Suche nicht auf eventuelle
+			Fehler aufmerksam werden.</p>
+		<p></p>
+	</div>
 </div>

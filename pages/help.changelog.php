@@ -1,6 +1,11 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.5.5-DEV</p>
+		<ul>
+			<li>Readme um Hinweis zum Impressum in Templates ergänzt.</li>
+			<li>Template 03-2 "Immo Window Advertising Template" an D2U Immo 1.0.8 angepasst.</li>
+		</ul>
 		<p>1.5.4</p>
 		<ul>
 			<li>Popper auf Version 1.14.6 aktualisiert.</li>
@@ -17,7 +22,7 @@
 			<li>Bugfix d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu(): Menü konnte auf großen Bildschirmen trotz Einstellung nicht ausgeblendet werden.</li>
 			<li>Alle Module: Backend Eingabefelder Style Redaxo konform gestaltet und unnötige Felder ausgeblendet.</li>
 			<li>Modul 13-1 "Lauftext" hinzugefügt.</li>
-			<li>Modul 11-2 "YFrom Kontaktformular": Einrückung des Textes bei Checkboxen verbessert.</li>
+			<li>Modul 11-2 "YForm Kontaktformular": Einrückung des Textes bei Checkboxen verbessert.</li>
 			<li>Modul 04-1 "Google Maps" Geocoding Link erneuert.</li>
 			<li>Modul 03-2 "Ekkolightbox Galerie" hat jetzt Option wie viele Bilder pro Reihe dargestellt werden sollen.</li>
 			<li>Modul 02-2 "Überschrift mit Klapptext" hinzugefügt.</li>

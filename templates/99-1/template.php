@@ -1328,7 +1328,7 @@ class HTMLCreator extends FeedCreator {
  * @author Pascal Van Hecke
  */
 class JSCreator extends HTMLCreator {
-	var $contentType = "text/javascript";
+	var $contentType = "application/javascript";
 	
 	/**
 	 * writes the javascript

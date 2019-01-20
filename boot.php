@@ -318,7 +318,7 @@ function sendD2UHelperCSS() {
  * @param string $position JS position ("head" oder "body") 
  */
 function sendD2UHelperJS($position = "head") {
-	header('Content-type: text/javascript');
+	header('Content-type: application/javascript');
 	$d2u_helper = rex_addon::get('d2u_helper');
 	$js = "";
 	if($position == "body") {

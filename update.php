@@ -96,7 +96,7 @@ if(class_exists('D2UTemplateManager')) {
 		5);
 	$d2u_templates[] = new D2UTemplate("03-2",
 		"Immo Window Advertising Template",
-		5);
+		6);
 	$d2u_templates[] = new D2UTemplate("04-1",
 		"Header Slider Template with Slogan",
 		1);
