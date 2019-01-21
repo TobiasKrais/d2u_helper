@@ -174,6 +174,16 @@ class d2u_addon_backend_helper {
 	public static function getJS() {
 		$js =
 "<script>
+	// Hide or show detail fields of languages
+	function toggleClangDetailsView(clang_id) {
+		if ($(\"select[name='form[lang][\" + clang_id + \"][translation_needs_update]']\").val() === 'delete') {
+			$('#details_clang_' + clang_id).slideUp();
+		}
+		else {
+			$('#details_clang_' + clang_id).slideDown();
+		};			
+	}
+
 	// slide fieldsets
 	jQuery(document).ready(function($) {
 		$('legend').click(function(e) {
