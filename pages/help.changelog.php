@@ -1,8 +1,9 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.5.5-DEV</p>
+		<p>1.5.5</p>
 		<ul>
+			<li>JS Methode zum Ausblenden von Sprachübersetzungen in kommenden Versionen von D2U Addons hinzugefügt.</li>
 			<li>Readme um Hinweis zum Impressum in Templates ergänzt.</li>
 			<li>Template 03-2 "Immo Window Advertising Template" an D2U Immo 1.0.8 angepasst.</li>
 		</ul>
