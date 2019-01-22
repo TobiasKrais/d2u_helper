@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.5.6-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.5.5</p>
 		<ul>
 			<li>JS Methode zum Ausblenden von Sprachübersetzungen in kommenden Versionen von D2U Addons hinzugefügt.</li>
