@@ -6,6 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <base href="<?php echo rex::getServer(); ?>" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
 		print d2u_addon_frontend_helper::getMetaTags();
 	?>
