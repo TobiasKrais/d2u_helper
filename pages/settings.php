@@ -15,6 +15,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['custom_css'] = $input_media['custom_css'];
 	$settings['template_header_pic'] = $input_media['template_header_pic'];
 	$settings['template_logo'] = $input_media['template_logo'];
+	$settings['template_logo_2'] = $input_media['template_logo_2'];
 	$settings['template_print_header_pic'] = isset($input_media['template_print_header_pic']) ? $input_media['template_print_header_pic'] : '';
 	$settings['template_print_footer_pic'] = isset($input_media['template_print_footer_pic']) ? $input_media['template_print_footer_pic'] : '';
 	$settings['template_04_2_facebook_icon'] = isset($input_media['template_04_2_facebook_icon']) ? $input_media['template_04_2_facebook_icon'] : '';
@@ -159,7 +160,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						$d2u_templates = D2UTemplateManager::getD2UHelperTemplates();
 						foreach($d2u_templates as $d2u_template) {
 							$d2u_template->initRedaxoContext($this, "templates/");
-							$d2u_template_ids_for_settings = ["02-1", "03-1", "03-2", "04-1", "04-2",];
+							$d2u_template_ids_for_settings = ["02-1", "03-1", "03-2", "04-1", "04-2", "05-1"];
 							if(in_array($d2u_template->getD2UId(), $d2u_template_ids_for_settings) && $d2u_template->isInstalled()) {
 								print '<hr style="border-top: 1px solid #333">';
 								print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
@@ -174,17 +175,17 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 									d2u_addon_backend_helper::form_select('d2u_helper_settings_template_02_1_navi_pos_text', 'settings[template_02_1_navi_pos]', $navi_pos_options, [$this->getConfig('template_02_1_navi_pos')]);
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_1_footer_text', 'settings[template_02_1_footer_text]', $this->getConfig('template_02_1_footer_text'), FALSE, FALSE, "text");
 								}
-								else if($d2u_template->getD2UId() === "03-1" && $d2u_template->isInstalled()) {
+								if($d2u_template->getD2UId() === "03-1" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_1_print_header_pic', 'template_print_header_pic', $this->getConfig('template_print_header_pic'));
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_1_print_footer_pic', 'template_print_footer_pic', $this->getConfig('template_print_footer_pic'));
 								}
-								else if($d2u_template->getD2UId() === "03-2" && $d2u_template->isInstalled()) {
+								if($d2u_template->getD2UId() === "03-2" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_2_header_pic', 'template_03_2_header_pic', $this->getConfig('template_03_2_header_pic'));
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_2_footer_pic', 'template_03_2_footer_pic', $this->getConfig('template_03_2_footer_pic'));
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_margin_top', 'settings[template_03_2_margin_top]', $this->getConfig('template_03_2_margin_top'), FALSE, FALSE, "number");
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_time_show_ad', 'settings[template_03_2_time_show_ad]', $this->getConfig('template_03_2_time_show_ad'), FALSE, FALSE, "number");
 								}
-								else if(($d2u_template->getD2UId() === "04-1" || $d2u_template->getD2UId() === "04-2") && $d2u_template->isInstalled()) {
+								if(($d2u_template->getD2UId() === "04-1" || $d2u_template->getD2UId() === "04-2") && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'full', $this->getConfig('template_04_header_slider_pics_full_width') == 'full');
 									if($d2u_template->getD2UId() === "04-2" && $d2u_template->isInstalled()) {
 										d2u_addon_backend_helper::form_input('d2u_helper_settings_template_04_2_facebook_link', 'settings[template_04_2_facebook_link]', $this->getConfig('template_04_2_facebook_link'), FALSE, FALSE);
@@ -208,6 +209,12 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 										}
 										print '</div>';
 									}
+								}
+								if($d2u_template->getD2UId() === "05-1" && $d2u_template->isInstalled()) {
+									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_05_1_logo', 'template_logo_2', $this->getConfig('template_logo_2'));
+									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_05_1_logo_link', 'settings[template_logo_2_link]', $this->getConfig('template_logo_2_link'), FALSE, FALSE);
+									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_05_1_footer_text', 'settings[template_05_1_footer_text]', $this->getConfig('template_05_1_footer_text'), FALSE, FALSE, "text");
+									d2u_addon_backend_helper::form_textarea('d2u_helper_settings_template_05_1_info_text', 'settings[template_05_1_info_text]', $this->getConfig('template_05_1_info_text'), 5, FALSE, FALSE, TRUE);
 								}
 							}
 						}

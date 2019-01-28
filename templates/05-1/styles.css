@@ -1,0 +1,106 @@
+@font-face{
+	font-family:'FontAwesome';
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?v=4.7.0");
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff2?v=4.7.0") format('woff2'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff?v=4.7.0") format('woff'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
+}
+.fa-home, .fa-icon {
+	font-family: FontAwesome;
+}
+.fa-home:before {
+	content: "\f015";
+}
+body {
+	background: linear-gradient(to right, navi_color_bg 50%, navi_color_hover_bg 50%);
+	font-family: Arial, sans-serif;
+	hyphens: auto;
+}
+article h1, article h2, article h3, article h4, article h5, article h6 {
+	color: article_color_h;
+	text-align: left;
+}
+a, a:link, a:visited {
+	color: article_color_h;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+img {
+	max-width: 100%;
+}
+hr {
+	color: article_color_h;
+	height: 1px;
+	width: 100%;
+}
+
+header, #article-content {
+	background-color: article_color_bg;
+}
+
+#breadcrumbs {
+	font-size: 0.9em;
+	padding-bottom: 1em;
+	padding-top: 10px;
+}
+
+/* Navi */
+#mobile-menu {
+	display: none;
+}
+#navi_startseite div.slicknav_menu {
+	background: transparent;
+}
+#navi_startseite .slicknav_btn {
+	background-color: transparent;
+	float: left;
+}
+.slicknav_nav a, .slicknav_nav .slicknav_row {
+	margin: 0px !important;
+}
+.slicknav_nav a:hover, .current a, .slicknav_nav .slicknav_row:hover, .slicknav_nav .slicknav_row:hover a, .current a {
+	border-radius: 0 !important;
+}
+.slicknav_menu .slicknav_icon-bar {
+	background-color: navi_color_font !important;
+	box-shadow: none !important;
+}
+.slicknav_btn {
+	background-color: transparent !important;
+}
+.slicknav_nav ul {
+	padding-left: 10px;
+}
+
+#logo-left, #logo-right {
+	background-color: white;
+	text-align: center;
+}
+#logo-left img {
+	margin: 1em auto;
+}
+#logo-right img	{
+	margin: 1em auto;
+}
+
+#footer {
+	color: navi_color_bg;
+	font-size: 14px;
+	text-align: center;
+	margin: 1em auto;
+}
+@media screen and (min-width: 992px) {
+	#footer {
+		letter-spacing: 0.5em;
+	}
+}
+
+/* Teaser */
+#teaser-inner-frame	{
+	background-color: navi_color_hover_bg;
+	color: navi_color_hover_font;
+}

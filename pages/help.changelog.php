@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.5.6-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Template 05-1 "Double Logo Template" hinzugefügt.</li>
 		</ul>
 		<p>1.5.5</p>
 		<ul>

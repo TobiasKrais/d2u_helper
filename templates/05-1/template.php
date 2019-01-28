@@ -1,0 +1,197 @@
+<?php
+	$d2u_helper = rex_addon::get('d2u_helper');
+?>
+<!DOCTYPE html>
+<html lang="<?php echo rex_clang::getCurrent()->getCode(); ?>">
+<head>
+    <meta charset="utf-8" />
+    <base href="<?php echo rex::getServer(); ?>" />
+	<?php
+		print d2u_addon_frontend_helper::getMetaTags();
+	?>
+ 	<link rel="stylesheet" href="index.php?template_id=05-1&d2u_helper=template.css">
+  	<link rel="icon" href="<?php print rex_url::media('favicon.ico'); ?>" />
+	<?php
+		$show_screen_size = 'screen == "lg" ||  screen == "xl"';
+		$menu_icon_min_width = '';
+		if($d2u_helper->isAvailable()) {
+			d2u_mobile_navi_slicknav::getMobileMenu();
+			
+			$include_menu_show = $d2u_helper->getConfig('include_menu_show', 'md');
+			if($include_menu_show == 'xs') {
+				$show_screen_size = 'screen == "sm" || screen == "md" || screen == "lg" ||  screen == "xl"';
+				$menu_icon_min_width = '576px';
+			}
+			else if($include_menu_show == 'sm') {
+				$show_screen_size = 'screen == "md" || screen == "lg" ||  screen == "xl"';
+				$menu_icon_min_width = '768px';
+			}
+			else if($include_menu_show == 'md') {
+				$show_screen_size = 'screen == "lg" ||  screen == "xl"';
+				$menu_icon_min_width = '992px';
+			}
+			else if($include_menu_show == 'lg') {
+				$show_screen_size = 'screen == "xl"';
+				$menu_icon_min_width = '1200px';
+			}
+			else {
+	 			$show_screen_size = 'false';
+			}
+		}
+		
+		if($menu_icon_min_width != '') {
+	?>
+  	<style>
+  		@media screen and (min-width: <?php print $menu_icon_min_width; ?>) {
+			#navi_desktop .slicknav_btn {
+				display: none !important;
+			}
+		}
+  	</style>
+  	<?php
+  		}
+  	?>
+</head>
+
+<body>
+	<div id="device-size-detector">
+		<div id="xs" class="d-block d-sm-none"></div>
+		<div id="sm" class="d-none d-sm-block d-md-none"></div>
+		<div id="md" class="d-none d-md-block d-lg-none"></div>
+		<div id="lg" class="d-none d-lg-block d-xl-none"></div>
+		<div id="xl" class="d-none d-xl-block"></div>
+	</div>
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-6 col-xl-2">
+					<div id="logo-left" align="right">
+						<?php
+							if($d2u_helper->getConfig('template_logo', '') != "") {
+								print '<a href="'. rex::getServer() .'">';
+								$media_logo = rex_media::get($d2u_helper->getConfig('template_logo'));
+								if($media_logo instanceof rex_media) {
+									print '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+								}
+								print '</a>';
+							}
+						?>
+					</div>
+				</div>
+				<div class="col-6 d-block d-xl-none">
+					<div id="logo-right">
+						<?php
+							if($d2u_helper->getConfig('template_logo_2', '') != "") {
+								if($d2u_helper->getConfig('template_logo_2_link', '') != '') {
+									print '<a href="'. $d2u_helper->getConfig('template_logo_2_link', '') .'">';
+								}
+								$media_logo = rex_media::get($d2u_helper->getConfig('template_logo_2'));
+								if($media_logo instanceof rex_media) {
+									print '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+								}
+								if($d2u_helper->getConfig('template_logo_2_link', '') != '') {
+									print '</a>';
+								}
+							}
+						?>
+					</div>
+				</div>
+				<?php
+					$header_pic_style = "";
+					// Vorschaubild berechnen
+					$header_image = rex_config::get('d2u_helper', "template_header_pic", "");
+					if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
+						$header_image = $this->getValue("art_file");
+					}
+					$titelbild = rex_media::get($header_image);
+					if($titelbild instanceof rex_media) {
+						$header_pic_style = 'background: url(index.php?rex_media_type=titelbild&rex_media_file='.
+								$titelbild->getFileName() .') center center; background-size: cover;';
+					}
+				?>
+				<div class="col-12 col-xl-8" style="<?php print $header_pic_style; ?>">
+				</div>
+				<div class="d-none d-xl-block col-xl-2">
+					<div id="logo-right">
+						<?php
+							if($d2u_helper->getConfig('template_logo_2', '') != "") {
+								if($d2u_helper->getConfig('template_logo_2_link', '') != '') {
+									print '<a href="'. $d2u_helper->getConfig('template_logo_2_link', '') .'">';
+								}
+								$media_logo = rex_media::get($d2u_helper->getConfig('template_logo_2'));
+								if($media_logo instanceof rex_media) {
+									print '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+								}
+								if($d2u_helper->getConfig('template_logo_2_link', '') != '') {
+									print '</a>';
+								}
+							}
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<article>
+		<div class="container">
+			<div class="row">
+				<div class="col-6 col-xl-2" id="navi-inner-frame">
+					<navi>
+						<div id="navi_desktop"></div>
+						<script>
+							$(document).ready(function() { 
+								$('#slicknav-mobile-menu').slicknav({
+									label: 'MENÜ',
+									prependTo: '#navi_desktop'
+								});
+
+								function getBootstrapDeviceSize() {
+									return $('#device-size-detector').find('div:visible').first().attr('id');
+								}
+
+								function checkMenu(){
+									var screen = getBootstrapDeviceSize();    
+									if(<?php print $show_screen_size; ?>) {
+										$('#slicknav-mobile-menu').slicknav('open');
+									} else {
+										$('#slicknav-mobile-menu').slicknav('close');
+									}       
+								}
+								checkMenu();
+								$(window).on('resize', checkMenu);
+							});
+						</script>				
+					</navi>
+				</div>
+				<div class="col-12 col-xl-8" id="article-content">
+					<div class="row">
+						<?php
+							// Breadcrumbs
+							if($d2u_helper->getConfig('show_breadcrumbs', 'false') == 'true') {
+								print '<div class="col-12 d-print-none" id="breadcrumbs">';
+								print d2u_addon_frontend_helper::getBreadcrumbs();
+								print '</div>';
+							}
+
+							// Content follows
+							print $this->getArticle();
+
+							// Footer
+							if($d2u_helper->getConfig('template_05_1_footer_text', '') !== '') {
+								print '<div class="col-12" id="footer">'. $d2u_helper->getConfig('template_05_1_footer_text') .'</div>';
+							}
+						?>
+					</div>
+				</div>
+				<div class="d-none d-xl-block col-xl-2" id="teaser-inner-frame">
+					<?php
+						if($d2u_helper->getConfig('template_05_1_info_text', '') !== '') {
+							print $d2u_helper->getConfig('template_05_1_info_text');
+						}
+					?>
+				</div>
+			</div>
+		</div>
+	</article>
+</body>
+</html>
