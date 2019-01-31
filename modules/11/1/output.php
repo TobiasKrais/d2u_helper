@@ -22,17 +22,16 @@
 		text|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_email') .' *|||{"required":"required"}
 		textarea|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_message') .' *|||{"required":"required"}'. PHP_EOL;
 	if($show_gdpr_hint) {
-		$form_data .= 'checkbox|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_privacy_policy') .' *|no,yes|no' . PHP_EOL;
+		$form_data .= 'checkbox|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_privacy_policy') .' *|0,1|0' . PHP_EOL;
 	}
 	$form_data .= 'html||<br>* '. \Sprog\Wildcard::get('d2u_helper_module_11_required') .'<br><br>
-		captcha|'. \Sprog\Wildcard::get('d2u_helper_module_11_captcha') .'|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_captcha') .'|'. rex_getUrl(rex_article::getCurrentId()) .'
 
 		submit|submit|'. \Sprog\Wildcard::get('d2u_helper_module_11_send') .'|no_db
 
 		validate|empty|name|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_name') .'
 		validate|empty|phone|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_phone') .'
 		validate|empty|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_email') .'
-		validate|email|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_email') .'
+		validate|type|email|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_email') .'
 		validate|empty|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_message') . PHP_EOL;
 	if($show_gdpr_hint) {
 		$form_data .= 'validate|empty|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_privacy_policy') . PHP_EOL;

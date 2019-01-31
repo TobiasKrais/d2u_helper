@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.5.6-DEV</p>
 		<ul>
+			<li>Modul 11-1 "YForm Kontaktformular" an YForm 3 angepasst.</li>
 			<li>Template 05-1 "Double Logo Template" hinzugefügt.</li>
 		</ul>
 		<p>1.5.5</p>

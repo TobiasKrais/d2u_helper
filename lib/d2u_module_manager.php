@@ -190,7 +190,7 @@ class D2UModuleManager {
 			3);
 		$modules[] = new D2UModule("11-1",
 			"YForm Kontaktformular (DSGVO kompatibel)",
-			4);
+			5);
 		$modules[] = new D2UModule("12-1",
 			"YFeed Stream Galerie",
 			2);

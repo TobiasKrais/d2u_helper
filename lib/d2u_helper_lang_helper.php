@@ -8,7 +8,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_english = [
-		'd2u_helper_module_11_captcha' => 'To prevent abuse, please enter captcha.',
 		'd2u_helper_module_11_city' => 'City',
 		'd2u_helper_module_11_contact_request' => 'Contact request',
 		'd2u_helper_module_11_contact_request_intro' => 'The following values were entered in the request form:',
@@ -21,7 +20,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_send' => 'Send',
 		'd2u_helper_module_11_street' => 'Street',
 		'd2u_helper_module_11_thanks' => 'Thank you for request. we will answer as soon as possible.',
-		'd2u_helper_module_11_validate_captcha' => 'The Captcha was not read correctly.',
 		'd2u_helper_module_11_validate_message' => 'Please enter a message.',
 		'd2u_helper_module_11_validate_email' => 'Please enter a valid email address.',
 		'd2u_helper_module_11_validate_name' => 'Please enter your full name.',
@@ -37,7 +35,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_french = [
-		'd2u_helper_module_11_captcha' => 'Pour prévenir les abus, nous vous demandons de saisir le captcha suivante.',
 		'd2u_helper_module_11_city' => 'Ville',
 		'd2u_helper_module_11_contact_request' => 'Demande de contact',
 		'd2u_helper_module_11_contact_request_intro' => 'Les valeurs suivantes ont été entrées dans le formulaire de demande',
@@ -50,7 +47,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_send' => 'Envoyer',
 		'd2u_helper_module_11_street' => 'Adresse',
 		'd2u_helper_module_11_thanks' => 'Merci pour votre message. Nous prendrons soin de votre demande dès que possible.',
-		'd2u_helper_module_11_validate_captcha' => 'Le Captcha n\'a pas été lu correctement.',
 		'd2u_helper_module_11_validate_message' => 'S\'il vous plaît entrer un message.',
 		'd2u_helper_module_11_validate_email' => 'Veuillez indiquer votre adresse email.',
 		'd2u_helper_module_11_validate_name' => 'Veuillez indiquer votre nom',
@@ -66,7 +62,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_german = [
-		'd2u_helper_module_11_captcha' => 'Um Missbrauch vorzubeugen bitten wir Sie das Captcha einzugeben.',
 		'd2u_helper_module_11_city' => 'Ort',
 		'd2u_helper_module_11_contact_request' => 'Kontaktanfrage',
 		'd2u_helper_module_11_contact_request_intro' => 'In das Anfrage-Formular wurden folgende Werte eingetragen',
@@ -79,7 +74,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_send' => 'Abschicken',
 		'd2u_helper_module_11_street' => 'Straße',
 		'd2u_helper_module_11_thanks' => 'Danke für Ihr Nachricht. Wir werden uns schnellst möglich um Ihr Anliegen kümmern.',
-		'd2u_helper_module_11_validate_captcha' => 'Bitte geben Sie erneut das Captcha ein.',
 		'd2u_helper_module_11_validate_message' => 'Bitte geben Sie eine Nachricht ein.',
 		'd2u_helper_module_11_validate_email' => 'Bitte geben Sie eine gültige E-Mailadresse ein.',
 		'd2u_helper_module_11_validate_name' => 'Um Sie korrekt ansprechen zu können, geben Sie bitte Ihren vollständigen Namen an.',
@@ -95,7 +89,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_russian = [
-		'd2u_helper_module_11_captcha' => 'Для предотвращения злоупотреблений, мы просим Вас ввести следующую капчу.',
 		'd2u_helper_module_11_city' => 'Город',
 		'd2u_helper_module_11_contact_request' => 'Контакт запрос',
 		'd2u_helper_module_11_contact_request_intro' => 'В форму запроса были введены следующие значения:',
@@ -108,7 +101,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_send' => 'Отправить',
 		'd2u_helper_module_11_street' => 'Адрес',
 		'd2u_helper_module_11_thanks' => 'Большое спасибо за Ваш запрос. Мы обработаем его, как можно быстрее.',
-		'd2u_helper_module_11_validate_captcha' => 'Captcha неправильно читается.',
 		'd2u_helper_module_11_validate_message' => 'Введите сообщение',
 		'd2u_helper_module_11_validate_email' => 'Пожалуйста, укажите правильный адрес электронной почты.',
 		'd2u_helper_module_11_validate_name' => 'Введите свое полное имя',
@@ -124,7 +116,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_chinese = [
-		'd2u_helper_module_11_captcha' => '为避免滥用网站，请您输入以下验证码。',
 		'd2u_helper_module_11_city' => '所在地',
 		'd2u_helper_module_11_contact_request' => '联系方式查询',
 		'd2u_helper_module_11_contact_request_intro' => '以下值已在请求表格中输入',
@@ -137,7 +128,6 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_send' => '发送',
 		'd2u_helper_module_11_street' => '街头',
 		'd2u_helper_module_11_thanks' => '感谢您的留言。 我们会尽快处理您的请求。',
-		'd2u_helper_module_11_validate_captcha' => '验证码错误。',
 		'd2u_helper_module_11_validate_message' => '请输入消息。',
 		'd2u_helper_module_11_validate_email' => '请输入您的电子邮箱地址。',
 		'd2u_helper_module_11_validate_name' => '请输入您的全名。',

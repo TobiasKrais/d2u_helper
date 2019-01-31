@@ -67,6 +67,7 @@ d2u_helper_metainfo_headerpic = Headerbild
 d2u_helper_modules_d2u_module_name = D2U Modulname
 d2u_helper_modules_error_settings_translations = Fehler: bitte aktivieren Sie die Installation der Übersetzungen in den Einstellungen dieses Addons.
 d2u_helper_modules_error_sprog = Fehler: bitte installieren Sie das SProg Addon.
+d2u_helper_modules_error_yform = Fehler: bitte installieren Sie das YForm Addon.
 d2u_helper_modules_installed = Modul installiert
 d2u_helper_modules_install_module_03_2 = Um die Lightbox Funktionalität automatisch laden zu können muss das Modul 03-2 aus dem D2U Helper Addon installiert sein.
 d2u_helper_modules_install_wysiwyg = Das Addon "TinyMCE 4", "Redactor 2 Editor", "CKEditor", "CKe5" oder "MarkItUp" wird für dieses Modul benötigt.
