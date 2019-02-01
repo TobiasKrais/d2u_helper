@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.5.7-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.5.6</p>
 		<ul>
 			<li>Möglicher Fehler in boot.php beim Senden von CSS Daeien entfernt.</li>
