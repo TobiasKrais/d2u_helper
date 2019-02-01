@@ -1,8 +1,9 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.5.6-DEV</p>
+		<p>1.5.6</p>
 		<ul>
+			<li>Möglicher Fehler in boot.php beim Senden von CSS Daeien entfernt.</li>
 			<li>Modul 11-1 "YForm Kontaktformular" an YForm 3 angepasst.</li>
 			<li>Template 05-1 "Double Logo Template" hinzugefügt.</li>
 		</ul>

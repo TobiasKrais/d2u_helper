@@ -372,7 +372,9 @@ function sendD2UHelperTemplateCSS($d2u_template_id = "") {
 	if($d2u_template_id != "") {
 		$template_manager = new D2UTemplateManager(D2UTemplateManager::getD2UHelperTemplates());
 		$current_template = $template_manager->getTemplate($d2u_template_id);
-		$css .= $current_template->getCSS();
+		if($current_template !== FALSE) {
+			$css .= $current_template->getCSS();
+		}
 	}
 
 	// Custom CSS
