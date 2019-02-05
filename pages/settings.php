@@ -46,7 +46,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	if($settings['activate_rewrite_scheme'] == 'true') {
 		// YRewrite
 		if(rex_addon::get("yrewrite")->isAvailable()) {
+			rex_yrewrite::setScheme(new d2u_yrewrite_scheme());
 			rex_yrewrite::deleteCache();
+			rex_yrewrite::generatePathFile([]);
 		}
 		else {
 			$settings['activate_rewrite_scheme'] = 'false';
