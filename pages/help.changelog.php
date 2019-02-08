@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.5.7-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Im optionalen YRewrite Schema werden nun HTML Tags im zu normalisierenden Text entfernt.</li>
 		</ul>
 		<p>1.5.6</p>
 		<ul>
