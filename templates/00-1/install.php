@@ -35,7 +35,7 @@ $result_art_file = rex_sql::factory();
 $result_art_file->setQuery($query_art_file);
 if($result_art_file->getRows() == 0) {
 	$query_add_art_file = "ALTER TABLE ". \rex::getTablePrefix() ."article "
-		. "ADD art_file VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL";
+		. "ADD art_file VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL";
 	$result_add_art_file = rex_sql::factory();
 	$result_add_art_file->setQuery($query_add_art_file);
 }
@@ -62,7 +62,7 @@ $result_art_clang_icon = rex_sql::factory();
 $result_art_clang_icon->setQuery($query_art_clang_icon);
 if($result_art_clang_icon->getRows() == 0) {
 	$query_add_art_file = "ALTER TABLE ". \rex::getTablePrefix() ."clang "
-		. "ADD clang_icon VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL";
+		. "ADD clang_icon VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL";
 	$result_add_art_file = rex_sql::factory();
 	$result_add_art_file->setQuery($query_add_art_file);
 }
