@@ -11,3 +11,17 @@ if($d2u_module_id != "") {
 
 // D2UModuleManager show list
 $d2u_module_manager->showManagerList();
+?>
+<h2>FAQ</h2>
+<ul>
+	<li><b>Wie kann der in den Modulen verwendete Editor geändert werden?</b><br>
+		Um den Lieblingseditor für die Module und und die D2U Addons
+			einzustellen einfach in den Einstellungen dieses Addons den gewünschten
+			Editor auswählen. Unterstützt werden TinyMCE (nur Standard Profil),
+			CKEditor (alle Profile ab Version 4.9.3), Redactor 2 und MarkItUp
+			(nur Standard Profile). Wichtig: Während die Editoren beliebig
+			gewechselt werden können, sind MarkItUp Profile sind nicht kompatibel
+			zu den anderen Editoren. Ist MarkItUp ein mal gewählt, sollte er
+			gewählt bleiben.
+	</li>
+<ul>

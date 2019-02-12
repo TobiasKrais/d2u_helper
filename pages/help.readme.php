@@ -115,26 +115,4 @@
 		?>
 		</div>
 	</div>
-	<header class="panel-heading"><div class="panel-title">Lieblingseditor</div></header>
-	<div class="panel-body">
-		<p>Um den Lieblingseditor für die Module und und die D2U Addons
-			einzustellen einfach in den Einstellungen dieses Addons den gewünschten
-			Editor auswählen. Unterstützt werden TinyMCE (nur Standard Profil),
-			CKEditor (alle Profile ab Version 4.9.3), Redactor 2 und MarkItUp
-			(nur Standard Profile). Wichtig: Während die Editoren beliebig
-			gewechselt werden können, sind MarkItUp Profile sind nicht kompatibel
-			zu den anderen Editoren. Ist MarkItUp ein mal gewählt, sollte er
-			gewählt bleiben.</p>
-		<p></p>
-	</div>
-	<header class="panel-heading"><div class="panel-title">Wo wird in den Templates das Impressum ausgegeben?</div></header>
-	<div class="panel-body">
-		<p>Im Footer werden die Artikel der Root Kategorie aufgelistet. Einfach
-			einen Artikel mit dem Impressum in der Root Kategorie anlegen. Der
-			Artikel muss online sein. Tipp: das Impressum und auch die
-			Datenschutzerklärung sollten aus dem Webseitenindex entfernt werden,
-			damit Abmahnanwälte durch eine Google Suche nicht auf eventuelle
-			Fehler aufmerksam werden.</p>
-		<p></p>
-	</div>
 </div>
