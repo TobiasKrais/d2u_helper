@@ -17,7 +17,7 @@ $d2u_template_manager->showManagerList();
 	<li><b>Wie kann ein Favicon für die Templates eingebunden werden?</b><br>
 		Die Templates können ein Favicon einbinden. Hierzu einfach eine Datei
 		favicon.ico in den Medienpool laden.</li>
-	<li><b>Wo wird in den Templates das Impressum ausgegeben?</b><br>
+	<li><b>Wo wird in den Templates das Impressum / die Links im Footer ausgegeben?</b><br>
 		Im Footer werden die Artikel der Root Kategorie aufgelistet. Einfach
 			einen Artikel mit dem Impressum in der Root Kategorie anlegen. Der
 			Artikel muss online sein. Tipp: das Impressum und auch die
