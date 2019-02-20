@@ -28,7 +28,7 @@ if(class_exists('D2UModuleManager')) {
 		9);
 	$modules[] = new D2UModule("05-1",
 		"Artikelweiterleitung",
-		7);
+		8);
 	$modules[] = new D2UModule("05-2",
 		"Artikel aus anderer Sprache übernehmen",
 		3);
