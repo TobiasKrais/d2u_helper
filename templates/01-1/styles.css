@@ -16,9 +16,11 @@ body {
 }
 a, a:link, a:visited, a:hover
 	{text-decoration: none;}
-img
-	{border: 0px;
-	max-width: 100%;}
+img {
+	border: 0px;
+	height: auto;
+	max-width: 100%;
+}
 .abstand
 	{margin: 1em 0;}
 	

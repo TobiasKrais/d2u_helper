@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.5.7-DEV</p>
 		<ul>
+			<li>Verbesserung Tempaltes: Bildhöhe per default auf "auto" geändert.</li>
 			<li>Bugfix Modul "05-1 Artikelweiterleitung": nach Klick auf Link im Backend wurde beim editieren die Standardsprache editiert.</li>
 			<li>Popper auf Version 1.14.7 aktualisiert.</li>
 			<li>Bootstrap auf Version 4.3 aktualisiert.</li>
