@@ -5,6 +5,7 @@
 		<ul>
 			<li>Verbesserung Tempaltes: Bildhöhe per default auf "auto" geändert.</li>
 			<li>Bugfix Modul "05-1 Artikelweiterleitung": nach Klick auf Link im Backend wurde beim editieren die Standardsprache editiert.</li>
+			<li>Bugfix Template 05-1 "Double Logo Template".</li>
 			<li>Popper auf Version 1.14.7 aktualisiert.</li>
 			<li>Bootstrap auf Version 4.3 aktualisiert.</li>
 			<li>Im optionalen YRewrite Schema werden nun HTML Tags im zu normalisierenden Text entfernt.</li>
