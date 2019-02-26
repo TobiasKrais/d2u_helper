@@ -12,6 +12,9 @@
 	?>
  	<link rel="stylesheet" href="index.php?template_id=05-1&d2u_helper=template.css">
   	<link rel="icon" href="<?php print rex_url::media('favicon.ico'); ?>" />
+</head>
+
+<body>
 	<?php
 		$show_screen_size = 'screen == "lg" ||  screen == "xl"';
 		$menu_icon_min_width = '';
@@ -52,9 +55,6 @@
   	<?php
   		}
   	?>
-</head>
-
-<body>
 	<div id="device-size-detector">
 		<div id="xs" class="d-block d-sm-none"></div>
 		<div id="sm" class="d-none d-sm-block d-md-none"></div>
