@@ -51,7 +51,6 @@ class d2u_mobile_navi_slicknav {
 	 * @param int $cat_parent_id Redaxo category ID, default root categories are returned.
 	 */
 	public static function getMobileMenu($cat_parent_id = 0) {
-		$addon = rex_addon::get("d2u_helper");
 		print '<div id="mobile-menu">';
 		print '<ul id="slicknav-mobile-menu">';
 		foreach(d2u_mobile_navi_slicknav::getCategories($cat_parent_id) as $lev1) {
