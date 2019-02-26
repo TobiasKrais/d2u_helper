@@ -29,6 +29,11 @@ a, a:link, a:visited {
 a:hover {
 	text-decoration: underline;
 }
+button.btn {
+	background-color: navi_color_bg;
+	border: none;
+	color: navi_color_font;
+}
 img {
 	max-width: 100%;
 }
@@ -100,7 +105,10 @@ header, #article-content {
 }
 
 /* Teaser */
-#teaser-inner-frame	{
+#teaser-inner-frame {
 	background-color: navi_color_hover_bg;
+	color: navi_color_hover_font;
+}
+#teaser-inner-frame a {
 	color: navi_color_hover_font;
 }
