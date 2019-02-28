@@ -31,7 +31,7 @@ if(class_exists('D2UModuleManager')) {
 		8);
 	$modules[] = new D2UModule("05-2",
 		"Artikel aus anderer Sprache übernehmen",
-		3);
+		4);
 	$modules[] = new D2UModule("06-1",
 		"YouTube Video einbinden",
 		3);
