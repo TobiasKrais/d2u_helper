@@ -1453,22 +1453,22 @@ $rss = new UniversalFeedCreator();
 $rss->useCached($rdfType, $rdfFile);
 $rss->title = \rex::getServerName();
 $rss->description = \rex::getServerName()." Feed News";
-$rss->link = \rex::getServer();
-$rss->syndicationURL = trim(\rex::getServer(), "/") . $_SERVER['REQUEST_URI'];
+$rss->link = \rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer();
+$rss->syndicationURL = trim(\rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer(), "/") . $_SERVER['REQUEST_URI'];
 
 $image = new FeedImage();
 $image->title = \rex::getServerName()." Feed";
 $image->url = "http://www.gustavus.edu/xml/rssicon.png";
-$image->link = \rex::getServer();
+$image->link = \rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer();
 $image->description = "Neueste Nachrichten von ". \rex::getServerName();
 $rss->image = $image;
 
 while (list($k, $rdfFeedItem) = each($rdfFeedItems) ) {
 	$item = new FeedItem();
 	$item->title = $rdfFeedItem['name'];
-	$item->link = trim(\rex::getServer(), "/") . rex_getUrl($rdfFeedItem['id']);
+	$item->link = trim(\rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer(), "/") . rex_getUrl($rdfFeedItem['id']);
 	$item->description = $rdfFeedItem['yrewrite_description'];
-	$item->source = trim(\rex::getServer(), "/") . rex_getUrl($rdfFeedItem['id']);
+	$item->source = trim(\rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer(), "/") . rex_getUrl($rdfFeedItem['id']);
 	$item->date = $rdfFeedItem['createdate'];
 	$item->author = \rex::getServerName();
 	$rss->addItem($item);

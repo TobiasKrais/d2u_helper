@@ -62,7 +62,8 @@
  
 	$mail_from = '###email###';
     $mail_to = ('REX_VALUE[1]' != '') ? 'REX_VALUE[1]' : rex::getErrorEmail();
-    $mail_subject = \Sprog\Wildcard::get('d2u_helper_module_11_contact_request') .' '. rex::getServer();
+    $mail_subject = \Sprog\Wildcard::get('d2u_helper_module_11_contact_request') .' '.
+		(\rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer());
     $mail_body = str_replace('<br />', '', rex_yform::unhtmlentities(\Sprog\Wildcard::get('d2u_helper_module_11_contact_request_intro') .':
 		'. \Sprog\Wildcard::get('d2u_helper_module_11_name') .': ###name###
 		'. ($ask_address ? \Sprog\Wildcard::get('d2u_helper_module_11_street') .': ###street###'. PHP_EOL . \Sprog\Wildcard::get('d2u_helper_module_11_zip') .', '. \Sprog\Wildcard::get('d2u_helper_module_11_city') .': ###zip### ###city###' : '') .'
