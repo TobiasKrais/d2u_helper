@@ -4,6 +4,7 @@
 		<p>1.5.7-DEV</p>
 		<ul>
 			<li>Verbesserung Tempaltes: Bildhöhe per default auf "auto" geändert.</li>
+			<li>Verbesserung Tempaltes: YRewrite Multidomain support.</li>
 			<li>Bugfix Modul "05-1 Artikelweiterleitung": nach Klick auf Link im Backend wurde beim editieren die Standardsprache editiert.</li>
 			<li>bugfix Modul "05-2 Artikel aus anderer Sprache übernehmen": aktuelle Sprache steht nicht mehr in der Auswahlliste zur Verfügung.</li>
 			<li>Bugfix Template 05-1 "Double Logo Template".</li>
