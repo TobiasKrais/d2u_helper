@@ -41,7 +41,7 @@
 ?>
 <script>
 	function toggle_view_<?php echo $id; ?>() {
-		$("#<?php echo $id; ?>_text").slideToggle();
+		$("#<?php echo $id; ?>_text").fadeToggle();
 		$("#<?php echo $id; ?>_arrow").toggleClass("icon_down");
 		$("#<?php echo $id; ?>_arrow").toggleClass("icon_up");
 	}

@@ -15,7 +15,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_message' => 'Message',
 		'd2u_helper_module_11_name' => 'Name',
 		'd2u_helper_module_11_phone' => 'Phone',
-		'd2u_helper_module_11_privacy_policy' => 'I accept the <a href="+++LINK_PRIVACY_POLICY+++" target="_blank">Privacy Policy</a>. My data will not be disclosed to third parties. I know about the right of deletion of my data. I can request deletion at any time from the contact details provided in the <a href="+++LINK_IMPRESS+++" target="_blank">imprint</a>.',
+		'd2u_helper_module_11_privacy_policy' => 'I accept the <a href="+++LINK_PRIVACY_POLICY+++" target="_blank">Privacy Policy</a>. My data will not be disclosed to third parties. I know about the right of deletion of my data. I can request deletion at any time from the contact details provided in the <a href="+++LINK_IMPRESS+++" target="_blank">impress</a>.',
 		'd2u_helper_module_11_required' => 'Required',
 		'd2u_helper_module_11_send' => 'Send',
 		'd2u_helper_module_11_street' => 'Street',
