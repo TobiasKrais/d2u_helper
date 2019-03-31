@@ -69,7 +69,8 @@
 .dl-menuwrapper li a {
 	display: block;
 	position: relative;
-	padding: 15px 20px;
+	margin: 10px 10px;
+	padding: 5px 10px;
 /*	font-size: 16px; */
 	line-height: 20px;
 	font-weight: 300;
@@ -90,7 +91,7 @@
 .dl-menuwrapper li > a:not(:only-child):after {
 	position: absolute;
 	top: 0;
-	line-height: 50px;
+	line-height: 30px;
 	font-family: 'FontAwesome';
 	speak: none;
 	-webkit-font-smoothing: antialiased;
