@@ -1,14 +1,14 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.5.7-DEV</p>
+		<p>1.5.7</p>
 		<ul>
 			<li>Verbesserung Templates: Mobile Navi wurde von Google manchmals als nicht mobiloptimiert bemängelt.</li>
 			<li>Verbesserung Templates: Bildhöhe per default auf "auto" geändert.</li>
 			<li>Verbesserung Templates: YRewrite Multidomain support.</li>
 			<li>Bugfix Modul "02-2 Überschrift mit Klapptext": JQuery Effekt geändert, damit es auch im Safari funktioniert.</li>
 			<li>Bugfix Modul "05-1 Artikelweiterleitung": nach Klick auf Link im Backend wurde beim editieren die Standardsprache editiert.</li>
-			<li>bugfix Modul "05-2 Artikel aus anderer Sprache übernehmen": aktuelle Sprache steht nicht mehr in der Auswahlliste zur Verfügung.</li>
+			<li>Bugfix Modul "05-2 Artikel aus anderer Sprache übernehmen": aktuelle Sprache steht nicht mehr in der Auswahlliste zur Verfügung.</li>
 			<li>Bugfix Template 05-1 "Double Logo Template".</li>
 			<li>Popper auf Version 1.14.7 aktualisiert.</li>
 			<li>Bootstrap auf Version 4.3.1 aktualisiert.</li>
