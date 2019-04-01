@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.5.8-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.5.7</p>
 		<ul>
 			<li>Verbesserung Templates: Mobile Navi wurde von Google manchmals als nicht mobiloptimiert bemängelt.</li>
