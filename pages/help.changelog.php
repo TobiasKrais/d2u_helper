@@ -11,7 +11,7 @@
 			<li>bugfix Modul "05-2 Artikel aus anderer Sprache übernehmen": aktuelle Sprache steht nicht mehr in der Auswahlliste zur Verfügung.</li>
 			<li>Bugfix Template 05-1 "Double Logo Template".</li>
 			<li>Popper auf Version 1.14.7 aktualisiert.</li>
-			<li>Bootstrap auf Version 4.3 aktualisiert.</li>
+			<li>Bootstrap auf Version 4.3.1 aktualisiert.</li>
 			<li>Im optionalen YRewrite Schema werden nun HTML Tags im zu normalisierenden Text entfernt.</li>
 		</ul>
 		<p>1.5.6</p>
