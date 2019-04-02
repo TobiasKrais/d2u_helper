@@ -78,13 +78,15 @@
 	outline: none;
 }
 
-.no-touch .dl-menuwrapper li a:hover {
+.no-touch .dl-menuwrapper li:hover {
 	background: rgba(255,248,213,0.1);
 }
 
+.dl-menuwrapper li.dl-back {
+	background: rgba(0,0,0,0.1);
+}
 .dl-menuwrapper li.dl-back > a {
 	padding-left: 30px;
-	background: rgba(0,0,0,0.1);
 }
 
 .dl-menuwrapper li.dl-back:after,
@@ -754,7 +756,7 @@ All this is done for any sub-level being entered.
 	display: none;
 }
 
-.no-js .dl-menuwrapper li > a:not(:only-child) {
+.no-js .dl-menuwrapper li:not(:only-child) {
 	background: rgba(0,0,0,0.1);
 }
 
