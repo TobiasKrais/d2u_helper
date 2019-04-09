@@ -56,7 +56,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 		
 		// URL Addon
 		if(rex_addon::get("url")->isAvailable()) {
-			UrlGenerator::generatePathFile([]);
+			\UrlGenerator::generatePathFile([]);
 		}
 	}
 

@@ -3,7 +3,8 @@
 	<div class="panel-body">
 		<p>1.5.8-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Templates auf mit URL Addon 2.x kompatibel gemacht.</li>
+			<li>Methoden fürs Frontend zur Verfügung gestellt um vom URL Addon den Namespace und die Dataset ID zu ermitteln.</li>
 		</ul>
 		<p>1.5.7</p>
 		<ul>

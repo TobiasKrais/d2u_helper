@@ -4,7 +4,18 @@
  * www.design-to-use.de.
  */
 class d2u_addon_frontend_helper {
+	
 	/**
+	 * @var int Parameter id from URL addon
+	 */
+	private static $url_id = 0;
+	
+	/**
+	 * @var string Parameter namespace from URL addon 
+	 */
+	private static $url_namespace = "";
+
+		/**
 	 * Apply colors from settings
 	 * @param string $css CSS string
 	 * @return string replaced CSS
@@ -252,6 +263,53 @@ class d2u_addon_frontend_helper {
 
 			return $js;
 		}
+	}
+
+	/**
+	 * Get URL addon id if available. Works with all Versions of URL addon. If
+	 * id is not available, "0" is returned.
+	 * @return int URL addon dataset id
+	 */
+	public static function getUrlId() {
+		if(self::$url_id == 0 && rex_addon::get("url")->isAvailable()) {
+			if(rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
+				// URL Addon 2.x
+				$manager = \Url\Url::resolveCurrent();
+				if($manager) {
+					self::$url_id = $manager->getDatasetId();
+				}
+			}
+			else {
+				// URL Addon 1.x
+				self::$url_id = UrlGenerator::getId();
+			}
+		}
+		return self::$url_id;
+	}
+
+	/**
+	 * Get URL addon namespace (former param_key) if available. Works with all
+	 * Versions of URL addon. If id is not available, an empty string is returned.
+	 * @return string URL addon namespace
+	 */
+	public static function getUrlNamespace() {
+		if(self::$url_namespace == "" && rex_addon::get("url")->isAvailable()) {
+			if(rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
+				// URL Addon 2.x
+				$manager = \Url\Url::resolveCurrent();
+				if($manager) {
+					self::$url_namespace = $manager->getProfile()->getNamespace();
+				}
+			}
+			else {
+				// URL Addon 1.x
+				$url_data = UrlGenerator::getData();
+				if(isset($url_data->urlParamKey)) {
+					self::$url_namespace = $url_data->urlParamKey;
+				}
+			}
+		}
+		return self::$url_namespace;
 	}
 	
 	/**
