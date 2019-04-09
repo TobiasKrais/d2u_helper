@@ -477,16 +477,42 @@ class d2u_addon_backend_helper {
 	}
 
 	/**
+	 * Regenerates cache of URL addon
+	 * @param string $namespace If only single namespace should be regenerated
+	 */
+	public static function generateUrlCache($namespace = FALSE) {
+		if(\rex_addon::get('url')->isAvailable()) {
+			if(\rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
+				// url version 2.x
+				\rex_delete_cache();
+			}
+			else {
+				// url version 1.x
+				\UrlGenerator::generatePathFile([]);
+			}
+		}
+	}
+	
+	/**
 	 * Updates url addon scheme article id.
-	 * @param string $table Table/view name used for url scheme. Parameter is used as identifier.
+	 * @param string $namespace Table/view name (version 1.x) or namespace (version 2.x) used for url scheme. Parameter is used as identifier.
 	 * @param int $article_id Redaxo article id
 	 */
-    public static function update_url_scheme($table, $article_id) {
+    public static function update_url_scheme($namespace, $article_id) {
 		if(rex_addon::get('url')->isAvailable()) {
-			$query = "UPDATE `". \rex::getTablePrefix() ."url_generate` SET `article_id` = ". $article_id ." "
-				."WHERE `table` LIKE '%". $table ."'";
 			$sql = rex_sql::factory();
-			$sql->setQuery($query);
+			if(rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
+				// url version 2.x
+				$query = "UPDATE `". \rex::getTablePrefix() ."url_generator_profile` SET `article_id` = ". $article_id ." "
+					."WHERE `namespace` = '". $namespace ."'";
+				$sql->setQuery($query);
+			}
+			else {
+				// url version 1.x
+				$query = "UPDATE `". \rex::getTablePrefix() ."url_generate` SET `article_id` = ". $article_id ." "
+					."WHERE `table` LIKE '%". $namespace ."'";
+				$sql->setQuery($query);
+			}
 		}
     }
 }

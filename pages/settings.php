@@ -54,10 +54,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 			$settings['activate_rewrite_scheme'] = 'false';
 		}
 		
-		// URL Addon
-		if(rex_addon::get("url")->isAvailable()) {
-			\UrlGenerator::generatePathFile([]);
-		}
+		// URL Addon if active
+		d2u_addon_backend_helper::generateUrlCache();
 	}
 
 	// Save settings
