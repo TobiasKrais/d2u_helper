@@ -5,6 +5,7 @@
 		<ul>
 			<li>Templates auf mit URL Addon 2.x kompatibel gemacht.</li>
 			<li>Methoden fürs Frontend zur Verfügung gestellt um vom URL Addon den Namespace und die Dataset ID zu ermitteln.</li>
+			<li>Bugfix Modul "10-3 Box mit Download": Anpassungen an media_auth Plugin von YCom.</li>
 		</ul>
 		<p>1.5.7</p>
 		<ul>
@@ -171,7 +172,7 @@
 			<li>Update bootstrap 4.</li>
 			<li>Update Ekko Lightbox to version 5.3.</li>
 			<li>Backendsprache Englisch hinzugefügt.</li>
-			<li>Module 10-3 Box mit Downloads prüft Dokumentenrechte, falls ycom/auth_media installiert ist.</li>
+			<li>Module 10-3 Box mit Downloads prüft Dokumentenrechte, falls ycom/media_auth installiert ist.</li>
 		</ul>
 		<p>1.3.0</p>
 		<ul>

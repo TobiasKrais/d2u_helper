@@ -23,8 +23,8 @@ $ueberschrift = "REX_VALUE[1]";
 
 				// Check permissions
 				$has_permission = TRUE;
-				if(rex_plugin::get('ycom', 'auth_media')->isAvailable()) {
-					$has_permission = rex_ycom_auth_media::checkPerm($rex_document);
+				if(rex_plugin::get('ycom', 'media_auth')->isAvailable()) {
+					$has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create("", $document));
 				}
 				if($has_permission) {
 					print '<li>';
