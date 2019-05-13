@@ -137,7 +137,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 		$select_link->setSize(1);
 		$select_link->setAttribute('class', 'form-control');
 
-		$properties = Property::getAll(rex_clang::getCurrentId(), '', TRUE);
+		$properties = \D2U_Immo\Property::getAll(rex_clang::getCurrentId(), '', TRUE);
 		foreach($properties as $property)  {
 			$select_link->addOption($property->name, $property->property_id); 
 		}

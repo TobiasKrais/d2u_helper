@@ -108,12 +108,12 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	if(($addon->getConfig("include_module", "false") == "true" && d2u_addon_frontend_helper::getModulesCSS() != "")
 			|| $addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true"
 		) {
-		$insert_head .= '<link rel="stylesheet" type="text/css" href="index.php?d2u_helper=helper.css" />' . PHP_EOL;
+		$insert_head .= '<link rel="stylesheet" type="text/css" href="/index.php?d2u_helper=helper.css" />' . PHP_EOL;
 	}
 		
 	// Menu stuff in header
 	if($addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true") {
-		$insert_head .= '<script src="index.php?position=head&d2u_helper=helper.js"></script>' . PHP_EOL;
+		$insert_head .= '<script src="/index.php?position=head&d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 
 	$ep->setSubject(str_replace('</head>', $insert_head .'</head>', $ep->getSubject()));
@@ -125,7 +125,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 
 	// Module stuff in body
 	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true" && d2u_addon_frontend_helper::getModulesJS()) {
-		$insert_body .= '<script src="index.php?position=body&d2u_helper=helper.js"></script>' . PHP_EOL;
+		$insert_body .= '<script src="/index.php?position=body&d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
@@ -214,7 +214,7 @@ function rex_d2u_helper_article_is_in_use(rex_extension_point $ep) {
 	$addon = rex_addon::get("d2u_helper");
 	if(($addon->hasConfig("article_id_privacy_policy") && $addon->getConfig("article_id_privacy_policy") == $article_id) ||
 		($addon->hasConfig("article_id_impress") && $addon->getConfig("article_id_impress") == $article_id)) {
-		$message = '<a href="index.php?page=d2u_helper/settings">'.
+		$message = '<a href="/index.php?page=d2u_helper/settings">'.
 			 rex_i18n::msg('d2u_helper_rights_all') ." - ". rex_i18n::msg('d2u_helper_settings') . '</a>';
 		if(!in_array($message, $warning)) {
 			$warning[] = $message;

@@ -6,6 +6,7 @@
 			<li>Templates auf mit URL Addon 2.x kompatibel gemacht.</li>
 			<li>Methoden fürs Frontend zur Verfügung gestellt um vom URL Addon den Namespace und die Dataset ID zu ermitteln.</li>
 			<li>Bugfix Modul "10-3 Box mit Download": Anpassungen an media_auth Plugin von YCom.</li>
+			<li>Bugfix Modul "05-1 Artikelweiterleitung": Fehler bei Verwendung des D2U Immo Addons behoben.</li>
 		</ul>
 		<p>1.5.7</p>
 		<ul>

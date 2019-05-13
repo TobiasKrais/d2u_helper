@@ -104,7 +104,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	<?php
 		print d2u_addon_frontend_helper::getMetaTags();
 	?>
-	<link rel="stylesheet" href="index.php?template_id=04-2&d2u_helper=template.css">
+	<link rel="stylesheet" href="/index.php?template_id=04-2&d2u_helper=template.css">
 	<?php
 		if(file_exists(rex_path::media('favicon.ico'))) {
 			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';

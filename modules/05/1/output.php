@@ -79,7 +79,7 @@ else if($link_type == "d2u_immo_property") {
 	if(rex_addon::get('d2u_immo')->isAvailable()) {
 		$property_id = "REX_VALUE[6]";
 		if($property_id > 0) {
-			$property = new Property($property_id, rex_clang::getCurrentId());
+			$property = new \D2U_Immo\Property($property_id, rex_clang::getCurrentId());
 			if(\rex::isBackend()) {
 				print "Weiterleitung zu D2U Immobilien - Immobilie <a href='". $property->getUrl(TRUE) ."'>". $property->name ."</a>";
 			}

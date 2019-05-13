@@ -10,7 +10,7 @@
 	<?php
 		print d2u_addon_frontend_helper::getMetaTags();
 	?>
- 	<link rel="stylesheet" href="index.php?template_id=05-1&d2u_helper=template.css">
+ 	<link rel="stylesheet" href="/index.php?template_id=05-1&d2u_helper=template.css">
   	<link rel="icon" href="<?php print rex_url::media('favicon.ico'); ?>" />
 </head>
 
