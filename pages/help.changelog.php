@@ -7,6 +7,7 @@
 			<li>Template 00-1, 04-1, 04-2 und 04-3 bei Verwendung des D2U Veranstaltungen Addon: Anzahl Kurse wird im Warenkorb angezeigt.</li>
 			<li>Templates auf mit URL Addon 2.x kompatibel gemacht.</li>
 			<li>Methoden fürs Frontend zur Verfügung gestellt um vom URL Addon den Namespace und die Dataset ID zu ermitteln.</li>
+			<li>Modul "02-2 Überschrift mit Klapptext": Formate Überschrift um "Fett" und "Absatz" ergänzt.</li>
 			<li>Bugfix Modul "10-3 Box mit Download": Anpassungen an media_auth Plugin von YCom.</li>
 			<li>Bugfix Modul "05-1 Artikelweiterleitung": Fehler bei Verwendung des D2U Immo Addons behoben.</li>
 		</ul>

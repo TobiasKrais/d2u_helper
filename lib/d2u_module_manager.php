@@ -157,7 +157,7 @@ class D2UModuleManager {
 			7);
 		$modules[] = new D2UModule("02-2",
 			"Überschrift mit Klapptext",
-			2);
+			3);
 		$modules[] = new D2UModule("03-1",
 			"Bild",
 			6);

@@ -118,13 +118,13 @@
 	<div class="col-xs-2">
 		<select name="REX_INPUT_VALUE[2]" class="form-control">
 		<?php
-		foreach (["h1","h2","h3","h4","h5","h6"] as $value) {
-			echo '<option value="'.$value.'" ';
+		foreach (["h1" => "h1", "h2" => "h2", "h3" => "h3", "h4" => "h4", "h5" => "h5", "h6" => "h6", "b" => "Fett", "p" => "Absatz"] as $html_tag => $value) {
+			echo '<option value="'. $html_tag .'" ';
 	
-			if ( "REX_VALUE[2]"=="$value" ) {
+			if ( "REX_VALUE[2]" == "$html_tag" ) {
 				echo 'selected="selected" ';
 			}
-			echo '>'.$value.'</option>';
+			echo '>'. $value .'</option>';
 		}
 		?>
 		</select>
