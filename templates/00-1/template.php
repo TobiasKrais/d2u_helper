@@ -180,6 +180,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						print '<a href="'. rex_getUrl(rex_config::get('d2u_courses', 'article_id_shopping_cart')) .'" class="cart_link">';
 						print '<div id="cart_symbol" class="desktop-inner">';
 						print '<img src="'. rex_url::addonAssets('d2u_courses', 'cart_only.png') .'" alt="'. rex_article::get(rex_config::get('d2u_courses', 'article_id_shopping_cart', 0))->getName() .'">';
+						if(count(\D2U_Courses\Cart::getCourseIDs()) > 0) {
+							print '<div id="cart_info">'. count(\D2U_Courses\Cart::getCourseIDs()) .'</div>';
+						}
 						print '</div>';
 						print '</a>';
 						print '</div>';

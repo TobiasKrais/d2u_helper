@@ -160,7 +160,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						$d2u_templates = D2UTemplateManager::getD2UHelperTemplates();
 						foreach($d2u_templates as $d2u_template) {
 							$d2u_template->initRedaxoContext($this, "templates/");
-							$d2u_template_ids_for_settings = ["02-1", "03-1", "03-2", "04-1", "04-2", "05-1"];
+							$d2u_template_ids_for_settings = ["02-1", "03-1", "03-2", "04-1", "04-2", "04-3", "05-1"];
 							if(in_array($d2u_template->getD2UId(), $d2u_template_ids_for_settings) && $d2u_template->isInstalled()) {
 								print '<hr style="border-top: 1px solid #333">';
 								print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
@@ -185,7 +185,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_margin_top', 'settings[template_03_2_margin_top]', $this->getConfig('template_03_2_margin_top'), FALSE, FALSE, "number");
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_time_show_ad', 'settings[template_03_2_time_show_ad]', $this->getConfig('template_03_2_time_show_ad'), FALSE, FALSE, "number");
 								}
-								if(($d2u_template->getD2UId() === "04-1" || $d2u_template->getD2UId() === "04-2") && $d2u_template->isInstalled()) {
+								if(($d2u_template->getD2UId() === "04-1" || $d2u_template->getD2UId() === "04-2" || $d2u_template->getD2UId() === "04-3") && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'full', $this->getConfig('template_04_header_slider_pics_full_width') == 'full');
 									if($d2u_template->getD2UId() === "04-2" && $d2u_template->isInstalled()) {
 										d2u_addon_backend_helper::form_input('d2u_helper_settings_template_04_2_facebook_link', 'settings[template_04_2_facebook_link]', $this->getConfig('template_04_2_facebook_link'), FALSE, FALSE);
@@ -209,6 +209,14 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 										}
 										print '</div>';
 									}
+								}
+								if($d2u_template->getD2UId() === "04-3" && $d2u_template->isInstalled() && rex_addon::get('d2u_news')->isAvailable()) {
+									$news_categories = \D2U_News\Category::getAll(rex_clang::getCurrentId());
+									$news_options = [];
+									foreach ($news_categories as $news_category) {
+										$news_options[$news_category->category_id] = $news_category->name;
+									}
+									d2u_addon_backend_helper::form_select('d2u_helper_settings_template_news_category', 'settings[template_news_category]', $news_options, [$this->getConfig('template_news_category')]);
 								}
 								if($d2u_template->getD2UId() === "05-1" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_05_1_logo', 'template_logo_2', $this->getConfig('template_logo_2'));

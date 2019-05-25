@@ -32,11 +32,14 @@ nav {
 	border-bottom: solid 1px white;
 	font-size: 1.15em;
 }
+.navigation {
+	padding-bottom: 1em;
+}
 .navigation a {
 	text-decoration: none !important;
 }
 .desktop-inner {
-	padding: 1em 1.75em 1em 0;
+	padding: 15px 20px;
 }
 .desktop-navi:hover div.desktop-inner, .desktop-navi div:hover, .desktop-navi a:hover {
 	color: navi_color_hover_font !important;
@@ -51,38 +54,22 @@ nav {
 .desktop-navi.current, .desktop-navi:hover {
 	border-bottom-color: navi_color_hover_bg !important;
 }
-.dl-menuwrapper .dl-menu {
-	right: 0;
-}
-.dl-menuwrapper .dl-menu.dl-menuopen, .dl-menuwrapper li .dl-submenu {
-	background-color: navi_color_fontD9;
-	font-size: 1em;
-}
-.dl-menuwrapper li a, .dl-menuwrapper div a, ul.dl-menu a, .dl-menuwrapper li.dl-back::after, .dl-subview .dl-subviewopen .dl-submenu li a {
-	color: navi_color_bg !important;
-}
-.dl-menu li:hover a, .dl-subviewopen .dl-submenu li:hover a {
-	color: navi_color_hover_font !important;
-}
-.dl-menuwrapper button::after {
-	background: navi_color_hover_font !important;
-	box-shadow: 0 10px 0 navi_color_hover_font, 0 20px 0 navi_color_hover_font !important;
-}
-#langchooser, #desktop-menu {
-	float: right;
+.dl-menuwrapper .dl-menu.dl-menuopen {
+	font-size: 0.8em;
 }
 #langchooser {
-	padding: 1em 1em 0 0;
+	position: absolute;
+	right: 0;
+	bottom: 0;
 }
 #langchooser img {
-	vertical-align: top;
+	margin: 0 10px 12px 0;
+}
+#langchooser a {
+	color: white;
 }
 #mobile-menu {
-	float: right !important;
-	padding: 1em 0;
-}
-#logo {
-	margin: 1em 0;
+	margin-bottom: 15px;
 }
 
 /* Header*/
@@ -106,74 +93,8 @@ header {
 #headerCarousel {
 	width: 100%;
 }
-.slogan {
-	left: 0;
-	position: absolute;
-	width: 100%;
-}
-.slogan-text {
-	color: white;
-	font-weight: bold;
-}
-@media screen and (max-width: 576px) {
-	.slogan {
-		bottom: 2.5em;
-	}
-	.slogan-text {
-		font-size: 1.25em;
-	}
-	.slogan-text-row:last-child {
-		padding-bottom: 2.5em;
-	}
-}
-@media screen and (min-width: 577px) and (max-width: 991px) {
-	.slogan {
-		bottom: 2.5em;
-	}
-	.slogan-text {
-		font-size: 1.5em;
-	}
-	.slogan-text-row:last-child {
-		padding-bottom: 2.5em;
-	}
-}
-@media screen and (min-width: 992px) {
-	.slogan {
-		bottom: 4em;
-	}
-	.slogan-text {
-		font-size: 2em;
-	}
-	.slogan-text-row:last-child {
-		padding-bottom: 4em;
-	}
-}
-.slogan-text-row {
-	padding: 0.16em;
-	background-color: article_color_hB3;
-}
-.slogan-text-row:after {
-	content: "\A";
-	white-space: pre;
-}
 .carousel-item {
-	transition-duration: 3s !important;
-}
-.carousel-item img {
-	margin-left: 50%;
-    transform: translateX(-50%);
-}
-header .carousel-indicators {
-	bottom: auto;
-	top: 1em;
-}
-header .carousel-indicators li {
-  width: 10px;
-  height: 10px;
-  border-radius: 100%;
-}
-header .carousel-indicators li, header .carousel-indicators li.active {
-  margin: 0px 7px !important;
+	transition-duration: 3s !important
 }
 
 /* Subhead and Breadcrumbs */
@@ -188,16 +109,17 @@ header .carousel-indicators li, header .carousel-indicators li.active {
 	text-decoration: underline;
 }
 h1.subhead {
-	color: navi_color_hover_font;
 	font-size: 2em;
-	font-weight: bold;
-	margin-bottom: 0;
-	padding-top: 0.75em;
+	padding: 0.25em 0;
 }
 @media screen and (max-width: 767px) {
 	h1.subhead {
 		font-size: 1.5em;
 	}
+}
+#logo {
+	float: right;
+	margin: 0.5em 0 25px;
 }
 .subhead, .subhead a, .subhead a:hover {
 	color: subhead_color_font;
@@ -240,9 +162,6 @@ article h1, article h2, article h3, article h4, article h5, article h6 {
 article h1, article h2 {
 	font-weight: bold;
 }
-article h2 {
-	font-size: 1.75em;
-}
 article p, article ul {
 	margin-bottom: .5rem;
 }
@@ -252,14 +171,12 @@ article label {
 article .form-group {
 	margin-bottom: 0.5rem;
 }
-article strong, article b {
-	color: navi_color_hover_font;
+#content {
+	padding-bottom: 2em;
 }
 
 footer {
 	background-color: footer_color_bg;
-	color: white;
-	font-size: 0.75em;
 	padding: 1em;
 }
 .footer a {
@@ -282,6 +199,18 @@ footer {
 	background-color: article_color_h !important;
 	border: none !important;
 }
+/* News Column */
+.news {
+	padding-bottom: 2em;
+}
+.newshead {
+	background: article_color_h;
+	color: article_color_bg;
+	font-weight: bold;
+	font-size: 1.25em;
+	margin-bottom: 1em;
+	padding: 10px;
+}
 
 /* YForm Captcha */
 .input-group-addon {
@@ -293,22 +222,14 @@ footer {
 }
 
 /* Machinery Addon */
-a .box b {
-	color: white;
-}
 .box {
 	background-color: article_color_h;
+	border: 1px solid article_color_h;
 	text-align: center;
 }
 .box div {
-	background-color: article_color_hB3;
-	bottom: 0;
 	color: white;
-	font-weight: bold;
-	padding: 5px 5px 2em 5px;
-	position: absolute;
-	text-align: center;
-	width: calc(100% - 30px);
+	padding: 5px;
 }
 .box img {
 	max-width: 100%;
@@ -327,13 +248,6 @@ a .box b {
 .nav-link.active {
 	background-color: transparent !important;
 }
-.nav, .nav-pills {
-	padding-top: 1em;
-	border-bottom: 1px solid navi_color_hover_font;
-}
-a.active div.active-navi-pill {
-	border-bottom: 12px solid navi_color_hover_font !important;
-}
 .comparison-header, unit {
 	padding: 0 15px;
 }
@@ -344,20 +258,6 @@ a.active div.active-navi-pill {
 	border-bottom: 12px white solid;
     margin: 0 auto;
     width: 30px;
-}
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: subhead_color_font !important;
-}
-.download-list li {
-	background-color: navi_color_hover_font !important;
-}
-.download-list li .file::before {
-	color: white !important;
-	padding-right: 0.5em;
-}
-.download-list li a {
-	color: white;
-	font-weight: bold;
 }
 /* D2U Courses Addon */
 #cart_symbol {

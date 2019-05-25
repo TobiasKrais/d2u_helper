@@ -78,6 +78,21 @@ header {
 	min-width: 25px;
 	width: 25px;
 }
+#cart_symbol img {
+	position: relative;
+	z-index: 1;
+}
+#cart_info {
+	background-color: subhead_color_font;
+	border-radius: 20px;
+	color: subhead_color_bg;
+	height: 25px;
+	position: absolute;
+	right: 0;
+	min-width: 25px;
+	text-align: center;
+	top: 0;
+}
 
 .subhead {
 	background-color: subhead_color_bg;
