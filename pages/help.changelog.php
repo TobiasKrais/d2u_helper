@@ -1,12 +1,12 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.5.8-DEV</p>
+		<p>1.5.8</p>
 		<ul>
 			<li>Template 04-3 "Header Slider Template with Slogan" hinzugefügt.</li>
 			<li>Template 00-1, 04-1, 04-2 und 04-3 bei Verwendung des D2U Veranstaltungen Addon: Anzahl Kurse wird im Warenkorb angezeigt.</li>
-			<li>Templates auf mit URL Addon 2.x kompatibel gemacht.</li>
-			<li>Methoden fürs Frontend zur Verfügung gestellt um vom URL Addon den Namespace und die Dataset ID zu ermitteln.</li>
+			<li>Templates mit URL Addon 2.x kompatibel gemacht.</li>
+			<li>Methoden fürs Frontend zur Verfügung gestellt um vom URL Addon Versionsunabhängig den Namespace und die Dataset ID zu ermitteln.</li>
 			<li>Modul "02-2 Überschrift mit Klapptext": Formate Überschrift um "Fett" und "Absatz" ergänzt.</li>
 			<li>Bugfix Modul "10-3 Box mit Download": Anpassungen an media_auth Plugin von YCom.</li>
 			<li>Bugfix Modul "05-1 Artikelweiterleitung": Fehler bei Verwendung des D2U Immo Addons behoben.</li>
