@@ -1,9 +1,11 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.5.9</p>
+		<p>1.6.0</p>
 		<ul>
-			<li>...</li>
+			<li>JQuery Update 3.4d.1.</li>
+			<li>Smartmenus Version 1.1.0 als Navigation zur Verfügung gestellt (<a href="https://www.smartmenus.org/">https://www.smartmenus.org/</a>).</li>
+			<li>Templates mit Resonsive Multilevel Menu auf Smartmenu umgestellt (Ausnahme: Immo Template), da Google Probleme mit der Nutzerfreundlichkeit feststellte.</li>
 		</ul>
 		<p>1.5.8</p>
 		<ul>

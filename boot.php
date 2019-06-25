@@ -106,13 +106,13 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 
 	// Consider module css or menu css
 	if(($addon->getConfig("include_module", "false") == "true" && d2u_addon_frontend_helper::getModulesCSS() != "")
-			|| $addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true"
+			|| $addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true" || $addon->getConfig("include_menu_smartmenu", "false") == "true"
 		) {
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="/index.php?d2u_helper=helper.css" />' . PHP_EOL;
 	}
 		
 	// Menu stuff in header
-	if($addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true") {
+	if($addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true" || $addon->getConfig("include_menu_smartmenu", "false") == "true") {
 		$insert_head .= '<script src="/index.php?position=head&d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 
@@ -309,6 +309,11 @@ function sendD2UHelperCSS() {
 		$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_slicknav::getAutoCSS());
 	}
 
+	// Smartmenu Menu CSS
+	if($d2u_helper->getConfig("include_menu_smartmenu", "false") == "true") {
+		$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_smartmenus::getAutoCSS());
+	}
+
 	print $css;
 	exit;
 }
@@ -335,6 +340,10 @@ function sendD2UHelperJS($position = "head") {
 		// Slicknav menu JS
 		if($d2u_helper->getConfig("include_menu_slicknav", "false") == "true") {
 			$js .= d2u_mobile_navi_slicknav::getAutoJS();
+		}
+		// Smartmenu menu JS
+		if($d2u_helper->getConfig("include_menu_smartmenu", "false") == "true") {
+			$js .= d2u_mobile_navi_smartmenus::getAutoJS();
 		}
 	}
 	print $js;

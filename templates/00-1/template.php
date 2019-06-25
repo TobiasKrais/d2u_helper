@@ -168,10 +168,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						print '<div class="col-12" data-match-height>';
 					}
 					print '<div class="navi">';
-							if(rex_addon::get('d2u_helper')->isAvailable()) {
-								d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
-								d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
-							}
+					if(rex_addon::get('d2u_helper')->isAvailable()) {
+						d2u_mobile_navi_smartmenus::getMenu();
+					}
 					print '</div>';
 					print '</div>';
 					// D2U Courses cart

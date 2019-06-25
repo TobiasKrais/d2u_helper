@@ -35,6 +35,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['include_module'] = array_key_exists('include_module', $settings);
 	$settings['include_menu_multilevel'] = array_key_exists('include_menu_multilevel', $settings);
 	$settings['include_menu_slicknav'] = array_key_exists('include_menu_slicknav', $settings);
+	$settings['include_menu_smartmenu'] = array_key_exists('include_menu_smartmenu', $settings);
 	$settings['lang_wildcard_overwrite'] = array_key_exists('lang_wildcard_overwrite', $settings) ? "true" : "false";
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
@@ -55,7 +56,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 		}
 		
 		// URL Addon if active
-		d2u_addon_backend_helper::generateUrlCache();
+		\d2u_addon_backend_helper::generateUrlCache();
 	}
 
 	// Save settings
@@ -112,6 +113,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 					<?php
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_multilevel', 'settings[include_menu_multilevel]', 'true', $this->getConfig('include_menu_multilevel') == 'true');
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_slicknav', 'settings[include_menu_slicknav]', 'true', $this->getConfig('include_menu_slicknav') == 'true');
+						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_smartmenu', 'settings[include_menu_smartmenu]', 'true', $this->getConfig('include_menu_smartmenu') == 'true');
 						d2u_addon_backend_helper::form_infotext('d2u_helper_settings_include_prevent', 'prevent_include_info');
 						$width_options = [
 							"xs" => rex_i18n::msg('d2u_helper_settings_width_xs'),

@@ -20,7 +20,7 @@ class d2u_addon_frontend_helper {
 	 * @param string $css CSS string
 	 * @return string replaced CSS
 	 */
-	private static function applyColorToCSS($css) {
+	private static function applySettingsToCSS($css) {
 		$d2u_helper = rex_addon::get('d2u_helper');
 
 		// Apply template color settings
@@ -32,6 +32,28 @@ class d2u_addon_frontend_helper {
 			if($d2u_helper->hasConfig($color)) {
 				$css = str_replace($color, $d2u_helper->getConfig($color), $css);
 			}
+		}
+
+		// Apply width
+		if($d2u_helper->hasConfig('include_menu_show')) {
+			$size = "576px";
+			switch ($d2u_helper->getConfig('include_menu_show')) {
+				case "xs":
+					$size = "576px";
+					break;
+				case "sm":
+					$size = "768px";
+					break;
+				case "md":
+					$size = "992px";
+					break;
+				case "lg":
+					$size = "1200px";
+					break;
+				default:
+					$size = "992px";
+			}
+			$css = str_replace('navi-min-width', $size, $css);
 		}
 
 		return $css;
@@ -319,7 +341,7 @@ class d2u_addon_frontend_helper {
 	 */
 	public static function prepareCSS($css) {
 		// Replace colors
-		$css = d2u_addon_frontend_helper::applyColorToCSS($css);
+		$css = d2u_addon_frontend_helper::applySettingsToCSS($css);
 		
 		// Compress
 		$css = d2u_addon_frontend_helper::compressCSS($css);

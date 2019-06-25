@@ -63,8 +63,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 						<?php
 							// Navi
 							if(rex_addon::get('d2u_helper')->isAvailable()) {
-								d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
-								d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
+								d2u_mobile_navi_smartmenus::getMenu();
 							}
 						?>
 					</div>

@@ -144,7 +144,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 				<?php
 					// Logo
 					if($d2u_helper->getConfig("template_logo", "") != "") {
-						print '<div class="col-6 col-md-4 col-lg-3">';
+						print '<div class="col-12 col-md-4 col-lg-3">';
 						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
 						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
 						if($media_logo instanceof rex_media) {
@@ -154,13 +154,13 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						print '</div>';
 					}
 
-					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '6' : '12') .' col-md-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .'">';
+					print '<div class="col-12 col-md-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .'">';
 					print '<div class="row">';
 					
-					// Mobile Navi
+					// Navi
 					print '<div class="col-12">';
 					if(rex_addon::get('d2u_helper')->isAvailable()) {
-						d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
+						d2u_mobile_navi_smartmenus::getMenu();
 					}
 					// Languages
 					$clangs = rex_clang::getAll(TRUE);
@@ -176,17 +176,8 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 								print '</a>';							
 							}
 						}
+						print '</div>';
 					}
-					print '</div>';
-					print '</div>';
-
-					// Desktop Navi
-					print '<div class="col-12">';
-					print '<div class="navi">';
-					if(rex_addon::get('d2u_helper')->isAvailable()) {
-						d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
-					}
-					print '</div>';
 					print '</div>';
 
 					print '</div>';

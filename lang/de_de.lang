@@ -96,6 +96,7 @@ d2u_helper_settings_include_bootstrap = Bootstrap 4 mit Popper CSS / JS automati
 d2u_helper_settings_include_jquery = Aktuelles JQuery JS automatisch einbinden<br>(bitte aktivieren, wenn Templates dieses Addons installiert sind)
 d2u_helper_settings_include_menu_multilevel = CSS / JS des Responsive MultiLevel Menüs automatisch einbinden
 d2u_helper_settings_include_menu_slicknav = CSS / JS des SlickNav Menüs automatisch einbinden
+d2u_helper_settings_include_menu_smartmenu = CSS / JS des Smartmenu Menüs automatisch einbinden
 d2u_helper_settings_include_module = CSS / JS der installierten Module automatisch einbinden
 d2u_helper_settings_include_prevent = Um einzelne Templates auszunehmen, im body Tag des Templates die Klasse "prevent_d2u_helper_styles" hinzufügen.
 d2u_helper_settings_install_sprog = Übersetzungen wurden nicht installiert. Bitte installieren Sie das Addon SProg und speichern Sie die Einstellungen des D2U Helper Addons erneut damit die Übersetzungen installiert werden.

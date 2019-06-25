@@ -31,7 +31,7 @@ class D2UTemplateManager {
 	 * update the path of the new addon folder. Otherwise the normal addon path.
 	 * @param D2UTemplate[] $d2u_templates Array with D2U templates
 	 * @param string $template_folder Folder, in which templates can be found.
-	 * Trailing slash must be included. Default is D2UTemplateManager::MODULE_FOLDER.
+	 * Trailing slash must be included. Default is D2UTemplateManager::TEMPLATE_FOLDER.
 	 * @param string $addon_key Redaxo Addon name template belongs to, default "d2u_helper"
 	 */
 	public function __construct($d2u_templates, $template_folder = "", $addon_key = "d2u_helper") {
@@ -117,28 +117,28 @@ class D2UTemplateManager {
 		$d2u_templates = [];
 		$d2u_templates[] = new D2UTemplate("00-1",
 			"Big Header Template",
-			12);
+			13);
 		$d2u_templates[] = new D2UTemplate("01-1",
 			"Side Picture Template",
-			4);
+			5);
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
-			6);
+			7);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
-			5);
+			6);
 		$d2u_templates[] = new D2UTemplate("03-2",
 			"Immo Window Advertising Template",
 			6);
 		$d2u_templates[] = new D2UTemplate("04-1",
 			"Header Slider Template with Slogan",
-			3);
+			4);
 		$d2u_templates[] = new D2UTemplate("04-2",
 			"Header Slider Template",
-			7);
+			8);
 		$d2u_templates[] = new D2UTemplate("04-3",
 			"Header Slider Template with news column",
-			1);
+			2);
 		$d2u_templates[] = new D2UTemplate("05-1",
 			"Double Logo Template",
 			6);

@@ -96,6 +96,7 @@ d2u_helper_settings_include_bootstrap = Load Bootstrap 4 and Popper CSS / JS aut
 d2u_helper_settings_include_jquery = Load JQuery JS automatically<br>(please activate if templates of this addon are used)
 d2u_helper_settings_include_menu_multilevel = Load Responsive MultiLevel menu CSS / JS automatically
 d2u_helper_settings_include_menu_slicknav = Load SlickNav menu CSS / JS automatically
+d2u_helper_settings_include_menu_smartmenu = Load Smartmenu menu CSS / JS automatically
 d2u_helper_settings_include_module = Load modules CSS / JS automatically
 d2u_helper_settings_include_prevent = To prevent loading in single templates, add class "prevent_d2u_helper_styles" in body tag.
 d2u_helper_settings_install_sprog = Error installing translations. Pleas install SProg addon. Save D2U Helper settings again to install translations.

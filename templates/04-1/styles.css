@@ -32,6 +32,9 @@ nav {
 	border-bottom: solid 1px white;
 	font-size: 1.15em;
 }
+#main-menu {
+	padding-top: 1em;
+}
 .navigation a {
 	text-decoration: none !important;
 }

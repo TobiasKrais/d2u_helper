@@ -79,8 +79,13 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 							<div class="col-12">
 									<?php
 										if(rex_addon::get('d2u_helper')->isAvailable()) {
-											d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
-											d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
+											if(rex_config::get('d2u_helper', 'include_menu_smartmenu', FALSE)) {
+												d2u_mobile_navi_smartmenus::getMenu();
+											}
+											else {
+												d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
+												d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
+											}
 										}
 									?>
 							</div>

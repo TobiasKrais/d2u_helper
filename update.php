@@ -84,28 +84,28 @@ if(class_exists('D2UTemplateManager')) {
 	$d2u_templates = [];
 	$d2u_templates[] = new D2UTemplate("00-1",
 		"Big Header Template",
-		12);
+		13);
 	$d2u_templates[] = new D2UTemplate("01-1",
 		"Side Picture Template",
-		4);
+		5);
 	$d2u_templates[] = new D2UTemplate("02-1",
 		"Header Pic Template",
-		6);
+		7);
 	$d2u_templates[] = new D2UTemplate("03-1",
 		"Immo Template - 2 Columns",
-		5);
+		6);
 	$d2u_templates[] = new D2UTemplate("03-2",
 		"Immo Window Advertising Template",
 		6);
 	$d2u_templates[] = new D2UTemplate("04-1",
 		"Header Slider Template with Slogan",
-		3);
+		4);
 	$d2u_templates[] = new D2UTemplate("04-2",
 		"Header Slider Template",
-		7);
+		8);
 	$d2u_templates[] = new D2UTemplate("04-3",
 		"Header Slider Template with news column",
-		1);
+		2);
 	$d2u_templates[] = new D2UTemplate("05-1",
 		"Double Logo Template",
 		6);
@@ -211,8 +211,19 @@ if($this->hasConfig('include_menu')) {
 	$this->removeConfig('include_menu');
 }
 
+// Update to 1.6.0
+if (rex_string::versionCompare($this->getVersion(), '1.6.0', '<')) {
+	// Update settings to switch from multilevel menu to smartmenu
+	if((rex_config::has('d2u_helper', 'template_00-1') || rex_config::has('d2u_helper', 'template_01-1') || rex_config::has('d2u_helper', 'template_02-1')
+			|| rex_config::has('d2u_helper', 'template_04-1') || rex_config::has('d2u_helper', 'template_04-2') || rex_config::has('d2u_helper', 'template_04-3'))
+		&& rex_config::get('d2u_helper', 'include_menu_multilevel', FALSE) == TRUE) {
+		$this->setConfig('include_menu_multilevel', FALSE);
+		$this->setConfig('include_menu_smartmenu', TRUE);
+	}
+}
+
 // Update translations
-if ($this->getConfig('lang_replacements_install', 'false') == 'true') {
+if ($this->getConfig('lang_replacements_install', 'false')) {
 	if(!class_exists('d2u_helper_lang_helper')) {
 		// Load class in case addon is deactivated
 		require_once 'lib/d2u_helper_lang_helper.php';
