@@ -125,6 +125,23 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						d2u_addon_backend_helper::form_select('d2u_helper_settings_menu_show', 'settings[include_menu_show]', $width_options, [$this->getConfig('include_menu_show')]);
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_submenu_use_articlename', 'settings[submenu_use_articlename]', 'true', $this->getConfig('submenu_use_articlename') == 'true');
 					?>
+					<script>
+						function changeSubmenuUseArticlename() {
+							if($('input[name="settings\\[include_menu_smartmenu\\]"]').is(':checked')) {
+								$('#settings\\[submenu_use_articlename\\]').fadeIn();
+							}
+							else {
+								$('#settings\\[submenu_use_articlename\\]').hide();
+							}
+						}
+
+						// On init
+						changeSubmenuUseArticlename();
+						// On change
+						$('input[name="settings\\[include_menu_smartmenu\\]"]').on('change', function() {
+							changeSubmenuUseArticlename();
+						});
+					</script>
 				</div>
 			</fieldset>
 			<fieldset>
@@ -169,12 +186,14 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								print '<dt><label></label></dt>';
 								print '<dd><b>' . rex_i18n::msg('d2u_helper_settings_template') ." '". $d2u_template->getName() . "'</b></dd>";
 								print '</dl>';
-								if($d2u_template->getD2UId() === "02-1" && $d2u_template->isInstalled()) {
+								if(($d2u_template->getD2UId() === "02-1" || $d2u_template->getD2UId() === "04-3") && $d2u_template->isInstalled()) {
 									$navi_pos_options = [
-										"bottom" => rex_i18n::msg('d2u_helper_settings_template_02_1_navi_pos_bottom'),
-										"top" => rex_i18n::msg('d2u_helper_settings_template_02_1_navi_pos_top')
+										"bottom" => rex_i18n::msg('d2u_helper_settings_template_navi_pos_bottom'),
+										"top" => rex_i18n::msg('d2u_helper_settings_template_navi_pos_top')
 									];
-									d2u_addon_backend_helper::form_select('d2u_helper_settings_template_02_1_navi_pos_text', 'settings[template_02_1_navi_pos]', $navi_pos_options, [$this->getConfig('template_02_1_navi_pos')]);
+									d2u_addon_backend_helper::form_select('d2u_helper_settings_template_navi_pos_text', 'settings[template_navi_pos]', $navi_pos_options, [$this->getConfig('template_navi_pos')]);
+								}
+								if($d2u_template->getD2UId() === "02-1" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_1_footer_text', 'settings[template_02_1_footer_text]', $this->getConfig('template_02_1_footer_text'), FALSE, FALSE, "text");
 								}
 								if($d2u_template->getD2UId() === "03-1" && $d2u_template->isInstalled()) {
@@ -264,7 +283,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 										print "$('#settings\\\\[rewrite_scheme_clang_". $rex_clang->getId() ."\\\\]').fadeIn();";
 									}
 								?>
-								
 							}
 							else {
 								<?php

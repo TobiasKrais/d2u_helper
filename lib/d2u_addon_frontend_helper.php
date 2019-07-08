@@ -319,7 +319,7 @@ class d2u_addon_frontend_helper {
 			if(rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
 				// URL Addon 2.x
 				$manager = \Url\Url::resolveCurrent();
-				if($manager) {
+				if($manager && $manager->getProfile()) {
 					self::$url_namespace = $manager->getProfile()->getNamespace();
 				}
 			}

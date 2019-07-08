@@ -172,7 +172,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		<div id="background">
 			<?php
 				if(count($slider_pics) == 1) {
-					print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" style="max-width:100%;">';
+					print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" id="background-single-image">';
 				}
 				else if(count($slider_pics) > 1) {
 					// Slider

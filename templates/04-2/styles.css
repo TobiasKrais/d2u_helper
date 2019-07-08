@@ -90,6 +90,10 @@ header {
 	-ms-filter: blur(10px);
 	filter: blur(10px);
 }
+#background-single-image {
+	max-width: 100%;
+	width: 100%;
+}
 #headerCarousel {
 	width: 100%;
 }

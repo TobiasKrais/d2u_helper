@@ -1,4 +1,31 @@
 <?php
+function printTemplate04_3Navi() {
+	$d2u_helper = rex_addon::get('d2u_helper');
+	// Navi
+	print '<div class="navi">';
+	if(rex_addon::get('d2u_helper')->isAvailable()) {
+		d2u_mobile_navi_smartmenus::getMenu();
+	}
+	print '</div>';
+
+	// Languages
+	$clangs = rex_clang::getAll(TRUE);
+	if(count($clangs) > 1) {
+		print '<div id="langchooser" class="desktop-inner">';
+		$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
+		foreach ($clangs as $clang) {
+			if($clang->getId() != rex_clang::getCurrentId()) {
+				print '<a href="'. (isset($alternate_urls[$clang->getId()]) ? $alternate_urls[$clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $clang->getId())) .'">';
+				if($clang->getValue('clang_icon') != "") {
+					print '<img src="'. rex_url::media($clang->getValue('clang_icon')) .'" alt="'. $clang->getName() .'">';
+				}
+				print '</a>';							
+			}
+		}
+		print '</div>';
+	}
+}
+
 // Get placeholder wildcard tags
 $sprog = rex_addon::get("sprog");
 $tag_open = $sprog->getConfig('wildcard_open_tag');
@@ -113,56 +140,38 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 </head>
 
 <body>
-	<nav>
-		<div class="container d-print-none navigation">
-			<div class="row">
-				<?php
-					// Navi
-					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '4' : '12') .' col-md-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .'">';
-
-					print '<div class="navi">';
-					if(rex_addon::get('d2u_helper')->isAvailable()) {
-						d2u_mobile_navi_smartmenus::getMenu();
-					}
-					print '</div>';
-
-					// Languages
-					$clangs = rex_clang::getAll(TRUE);
-					if(count($clangs) > 1) {
-						print '<div id="langchooser" class="desktop-inner">';
-						$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
-						foreach ($clangs as $clang) {
-							if($clang->getId() != rex_clang::getCurrentId()) {
-								print '<a href="'. (isset($alternate_urls[$clang->getId()]) ? $alternate_urls[$clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $clang->getId())) .'">';
-								if($clang->getValue('clang_icon') != "") {
-									print '<img src="'. rex_url::media($clang->getValue('clang_icon')) .'" alt="'. $clang->getName() .'">';
-								}
-								print '</a>';							
-							}
-						}
-						print '</div>';
-					}
-
-					print '</div>';
-
-					// Logo
-					if($d2u_helper->getConfig("template_logo", "") != "") {
-						print '<div class="col-8 col-md-4 col-lg-3">';
-						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
-						if($media_logo instanceof rex_media) {
-							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
-						}
-						print '</a>';
-						print '</div>';
-					}
-				?>
-			</div>
-		</div>
-	</nav>
 	<?php
+		if(($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') || $d2u_helper->getConfig("template_logo", "") != "") {
+			print '<div class="container">';
+			print '<div class="row">';
+			// Navi, if configured on top
+			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') {
+				print '<div class="col-12'. ($d2u_helper->getConfig("template_logo", "") != "" ? ' col-md-8  col-lg-9' : '') .' d-print-none">';
+				print '<nav  class="d-print-none">';
+				print '<div class="navigation">';
+				printTemplate04_3Navi();
+				print '</div>';
+				print '</nav>';
+				print '</div>';
+			}
+
+			// Logo
+			if($d2u_helper->getConfig("template_logo", "") != "") {
+				print '<div class="col-12'. ($d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top' ? ' col-md-4 col-lg-3' : '') .'">';
+				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
+				$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
+				if($media_logo instanceof rex_media) {
+					print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+				}
+				print '</a>';
+				print '</div>';
+			}
+			print '</div>';
+			print '</div>';
+		}
+
 		$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
-		if(count($slider_pics) > 0) {
+		if(count($slider_pics) > 0 || $d2u_helper->getConfig("template_header_pic", "") != "") {
 	?>
 	<header>
 		<?php 
@@ -171,8 +180,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		?>
 		<div id="background">
 			<?php
-				if(count($slider_pics) == 1) {
-					print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" style="max-width:100%;">';
+				if(count($slider_pics) <= 1 || $d2u_helper->getConfig("template_header_pic", "") != "") {
+					$headerpic = count($slider_pics) == 1 ? $slider_pics[0] : $d2u_helper->getConfig("template_header_pic");
+					print '<img src="'. rex_url::media($headerpic) .'" alt="" id="background-single-image">';
 				}
 				else if(count($slider_pics) > 1) {
 					// Slider
@@ -202,8 +212,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 				<div class="col-12">
 					<?php
 			}  // END Only if slider background slider is shown
-						if(count($slider_pics) == 1) {
-							print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" style="max-width:100%;">';
+						if(count($slider_pics) <= 1 || $d2u_helper->getConfig("template_header_pic", "") != "") {
+							$headerpic = count($slider_pics) == 1 ? $slider_pics[0] : $d2u_helper->getConfig("template_header_pic");
+							print '<img src="'. rex_url::media($headerpic) .'" alt="" style="max-width:100%;">';
 						}
 						else if(count($slider_pics) > 1) {
 							// Slider
@@ -280,6 +291,20 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		?>
 	</header>
 	<?php
+		}
+		// Navi, if configured on bottom
+		if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'bottom') {
+			print '<nav class="d-print-non bottom">';
+			print '<div class="container">';
+			print '<div class="navigation">';
+			print '<div class="row">';
+			print '<div class="col-12">';
+			printTemplate04_3Navi();
+			print '</div>';
+			print '</div>';
+			print '</div>';
+			print '</div>';
+			print '</nav>';
 		}
 	?>
 	<section id="breadcrumbs">
@@ -424,6 +449,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 								if(count($news) > 0) {
 									foreach ($news as $nachricht) {
 										print '<div class="col-12 col-sm-6 col-md-12">';
+										print '<div class="newsbox">';
 										// Heading
 										if(trim($nachricht->name) != "") {
 											print '<div class="newshead">';
@@ -437,9 +463,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 											print '</div>';
 										}
 
-										print '<div class="news">';
 										// Picture
 										if($nachricht->picture != "") {
+											print '<div class="newspic">';
 											if($nachricht->getUrl() != "") {
 												print '<a href="'. $nachricht->getUrl() .'">';
 											}
@@ -447,11 +473,14 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 											if($nachricht->getUrl() != "") {
 												print '</a>';
 											}
+											print '</div>';
 										}
 
 										// Text
 										if($nachricht->teaser != "") {
+											print '<div class="news">';
 											print d2u_addon_frontend_helper::prepareEditorField($nachricht->teaser);
+											print '</div>';
 										}
 
 										print '</div>';

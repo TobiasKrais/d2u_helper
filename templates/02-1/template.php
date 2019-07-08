@@ -47,7 +47,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 		<?php
 			}
 			// Navi if above header picture
-			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_02_1_navi_pos', 'bottom') == 'top') {
+			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') {
 				print '<div class="row">';
 				print '<div class="col-12">';
 				print '<nav>';
@@ -79,7 +79,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 		</div>
 		<?php
 			// Navi if below header picture
-			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_02_1_navi_pos', 'bottom') == 'bottom') {
+			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'bottom') {
 				print '<div class="row">';
 				print '<div class="col-12">';
 				print '<nav>';

@@ -137,7 +137,7 @@
     color: navi_color_hover_font;
   }
   .sm-simple a:hover, .sm-simple a:focus, .sm-simple a:active, .sm-simple a.highlighted {
-    background: #eeeeee;
+    background: navi_color_hover_bg;
   }
   .sm-simple a.current {
     background: navi_color_font;

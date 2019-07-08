@@ -90,7 +90,7 @@ if(class_exists('D2UTemplateManager')) {
 		5);
 	$d2u_templates[] = new D2UTemplate("02-1",
 		"Header Pic Template",
-		7);
+		8);
 	$d2u_templates[] = new D2UTemplate("03-1",
 		"Immo Template - 2 Columns",
 		6);
@@ -99,13 +99,13 @@ if(class_exists('D2UTemplateManager')) {
 		6);
 	$d2u_templates[] = new D2UTemplate("04-1",
 		"Header Slider Template with Slogan",
-		4);
+		5);
 	$d2u_templates[] = new D2UTemplate("04-2",
 		"Header Slider Template",
-		8);
+		9);
 	$d2u_templates[] = new D2UTemplate("04-3",
 		"Header Slider Template with news column",
-		2);
+		3);
 	$d2u_templates[] = new D2UTemplate("05-1",
 		"Double Logo Template",
 		6);
@@ -220,6 +220,10 @@ if (rex_string::versionCompare($this->getVersion(), '1.6.0', '<')) {
 		$this->setConfig('include_menu_multilevel', FALSE);
 		$this->setConfig('include_menu_smartmenu', TRUE);
 	}
+}
+if($this->hasConfig('template_02_1_navi_pos')) {
+	$this->setConfig('template_navi_pos', $this->getConfig('template_02_1_navi_pos'));
+	$this->removeConfig('template_02_1_navi_pos');
 }
 
 // Update translations
