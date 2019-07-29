@@ -16,7 +16,8 @@ $d2u_module_manager->showManagerList();
 <p>Alle Module von D2U mit HTML Ausgabe verwenden Bootstrap 4. Für ein optimales
 	Ergebnis sollte in den Einstellungen die Einbindung der aktuellen
 	Bootstrap / JQuery Dateien aktiviert werden. Ebenfalls sollte die CSS / JS
-	der installierten Module automatisch eingebunden werden.</p>
+	der installierten Module automatisch eingebunden werden. Einige Module
+	funktionieren auch ohne Bootstrap, andere - wie Ekko Lightbox - nicht.</p>
 <ul>
 	<li><b>Wie kann der in den Modulen verwendete Editor geändert werden?</b><br>
 		Um den Lieblingseditor für die Module und und die D2U Addons

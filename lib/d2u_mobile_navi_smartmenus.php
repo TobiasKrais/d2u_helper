@@ -79,11 +79,11 @@ class d2u_mobile_navi_smartmenus {
 			$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') == 'show' && rex_config::get('d2u_machinery', 'article_id', 0) == $category->getId());
 			if(count($category->getChildren(true)) == 0 && !$has_machine_submenu) {
 				// Ohne Untermenü
-				print '<li class="'. (rex_article::getCurrentId() == $category->getId() ? ' current' : '') .'"><a href="'. $category->getUrl() .'" title="'. $category->getName() .'"><b>'. $category->getName() .'</b></a></li>'. PHP_EOL;
+				print '<li class="main'. (rex_article::getCurrentId() == $category->getId() ? ' current' : '') .'"><a href="'. $category->getUrl() .'" title="'. $category->getName() .'">'. $category->getName() .'</a></li>'. PHP_EOL;
 			}
 			else {
-				print '<li'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? '  c<lass="current"' : '') .'>'
-					.'<a href="'. $category->getUrl() .'" title="'. $category->getName() .'"><b>'. $category->getName() .'</b></a>'. PHP_EOL;
+				print '<li class="main '. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'">'
+					.'<a href="'. $category->getUrl() .'" title="'. $category->getName() .'">'. $category->getName() .'</a>'. PHP_EOL;
 				print '<ul>'. PHP_EOL;
 				// Mit Untermenü
 				if($has_machine_submenu) {

@@ -36,6 +36,8 @@
 	if($show_gdpr_hint) {
 		$form_data .= 'validate|empty|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_privacy_policy') . PHP_EOL;
 	}
+    $mail_to = ('REX_VALUE[1]' != '') ? 'REX_VALUE[1]' : rex::getErrorEmail();
+	$form_data .= 'action|tpl2email|d2u_helper_module_11_1|emaillabel|'. $mail_to;
 
 	$yform = new rex_yform();
 	$yform->setFormData(trim($form_data));
@@ -59,22 +61,7 @@
 
 	// action - showtext
 	$yform->setActionField("showtext", [\Sprog\Wildcard::get('d2u_helper_module_11_thanks')]);
- 
-	$mail_from = '###email###';
-    $mail_to = ('REX_VALUE[1]' != '') ? 'REX_VALUE[1]' : rex::getErrorEmail();
-    $mail_subject = \Sprog\Wildcard::get('d2u_helper_module_11_contact_request') .' '.
-		(\rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer());
-    $mail_body = str_replace('<br />', '', rex_yform::unhtmlentities(\Sprog\Wildcard::get('d2u_helper_module_11_contact_request_intro') .':
-		'. \Sprog\Wildcard::get('d2u_helper_module_11_name') .': ###name###
-		'. ($ask_address ? \Sprog\Wildcard::get('d2u_helper_module_11_street') .': ###street###'. PHP_EOL . \Sprog\Wildcard::get('d2u_helper_module_11_zip') .', '. \Sprog\Wildcard::get('d2u_helper_module_11_city') .': ###zip### ###city###' : '') .'
-		'. \Sprog\Wildcard::get('d2u_helper_module_11_phone') .': ###phone###
-		'. \Sprog\Wildcard::get('d2u_helper_module_11_email') .': ###email###
 
-		'. \Sprog\Wildcard::get('d2u_helper_module_11_message') .':
-		###message###'
-	));
-	$yform->setActionField('email', [$mail_from, $mail_to, $mail_subject, $mail_body]);
-	
 	echo $yform->getForm();
 ?>
 </div>

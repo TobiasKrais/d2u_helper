@@ -128,10 +128,10 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 					<script>
 						function changeSubmenuUseArticlename() {
 							if($('input[name="settings\\[include_menu_smartmenu\\]"]').is(':checked')) {
-								$('#settings\\[submenu_use_articlename\\]').fadeIn();
+								$('#settings\\[submenu_use_articlename\\]').hide();
 							}
 							else {
-								$('#settings\\[submenu_use_articlename\\]').hide();
+								$('#settings\\[submenu_use_articlename\\]').fadeIn();
 							}
 						}
 

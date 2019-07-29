@@ -190,7 +190,7 @@ class D2UModuleManager {
 			4);
 		$modules[] = new D2UModule("11-1",
 			"YForm Kontaktformular (DSGVO kompatibel)",
-			5);
+			6);
 		$modules[] = new D2UModule("12-1",
 			"YFeed Stream Galerie",
 			2);
@@ -375,27 +375,27 @@ class D2UModule {
 	const MODULE_CSS_FILE = 'style.css';
 
 	/**
-	 * CSS file name for modules.
+	 * JS file name for modules.
 	 */
 	const MODULE_JS_FILE = 'js.js';
 
 	/**
-	 * CSS file name for modules.
+	 * File name for module input.
 	 */
 	const MODULE_INPUT = 'input.php';
 
 	/**
-	 * CSS file name for modules.
+	 * File name for module install AND update script.
 	 */
 	const MODULE_INSTALL = 'install.php';
 
 	/**
-	 * CSS file name for modules.
+	 * File name for module output.
 	 */
 	const MODULE_OUTPUT = 'output.php';
 
 	/**
-	 * CSS file name for modules.
+	 * File name for module uninstall script.
 	 */
 	const MODULE_UNINSTALL = 'uninstall.php';
 
