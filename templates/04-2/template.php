@@ -118,7 +118,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			<div class="row">
 				<?php
 					// Navi
-					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '4' : '12') .' col-md-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .'">';
+					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-md-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .'">';
 
 					print '<div class="navi">';
 					if(rex_addon::get('d2u_helper')->isAvailable()) {
@@ -126,34 +126,35 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					}
 					print '</div>';
 
-					// Languages
-					$clangs = rex_clang::getAll(TRUE);
-					if(count($clangs) > 1) {
-						print '<div id="langchooser" class="desktop-inner">';
-						$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
-						foreach ($clangs as $clang) {
-							if($clang->getId() != rex_clang::getCurrentId()) {
-								print '<a href="'. (isset($alternate_urls[$clang->getId()]) ? $alternate_urls[$clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $clang->getId())) .'">';
-								if($clang->getValue('clang_icon') != "") {
-									print '<img src="'. rex_url::media($clang->getValue('clang_icon')) .'" alt="'. $clang->getName() .'">';
-								}
-								print '</a>';							
-							}
-						}
-						print '</div>';
-					}
-
 					print '</div>';
 
-					// Logo
-					if($d2u_helper->getConfig("template_logo", "") != "") {
-						print '<div class="col-8 col-md-4 col-lg-3">';
+					// Logo and languages
+					if($d2u_helper->getConfig("template_logo", "") != "" || count($clangs) > 1) {
+						print '<div class="col-4 col-lg-3">';
 						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
 						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
 						if($media_logo instanceof rex_media) {
 							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
 						}
 						print '</a>';
+						
+						// Languages
+						$clangs = rex_clang::getAll(TRUE);
+						if(count($clangs) > 1) {
+							print '<div id="langchooser" class="desktop-inner">';
+							$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
+							foreach ($clangs as $clang) {
+								if($clang->getId() != rex_clang::getCurrentId()) {
+									print '<a href="'. (isset($alternate_urls[$clang->getId()]) ? $alternate_urls[$clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $clang->getId())) .'">';
+									if($clang->getValue('clang_icon') != "") {
+										print '<img src="'. rex_url::media($clang->getValue('clang_icon')) .'" alt="'. $clang->getName() .'">';
+									}
+									print '</a>';							
+								}
+							}
+							print '</div>';
+						}
+
 						print '</div>';
 					}
 				?>

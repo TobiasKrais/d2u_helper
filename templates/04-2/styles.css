@@ -57,9 +57,14 @@ nav {
 .dl-menuwrapper .dl-menu.dl-menuopen {
 	font-size: 0.8em;
 }
+@media (min-width: navi-min-width) {
+	.navi {
+		bottom: 0;
+		position: absolute;
+	}
+}
 #langchooser {
 	position: absolute;
-	right: 0;
 	bottom: 0;
 }
 #langchooser img {

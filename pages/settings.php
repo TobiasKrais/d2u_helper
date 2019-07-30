@@ -36,12 +36,12 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['include_menu_multilevel'] = array_key_exists('include_menu_multilevel', $settings);
 	$settings['include_menu_slicknav'] = array_key_exists('include_menu_slicknav', $settings);
 	$settings['include_menu_smartmenu'] = array_key_exists('include_menu_smartmenu', $settings);
+	$settings['lang_replacements_install'] = array_key_exists('lang_replacements_install', $settings);
 	$settings['lang_wildcard_overwrite'] = array_key_exists('lang_wildcard_overwrite', $settings) ? "true" : "false";
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['submenu_use_articlename'] = array_key_exists('submenu_use_articlename', $settings);
 	$settings['template_04_header_slider_pics_full_width'] = array_key_exists('template_04_header_slider_pics_full_width', $settings);
-	$settings['lang_replacements_install'] = array_key_exists('lang_replacements_install', $settings);
 	
 	// Update URLs
 	if($settings['activate_rewrite_scheme'] == 'true') {

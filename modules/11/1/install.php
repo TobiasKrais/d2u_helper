@@ -12,6 +12,10 @@ if(!rex_addon::get('yform')->isAvailable() || !rex_plugin::get('yform', 'email')
 	print rex_view::error(rex_i18n::msg('d2u_helper_modules_error_yform'));
 	$return = $return ? FALSE : $return;
 }
+if(!rex_config::get('d2u_helper', 'lang_replacements_install', FALSE)) {
+	print rex_view::error(rex_i18n::msg('d2u_helper_modules_error_sprog_replacements'));
+	$return = $return ? FALSE : $return;	
+}
 
 // YForm e-mail template
 $sql = rex_sql::factory();
