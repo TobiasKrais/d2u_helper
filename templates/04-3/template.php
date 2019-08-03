@@ -437,9 +437,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						<div class="row">
 							<?php
 								// News / Teaser
-								$news_category = new \D2U_News\Category(1, rex_clang::getCurrentId());
+								$news_category = new \D2U_News\Category(rex_config::get('d2u_helper', 'template_news_category'), rex_clang::getCurrentId());
 								$news = [];
-								if($category !== FALSE) {
+								if($news_category !== FALSE) {
 									$news = $news_category->getNews(TRUE);
 								}
 								else {
