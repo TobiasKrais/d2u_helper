@@ -20,6 +20,11 @@ class d2u_yrewrite_scheme extends rex_yrewrite_scheme {
 		
 		// In case settings require URL encode or normalizing the standard way failed
 		if(rex_config::get('d2u_helper', 'rewrite_scheme_clang_'. $clang, 'standard') == 'urlencode' || ($parent_string == "" || $parent_string == "-")) {
+			$string = str_replace(
+				['й'],
+				['и'],
+				mb_strtolower($string)
+			);
 			return preg_replace('/[+-]+/', '-', $string);
 		}
 
