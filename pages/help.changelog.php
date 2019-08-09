@@ -3,11 +3,13 @@
 	<div class="panel-body">
 		<p>1.6.0</p>
 		<ul>
+			<li>Rewrite Schema für URL Encoded URLs (z.B. Russische oder Chinesische URLs verbessert).</li>
 			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)" auf YForm E-Mailtemplate umgestellt, damit "Antworten an" Feld benutzt werden kann.</li>
 			<li>JQuery Update 3.4.1.</li>
 			<li>Smartmenus Version 1.1.0 als Navigation zur Verfügung gestellt (<a href="https://www.smartmenus.org/">https://www.smartmenus.org/</a>).</li>
 			<li>Templates mit Resonsive Multilevel Menu auf Smartmenu umgestellt (Ausnahme: Immo Template), da Google Probleme mit der Nutzerfreundlichkeit feststellte.</li>
 			<li>Template 02-1, 04-1, 04-2 und 04-3 Detailverbesserungen.</li>
+			<li>Template 06-1 "Paper Sheet Template" hinzugefügt.</li>
 			<li>Doku Templates mit Beispielseiten versehen und eine FAQ hinzugefügt.</li>
 		</ul>
 		<p>1.5.8</p>
