@@ -90,25 +90,25 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 */
 	protected $replacements_russian = [
 		'd2u_helper_module_11_city' => 'Город',
-		'd2u_helper_module_11_contact_request' => 'Контакт запрос',
-		'd2u_helper_module_11_contact_request_intro' => 'В форму запроса были введены следующие значения:',
+		'd2u_helper_module_11_contact_request' => 'Запрос контакта',
+		'd2u_helper_module_11_contact_request_intro' => 'В форму запроса были введены следующие данные:',
 		'd2u_helper_module_11_email' => 'Электронная почта',
 		'd2u_helper_module_11_message' => 'Примечание',
 		'd2u_helper_module_11_name' => 'Фамилия',
 		'd2u_helper_module_11_phone' => 'Телефон',
-		'd2u_helper_module_11_privacy_policy' => 'Я принимаю <a href="+++LINK_PRIVACY_POLICY+++" target="_blank">политику конфиденциальности</a>. Мои данные не будут раскрыты третьим лицам. Я имею право удалить свои данные. Я могу запросить их в любое время из контактной информации, указанной в <a href="+++LINK_IMPRESS+++" target="_blank">отпечатке</a>.',
-		'd2u_helper_module_11_required' => 'обязательное',
+		'd2u_helper_module_11_privacy_policy' => 'Я принимаю <a href="+++LINK_PRIVACY_POLICY+++" target="_blank">политику конфиденциальности</a>. Мои данные не будут раскрыты третьим лицам. Я имею право удалить свои данные. Я могу запросить их в любое время из контактной информации, указанной в <a href="+++LINK_IMPRESS+++" target="_blank">разделе</a>',
+		'd2u_helper_module_11_required' => 'поля, обязательные для заполнения',
 		'd2u_helper_module_11_send' => 'Отправить',
 		'd2u_helper_module_11_street' => 'Адрес',
-		'd2u_helper_module_11_thanks' => 'Большое спасибо за Ваш запрос. Мы обработаем его, как можно быстрее.',
-		'd2u_helper_module_11_validate_message' => 'Введите сообщение',
+		'd2u_helper_module_11_thanks' => 'Благодарим за Ваш запрос. Наши специалисты ответят Вам в ближайшее время.',
 		'd2u_helper_module_11_validate_email' => 'Пожалуйста, укажите правильный адрес электронной почты.',
+		'd2u_helper_module_11_validate_message' => 'Введите сообщение',
 		'd2u_helper_module_11_validate_name' => 'Введите свое полное имя',
 		'd2u_helper_module_11_validate_phone' => 'Пожалуйста, введите Ваш номер телефона.',
 		'd2u_helper_module_11_validate_privacy_policy' => 'Политика конфиденциальности должна быть одобрена',
-		'd2u_helper_module_11_validate_spambots' => 'Вы заполнили форму так быстро, как только спамбот. Пожалуйста, позвольте немного больше времени при заполнении полей.',
+		'd2u_helper_module_11_validate_spambots' => 'Мы зарегистрировали подозрительный трафик, исходящий из Вашей сети. Пожалуйста, заполните форму ещё раз и подтвердите, что Вы не спам-бот.',
 		'd2u_helper_module_11_validate_title' => 'Ошибка при отправке:',
-		'd2u_helper_module_11_zip' => 'Почтовый код',
+		'd2u_helper_module_11_zip' => 'Индекс',
 	];
 	
 	/**
