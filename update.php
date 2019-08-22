@@ -109,6 +109,9 @@ if(class_exists('D2UTemplateManager')) {
 	$d2u_templates[] = new D2UTemplate("05-1",
 		"Double Logo Template",
 		6);
+	$d2u_templates[] = new D2UTemplate("06-1",
+		"Paper Sheet Template",
+		1);
 	$d2u_templates[] = new D2UTemplate("99-1",
 		"Feed Generator",
 		1);
@@ -224,6 +227,10 @@ if (rex_string::versionCompare($this->getVersion(), '1.6.0', '<')) {
 if($this->hasConfig('template_02_1_navi_pos')) {
 	$this->setConfig('template_navi_pos', $this->getConfig('template_02_1_navi_pos'));
 	$this->removeConfig('template_02_1_navi_pos');
+}
+if($this->hasConfig('emetrics_customno')) {
+	$this->setConfig('wiredminds_tracking_account_id', $this->getConfig('emetrics_customno'));
+	$this->removeConfig('emetrics_customno');
 }
 
 // Update translations

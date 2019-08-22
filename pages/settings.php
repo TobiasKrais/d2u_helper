@@ -311,7 +311,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 					<?php
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_analytics_analytics', 'settings[google_analytics]', $this->getConfig('google_analytics'), FALSE, FALSE, "text");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_analytics_maps_key', 'settings[maps_key]', $this->getConfig('maps_key'), FALSE, FALSE, "text");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_wiredmetrics_costumerno', 'settings[emetrics_customno]', $this->getConfig('emetrics_customno'), FALSE, FALSE, "text");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_wiredmetrics_costumerno', 'settings[wiredminds_tracking_account_id]', $this->getConfig('wiredminds_tracking_account_id'), FALSE, FALSE, "text");
 					?>
 				</div>
 			</fieldset>

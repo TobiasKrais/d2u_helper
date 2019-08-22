@@ -137,46 +137,15 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 function appendWiredMindseMetrics(rex_extension_point $ep) {
 	$insert_body = "";
 
-	if(rex_config::get("d2u_helper", "emetrics_customno", "") !== "") {
+	if(rex_config::get("d2u_helper", "wiredminds_tracking_account_id", "") !== "") {
 		// eMatrics stuff
 		$insert_body = '
-		<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.9.2 START -->
-		<script>
-			var wiredminds = [];
-			wiredminds.push(["setTrackParam", "wm_custnum", "'. rex_config::get("d2u_helper", "emetrics_customno", "") .'"]);
-			// Begin own parameters.
-			wiredminds.push(["setTrackParam", "wm_campaign_key", "wmc"]);
-			wiredminds.push(["registerHeatmapEvent", "mousedown"]);
-			wiredminds.push(["setTrackParam", "wm_content_width", ]);
-			// End own parameters.
-			wiredminds.push(["count"]);
-
-			(function() {
-				function wm_async_load() {
-					var wm = document.createElement("script");
-					wm.type = "text/javascript";
-					wm.async = true;
-					wm.src = "https://stats.vertriebsassistent.de/track/count.js";
-					var el = document.getElementsByTagName(\'script\')[0];
-					el.parentNode.insertBefore(wm, el);
-				}
-
-				if (window.addEventListener) {
-					window.addEventListener(\'load\', wm_async_load, false);
-				} else if (window.attachEvent){
-					window.attachEvent(\'onload\', wm_async_load);
-				}
-			})();
-		</script>
-
-		<noscript>
-			<div>
-				<a href="https://www.wiredminds.de">
-					<img src="https://stats.vertriebsassistent.de/track/ctin.php?wm_custnum='. rex_config::get("d2u_helper", "emetrics_customno", "") .'&nojs=1" alt="" style="border:0px;"/>
-				</a>
-			</div>
-		</noscript>
-		<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.9.2 END -->';
+		<script type="text/javascript">
+			(function(d,s){var l=d.createElement(s),e=d.getElementsByTagName(s)[0];
+			l.async=true;l.type="text/javascript";
+			l.src="https://c.leadlab.click/'. rex_config::get("d2u_helper", "wiredminds_tracking_account_id", "") .'.js";
+			e.parentNode.insertBefore(l,e);})(document,"script");
+		</script>';
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
