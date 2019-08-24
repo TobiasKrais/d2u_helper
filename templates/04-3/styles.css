@@ -71,6 +71,7 @@ nav.bottom {
 		position: absolute;
 		right: 0;
 		bottom: 0;
+		z-index: 10000;
 	}
 }
 #langchooser img {
