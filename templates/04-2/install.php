@@ -9,7 +9,7 @@ if(!rex_addon::get('yrewrite')->isAvailable()) {
 	return FALSE;
 }
 
-if(!rex_addon::get('emailobfuscator')->isAvailable()) {
+if(!rex_addon::get('email_obfuscator')->isAvailable()) {
 	print rex_view::warning(rex_i18n::msg('d2u_helper_templates_install_emailobfuscator'));
 }
 
