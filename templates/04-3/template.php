@@ -510,7 +510,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					foreach($rex_articles as $rex_article) {
 						print '<div class="col-md-6 col-lg-4">';
 						print '<div class="footerbox">';
-						print '<a href="'. $rex_article->getUrl() .'">'. $rex_article->is ->getName() .'</a>';
+						print '<a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a>';
 						print '</div>';
 						print '</div>';
 					}
