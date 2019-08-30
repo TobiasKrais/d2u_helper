@@ -142,6 +142,9 @@ class D2UTemplateManager {
 		$d2u_templates[] = new D2UTemplate("05-1",
 			"Double Logo Template",
 			6);
+		$d2u_templates[] = new D2UTemplate("06-1",
+			"Paper Sheet Template",
+			1);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",
 			1);
