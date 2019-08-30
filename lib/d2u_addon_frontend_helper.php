@@ -203,10 +203,10 @@ class d2u_addon_frontend_helper {
 		}
 		else if(rex_addon::get('yrewrite')->isAvailable()) {
 			$yrewrite = new rex_yrewrite_seo();
-			$meta_tags = $yrewrite->getHreflangTags();
-			$meta_tags .= $yrewrite->getCanonicalUrlTag();
-			$meta_tags .= $yrewrite->getDescriptionTag();
-			$meta_tags .= $yrewrite->getTitleTag();
+			$meta_tags = $yrewrite->getTitleTag() . PHP_EOL;
+			$meta_tags .= $yrewrite->getDescriptionTag() . PHP_EOL;
+			$meta_tags .= $yrewrite->getHreflangTags() . PHP_EOL;
+			$meta_tags .= $yrewrite->getCanonicalUrlTag() . PHP_EOL;
 		}
 		else {
 			// TODO Use Redaxo default
