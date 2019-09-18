@@ -19,6 +19,9 @@
 	</div>
 </div>
 <div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
 	<div class="col-xs-4">
 		Breite des Blocks auf Tablets:
 	</div>
@@ -37,6 +40,9 @@
 		?>
 		</select>
 	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
 </div>
 <div class="row">
 	<div class="col-xs-4">
