@@ -195,7 +195,7 @@ header .carousel-indicators li, header .carousel-indicators li.active {
 	text-decoration: underline;
 }
 h1.subhead {
-	color: navi_color_hover_font;
+	color: subhead_color_font;
 	font-size: 2em;
 	font-weight: bold;
 	margin-bottom: 0;
