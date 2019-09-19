@@ -37,8 +37,8 @@ $d2u_template_manager->showManagerList();
 		<a href="https://www.design-to-use.de/" target="_blank">design-to-use.de - Benutzerfreundliches Webdesign</a><br>
 	</li>
 	<li><b>01-1	Side Picture Template</b><br>
-		<a href="http://www.optik-muelhaupt.de/" target="_blank">Optik Mülhaupt</a><br>
 		<a href="http://www.staub-schoene-zaehne.de/" target="_blank">Staub Zahntechnik - Schöne Zähne</a><br>
+		<a href="http://www.optik-muelhaupt.de/" target="_blank">Optik Mülhaupt</a><br>
 	</li>
 	<li><b>02-1	Header Pic Template</b><br>
 		<a href="https://www.cr-vision.de/" target="_blank">CR-VISION - Highspeed Marketingkommunikation</a><br>
@@ -69,6 +69,9 @@ $d2u_template_manager->showManagerList();
 	<li><b>05-1	Double Logo Template</b><br>
 		<a href="https://kita-am-baechle.de/" target="_blank">KiTa am Bächle</a><br>
 		<a href="https://kita-ideenreich.de/" target="_blank">KiTa Ideenreich - Die Roche Kindertagesstätte</a><br>
+	</li>
+	<li><b>06-1	Paper Sheet Template</b><br>
+		<a href="https://egh-hauingen.de/" target="_blank">Elektrizitäts-Genossenschaft Hauingen e.G.</a><br>
 	</li>
 	<li><b>99-1	Feed Generator</b><br>
 		<a href="https://gewert-consulting.de/feed/" target="_blank">Gewert Consulting Blog Feed</a><br>

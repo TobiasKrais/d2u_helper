@@ -1,0 +1,103 @@
+@font-face{
+	font-family:'FontAwesome';
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?v=4.7.0");
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff2?v=4.7.0") format('woff2'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff?v=4.7.0") format('woff'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
+}
+.fa-home, .fa-icon {
+	font-family: FontAwesome;
+}
+.fa-home:before {
+	content: "\f015";
+}
+
+img {
+	max-width: 100%;
+}
+
+#body {
+	background-color: #ececec;
+	color: #4e4e4e;
+}
+#paper-sheet {
+	background-color: article_color_bg;
+	box-shadow: 5px 5px 10px #4e4e4e;
+	margin: 15px 0;
+	padding: 0.5em 1.5em;
+}
+
+header {
+	padding-bottom: 2.5em;
+}
+#header-image {
+	width: 100%;
+}
+#logo-top {
+	max-height: 100%;
+	position: absolute;
+	right: 5%;
+	top: 5px;
+}
+
+#main-menu {
+	padding-bottom: 2em;
+}
+#main-menu a {
+	background-color: navi_color_bg;
+}
+#main-menu .current > a, #main-menu a:hover {
+	background-color: navi_color_hover_bg;
+}
+
+article a, article a:hover, article a:focus, article a:visited, footer a, footer a:hover, footer a:focus, footer a:visited {
+	color: #777;
+	text-decoration: underline;
+}
+article .gallery-pic-box {
+    padding: 0;
+    margin: 0;
+}
+article h1 {
+	font-size: 1.75em;
+}
+article h2 {
+	font-size: 1.5em;
+}
+article h3 {
+	font-size: 1.3em;
+}
+article h4 {
+	font-size: 1.2em;
+}
+article h5, article h5 {
+	font-size: 1.1em;
+}
+article .btn-primary, article .btn-primary:hover {
+	border: none;
+	background-color: navi_color_hover_bg;
+	color: navi_color_hover_font;
+}
+
+footer {
+	border-top: 1px solid #4e4e4e;
+	font-size: 0.75em;
+	margin-top: 2em;
+	padding: 1em 0;
+}
+#footer-left {
+	align-items: center;
+	display: flex;
+}
+#footer-right {
+	align-items: center;
+	display: flex;
+	justify-content: right;
+}
+#logo-footer {
+	float: right;
+	max-height: 75px;
+	padding-left: 2em;
+}
