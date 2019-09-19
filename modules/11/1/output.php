@@ -1,13 +1,24 @@
 <?php
+	$cols_sm = "REX_VALUE[20]";
+	if($cols_sm == "") {
+		$cols_sm = 12;
+	}
+	$cols_md = "REX_VALUE[19]";
+	if($cols_md == "") {
+		$cols_md = 12;
+	}
+	$cols_lg = "REX_VALUE[18]";
+	if($cols_lg == "") {
+		$cols_lg = 8;
+	}
 	$offset_lg_cols = intval("REX_VALUE[17]");
 	$offset_lg = "";
 	if($offset_lg_cols > 0) {
 		$offset_lg = " mr-lg-auto ml-lg-auto ";
 	}
-?>
-
-<div class="col-sm-12 col-md-8 <?php print $offset_lg; ?>">
-<?php
+	
+	print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
+	
 	$ask_address = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
 	$show_gdpr_hint = "REX_VALUE[3]" == 'true' ? TRUE : FALSE;
 
