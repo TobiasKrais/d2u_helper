@@ -51,28 +51,6 @@ class d2u_mobile_navi_smartmenus {
 	 * @param int $cat_parent_id Redaxo category ID, by default root categories are returned.
 	 */
 	public static function getMenu($cat_parent_id = 0) {
-		$addon = rex_addon::get("d2u_helper");
-		$show_class = "";
-		if($addon->hasConfig('include_menu_show')) {
-			$size = "xs";
-			switch ($addon->getConfig('include_menu_show')) {
-				case "xs":
-					$size = "sm";
-					break;
-				case "sm":
-					$size = "md";
-					break;
-				case "md":
-					$size = "lg";
-					break;
-				case "lg":
-					$size = "xl";
-					break;
-				default:
-					$size = "md";
-			}
-			$show_class = ' class="d-none '. ($addon->getConfig('include_menu_show') == "xl" ? '' : 'd-'. $size .'-block') .'"';
-		}
 		print '<ul id="main-menu" class="sm sm-simple">'. PHP_EOL;
 	
 		foreach(d2u_mobile_navi_smartmenus::getCategories($cat_parent_id) as $category) {

@@ -50,6 +50,9 @@ class d2u_addon_frontend_helper {
 				case "lg":
 					$size = "1200px";
 					break;
+				case "xl":
+					$size = "";
+					break;
 				default:
 					$size = "992px";
 			}
