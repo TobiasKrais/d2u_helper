@@ -27,6 +27,13 @@ $d2u_template_manager->showManagerList();
 	<li><b>Wie groß müssen die Bilder für die Slider / Headerbilder sein?</b><br>
 		Es ist keine fixe Größe vorgesehen. Die Bilder werden bei Bedarf gedehnt.
 		Einfach ausprobieren.</li>
+	<li><b>Welche Einstellungen müssen im Addon für die Templates vorgenommen werden?</b><br>
+		Für das "99-1 Feed Generator" Template sind keine Einstellungen nötig.
+		Für alle anderen Addons gilt:
+		Die Optionen zum Einbinden von JQuery und Bootstrap müssen aktiviert werden.
+		Für das "05-1 Double Logo Template" muss die Option SlickNav Menü aktiviert
+		werden. Für alle anderen Templates muss die Option Smartmenu Menü aktiviert
+		werden.</li>
 </ul>
 <h2>Beispielseiten</h2>
 <ul>
@@ -66,7 +73,7 @@ $d2u_template_manager->showManagerList();
 		Template eignet sich für das D2U Maschinen und D2U Veranstaltungen Addon, funktioniert aber auch ohne diese Addons. Für die News Spalte wird das D2U News Addon vorausgesetzt.<br>
 		<a href="https://propatient-beratungsstelle.de/" target="_blank">Pro-Patient - Beratungsstelle für Betroffene bei misslungener Schönheits-OP</a><br>
 	</li>
-	<li><b>05-1	Double Logo Template</b><br>
+	<li><b>05-1 Double Logo Template</b><br>
 		<a href="https://kita-am-baechle.de/" target="_blank">KiTa am Bächle</a><br>
 		<a href="https://kita-ideenreich.de/" target="_blank">KiTa Ideenreich - Die Roche Kindertagesstätte</a><br>
 	</li>
