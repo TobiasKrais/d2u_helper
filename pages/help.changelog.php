@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.6.1-DEV</p>
+		<ul>
+			<li>Modul 03-2 "Ekkolightbox Galerie" hat jetzt einen Abstand ober- und unterhalb der Bildervorschau, was vor allem für die mobile Ansicht wichtig war.</li>
+		</ul>
 		<p>1.6.0</p>
 		<ul>
 			<li>WiredMinds eMetrics Tracking Option (siehe Einstellungen) auf aktuellen WiredMinds LeadLab Tracking Account Code aktualisiert.</li>

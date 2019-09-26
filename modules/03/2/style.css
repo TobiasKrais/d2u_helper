@@ -2,4 +2,5 @@
 .gallery-pic-box {
     background: template_color_05;
     max-width: 100%;
+	margin: 15px 0;
 }
