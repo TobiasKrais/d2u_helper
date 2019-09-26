@@ -74,7 +74,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 	<article>
 		<div class="container">
 			<div class="row">
-				<div class="col-12 col-sm-6">
+				<div class="col-12 col-md-6">
 					<?php
 						if(!$d2u_helper->hasConfig("template_header_pic") || $d2u_helper->getConfig("template_header_pic") == "") {
 							print "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
@@ -90,7 +90,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 						}
 					?>
 				</div>
-				<div class="col-12 col-sm-6">
+				<div class="col-12 col-md-6">
 					<div class="row">
 						<?php
 							// Breadcrumbs
