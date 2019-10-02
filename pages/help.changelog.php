@@ -4,6 +4,7 @@
 		<p>1.6.1-DEV</p>
 		<ul>
 			<li>Template "01-1 Side Picture Template" Ansicht auf kleinen Bildschirmen optimiert.</li>
+			<li>Modul 11-1 "YForm Kontaktformular": Fehler bei Installation behoben, wenn YForm Addon nicht aktiviert war.</li>
 			<li>Modul 03-2 "Ekkolightbox Galerie" hat jetzt einen Abstand ober- und unterhalb der Bildervorschau, was vor allem für die mobile Ansicht wichtig war.</li>
 		</ul>
 		<p>1.6.0</p>
