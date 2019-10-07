@@ -798,7 +798,7 @@ else {
 		<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_videos'); ?></div></header>
 		<div class="panel-body">
 			<fieldset>
-				<legend><small><i class="rex-icon fa-video-camera"></i></small> <?php echo rex_i18n::msg('d2u_news_news_title'); ?></legend>
+				<legend><small><i class="rex-icon fa-video-camera"></i></small> <?php echo rex_i18n::msg('d2u_videos'); ?></legend>
 				<div class="panel-body-wrapper slide">
 				<?php
 					if(count($videos) > 0) {
