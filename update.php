@@ -236,6 +236,11 @@ if($this->hasConfig('emetrics_customno')) {
 // Update to 1.6.1
 if($this->hasConfig('activate_rewrite_scheme')) {
 	$this->removeConfig('activate_rewrite_scheme');
+	foreach (rex_clang::getAll() as $rex_clang) {
+		if($this->hasConfig('rewrite_scheme_clang_'. $rex_clang->getId())) {
+			$this->removeConfig('rewrite_scheme_clang_'. $rex_clang->getId());
+		}
+	}
 }
 
 // Update translations
