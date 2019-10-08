@@ -1,9 +1,4 @@
 <?php
-// Rewrite Scheme
-if(rex_addon::get('yrewrite')->isAvailable() && rex_config::get('d2u_helper', 'activate_rewrite_scheme', 'false') == 'true') {
-	rex_yrewrite::setScheme(new d2u_yrewrite_scheme());
-}
-
 // Correct name of rights
 if(\rex::isBackend() && is_object(\rex::getUser())) {
 	rex_perm::register('d2u_helper[]', rex_i18n::msg('d2u_helper_rights_all'));

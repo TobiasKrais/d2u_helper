@@ -29,7 +29,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	}
 
 	// Checkbox also need special treatment if empty
-	$settings['activate_rewrite_scheme'] = array_key_exists('activate_rewrite_scheme', $settings);
 	$settings['include_bootstrap4'] = array_key_exists('include_bootstrap4', $settings);
 	$settings['include_jquery'] = array_key_exists('include_jquery', $settings);
 	$settings['include_module'] = array_key_exists('include_module', $settings);
@@ -43,22 +42,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['submenu_use_articlename'] = array_key_exists('submenu_use_articlename', $settings);
 	$settings['template_04_header_slider_pics_full_width'] = array_key_exists('template_04_header_slider_pics_full_width', $settings);
 	
-	// Update URLs
-	if($settings['activate_rewrite_scheme'] == 'true') {
-		// YRewrite
-		if(rex_addon::get("yrewrite")->isAvailable()) {
-			rex_yrewrite::setScheme(new d2u_yrewrite_scheme());
-			rex_yrewrite::deleteCache();
-			rex_yrewrite::generatePathFile([]);
-		}
-		else {
-			$settings['activate_rewrite_scheme'] = 'false';
-		}
-		
-		// URL Addon if active
-		\d2u_addon_backend_helper::generateUrlCache();
-	}
-
 	// Save settings
 	if(rex_config::set("d2u_helper", $settings)) {
 		// Install / update language replacements
@@ -248,63 +231,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							}
 						}
 					?>
-					</div>
-				</fieldset>
-			<?php
-				if(rex_addon::get('yrewrite')->isAvailable()) {
-			?>
-			<fieldset>
-				<legend><small><i class="rex-icon rex-icon-package-addon"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_rewrite'); ?></legend>
-				<div class="panel-body-wrapper slide">
-					<?php
-						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_rewrite_activate', 'settings[activate_rewrite_scheme]', 'true', $this->getConfig('activate_rewrite_scheme') == 'true');
-						$rewrite_options = [
-							'd2u_helper_settings_rewrite_standard' => 'standard',
-							'd2u_helper_settings_rewrite_urlencode' => 'urlencode'
-						];
-						foreach(rex_clang::getAll() as $rex_clang) {
-							print '<dl class="rex-form-group form-group" id="settings[rewrite_scheme_clang_'. $rex_clang->getId() .']">';
-							print '<dt><label>'. $rex_clang->getName() .'</label></dt>';
-							print '<dd>';
-							print '<select class="form-control" name="settings[rewrite_scheme_clang_'. $rex_clang->getId() .']">';
-							foreach($rewrite_options as $key => $value) {
-								$selected = $value == $this->getConfig('rewrite_scheme_clang_'. $rex_clang->getId()) ? ' selected="selected"' : '';
-								print '<option value="'. $value .'"'. $selected .'>'. rex_i18n::msg($key) .'</option>';
-							}
-							print '</select>';
-							print '</dl>';
-						}
-					?>
-					<script>
-						function changeRewriteType() {
-							if($('input[name="settings\\[activate_rewrite_scheme\\]"]').is(':checked')) {
-								<?php
-									foreach(rex_clang::getAll() as $rex_clang) {
-										print "$('#settings\\\\[rewrite_scheme_clang_". $rex_clang->getId() ."\\\\]').fadeIn();";
-									}
-								?>
-							}
-							else {
-								<?php
-									foreach(rex_clang::getAll() as $rex_clang) {
-										print "$('#settings\\\\[rewrite_scheme_clang_". $rex_clang->getId() ."\\\\]').hide();";
-									}
-								?>
-							}
-						}
-
-						// On init
-						changeRewriteType();
-						// On change
-						$('input[name="settings\\[activate_rewrite_scheme\\]"]').on('change', function() {
-							changeRewriteType();
-						});
-					</script>
 				</div>
 			</fieldset>
-			<?php
-				}
-			?>
 			<fieldset>
 				<legend><small><i class="rex-icon fa-google"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_analytics'); ?></legend>
 				<div class="panel-body-wrapper slide">

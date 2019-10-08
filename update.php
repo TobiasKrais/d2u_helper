@@ -233,6 +233,11 @@ if($this->hasConfig('emetrics_customno')) {
 	$this->removeConfig('emetrics_customno');
 }
 
+// Update to 1.6.1
+if($this->hasConfig('activate_rewrite_scheme')) {
+	$this->removeConfig('activate_rewrite_scheme');
+}
+
 // Update translations
 if ($this->getConfig('lang_replacements_install', 'false')) {
 	if(!class_exists('d2u_helper_lang_helper')) {
