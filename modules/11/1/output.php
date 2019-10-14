@@ -31,6 +31,10 @@
 	}
 	$form_data .= 'text|phone|'. \Sprog\Wildcard::get('d2u_helper_module_11_phone') .' *|||{"required":"required"}
 		text|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_email') .' *|||{"required":"required"}
+		html|honeypot||<div class="hide-validation">
+		text|mailvalidate|'. $tag_open .'d2u_guestbook_form_email'. $tag_close .'||no_db
+		validate|compare_value|mailvalidate||!=|'. $tag_open .'d2u_guestbook_form_validate_spam_detected'. $tag_close .'|
+		html|honeypot||</div>
 		textarea|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_message') .' *|||{"required":"required"}'. PHP_EOL;
 	if($show_gdpr_hint) {
 		$form_data .= 'checkbox|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_privacy_policy') .' *|0,1|0' . PHP_EOL;
