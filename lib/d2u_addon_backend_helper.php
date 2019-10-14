@@ -478,22 +478,23 @@ class d2u_addon_backend_helper {
 
 	/**
 	 * Regenerates cache of URL addon
-	 * @param string $namespace If only single namespace should be regenerated
+	 * @param string $namespace Profile namespace, if URLs for only one profile
+	 * should be generated.
 	 */
-	public static function generateUrlCache() {
+	public static function generateUrlCache($namespace = "") {
 		if(\rex_addon::get('url')->isAvailable()) {
 			if(\rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
 				// url version 2.x
-				\rex_delete_cache();
-/*				
+				
 				$profiles = \Url\Profile::getAll();
 				if ($profiles) {
 					foreach ($profiles as $profile) {
-						$profile->deleteUrls();
-						$profile->buildUrls();
+						if($namespace == "" || $namespace == $profile->getNamespace()) {
+							$profile->deleteUrls();
+							$profile->buildUrls();
+						}
 					}
 				}
- */
 			}
 			else {
 				// url version 1.x
