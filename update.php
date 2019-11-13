@@ -45,8 +45,8 @@ if(class_exists('D2UModuleManager')) {
 		"Box mit Bild und Text",
 		4);
 	$modules[] = new D2UModule("10-3",
-		"Box mit Download",
-		4);
+		"Box mit Downloads",
+		5);
 	$modules[] = new D2UModule("11-1",
 		"YForm Kontaktformular (DSGVO kompatibel)",
 		6);
