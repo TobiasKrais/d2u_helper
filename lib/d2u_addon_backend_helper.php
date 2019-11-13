@@ -485,7 +485,6 @@ class d2u_addon_backend_helper {
 		if(\rex_addon::get('url')->isAvailable()) {
 			if(\rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
 				// url version 2.x
-				
 				$profiles = \Url\Profile::getAll();
 				if ($profiles) {
 					foreach ($profiles as $profile) {
