@@ -126,7 +126,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_privacy_policy' => '我接受<a href="+++LINK_PRIVACY_POLICY+++" target="_blank">隐私政策</a>。 我的数据不会透露给第三方。 我有权删除我的数据。 我可以随时通过<a href="+++LINK_IMPRESS+++" target="_blank">版本说明</a>中提供的联系信息申请这些信息。',
 		'd2u_helper_module_11_required' => '强制性',
 		'd2u_helper_module_11_send' => '发送',
-		'd2u_helper_module_11_street' => '街头',
+		'd2u_helper_module_11_street' => '街道',
 		'd2u_helper_module_11_thanks' => '感谢您的留言。 我们会尽快处理您的请求。',
 		'd2u_helper_module_11_validate_message' => '请输入消息。',
 		'd2u_helper_module_11_validate_email' => '请输入您的电子邮箱地址。',
