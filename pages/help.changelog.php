@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.6.2-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.6.1</p>
 		<ul>
 			<li><b>ACHTUNG</b>: YRewrite Schema für russische und chinesische URLs entfernt. Statt dessen bitte das Addon <b>"YRewrite Scheme"</b> verwenden. Dort in den Einstellungen als Suffix "/" und als Schema "Standard" verwenden um die gleichen URLs zu generieren.</li>
