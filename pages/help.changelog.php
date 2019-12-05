@@ -4,6 +4,7 @@
 		<p>1.6.1</p>
 		<ul>
 			<li><b>ACHTUNG</b>: YRewrite Schema für russische und chinesische URLs entfernt. Statt dessen bitte das Addon <b>"YRewrite Scheme"</b> verwenden. Dort in den Einstellungen als Suffix "/" und als Schema "Standard" verwenden um die gleichen URLs zu generieren.</li>
+			<li>Bootstrap 4.4.1 Upgrade.</li>
 			<li>Backend: Hilfe Tab ist jetzt rechts ausgerichtet.</li>
 			<li>Performance Verbesserungen wenn ein D2U Addon den Cache des URL Addons neu generiert hat.</li>
 			<li>Template "01-1 Side Picture Template" Ansicht auf kleinen Bildschirmen optimiert.</li>
