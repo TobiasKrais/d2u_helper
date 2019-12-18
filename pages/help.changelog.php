@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.6.2-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul "06-1 YouTube Video einbinden" auf youtube-nocookie.com umgestellt.</li>
 		</ul>
 		<p>1.6.1</p>
 		<ul>
