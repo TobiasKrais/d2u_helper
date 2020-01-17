@@ -479,7 +479,8 @@ class d2u_addon_backend_helper {
 	/**
 	 * Regenerates cache of URL addon
 	 * @param string $namespace Profile namespace, if URLs for only one profile
-	 * should be generated.
+	 * should be generated. This works only for url Addon Version >=2. If
+	 * namespace does not exist, nothing happens.
 	 */
 	public static function generateUrlCache($namespace = "") {
 		if(\rex_addon::get('url')->isAvailable()) {
