@@ -4,6 +4,7 @@
 		<p>1.6.2-DEV</p>
 		<ul>
 			<li>Template Installation Empfehlung für email_obfuscator auf emailobfuscator Addon geändert.</li>
+			<li>Modul "03-1 Bild" gibt Bild nur noch aus, wenn es auch im Medienpool vorhanden ist.</li>
 			<li>Modul "06-1 YouTube Video einbinden" auf youtube-nocookie.com umgestellt.</li>
 			<li>Template "04-2 Header Slider Template" Notice entfernt.</li>
 		</ul>

@@ -19,7 +19,7 @@ if(class_exists('D2UModuleManager')) {
 		3);
 	$modules[] = new D2UModule("03-1",
 		"Bild",
-		6);
+		7);
 	$modules[] = new D2UModule("03-2",
 		"Bildergalerie Ekko Lightbox",
 		7);
