@@ -129,6 +129,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					print '</div>';
 
 					// Logo and languages
+					$clangs = rex_clang::getAll(TRUE);
 					if($d2u_helper->getConfig("template_logo", "") != "" || count($clangs) > 1) {
 						print '<div class="col-4 col-lg-3">';
 						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
@@ -139,7 +140,6 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						print '</a>';
 						
 						// Languages
-						$clangs = rex_clang::getAll(TRUE);
 						if(count($clangs) > 1) {
 							print '<div id="langchooser" class="desktop-inner">';
 							$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();

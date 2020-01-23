@@ -102,7 +102,7 @@ if(class_exists('D2UTemplateManager')) {
 		5);
 	$d2u_templates[] = new D2UTemplate("04-2",
 		"Header Slider Template",
-		9);
+		10);
 	$d2u_templates[] = new D2UTemplate("04-3",
 		"Header Slider Template with news column",
 		3);

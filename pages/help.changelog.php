@@ -5,6 +5,7 @@
 		<ul>
 			<li>Template Installation Empfehlung für email_obfuscator auf emailobfuscator Addon geändert.</li>
 			<li>Modul "06-1 YouTube Video einbinden" auf youtube-nocookie.com umgestellt.</li>
+			<li>Template "04-2 Header Slider Template" Notice entfernt.</li>
 		</ul>
 		<p>1.6.1</p>
 		<ul>
