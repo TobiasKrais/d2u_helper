@@ -195,7 +195,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 										d2u_addon_backend_helper::form_input('d2u_helper_settings_template_04_2_facebook_link', 'settings[template_04_2_facebook_link]', $this->getConfig('template_04_2_facebook_link'), FALSE, FALSE);
 										d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_04_2_facebook_icon', 'template_04_2_facebook_icon', $this->getConfig('template_04_2_facebook_icon'));
 									}
-									if($d2u_template->getD2UId() === "04-1" && $d2u_template->isInstalled()) {
+									if(($d2u_template->getD2UId() === "04-1" || $d2u_template->getD2UId() === "04-2") && $d2u_template->isInstalled()) {
 										d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_04_1_footer_logo', 'template_04_1_footer_logo', $this->getConfig('template_04_1_footer_logo'));
 									}
 									// Language specific settings
