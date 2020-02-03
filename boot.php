@@ -249,17 +249,19 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 	}
 	
 	// Tempaltes
-	$sql_template = \rex_sql::factory();
-	$query = 'SELECT DISTINCT id, name FROM ' . rex::getTablePrefix() . 'template WHERE content REGEXP ' . $sql_template->escape('(^|[^[:alnum:]+_-])'. $filename);
-	$sql_template->setQuery($query);
+	if(rex_config::get("d2u_helper", "check_media_template", FALSE) === "true") {
+		$sql_template = \rex_sql::factory();
+		$query = 'SELECT DISTINCT id, name FROM ' . rex::getTablePrefix() . 'template WHERE content REGEXP ' . $sql_template->escape('(^|[^[:alnum:]+_-])'. $filename);
+		$sql_template->setQuery($query);
 
-	// Prepare warnings for templates
-	for($i = 0; $i < $sql_template->getRows(); $i++) {
-		$message = '<a href="javascript:openPage(\''. rex_url::backendPage('templates', ['template_id' => $sql_template->getValue('id'), 'function' => 'edit']) .'\')">'. rex_i18n::msg('header_template') .': '. $sql_template->getValue('name') .'</a>';
-		if(!in_array($message, $warning)) {
-			$warning[] = $message;
+		// Prepare warnings for templates
+		for($i = 0; $i < $sql_template->getRows(); $i++) {
+			$message = '<a href="javascript:openPage(\''. rex_url::backendPage('templates', ['template_id' => $sql_template->getValue('id'), 'function' => 'edit']) .'\')">'. rex_i18n::msg('header_template') .': '. $sql_template->getValue('name') .'</a>';
+			if(!in_array($message, $warning)) {
+				$warning[] = $message;
+			}
 		}
-    }
+	}
 
 	return $warning;
 }
