@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.6.2-DEV</p>
 		<ul>
+			<li>Prüft vor dem Löschen eines Bildes ob es in einem Redaxo Template verwendet wird.</li>
 			<li>Template Installation Empfehlung für email_obfuscator auf emailobfuscator Addon geändert.</li>
 			<li>Modul "03-1 Bild" gibt Bild nur noch aus, wenn es auch im Medienpool vorhanden ist.</li>
 			<li>Modul "06-1 YouTube Video einbinden" auf youtube-nocookie.com umgestellt.</li>
