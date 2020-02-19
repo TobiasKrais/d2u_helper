@@ -31,9 +31,10 @@
 	}
 	$form_data .= 'text|phone|'. \Sprog\Wildcard::get('d2u_helper_module_11_phone') .' *|||{"required":"required"}
 		text|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_email') .' *|||{"required":"required"}
+			
 		html|honeypot||<div class="hide-validation">
-		text|mailvalidate|'. $tag_open .'d2u_guestbook_form_email'. $tag_close .'||no_db
-		validate|compare_value|mailvalidate||!=|'. $tag_open .'d2u_guestbook_form_validate_spam_detected'. $tag_close .'|
+		text|mailvalidate|'. $tag_open .'d2u_helper_module_11_email'. $tag_close .'||no_db
+		validate|compare_value|mailvalidate||!=|'. $tag_open .'d2u_helper_module_11_validate_spam_detected'. $tag_close .'|
 		html|honeypot||</div>
 		textarea|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_message') .' *|||{"required":"required"}'. PHP_EOL;
 	if($show_gdpr_hint) {
@@ -52,7 +53,9 @@
 		$form_data .= 'validate|empty|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_privacy_policy') . PHP_EOL;
 	}
     $mail_to = ('REX_VALUE[1]' != '') ? 'REX_VALUE[1]' : rex::getErrorEmail();
-	$form_data .= 'action|tpl2email|d2u_helper_module_11_1|emaillabel|'. $mail_to;
+	$form_data .= 'action|tpl2email|d2u_helper_module_11_1|emaillabel|'. $mail_to .PHP_EOL;
+	// Prevent setting a cookie
+//	$form_data .= 'objparams|csrf_protection|0';
 
 	$yform = new rex_yform();
 	$yform->setFormData(trim($form_data));
