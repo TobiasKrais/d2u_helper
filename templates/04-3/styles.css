@@ -103,11 +103,16 @@ header {
 	filter: blur(10px);
 }
 #background-single-image {
+	max-height: 600px;
 	max-width: 100%;
 	width: 100%;
 }
 #headerCarousel {
+	max-height: 600px;
 	width: 100%;
+}
+#headerCarouselbg {
+	max-height: 600px;
 }
 .carousel-item {
 	transition-duration: 3s !important

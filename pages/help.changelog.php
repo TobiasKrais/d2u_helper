@@ -8,6 +8,7 @@
 			<li>Modul 03-1 "Bild" gibt Bild nur noch aus, wenn es auch im Medienpool vorhanden ist.</li>
 			<li>Modul 06-1 "YouTube Video einbinden" auf youtube-nocookie.com umgestellt.</li>
 			<li>Modul 11-1 "YForm Kontaktformular": Übersetzungsfehler korrigiert.</li>
+			<li>Bei Slider Templates 04-1 bis 04-3 ragt der Sliderhintergrund bei wenig Seiteninhalt nicht mehr über den Footer hinaus.</li>
 			<li>Template "04-2 Header Slider Template" Notice entfernt. Außerdem kann ein eigenes Logo für den Footer festgelegt werden.</li>
 		</ul>
 		<p>1.6.1</p>
