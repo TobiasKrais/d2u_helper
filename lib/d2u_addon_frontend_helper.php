@@ -383,7 +383,7 @@ class d2u_addon_frontend_helper {
 	 * @param string $label Field label
 	 * @param int $microtime Microtime value defined in field
 	 * @param int $seconds to wait
-	 * @return boolean TRUE if user took long enougth to fill out fields
+	 * @return bool TRUE if user took long enougth to fill out fields
 	 */
 	public static function yform_validate_timer($label, $microtime, $seconds) {
 		if (($microtime + $seconds) > microtime(true)) {

@@ -12,7 +12,7 @@ abstract class ACronJob {
 	
 	/**
 	 * Activate CronJob.
-	 * @return boolean TRUE if successful, otherwise FALSE
+	 * @return bool TRUE if successful, otherwise FALSE
 	 */
 	public function activate() {
 		if(\rex_addon::get('cronjob')->isAvailable() && self::isInstalled()) {
@@ -34,7 +34,7 @@ abstract class ACronJob {
 	
 	/**
 	 * Deactivate CronJob.
-	 * @return boolean TRUE if successful, otherwise FALSE
+	 * @return bool TRUE if successful, otherwise FALSE
 	 */
 	public function deactivate() {
 		if(\rex_addon::get('cronjob')->isAvailable() && self::isInstalled()) {
@@ -50,7 +50,7 @@ abstract class ACronJob {
 
 	/**
 	 * Delete CronJob.
-	 * @return boolean TRUE if successful, otherwise FALSE
+	 * @return bool TRUE if successful, otherwise FALSE
 	 */
 	public function delete() {
 		if(\rex_addon::get('cronjob')->isAvailable()) {
@@ -75,7 +75,7 @@ abstract class ACronJob {
 
 	/**
 	 * Checks if  cron job is installed.
-	 * @return boolean TRUE if CronJob is installed, otherwise FALSE.
+	 * @return bool TRUE if CronJob is installed, otherwise FALSE.
 	 */
 	public function isInstalled() {
 		if(\rex_addon::get('cronjob')->isAvailable()) {
@@ -97,7 +97,7 @@ abstract class ACronJob {
 	 * @param string $description Description
 	 * @param string $php_code PHP Code, please just one line
 	 * @param string $interval JSON encoded interval, e.g. {\"minutes\":[0],\"hours\":[0],\"days\":\"all\",\"weekdays\":[1],\"months\":\"all\"}
-	 * @param boolean $activate TRUE if CronJob should be activated, otherwise FALSE
+	 * @param bool $activate TRUE if CronJob should be activated, otherwise FALSE
 	 */
 	protected function save($description, $php_code, $interval, $activate = TRUE) {
 		if(\rex_addon::get('cronjob')->isAvailable()) {

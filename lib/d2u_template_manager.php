@@ -193,7 +193,7 @@ class D2UTemplateManager {
 	
 	/**
 	 * Gets Redaxo Templates.
-	 * @param boolean If TRUE, reload of templates is performed.
+	 * @param bool If TRUE, reload of templates is performed.
 	 * @return string[] Redaxo templates. Key ist the template ID, value ist the template name
 	 */
 	public static function getRexTemplates($unpaired_only = FALSE) {
@@ -333,7 +333,7 @@ class D2UTemplate {
 	private $d2u_template_id = "";
 	
 	/**
-	 * @var boolean TRUE if autoupdate ist activated
+	 * @var bool TRUE if autoupdate ist activated
 	 */
 	private $autoupdate = FALSE;
 
@@ -464,7 +464,7 @@ class D2UTemplate {
 	/**
 	 * Installes or updates the template in redaxo template table.
 	 * @param int Redaxo template id, if not passed, already available ID is taken.
-	 * @return boolean TRUE if installed, otherwise FALSE
+	 * @return bool TRUE if installed, otherwise FALSE
 	 */
 	public function install($rex_template_id = 0) {
 		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_INSTALL)) {

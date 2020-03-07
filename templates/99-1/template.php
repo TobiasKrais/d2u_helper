@@ -334,7 +334,7 @@ class UniversalFeedCreator extends FeedCreator {
 	 *			"PIE0.1" (deprecated), "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM", "ATOM0.3", "HTML", "JS"
 	 * @param	string	filename	optional	the filename where a recent version of the feed is saved.
 	 * If not specified, the filename is $_SERVER['REQUEST_URI'] with the extension changed to .xml (see _generateFilename()).
-	 * @param	boolean	displayContents	optional	send the content of the file or not. If true, the file will be sent in the body of the response.
+	 * @param	bool	displayContents	optional	send the content of the file or not. If true, the file will be sent in the body of the response.
 	 */
 	function saveFeed($format="RSS0.91", $filename="", $displayContents=true) {
 		$this->_setFormat($format);
@@ -602,7 +602,7 @@ class FeedCreator extends HtmlDescribable {
 	 * @since 1.4
 	 * 
 	 * @param filename	string	optional	the filename where a recent version of the feed is saved. If not specified, the filename is $_SERVER['REQUEST_URI'] with the extension changed to .xml (see _generateFilename()).
-	 * @param redirect	boolean	optional	send an HTTP redirect header or not. If true, the user will be automatically redirected to the created file.
+	 * @param redirect	bool	optional	send an HTTP redirect header or not. If true, the user will be automatically redirected to the created file.
 	 */
 	function saveFeed($filename="", $displayContents=true) {
 		if ($filename=="") {

@@ -19,7 +19,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 /**
 * Convert a hexa decimal color code to its RGB equivalent
 * @param string $hexStr (hexadecimal color value)
-* @param boolean $returnAsString (if set true, returns the value separated by the separator character. Otherwise returns associative array)
+* @param bool $returnAsString (if set true, returns the value separated by the separator character. Otherwise returns associative array)
 * @param string $seperator (to separate RGB values. Applicable only if second parameter is true.)
 * @return array or string (depending on second parameter. Returns False if invalid hex color value)
 */                                                                                                

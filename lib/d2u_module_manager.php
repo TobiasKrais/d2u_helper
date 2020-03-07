@@ -241,7 +241,7 @@ class D2UModuleManager {
 	
 	/**
 	 * Gets Redaxo Modules.
-	 * @param boolean If TRUE, only unpaired modules are returned.
+	 * @param bool If TRUE, only unpaired modules are returned.
 	 * @return string[] Redaxo modules. Key ist the module ID, value ist the module name
 	 */
 	public static function getRexModules($unpaired_only = FALSE) {
@@ -405,7 +405,7 @@ class D2UModule {
 	private $d2u_module_id = "";
 	
 	/**
-	 * @var boolean TRUE if autoupdate ist activated
+	 * @var bool TRUE if autoupdate ist activated
 	 */
 	private $autoupdate = FALSE;
 
@@ -551,7 +551,7 @@ class D2UModule {
 	/**
 	 * Installes or updates the module in redaxo module table.
 	 * @param int Redaxo module id, if not passed, already available ID is taken.
-	 * @return boolean TRUE if installed, otherwise FALSE
+	 * @return bool TRUE if installed, otherwise FALSE
 	 */
 	public function install($rex_module_id = 0) {
 		if(file_exists($this->module_folder . D2UModule::MODULE_INSTALL)) {
@@ -615,7 +615,7 @@ class D2UModule {
 	/**
 	 * Static method equivalent to isInstalled()
 	 * @param string $d2u_module_id D2U Module ID, e.g. "03-2"
-	 * @return boolean TRUE if D2U module is installed, otherwise FALSE
+	 * @return bool TRUE if D2U module is installed, otherwise FALSE
 	 */
 	public static function isModuleIDInstalled($d2u_module_id) {
 		$query = 'SELECT * FROM ' . \rex::getTablePrefix() . 'config WHERE `key` = "module_'. $d2u_module_id .'"';

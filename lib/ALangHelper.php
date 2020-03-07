@@ -50,8 +50,8 @@ abstract class ALangHelper {
 	 * @param string $key Wildcard key
 	 * @param string $value Wildcard value
 	 * @param int $clang_id Wildcard language ID
-	 * @param boolean $overwrite Overwrite value if key already exists. Default is FALSE.
-	 * @return boolean TRUE if successfully saved
+	 * @param bool $overwrite Overwrite value if key already exists. Default is FALSE.
+	 * @return bool TRUE if successfully saved
 	 */
 	protected static function saveValue($key, $value, $clang_id, $overwrite = FALSE) {
 		if(!\rex_addon::get('sprog')->isAvailable()) {
