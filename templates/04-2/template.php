@@ -420,7 +420,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					}
 
 					if($media_logo_footer instanceof rex_media || $facebook_footer != "") {
-						print '<div class="col-8 col-md-9">';
+						print '<div class="col-12 col-sm-8 col-md-9">';
 					}
 					else {
 						print '<div class="col-12">';
@@ -438,7 +438,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					print '</div>';
 
 					if($media_logo_footer instanceof rex_media || $facebook_footer != "") {
-						print '<div class="col-4 col-sm-4 col-md-3">';
+						print '<div class="col-12 col-sm-4 col-md-3">';
 
 						if($media_logo_footer instanceof rex_media && $facebook_footer != "") {
 							print '<div class="row">';
