@@ -196,7 +196,7 @@ class D2UModuleManager {
 			2);
 		$modules[] = new D2UModule("13-1",
 			"Lauftext",
-			1);
+			2);
 		// 20-x reserved for D2U Addresss
 		// 21-x reserved for D2U History
 		// 22-x reserved for D2U Staff
