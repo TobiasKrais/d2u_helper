@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.6.2-DEV</p>
 		<ul>
+			<li>Wenn Google Analytics in den Einstellungen aktiviert ist wird der Google Code nicht ausgegeben, wenn search_it die Seite zur Indexierung aufruft.</li>
 			<li>Prüft vor dem Löschen eines Bildes ob es in einem Redaxo Template verwendet wird.</li>
 			<li>Template Installation Empfehlung für email_obfuscator auf emailobfuscator Addon geändert.</li>
 			<li>Modul 03-1 "Bild" gibt Bild nur noch aus, wenn es auch im Medienpool vorhanden ist.</li>

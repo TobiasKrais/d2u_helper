@@ -29,8 +29,10 @@ if(!\rex::isBackend()) {
 	
 	// Only frontend call
 	rex_extension::register('OUTPUT_FILTER', 'appendToPageD2UHelperFiles');
-	rex_extension::register('OUTPUT_FILTER', 'appendGoogleAnalytics');
 	rex_extension::register('OUTPUT_FILTER', 'appendWiredMindseMetrics');
+	if(rex_request('search_it_build_index', 'int', FALSE) === FALSE) {
+		rex_extension::register('OUTPUT_FILTER', 'appendGoogleAnalytics');
+	}
 	
 	if(rex_config::get("d2u_helper", "article_id_privacy_policy", 0) > 0 || rex_config::get("d2u_helper", "article_id_impress", 0) > 0) {
 		// Try to replace as last one, esp. after sprog calls OUTPUT_FILTER
