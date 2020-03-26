@@ -197,6 +197,9 @@ class D2UModuleManager {
 		$modules[] = new D2UModule("13-1",
 			"Lauftext",
 			2);
+		$modules[] = new D2UModule("14-1",
+			"Search It Suchmodul",
+			1);
 		// 20-x reserved for D2U Addresss
 		// 21-x reserved for D2U History
 		// 22-x reserved for D2U Staff

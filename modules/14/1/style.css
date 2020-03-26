@@ -1,0 +1,69 @@
+.search_it-search {
+	padding-bottom: 2em;
+}
+.search_it-button {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.search_it-flex {
+	position: relative;
+}
+.search_it-headline, .search_it-result {
+	margin: 0.75em 0 0.75em 0;
+}
+.search_it-result {
+	background-color: article_color_box;
+	padding: 15px;
+}
+.search_it-title {
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+.search_it-teaser {
+	
+}
+.search_it-url {
+	
+}
+
+@font-face{
+	font-family:'FontAwesome';
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?v=4.7.0");
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff2?v=4.7.0") format('woff2'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff?v=4.7.0") format('woff'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
+}
+.icon {
+	font-family: FontAwesome;
+	font-weight: normal;
+	line-height: 1em;
+}
+.file:before {
+	color: darkred;
+	content: "\f1c1";
+}
+.pdf:before {
+	color: darkred;
+	content: "f016";
+}
+
+.search_it-hits .pagination {
+	height: 2em;
+	margin: 0.5em 0;	
+}
+.search_it-hits .pagination li {
+	background-color: article_color_box;
+	height: 2em;
+	margin: 0 0.5em 0 0;
+	text-align: center;
+	width: 2.5em;
+}
+.search_it-hits .pagination li.current, .search_it-hits .pagination li:hover, .search_it-hits .pagination a:hover{
+	background-color: article_color_h;
+	color: article_color_bg;
+	text-decoration: none;
+	transition: background-color 300ms ease-out;
+}

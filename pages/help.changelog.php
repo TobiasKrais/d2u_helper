@@ -10,6 +10,7 @@
 			<li>Modul 06-1 "YouTube Video einbinden" auf youtube-nocookie.com umgestellt.</li>
 			<li>Modul 11-1 "YForm Kontaktformular": Übersetzungsfehler korrigiert.</li>
 			<li>Modul 13-1 "Lauftext": Anzahl Sekunden in der der Lauftext durchlaufen soll kann eingestellt werden.</li>
+			<li>Modul 14-1 "Search It Suchmodul" hinzugefügt.</li>
 			<li>Bei Slider Templates 04-1 bis 04-3 ragt der Sliderhintergrund bei wenig Seiteninhalt nicht mehr über den Footer hinaus.</li>
 			<li>Template "04-2 Header Slider Template" Notice entfernt. Außerdem kann ein eigenes Logo für den Footer festgelegt werden, das auf schmalen Bildschirmen unterhalb der Footer Links dargestellt wird.</li>
 		</ul>

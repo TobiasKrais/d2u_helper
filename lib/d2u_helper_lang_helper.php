@@ -29,6 +29,9 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_spambots' => 'Too fast - it seems you are a spambot. Please take your time to fill out all all fields.',
 		'd2u_helper_module_11_validate_title' => 'Failure sending message:',
 		'd2u_helper_module_11_zip' => 'ZIP Code',
+		'd2u_helper_module_14_enter_search_term' => 'Enter a search term',
+		'd2u_helper_module_14_search_results' => 'Search results',
+		'd2u_helper_module_14_search_results_none' => 'No search results found.',
 	];
 	
 	/**
@@ -57,6 +60,9 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_spambots' => 'Vous avez rempli le formulaire aussi vite que seul un spambot peut. S\'il vous plaît, accordez-vous un peu plus de temps pour remplir les champs.',
 		'd2u_helper_module_11_validate_title' => 'Erreur lors de l\'envoi:',
 		'd2u_helper_module_11_zip' => 'Code postal',
+		'd2u_helper_module_14_enter_search_term' => 'Entrez le terme de recherche',
+		'd2u_helper_module_14_search_results' => 'Résultats de recherche',
+		'd2u_helper_module_14_search_results_none' => "Aucun résultat de recherche n'a été trouvé.",
 	];
 	
 	/**
@@ -85,6 +91,9 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_spambots' => 'Spamverdacht: Sie haben das Formular so schnell ausgefüllt, wie es nur ein Spambot tun kann. Bitte lassen Sie sich beim ausfüllen der Felder etwas mehr Zeit.',
 		'd2u_helper_module_11_validate_title' => 'Fehler beim Senden:',
 		'd2u_helper_module_11_zip' => 'Postleitzahl',
+		'd2u_helper_module_14_enter_search_term' => 'Suchbegriff eingeben',
+		'd2u_helper_module_14_search_results' => 'Suchergebnisse',
+		'd2u_helper_module_14_search_results_none' => 'Es wurden keine Suchergebnisse gefunden.',
 	];
 	
 	/**
@@ -113,6 +122,9 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_spambots' => 'Мы зарегистрировали подозрительный трафик, исходящий из Вашей сети. Пожалуйста, заполните форму ещё раз и подтвердите, что Вы не спам-бот.',
 		'd2u_helper_module_11_validate_title' => 'Ошибка при отправке:',
 		'd2u_helper_module_11_zip' => 'Индекс',
+		'd2u_helper_module_14_enter_search_term' => 'Введите поисковый запрос',
+		'd2u_helper_module_14_search_results' => 'Результаты поиска',
+		'd2u_helper_module_14_search_results_none' => 'Результаты поиска не найдены.',
 	];
 	
 	/**
@@ -141,6 +153,9 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_spambots' => '您填写表格的速度只有spambot可以。 填写字段时请多留点时间。',
 		'd2u_helper_module_11_validate_title' => '发送时出错:',
 		'd2u_helper_module_11_zip' => '邮政编码',
+		'd2u_helper_module_14_enter_search_term' => '输入搜索词',
+		'd2u_helper_module_14_search_results' => '搜索结果',
+		'd2u_helper_module_14_search_results_none' => '找不到搜索结果。',
 	];
 	
 	/**
