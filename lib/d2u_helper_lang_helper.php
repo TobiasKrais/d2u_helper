@@ -32,6 +32,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_enter_search_term' => 'Enter a search term',
 		'd2u_helper_module_14_search_results' => 'Search results',
 		'd2u_helper_module_14_search_results_none' => 'No search results found.',
+		'd2u_helper_module_14_search_similarity' => 'Similar search with hits',
 	];
 	
 	/**
@@ -63,6 +64,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_enter_search_term' => 'Entrez le terme de recherche',
 		'd2u_helper_module_14_search_results' => 'Résultats de recherche',
 		'd2u_helper_module_14_search_results_none' => "Aucun résultat de recherche n'a été trouvé.",
+		'd2u_helper_module_14_search_similarity' => 'Recherche similaire avec résultats',
 	];
 	
 	/**
@@ -94,6 +96,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_enter_search_term' => 'Suchbegriff eingeben',
 		'd2u_helper_module_14_search_results' => 'Suchergebnisse',
 		'd2u_helper_module_14_search_results_none' => 'Es wurden keine Suchergebnisse gefunden.',
+		'd2u_helper_module_14_search_similarity' => 'Ähnliche Suche mit Treffern',
 	];
 	
 	/**
@@ -125,6 +128,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_enter_search_term' => 'Введите поисковый запрос',
 		'd2u_helper_module_14_search_results' => 'Результаты поиска',
 		'd2u_helper_module_14_search_results_none' => 'Результаты поиска не найдены.',
+		'd2u_helper_module_14_search_similarity' => 'Подобный поиск с хитами',
 	];
 	
 	/**
@@ -156,6 +160,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_enter_search_term' => '输入搜索词',
 		'd2u_helper_module_14_search_results' => '搜索结果',
 		'd2u_helper_module_14_search_results_none' => '找不到搜索结果。',
+		'd2u_helper_module_14_search_similarity' => '与搜寻相似的搜寻',
 	];
 	
 	/**

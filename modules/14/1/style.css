@@ -67,3 +67,7 @@
 	text-decoration: none;
 	transition: background-color 300ms ease-out;
 }
+
+.search_it-highlight {
+    color: darkorange;
+}
