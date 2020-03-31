@@ -57,7 +57,7 @@
 .search_it-hits .pagination li {
 	background-color: article_color_box;
 	height: 2em;
-	margin: 0 0.5em 0 0;
+	margin: 0 0.5em 0.5em 0;
 	text-align: center;
 	width: 2.5em;
 }
@@ -70,4 +70,7 @@
 
 .search_it-highlight {
     color: darkorange;
+}
+.search_it-hits br {
+	clear: both;
 }

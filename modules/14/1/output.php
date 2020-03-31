@@ -4,12 +4,19 @@ $article = rex_article::get($article_id);
 $request = rex_request('search', 'string', false);
 $limit = "REX_VALUE[1]" ?: 10;
 $start = rex_request('start', 'int', 0);
+
+// Get placeholder wildcard tags
+$sprog = rex_addon::get("sprog");
+$tag_open = $sprog->getConfig('wildcard_open_tag');
+$tag_close = $sprog->getConfig('wildcard_close_tag');
 ?>
 
 <section class="search_it-search">
 	<form class="search_it-form" id="search_it-form1" action="<?php echo $article->getUrl(); ?>" method="get">
 		<div class="search_it-flex">
-			<input type="text" name="search" value="<?php if($request) { echo rex_escape($request); } ?>" placeholder="{{ d2u_helper_module_14_enter_search_term }}" />
+			<?php
+				echo '<input type="text" name="search" value="'. ($request ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" />';
+			?>
 			<button class="search_it-button" type="submit">
 				<img src="<?php print rex_url::addonAssets('d2u_helper', 'icon_search.svg'); ?>">
 			</button>
@@ -28,7 +35,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 	$search_it->setLimit($start, $limit);
     $result = $search_it->search($request);
 
-	echo '<h2 class="search_it-headline">{{ d2u_helper_module_14_search_results }}</h2>';
+	echo '<h2 class="search_it-headline">'. $tag_open .'d2u_helper_module_14_search_results'. $tag_close .'</h2>';
 	if($result['count']) {
  		// Pagination
 		$pagination = "";
@@ -124,7 +131,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 		echo $pagination;	
     }
 	else if(!$result['count']) {
-		echo '<p class="search_it-zero">{{ d2u_helper_module_14_search_results_none }}</p>';
+		echo '<p class="search_it-zero">'. $tag_open .'d2u_helper_module_14_search_results_none'. $tag_close .'</p>';
 
 		$activate_similarity_search = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
 		// Similarity search
@@ -132,7 +139,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 			$newsearchString = $result['simwordsnewsearch'];
 			$result_simwords = $search_it->search($newsearchString);
 			if($result_simwords['count'] > 0){
-				echo '<p>{{ d2u_helper_module_14_search_similarity }}: "<strong><a href="'. $article->getUrl(['search' => $newsearchString]) .'">'. $newsearchString .'</a></strong>"</p>';
+				echo '<p>'. $tag_open .'d2u_helper_module_14_search_similarity'. $tag_close .': "<strong><a href="'. $article->getUrl(['search' => $newsearchString]) .'">'. $newsearchString .'</a></strong>"</p>';
 			}
 		}
 	}
