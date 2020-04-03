@@ -3,6 +3,7 @@ $article_id = rex_article::getCurrentId();
 $article = rex_article::get($article_id);
 $request = rex_request('search', 'string', false);
 $limit = "REX_VALUE[1]" ?: 10;
+$media_manager_type = "REX_VALUE[3]" ?: "rex_mediapool_preview";
 $start = rex_request('start', 'int', 0);
 
 // Get placeholder wildcard tags
@@ -30,9 +31,10 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 	
 	print '<section class="search_it-hits">';
 	
-	// Init search and execute
-    $search_it = new search_it();
+	// Init search and execute (only search articles and urls in current language)
+    $search_it = new search_it(rex_clang::getCurrentId());
 	$search_it->setLimit($start, $limit);
+	$search_it->setOrder(["field(texttype, 'url', 'article', 'file')" => "ASC"], true);
     $result = $search_it->search($request);
 
 	echo '<h2 class="search_it-headline">'. $tag_open .'d2u_helper_module_14_search_results'. $tag_close .'</h2>';
@@ -49,7 +51,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 					$pagination .= '<li><a href="'. $article->getUrl(['search' => $request, 'start' => $i * $limit]) .'">'. ($i + 1) .'</a></li>';
 				}
 			}
-			$pagination .= '</ul>';
+			$pagination .= '</ul><br>';
 		}
 		echo $pagination;
 		
@@ -70,14 +72,14 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 					echo '<li class="search_it-result search_it-article">';
 					echo '<span class="search_it-title"><a href="'. $hit_server . $article_hit->getUrl(['search_highlighter' => $request]) .'" title="'. $article_hit->getName() .'">'. $article_hit->getName() .'</a></span><br>';
 					echo '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
-					echo '<span class="search_it-url"><a href="'. $hit_server . $article_hit->getUrl(['search_highlighter' => $request]) .'" title="'. $article_hit->getName() .'">'. $hit_server . $article_hit->getUrl() .'</a></span>';
+					echo '<span class="search_it-url"><a href="'. $hit_server . $article_hit->getUrl(['search_highlighter' => $request]) .'" title="'. $article_hit->getName() .'">'. urldecode($hit_server . $article_hit->getUrl()) .'</a></span>';
 					echo '</li>';
 				}
             }
             else if($hit['type'] == 'url') {
 				// url hits
 				$url_sql = rex_sql::factory();
-				$url_sql->setTable(rex::getTablePrefix() . \rex::getTempPrefix() . 'url_generator_url');
+				$url_sql->setTable(rex::getTablePrefix() . \Url\UrlManagerSql::TABLE_NAME);
 				$url_sql->setWhere("id = ". $hit['fid']);
 				if ($url_sql->select('article_id, clang_id, profile_id, data_id, seo')) {
 					$article_hit = rex_article::get($url_sql->getValue('article_id'));
@@ -96,8 +98,9 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 						$hit_link = $hit_server . rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id'), 'search_highlighter' => $request]);
 						echo '<li class="search_it-result search_it-article">';
 						echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. $url_info['title'] .'</a></span><br>';
-						echo '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
-						echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'.$hit_server.rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]).'</a></span>';
+						$image = $url_info['image'] ? '<span class="search_it-previewimage"><img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
+						echo $image . '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
+						echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. urldecode($hit_server.rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')])) .'</a></span>';
 						echo '</li>';
 					}
 				}
@@ -125,7 +128,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
                 // other hit types
             }
         }
-        echo '</ul>';
+        echo '</ul><br>';
 
 		// Pagination
 		echo $pagination;	
