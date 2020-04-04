@@ -98,7 +98,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 						$hit_link = $hit_server . rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id'), 'search_highlighter' => $request]);
 						echo '<li class="search_it-result search_it-article">';
 						echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. $url_info['title'] .'</a></span><br>';
-						$image = $url_info['image'] ? '<span class="search_it-previewimage"><img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
+						$image = $url_info['image'] ? '<span class="search_it-previewimage"><img src="'. $hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
 						echo $image . '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
 						echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. urldecode($hit_server.rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')])) .'</a></span>';
 						echo '</li>';
@@ -116,13 +116,36 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 					if($has_permission) {
 						$hit_link = $server . rex_url::media($media->getFileName());
 						echo '<li class="search_it-result search_it-image search_it-flex">';
-						echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'"><span class="icon '. ($filetype == 'pdf' ? 'pdf' : 'file') .'"></span>';
+						echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. ($filetype == 'pdf' ? '<span class="icon pdf"></span>' : '');
 						echo '&nbsp;&nbsp;'. $media->getTitle() .'</a></span><br>';
-						echo '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
+						$image = substr($media->getType(), 0, 5) === "image" ? '<span class="search_it-previewimage"><img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $media->getFileName() .'"></span>' : '';
+						echo $image .'<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
 						echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. $hit_link .'</a></span>';
 						echo '</li>';
 					}
 				}
+			}
+            else if($hit['type'] == 'db_column') {
+				// picture hits
+				if($hit['table'] == rex::getTablePrefix() .'media' && isset($hit['values']['filetype']) && substr($hit['values']['filetype'], 0, 5) === "image") {
+					$media = rex_media::get($hit['values']['filename']);
+					if(is_object($media)) { 
+						$has_permission = FALSE;
+						if(rex_plugin::get('ycom', 'media_auth')->isAvailable()) {
+							$has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create(null, $media->getFileName()));
+						}
+						if($has_permission) {
+							$hit_link = $server . rex_url::media($media->getFileName());
+							echo '<li class="search_it-result search_it-image search_it-flex">';
+							echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. ($media->getTitle() ?: $media->getFileName()) .'</a></span><br>';
+							$image = substr($media->getType(), 0, 5) === "image" ? '<span class="search_it-previewimage"><img src="'. $server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $media->getFileName() .'"></span>' : '';
+							echo $image .'<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
+							echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. $hit_link .'</a></span>';
+							echo '</li>';
+						}
+					}
+				}
+				// other tables
 			}
 			else {
                 // other hit types
