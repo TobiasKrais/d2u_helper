@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.6.2-DEV</p>
 		<ul>
+			<li>Spanische Frontend Übersetzungen für Modulausgabe hinzugefügt.</li>
 			<li>Wenn Google Analytics in den Einstellungen aktiviert ist wird der Google Code nicht ausgegeben, wenn search_it die Seite zur Indexierung aufruft.</li>
 			<li>Prüft vor dem Löschen eines Bildes ob es in einem Redaxo Template verwendet wird.</li>
 			<li>Template Installation Empfehlung für email_obfuscator auf emailobfuscator Addon geändert.</li>
