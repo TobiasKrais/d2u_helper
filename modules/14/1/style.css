@@ -43,11 +43,11 @@
 }
 .file:before {
 	color: darkred;
-	content: "\f1c1";
+	content: "\f016";
 }
 .pdf:before {
 	color: darkred;
-	content: "f016";
+	content: "\f1c1";
 }
 
 .search_it-hits .pagination {
@@ -77,4 +77,51 @@
 .search_it-previewimage {
 	float: left;
 	padding: 0 0.5em 0.5em 0;
+}
+
+/* Autocomplete */
+.ac_results {
+    background-color: article_color_box;
+    border: 1px solid article_color_h;
+    display: none;
+    list-style: outside none none;
+    margin: -1px 0 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    z-index: 200;
+    width: 100%;
+    max-width: 500px;
+	transition: background-color 300ms ease-out;
+}
+
+.ac_results li {
+    color: #333;
+    line-height: 30px;
+    padding: 2px 5px 2px 12px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+body > .ac_results:first-child {
+    background: red;
+}
+
+body > .ac_results:last-child {
+    z-index: 5000;
+}
+
+.ac_over {
+    background-color: article_color_h;
+    color: article_color_bg !important;
+    cursor: pointer;
+}
+
+.ac_over .ac_match {
+    color: article_color_bg !important;
+}
+
+.ac_match {
+    color: #333;
+    text-decoration: underline;
 }

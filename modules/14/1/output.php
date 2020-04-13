@@ -61,7 +61,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 				// article hits
                 $article_hit = rex_article::get($hit['fid']);
 				// Check article permission if YCom is used
-				if(rex_addon::get('ycom')->isAvailable() == false || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($article_hit))) {
+				if(rex_addon::get('ycom')->isAvailable() === false || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($article_hit))) {
 					// get yrewrite article domain
 					$hit_server = $server;
 					if(rex_addon::get('yrewrite')->isAvailable()) {
@@ -69,10 +69,11 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 						$hit_server = rtrim($hit_domain->getUrl(), "/");
 					}
 
+					$hit_link = strpos($article_hit->getUrl(), $hit_server) === false ? $hit_server . $article_hit->getUrl(['search_highlighter' => $request]) : $article_hit->getUrl(['search_highlighter' => $request]);
 					echo '<li class="search_it-result search_it-article">';
-					echo '<span class="search_it-title"><a href="'. $hit_server . $article_hit->getUrl(['search_highlighter' => $request]) .'" title="'. $article_hit->getName() .'">'. $article_hit->getName() .'</a></span><br>';
+					echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $article_hit->getName() .'">'. $article_hit->getName() .'</a></span><br>';
 					echo '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
-					echo '<span class="search_it-url"><a href="'. $hit_server . $article_hit->getUrl(['search_highlighter' => $request]) .'" title="'. $article_hit->getName() .'">'. urldecode($hit_server . $article_hit->getUrl()) .'</a></span>';
+					echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $article_hit->getName() .'">'. urldecode(strpos($article_hit->getUrl(), $hit_server) === false ? $hit_server . $article_hit->getUrl() : $article_hit->getUrl()) .'</a></span>';
 					echo '</li>';
 				}
             }
@@ -84,7 +85,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 				if ($url_sql->select('article_id, clang_id, profile_id, data_id, seo')) {
 					$article_hit = rex_article::get($url_sql->getValue('article_id'));
 					// Check article permission if YCom is used
-					if(rex_addon::get('ycom')->isAvailable() == false || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($article_hit))) {
+					if(rex_addon::get('ycom')->isAvailable() === false || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($article_hit))) {
 						$url_info = json_decode($url_sql->getValue('seo'), true);
 						$url_profile = \Url\Profile::get($url_sql->getValue('profile_id'));
 
@@ -116,10 +117,10 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 					if($has_permission) {
 						$hit_link = $server . rex_url::media($media->getFileName());
 						echo '<li class="search_it-result search_it-image search_it-flex">';
-						echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. ($filetype == 'pdf' ? '<span class="icon pdf"></span>' : '');
+						echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. (pathinfo($hit['filename'], PATHINFO_EXTENSION) == 'pdf' ? '<span class="icon pdf"></span>' : '');
 						echo '&nbsp;&nbsp;'. $media->getTitle() .'</a></span><br>';
 						$image = substr($media->getType(), 0, 5) === "image" ? '<span class="search_it-previewimage"><img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $media->getFileName() .'"></span>' : '';
-						echo $image .'<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
+						echo $image . ($hit['highlightedtext'] ? '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>' : '');
 						echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. $hit_link .'</a></span>';
 						echo '</li>';
 					}
@@ -139,7 +140,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 							echo '<li class="search_it-result search_it-image search_it-flex">';
 							echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. ($media->getTitle() ?: $media->getFileName()) .'</a></span><br>';
 							$image = substr($media->getType(), 0, 5) === "image" ? '<span class="search_it-previewimage"><img src="'. $server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $media->getFileName() .'"></span>' : '';
-							echo $image .'<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
+							echo $image . ($hit['highlightedtext'] ? '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>' : '');
 							echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. $hit_link .'</a></span>';
 							echo '</li>';
 						}
@@ -170,4 +171,20 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 		}
 	}
 	print "</section>";
+}
+
+if(rex_plugin::get('search_it', 'autocomplete')->isAvailable()) {
+?>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery(function() {
+			jQuery(".search_it-form input[name=search]").suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),
+				{
+					onSelect: function(event, ui) { $('.search_it-form').submit(); return false;
+				}
+			});
+		});
+	});
+</script>
+<?php
 }
