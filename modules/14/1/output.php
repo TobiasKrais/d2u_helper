@@ -1,3 +1,4 @@
+<div class="col-12 col-lg-8">
 <?php
 $article_id = rex_article::getCurrentId();
 $article = rex_article::get($article_id);
@@ -16,7 +17,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 	<form class="search_it-form" id="search_it-form1" action="<?php echo $article->getUrl(); ?>" method="get">
 		<div class="search_it-flex">
 			<?php
-				echo '<input type="text" name="search" value="'. ($request ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" />';
+				echo '<input type="text" id="search_it_search" name="search" value="'. ($request ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" />';
 			?>
 			<button class="search_it-button" type="submit">
 				<img src="<?php print rex_url::addonAssets('d2u_helper', 'icon_search.svg'); ?>">
@@ -178,7 +179,7 @@ if(rex_plugin::get('search_it', 'autocomplete')->isAvailable()) {
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		jQuery(function() {
-			jQuery(".search_it-form input[name=search]").suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),
+			jQuery("#search_it_search").suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),
 				{
 					onSelect: function(event, ui) { $('.search_it-form').submit(); return false;
 				}
@@ -188,3 +189,5 @@ if(rex_plugin::get('search_it', 'autocomplete')->isAvailable()) {
 </script>
 <?php
 }
+?>
+</div>

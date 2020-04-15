@@ -1,7 +1,15 @@
 .search_it-search {
 	padding-bottom: 2em;
 }
+.search_it-search input {
+	border: 1px solid article_color_h;
+	height: 50px;
+	padding: .5rem;
+	width: 100%;
+}
 .search_it-button {
+	background-color: article_color_h;
+	border: none;
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -16,6 +24,11 @@
 	background-color: article_color_box;
 	padding: 15px;
 }
+.search_it-results {
+	list-style: none;
+	padding: 0;
+}
+
 .search_it-title {
 	font-size: 1.25rem;
 	font-weight: bold;
@@ -52,7 +65,11 @@
 
 .search_it-hits .pagination {
 	height: 2em;
+	line-height: 2em;
 	margin: 0.5em 0;	
+}
+.search_it-hits .pagination a {
+	padding: 0.4em 1em;	
 }
 .search_it-hits .pagination li {
 	background-color: article_color_box;
@@ -61,7 +78,7 @@
 	text-align: center;
 	width: 2.5em;
 }
-.search_it-hits .pagination li.current, .search_it-hits .pagination li:hover, .search_it-hits .pagination a:hover{
+.search_it-hits .pagination li.current, .search_it-hits .pagination li:hover, .search_it-hits .pagination a:hover {
 	background-color: article_color_h;
 	color: article_color_bg;
 	text-decoration: none;
