@@ -167,7 +167,11 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 			$newsearchString = $result['simwordsnewsearch'];
 			$result_simwords = $search_it->search($newsearchString);
 			if($result_simwords['count'] > 0){
-				echo '<p>'. $tag_open .'d2u_helper_module_14_search_similarity'. $tag_close .': "<strong><a href="'. $article->getUrl(['search' => $newsearchString]) .'">'. $newsearchString .'</a></strong>"</p>';
+				echo '<p>'. $tag_open .'d2u_helper_module_14_search_similarity'. $tag_close .':<strong><ul>';
+				foreach (explode(' ', $newsearchString) as $new_search_word) {
+					print '<li><a href="'. $article->getUrl(['search' => $new_search_word]) .'">'. $new_search_word .'</a></li>';
+				}
+				echo '</ul></strong></p>';
 			}
 		}
 	}
