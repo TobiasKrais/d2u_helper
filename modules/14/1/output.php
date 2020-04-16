@@ -84,26 +84,29 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 				$url_sql->setTable(rex::getTablePrefix() . \Url\UrlManagerSql::TABLE_NAME);
 				$url_sql->setWhere("id = ". $hit['fid']);
 				if ($url_sql->select('article_id, clang_id, profile_id, data_id, seo')) {
-					$article_hit = rex_article::get($url_sql->getValue('article_id'));
-					// Check article permission if YCom is used
-					if(rex_addon::get('ycom')->isAvailable() === false || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($article_hit))) {
-						$url_info = json_decode($url_sql->getValue('seo'), true);
-						$url_profile = \Url\Profile::get($url_sql->getValue('profile_id'));
+					// Check in case URL IDs changed
+					if($url_sql->getRows() > 0) {
+						$article_hit = rex_article::get($url_sql->getValue('article_id'));
+						// Check article permission if YCom is used
+						if(rex_addon::get('ycom')->isAvailable() === false || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($article_hit))) {
+							$url_info = json_decode($url_sql->getValue('seo'), true);
+							$url_profile = \Url\Profile::get($url_sql->getValue('profile_id'));
 
-						// get yrewrite article domain
-						$hit_server = $server;
-						if(rex_addon::get('yrewrite')->isAvailable()) {
-							$hit_domain = rex_yrewrite::getDomainByArticleId($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'));
-							$hit_server = rtrim($hit_domain->getUrl(), "/");
+							// get yrewrite article domain
+							$hit_server = $server;
+							if(rex_addon::get('yrewrite')->isAvailable()) {
+								$hit_domain = rex_yrewrite::getDomainByArticleId($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'));
+								$hit_server = rtrim($hit_domain->getUrl(), "/");
+							}
+
+							$hit_link = (strpos($article_hit->getUrl(), $hit_server) === false ? $hit_server . rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id'), 'search_highlighter' => $request]) : rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id'), 'search_highlighter' => $request]));
+							echo '<li class="search_it-result search_it-article">';
+							echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. $url_info['title'] .'</a></span><br>';
+							$image = $url_info['image'] ? '<span class="search_it-previewimage"><img src="'. $hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
+							echo $image . '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
+							echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. urldecode((strpos($article_hit->getUrl(), $hit_server) === false ? $hit_server.rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]) : rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]))) .'</a></span>';
+							echo '</li>';
 						}
-						
-						$hit_link = (strpos($article_hit->getUrl(), $hit_server) === false ? $hit_server . rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id'), 'search_highlighter' => $request]) : rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id'), 'search_highlighter' => $request]));
-						echo '<li class="search_it-result search_it-article">';
-						echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. $url_info['title'] .'</a></span><br>';
-						$image = $url_info['image'] ? '<span class="search_it-previewimage"><img src="'. $hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
-						echo $image . '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
-						echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. urldecode((strpos($article_hit->getUrl(), $hit_server) === false ? $hit_server.rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]) : rex_getUrl($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]))) .'</a></span>';
-						echo '</li>';
 					}
 				}
             }

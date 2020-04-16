@@ -504,6 +504,24 @@ class d2u_addon_backend_helper {
 	}
 	
 	/**
+	 * Updates search it index for urls from url addon
+	 */
+    public static function update_searchit_url_index() {
+		if(rex_addon::get('search_it')->isAvailable() && rex_addon::get('search_it')->getConfig('index_url_addon') && search_it_isUrlAddOnAvailable()) {
+			$url_sql = rex_sql::factory();
+			$url_sql->setTable(search_it_getUrlAddOnTableName());
+			if ($url_sql->select('id, article_id, clang_id, profile_id, data_id')) {
+				// delete cache and index first
+				$search_it = new search_it();
+				$search_it->deleteIndexForType("url");
+				foreach ($url_sql->getArray() as $url) {
+					$search_it->indexUrl($url['id'], $url['article_id'], $url['clang_id'], $url['profile_id'], $url['data_id']);
+				}
+			}
+		}
+    }
+	
+	/**
 	 * Updates url addon scheme article id.
 	 * @param string $namespace Table/view name (version 1.x) or namespace (version 2.x) used for url scheme. Parameter is used as identifier.
 	 * @param int $article_id Redaxo article id
