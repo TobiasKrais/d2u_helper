@@ -82,7 +82,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 				// url hits
 				$url_sql = rex_sql::factory();
 				$url_sql->setTable(rex::getTablePrefix() . \Url\UrlManagerSql::TABLE_NAME);
-				$url_sql->setWhere("id = ". $hit['fid']);
+				$url_sql->setWhere("url_hash = '". $hit['fid'] ."'");
 				if ($url_sql->select('article_id, clang_id, profile_id, data_id, seo')) {
 					// Check in case URL IDs changed
 					if($url_sql->getRows() > 0) {

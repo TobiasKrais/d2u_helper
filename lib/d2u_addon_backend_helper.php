@@ -488,11 +488,14 @@ class d2u_addon_backend_helper {
 				// url version 2.x
 				$profiles = \Url\Profile::getAll();
 				if ($profiles) {
+					if($namespace == "") {
+						\Url\UrlManagerSql::deleteAll();
+					}
 					foreach ($profiles as $profile) {
-						if($namespace == "" || $namespace == $profile->getNamespace()) {
+						if($namespace == $profile->getNamespace()) {
 							$profile->deleteUrls();
-							$profile->buildUrls();
 						}
+						$profile->buildUrls();
 					}
 				}
 			}
@@ -510,12 +513,12 @@ class d2u_addon_backend_helper {
 		if(rex_addon::get('search_it')->isAvailable() && rex_addon::get('search_it')->getConfig('index_url_addon') && search_it_isUrlAddOnAvailable()) {
 			$url_sql = rex_sql::factory();
 			$url_sql->setTable(search_it_getUrlAddOnTableName());
-			if ($url_sql->select('id, article_id, clang_id, profile_id, data_id')) {
+			if ($url_sql->select('url_hash, article_id, clang_id, profile_id, data_id')) {
 				// delete cache and index first
 				$search_it = new search_it();
 				$search_it->deleteIndexForType("url");
 				foreach ($url_sql->getArray() as $url) {
-					$search_it->indexUrl($url['id'], $url['article_id'], $url['clang_id'], $url['profile_id'], $url['data_id']);
+					$search_it->indexUrl($url['url_hash'], $url['article_id'], $url['clang_id'], $url['profile_id'], $url['data_id']);
 				}
 			}
 		}
