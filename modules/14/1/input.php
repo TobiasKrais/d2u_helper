@@ -14,7 +14,7 @@
 		<input type="checkbox" name="REX_INPUT_VALUE[2]" value="true" <?php echo "REX_VALUE[2]" == 'true' ? ' checked="checked"' : ''; ?> style="float: right;" />
 	</div>
 	<div class="col-xs-8">
-		Ähnlichkeitssuche aktivieren wenn keine Treffer gefunden werden?<br />
+		Ähnliche Suchtreffer anzeigen, wenn keine Treffer gefunden werden?<br />
 		<?php
 			if(rex_config::get('search_it', 'similarwordsmode', 0) === 0) {
 				print "<b>Die Ähnlichkeitssuche muss in den Search It Einstellungen aktiviert werden!</b>";
