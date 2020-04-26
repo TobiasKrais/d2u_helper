@@ -25,6 +25,9 @@
 		if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			$select_link->addOption("D2U Maschinen Addon - Maschine", "d2u_machinery_machine");
 		}
+		if(rex_addon::get('d2u_courses')->isAvailable()) {
+			$select_link->addOption("D2U Veranstaltungen Addon - Kategorie", "d2u_courses_category");
+		}
 
 		$select_link->setSelected("REX_VALUE[1]");
 
@@ -148,6 +151,28 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 	print '</div>';
 	print '</div>';
 }
+// Veranstaltungen Addon
+if(rex_addon::get('d2u_courses')->isAvailable()) {
+	// Categories
+	print '<div class="row" id="d2u_courses_category">';
+	print '<div class="col-xs-4">Zu welcher Veranstaltungskategorie soll weitergeleitet werden?</div>';
+	print '<div class="col-xs-8">';
+		$select_link = new rex_select(); 
+		$select_link->setName('REX_INPUT_VALUE[6]'); 
+		$select_link->setSize(1);
+		$select_link->setAttribute('class', 'form-control');
+
+		$categories = \D2U_Courses\Category::getAll(TRUE);
+		foreach($categories as $category)  {
+			$select_link->addOption((($category->parent_category ? ($category->parent_category->parent_category ? $category->parent_category->parent_category->name ." → " : "" ). $category->parent_category->name ." → " : "" ). $category->name), $category->category_id); 
+		}
+
+		$select_link->setSelected("REX_VALUE[6]");
+
+		echo $select_link->show();
+	print '</div>';
+	print '</div>';
+}
 ?>
 
 <script>
@@ -160,6 +185,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').hide();
 			$('#d2u_immo_property').hide();
+			$('#d2u_courses_category').hide();
 		}
 		else if($('#selector').val() === "link") {
 			$('#article').hide();
@@ -169,6 +195,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').hide();
 			$('#d2u_immo_property').hide();
+			$('#d2u_courses_category').hide();
 		}
 		else if($('#selector').val() === "download") {
 			$('#article').hide();
@@ -178,6 +205,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').hide();
 			$('#d2u_immo_property').hide();
+			$('#d2u_courses_category').hide();
 		}
 		else if($('#selector').val() === "d2u_machinery_machine") {
 			$('#article').hide();
@@ -187,6 +215,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').hide();
 			$('#d2u_immo_property').hide();
+			$('#d2u_courses_category').hide();
 		}
 		else if($('#selector').val() === "d2u_machinery_industry_sector") {
 			$('#article').hide();
@@ -196,6 +225,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 			$('#d2u_machinery_industry_sector').show();
 			$('#d2u_machinery_used_machine').hide();
 			$('#d2u_immo_property').hide();
+			$('#d2u_courses_category').hide();
 		}
 		else if($('#selector').val() === "d2u_machinery_used_machine") {
 			$('#article').hide();
@@ -205,6 +235,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').show();
 			$('#d2u_immo_property').hide();
+			$('#d2u_courses_category').hide();
 		}
 		else if($('#selector').val() === "d2u_immo_property") {
 			$('#article').hide();
@@ -214,6 +245,17 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 			$('#d2u_machinery_industry_sector').hide();
 			$('#d2u_machinery_used_machine').hide();
 			$('#d2u_immo_property').show();
+			$('#d2u_courses_category').hide();
+		}
+		else if($('#selector').val() === "d2u_courses_category") {
+			$('#article').hide();
+			$('#link').hide();
+			$('#download').hide();
+			$('#d2u_machinery_machine').hide();
+			$('#d2u_machinery_industry_sector').hide();
+			$('#d2u_machinery_used_machine').hide();
+			$('#d2u_immo_property').hide();
+			$('#d2u_courses_category').show();
 		}
 	}
 	

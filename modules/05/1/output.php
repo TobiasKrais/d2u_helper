@@ -92,6 +92,23 @@ else if($link_type == "d2u_immo_property") {
 		print "Das D2U Immobilien Addon muss installiert und aktiviert werden.";
 	}
 }
+else if($link_type == "d2u_courses_category") {
+	if(rex_addon::get('d2u_courses')->isAvailable()) {
+		$category_id = "REX_VALUE[6]";
+		if($category_id > 0) {
+			$category = new \D2U_Courses\Category($category_id);
+			if(\rex::isBackend()) {
+				print "Weiterleitung zu D2U Veranstaltungen - Kategorie <a href='". $category->getUrl(TRUE) ."'>". $category->name ."</a>";
+			}
+			else {
+				$forward_url = $category->getUrl(TRUE);
+			}
+		}
+	}
+	else {
+		print "Das D2U Veranstaltungen Addon muss installiert und aktiviert werden.";
+	}
+}
 else { // Backward compatibility module Version <= 3
 	$article_id = "REX_LINK[1]";
 	if($article_id > 0 && rex_article::get($article_id) instanceof rex_article) {
