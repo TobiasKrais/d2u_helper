@@ -22,4 +22,4 @@ page:
                 changelog: { title: 'translate:d2u_helper_help_chapter_changelog' }
 
 requires:
-    redaxo: >=5.10.0
+    redaxo: '>=5.10.0'
