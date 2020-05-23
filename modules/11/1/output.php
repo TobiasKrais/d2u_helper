@@ -52,7 +52,7 @@
 	if($show_gdpr_hint) {
 		$form_data .= 'validate|empty|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_validate_privacy_policy') . PHP_EOL;
 	}
-    $mail_to = ('REX_VALUE[1]' != '') ? 'REX_VALUE[1]' : rex::getErrorEmail();
+    $mail_to = 'REX_VALUE[1]' ?? rex::getErrorEmail();
 	$form_data .= 'action|tpl2email|d2u_helper_module_11_1|emaillabel|'. $mail_to .PHP_EOL;
 	// Prevent setting a cookie
 //	$form_data .= 'objparams|csrf_protection|0';

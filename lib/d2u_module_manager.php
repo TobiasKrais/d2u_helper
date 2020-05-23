@@ -207,6 +207,7 @@ class D2UModuleManager {
 		// 24-x reserved for D2U Linkbox
 		// 25-x reserved for D2U Partner
 		// 26-x reserved for D2U Courses
+		// 27-x reserved for D2U Heinzmann
 		// 30-x reserved for D2U Videos
 		// 40-x reserved for D2U News
 		// 50-x reserved for D2U References
