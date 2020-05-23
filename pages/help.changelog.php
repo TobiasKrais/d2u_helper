@@ -4,7 +4,8 @@
 		<p>1.6.2-DEV</p>
 		<ul>
 			<li>Update Ekko Lightbox to version <a href="https://github.com/ashleydw/lightbox/releases/tag/v5.4.0-rc2">5.4.0-rc2</a>.</li>
-			<li>JQuery 3.4.1 update.</li>
+			<li>Bootstrap 4.5.0 Upgrade.</li>
+			<li>JQuery 3.5.1 Upgrade - ab dieser Version liefert das Addon keine eigene jQuery mehr mit aus, sondern bindet die schon mit Redaxo ausgelieferte Version ein.</li>
 			<li>Spanische Frontend Übersetzungen für Modulausgabe hinzugefügt.</li>
 			<li>Wenn Google Analytics in den Einstellungen aktiviert ist wird der Google Code nicht ausgegeben, wenn search_it die Seite zur Indexierung aufruft.</li>
 			<li>Prüft vor dem Löschen eines Bildes ob es in einem Redaxo Template verwendet wird.</li>

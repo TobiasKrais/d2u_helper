@@ -77,8 +77,7 @@ function appendGoogleAnalytics(rex_extension_point $ep) {
  * @param rex_extension_point $ep Redaxo extension point
  */
 function appendToPageD2UHelperFiles(rex_extension_point $ep) {
-	$VERSION_JQUERY = '3.4.1';
-	$VERSION_BOOTSTRAP = '4.4.1';
+	$VERSION_BOOTSTRAP = '4.5.0';
 	$VERSION_POPPER = '1.14.7';
 	$addon = rex_addon::get("d2u_helper");
 	
@@ -92,7 +91,8 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	// Vor dem </head> einfügen
 	if($addon->getConfig('include_jquery') == 'true') {
 		// JavaScript
-		$insert_head .= '<script src="'. $addon->getAssetsUrl('bootstrap4/jquery.min.js') .'?v='. $VERSION_JQUERY .'"></script>' . PHP_EOL;
+		$file = 'jquery.min.js';
+		$insert_head .= '<script src="'. rex_url::coreAssets($file) .'?buster='. filemtime(rex_path::coreAssets($file)) .'"></script>' . PHP_EOL;
 	}
 	if($addon->getConfig('include_bootstrap4') == 'true') {
 		// Popper JavaScript
