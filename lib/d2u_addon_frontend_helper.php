@@ -297,7 +297,7 @@ class d2u_addon_frontend_helper {
 	 */
 	public static function getUrlId() {
 		if(self::$url_id == 0 && rex_addon::get("url")->isAvailable()) {
-			if(rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
+			if(rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
 				// URL Addon 2.x
 				$manager = \Url\Url::resolveCurrent();
 				if($manager) {
@@ -319,7 +319,7 @@ class d2u_addon_frontend_helper {
 	 */
 	public static function getUrlNamespace() {
 		if(self::$url_namespace == "" && rex_addon::get("url")->isAvailable()) {
-			if(rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
+			if(rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
 				// URL Addon 2.x
 				$manager = \Url\Url::resolveCurrent();
 				if($manager && $manager->getProfile()) {

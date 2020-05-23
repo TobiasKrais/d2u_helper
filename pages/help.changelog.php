@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.6.2-DEV</p>
 		<ul>
+			<li>Benötigt Redaxo >= 5.10, da die neue Klasse rex_version verwendet wird.</li>
 			<li>Update Ekko Lightbox to version <a href="https://github.com/ashleydw/lightbox/releases/tag/v5.4.0-rc2">5.4.0-rc2</a>.</li>
 			<li>Bootstrap 4.5.0 Upgrade.</li>
 			<li>JQuery 3.5.1 Upgrade - ab dieser Version liefert das Addon keine eigene jQuery mehr mit aus, sondern bindet die schon mit Redaxo ausgelieferte Version ein.</li>

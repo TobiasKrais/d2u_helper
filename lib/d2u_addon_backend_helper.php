@@ -484,7 +484,7 @@ class d2u_addon_backend_helper {
 	 */
 	public static function generateUrlCache($namespace = "") {
 		if(\rex_addon::get('url')->isAvailable()) {
-			if(\rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
+			if(\rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
 				// url version 2.x
 				$profiles = \Url\Profile::getAll();
 				if ($profiles) {
@@ -526,7 +526,7 @@ class d2u_addon_backend_helper {
     public static function update_url_scheme($namespace, $article_id) {
 		if(rex_addon::get('url')->isAvailable()) {
 			$sql = rex_sql::factory();
-			if(rex_string::versionCompare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
+			if(rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
 				// url version 2.x
 				$query = "UPDATE `". \rex::getTablePrefix() ."url_generator_profile` SET `article_id` = ". $article_id ." "
 					."WHERE `namespace` = '". $namespace ."'";

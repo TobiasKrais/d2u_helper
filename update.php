@@ -64,7 +64,7 @@ if(class_exists('D2UModuleManager')) {
 }
 
 // Update templates
-if (rex_string::versionCompare($this->getVersion(), '1.5.4', '<')) {
+if (rex_version::compare($this->getVersion(), '1.5.4', '<')) {
 	// Rename template 02-2 to 04-2
 	if(rex_config::has('d2u_helper', 'template_02-2')) {
 		$result = rex_sql::factory();
@@ -218,7 +218,7 @@ if($this->hasConfig('include_menu')) {
 }
 
 // Update to 1.6.0
-if (rex_string::versionCompare($this->getVersion(), '1.6.0', '<')) {
+if (rex_version::compare($this->getVersion(), '1.6.0', '<')) {
 	// Update settings to switch from multilevel menu to smartmenu
 	if((rex_config::has('d2u_helper', 'template_00-1') || rex_config::has('d2u_helper', 'template_01-1') || rex_config::has('d2u_helper', 'template_02-1')
 			|| rex_config::has('d2u_helper', 'template_04-1') || rex_config::has('d2u_helper', 'template_04-2') || rex_config::has('d2u_helper', 'template_04-3'))
