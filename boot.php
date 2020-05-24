@@ -90,7 +90,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$insert_body = "";
 	// Vor dem </head> einfügen
 	if($addon->getConfig('include_jquery') == 'true') {
-		// JavaScript
+		// JQuery
 		$file = 'jquery.min.js';
 		$insert_head .= '<script src="'. rex_url::coreAssets($file) .'?buster='. filemtime(rex_path::coreAssets($file)) .'"></script>' . PHP_EOL;
 	}
