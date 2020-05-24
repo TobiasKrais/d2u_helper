@@ -15,7 +15,7 @@
 			<li>Modul 05-1 "Artikelweiterleitung" beherrscht nun auch Weiterleitungen zu Kategorien des D2U Veranstaltungen Addons.</li>
 			<li>Modul 06-1 "YouTube Video einbinden" auf youtube-nocookie.com umgestellt.</li>
 			<li>Modul 11-1 "YForm Kontaktformular": Übersetzungsfehler korrigiert.</li>
-			<li>Modul 12-1 "YFeed Stream Galerie" auf das Addon Feeds aktualisiert. Neuer Name: "Feeds Stream Galerie". WICHTIG: Wird dieses Modul genutzt, muss es nach dem Update des Addons neu installiert werden.</li>
+			<li>Modul 12-1 "YFeed Stream Galerie" auf das Addon Feeds aktualisiert. Neuer Name: "Feeds Stream Galerie".</li>
 			<li>Modul 13-1 "Lauftext": Anzahl Sekunden in der der Lauftext durchlaufen soll kann eingestellt werden.</li>
 			<li>Modul 14-1 "Search It Suchmodul" hinzugefügt.</li>
 			<li>Bei Slider Templates 04-1 bis 04-3 ragt der Sliderhintergrund bei wenig Seiteninhalt nicht mehr über den Footer hinaus.</li>
