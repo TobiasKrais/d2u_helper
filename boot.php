@@ -78,7 +78,7 @@ function appendGoogleAnalytics(rex_extension_point $ep) {
  */
 function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$VERSION_BOOTSTRAP = '4.5.0';
-	$VERSION_POPPER = '1.14.7';
+	$VERSION_POPPER = '1.16.0';
 	$addon = rex_addon::get("d2u_helper");
 	
 	// If insertion should be prevented, detect class "prevent_d2u_helper_styles"
