@@ -154,7 +154,7 @@ class D2UModuleManager {
 			10);
 		$modules[] = new D2UModule("02-1",
 			"Überschrift",
-			7);
+			8);
 		$modules[] = new D2UModule("02-2",
 			"Überschrift mit Klapptext",
 			3);
@@ -571,6 +571,7 @@ class D2UModule {
 		
 		$insertmod = rex_sql::factory();
 		$insertmod->setTable(\rex::getTablePrefix() . 'module');
+        $insertmod->setValue('key', "d2u_". $this->d2u_module_id);
         $insertmod->setValue('name', $this->d2u_module_id ." ". $this->name);
 		$insertmod->setValue('input', file_get_contents($this->module_folder . D2UModule::MODULE_INPUT));
 		$insertmod->setValue('output', file_get_contents($this->module_folder . D2UModule::MODULE_OUTPUT));

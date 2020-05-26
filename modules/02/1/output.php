@@ -12,5 +12,5 @@
 
 ?>
 <div class="col-12 col-lg-<?php echo $cols . $offset_lg; ?>">
-	<REX_VALUE[2]>REX_VALUE[1]</REX_VALUE[2]>
+	<REX_VALUE[2] class="REX_VALUE[2]">REX_VALUE[1]</REX_VALUE[2]>
 </div>

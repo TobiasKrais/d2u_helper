@@ -531,6 +531,7 @@ class d2u_addon_backend_helper {
 				$query = "UPDATE `". \rex::getTablePrefix() ."url_generator_profile` SET `article_id` = ". $article_id ." "
 					."WHERE `namespace` = '". $namespace ."'";
 				$sql->setQuery($query);
+				self::generateUrlCache($namespace);
 			}
 			else {
 				// url version 1.x

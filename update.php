@@ -13,7 +13,7 @@ if(class_exists('D2UModuleManager')) {
 		10);
 	$modules[] = new D2UModule("02-1",
 		"Überschrift",
-		7);
+		8);
 	$modules[] = new D2UModule("02-2",
 		"Überschrift mit Klapptext",
 		3);
