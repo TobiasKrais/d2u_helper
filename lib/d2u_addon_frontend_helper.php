@@ -138,6 +138,7 @@ class d2u_addon_frontend_helper {
 		$breadcrumbs = '<a href="' . $startarticle->getUrl() . '"><span class="fa-icon fa-home"></span></a>';
 		$current_article = rex_article::getCurrent();
 		$path = $current_article->getPathAsArray();
+		// Categories
 		foreach ($path as $id) {
 			$article = rex_category::get($id);
 			if($id != rex_article::getSiteStartArticleId()) {
@@ -145,10 +146,12 @@ class d2u_addon_frontend_helper {
 			}
 			$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
 		}
-		if(!$current_article->isStartArticle()) {
+		// Articles
+		if(!$current_article->isStartArticle() && !$current_article->isSiteStartArticle()) {
 			$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $current_article->getUrl() . '">' . $current_article->getName() . '</a>';
 			$breadcrumb_start_only = FALSE;
 		}
+		// Addons
 		if(rex_addon::get('d2u_courses')->isAvailable()) {
 			foreach(d2u_courses_frontend_helper::getBreadcrumbs() as $breadcrumb) {
 				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
