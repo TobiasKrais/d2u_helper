@@ -486,17 +486,17 @@ class d2u_addon_backend_helper {
 		if(\rex_addon::get('url')->isAvailable()) {
 			if(\rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
 				// url version 2.x
-				$profiles = \Url\Profile::getAll();
-				if ($profiles) {
-					if($namespace == "") {
-						\Url\UrlManagerSql::deleteAll();
-					}
-					foreach ($profiles as $profile) {
-						if($namespace == $profile->getNamespace()) {
-							$profile->deleteUrls();
-						}
-						$profile->buildUrls();
-					}
+				
+				// Delete url addon cache file
+				\Url\Cache::deleteProfiles();
+				// Reset loaded cache file
+				\Url\Profile::reset();
+				// Read profile
+				$profiles = $namespace != "" ? \Url\Profile::getByNamespace($namespace) : \Url\Profile::getAll();
+				foreach($profiles as $profile) {
+					// generate URLs
+					$profile->deleteUrls();
+					$profile->buildUrls();
 				}
 			}
 			else {
@@ -520,23 +520,28 @@ class d2u_addon_backend_helper {
 	
 	/**
 	 * Updates url addon scheme article id.
-	 * @param string $namespace Table/view name (version 1.x) or namespace (version 2.x) used for url scheme. Parameter is used as identifier.
+	 * @param string $table_name Table/view name (version 1.x) or namespace (version 2.x) used for url scheme. Parameter is used as identifier.
 	 * @param int $article_id Redaxo article id
 	 */
-    public static function update_url_scheme($namespace, $article_id) {
+    public static function update_url_scheme($table_name, $article_id) {
 		if(rex_addon::get('url')->isAvailable()) {
 			$sql = rex_sql::factory();
 			if(rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
 				// url version 2.x
 				$query = "UPDATE `". \rex::getTablePrefix() ."url_generator_profile` SET `article_id` = ". $article_id ." "
-					."WHERE `namespace` = '". $namespace ."'";
+					."WHERE `table_name` LIKE '%". $table_name ."'";
 				$sql->setQuery($query);
-				self::generateUrlCache($namespace);
+				$query = "SELECT namespace FROM  `". \rex::getTablePrefix() ."url_generator_profile` "
+					."WHERE `table_name` LIKE '%". $table_name ."'";
+				$sql->setQuery($query);
+				if($sql->getRows() > 0) {
+					self::generateUrlCache($sql->getValue('namespace'));
+				}
 			}
 			else {
 				// url version 1.x
 				$query = "UPDATE `". \rex::getTablePrefix() ."url_generate` SET `article_id` = ". $article_id ." "
-					."WHERE `table` LIKE '%". $namespace ."'";
+					."WHERE `table` LIKE '%". $table_name ."'";
 				$sql->setQuery($query);
 			}
 		}

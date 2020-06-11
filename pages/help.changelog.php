@@ -4,6 +4,7 @@
 		<p>1.6.2-DEV</p>
 		<ul>
 			<li>Benötigt Redaxo >= 5.10, da die neue Klasse rex_version verwendet wird.</li>
+			<li>Hilfsklassen für URL 2 Addon auf aktuelle Git Version angepasst.</li>
 			<li>d2u_addon_frontend_helper::getBreadcrumbs() gibt für die Startseite kein Breadcrumb mehr zurück.</li>
 			<li>Update Ekko Lightbox to version <a href="https://github.com/ashleydw/lightbox/releases/tag/v5.4.0-rc2">5.4.0-rc2</a>.</li>
 			<li>Bootstrap 4.5.0 Upgrade.</li>
