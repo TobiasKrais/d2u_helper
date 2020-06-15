@@ -489,8 +489,6 @@ class d2u_addon_backend_helper {
 				
 				// Delete url addon cache file
 				\Url\Cache::deleteProfiles();
-				// Reset loaded cache file
-				\Url\Profile::reset();
 				// Read profile
 				$profiles = $namespace != "" ? \Url\Profile::getByNamespace($namespace) : \Url\Profile::getAll();
 				foreach($profiles as $profile) {
