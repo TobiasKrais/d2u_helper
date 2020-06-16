@@ -531,8 +531,16 @@ class D2UModule {
 	 * @param string Complete folder string, in which module files can be found.
 	 * Trailing slash must be included.
 	 */
-	public function initRedaxoContext($module_addon, $module_folder) {
+	public function initRedaxoContext(rex_addon $module_addon, string $module_folder) {
 		$this->rex_addon = $module_addon;
+		$sql = rex_sql::factory();
+		$sql->setTable(rex::getTablePrefix(). 'module');
+		$sql->setWhere('`key` = "d2u_'. $this->d2u_module_id .'"');
+		$sql->select();
+		foreach ($sql->getArray() as $result) {
+			$indexIds[] = $result['id'];
+		}
+		
 		if($this->rex_addon->hasConfig("module_". $this->d2u_module_id)) {
 			$config = $this->rex_addon->getConfig("module_". $this->d2u_module_id);
 			if(key_exists($config["rex_module_id"], D2UModuleManager::getRexModules())) {
