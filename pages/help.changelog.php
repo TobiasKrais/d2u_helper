@@ -18,7 +18,7 @@
 			<li>Modul 03-1 "Bild" gibt Bild nur noch aus, wenn es auch im Medienpool vorhanden ist.</li>
 			<li>Modul 05-1 "Artikelweiterleitung" beherrscht nun auch Weiterleitungen zu Kategorien des D2U Veranstaltungen Addons.</li>
 			<li>Modul 06-1 "YouTube Video einbinden" auf youtube-nocookie.com umgestellt.</li>
-			<li>Modul 11-1 "YForm Kontaktformular": Übersetzungsfehler korrigiert.</li>
+			<li>Modul 11-1 "YForm Kontaktformular": Übersetzungsfehler korrigiert und an YForm 3.4 angepasst.</li>
 			<li>Modul 12-1 "YFeed Stream Galerie" auf das Addon Feeds aktualisiert. Neuer Name: "Feeds Stream Galerie".</li>
 			<li>Modul 13-1 "Lauftext": Anzahl Sekunden in der der Lauftext durchlaufen soll kann eingestellt werden.</li>
 			<li>Modul 14-1 "Search It Suchmodul" hinzugefügt.</li>
