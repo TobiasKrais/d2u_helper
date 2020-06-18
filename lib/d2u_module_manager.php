@@ -215,8 +215,26 @@ class D2UModuleManager {
 	}
 	
 	/**
-	 * Get Redaxo Modules.
-	 * @param bool If TRUE, only non d2u modules (unpaired modules) are returned.
+	 * Get paired module ids. 
+	 * @return string[] Paired module ids. Key is Redaxo module id, value is 
+	 * D2U module id.
+	 */
+	public static function getModulePairs() {
+		$paired_modules = [];
+		$query_paired = 'SELECT id FROM `'. \rex::getTablePrefix() .'module` WHERE `key` LIKE "d2u_%"';
+		$result_paired = rex_sql::factory();
+		$result_paired->setQuery($query_paired);
+		for($i = 0; $i < $result_paired->getRows(); $i++) {
+			$paired_modules[$result_paired->getValue('id')] = str_replace('d2u_', '', $result_paired->getValue("key"));
+			$result_paired->next();
+		}
+
+		return $paired_modules;
+	}
+	
+	/**
+	 * Gets Redaxo Modules.
+	 * @param bool If TRUE, only unpaired modules are returned.
 	 * @return string[] Redaxo modules. Key ist the module ID, value ist the module name
 	 */
 	public static function getRexModules($unpaired_only = FALSE) {
