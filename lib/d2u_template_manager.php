@@ -480,6 +480,7 @@ class D2UTemplate {
 		
 		$insertmod = rex_sql::factory();
 		$insertmod->setTable(\rex::getTablePrefix() . 'template');
+        $insertmod->setValue('key', "d2u_". $this->d2u_template_id);
         $insertmod->setValue('name', $this->d2u_template_id ." ". $this->name);
 		$insertmod->setValue('content', file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_FILE));
 		$insertmod->setValue('active', 1);
