@@ -5,11 +5,9 @@ $d2u_module_manager = new D2UModuleManager(D2UModuleManager::getModules());
 $d2u_module_id = rex_request('d2u_module_id', 'string');
 $paired_module = rex_request('pair_'. $d2u_module_id, 'int');
 $function = rex_request('function', 'string');
-dump($d2u_module_manager);
 if($d2u_module_id != "") {
 	$d2u_module_manager->doActions($d2u_module_id, $function, $paired_module);
 }
-dump($d2u_module_manager);
 
 // D2UModuleManager show list
 $d2u_module_manager->showManagerList();

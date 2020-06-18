@@ -35,7 +35,7 @@ class D2UTemplateManager {
 	 * @param string $addon_key Redaxo Addon name template belongs to, default "d2u_helper"
 	 */
 	public function __construct($d2u_templates, $template_folder = "", $addon_key = "d2u_helper") {
-		$template_folder = $template_folder == "" ? D2UTemplateManager::TEMPLATE_FOLDER : $template_folder;
+		$template_folder = $template_folder ?: D2UTemplateManager::TEMPLATE_FOLDER;
 		$this->template_addon = rex_addon::get($addon_key);
 		$this->template_folder = $this->template_addon->getPath($template_folder);
 		// Path during addon update
