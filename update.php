@@ -1,4 +1,20 @@
 <?php
+/*
+ *  Update modules
+ */
+// Move module config from rex_config to rex_module
+$sql = rex_sql::factory();
+$sql->setQuery("SELECT * FROM `". rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
+foreach ($sql->getArray() as $result) {
+	$attributes = json_decode($result['value'], true);
+
+	$sql_module = rex_sql::factory();
+	$sql_module->setQuery("UPDATE `". rex::getTablePrefix() ."module` "
+		. "SET `key` = '". str_replace("module_", "d2u_", $result['key'])."', attributes = '". json_encode(["autoupdate" => $attributes['autoupdate']]) ."'"
+		. "where id = ". $attributes['rex_module_id']);
+}
+$sql->setQuery("DELETE FROM `". rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
+ 
 // Update modules
 if(class_exists('D2UModuleManager')) {
 	$modules = [];
@@ -131,7 +147,6 @@ if (!$this->hasConfig('show_breadcrumbs')) {
 }
 
 // Media Manager media types
-$sql = rex_sql::factory();
 $sql->setQuery("SELECT * FROM ". \rex::getTablePrefix() ."media_manager_type WHERE name = 'd2u_helper_gallery_thumb'");
 if($sql->getRows() == 0) {
 	$sql->setQuery("INSERT INTO ". \rex::getTablePrefix() ."media_manager_type (`status`, `name`, `description`) VALUES
