@@ -232,16 +232,17 @@ class d2u_addon_frontend_helper {
 	
 	/**
 	 * Get CSS stuff from modules as one string
+	 * @param string $addon_key If set, only CSS for modules of this addon are returned
 	 * @return string CSS
 	 */
-	public static function getModulesCSS() {
+	public static function getModulesCSS($addon_key = "") {
 		if(file_exists(rex_path::addonCache('d2u_helper', 'modules.css'))) {
 			// Read from cache
 			return file_get_contents(rex_path::addonCache('d2u_helper', 'modules.css'));
 		}
 		else {
 			// Generate contents
-			$installed_modules = D2UModuleManager::getModulePairs();
+			$installed_modules = D2UModuleManager::getModulePairs($addon_key);
 
 			$css = "";
 			foreach($installed_modules as $installed_module) {

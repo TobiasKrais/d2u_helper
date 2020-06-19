@@ -221,11 +221,15 @@ class D2UModuleManager {
 	 */
 	public static function getModulePairs() {
 		$paired_modules = [];
-		$query_paired = 'SELECT id FROM `'. \rex::getTablePrefix() .'module` WHERE `key` LIKE "d2u_%"';
+		$query_paired = 'SELECT id, attributes FROM `'. \rex::getTablePrefix() .'module` WHERE `key` LIKE "d2u_%"';
 		$result_paired = rex_sql::factory();
 		$result_paired->setQuery($query_paired);
 		for($i = 0; $i < $result_paired->getRows(); $i++) {
-			$paired_modules[$result_paired->getValue('id')] = str_replace('d2u_', '', $result_paired->getValue("key"));
+			$attributes = json_decode($result_paired->getValue("attributes"), true);
+			$paired_modules[$result_paired->getValue('id')] = [
+				'd2u_id' => str_replace('d2u_', '', $result_paired->getValue("key")),
+				'addon_key' => $attributes['addon_key']
+			];
 			$result_paired->next();
 		}
 
@@ -635,7 +639,10 @@ class D2UModule {
 	 */
 	private function setAttributes() {
 		// Autoupdate
-		$params = ["autoupdate" => ($this->isAutoupdateActivated() ? "active" : "inactive")];
+		$params = [
+			"autoupdate" => ($this->isAutoupdateActivated() ? "active" : "inactive"),
+			"addon_key" => $this->rex_addon->getName()
+			];
 
 		$sql = rex_sql::factory();
 		$sql->setQuery("UPDATE ". rex::getTablePrefix() ."module "
@@ -649,7 +656,7 @@ class D2UModule {
 	public function unlink() {
 		$sql = rex_sql::factory();
 		$sql->setQuery("UPDATE ". rex::getTablePrefix() ."module "
-			."SET `key` = NULL "
+			."SET `key` = NULL, attributes = NULL "
 			."WHERE `key` = 'd2u_". $this->d2u_module_id ."'");
 
 		$this->rex_module_id = 0;
