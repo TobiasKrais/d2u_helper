@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.6.2-DEV</p>
 		<ul>
+			<li>TinyMCE 5 als Lieblingseditor hinzugefügt.</li>
 			<li>Benötigt Redaxo >= 5.10, da die neue Klasse rex_version und das neue key Feld in der Modultabelle verwendet wird.</li>
 			<li>Hilfsklassen für URL 2 Addon auf aktuelle Git Version angepasst.</li>
 			<li>d2u_addon_frontend_helper::getBreadcrumbs() gibt für die Startseite kein Breadcrumb mehr zurück.</li>

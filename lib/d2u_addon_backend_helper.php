@@ -94,6 +94,9 @@ class d2u_addon_backend_helper {
 		if(rex_addon::get('tinymce4')->isAvailable()) {
 			$options_editor['tinymce4'] = "TinyMCE 4";
 		}
+		if(rex_addon::get('tinymce5')->isAvailable()) {
+			$options_editor['tinymce5'] = "TinyMCE 5";
+		}
 		return $options_editor;
 	}
 	
@@ -105,6 +108,9 @@ class d2u_addon_backend_helper {
 		$wysiwyg_class = '';
 		if(rex_config::get('d2u_helper', 'editor') == 'tinymce4' && rex_addon::get('tinymce4')->isAvailable()) {
 			$wysiwyg_class = ' tinyMCEEditor';
+		}
+		else if(rex_config::get('d2u_helper', 'editor') == 'tinymce5' && rex_addon::get('tinymce5')->isAvailable()) {
+			$wysiwyg_class = ' tiny5-editor" data-profile="full';
 		}
 		else if(rex_config::get('d2u_helper', 'editor') == 'redactor2' && rex_addon::get('redactor2')->isAvailable()) {
 			$wysiwyg_class = ' redactorEditor2-full';
@@ -466,7 +472,7 @@ class d2u_addon_backend_helper {
 				. '<input type="hidden" name="' . $fieldname . '" value="'. str_replace('"', "'", $value) .'"></dd>';
 		}
 		else { 
-			print '<dd><textarea cols="1" rows="' . $rows . '" class="form-control' . $wysiwyg_class . '" name="' . $fieldname . '"';
+			print '<dd><textarea cols="1" rows="' . $rows . '" class="form-control' . $wysiwyg_class . '" name="' . $fieldname . '" data-lang="de"';
 			// Required can only be activated if WYSIWYG Editor is not activated
 			if ($required && !$use_wysiwyg) {
 				print ' required';
