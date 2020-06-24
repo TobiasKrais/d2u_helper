@@ -221,7 +221,7 @@ class D2UModuleManager {
 	 */
 	public static function getModulePairs() {
 		$paired_modules = [];
-		$query_paired = 'SELECT id, attributes FROM `'. \rex::getTablePrefix() .'module` WHERE `key` LIKE "d2u_%"';
+		$query_paired = 'SELECT id, attributes, `key` FROM `'. \rex::getTablePrefix() .'module` WHERE `key` LIKE "d2u_%"';
 		$result_paired = rex_sql::factory();
 		$result_paired->setQuery($query_paired);
 		for($i = 0; $i < $result_paired->getRows(); $i++) {
