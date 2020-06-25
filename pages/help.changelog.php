@@ -24,6 +24,8 @@
 			<li>Modul 13-1 "Lauftext": Anzahl Sekunden in der der Lauftext durchlaufen soll kann eingestellt werden.</li>
 			<li>Modul 14-1 "Search It Suchmodul" hinzugefügt.</li>
 			<li>Bei Slider Templates 04-1 bis 04-3 ragt der Sliderhintergrund bei wenig Seiteninhalt nicht mehr über den Footer hinaus.</li>
+			<li>Template "04-1 Header Slider Template with Slogan" bindet Cookie Gedöns Dialog ein, wenn das Addon installiert ist.</li>
+			<li>Template "04-1 Header Slider Template with Slogan" verwendet Dropdown Menü als Sprachwähler, wenn mehr als 2 Sprachen online sind.</li>
 			<li>Template "04-2 Header Slider Template" Notice entfernt. Außerdem kann ein eigenes Logo für den Footer festgelegt werden, das auf schmalen Bildschirmen unterhalb der Footer Links dargestellt wird.</li>
 		</ul>
 		<p>1.6.1</p>
