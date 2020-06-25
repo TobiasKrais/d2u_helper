@@ -82,6 +82,7 @@ class d2u_mobile_navi_smartmenus {
 			}	
 		}
 		
+		print '</ul>';
 		print '<script type="text/javascript">
 	$(function() {
 		$("#main-menu").smartmenus({
