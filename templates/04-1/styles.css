@@ -108,11 +108,7 @@ nav {
 	max-width: 100%;
 	width: 250px;
 }
-@media screen and (min-width: 1200px) {
-	.navi-row {
-		padding-top: 41px;
-	}
-}
+
 /* Header*/
 header {
 	overflow: hidden;
