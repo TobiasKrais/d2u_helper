@@ -12,7 +12,7 @@
 }
 .h_toggle {
 	float: right;
-	padding: 0 1em;
+	padding-left:1em;
 }
 .icon_down::before {
 	content: "\f078";
