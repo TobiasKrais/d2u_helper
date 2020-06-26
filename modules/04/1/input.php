@@ -143,7 +143,7 @@ else {
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[6]" class="form-control">
 			<?php
-			foreach (array(HYBRID, ROADMAP, SATELLITE, TERRAIN) as $value) {
+			foreach (['HYBRID', 'ROADMAP', 'SATELLITE', 'TERRAIN'] as $value) {
 				echo '<option value="'.$value.'" ';
 	
 				if ( "REX_VALUE[6]"=="$value" ) {

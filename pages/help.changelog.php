@@ -17,6 +17,7 @@
 			<li>Template Installation Empfehlung für email_obfuscator auf emailobfuscator Addon geändert.</li>
 			<li>Modul 02-1 "Überschrift". Überschriften werden mit einer eigenen Klasse ihres Grades versehen (z.B. mit der Klasse "h1" oder "h2".</li>
 			<li>Modul 03-1 "Bild" gibt Bild nur noch aus, wenn es auch im Medienpool vorhanden ist.</li>
+			<li>Modul 04-1 "Google Maps" PHP Warnung in Moduleingab behoben.</li>
 			<li>Modul 05-1 "Artikelweiterleitung" beherrscht nun auch Weiterleitungen zu Kategorien des D2U Veranstaltungen Addons.</li>
 			<li>Modul 06-1 "YouTube Video einbinden" auf youtube-nocookie.com umgestellt.</li>
 			<li>Modul 11-1 "YForm Kontaktformular": Übersetzungsfehler korrigiert und an YForm 3.4 angepasst.</li>

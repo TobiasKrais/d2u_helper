@@ -41,7 +41,7 @@ if(class_exists('D2UModuleManager')) {
 		7);
 	$modules[] = new D2UModule("04-1",
 		"Google Maps",
-		9);
+		10);
 	$modules[] = new D2UModule("05-1",
 		"Artikelweiterleitung",
 		10);
