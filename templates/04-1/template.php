@@ -286,7 +286,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 									// Slogan
 									$slogan_text = $this->getValue('art_slogan') != "" ? $this->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId());
 									$slogan = '<span class="slogan-text-row">'. str_replace('<br>', '</span><span class="slogan-text-row">', nl2br($slogan_text, FALSE)) .'</span>';
-									if($slogan != "") {
+									if($slogan_text != "") {
 										print '<div class="slogan"><div class="container"><span class="slogan-text">'. $slogan .'</span></div></div>';
 									}
 									print '</div>';
@@ -452,44 +452,33 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	</article>
 	<footer class="d-print-none">
 		<div class="container footer">
-			<div class="row">
+			<div class="row align-items-center">
 				<?php
-					print '<div class="col-12 col-md-6 col-lg-8">';
+					// Article links
+					print '<div class="col-12 col-md-4 col-lg-4">';
+					$rex_articles = rex_article::getRootArticles(true);
+					foreach($rex_articles as $rex_article) {
+						print '<p><span class="fa-icon fa-link footer-icon"></span><a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a></p>';
+					}
+					if(rex_addon::get('iwcc')->isAvailable()) {
+						print '<p><span class="fa-icon fa-link footer-icon"></span><a class="iwcc-show-box">'. $tag_open .'iwcc_template_edit_cookiesettings'. $tag_close .'</a></p>';
+					}
+					print '</div>';
+
 					// Logo
+					print '<div class="col-12 col-md-4 col-lg-4 text-md-center">';
 					if($d2u_helper->getConfig("template_04_1_footer_logo", "") != "") {
-							print '<div class="row">';
-							print '<div class="col-12 col-sm-6">';
 							print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
 							$media_logo = rex_media::get($d2u_helper->getConfig("template_04_1_footer_logo"));
 							if($media_logo instanceof rex_media) {
 								print '<img src="'. rex_url::media($d2u_helper->getConfig("template_04_1_footer_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer">';
 							}
 							print '</a>';
-							print '</div>';
-							print '</div>';
 					}
-					// Article links
-					$rex_articles = rex_article::getRootArticles(true);
-					print '<div class="row">';
-					print '<div class="col-12"><br>';
-					$delimiter = FALSE;
-					foreach($rex_articles as $rex_article) {
-						if($delimiter) {
-							print '  |  ';
-						}
-						else {
-							$delimiter = TRUE;
-						}
-						print '<a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a>';
-					}
-					print '  |  <a class="iwcc-show-box">'. $tag_open .'iwcc_template_edit_cookiesettings'. $tag_close .'</a>';
-					print '</div>';
-					print '</div>';
 					print '</div>';
 
 					// Custom field
 					if($d2u_helper->getConfig("template_04_1_footer_text_clang_". rex_clang::getCurrentId(), "") != "") {
-						print '<div class="col-12 d-block d-md-none"><br><br></div>';
 						print '<div class="col-12 col-md-6 col-lg-4">';
 						print '<p class="text-md-right">'. nl2br($d2u_helper->getConfig("template_04_1_footer_text_clang_". rex_clang::getCurrentId(), "")) .'</p>';
 						print '</div>';

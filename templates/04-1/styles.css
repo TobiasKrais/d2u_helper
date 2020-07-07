@@ -292,7 +292,6 @@ article strong, article b {
 footer {
 	background-color: footer_color_bg;
 	color: white;
-	font-size: 0.75em;
 	padding: 1em;
 }
 .footer a {
@@ -302,6 +301,9 @@ footer {
 	color: white;
 	text-decoration: underline;
 }
+.footer p {
+	margin-bottom: 5px;
+}
 .footerbox {
 	background-color: footer_color_box;
 	margin-bottom: 1em;
@@ -309,6 +311,28 @@ footer {
 }
 #logo-footer {
 	float: right;
+}
+.fa-envelope:before {
+	content: "\f0e0";
+}
+.fa-fax:before {
+	content: "\f1ac";
+}
+.fa-phone:before {
+	content: "\f095";
+}
+.fa-user:before {
+	content: "\f007";
+}
+.fa-mobile:before {
+	content: "\f10b";
+}
+.fa-link:before {
+	content: "\f054";
+}
+.footer-icon {
+	display: inline-block;
+	width: 1.5em;
 }
 
 .btn-primary {
