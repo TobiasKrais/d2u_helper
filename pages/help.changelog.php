@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.6.2-DEV</p>
+		<p>1.7.0</p>
 		<ul>
 			<li>TinyMCE 5 als Lieblingseditor hinzugefügt.</li>
 			<li>Benötigt Redaxo >= 5.10, da die neue Klasse rex_version und das neue key Feld in der Modultabelle verwendet wird.</li>
