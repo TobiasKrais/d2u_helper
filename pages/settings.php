@@ -15,7 +15,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['custom_css'] = $input_media['custom_css'];
 	$settings['template_header_pic'] = $input_media['template_header_pic'];
 	$settings['template_logo'] = $input_media['template_logo'];
-	$settings['template_logo_2'] = $input_media['template_logo_2'];
+	$settings['template_logo_2'] = isset($input_media['template_logo_2']) ? $input_media['template_logo_2'] : '';
 	$settings['template_print_header_pic'] = isset($input_media['template_print_header_pic']) ? $input_media['template_print_header_pic'] : '';
 	$settings['template_print_footer_pic'] = isset($input_media['template_print_footer_pic']) ? $input_media['template_print_footer_pic'] : '';
 	$settings['template_04_2_facebook_icon'] = isset($input_media['template_04_2_facebook_icon']) ? $input_media['template_04_2_facebook_icon'] : '';
@@ -25,7 +25,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 
 	$input_media_list = (array) rex_post('REX_INPUT_MEDIALIST', 'array', []);
 	foreach(rex_clang::getAllIds() as $clang_id) {
-		$settings['template_04_header_slider_pics_clang_'. $clang_id] = $input_media_list[$clang_id];
+		$settings['template_04_header_slider_pics_clang_'. $clang_id] = isset($input_media_list[$clang_id]) ? $input_media_list[$clang_id] : '';
 	}
 
 	// Checkbox also need special treatment if empty

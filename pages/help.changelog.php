@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.7.1-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Notices beim Speichern der Einstellungen entfernt.</li>
 		</ul>
 		<p>1.7.0</p>
 		<ul>
