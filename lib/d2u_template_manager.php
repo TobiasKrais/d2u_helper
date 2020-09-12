@@ -593,6 +593,5 @@ class D2UTemplate {
 		$update->addGlobalUpdateFields();
 		$update->setWhere(['key' => 'd2u_'. $this->d2u_template_id]);
 		$update->update();
-
 	}
 }
