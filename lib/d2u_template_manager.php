@@ -478,23 +478,23 @@ class D2UTemplate {
 			$this->rex_template_id = $rex_template_id;
 		}
 		
-		$insertmod = rex_sql::factory();
-		$insertmod->setTable(\rex::getTablePrefix() . 'template');
-        $insertmod->setValue('key', "d2u_". $this->d2u_template_id);
-        $insertmod->setValue('name', $this->d2u_template_id ." ". $this->name);
-		$insertmod->setValue('content', file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_FILE));
-		$insertmod->setValue('active', 1);
-		$insertmod->setValue('revision', $this->revision);
+		$insert = rex_sql::factory();
+		$insert->setTable(\rex::getTablePrefix() . 'template');
+        $insert->setValue('key', 'd2u_'. $this->d2u_template_id);
+        $insert->setValue('name', $this->d2u_template_id ." ". $this->name);
+		$insert->setValue('content', file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_FILE));
+		$insert->setValue('active', 1);
+		$insert->setValue('revision', $this->revision);
 		if($this->rex_template_id == 0) {
-			$insertmod->addGlobalCreateFields();
-			$insertmod->setValue('attributes', '{"modules":{"1":{"all":"1"}},"ctype":[],"categories":{"all":"1"}}');
-			$insertmod->insert();
-			$this->rex_template_id = $insertmod->getLastId();
+			$insert->addGlobalCreateFields();
+			$insert->setValue('attributes', '{"modules":{"1":{"all":"1"}},"ctype":[],"categories":{"all":"1"}}');
+			$insert->insert();
+			$this->rex_template_id = $insert->getLastId();
 		}
 		else {
-			$insertmod->addGlobalUpdateFields();
-			$insertmod->setWhere(['id' => $this->rex_template_id]);
-			$insertmod->update();
+			$insert->addGlobalUpdateFields();
+			$insert->setWhere(['id' => $this->rex_template_id]);
+			$insert->update();
 		}
 		
 		// save pairing in config
@@ -582,7 +582,17 @@ class D2UTemplate {
 	 * Remove template pair config.
 	 */
 	public function unlink() {
+		// unlink
 		$this->rex_addon->removeConfig("template_". $this->d2u_template_id);
-		$this->rex_template_id = 0;
+		$this->rex_template_id = 0;		
+
+		// remove template key after unlink
+		$update = rex_sql::factory();
+		$update->setTable(\rex::getTablePrefix() . 'template');
+        $update->setValue('key', '');
+		$update->addGlobalUpdateFields();
+		$update->setWhere(['key' => 'd2u_'. $this->d2u_template_id]);
+		$update->update();
+
 	}
 }

@@ -5,6 +5,7 @@
 		<ul>
 			<li>Notices beim Speichern der Einstellungen entfernt.</li>
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" ermöglicht nun auch nur 2 Bilder pro Zeile. Bilder werden nun auch lazy geladen.</li>
+			<li>Bugfix: beim Aufheben einer Verknüpfung eines Templates wurde der Template Key nicht gelöscht.</li>
 		</ul>
 		<p>1.7.0</p>
 		<ul>
