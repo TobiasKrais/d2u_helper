@@ -25,14 +25,18 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_name' => 'Please enter your full name.',
 		'd2u_helper_module_11_validate_phone' => 'Please enter your phone number.',
 		'd2u_helper_module_11_validate_privacy_policy' => 'It\'s necessary to accept the privacy policy.',
-		'd2u_helper_module_11_validate_spambots' => 'Too fast - it seems you are a spambot. Please take your time to fill out all all fields.',
-		'd2u_helper_module_11_validate_spam_detected' => 'Your message was classified as spam, because not visible fields were filled in.',
+		'd2u_helper_module_11_validate_spambots' => 'Too fast - it seems you are a spambot. Please take your time to fill out all all fields or call us.',
+		'd2u_helper_module_11_validate_spam_detected' => 'Your request was recognized as spam and deleted. Please try again in a few minutes or contact us personally.',
 		'd2u_helper_module_11_validate_title' => 'Failure sending message:',
 		'd2u_helper_module_11_zip' => 'ZIP Code',
 		'd2u_helper_module_14_enter_search_term' => 'Enter a search term',
 		'd2u_helper_module_14_search_results' => 'Search results',
 		'd2u_helper_module_14_search_results_none' => 'No search results found.',
 		'd2u_helper_module_14_search_similarity' => 'Similar search with hits',
+		'd2u_helper_module_14_search_template_address' => 'Address',
+		'd2u_helper_module_14_search_template_ceo' => 'Managing director',
+		'd2u_helper_module_14_search_template_contact' => 'Contact',
+		'd2u_helper_module_14_search_template_links' => 'Links',
 	];
 	
 	/**
@@ -58,13 +62,17 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_phone' => 'Veuillez indiquer votre numero téléphone.',
 		'd2u_helper_module_11_validate_privacy_policy' => 'La politique de confidentialité doit être approuvée.',
 		'd2u_helper_module_11_validate_spambots' => 'Vous avez rempli le formulaire aussi vite que seul un spambot peut. S\'il vous plaît, accordez-vous un peu plus de temps pour remplir les champs.',
-		'd2u_helper_module_11_validate_spam_detected' => 'Votre message a été classé comme spam, car des champs non visibles ont été remplis.',
+		'd2u_helper_module_11_validate_spam_detected' => 'Votre demande a été reconnue comme spam et supprimée. Veuillez réessayer dans quelques minutes ou nous contacter personnellement.',
 		'd2u_helper_module_11_validate_title' => 'Erreur lors de l\'envoi:',
 		'd2u_helper_module_11_zip' => 'Code postal',
 		'd2u_helper_module_14_enter_search_term' => 'Entrez le terme de recherche',
 		'd2u_helper_module_14_search_results' => 'Résultats de recherche',
 		'd2u_helper_module_14_search_results_none' => "Aucun résultat de recherche n'a été trouvé.",
 		'd2u_helper_module_14_search_similarity' => 'Recherche similaire avec résultats',
+		'd2u_helper_module_14_search_template_address' => 'Adresse',
+		'd2u_helper_module_14_search_template_ceo' => 'Directeurs généraux',
+		'd2u_helper_module_14_search_template_contact' => 'Contact',
+		'd2u_helper_module_14_search_template_links' => 'Liens',
 	];
 	
 	/**
@@ -90,13 +98,17 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_phone' => 'Bitte geben Sie Ihre Telefonnummer an.',
 		'd2u_helper_module_11_validate_privacy_policy' => 'Der Datenschutzerklärung muss zugestimmt werden.',
 		'd2u_helper_module_11_validate_spambots' => 'Spamverdacht: Sie haben das Formular so schnell ausgefüllt, wie es nur ein Spambot tun kann. Bitte lassen Sie sich beim ausfüllen der Felder etwas mehr Zeit.',
-		'd2u_helper_module_11_validate_spam_detected' => 'Ihr Eintrag wurde als Spam eingestuft, da nicht sichtbare Felder ausgefüllt wurden.',
+		'd2u_helper_module_11_validate_spam_detected' => 'Ihre Anfrage wurde als Spam erkannt und gelöscht. Bitte versuchen Sie es in einigen Minuten erneut oder wenden Sie sich persönlich an uns.',
 		'd2u_helper_module_11_validate_title' => 'Fehler beim Senden:',
 		'd2u_helper_module_11_zip' => 'Postleitzahl',
 		'd2u_helper_module_14_enter_search_term' => 'Suchbegriff eingeben',
 		'd2u_helper_module_14_search_results' => 'Suchergebnisse',
 		'd2u_helper_module_14_search_results_none' => 'Es wurden keine Suchergebnisse gefunden.',
 		'd2u_helper_module_14_search_similarity' => 'Ähnliche Suche mit Treffern',
+		'd2u_helper_module_14_search_template_address' => 'Adresse',
+		'd2u_helper_module_14_search_template_ceo' => 'Geschäftsführung',
+		'd2u_helper_module_14_search_template_contact' => 'Kontakt',
+		'd2u_helper_module_14_search_template_links' => 'Links',
 	];
 	
 	/**
@@ -122,13 +134,17 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_phone' => 'Por favor, introduzca su número de teléfono.',
 		'd2u_helper_module_11_validate_privacy_policy' => 'Se necesita aprobar la política de privacidad.',
 		'd2u_helper_module_11_validate_spambots' => 'Demasiado rápido - pareciera que es un robot. Por favor, tome su tiempo para rellenar todos los datos.',
-		'd2u_helper_module_11_validate_spam_detected' => 'Su mensaje se ha clasificado como spam, ya que se han rellenado campos no visibles',
+		'd2u_helper_module_11_validate_spam_detected' => 'Su solicitud fue reconocida como spam y eliminada. Inténtelo de nuevo en unos minutos o contáctenos personalmente.',
 		'd2u_helper_module_11_validate_title' => 'Fallo al enviar el mensaje:',
 		'd2u_helper_module_11_zip' => 'Código Postal',
 		'd2u_helper_module_14_enter_search_term' => 'Introduzca artículo de búsqueda',
 		'd2u_helper_module_14_search_results' => 'Resultado de búsqueda',
 		'd2u_helper_module_14_search_results_none' => 'Sin resultado de búsqueda',
 		'd2u_helper_module_14_search_similarity' => 'Búsqueda similar',
+		'd2u_helper_module_14_search_template_address' => 'Alocución',
+		'd2u_helper_module_14_search_template_ceo' => 'Directores generales',
+		'd2u_helper_module_14_search_template_contact' => 'Contacto',
+		'd2u_helper_module_14_search_template_links' => 'Enlaces de internet',
 	];
 	
 	/**
@@ -161,6 +177,10 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_search_results' => 'Результаты поиска',
 		'd2u_helper_module_14_search_results_none' => 'Результаты поиска не найдены.',
 		'd2u_helper_module_14_search_similarity' => 'Подобный поиск с хитами',
+		'd2u_helper_module_14_search_template_address' => 'Aдрес',
+		'd2u_helper_module_14_search_template_ceo' => 'Управляющие директора',
+		'd2u_helper_module_14_search_template_contact' => 'Связаться с нами',
+		'd2u_helper_module_14_search_template_links' => 'Интернет-ссылки',
 	];
 	
 	/**
@@ -193,6 +213,10 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_search_results' => '搜索结果',
 		'd2u_helper_module_14_search_results_none' => '找不到搜索结果。',
 		'd2u_helper_module_14_search_similarity' => '与搜寻相似的搜寻',
+		'd2u_helper_module_14_search_template_address' => '地址',
+		'd2u_helper_module_14_search_template_ceo' => '常务董事',
+		'd2u_helper_module_14_search_template_contact' => '联系',
+		'd2u_helper_module_14_search_template_links' => '互联网链接',
 	];
 	
 	/**

@@ -23,6 +23,8 @@
 	$show_gdpr_hint = "REX_VALUE[3]" == 'true' ? TRUE : FALSE;
 
 	// Form
+	$yform = new rex_yform();
+
 	$form_data = 'text|name|'. \Sprog\Wildcard::get('d2u_helper_module_11_name') .' *|||{"required":"required"}'. PHP_EOL;
 	if($ask_address) {
 		$form_data .= 'text|street|'. \Sprog\Wildcard::get('d2u_helper_module_11_street') .'
@@ -30,12 +32,32 @@
 			text|city|'. \Sprog\Wildcard::get('d2u_helper_module_11_city') . PHP_EOL;
 	}
 	$form_data .= 'text|phone|'. \Sprog\Wildcard::get('d2u_helper_module_11_phone') .' *|||{"required":"required"}
-		text|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_email') .' *|||{"required":"required"}
+		text|email|'. \Sprog\Wildcard::get('d2u_helper_module_11_email') .' *|||{"required":"required"}';
 			
-		html|honeypot||<div class="hide-validation">
-		text|mailvalidate|'. $tag_open .'d2u_helper_module_11_email'. $tag_close .'||no_db
-		validate|compare_value|mailvalidate||!=|'. $tag_open .'d2u_helper_module_11_validate_spam_detected'. $tag_close .'|
-		html|honeypot||</div>
+	if(rex_addon::get('yform_spam_protection')->isAvailable()) {
+		$form_data .= '
+			spam_protection|honeypot|Bitte nicht ausfüllen|'. $tag_open .'d2u_helper_module_11_validate_spam_detected'. $tag_close .'|0';					
+	}
+	else {
+		// Spam protection
+		$form_data .= '
+			html|honeypot||<div class="hide-validation">
+			text|mailvalidate|'. $tag_open .'d2u_helper_module_11_email'. $tag_close .'||no_db
+			validate|compare_value|mailvalidate||!=|'. $tag_open .'d2u_helper_module_11_validate_spam_detected'. $tag_close .'|
+			html|honeypot||</div>';
+		$yform->setValueField('php', [
+			'validate_timer',
+			'spamschutz',
+			'<?php echo \'<input name="validate_timer" type="hidden" value="' . microtime(true) . '" />\' ?>'
+		]);
+		$yform->setValidateField('customfunction', [
+			'validate_timer',
+			'd2u_addon_frontend_helper::yform_validate_timer',
+			'5',
+			\Sprog\Wildcard::get('d2u_helper_module_11_validate_spambots')
+		]);
+	}
+	$form_data .= '
 		textarea|message|'. \Sprog\Wildcard::get('d2u_helper_module_11_message') .' *|||{"required":"required"}'. PHP_EOL;
 	if($show_gdpr_hint) {
 		$form_data .= 'checkbox|privacy_policy_accepted|'. \Sprog\Wildcard::get('d2u_helper_module_11_privacy_policy') .' *|0,1|0' . PHP_EOL;
@@ -57,21 +79,7 @@
 	// Prevent setting a cookie
 //	$form_data .= 'objparams|csrf_protection|0';
 
-	$yform = new rex_yform();
 	$yform->setFormData(trim($form_data));
-
-	// Spam protection
-	$yform->setValueField('php', [
-        'validate_timer',
-        'spamschutz',
-        '<?php echo \'<input name="validate_timer" type="hidden" value="' . microtime(true) . '" />\' ?>'
-    ]);
-	$yform->setValidateField('customfunction', [
-        'validate_timer',
-        'd2u_addon_frontend_helper::yform_validate_timer',
-        '5',
-        \Sprog\Wildcard::get('d2u_helper_module_11_validate_spambots')
-    ]);
 
 	$yform->setObjectparams("form_action", rex_getUrl(rex_article::getCurrentId()));
 	$yform->setObjectparams("Error-occured", \Sprog\Wildcard::get('d2u_helper_module_11_validate_title'));
