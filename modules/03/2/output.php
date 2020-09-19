@@ -21,7 +21,10 @@
 	// Number pics per row
 	$number_pics = "REX_VALUE[1]";
 	$pics_cols = 'col-6';
-	if ($number_pics == "2") {
+	if ($number_pics == "1") {
+		$pics_cols = 'col-12';
+	}
+	else if ($number_pics == "2") {
 		$pics_cols .= ' col-sm-6';
 	}
 	else if ($number_pics == "3") {
@@ -72,7 +75,7 @@
 				if($media instanceof rex_media) {
 					print '<a href="index.php?rex_media_type='. $type_detail .'&rex_media_file='. $pic .'" data-toggle="lightbox'. $lightbox_id .'" data-gallery="example-gallery'. $lightbox_id .'" class="'. $pics_cols .'"'
 						.' data-title="'. $media->getValue('title') .'">';
-		            print '<img src="index.php?rex_media_type='. $type_thumb .'&rex_media_file='. $pic .'" class="img-fluid gallery-pic-box"'
+		            print '<img src="'. ($number_pics == 1 ? rex_url::media($pic) : 'index.php?rex_media_type='. $type_thumb .'&rex_media_file='. $pic) .'" class="img-fluid gallery-pic-box"'
 						.' alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'" loading="lazy">';
 					print '</a>';
 				}

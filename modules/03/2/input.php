@@ -115,7 +115,7 @@
 	<div class="col-xs-6">
 		<select name="REX_INPUT_VALUE[1]" class="form-control">
 		<?php
-		$values = [6=>"6 Bilder", 4=>"4 Bilder", 3=>"3 Bilder", 2=>"2 Bilder"];
+		$values = [6=>"6 Bilder", 4=>"4 Bilder", 3=>"3 Bilder", 2=>"2 Bilder", 1=>"1 Bild"];
 		foreach($values as $key => $value) {
 			echo '<option value="'. $key .'" ';
 	
