@@ -1,0 +1,56 @@
+/* Footer links address contact logo CSS */
+footer {
+	background-color: footer_color_bg;
+	padding: 1em;
+}
+footer a {
+	color: footer_color_font;
+}
+footer a:hover {
+	color: footer_color_font;
+	text-decoration: underline;
+}
+footer p {
+    margin-bottom: 5px;
+}
+.footer-title {
+	border-bottom: 1px solid footer_color_box;
+	margin-bottom: 10px;
+}
+#logo-footer {
+	float: none !important;
+	padding-bottom: 1em;
+}
+#footer-address, #footer-address a {
+	color: footer_color_font;
+	line-height: 1.75rem;
+	margin-bottom: 1em;
+}
+.fa-envelope:before {
+	content: "\f0e0";
+}
+.fa-facebook:before {
+	content: "\f230";
+}
+.fa-fax:before {
+	content: "\f1ac";
+}
+.fa-link:before {
+	content: "\f054";
+}
+.fa-mobile:before {
+	content: "\f10b";
+}
+.fa-phone:before {
+	content: "\f095";
+}
+.fa-user:before {
+	content: "\f007";
+}
+.footer-icon {
+	display: inline-block;
+	width: 1.5em;
+}
+.footer-logo-col {
+	text-align: center;
+}

@@ -9,21 +9,10 @@ function printTemplate04_3Navi() {
 	print '</div>';
 
 	// Languages
-	$clangs = rex_clang::getAll(TRUE);
-	if(count($clangs) > 1) {
-		print '<div id="langchooser" class="desktop-inner">';
-		$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
-		foreach ($clangs as $clang) {
-			if($clang->getId() != rex_clang::getCurrentId()) {
-				print '<a href="'. (isset($alternate_urls[$clang->getId()]) ? $alternate_urls[$clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $clang->getId())) .'">';
-				if($clang->getValue('clang_icon') != "") {
-					print '<img src="'. rex_url::media($clang->getValue('clang_icon')) .'" alt="'. $clang->getName() .'">';
-				}
-				print '</a>';							
-			}
-		}
-		print '</div>';
-	}
+	print '<div id="lang_chooser_div">';
+	$fragment = new rex_fragment();
+	echo $fragment->parse('d2u_template_language_modal.php');
+	print '</div>';
 }
 
 // Get placeholder wildcard tags
@@ -502,22 +491,10 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	</article>
 	<footer class="d-print-none">
 		<div class="container footer">
-			<div class="row">
-				<?php
-					print '<div class="col-12">';
-					$rex_articles = rex_article::getRootArticles(true);
-					print '<div class="row">';
-					foreach($rex_articles as $rex_article) {
-						print '<div class="col-md-6 col-lg-4">';
-						print '<div class="footerbox">';
-						print '<a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a>';
-						print '</div>';
-						print '</div>';
-					}
-					print '</div>';
-					print '</div>';
-				?>
-			</div>
+			<?php
+				$fragment = new rex_fragment();
+				echo $fragment->parse('d2u_template_footer.php');
+			?>
 		</div>
 	</footer>
 	<script>

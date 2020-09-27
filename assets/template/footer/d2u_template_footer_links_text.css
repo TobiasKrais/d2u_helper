@@ -1,0 +1,24 @@
+/* Footer links with free text CSS */
+footer {
+	background-color: footer_color_bg;
+	color: footer_color_font;
+	padding: 10px 20px 9px 20px;
+}
+footer a {
+	color: footer_color_font;
+}
+footer a:hover {
+	color: footer_color_font;
+	text-decoration: underline;
+}
+.footerbox {
+	background-color: footer_color_box;
+	float: left;
+	margin: 0 1em 1em 0;
+	padding: 0.25em 0.5em 0.25em 0;
+}
+@media screen and (max-width: 767px) {
+	footer h2 {
+		font-size: 1.5em;
+	}
+}

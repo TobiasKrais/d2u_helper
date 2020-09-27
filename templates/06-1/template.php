@@ -39,6 +39,15 @@
 				</header>
 				<div class="row">
 					<div class="col-12 col-lg-3">
+						<?php
+							// Languages
+							$fragment = new rex_fragment();
+							if(count(rex_clang::getAllIds(true)) > 1) {
+								print '<div id="lang_chooser_div">';
+								echo $fragment->parse('d2u_template_language_modal.php');
+								print '</div>';
+							}
+						?>
 						<navi>
 							<?php
 								if(rex_addon::get('d2u_helper')->isAvailable()) {

@@ -103,34 +103,34 @@ if(class_exists('D2UTemplateManager')) {
 	$d2u_templates = [];
 	$d2u_templates[] = new D2UTemplate("00-1",
 		"Big Header Template",
-		13);
+		14);
 	$d2u_templates[] = new D2UTemplate("01-1",
 		"Side Picture Template",
-		5);
+		6);
 	$d2u_templates[] = new D2UTemplate("02-1",
 		"Header Pic Template",
-		8);
+		9);
 	$d2u_templates[] = new D2UTemplate("03-1",
 		"Immo Template - 2 Columns",
-		6);
+		7);
 	$d2u_templates[] = new D2UTemplate("03-2",
 		"Immo Window Advertising Template",
 		6);
 	$d2u_templates[] = new D2UTemplate("04-1",
 		"Header Slider Template with Slogan",
-		5);
+		6);
 	$d2u_templates[] = new D2UTemplate("04-2",
 		"Header Slider Template",
-		10);
+		11);
 	$d2u_templates[] = new D2UTemplate("04-3",
 		"Header Slider Template with news column",
-		3);
+		4);
 	$d2u_templates[] = new D2UTemplate("05-1",
 		"Double Logo Template",
-		6);
+		7);
 	$d2u_templates[] = new D2UTemplate("06-1",
 		"Paper Sheet Template",
-		1);
+		2);
 	$d2u_templates[] = new D2UTemplate("99-1",
 		"Feed Generator",
 		1);
@@ -257,6 +257,55 @@ if($this->hasConfig('activate_rewrite_scheme')) {
 	foreach (rex_clang::getAll() as $rex_clang) {
 		if($this->hasConfig('rewrite_scheme_clang_'. $rex_clang->getId())) {
 			$this->removeConfig('rewrite_scheme_clang_'. $rex_clang->getId());
+		}
+	}
+}
+// Update to 1.8
+if($this->hasConfig('template_02_1_footer_text')) {
+	$this->setConfig('footer_text', $this->getConfig('template_02_1_footer_text'));
+	$this->removeConfig('template_02_1_footer_text');
+}
+if($this->hasConfig('template_04_1_footer_logo')) {
+	$this->setConfig('footer_logo', $this->getConfig('template_04_1_footer_logo'));
+	$this->removeConfig('template_04_1_footer_logo');
+}
+if($this->hasConfig('template_04_2_facebook_link')) {
+	$this->setConfig('footer_facebook_link', $this->getConfig('template_04_2_facebook_link'));
+	$this->removeConfig('template_04_2_facebook_link');
+}
+if($this->hasConfig('template_04_2_facebook_icon')) {
+	$this->setConfig('footer_facebook_icon', $this->getConfig('template_04_2_facebook_icon'));
+	$this->removeConfig('template_04_2_facebook_icon');
+}
+if (rex_version::compare($this->getVersion(), '1.8.0', '<')) {
+	$d2u_templates = D2UTemplateManager::getD2UHelperTemplates();
+	if(!$this->hasConfig('footer_color_font')) {
+		$this->setConfig('footer_color_font', '#ffffff');
+		foreach ($d2u_templates as $d2u_template) {
+			if($d2u_template->getD2UId() === "05-1" && $d2u_template->isInstalled()) {
+				$this->setConfig('footer_color_font', $this->getConfig('navi_color_bg'));
+			}
+			else if($d2u_template->getD2UId() === "06-1" && $d2u_template->isInstalled()) {
+				$this->setConfig('footer_color_font', '#777777');
+			}
+		}
+	}
+	// set footer type
+	foreach ($d2u_templates as $d2u_template) {
+		if(($d2u_template->getD2UId() === "00-1" && $d2u_template->isInstalled()) ||
+			($d2u_template->getD2UId() === "01-1" && $d2u_template->isInstalled()) ||
+			($d2u_template->getD2UId() === "04-3" && $d2u_template->isInstalled())) {
+			$this->setConfig('footer_type', 'box');
+		}
+		else if($d2u_template->getD2UId() === "02-1" && $d2u_template->isInstalled() ||
+			$d2u_template->getD2UId() === "03-1" && $d2u_template->isInstalled()) {
+			$this->setConfig('footer_type', 'links_text');
+		}
+		else if($d2u_template->getD2UId() === "04-1" && $d2u_template->isInstalled()) {
+			$this->setConfig('footer_type', 'links_logo_address');
+		}
+		else if($d2u_template->getD2UId() === "04-2" && $d2u_template->isInstalled()) {
+			$this->setConfig('footer_type', 'box_logo');
 		}
 	}
 }

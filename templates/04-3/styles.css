@@ -44,6 +44,9 @@ nav.bottom {
 .navigation a {
 	text-decoration: none !important;
 }
+.navi {
+	float: left;
+}
 .desktop-inner {
 	padding: 15px 20px;
 }
@@ -63,22 +66,8 @@ nav.bottom {
 .dl-menuwrapper .dl-menu.dl-menuopen {
 	font-size: 0.8em;
 }
-#langchooser {
-	padding: 15px 20px 5px 20px;
-}
-@media (min-width: navi-min-width) {
-	#langchooser {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		z-index: 10000;
-	}
-}
-#langchooser img {
-	margin: 0 10px 12px 0;
-}
-#langchooser a {
-	color: white;
+#lang_chooser_div {
+	padding-top: 10px;
 }
 #mobile-menu {
 	margin-bottom: 15px;
@@ -211,26 +200,6 @@ article .form-group {
 	padding-bottom: 2em;
 }
 
-footer {
-	background-color: footer_color_bg;
-	padding: 1em;
-}
-.footer a {
-	color: white;
-}
-.footer a:hover {
-	color: white;
-	text-decoration: underline;
-}
-.footerbox {
-	background-color: footer_color_box;
-	margin-bottom: 1em;
-	padding: 5px 1em;
-}
-#logo-footer {
-	float: right;
-}
-
 .btn-primary {
 	background-color: article_color_h !important;
 	border: none !important;
@@ -251,15 +220,6 @@ footer {
 }
 .newsbox .newshead, .newsbox .newshead a {
 	color: white;
-}
-
-/* YForm Captcha */
-.input-group-addon {
-	min-width: 150px;
-	padding: 0px !important;
-}
-.input-group-addon img {
-	height: 100%;
 }
 
 /* Machinery Addon */

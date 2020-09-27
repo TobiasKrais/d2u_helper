@@ -45,6 +45,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 		</div>
 		<?php
 			}
+			$fragment = new rex_fragment();
 			// Navi if above header picture
 			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') {
 				print '<div class="row">';
@@ -56,6 +57,11 @@ $d2u_helper = rex_addon::get("d2u_helper");
 				print '</div>';
 				print '</div>';
 				print '</nav>';
+				// Languages
+				print '<div id="lang_chooser_div">';
+				echo $fragment->parse('d2u_template_language_modal.php');
+				print '</div>';
+				
 				print '</div>';
 				print '</div>';
 			}
@@ -88,6 +94,11 @@ $d2u_helper = rex_addon::get("d2u_helper");
 				print '</div>';
 				print '</div>';
 				print '</nav>';
+				// Languages
+				print '<div id="lang_chooser_div">';
+				echo $fragment->parse('d2u_template_language_modal.php');
+				print '</div>';
+				
 				print '</div>';
 				print '</div>';
 			}
@@ -120,29 +131,9 @@ $d2u_helper = rex_addon::get("d2u_helper");
 		<div class="row abstand">
 			<div class="col-12">
 				<footer>
-					<div class="row">
-						<?php
-							if($d2u_helper->hasConfig('template_02_1_footer_text') && $d2u_helper->getConfig('template_02_1_footer_text') != "") {
-								print '<div class="col-12 col-md-5 col-lg-7">';
-							}
-							else {
-								print '<div class="col-12">';
-							}
-							$rex_articles = rex_article::getRootArticles(true);
-							foreach($rex_articles as $rex_articles) {
-								print '<div class="footerbox">';
-								print '<a href="'. $rex_articles->getUrl() .'">'. $rex_articles->getName() .'</a>';
-								print '</div>';
-							}
-							print '</div>';
-
-							if($d2u_helper->hasConfig('template_02_1_footer_text') && $d2u_helper->getConfig('template_02_1_footer_text') != "") {
-								print '<div class="col-12 col-md-7 col-lg-5">';
-								print '<h2>'. $d2u_helper->getConfig('template_02_1_footer_text') .'</h2>';
-								print '</div>';
-							}
-						?>
-					</div>
+					<?php
+						echo $fragment->parse('d2u_template_footer.php');
+					?>
 				</footer>
 			</div>
 		</div>

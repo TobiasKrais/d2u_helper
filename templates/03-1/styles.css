@@ -59,6 +59,7 @@ h1.subhead {
 nav {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
+	float: left;
 }
 nav a {
 	text-decoration: none;
@@ -78,6 +79,12 @@ nav a {
 }
 .dl-menuopen a:hover {
 	text-decoration: underline;
+}
+#lang_chooser_div {
+	float: right;
+}
+#lang_chooser_button {
+	margin-top: 10px;
 }
 
 article {
@@ -138,10 +145,10 @@ footer {
 	padding: 10px 20px 9px 20px;
 }
 footer a {
-	color: white;
+	color: footer_color_font;
 }
 footer a:hover {
-	color: white;
+	color: footer_color_font;
 	text-decoration: underline;
 }
 .footerbox {

@@ -137,6 +137,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-6 col-xl-2" id="navi-inner-frame">
+					<?php
+						// Languages
+						print '<div id="lang_chooser_div">';
+						$fragment = new rex_fragment();
+						echo $fragment->parse('d2u_template_language_modal.php');
+						print '</div>';
+					?>
 					<navi>
 						<div id="navi_desktop"></div>
 						<script>

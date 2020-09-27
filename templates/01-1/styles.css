@@ -63,6 +63,9 @@ nav {
 nav a {
 	text-decoration: none !important;
 }
+.navi {
+	float: left;
+}
 .desktop-inner {
 	font-weight: bold;
 	padding: 15px 20px;
@@ -76,6 +79,12 @@ nav a {
 }
 .desktop-navi.current, .desktop-navi li.current {
 	background: rgba(255, 255, 255, 0.25);
+}
+#lang_chooser_div {
+	float: right;
+}
+#lang_chooser_button {
+	margin-top: 10px;
 }
 
 article {
@@ -106,34 +115,8 @@ article h3 {
 section {
 	font-family: 'Arial', sans-serif;
 }
-footer {
-	background-color: footer_color_bg;
-	font-family: 'Arial', sans-serif;
-	padding: 1em 1em 0 1em;
-}
-footer a {
-	color: white;
-}
-footer a:hover {
-	color: white;
-	text-decoration: underline;
-}
-.footerbox {
-	background-color: footer_color_box;
-	margin-bottom: 1em;
-	padding: 5px 1em;
-}
 
 .btn-primary {
 	background-color: article_color_h !important;
 	border: none !important;
-}
-
-/* YForm Captcha */
-.input-group-addon {
-	min-width: 150px;
-	padding: 0px !important;
-}
-.input-group-addon img {
-	height: 100%;
 }

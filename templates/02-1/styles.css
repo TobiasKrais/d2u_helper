@@ -63,6 +63,7 @@ h1.subhead {
 nav {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
+	float: left;
 }
 nav a {
 	text-decoration: none !important;
@@ -85,6 +86,12 @@ nav a {
 }
 .desktop-navi.current, .desktop-navi li.current {
 	background: rgba(255, 255, 255, 0.25);
+}
+#lang_chooser_div {
+	float: right;
+}
+#lang_chooser_button {
+	margin-top: 10px;
 }
 
 article {
@@ -127,43 +134,9 @@ article .btn-primary {
 	border-color: article_color_h;
 }
 
-
-footer {
-	background-color: footer_color_bg;
-	color: white;
-	padding: 10px 20px 9px 20px;
-}
-footer a {
-	color: white;
-}
-footer a:hover {
-	color: white;
-	text-decoration: underline;
-}
-.footerbox {
-	background-color: footer_color_box;
-	float: left;
-	margin: 0 1em 1em 0;
-	padding: 0.25em 0.5em 0.25em 0;
-}
-@media screen and (max-width: 767px) {
-	footer h2 {
-		font-size: 1.5em;
-	}
-}
-
 .btn-primary {
 	background-color: article_color_h !important;
 	border: none !important;
-}
-
-/* YForm Captcha */
-.input-group-addon {
-	min-width: 150px;
-	padding: 0px !important;
-}
-.input-group-addon img {
-	height: 100%;
 }
 
 /* Other stuff */

@@ -1,0 +1,20 @@
+/* Footer Box + Logo CSS */
+footer {
+	background-color: footer_color_bg;
+	padding: 1em;
+}
+.footer a {
+	color: footer_color_font;
+}
+.footer a:hover {
+	color: footer_color_font;
+	text-decoration: underline;
+}
+.footerbox {
+	background-color: footer_color_box;
+	margin-bottom: 1em;
+	padding: 5px 1em;
+}
+#logo-footer {
+	float: right;
+}

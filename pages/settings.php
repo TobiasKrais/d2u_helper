@@ -19,7 +19,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['template_print_header_pic'] = isset($input_media['template_print_header_pic']) ? $input_media['template_print_header_pic'] : '';
 	$settings['template_print_footer_pic'] = isset($input_media['template_print_footer_pic']) ? $input_media['template_print_footer_pic'] : '';
 	$settings['template_04_2_facebook_icon'] = isset($input_media['template_04_2_facebook_icon']) ? $input_media['template_04_2_facebook_icon'] : '';
-	$settings['template_04_1_footer_logo'] = isset($input_media['template_04_1_footer_logo']) ? $input_media['template_04_1_footer_logo'] : '';
+	$settings['footer_logo'] = isset($input_media['footer_logo']) ? $input_media['footer_logo'] : '';
 	$settings['template_03_2_header_pic'] = isset($input_media['template_03_2_header_pic']) ? $input_media['template_03_2_header_pic'] : '';
 	$settings['template_03_2_footer_pic'] = isset($input_media['template_03_2_footer_pic']) ? $input_media['template_03_2_footer_pic'] : '';
 
@@ -146,17 +146,142 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_hover_bg', 'settings[navi_color_hover_bg]', $this->getConfig('navi_color_hover_bg'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_hover_font', 'settings[navi_color_hover_font]', $this->getConfig('navi_color_hover_font'), FALSE, FALSE, "color");
 						print '<hr style="border-top: 1px solid #333">';
+						print '<h3>'. rex_i18n::msg('d2u_helper_settings_article') .'</h3>';
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_breadcrumbs', 'settings[show_breadcrumbs]', 'true', $this->getConfig('show_breadcrumbs') == 'true');
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_subhead_include_articlename', 'settings[subhead_include_articlename]', 'true', $this->getConfig('subhead_include_articlename') == 'true');
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_subhead_color_bg', 'settings[subhead_color_bg]', $this->getConfig('subhead_color_bg'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_subhead_color_font', 'settings[subhead_color_font]', $this->getConfig('subhead_color_font'), FALSE, FALSE, "color");
-						print '<hr style="border-top: 1px solid #333">';
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_bg', 'settings[article_color_bg]', $this->getConfig('article_color_bg'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_h', 'settings[article_color_h]', $this->getConfig('article_color_h'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_box', 'settings[article_color_box]', $this->getConfig('article_color_box'), FALSE, FALSE, "color");
+
 						print '<hr style="border-top: 1px solid #333">';
+						print '<h3>'. rex_i18n::msg('d2u_helper_settings_footer') .'</h3>';
+						$options_footer = [
+							'box' => rex_i18n::msg('d2u_helper_settings_footer_type_option_box'),
+							'box_logo' => rex_i18n::msg('d2u_helper_settings_footer_type_option_box_logo'),
+							'links_logo_address' => rex_i18n::msg('d2u_helper_settings_footer_type_option_links_logo_address'),
+							'links_address_contact_logo' => rex_i18n::msg('d2u_helper_settings_footer_type_option_links_address_contact_logo'),
+							'links_text' => rex_i18n::msg('d2u_helper_settings_footer_type_option_links_text'),
+						];
+						d2u_addon_backend_helper::form_select('d2u_helper_settings_footer_type', 'settings[footer_type]', $options_footer, [$this->getConfig('footer_type')]);
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_bg', 'settings[footer_color_bg]', $this->getConfig('footer_color_bg'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_box', 'settings[footer_color_box]', $this->getConfig('footer_color_box'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_font', 'settings[footer_color_font]', $this->getConfig('footer_color_font'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_company', 'settings[footer_text_company]', $this->getConfig('footer_text_company'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_ceo', 'settings[footer_text_ceo]', $this->getConfig('footer_text_ceo'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_street', 'settings[footer_text_street]', $this->getConfig('footer_text_street'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_zip_city', 'settings[footer_text_zip_city]', $this->getConfig('footer_text_zip_city'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_phone', 'settings[footer_text_phone]', $this->getConfig('footer_text_phone'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_mobile', 'settings[footer_text_mobile]', $this->getConfig('footer_text_mobile'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_fax', 'settings[footer_text_fax]', $this->getConfig('footer_text_fax'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_email', 'settings[footer_text_email]', $this->getConfig('footer_text_email'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text', 'settings[footer_text]', $this->getConfig('footer_text'), FALSE, FALSE, "text");
+						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_footer_logo', 'footer_logo', $this->getConfig('footer_logo'));
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_facebook_link', 'settings[footer_facebook_link]', $this->getConfig('footer_facebook_link'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_footer_facebook_icon', 'footer_facebook_icon', $this->getConfig('footer_facebook_icon'));
+					?>
+					<script>
+						function footer_type_changer() {
+							selection = $("select[name='settings[footer_type]']").val() ;
+							if (selection === "box") {
+								$("dl[id='settings[footer_color_bg]']").show();
+								$("dl[id='settings[footer_color_box]']").show();
+								$("dl[id='settings[footer_color_font]']").show();
+								$("dl[id='settings[footer_text_company]']").hide();
+								$("dl[id='settings[footer_text_ceo]']").hide();
+								$("dl[id='settings[footer_text_street]']").hide();
+								$("dl[id='settings[footer_text_zip_city]']").hide();
+								$("dl[id='settings[footer_text_phone]']").hide();
+								$("dl[id='settings[footer_text_mobile]']").hide();
+								$("dl[id='settings[footer_text_fax]']").hide();
+								$("dl[id='settings[footer_text_email]']").hide();
+								$("dl[id='settings[footer_text]']").hide();
+								$("dl[id='settings[footer_facebook_icon]']").hide();
+								$("dl[id='settings[footer_facebook_link]']").hide();
+								$("dl[id='settings[footer_logo]']").hide();
+							}
+							else if (selection === "box_logo") {
+								$("dl[id='settings[footer_color_bg]']").show();
+								$("dl[id='settings[footer_color_box]']").show();
+								$("dl[id='settings[footer_color_font]']").show();
+								$("dl[id='settings[footer_text_company]']").hide();
+								$("dl[id='settings[footer_text_ceo]']").hide();
+								$("dl[id='settings[footer_text_street]']").hide();
+								$("dl[id='settings[footer_text_zip_city]']").hide();
+								$("dl[id='settings[footer_text_phone]']").hide();
+								$("dl[id='settings[footer_text_mobile]']").hide();
+								$("dl[id='settings[footer_text_fax]']").hide();
+								$("dl[id='settings[footer_text_email]']").hide();
+								$("dl[id='settings[footer_text]']").hide();
+								$("dl[id='settings[footer_facebook_icon]']").show();
+								$("dl[id='settings[footer_facebook_link]']").show();
+								$("dl[id='settings[footer_logo]']").show();
+							}
+							else if (selection === "links_address_contact_logo") {
+								$("dl[id='settings[footer_color_bg]']").show();
+								$("dl[id='settings[footer_color_box]']").hide();
+								$("dl[id='settings[footer_color_font]']").show();
+								$("dl[id='settings[footer_text_company]']").show();
+								$("dl[id='settings[footer_text_ceo]']").show();
+								$("dl[id='settings[footer_text_street]']").show();
+								$("dl[id='settings[footer_text_zip_city]']").show();
+								$("dl[id='settings[footer_text_phone]']").show();
+								$("dl[id='settings[footer_text_mobile]']").show();
+								$("dl[id='settings[footer_text_fax]']").show();
+								$("dl[id='settings[footer_text_email]']").show();
+								$("dl[id='settings[footer_text]']").hide();
+								$("dl[id='settings[footer_facebook_icon]']").hide();
+								$("dl[id='settings[footer_facebook_link]']").show();
+								$("dl[id='settings[footer_logo]']").show();
+							}
+							else if (selection === "links_logo_address") {
+								$("dl[id='settings[footer_color_bg]']").show();
+								$("dl[id='settings[footer_color_box]']").show();
+								$("dl[id='settings[footer_color_font]']").show();
+								$("dl[id='settings[footer_text_company]']").show();
+								$("dl[id='settings[footer_text_ceo]']").show();
+								$("dl[id='settings[footer_text_street]']").show();
+								$("dl[id='settings[footer_text_zip_city]']").show();
+								$("dl[id='settings[footer_text_phone]']").show();
+								$("dl[id='settings[footer_text_mobile]']").show();
+								$("dl[id='settings[footer_text_fax]']").show();
+								$("dl[id='settings[footer_text_email]']").show();
+								$("dl[id='settings[footer_text]']").hide();
+								$("dl[id='settings[footer_facebook_icon]']").hide();
+								$("dl[id='settings[footer_facebook_link]']").show();
+								$("dl[id='settings[footer_logo]']").show();
+							}
+							else if (selection === "links_text") {
+								$("dl[id='settings[footer_color_bg]']").show();
+								$("dl[id='settings[footer_color_box]']").show();
+								$("dl[id='settings[footer_color_font]']").show();
+								$("dl[id='settings[footer_text_company]']").hide();
+								$("dl[id='settings[footer_text_ceo]']").hide();
+								$("dl[id='settings[footer_text_street]']").hide();
+								$("dl[id='settings[footer_text_zip_city]']").hide();
+								$("dl[id='settings[footer_text_phone]']").hide();
+								$("dl[id='settings[footer_text_mobile]']").hide();
+								$("dl[id='settings[footer_text_fax]']").hide();
+								$("dl[id='settings[footer_text_email]']").hide();
+								$("dl[id='settings[footer_text]']").show();
+								$("dl[id='settings[footer_facebook_icon]']").hide();
+								$("dl[id='settings[footer_facebook_link]']").hide();
+								$("dl[id='settings[footer_logo]']").hide();
+							}
+						}
+
+						// Hide on document load
+						$(document).ready(function() {
+							footer_type_changer();
+						});
+
+						// Hide on selection change
+						$("select[name='settings[footer_type]").on('change', function(e) {
+							footer_type_changer();
+						});
+					</script>
+					<?php
 						print '<hr style="border-top: 1px solid #333">';
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_custom_css', 'custom_css', $this->getConfig('custom_css'));
 						
@@ -178,9 +303,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 									];
 									d2u_addon_backend_helper::form_select('d2u_helper_settings_template_navi_pos_text', 'settings[template_navi_pos]', $navi_pos_options, [$this->getConfig('template_navi_pos')]);
 								}
-								if($d2u_template->getD2UId() === "02-1" && $d2u_template->isInstalled()) {
-									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_02_1_footer_text', 'settings[template_02_1_footer_text]', $this->getConfig('template_02_1_footer_text'), FALSE, FALSE, "text");
-								}
 								if($d2u_template->getD2UId() === "03-1" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_1_print_header_pic', 'template_print_header_pic', $this->getConfig('template_print_header_pic'));
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_1_print_footer_pic', 'template_print_footer_pic', $this->getConfig('template_print_footer_pic'));
@@ -193,13 +315,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								}
 								if(($d2u_template->getD2UId() === "04-1" || $d2u_template->getD2UId() === "04-2" || $d2u_template->getD2UId() === "04-3") && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'full', $this->getConfig('template_04_header_slider_pics_full_width') == 'full');
-									if($d2u_template->getD2UId() === "04-2" && $d2u_template->isInstalled()) {
-										d2u_addon_backend_helper::form_input('d2u_helper_settings_template_04_2_facebook_link', 'settings[template_04_2_facebook_link]', $this->getConfig('template_04_2_facebook_link'), FALSE, FALSE);
-										d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_04_2_facebook_icon', 'template_04_2_facebook_icon', $this->getConfig('template_04_2_facebook_icon'));
-									}
-									if(($d2u_template->getD2UId() === "04-1" || $d2u_template->getD2UId() === "04-2") && $d2u_template->isInstalled()) {
-										d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_04_1_footer_logo', 'template_04_1_footer_logo', $this->getConfig('template_04_1_footer_logo'));
-									}
 									// Language specific settings
 									foreach(rex_clang::getAll() as $rex_clang) {
 										print '<div style="background-color: white; margin-bottom: 1em; padding: 1em;">';

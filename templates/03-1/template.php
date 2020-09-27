@@ -69,6 +69,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 			</div>
 		</header>
 		<?php
+			$fragment = new rex_fragment();
 			if($print == "") {
 		?>
 		<div class="row d-print-none">
@@ -91,6 +92,12 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 							</div>
 						</div>
 					</nav>
+					<?php
+						// Languages
+						print '<div id="lang_chooser_div">';
+						echo $fragment->parse('d2u_template_language_modal.php');
+						print '</div>';
+					?>
 				</div>
 			</div>
 		</div>
@@ -144,18 +151,9 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 		<div class="row">
 			<div class="col-12 d-print-none">
 				<footer id="footer_template">
-					<div class="row">
-						<?php
-							print '<div class="col-12">';
-							$rex_articles = rex_article::getRootArticles(true);
-							foreach($rex_articles as $rex_articles) {
-								print '<div class="footerbox">';
-								print '<a href="'. $rex_articles->getUrl() .'">'. $rex_articles->getName() .'</a>';
-								print '</div>';
-							}
-							print '</div>';
-						?>
-					</div>
+					<?php
+						echo $fragment->parse('d2u_template_footer.php');
+					?>
 				</footer>
 			</div>
 			<?php

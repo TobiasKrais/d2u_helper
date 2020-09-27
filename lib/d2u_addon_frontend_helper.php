@@ -27,7 +27,7 @@ class d2u_addon_frontend_helper {
 		$colors = ['navi_color_bg', 'navi_color_font', 'navi_color_hover_bg', 'navi_color_hover_font',
 			'subhead_color_bg', 'subhead_color_font',
 			'article_color_bg', 'article_color_h', 'article_color_box',
-			'footer_color_bg', 'footer_color_box'];
+			'footer_color_bg', 'footer_color_box', 'footer_color_font'];
 		foreach($colors as $color) {
 			if($d2u_helper->hasConfig($color)) {
 				$css = str_replace($color, $d2u_helper->getConfig($color), $css);

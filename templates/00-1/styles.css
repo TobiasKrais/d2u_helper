@@ -183,36 +183,10 @@ article h1, article h2 {
 section {
 	font-family: 'Arial', sans-serif;
 }
-footer {
-	background-color: footer_color_bg;
-	font-family: 'Arial', sans-serif;
-	padding: 1em 1em 0 1em;
-}
-footer a {
-	color: white;
-}
-footer a:hover {
-	color: white;
-	text-decoration: underline;
-}
-.footerbox {
-	background-color: footer_color_box;
-	margin-bottom: 1em;
-	padding: 5px 1em;
-}
 
 .btn-primary {
 	background-color: article_color_h !important;
 	border: none !important;
-}
-
-/* YForm Captcha */
-.input-group-addon {
-	min-width: 150px;
-	padding: 0px !important;
-}
-.input-group-addon img {
-	height: 100%;
 }
 
 /* Machinery Addon */

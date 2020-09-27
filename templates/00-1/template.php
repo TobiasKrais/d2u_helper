@@ -191,16 +191,10 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						$clangs = rex_clang::getAll(TRUE);
 						print '<div class="col-6 col-sm-6 col-md-3 col-lg-2">';
 						print '<div id="langchooser" class="desktop-inner">';
-						$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
-						foreach ($clangs as $clang) {
-							if($clang->getId() != rex_clang::getCurrentId()) {
-								print '<a href="'. (isset($alternate_urls[$clang->getId()]) ? $alternate_urls[$clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $clang->getId())) .'">';
-								if($clang->getValue('clang_icon') != "") {
-									print '<img src="'. rex_url::media($clang->getValue('clang_icon')) .'" alt="'. $clang->getName() .'">';
-								}
-								print (count($clangs) == 2 ? $clang->getName() : '') .'</a>';							
-							}
-						}
+						print '<div id="lang_chooser_div">';
+						$fragment = new rex_fragment();
+						echo $fragment->parse('d2u_template_language_modal.php');
+						print '</div>';
 						print '</div>';
 						print '</div>';
 					}
@@ -309,18 +303,10 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	</article>
 	<footer class="d-print-none">
 		<div class="container">
-			<div class="row">
-				<?php
-					$rex_articles = rex_article::getRootArticles(true);
-					foreach($rex_articles as $rex_articles) {
-						print '<div class="col-sm-6 col-md-4 col-lg-3">';
-						print '<div class="footerbox">';
-						print '<a href="'. $rex_articles->getUrl() .'">'. $rex_articles->getName() .'</a>';
-						print '</div>';
-						print '</div>';
-					}
-				?>
-			</div>
+			<?php
+				$fragment = new rex_fragment();
+				echo $fragment->parse('d2u_template_footer.php');
+			?>
 		</div>
 	</footer>
 	<script>

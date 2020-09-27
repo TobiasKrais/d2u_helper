@@ -117,34 +117,34 @@ class D2UTemplateManager {
 		$d2u_templates = [];
 		$d2u_templates[] = new D2UTemplate("00-1",
 			"Big Header Template",
-			13);
+			14);
 		$d2u_templates[] = new D2UTemplate("01-1",
 			"Side Picture Template",
-			5);
+			6);
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
-			8);
+			9);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
-			6);
+			7);
 		$d2u_templates[] = new D2UTemplate("03-2",
 			"Immo Window Advertising Template",
 			6);
 		$d2u_templates[] = new D2UTemplate("04-1",
 			"Header Slider Template with Slogan",
-			5);
+			6);
 		$d2u_templates[] = new D2UTemplate("04-2",
 			"Header Slider Template",
-			10);
+			11);
 		$d2u_templates[] = new D2UTemplate("04-3",
 			"Header Slider Template with news column",
-			3);
+			4);
 		$d2u_templates[] = new D2UTemplate("05-1",
 			"Double Logo Template",
-			6);
+			7);
 		$d2u_templates[] = new D2UTemplate("06-1",
 			"Paper Sheet Template",
-			1);
+			2);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",
 			1);
@@ -396,7 +396,18 @@ class D2UTemplate {
 	 */
 	public function getCSS() {
 		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_CSS_FILE)) {
-			return file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_CSS_FILE);
+			$template_css = file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_CSS_FILE);
+			// Footer CSS
+			$footer_type = rex_config::get('d2u_helper', 'footer_type', '');
+			if ($footer_type !== '' && file_exists(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'))) {
+				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'));
+			}
+			// Langugae Modal CSS
+			if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'))) {
+				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'));
+			}
+
+			return $template_css;
 		}
 		else {
 			return "";

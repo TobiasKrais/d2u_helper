@@ -67,6 +67,13 @@ $d2u_helper = rex_addon::get("d2u_helper");
 							}
 						?>
 					</div>
+					<div id="lang_chooser_div">
+						<?php
+							// Languages
+							$fragment = new rex_fragment();
+							echo $fragment->parse('d2u_template_language_modal.php');
+						?>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -116,18 +123,9 @@ $d2u_helper = rex_addon::get("d2u_helper");
 	</article>
 	<footer>
 		<div class="container">
-			<div class="row">
-				<?php
-					$rex_articles = rex_article::getRootArticles(true);
-					foreach($rex_articles as $rex_articles) {
-						print '<div class="col-sm-6 col-md-4 col-lg-3">';
-						print '<div class="footerbox">';
-						print '<a href="'. $rex_articles->getUrl() .'">'. $rex_articles->getName() .'</a>';
-						print '</div>';
-						print '</div>';
-					}
-				?>
-			</div>
+			<?php
+				echo $fragment->parse('d2u_template_footer.php');
+			?>
 		</div>
 	</footer>
 	<script>

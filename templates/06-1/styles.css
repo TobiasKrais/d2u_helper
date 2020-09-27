@@ -41,6 +41,10 @@ header {
 	right: 5%;
 	top: 5px;
 }
+#lang_chooser_div {
+	height: 2.5em;
+	padding-bottom: 1em;
+}
 
 #main-menu {
 	padding-bottom: 2em;
@@ -53,7 +57,7 @@ header {
 }
 
 article a, article a:hover, article a:focus, article a:visited, footer a, footer a:hover, footer a:focus, footer a:visited {
-	color: #777;
+	color: footer_color_font;
 	text-decoration: underline;
 }
 article .gallery-pic-box {
@@ -82,7 +86,7 @@ article .btn-primary, article .btn-primary:hover {
 }
 
 footer {
-	border-top: 1px solid #4e4e4e;
+	border-top: 1px solid footer_color_font;
 	font-size: 0.75em;
 	margin-top: 2em;
 	padding: 1em 0;

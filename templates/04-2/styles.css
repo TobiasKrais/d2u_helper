@@ -63,15 +63,8 @@ nav {
 		position: absolute;
 	}
 }
-#langchooser {
-	position: absolute;
-	bottom: 0;
-}
-#langchooser img {
-	margin: 0 10px 12px 0;
-}
-#langchooser a {
-	color: white;
+#lang_chooser_div {
+	padding-top: 25px;
 }
 #mobile-menu {
 	margin-bottom: 15px;
@@ -186,38 +179,9 @@ article .form-group {
 	margin-bottom: 0.5rem;
 }
 
-footer {
-	background-color: footer_color_bg;
-	padding: 1em;
-}
-.footer a {
-	color: white;
-}
-.footer a:hover {
-	color: white;
-	text-decoration: underline;
-}
-.footerbox {
-	background-color: footer_color_box;
-	margin-bottom: 1em;
-	padding: 5px 1em;
-}
-#logo-footer {
-	float: right;
-}
-
 .btn-primary {
 	background-color: article_color_h !important;
 	border: none !important;
-}
-
-/* YForm Captcha */
-.input-group-addon {
-	min-width: 150px;
-	padding: 0px !important;
-}
-.input-group-addon img {
-	height: 100%;
 }
 
 /* Machinery Addon */

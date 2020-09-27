@@ -93,7 +93,7 @@ header, #article-content {
 }
 
 #footer {
-	color: navi_color_bg;
+	color: footer_color_font;
 	font-size: 14px;
 	text-align: center;
 	margin: 1em auto;

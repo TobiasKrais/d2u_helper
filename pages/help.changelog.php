@@ -1,11 +1,19 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.7.1-DEV</p>
+		<p>1.8.0-DEV</p>
 		<ul>
+			<li>ACHTUNG: wenn Templates aus diesem Addon verwendet werden, müssen nach dem Update die Einstellungen überarbeitet werden. 
+				Sofern das verwendete Template einen Footer mit Links hat, kann nun der Stil in den Einstellungen ausgewählt werden.</li>
+			<li>Alle Templates auf Mehrsprachigkeit erweitert. Neben der Navigation wird ein Sprachwähler angeboten.</li>
 			<li>Notices beim Speichern der Einstellungen entfernt.</li>
-			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" ermöglicht nun auch nur 2 Bilder pro Zeile. Bilder werden nun auch lazy geladen.</li>
+			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" ermöglicht nun auch nur 2 Bilder und 1 Bild pro Zeile. Bilder werden nun auch lazy geladen.</li>
+			<li>Modul 11-1 "YForm Kontaktformular": wenn Addon yform_spam_protection installiert ist, wird es verwendet.</li>
 			<li>Bugfix: beim Aufheben einer Verknüpfung eines Templates wurde der Template Key nicht gelöscht.</li>
+			<li>Einstellungen für Templates Footer vereinheitlicht. Folgende Einstellungen wurden umbenannt:<br>
+				template_04_1_footer_logo => footer_logo<br>
+				template_04_2_facebook_icon => footer_facebook_icon<br>
+				template_04_2_facebook_link => footer_facebook_link</li>
 		</ul>
 		<p>1.7.0</p>
 		<ul>
