@@ -130,6 +130,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 
 					// Logo and languages
 					$clangs = rex_clang::getAll(TRUE);
+					$fragment = new rex_fragment();
 					if($d2u_helper->getConfig("template_logo", "") != "" || count($clangs) > 1) {
 						print '<div class="col-4 col-lg-3">';
 						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
@@ -140,10 +141,18 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						print '</a>';
 						
 						// Languages
-						print '<div id="lang_chooser_div">';
-						$fragment = new rex_fragment();
-						echo $fragment->parse('d2u_template_language_modal.php');
-						print '</div>';
+						if(count($clangs) > 1) {
+							print '<div id="lang_chooser_div">';
+							echo $fragment->parse('d2u_template_language_modal.php');
+							print '</div>';
+						}
+
+						// Search icon
+						if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
+							print '<div id="search_icon_div">';
+							echo $fragment->parse('d2u_template_search_icon.php');
+							print '</div>';
+						}
 					
 						print '</div>';
 					}

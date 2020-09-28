@@ -39,22 +39,36 @@
 				</header>
 				<div class="row">
 					<div class="col-12 col-lg-3">
-						<?php
-							// Languages
-							$fragment = new rex_fragment();
-							if(count(rex_clang::getAllIds(true)) > 1) {
-								print '<div id="lang_chooser_div">';
-								echo $fragment->parse('d2u_template_language_modal.php');
-								print '</div>';
-							}
-						?>
-						<navi>
-							<?php
-								if(rex_addon::get('d2u_helper')->isAvailable()) {
-									d2u_mobile_navi_smartmenus::getMenu();
-								}
-							?>
-						</navi>
+						<div class="row">
+							<div class="col-12">
+								<?php
+									// Languages
+									$fragment = new rex_fragment();
+									if(count(rex_clang::getAllIds(true)) > 1) {
+										print '<div id="lang_chooser_div">';
+										echo $fragment->parse('d2u_template_language_modal.php');
+										print '</div>';
+									}
+									// Search icon
+									if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
+										print '<div id="search_icon_div">';
+										echo $fragment->parse('d2u_template_search_icon.php');
+										print '</div>';
+									}
+								?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<navi>
+									<?php
+										if(rex_addon::get('d2u_helper')->isAvailable()) {
+											d2u_mobile_navi_smartmenus::getMenu();
+										}
+									?>
+								</navi>
+							</div>
+						</div>
 					</div>
 					<div class="col-12 col-lg-9">
 						<article>

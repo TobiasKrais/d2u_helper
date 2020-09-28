@@ -41,7 +41,8 @@ header {
 	right: 5%;
 	top: 5px;
 }
-#lang_chooser_div {
+#lang_chooser_div, #search_icon_div {
+	float: right;
 	height: 2.5em;
 	padding-bottom: 1em;
 }

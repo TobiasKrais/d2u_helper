@@ -13,6 +13,13 @@ function printTemplate04_3Navi() {
 	$fragment = new rex_fragment();
 	echo $fragment->parse('d2u_template_language_modal.php');
 	print '</div>';
+	
+	// Search icon
+	if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
+		print '<div id="search_icon_div">';
+		echo $fragment->parse('d2u_template_search_icon.php');
+		print '</div>';
+	}
 }
 
 // Get placeholder wildcard tags

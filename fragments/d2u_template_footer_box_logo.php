@@ -6,9 +6,9 @@
 		$media_logo_footer = rex_media::get($d2u_helper->getConfig("footer_logo", "") != "" ? $d2u_helper->getConfig("footer_logo", "") : $d2u_helper->getConfig("template_logo"));
 		// Facebook logo and link
 		$facebook_footer = "";
-		if($d2u_helper->getConfig("footer_facebook_link", "") != "" && $d2u_helper->getConfig("template_04_2_facebook_icon", "") != "") {
+		if($d2u_helper->getConfig("footer_facebook_link", "") != "" && $d2u_helper->getConfig("footer_facebook_icon", "") != "") {
 			$facebook_footer = '<a href="'. $d2u_helper->getConfig("footer_facebook_link") .'" target="_blank">'
-				.'<img src="'. rex_url::media($d2u_helper->getConfig("template_04_2_facebook_icon")) .'" alt="Facebook" id="facebook">'
+				.'<img src="'. rex_url::media($d2u_helper->getConfig("footer_facebook_icon")) .'" alt="Facebook" id="facebook">'
 				.'</a>';
 		}
 

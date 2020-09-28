@@ -406,6 +406,10 @@ class D2UTemplate {
 			if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'))) {
 				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'));
 			}
+			// Search icon CSS
+			if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'))) {
+				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'));
+			}
 
 			return $template_css;
 		}

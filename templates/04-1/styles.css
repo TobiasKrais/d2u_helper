@@ -72,7 +72,8 @@ nav {
 	background: navi_color_hover_font !important;
 	box-shadow: 0 10px 0 navi_color_hover_font, 0 20px 0 navi_color_hover_font !important;
 }
-#lang_chooser_div {
+#lang_chooser_div, #search_icon_div {
+	float: right;
 	padding-top: 25px;
 }
 #mobile-menu {

@@ -1,0 +1,11 @@
+ /* search button */
+#search_icon {
+	background: transparent;
+	border: none;
+	float: right;
+}
+#search_icon svg {
+	color: navi_color_font;
+	max-width: 25px;
+	max-height: 25px;
+}

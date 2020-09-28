@@ -80,10 +80,10 @@ nav a {
 .dl-menuopen a:hover {
 	text-decoration: underline;
 }
-#lang_chooser_div {
+#lang_chooser_div, #search_icon_div {
 	float: right;
 }
-#lang_chooser_button {
+#lang_chooser_button, #search_icon {
 	margin-top: 10px;
 }
 

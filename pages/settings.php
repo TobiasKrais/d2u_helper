@@ -7,6 +7,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$link_ids = filter_input_array(INPUT_POST, ['REX_INPUT_LINK'=> ['filter' => FILTER_VALIDATE_INT, 'flags' => FILTER_REQUIRE_ARRAY]]);
 	$settings['article_id_privacy_policy'] = $link_ids["REX_INPUT_LINK"][1];
 	$settings['article_id_impress'] = $link_ids["REX_INPUT_LINK"][2];
+	$settings['article_id_search'] = $link_ids["REX_INPUT_LINK"][3];
 	$linklist_ids = filter_input_array(INPUT_POST, ['REX_INPUT_LINKLIST'=> ['flags' => FILTER_REQUIRE_ARRAY]]);
 	$settings['template_02_3_footer_linklist'] = $linklist_ids["REX_INPUT_LINKLIST"][1];
 
@@ -18,7 +19,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['template_logo_2'] = isset($input_media['template_logo_2']) ? $input_media['template_logo_2'] : '';
 	$settings['template_print_header_pic'] = isset($input_media['template_print_header_pic']) ? $input_media['template_print_header_pic'] : '';
 	$settings['template_print_footer_pic'] = isset($input_media['template_print_footer_pic']) ? $input_media['template_print_footer_pic'] : '';
-	$settings['template_04_2_facebook_icon'] = isset($input_media['template_04_2_facebook_icon']) ? $input_media['template_04_2_facebook_icon'] : '';
+	$settings['footer_facebook_icon'] = isset($input_media['footer_facebook_icon']) ? $input_media['footer_facebook_icon'] : '';
 	$settings['footer_logo'] = isset($input_media['footer_logo']) ? $input_media['footer_logo'] : '';
 	$settings['template_03_2_header_pic'] = isset($input_media['template_03_2_header_pic']) ? $input_media['template_03_2_header_pic'] : '';
 	$settings['template_03_2_footer_pic'] = isset($input_media['template_03_2_footer_pic']) ? $input_media['template_03_2_footer_pic'] : '';
@@ -88,6 +89,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						
 						d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_privacy_policy', '1', $this->getConfig('article_id_privacy_policy'), rex_config::get("d2u_helper", "article_id_privacy_policy", rex_clang::getStartId()));
 						d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_impress', '2', $this->getConfig('article_id_impress'), rex_config::get("d2u_helper", "article_id_impress", rex_clang::getStartId()));
+						if(rex_addon::get('search_it')->isAvailable()) {
+							d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_search', '3', $this->getConfig('article_id_search'), rex_config::get("d2u_helper", "article_id_search", rex_clang::getStartId()));
+						}
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_check_media_template', 'settings[check_media_template]', 'true', $this->getConfig('check_media_template') == 'true');
 					?>
 				</div>
