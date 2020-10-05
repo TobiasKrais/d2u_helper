@@ -68,9 +68,6 @@
 	line-height: 2em;
 	margin: 0.5em 0;	
 }
-.search_it-hits .pagination a {
-	padding: 0.4em 1em;	
-}
 .search_it-hits .pagination li {
 	background-color: article_color_box;
 	height: 2em;

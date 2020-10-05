@@ -74,7 +74,7 @@ if(class_exists('D2UModuleManager')) {
 		2);
 	$modules[] = new D2UModule("14-1",
 		"Search It Suchmodul",
-		1);
+		2);
 	$d2u_module_manager = new D2UModuleManager($modules);
 	$d2u_module_manager->autoupdate();
 }

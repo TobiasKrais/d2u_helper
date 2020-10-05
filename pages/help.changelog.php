@@ -15,6 +15,7 @@
 			<li>Notices beim Speichern der Einstellungen entfernt.</li>
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" ermöglicht nun auch nur 2 Bilder und 1 Bild pro Zeile. Bilder werden nun auch lazy geladen.</li>
 			<li>Modul 11-1 "YForm Kontaktformular": wenn Addon yform_spam_protection installiert ist, wird es verwendet.</li>
+			<li>Modul 14-1 "Search It Suchmodul": Bugfix - Dokumente aus dem Medienpool wurden nicht angezeigt, wenn kein YCom installiert war..</li>
 		</ul>
 		<p>1.7.0</p>
 		<ul>

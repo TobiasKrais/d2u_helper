@@ -115,7 +115,7 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 				// media hits
 				$media = rex_media::get(pathinfo($hit['filename'], PATHINFO_BASENAME));
 				if(is_object($media)) { 
-					$has_permission = FALSE;
+					$has_permission = true;
 					if(rex_plugin::get('ycom', 'media_auth')->isAvailable()) {
 						$has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create(null, pathinfo($hit['filename'], PATHINFO_BASENAME)));
 					}
