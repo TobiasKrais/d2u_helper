@@ -36,6 +36,9 @@ footer p {
 .fa-fax:before {
 	content: "\f1ac";
 }
+.fa-icon {
+	font-family: FontAwesome;
+}
 .fa-link:before {
 	content: "\f054";
 }

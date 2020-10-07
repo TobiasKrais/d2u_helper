@@ -6,6 +6,23 @@
 }
 #search_icon svg {
 	color: navi_color_font;
-	max-width: 25px;
-	max-height: 25px;
+	width: 25px;
+	height: 25px;
+}
+#fragment-search {
+	border: 1px solid #aaa;
+	float: right;
+	margin: 15px 0;
+	max-width: 100%;
+	position: relative;
+}
+#fragment-search button {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#fragment-search input {
+	border: none;
+	color: #aaa;
+	font-size: 16px;
 }

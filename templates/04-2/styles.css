@@ -27,6 +27,10 @@ img {
 }
 	
 /* Navi */
+#search_icon_div {
+	height: 50px;
+	position: relative;
+}
 nav {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;

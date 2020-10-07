@@ -14,10 +14,11 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 ?>
 
 <section class="search_it-search">
-	<form class="search_it-form" id="search_it-form1" action="<?php echo $article->getUrl(); ?>" method="get">
+	<a name="search-field"></a>
+	<form class="search_it-form" id="search_it-form1" action="<?php echo $article->getUrl(); ?>#search-results" method="get">
 		<div class="search_it-flex">
 			<?php
-				echo '<input type="text" id="search_it_search" name="search" value="'. ($request ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" />';
+				echo '<input type="text" id="search_it_search" name="search" value="'. ($request ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" autofocus />';
 			?>
 			<button class="search_it-button" type="submit">
 				<img src="<?php print rex_url::addonAssets('d2u_helper', 'icon_search.svg'); ?>">
@@ -38,7 +39,8 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 	$search_it->setOrder(["field(texttype, 'url', 'article', 'file')" => "ASC"], true);
     $result = $search_it->search($request);
 
-	echo '<h2 class="search_it-headline">'. $tag_open .'d2u_helper_module_14_search_results'. $tag_close .'</h2>';
+	print '<a name="search-results"></a>';
+	print '<h2 class="search_it-headline">'. $tag_open .'d2u_helper_module_14_search_results'. $tag_close .'</h2>';
 	if($result['count']) {
  		// Pagination
 		$pagination = "";

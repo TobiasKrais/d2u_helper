@@ -21,6 +21,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['template_print_footer_pic'] = isset($input_media['template_print_footer_pic']) ? $input_media['template_print_footer_pic'] : '';
 	$settings['footer_facebook_icon'] = isset($input_media['footer_facebook_icon']) ? $input_media['footer_facebook_icon'] : '';
 	$settings['footer_logo'] = isset($input_media['footer_logo']) ? $input_media['footer_logo'] : '';
+	$settings['header_lang_icon'] = isset($input_media['header_lang_icon']) ? $input_media['header_lang_icon'] : '';
 	$settings['template_03_2_header_pic'] = isset($input_media['template_03_2_header_pic']) ? $input_media['template_03_2_header_pic'] : '';
 	$settings['template_03_2_footer_pic'] = isset($input_media['template_03_2_footer_pic']) ? $input_media['template_03_2_footer_pic'] : '';
 
@@ -141,14 +142,20 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap4]', 'true', $this->getConfig('include_bootstrap4') == 'true');
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_module', 'settings[include_module]', 'true', $this->getConfig('include_module') == 'true');
 						d2u_addon_backend_helper::form_infotext('d2u_helper_settings_include_prevent', 'prevent_include_info');
+						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_custom_css', 'custom_css', $this->getConfig('custom_css'));
+						
 						print '<hr style="border-top: 1px solid #333">';
+						print '<h3>'. rex_i18n::msg('d2u_helper_settings_header') .'</h3>';
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_header_pic', 'template_header_pic', $this->getConfig('template_header_pic'));
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_logo', 'template_logo', $this->getConfig('template_logo'));
-						print '<hr style="border-top: 1px solid #333">';
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_bg', 'settings[navi_color_bg]', $this->getConfig('navi_color_bg'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_font', 'settings[navi_color_font]', $this->getConfig('navi_color_font'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_hover_bg', 'settings[navi_color_hover_bg]', $this->getConfig('navi_color_hover_bg'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_hover_font', 'settings[navi_color_hover_font]', $this->getConfig('navi_color_hover_font'), FALSE, FALSE, "color");
+						if(count(rex_clang::getAllIds()) > 1) {
+							d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_header_lang_icon', 'header_lang_icon', $this->getConfig('header_lang_icon'));
+						}
+
 						print '<hr style="border-top: 1px solid #333">';
 						print '<h3>'. rex_i18n::msg('d2u_helper_settings_article') .'</h3>';
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_breadcrumbs', 'settings[show_breadcrumbs]', 'true', $this->getConfig('show_breadcrumbs') == 'true');
@@ -286,9 +293,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						});
 					</script>
 					<?php
-						print '<hr style="border-top: 1px solid #333">';
-						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_custom_css', 'custom_css', $this->getConfig('custom_css'));
-						
 						// Template specific part
 						$d2u_templates = D2UTemplateManager::getD2UHelperTemplates();
 						foreach($d2u_templates as $d2u_template) {

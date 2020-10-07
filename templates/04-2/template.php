@@ -117,22 +117,29 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		<div class="container d-print-none navigation">
 			<div class="row">
 				<?php
+					$fragment = new rex_fragment();
 					// Navi
-					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-md-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .'">';
+					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .'">';
+
+					// Search icon
+					if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
+						print '<div id="search_icon_div">';
+						$fragment->setVar('showSearchField', true, false);
+						echo $fragment->parse('d2u_template_search_icon.php');
+						print '</div>';
+					}
 
 					print '<div class="navi">';
 					if(rex_addon::get('d2u_helper')->isAvailable()) {
 						d2u_mobile_navi_smartmenus::getMenu();
 					}
 					print '</div>';
-
 					print '</div>';
 
 					// Logo and languages
 					$clangs = rex_clang::getAll(TRUE);
-					$fragment = new rex_fragment();
-					if($d2u_helper->getConfig("template_logo", "") != "" || count($clangs) > 1) {
-						print '<div class="col-4 col-lg-3">';
+					if($d2u_helper->getConfig("template_logo", "") != "" || count($clangs) > 1 || rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
+						print '<div class="col-4">';
 						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
 						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
 						if($media_logo instanceof rex_media) {
@@ -143,14 +150,8 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						// Languages
 						if(count($clangs) > 1) {
 							print '<div id="lang_chooser_div">';
+							$fragment->setVar('showLangDropdown', true, false);
 							echo $fragment->parse('d2u_template_language_modal.php');
-							print '</div>';
-						}
-
-						// Search icon
-						if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
-							print '<div id="search_icon_div">';
-							echo $fragment->parse('d2u_template_search_icon.php');
 							print '</div>';
 						}
 					

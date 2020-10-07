@@ -55,9 +55,20 @@
 	background: transparent;
 	border: none;
 	float: right;
+	font-size: 16px;
 }
-#lang_chooser_button svg {
+#lang_chooser_button svg, #lang_chooser_button img {
 	color: navi_color_font;
-	max-width: 25px;
-	max-height: 25px;
+	width: 25px;
+	height: 25px;
+}
+.lang-code {
+	float: right;
+	padding-top: 2px;
+}
+.fa-icon {
+	font-family: FontAwesome;
+}
+.fa-dropdown:before {
+	content: "\f0d7";
 }
