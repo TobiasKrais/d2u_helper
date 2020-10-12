@@ -67,7 +67,7 @@
 			print '<div class="col-12 col-md-4 offset-md-4 footer-logo-col">';
 			if($media_logo_footer instanceof rex_media) {
 				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">'
-					.'<img src="'. rex_url::media($media_logo_footer->getFileName()) .'" alt="'. $media_logo_footer->getTitle() .'" title="'. $media_logo_footer->getTitle() .'" id="logo-footer">'
+					.'<img src="'. rex_url::media($media_logo_footer->getFileName()) .'" alt="'. $media_logo_footer->getTitle() .'" title="'. $media_logo_footer->getTitle() .'" id="logo-footer" loading="lazy">'
 					.'</a>';
 			}
 			print '</div>';

@@ -19,7 +19,7 @@
 				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
 				$media_logo = rex_media::get($d2u_helper->getConfig("footer_logo"));
 				if($media_logo instanceof rex_media) {
-					print '<img src="'. rex_url::media($d2u_helper->getConfig("footer_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer">';
+					print '<img src="'. rex_url::media($d2u_helper->getConfig("footer_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
 				}
 				print '</a>';
 		}
@@ -68,7 +68,7 @@
 				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
 				$media_logo = rex_media::get($d2u_helper->getConfig("footer_logo"));
 				if($media_logo instanceof rex_media) {
-					print '<img src="'. rex_url::media($d2u_helper->getConfig("footer_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer">';
+					print '<img src="'. rex_url::media($d2u_helper->getConfig("footer_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
 				}
 				print '</a>';
 		}

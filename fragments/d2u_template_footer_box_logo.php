@@ -8,7 +8,7 @@
 		$facebook_footer = "";
 		if($d2u_helper->getConfig("footer_facebook_link", "") != "" && $d2u_helper->getConfig("footer_facebook_icon", "") != "") {
 			$facebook_footer = '<a href="'. $d2u_helper->getConfig("footer_facebook_link") .'" target="_blank">'
-				.'<img src="'. rex_url::media($d2u_helper->getConfig("footer_facebook_icon")) .'" alt="Facebook" id="facebook">'
+				.'<img src="'. rex_url::media($d2u_helper->getConfig("footer_facebook_icon")) .'" alt="Facebook" id="facebook" loading="lazy">'
 				.'</a>';
 		}
 
@@ -52,7 +52,7 @@
 			// Logo
 			if($media_logo_footer instanceof rex_media) {
 				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-				print '<img src="'. rex_url::media($media_logo_footer->getFileName()) .'" alt="'. $media_logo_footer->getTitle() .'" title="'. $media_logo_footer->getTitle() .'" id="logo-footer">';
+				print '<img src="'. rex_url::media($media_logo_footer->getFileName()) .'" alt="'. $media_logo_footer->getTitle() .'" title="'. $media_logo_footer->getTitle() .'" id="logo-footer" loading="lazy">';
 				print '</a>';
 			}
 
