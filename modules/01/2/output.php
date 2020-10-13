@@ -7,6 +7,7 @@
 	}
 	$heading = "REX_VALUE[1]";
 	$same_height = "REX_VALUE[5]" == 'true' ? 'same-height ' : '';
+	$show_title = ("REX_VALUE[9]" == 'true');
 
 	// Link
 	$link_type = "REX_VALUE[7]";
@@ -47,6 +48,7 @@
 						$html_picture .= '<a href="'. $link_url .'">';
 					}
 					$media = rex_media::get("REX_MEDIA[1]");
+					$html_picture .= '<figure>';
 					$html_picture .= '<img src="';
 					if($picture_type == "") {
 						$html_picture .= rex_url::media($picture);
@@ -55,6 +57,11 @@
 						$html_picture .= 'index.php?rex_media_type='. $picture_type .'&rex_media_file='. $picture;
 					}
 					$html_picture .= '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'">';
+					if($show_title && ($media->getValue('title') != "" || ($media->hasValue("med_title_". rex_clang::getCurrentId()) && $media->getValue("med_title_". rex_clang::getCurrentId()) != ""))) {
+						$med_title = ($media->hasValue("med_title_". rex_clang::getCurrentId()) && $media->getValue("med_title_". rex_clang::getCurrentId()) != "") ? $media->getValue("med_title_". rex_clang::getCurrentId()) : $media->getValue('title');
+						$html_picture .= '<figcaption class="d2u_figcaption">'. $med_title .'</figcaption>';
+					}
+					$html_picture .= '</figure>';
 					if($link_url != "") {
 						$html_picture .= '</a>';
 					}

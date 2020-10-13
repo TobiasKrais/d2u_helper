@@ -13,6 +13,8 @@
 				template_04_2_facebook_icon => footer_facebook_icon<br>
 				template_04_2_facebook_link => footer_facebook_link</li>
 			<li>Notices beim Speichern der Einstellungen entfernt.</li>
+			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift" Bildtitel kann optional angezeigt werden.</li>
+			<li>Modul 03-1 "Bild" Bildtitel kann optional angezeigt werden.</li>
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" ermöglicht nun auch nur 2 Bilder und 1 Bild pro Zeile. Bilder werden nun auch lazy geladen.</li>
 			<li>Modul 11-1 "YForm Kontaktformular": wenn Addon yform_spam_protection installiert ist, wird es verwendet.</li>
 			<li>Modul 14-1 "Search It Suchmodul": Bugfix - Dokumente aus dem Medienpool wurden nicht angezeigt, wenn kein YCom installiert war.

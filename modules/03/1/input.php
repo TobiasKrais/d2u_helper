@@ -97,3 +97,24 @@
 		</select>
 	</div>
 </div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<dl class="rex-form-group form-group">
+			<dt>
+				<input class="form-control" type="checkbox" name="REX_INPUT_VALUE[2]" value="true"<?php if("REX_VALUE[2]" == 'true') { print ' checked="checked"'; } ?> style="float: right; height: auto; width: auto;">
+			</dt>
+			<dd>
+				<label>Soll der Bildtitel aus dem Medienpool unterhalb des Bildes angezeigt werden?
+					<?php
+						if(count(rex_clang::getAllIds(false)) > 1) {
+							print '<br><small>(Sprachbezogenes Feld med_title_<i>sprach_id</i> kann angelegt werden um Titel in mehreren Sprachen zu verwalten.)</small>';
+						}
+					?>
+				</label>
+			</dd>
+		</dl>
+	</div>
+</div>

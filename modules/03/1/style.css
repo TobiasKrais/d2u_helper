@@ -2,3 +2,7 @@
 	max-width: 100%;
 	padding-bottom: 15px;
 }
+.d2u_figcaption {
+	background-color: article_color_box;
+	padding: 10px;
+}

@@ -26,7 +26,7 @@ if(class_exists('D2UModuleManager')) {
 		9);
 	$modules[] = new D2UModule("01-2",
 		"Texteditor mit Bild und Fettschrift",
-		10);
+		11);
 	$modules[] = new D2UModule("02-1",
 		"Überschrift",
 		8);
@@ -35,7 +35,7 @@ if(class_exists('D2UModuleManager')) {
 		3);
 	$modules[] = new D2UModule("03-1",
 		"Bild",
-		7);
+		8);
 	$modules[] = new D2UModule("03-2",
 		"Bildergalerie Ekko Lightbox",
 		8);

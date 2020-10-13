@@ -1,0 +1,11 @@
+.spacer {
+	margin-top: 1em;
+	padding-bottom: 1em;
+}
+.line {
+    border-top: 1px article_color_h solid;
+}
+.d2u_figcaption {
+	background-color: article_color_box;
+	padding: 10px;
+}
