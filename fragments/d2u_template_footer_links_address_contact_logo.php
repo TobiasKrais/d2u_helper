@@ -41,9 +41,6 @@
 		print '<div class="col-12 col-md-4">';
 		print '<div id="footer-address">';
 		print '<div class="footer-title">'. \Sprog\Wildcard::get('d2u_helper_module_14_search_template_contact') .'</div>';
-		if($d2u_helper->getConfig('footer_text_email', '') != '') {
-			print '<span class="fa-icon fa-envelope footer-icon"></span><a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
-		}
 		if($d2u_helper->getConfig('footer_text_phone', '') != '') {
 			print '<span class="fa-icon fa-phone footer-icon"></span>'. $d2u_helper->getConfig('footer_text_phone') .'<br>';
 		}
@@ -55,6 +52,9 @@
 		}
 		if($d2u_helper->getConfig('footer_facebook_link', '') != '') {
 			print '<span class="fa-icon fa-facebook footer-icon"></span><a href="'. $d2u_helper->getConfig("footer_facebook_link") .'" target="_blank">Facebook</a><br>';
+		}
+		if($d2u_helper->getConfig('footer_text_email', '') != '') {
+			print '<span class="fa-icon fa-envelope footer-icon"></span><a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
 		}
 		print '</div>';
 		print '</div>';

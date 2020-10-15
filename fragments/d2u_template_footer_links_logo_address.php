@@ -43,9 +43,6 @@
 			print $d2u_helper->getConfig('footer_text_zip_city') .'<br>';
 		}
 		print '<br>';
-		if($d2u_helper->getConfig('footer_text_email', '') != '') {
-			print '<span class="fa-icon fa-envelope footer-icon"></span> <a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
-		}
 		if($d2u_helper->getConfig('footer_text_phone', '') != '') {
 			print '<span class="fa-icon fa-phone footer-icon"></span> '. $d2u_helper->getConfig('footer_text_phone') .'<br>';
 		}
@@ -54,6 +51,9 @@
 		}
 		if($d2u_helper->getConfig('footer_text_fax', '') != '') {
 			print '<span class="fa-icon fa-fax footer-icon"></span> '. $d2u_helper->getConfig('footer_text_fax') .'<br>';
+		}
+		if($d2u_helper->getConfig('footer_text_email', '') != '') {
+			print '<span class="fa-icon fa-envelope footer-icon"></span> <a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
 		}
 		if($d2u_helper->getConfig('footer_facebook_link', '') != '') {
 			print '<span class="fa-icon fa-facebook footer-icon"></span> <a href="'. $d2u_helper->getConfig("footer_facebook_link") .'" target="_blank">Facebook</a>';
