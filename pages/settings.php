@@ -174,6 +174,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							'links_logo_address' => rex_i18n::msg('d2u_helper_settings_footer_type_option_links_logo_address'),
 							'links_address_contact_logo' => rex_i18n::msg('d2u_helper_settings_footer_type_option_links_address_contact_logo'),
 							'links_text' => rex_i18n::msg('d2u_helper_settings_footer_type_option_links_text'),
+							'text' => rex_i18n::msg('d2u_helper_settings_footer_type_option_text'),
 						];
 						d2u_addon_backend_helper::form_select('d2u_helper_settings_footer_type', 'settings[footer_type]', $options_footer, [$this->getConfig('footer_type')]);
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_bg', 'settings[footer_color_bg]', $this->getConfig('footer_color_bg'), FALSE, FALSE, "color");
@@ -208,9 +209,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								$("dl[id='settings[footer_text_fax]']").hide();
 								$("dl[id='settings[footer_text_email]']").hide();
 								$("dl[id='settings[footer_text]']").hide();
-								$("dl[id='settings[footer_facebook_icon]']").hide();
+								$("dl[id='MEDIA_footer_facebook_icon']").hide();
 								$("dl[id='settings[footer_facebook_link]']").hide();
-								$("dl[id='settings[footer_logo]']").hide();
+								$("dl[id='MEDIA_footer_logo']").hide();
 							}
 							else if (selection === "box_logo") {
 								$("dl[id='settings[footer_color_bg]']").show();
@@ -225,9 +226,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								$("dl[id='settings[footer_text_fax]']").hide();
 								$("dl[id='settings[footer_text_email]']").hide();
 								$("dl[id='settings[footer_text]']").hide();
-								$("dl[id='settings[footer_facebook_icon]']").show();
+								$("dl[id='MEDIA_footer_facebook_icon']").show();
 								$("dl[id='settings[footer_facebook_link]']").show();
-								$("dl[id='settings[footer_logo]']").show();
+								$("dl[id='MEDIA_footer_logo']").show();
 							}
 							else if (selection === "links_address_contact_logo") {
 								$("dl[id='settings[footer_color_bg]']").show();
@@ -242,9 +243,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								$("dl[id='settings[footer_text_fax]']").show();
 								$("dl[id='settings[footer_text_email]']").show();
 								$("dl[id='settings[footer_text]']").hide();
-								$("dl[id='settings[footer_facebook_icon]']").hide();
+								$("dl[id='MEDIA_footer_facebook_icon']").hide();
 								$("dl[id='settings[footer_facebook_link]']").show();
-								$("dl[id='settings[footer_logo]']").show();
+								$("dl[id='MEDIA_footer_logo']").show();
 							}
 							else if (selection === "links_logo_address") {
 								$("dl[id='settings[footer_color_bg]']").show();
@@ -259,9 +260,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								$("dl[id='settings[footer_text_fax]']").show();
 								$("dl[id='settings[footer_text_email]']").show();
 								$("dl[id='settings[footer_text]']").hide();
-								$("dl[id='settings[footer_facebook_icon]']").hide();
+								$("dl[id='MEDIA_footer_facebook_icon']").hide();
 								$("dl[id='settings[footer_facebook_link]']").show();
-								$("dl[id='settings[footer_logo]']").show();
+								$("dl[id='MEDIA_footer_logo']").show();
 							}
 							else if (selection === "links_text") {
 								$("dl[id='settings[footer_color_bg]']").show();
@@ -276,9 +277,26 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								$("dl[id='settings[footer_text_fax]']").hide();
 								$("dl[id='settings[footer_text_email]']").hide();
 								$("dl[id='settings[footer_text]']").show();
-								$("dl[id='settings[footer_facebook_icon]']").hide();
+								$("dl[id='MEDIA_footer_facebook_icon']").hide();
 								$("dl[id='settings[footer_facebook_link]']").hide();
-								$("dl[id='settings[footer_logo]']").hide();
+								$("dl[id='MEDIA_footer_logo']").hide();
+							}
+							else if (selection === "text") {
+								$("dl[id='settings[footer_color_bg]']").hide();
+								$("dl[id='settings[footer_color_box]']").hide();
+								$("dl[id='settings[footer_color_font]']").show();
+								$("dl[id='settings[footer_text_company]']").hide();
+								$("dl[id='settings[footer_text_ceo]']").hide();
+								$("dl[id='settings[footer_text_street]']").hide();
+								$("dl[id='settings[footer_text_zip_city]']").hide();
+								$("dl[id='settings[footer_text_phone]']").hide();
+								$("dl[id='settings[footer_text_mobile]']").hide();
+								$("dl[id='settings[footer_text_fax]']").hide();
+								$("dl[id='settings[footer_text_email]']").hide();
+								$("dl[id='settings[footer_text]']").show();
+								$("dl[id='MEDIA_footer_facebook_icon']").hide();
+								$("dl[id='settings[footer_facebook_link]']").hide();
+								$("dl[id='MEDIA_footer_logo']").hide();
 							}
 						}
 
@@ -346,7 +364,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								if($d2u_template->getD2UId() === "05-1" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_05_1_logo', 'template_logo_2', $this->getConfig('template_logo_2'));
 									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_05_1_logo_link', 'settings[template_logo_2_link]', $this->getConfig('template_logo_2_link'), FALSE, FALSE);
-									d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text', 'settings[template_05_1_footer_text]', $this->getConfig('template_05_1_footer_text'), FALSE, FALSE, "text");
 									d2u_addon_backend_helper::form_textarea('d2u_helper_settings_template_05_1_info_text', 'settings[template_05_1_info_text]', $this->getConfig('template_05_1_info_text'), 5, FALSE, FALSE, TRUE);
 								}
 							}

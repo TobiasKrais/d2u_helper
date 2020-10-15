@@ -17,3 +17,6 @@ else if ($footer_type === 'links_logo_address') {
 else if ($footer_type === 'links_text') {
 	echo $fragment->parse('d2u_template_footer_links_text.php');
 }
+else if ($footer_type === 'text') {
+	echo $fragment->parse('d2u_template_footer_text.php');
+}

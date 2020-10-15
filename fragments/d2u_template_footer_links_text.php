@@ -1,7 +1,7 @@
 <div class="row">
 	<?php
 		$d2u_helper = rex_addon::get('d2u_helper');
-		if($d2u_helper->hasConfig('template_footer_text') && $d2u_helper->getConfig('template_footer_text') != "") {
+		if($d2u_helper->hasConfig('footer_text') && $d2u_helper->getConfig('footer_text') != "") {
 			print '<div class="col-12 col-md-5 col-lg-7">';
 		}
 		else {
@@ -15,9 +15,9 @@
 		}
 		print '</div>';
 
-		if($d2u_helper->hasConfig('template_footer_text') && $d2u_helper->getConfig('template_footer_text') != "") {
+		if($d2u_helper->hasConfig('footer_text') && $d2u_helper->getConfig('footer_text') != "") {
 			print '<div class="col-12 col-md-7 col-lg-5">';
-			print '<h2>'. $d2u_helper->getConfig('template_footer_text') .'</h2>';
+			print '<h2>'. $d2u_helper->getConfig('footer_text') .'</h2>';
 			print '</div>';
 		}
 	?>

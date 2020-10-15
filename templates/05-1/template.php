@@ -191,9 +191,9 @@
 							print $this->getArticle();
 
 							// Footer
-							if($d2u_helper->getConfig('template_05_1_footer_text', '') !== '') {
-								print '<div class="col-12" id="footer">'. $d2u_helper->getConfig('template_05_1_footer_text') .'</div>';
-							}
+							print '<div class="col-12" id="footer">';
+							echo $fragment->parse('d2u_template_footer.php');
+							print '</div>';
 						?>
 					</div>
 				</div>

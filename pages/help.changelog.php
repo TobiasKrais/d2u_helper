@@ -9,9 +9,11 @@
 			<li>Templates: alle Templates um ein Icon für die Seitensuche erweitert, wenn das Addon search_it installiert und in den Einstellungen der Artikel mit der Suche hinterlegt ist.</li>
 			<li>Templates Bugfix: beim Aufheben einer Verknüpfung eines Templates wurde der Template Key nicht gelöscht.</li>
 			<li>Templates: Einstellungen für Templates Footer vereinheitlicht. Folgende Einstellungen wurden umbenannt:<br>
+				template_02_1_footer_text => footer_text<br>
 				template_04_1_footer_logo => footer_logo<br>
 				template_04_2_facebook_icon => footer_facebook_icon<br>
-				template_04_2_facebook_link => footer_facebook_link</li>
+				template_04_2_facebook_link => footer_facebook_link<br>
+				template_05_1_footer_text => footer_text</li>
 			<li>Notices beim Speichern der Einstellungen entfernt.</li>
 			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift" Bildtitel kann optional angezeigt werden.</li>
 			<li>Modul 03-1 "Bild" Bildtitel kann optional angezeigt werden.</li>

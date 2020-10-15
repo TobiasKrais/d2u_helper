@@ -265,6 +265,10 @@ if($this->hasConfig('template_02_1_footer_text')) {
 	$this->setConfig('footer_text', $this->getConfig('template_02_1_footer_text'));
 	$this->removeConfig('template_02_1_footer_text');
 }
+if($this->hasConfig('template_05_1_footer_text')) {
+	$this->setConfig('footer_text', $this->getConfig('template_05_1_footer_text'));
+	$this->removeConfig('template_05_1_footer_text');
+}
 if($this->hasConfig('template_04_1_footer_logo')) {
 	$this->setConfig('footer_logo', $this->getConfig('template_04_1_footer_logo'));
 	$this->removeConfig('template_04_1_footer_logo');
@@ -306,6 +310,9 @@ if (rex_version::compare($this->getVersion(), '1.8.0', '<')) {
 		}
 		else if($d2u_template->getD2UId() === "04-2" && $d2u_template->isInstalled()) {
 			$this->setConfig('footer_type', 'box_logo');
+		}
+		else if($d2u_template->getD2UId() === "05-1" && $d2u_template->isInstalled()) {
+			$this->setConfig('footer_type', 'text');
 		}
 	}
 }
