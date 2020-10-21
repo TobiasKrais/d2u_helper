@@ -3,7 +3,7 @@ $clangs = rex_clang::getAll(TRUE);
 if(count($clangs) > 1) {
 ?>
 
-<button id="lang_chooser_button">
+<button id="lang_chooser_button" data-toggle="modal" data-target="#lang_chooser_modal">
 	<?php
 		if(rex_config::get('d2u_helper', 'header_lang_icon', '') !== "") {
 			print '<img src="'. rex_url::media(rex_config::get('d2u_helper', 'header_lang_icon', '')) .'">';
@@ -22,48 +22,29 @@ if(count($clangs) > 1) {
 	?>
 </button>
 
-<div id="lang_chooser_modal" class="lang_chooser_modal">
-	<div class="lang_chooser_modal_content">
-		<span class="lang_chooser_close">&times;</span>
-		<ul>
-			<?php
-				$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
-				foreach($clangs as $rex_clang) {
-					$link = isset($alternate_urls[$rex_clang->getId()]) ? $alternate_urls[$rex_clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $rex_clang->getId());
-					print '<li><a href="'. $link . ($rex_clang->getId() == rex_clang::getStartId() && rex_article::getCurrentId() == rex_yrewrite::getCurrentDomain()->getStartId() ? '?clang='. $rex_clang->getId() : '') .'">'
-							.'<img class="lang-chooser-flag" src="'. rex_url::media($rex_clang->getValue('clang_icon')) .'" loading="lazy">'
-							.'<span class="lang-text">'. $rex_clang->getName() .'</span></a></li>';
-				}
-			?>
-		</ul>
+<div class="modal fade" id="lang_chooser_modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+	  <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<ul>
+					<?php
+						$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
+						foreach($clangs as $rex_clang) {
+							$link = isset($alternate_urls[$rex_clang->getId()]) ? $alternate_urls[$rex_clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $rex_clang->getId());
+							print '<li><a href="'. $link . ($rex_clang->getId() == rex_clang::getStartId() && rex_article::getCurrentId() == rex_yrewrite::getCurrentDomain()->getStartId() ? '?clang='. $rex_clang->getId() : '') .'">'
+									.'<img class="lang-chooser-flag" src="'. rex_url::media($rex_clang->getValue('clang_icon')) .'" loading="lazy">'
+									.'<span class="lang-text">'. $rex_clang->getName() .'</span></a></li>';
+						}
+					?>
+				</ul>
+			</div>
+		</div>
 	</div>
 </div>
-<script>
-	// Get the modal
-	var modal = document.getElementById("lang_chooser_modal");
-
-	// Get the button that opens the modal
-	var btn = document.getElementById("lang_chooser_button");
-
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("lang_chooser_close")[0];
-
-	// When the user clicks on the button, open the modal
-	btn.onclick = function() {
-		modal.style.display = "block";
-	};
-
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
-		modal.style.display = "none";
-	};
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-		if (event.target === modal) {
-			modal.style.display = "none";
-		}
-	};
-</script>
 <?php
 }

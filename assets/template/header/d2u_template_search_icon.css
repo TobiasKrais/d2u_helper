@@ -6,8 +6,9 @@
 }
 #search_icon svg {
 	color: navi_color_font;
-	width: 25px;
 	height: 25px;
+	margin: 0 0 3px 0;
+	width: 25px;
 }
 #fragment-search {
 	border: 1px solid #aaa;
