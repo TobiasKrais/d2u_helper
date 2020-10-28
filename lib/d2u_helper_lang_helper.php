@@ -37,6 +37,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_search_template_ceo' => 'Managing director',
 		'd2u_helper_module_14_search_template_contact' => 'Contact',
 		'd2u_helper_module_14_search_template_links' => 'Links',
+		'd2u_helper_module_14_validate_spam_detected' => 'Your request was recognized as spam and rejected. You were either too fast or there were too many requests from your IP address. Please take a few seconds to fill out the form or try again later.',
 	];
 	
 	/**
@@ -73,6 +74,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_search_template_ceo' => 'Directeurs généraux',
 		'd2u_helper_module_14_search_template_contact' => 'Contact',
 		'd2u_helper_module_14_search_template_links' => 'Liens',
+		'd2u_helper_module_14_validate_spam_detected' => 'Votre demande a été reconnue comme spam et rejetée. Vous étiez soit trop rapide, soit il y avait trop de demandes de votre adresse IP. Veuillez prendre quelques secondes pour remplir le formulaire et réessayer plus tard.',
 	];
 	
 	/**
@@ -98,7 +100,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_11_validate_phone' => 'Bitte geben Sie Ihre Telefonnummer an.',
 		'd2u_helper_module_11_validate_privacy_policy' => 'Der Datenschutzerklärung muss zugestimmt werden.',
 		'd2u_helper_module_11_validate_spambots' => 'Spamverdacht: Sie haben das Formular so schnell ausgefüllt, wie es nur ein Spambot tun kann. Bitte lassen Sie sich beim ausfüllen der Felder etwas mehr Zeit.',
-		'd2u_helper_module_11_validate_spam_detected' => 'Ihre Anfrage wurde als Spam erkannt und gelöscht. Bitte versuchen Sie es in einigen Minuten erneut oder wenden Sie sich persönlich an uns.',
+		'd2u_helper_module_11_validate_spam_detected' => 'Ihre Anfrage wurde als Spam eingestuft und verworfen. Sie waren entweder zu schnell oder es wurden zu viele Anfragen von Ihrer IP-Adresse registriert. Bitte versuchen Sie es später oder wenden Sie sich persönlich an uns.',
 		'd2u_helper_module_11_validate_title' => 'Fehler beim Senden:',
 		'd2u_helper_module_11_zip' => 'Postleitzahl',
 		'd2u_helper_module_14_enter_search_term' => 'Suchbegriff eingeben',
@@ -109,6 +111,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_search_template_ceo' => 'Geschäftsführung',
 		'd2u_helper_module_14_search_template_contact' => 'Kontakt',
 		'd2u_helper_module_14_search_template_links' => 'Links',
+		'd2u_helper_module_14_validate_spam_detected' => 'Ihre Anfrage wurde als Spam eingestuft und verworfen. Sie waren entweder zu schnell oder es wurden zu viele Anfragen von Ihrer IP-Adresse registriert. Bitte lassen Sie sich beim Ausfüllen des Formulars ein paar Sekunden Zeit oder versuchen Sie es später erneut.',
 	];
 	
 	/**
@@ -145,6 +148,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_search_template_ceo' => 'Directores generales',
 		'd2u_helper_module_14_search_template_contact' => 'Contacto',
 		'd2u_helper_module_14_search_template_links' => 'Enlaces de internet',
+		'd2u_helper_module_14_validate_spam_detected' => 'Su solicitud fue reconocida como spam y rechazada. O fue demasiado rápido o hubo demasiadas solicitudes de su dirección IP. Tómese unos segundos para completar el formulario y vuelva a intentarlo más tarde.',
 	];
 	
 	/**
@@ -181,6 +185,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_search_template_ceo' => 'Управляющие директора',
 		'd2u_helper_module_14_search_template_contact' => 'Связаться с нами',
 		'd2u_helper_module_14_search_template_links' => 'Интернет-ссылки',
+		'd2u_helper_module_14_validate_spam_detected' => 'Ваш запрос был признан спамом и отклонен. Либо вы действовали слишком быстро, либо с вашего IP-адреса поступило слишком много запросов. Пожалуйста, уделите несколько секунд, чтобы заполнить форму, и повторите попытку позже.',
 	];
 	
 	/**
@@ -217,6 +222,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_search_template_ceo' => '常务董事',
 		'd2u_helper_module_14_search_template_contact' => '联系',
 		'd2u_helper_module_14_search_template_links' => '互联网链接',
+		'd2u_helper_module_14_validate_spam_detected' => '您的请求被确认为垃圾邮件，但被拒绝了。 您的速度太快，或者来自IP地址的请求太多。 请花几秒钟填写表格，然后重试。',
 	];
 	
 	/**

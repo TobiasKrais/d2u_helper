@@ -15,20 +15,55 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 
 <section class="search_it-search">
 	<a name="search-field"></a>
-	<form class="search_it-form" id="search_it-form1" action="<?php echo $article->getUrl(); ?>#search-results" method="get">
-		<div class="search_it-flex">
-			<?php
-				echo '<input type="text" id="search_it_search" name="search" value="'. ($request ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" autofocus />';
-			?>
-			<button class="search_it-button" type="submit">
-				<img src="<?php print rex_url::addonAssets('d2u_helper', 'icon_search.svg'); ?>">
-			</button>
-		</div>
-	</form>
+<?php
+	if(rex_addon::get('yform_spam_protection')->isAvailable()) {
+		$yform = new rex_yform();
+
+		$form_data = 'text|search||||{"placeholder":"'. \Sprog\Wildcard::get('d2u_helper_module_14_enter_search_term') .'"}
+				html|button||<button class="search_it_yform_button" type="submit"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M23.354 22.646l-5-5-.012-.007a8.532 8.532 0 10-.703.703l.007.012 5 5a.5.5 0 00.707-.707zM12 19.5a7.5 7.5 0 117.5-7.5 7.508 7.508 0 01-7.5 7.5z"></path></svg></button>
+				spam_protection|honeypot|Bitte nicht ausfüllen|'. $tag_open .'d2u_helper_module_14_validate_spam_detected'. $tag_close .'|0'. PHP_EOL;					
+		$yform->setFormData(trim($form_data));
+
+		$yform->setObjectparams("submit_btn_show", false);
+		$yform->setObjectparams("form_action", rex_getUrl(rex_article::getCurrentId()));
+		$yform->setObjectparams("form_anchor", "search-field");
+		$yform->setObjectparams("Error-occured", \Sprog\Wildcard::get('d2u_helper_module_11_validate_title'));
+		$yform->setObjectparams("real_field_names", TRUE);
+		$yform->setObjectparams("form_showformafterupdate", true);
+
+		echo $yform->getForm();
+	
+		if(rex_plugin::get('search_it', 'autocomplete')->isAvailable()) {
+			print '<script>'. PHP_EOL;
+			print 'jQuery(document).ready(function() {'. PHP_EOL;
+			print 'jQuery(function() {'. PHP_EOL;
+			print 'jQuery(\'input[name="search"]\').suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),'. PHP_EOL;
+			print '{ onSelect: function(event, ui) { $("#formular").submit(); return false; }'. PHP_EOL;
+			print '});'. PHP_EOL;
+			print '});'. PHP_EOL;
+			print '});'. PHP_EOL;
+			print '</script>'. PHP_EOL;
+		}
+	}
+	else {
+?>
+		<form class="search_it-form" id="search_it-form1" action="<?php echo $article->getUrl(); ?>#search-results" method="get">
+			<div class="search_it-flex">
+				<?php
+					echo '<input type="text" id="search_it_search" name="search" value="'. ($request ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" autofocus />';
+				?>
+				<button class="search_it-button" type="submit">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M23.354 22.646l-5-5-.012-.007a8.532 8.532 0 10-.703.703l.007.012 5 5a.5.5 0 00.707-.707zM12 19.5a7.5 7.5 0 117.5-7.5 7.508 7.508 0 01-7.5 7.5z"></path></svg>
+				</button>
+			</div>
+		</form>
+<?php
+	}
+?>
 </section>
 
 <?php
-if($request) { // Wenn ein Suchbegriff eingegeben wurde
+if(((rex_addon::get('yform_spam_protection')->isAvailable() && count($yform->getObjectparams('warning')) == 0) || !rex_addon::get('yform_spam_protection')->isAvailable()) && $request) { // Wenn ein Suchbegriff eingegeben wurde
 	$server = rtrim(rex::getServer(), "/");
 	
 	print '<section class="search_it-hits">';
@@ -182,22 +217,6 @@ if($request) { // Wenn ein Suchbegriff eingegeben wurde
 		}
 	}
 	print "</section>";
-}
-
-if(rex_plugin::get('search_it', 'autocomplete')->isAvailable()) {
-?>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		jQuery(function() {
-			jQuery("#search_it_search").suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),
-				{
-					onSelect: function(event, ui) { $('.search_it-form').submit(); return false;
-				}
-			});
-		});
-	});
-</script>
-<?php
 }
 ?>
 </div>

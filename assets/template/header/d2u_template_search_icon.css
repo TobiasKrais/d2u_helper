@@ -4,12 +4,17 @@
 	border: none;
 	float: right;
 }
+#search_icon input {
+	height: 25px;
+}
 #search_icon svg {
 	color: navi_color_font;
 	height: 25px;
 	margin: 0 0 3px 0;
 	width: 25px;
 }
+
+/* YForm input field styles */
 #fragment-search {
 	border: 1px solid #aaa;
 	float: right;
@@ -17,13 +22,28 @@
 	max-width: 100%;
 	position: relative;
 }
-#fragment-search button {
-	position: absolute;
-	right: 0;
-	top: 0;
-}
 #fragment-search input {
 	border: none;
 	color: #aaa;
 	font-size: 16px;
+	height: 25px;
+	padding: 2px 30px 2px 5px;
+}
+#fragment-search label {
+	display: none;
+}
+#fragment-search .form-group {
+	margin-bottom: 0;
+}
+#fragment-search .search_it_yform_button {
+	background-color: transparent;
+	bottom: 0;
+	color: #aaa;
+	height: 38px;
+	position: absolute;
+	right: 0;
+	width: 38px;
+}
+#fragment-search .search_it_yform_button svg {
+	margin-top: 10px;
 }

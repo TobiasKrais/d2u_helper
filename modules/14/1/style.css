@@ -1,3 +1,27 @@
+/* with YFrom */
+.search_it-search #yform-formular-search label {
+	display: none;
+}
+.search_it-search #rex-yform {
+	position: relative;
+}
+.search_it-search #rex-yform button {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.search_it-search #rex-yform input {
+	border-radius: 0;
+}
+.search_it_yform_button {
+	background-color: article_color_h;
+	border: none;
+	color: white;
+	height: 50px;
+	width: 50px;
+}
+
+/* without YForm */
 .search_it-search {
 	padding-bottom: 2em;
 }
@@ -13,6 +37,12 @@
 	position: absolute;
 	right: 0;
 	top: 0;
+}
+.search_it-button svg {
+	color: article_color_bg;
+	height: 50px;
+	margin: 0 5px;
+	width: 30px;
 }
 .search_it-flex {
 	position: relative;

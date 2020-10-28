@@ -21,6 +21,7 @@
 			<li>Modul 11-1 "YForm Kontaktformular": wenn Addon yform_spam_protection installiert ist, wird es verwendet.</li>
 			<li>Modul 14-1 "Search It Suchmodul": Bugfix - Dokumente aus dem Medienpool wurden nicht angezeigt, wenn kein YCom installiert war.
 					Außerdem: Autofokus des Suchfeldes und Sprunganker zu den Suchergebnissen.</li>
+					Und: Wenn das Addon yform_spam_protection installiert ist, wird es zur Spamabwehr genutzt.
 			<li>Bootstrap 4.5.3 Upgrade.</li>
 		</ul>
 		<p>1.7.0</p>

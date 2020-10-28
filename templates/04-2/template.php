@@ -121,8 +121,8 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					// Navi
 					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .'">';
 
-					// Search icon
-					if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
+					// Search field
+					if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0 && rex_addon::get('yform_spam_protection')->isAvailable()) {
 						print '<div id="search_icon_div">';
 						$fragment->setVar('showSearchField', true, false);
 						echo $fragment->parse('d2u_template_search_icon.php');
@@ -154,7 +154,14 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 							echo $fragment->parse('d2u_template_language_modal.php');
 							print '</div>';
 						}
-					
+						
+						// Search icon
+						if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0 && !rex_addon::get('yform_spam_protection')->isAvailable()) {
+							print '<div id="search_icon_div">';
+							echo $fragment->parse('d2u_template_search_icon.php');
+							print '</div>';
+						}
+
 						print '</div>';
 					}
 				?>
