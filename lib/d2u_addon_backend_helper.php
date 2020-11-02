@@ -39,7 +39,7 @@ class d2u_addon_backend_helper {
 			$args .= "&args[types]=$filetypes";
 			} 
 		if($category)	{
-			$args .= "&rex_file_category=2&args[category]=$category";
+			$args .= "&rex_file_category=$category";
 			}
 		$js_onclick_open = "openREX" . $type_html . "('" . $field_id . "', '".$args."');return false;";
 		$fields = '<a href="#" class="btn btn-popup" onclick="' . $js_onclick_open . '" title="' . rex_i18n::msg('var_media_open') . '"><i class="rex-icon rex-icon-open-mediapool"></i></a>';
