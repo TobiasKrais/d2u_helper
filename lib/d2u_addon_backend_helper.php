@@ -29,18 +29,25 @@ class d2u_addon_backend_helper {
 	 * @param bool $isList TRUE if field is a medialist field
 	 * @return string HTML String with buttons
 	 */
-	public static function getMediaManagingButtons($field_id, $isList = FALSE) {
+	public static function getMediaManagingButtons($field_id, $isList = FALSE, $filetypes = '', $category = '') {
 		$type_html = "Media";
 		if ($isList) {
 			$type_html = "Medialist";
 		}
-		$js_onclick_open = "openREX" . $type_html . "('" . $field_id . "', '');return false;";
+		$args = "";
+		if($filetypes) {
+			$args .= "&args[types]=$filetypes";
+			} 
+		if($category)	{
+			$args .= "&rex_file_category=$category";
+			}
+		$js_onclick_open = "openREX" . $type_html . "('" . $field_id . "', '".$args."');return false;";
 		$fields = '<a href="#" class="btn btn-popup" onclick="' . $js_onclick_open . '" title="' . rex_i18n::msg('var_media_open') . '"><i class="rex-icon rex-icon-open-mediapool"></i></a>';
-		$js_onclick_add = "addREX" . $type_html . "('" . $field_id . "', '');return false;";
+		$js_onclick_add = "addREX" . $type_html . "('" . $field_id . "','".$args."');return false;";
 		$fields .= '<a href="#" class="btn btn-popup" onclick="' . $js_onclick_add . '" title="' . rex_i18n::msg('var_media_new') . '"><i class="rex-icon rex-icon-add-media"></i></a>';
 		$js_onclick_delete = "deleteREX" . $type_html . "('" . $field_id . "');return false;";
 		$fields .= '<a href="#" class="btn btn-popup" onclick="' . $js_onclick_delete . '" title="' . rex_i18n::msg('var_media_remove') . '"><i class="rex-icon rex-icon-delete-media"></i></a>';
-		$js_onclick_view = "viewREX" . $type_html . "('" . $field_id . "', '');return false;";
+		$js_onclick_view = "viewREX" . $type_html . "('" . $field_id . "','".$args."');return false;";
 		$fields .= '<a href="#" class="btn btn-popup" onclick="' . $js_onclick_view . '" title="' . rex_i18n::msg('var_media_view') . '"><i class="rex-icon rex-icon-view-media"></i></a>';
 		return $fields;
 	}
@@ -369,20 +376,24 @@ class d2u_addon_backend_helper {
 	 * @param string $fieldname Input field name (without REX_INPUT_MEDIA part).
 	 * @param string $value Field value.
 	 * @param bool $readonly TRUE if field should have readonly attribute.
+	 * @param string $filetypes for allowed filetypes.
+	 * @param string $category for default media-category.
 	 */
-	public static function form_mediafield($message_id, $fieldname, $value, $readonly = FALSE) {
+	public static function form_mediafield($message_id, $fieldname, $value, $readonly = FALSE, $filetypes = '', $category = '') {
+		$filetypes = strtolower(str_replace(' ', '', $filetypes));
 		print '<dl class="rex-form-group form-group" id="MEDIA_'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
 		print '<input class="form-control" type="text" name="REX_INPUT_MEDIA[' . $fieldname . ']" value="' . $value . '" id="REX_MEDIA_' . $fieldname . '" readonly="readonly">';
 		print '<span class="input-group-btn">';
 		if (!$readonly) {
-			print d2u_addon_backend_helper::getMediaManagingButtons($fieldname);
+			print d2u_addon_backend_helper::getMediaManagingButtons($fieldname, FALSE, $filetypes, $category);
 		}
 		print '</span>';
 		print '</div><div class="rex-js-media-preview"></div></dd>';
 		print '</dl>';
 	}
+
 
 	/**
 	 * Prints a row with an medialist input field
