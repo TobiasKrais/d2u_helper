@@ -27,20 +27,22 @@ class d2u_addon_backend_helper {
 	 * add, delete and view medias
 	 * @param string $field_id Name of die media field
 	 * @param bool $isList TRUE if field is a medialist field
+	 * @param string $filetypes Comma separated list of filetypes.
+	 * @param int $category_id Comma separated list of filetypes.
 	 * @return string HTML String with buttons
 	 */
-	public static function getMediaManagingButtons($field_id, $isList = FALSE, $filetypes = '', $category = '') {
+	public static function getMediaManagingButtons($field_id, $isList = FALSE, $filetypes = '', $category_id = 0) {
 		$type_html = "Media";
 		if ($isList) {
 			$type_html = "Medialist";
 		}
 		$args = "";
 		if($filetypes) {
-			$args .= "&args[types]=$filetypes";
-			} 
-		if($category)	{
-			$args .= "&rex_file_category=$category";
-			}
+			$args .= "&args[types]=". $filetypes;
+		} 
+		if($category_id > 0)	{
+			$args .= "&rex_file_category=". $category_id;
+		}
 		$js_onclick_open = "openREX" . $type_html . "('" . $field_id . "', '".$args."');return false;";
 		$fields = '<a href="#" class="btn btn-popup" onclick="' . $js_onclick_open . '" title="' . rex_i18n::msg('var_media_open') . '"><i class="rex-icon rex-icon-open-mediapool"></i></a>';
 		$js_onclick_add = "addREX" . $type_html . "('" . $field_id . "','".$args."');return false;";
@@ -377,9 +379,9 @@ class d2u_addon_backend_helper {
 	 * @param string $value Field value.
 	 * @param bool $readonly TRUE if field should have readonly attribute.
 	 * @param string $filetypes for allowed filetypes.
-	 * @param string $category for default media-category.
+	 * @param int $category_id for default media-category.
 	 */
-	public static function form_mediafield($message_id, $fieldname, $value, $readonly = FALSE, $filetypes = '', $category = '') {
+	public static function form_mediafield($message_id, $fieldname, $value, $readonly = FALSE, $filetypes = '', $category_id = 0) {
 		$filetypes = strtolower(str_replace(' ', '', $filetypes));
 		print '<dl class="rex-form-group form-group" id="MEDIA_'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
@@ -387,7 +389,7 @@ class d2u_addon_backend_helper {
 		print '<input class="form-control" type="text" name="REX_INPUT_MEDIA[' . $fieldname . ']" value="' . $value . '" id="REX_MEDIA_' . $fieldname . '" readonly="readonly">';
 		print '<span class="input-group-btn">';
 		if (!$readonly) {
-			print d2u_addon_backend_helper::getMediaManagingButtons($fieldname, FALSE, $filetypes, $category);
+			print d2u_addon_backend_helper::getMediaManagingButtons($fieldname, FALSE, $filetypes, $category_id);
 		}
 		print '</span>';
 		print '</div><div class="rex-js-media-preview"></div></dd>';
