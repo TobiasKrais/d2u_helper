@@ -54,13 +54,16 @@ class d2u_mobile_navi_slicknav {
 		print '<div id="mobile-menu">';
 		print '<ul id="slicknav-mobile-menu">';
 		foreach(d2u_mobile_navi_slicknav::getCategories($cat_parent_id) as $lev1) {
-			if(count($lev1->getChildren(TRUE)) == 0) {
-				// Without Redaxo submenu
-				print '<li'. (rex_article::getCurrentId() == $lev1->getId() || in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'" title="'. $lev1->getName() .'">'. $lev1->getName() .'</a></li>';
-			}
-			else {
-				// With submenu
-				d2u_mobile_navi_slicknav::getSubmenu($lev1);
+			// Check permissions if YCom ist installed
+			if(!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev1->getStartArticle()))) {
+				if(count($lev1->getChildren(TRUE)) == 0) {
+					// Without Redaxo submenu
+						print '<li'. (rex_article::getCurrentId() == $lev1->getId() || in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'" title="'. $lev1->getName() .'">'. $lev1->getName() .'</a></li>';
+				}
+				else {
+					// With submenu
+					d2u_mobile_navi_slicknav::getSubmenu($lev1);
+				}
 			}
 		}
 		print '</ul>';
@@ -78,18 +81,18 @@ class d2u_mobile_navi_slicknav {
 		print '<ul>';
 		$cat_name = rex_config::get('d2u_helper', 'submenu_use_articlename', FALSE) == TRUE ? rex_article::get($rex_category->getId())->getName() : strtoupper($rex_category->getName());
 		print '<li'. (rex_article::getCurrentId() == $rex_category->getId() || in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. $cat_name .'">'. $cat_name .'</a></li>';
-//		if(rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') == 'show' && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_category->getId()) {
-//			d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
-//		}
+
 		foreach($rex_category->getChildren(true) as $rex_subcategory) {
-			$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_subcategory->getId());
-			if(count($rex_subcategory->getChildren(true)) == 0 && !$has_machine_submenu) {
-				// Without Redaxo submenu
-				print '<li'. (rex_article::getCurrentId() == $rex_subcategory->getId() || in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
-			}
-			else {
-				// Mit Untermenü
-				d2u_mobile_navi_slicknav::getSubmenu($rex_subcategory);
+			// Check permissions if YCom ist installed
+			if(!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($rex_subcategory->getStartArticle()))) {
+				if(count($rex_subcategory->getChildren(true)) == 0) {
+					// Without Redaxo submenu
+					print '<li'. (rex_article::getCurrentId() == $rex_subcategory->getId() || in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
+				}
+				else {
+					// Mit Untermenü
+					d2u_mobile_navi_slicknav::getSubmenu($rex_subcategory);
+				}
 			}
 		}
 		print '</ul>';
