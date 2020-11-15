@@ -199,6 +199,9 @@ class D2UModuleManager {
 		$modules[] = new D2UModule("14-1",
 			"Search It Suchmodul",
 			2);
+		$modules[] = new D2UModule("15-1",
+			"Kategorie mit Liste der Unterkategorien",
+			1);
 		// 20-x reserved for D2U Addresss
 		// 21-x reserved for D2U History
 		// 22-x reserved for D2U Staff
@@ -482,8 +485,8 @@ class D2UModule {
 	 * @return string JS
 	 */
 	public function getJS() {
-		if(D2UModule::MODULE_CSS_FILE != "" && file_exists($this->module_folder . D2UModule::MODULE_CSS_FILE)){
-			return file_get_contents($this->module_folder . D2UModule::MODULE_CSS_FILE);
+		if(D2UModule::MODULE_JS_FILE != "" && file_exists($this->module_folder . D2UModule::MODULE_JS_FILE)){
+			return file_get_contents($this->module_folder . D2UModule::MODULE_JS_FILE);
 		}
 		return "";
 	}

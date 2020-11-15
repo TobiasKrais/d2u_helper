@@ -78,6 +78,9 @@ if(class_exists('D2UModuleManager')) {
 	$modules[] = new D2UModule("14-1",
 		"Search It Suchmodul",
 		2);
+	$modules[] = new D2UModule("15-1",
+		"Kategorie mit Liste der Unterkategorien",
+		1);
 	$d2u_module_manager = new D2UModuleManager($modules);
 	$d2u_module_manager->autoupdate();
 }

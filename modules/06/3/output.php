@@ -21,7 +21,7 @@ $media_filename = "REX_MEDIA[1]";
 $media = rex_media::get($media_filename);
 if($media instanceof rex_media) {
 	print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
-	$plyr_media = rex_plyr::outputMedia($media_filename, 'play-large,play,progress,airplay,pip' /*, '/media/cover/REX_MEDIA[2]'*/);
+	$plyr_media = rex_plyr::outputMedia($media_filename, 'play-large,play,progress,current-time,duration,restart,volume,mute,pip,fullscreen' /*, '/media/cover/REX_MEDIA[2]'*/);
 	print $plyr_media;
 	print '</div>';
 }

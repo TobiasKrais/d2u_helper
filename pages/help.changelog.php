@@ -19,9 +19,10 @@
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" ermöglicht nun auch nur 2 Bilder und 1 Bild pro Zeile. Bilder werden nun auch lazy geladen.</li>
 			<li>Modul 06-3 "Video mit Plyr einbinden" Neues Modul zur Einbindung von Videos mit dem Plyr Addon.</li>
 			<li>Modul 11-1 "YForm Kontaktformular": wenn Addon yform_spam_protection installiert ist, wird es verwendet.</li>
-			<li>Modul 14-1 "Search It Suchmodul": Bugfix - Dokumente aus dem Medienpool wurden nicht angezeigt, wenn kein YCom installiert war.
-					Außerdem: Autofokus des Suchfeldes und Sprunganker zu den Suchergebnissen.</li>
-					Und: Wenn das Addon yform_spam_protection installiert ist, wird es zur Spamabwehr genutzt.
+			<li>Modul 14-1 "Search It Suchmodul": Bugfix - Dokumente aus dem Medienpool wurden nicht angezeigt, wenn kein YCom installiert war.<br>
+				Außerdem: Autofokus des Suchfeldes und Sprunganker zu den Suchergebnissen.<br>
+				Und: Wenn das Addon yform_spam_protection installiert ist, wird es zur Spamabwehr genutzt.</li>
+			<li>Neues Modul "15-1 Kategorie mit Liste der Unterkategorien".</li>
 			<li>Notices beim Speichern der Einstellungen entfernt.</li>
 			<li>Menüs die das Addon zur Verfügung stellt prüft nun die angezeigten Artikel auf YCom Benutzerrechte und zeigt sie nur an, wenn die Rechte vorhanden sind.</li>
 			<li>Bootstrap 4.5.3 Upgrade.</li>
