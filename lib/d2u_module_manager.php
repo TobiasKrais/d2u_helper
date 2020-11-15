@@ -165,7 +165,7 @@ class D2UModuleManager {
 			10);
 		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
-			10);
+			11);
 		$modules[] = new D2UModule("05-2",
 			"Artikel aus anderer Sprache übernehmen",
 			4);
@@ -180,13 +180,13 @@ class D2UModuleManager {
 			1);
 		$modules[] = new D2UModule("10-1",
 			"Box mit Bild und Ueberschrift",
-			2);
+			3);
 		$modules[] = new D2UModule("10-2",
 			"Box mit Bild und Text",
-			4);
+			5);
 		$modules[] = new D2UModule("10-3",
 			"Box mit Downloads",
-			5);
+			6);
 		$modules[] = new D2UModule("11-1",
 			"YForm Kontaktformular (DSGVO kompatibel)",
 			6);

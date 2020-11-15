@@ -125,6 +125,6 @@
 		(Die Titel der Dokumente werden im Medienpool bearbeitet.)
 	</div>
 	<div class="col-xs-8">
-		REX_MEDIALIST[id=1 type="pdf" widget=1]
+		REX_MEDIALIST[id=1 types="pdf" widget=1]
 	</div>
 </div>

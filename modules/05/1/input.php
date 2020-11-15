@@ -62,7 +62,7 @@
 		Medienpool PDF Datei
 	</div>
 	<div class="col-xs-8">
-		REX_MEDIA[id="1" type="pdf" widget="1"]
+		REX_MEDIA[id="1" types="pdf" widget="1"]
 	</div>
 </div>
 

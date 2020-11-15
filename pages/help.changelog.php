@@ -23,6 +23,8 @@
 				Außerdem: Autofokus des Suchfeldes und Sprunganker zu den Suchergebnissen.<br>
 				Und: Wenn das Addon yform_spam_protection installiert ist, wird es zur Spamabwehr genutzt.</li>
 			<li>Neues Modul "15-1 Kategorie mit Liste der Unterkategorien".</li>
+			<li>Module 01-2, 03-1, 03-2, 05-1, 06-3, 10-1, 10-2 und 10-3: Bugfix Typeneinschränkungen der Eingabefelder hatte nicht funktioniert.</li>
+			<li>Verschiedene Module: Fehler bei der Typebeschränkung von Medienfeldern behoben.</li>
 			<li>Notices beim Speichern der Einstellungen entfernt.</li>
 			<li>Menüs die das Addon zur Verfügung stellt prüft nun die angezeigten Artikel auf YCom Benutzerrechte und zeigt sie nur an, wenn die Rechte vorhanden sind.</li>
 			<li>Bootstrap 4.5.3 Upgrade.</li>
