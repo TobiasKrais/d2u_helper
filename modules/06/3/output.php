@@ -25,13 +25,11 @@ if($media instanceof rex_media) {
 	print $plyr_media;
 	print '</div>';
 }
-?>
-<script>
-	document.addEventListener("DOMContentLoaded", function(){
-		const players = Plyr.setup('.rex-plyr',{
-			youtube: { 
-				noCookie: true
-			}
-		});
-	});
-</script>
+
+if(!function_exists('loadJsPlyr')) {
+	function loadJsPlyr() {
+		print '<script src="'. rex_url::base('assets/addons/plyr/vendor/plyr/dist/plyr.min.js') .'"></script>';
+		print '<script src="'. rex_url::base('assets/addons/plyr/plyr_init.js') .'"></script>';
+	}
+	loadJsPlyr();
+}
