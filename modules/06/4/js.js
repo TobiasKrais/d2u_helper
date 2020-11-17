@@ -1,45 +1,25 @@
-var players;
+function loadPlaylist(players, player_id, myPlaylist) {
+	$('<div class="plyr-playlist-wrapper" id="wrapper-' + player_id + '"><ul class="plyr-playlist" id="playlist-' + player_id + '"></ul></div>').insertAfter('#player-' + player_id);
 
-$(document).ready(function () {
-	players = Plyr.setup(target, {
-		youtube: { 
-			noCookie: true
-		},
-		iconUrl: 'assets/addons/plyr/vendor/plyr/dist/plyr.svg',
-		blankVideo: 'assets/addons/plyr/vendor/plyr/dist/blank.mp4'
+	var playingclass = "";
+	var items = [];
+	$.each(myPlaylist, function (id, val) {
+		if (0 === id) {
+			playingclass = "pls-playing";
+		}
+		else {
+			playingclass = "";
+		}
+
+		items.push(
+				'<li class="' + playingclass + '"><a href="#" data-type="' + val.type + '" data-video-id="' + val.src + '">' +
+				(val.poster ? '<img class="plyr-miniposter" src="' + val.poster + '"> ' : '') +
+				val.title + (val.author ? " - " + val.author : "") + "</a></li> ");
+
 	});
-	loadPlaylist(target, myPlaylist);
-});
+	$('#playlist-' + player_id).html(items.join(""));
 
-function loadPlaylist(target, myPlaylist) {
-	$("li.pls-playing").removeClass("pls-playing");
-	$(".plyr-playlist-wrapper").remove();
-
-	PlyrPlaylist(".plyr-playlist", myPlaylist);
-
-	function PlyrPlaylist(target, myPlaylist) {
-		$('<div class="plyr-playlist-wrapper"><ul class="plyr-playlist"></ul></div>').insertAfter("#player");
-
-		var playingclass = "";
-		var items = [];
-		$.each(myPlaylist, function (id, val) {
-			if (0 === id) {
-				playingclass = "pls-playing";
-			}
-			else {
-				playingclass = "";
-			}
-
-			items.push(
-					'<li class="' + playingclass + '"><a href="#" data-type="' + val.sources[0].type + '" data-video-id="' + val.sources[0].src + '">' +
-					(val.poster ? '<img class="plyr-miniposter" src="' + val.poster + '"> ' : '') +
-					val.title + (val.author ? " - " + val.author : "") + "</a></li> ");
-
-		});
-		$(target).html(items.join(""));
-
-		setTimeout(function () {}, 600);
-	}
+	setTimeout(function () {}, 600);
 
 	$(document).on("click", "ul.plyr-playlist li a", function (event) {
 		event.preventDefault();
@@ -52,11 +32,16 @@ function loadPlaylist(target, myPlaylist) {
 		var video_id = $(this).data("video-id");
 		// var video_type = $(this).data("type");
 		// var video_title = $(this).text();
+		
+		var playlistID = $(this).parent().parent().attr('id');
+		players.forEach(function (instance) {
+			if(('playlist-' + instance.config.plyrId) === playlistID) {
+				instance.media.setAttribute('src', video_id);
+				instance.play();
+			}
+		});
 
-		players[0].media.setAttribute('src', video_id);
-		players[0].play();
-
-		$(".plyr-playlist").scrollTo(".pls-playing", 300);
+		$('#playlist-' + player_id).scrollTo(".pls-playing", 300);
 	});
 }
 
