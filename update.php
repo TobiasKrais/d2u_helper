@@ -57,6 +57,9 @@ if(class_exists('D2UModuleManager')) {
 	$modules[] = new D2UModule("06-3",
 		"Video mit Plyr einbinden",
 		1);
+	$modules[] = new D2UModule("06-4",
+		"Videoliste mit Plyr einbinden",
+		1);
 	$modules[] = new D2UModule("10-1",
 		"Box mit Bild und Ueberschrift",
 		3);
