@@ -18,59 +18,14 @@ if($offset_lg_cols > 0) {
 }
 
 $media_filenames = preg_grep('/^\s*$/s', explode(",", REX_MEDIALIST[1]), PREG_GREP_INVERT);
-$plyr_id = rand();
 
 print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
-print '<div class="plyr-container">';
-print '<div id="player-'. $plyr_id .'">';
-$plyr_media = rex_plyr::outputMedia($media_filenames[0], 'play-large,play,progress,current-time,duration,restart,volume,mute,pip,fullscreen' /*, '/media/cover/REX_MEDIA[2]'*/);
-print str_replace('class="rex-plyr"', 'class="rex-plyr" id="plyr-'. $plyr_id .'"', 
-	str_replace("data-plyr-config='{", 'data-plyr-config=\'{"plyrId":"'. $plyr_id .'",', $plyr_media)
-);
-
+print rex_plyr::outputMediaPlaylist($media_filenames, 'play-large,play,progress,current-time,duration,restart,volume,mute,pip,fullscreen');
 print '</div>';
-print '</div>';
-print '</div>';
-
 if(!function_exists('loadJsPlyr')) {
 	function loadJsPlyr() {
 		print '<script src="'. rex_url::base('assets/addons/plyr/vendor/plyr/dist/plyr.min.js') .'"></script>';
+		print '<script src="'. rex_url::base('assets/addons/plyr/plyr_playlist.js') .'"></script>';
 	}
 	loadJsPlyr();
 }
-?>
-<script>
-$(document).ready(function () {
-	loadPlaylist(Plyr.setup('#plyr-<?= $plyr_id ?>', {
-			youtube: { 
-				noCookie: true
-			},
-			iconUrl: 'assets/addons/plyr/vendor/plyr/dist/plyr.svg',
-			blankVideo: 'assets/addons/plyr/vendor/plyr/dist/blank.mp4'
-		}),
-		<?= $plyr_id ?>,
-		[
-			<?php
-				$first_element = true;
-				foreach ($media_filenames as $media_filename) {
-					$media = rex_media::get($media_filename);
-					if ($media instanceof rex_media) {
-						if ($first_element) {
-							$first_element = false;
-						} else {
-							print ',';
-						}
-
-						print '{' . PHP_EOL;
-						print 'type: "video/mp4",' . PHP_EOL;
-						print 'title: "' . $media->getTitle() . '",' . PHP_EOL;
-						print 'src: "' . $media->getUrl() . '",' . PHP_EOL;
-						//		poster: "https://img.youtube.com/vi/nfs8NYg7yQM/hqdefault.jpg"
-						print '}' . PHP_EOL;
-					}
-				}
-			?>
-		]
-	);
-});
-</script>
