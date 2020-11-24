@@ -22,7 +22,8 @@
 			<li>Modul 11-1 "YForm Kontaktformular": wenn Addon yform_spam_protection installiert ist, wird es verwendet.</li>
 			<li>Modul 14-1 "Search It Suchmodul": Bugfix - Dokumente aus dem Medienpool wurden nicht angezeigt, wenn kein YCom installiert war.<br>
 				Außerdem: Autofokus des Suchfeldes und Sprunganker zu den Suchergebnissen.<br>
-				Und: Wenn das Addon yform_spam_protection installiert ist, wird es zur Spamabwehr genutzt.</li>
+				Und: Wenn das Addon yform_spam_protection installiert ist, wird es zur Spamabwehr genutzt.<br>
+				Und: es werden maximal 10 ähnliche Begriffe ausgegeben.</li>
 			<li>Neues Modul "15-1 Kategorie mit Liste der Unterkategorien".</li>
 			<li>Module 01-2, 03-1, 03-2, 05-1, 06-3, 06-4, 10-1, 10-2 und 10-3: Bugfix Typeneinschränkungen der Eingabefelder hatte nicht funktioniert.</li>
 			<li>Verschiedene Module: Fehler bei der Typebeschränkung von Medienfeldern behoben.</li>

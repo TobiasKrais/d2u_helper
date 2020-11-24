@@ -67,7 +67,7 @@
 					}
 				}
 				
-				$html_picture .= '<br><br></div>';
+				$html_picture .= '</div>';
 				if($picture_position == "left" || $picture_position == "top") {
 					print $html_picture;
 				}

@@ -204,15 +204,24 @@ if(((rex_addon::get('yform_spam_protection')->isAvailable() && count($yform->get
 
 		$activate_similarity_search = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
 		// Similarity search
-		if($activate_similarity_search && rex_config::get('search_it', 'similarwordsmode', 0) > 0 && count($result['simwords']) > 0){
-			$newsearchString = $result['simwordsnewsearch'];
-			$result_simwords = $search_it->search($newsearchString);
-			if($result_simwords['count'] > 0){
-				echo '<p>'. $tag_open .'d2u_helper_module_14_search_similarity'. $tag_close .':<strong><ul>';
-				foreach (explode(' ', $newsearchString) as $new_search_word) {
-					print '<li><a href="'. $article->getUrl(['search' => $new_search_word]) .'">'. $new_search_word .'</a></li>';
+		$search_it_sim = new search_it(rex_clang::getCurrentId());
+		$search_it_sim->setLimit(0, 1);
+		if($activate_similarity_search && rex_config::get('search_it', 'similarwordsmode', 0) > 0 && !empty($result['simwordsnewsearch'])){
+			$simwords_out = '<p>'. $tag_open .'d2u_helper_module_14_search_similarity'. $tag_close .':<strong><ul>';
+			$sim_counter = 0;
+			foreach (explode(' ', trim($result['simwordsnewsearch'])) as $new_search_word) {
+				$result_simwords = $search_it_sim->search(trim($new_search_word));
+				if($result_simwords['count'] > 0){
+					$simwords_out .= '<li><a href="'. $article->getUrl(['search' => $new_search_word]) .'">'. $new_search_word .'</a></li>';
+					$sim_counter++;
+					if($sim_counter >= 10) {
+						break;
+					}
 				}
-				echo '</ul></strong></p>';
+			}
+			$simwords_out .= '</ul></strong></p>';
+			if($sim_counter > 0) {
+				print $simwords_out;
 			}
 		}
 	}
