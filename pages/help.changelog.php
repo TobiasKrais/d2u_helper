@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.8.1-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.8.0</p>
 		<ul>
 			<li>ACHTUNG: wenn Templates aus diesem Addon verwendet werden, müssen nach dem Update die Einstellungen überarbeitet werden. 
