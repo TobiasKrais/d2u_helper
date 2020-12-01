@@ -6,9 +6,37 @@
 	padding-top: 25px;
 }
 .youtubeWrapper iframe {
+	background: none;
+	left: 0;
+	height: 100%;
 	position: absolute;
 	top: 0;
-	left: 0;
 	width: 100%;
-	height: 100%;
+}
+.youtube-gdpr-hint {
+	background-color: rgba(50,50,50,0.9);
+	color: white;
+	left: 50%;
+	max-width: 500px;
+	padding: 5%;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	width: 75%;
+	z-index: 2;
+}
+.youtube-gdpr-hint button {
+	background-color: article_color_h;
+	border: none;
+	border-radius: 100%;
+	margin-top: 15px;
+	padding: 15px;
+}
+.youtube-gdpr-hint svg {
+    fill: white;
+	height: 25px;
+	left: 3px;
+	position: relative;
+	width: 25px;
 }

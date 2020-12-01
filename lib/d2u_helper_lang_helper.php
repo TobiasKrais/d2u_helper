@@ -8,6 +8,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_english = [
+		'd2u_helper_module_06_gdpr_hint' => 'Data protection notice: if you let this video play, it will be retrieved from Youtube. By doing so, you acknowledge the <a href="https://policies.google.com/privacy" target="_blank"> Google terms of use and data protection declaration</a>.',
 		'd2u_helper_module_11_city' => 'City',
 		'd2u_helper_module_11_contact_request' => 'Contact request',
 		'd2u_helper_module_11_contact_request_intro' => 'The following values were entered in the request form:',
@@ -45,6 +46,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_french = [
+		'd2u_helper_module_06_gdpr_hint' => 'Avis de protection des données: si vous lisez cette vidéo, elle sera sera accessible par YouTube. Vous acceptez les <a href="https://policies.google.com/privacy" target="_blank"> conditions d\'utilisation et la politique de confidalité de Google.</a>.',
 		'd2u_helper_module_11_city' => 'Ville',
 		'd2u_helper_module_11_contact_request' => 'Demande de contact',
 		'd2u_helper_module_11_contact_request_intro' => 'Les valeurs suivantes ont été entrées dans le formulaire de demande',
@@ -82,6 +84,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_german = [
+		'd2u_helper_module_06_gdpr_hint' => 'Datenschutz Hinweis: wenn Sie dieses Video abspielen lassen, wird es von Youtube abgerufen. Sie anerkennen damit die <a href="https://policies.google.com/privacy" target="_blank">Google Nutzungsbedingungen und Datenschutzerklärung</a>.',
 		'd2u_helper_module_11_city' => 'Ort',
 		'd2u_helper_module_11_contact_request' => 'Kontaktanfrage',
 		'd2u_helper_module_11_contact_request_intro' => 'In das Anfrage-Formular wurden folgende Werte eingetragen',
@@ -119,6 +122,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_spanish = [
+		'd2u_helper_module_06_gdpr_hint' => 'Aviso de protección de datos: si reproduce este video, YouTube accederá a él. Acepta las <a href="https://policies.google.com/privacy" target="_blank">condiciones de uso y la política de privacidad de Google</a>.',
 		'd2u_helper_module_11_city' => 'Ciudad',
 		'd2u_helper_module_11_contact_request' => 'Solicitud de contacto',
 		'd2u_helper_module_11_contact_request_intro' => 'Se introducen los siguientes valores en el formulario de solicitud',
@@ -156,6 +160,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_russian = [
+		'd2u_helper_module_06_gdpr_hint' => 'Уведомление о защите данных: если вы воспроизведете это видео, YouTube получит доступ к нему. <a href="https://policies.google.com/privacy" target="_blank">Вы принимаете условия использования и политику конфиденциальности Google</a>.',
 		'd2u_helper_module_11_city' => 'Город',
 		'd2u_helper_module_11_contact_request' => 'Запрос контакта',
 		'd2u_helper_module_11_contact_request_intro' => 'В форму запроса были введены следующие данные:',
@@ -193,6 +198,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * value the replacement. 
 	 */
 	protected $replacements_chinese = [
+		'd2u_helper_module_06_gdpr_hint' => '数据保护声明：如果您播放此视频，YouTube将会对其进行访问。<a href="https://policies.google.com/privacy" target="_blank">您接受Google使用条款和隐私权政策。</a>.',
 		'd2u_helper_module_11_city' => '所在地',
 		'd2u_helper_module_11_contact_request' => '联系方式查询',
 		'd2u_helper_module_11_contact_request_intro' => '以下值已在请求表格中输入',
