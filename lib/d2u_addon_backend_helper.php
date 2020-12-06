@@ -524,7 +524,9 @@ class d2u_addon_backend_helper {
 	}
 	
 	/**
-	 * Updates search it index for urls from url addon
+	 * Updates search it index for urls from url addon (code is integrated in search_it
+	 * since version 3.4.3
+	 * @deprecated since version 1.8.1
 	 */
     public static function update_searchit_url_index() {
 		if(rex_addon::get('search_it')->isAvailable() && rex_addon::get('search_it')->getConfig('index_url_addon') && search_it_isUrlAddOnAvailable()) {
