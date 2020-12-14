@@ -59,7 +59,6 @@ h1.subhead {
 nav {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
-	float: left;
 }
 nav a {
 	text-decoration: none;
