@@ -3,7 +3,8 @@
 	<div class="panel-body">
 		<p>1.8.1-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Template "02-1 Header Pic Template" CSS Fehler bezüglich der Breite der Navigation behoben.</li>
+			<li>Template "04-3 Header Slider Template with news column" Darstellungsfehler von Navigation oben ist behoben.</li>
 		</ul>
 		<p>1.8.0</p>
 		<ul>

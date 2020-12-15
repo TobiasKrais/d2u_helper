@@ -143,9 +143,11 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			// Navi, if configured on top
 			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') {
 				print '<div class="col-12'. ($d2u_helper->getConfig("template_logo", "") != "" ? ' col-md-8  col-lg-9' : '') .' d-print-none">';
-				print '<nav  class="d-print-none">';
-				print '<div class="navigation">';
+				print '<nav class="d-print-none top">';
+				print '<div class="navigation row">';
+				print '<div class="col-12">';
 				printTemplate04_3Navi();
+				print '</div>';
 				print '</div>';
 				print '</nav>';
 				print '</div>';

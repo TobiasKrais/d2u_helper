@@ -31,7 +31,7 @@ nav {
 	border-bottom: solid 1px white;
 	font-size: 1.15em;
 }
-nav.bottom {
+nav.bottom, nav.top {
 	background-color: navi_color_hover_bg;
 }
 .navigation {
