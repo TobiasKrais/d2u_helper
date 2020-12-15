@@ -62,7 +62,7 @@
 		print '<div class="col-12">&nbsp;</div>';
 
 		// Logo footer
-		$media_logo_footer = rex_media::get($d2u_helper->getConfig("footer_logo", "") != "" ? $d2u_helper->getConfig("footer_logo", "") : $d2u_helper->getConfig("template_logo"));
+		$media_logo_footer = rex_media::get($d2u_helper->getConfig("footer_logo", "") ?? $d2u_helper->getConfig("template_logo"));
 		if($media_logo_footer instanceof rex_media) {
 			print '<div class="col-12 col-md-4 offset-md-4 footer-logo-col">';
 			if($media_logo_footer instanceof rex_media) {
