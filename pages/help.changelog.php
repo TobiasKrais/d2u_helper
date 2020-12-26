@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.8.1-DEV</p>
+		<p>1.8.1</p>
 		<ul>
 			<li>ACHTUNG: Wenn bisher das Addon iwcc und ein Template aus diesem Addon verwendet wurde:
 				bitte nach Update das den Nachfolger des iwcc Addons consent_manager installieren und dessen Einstellungen importieren.</li>
