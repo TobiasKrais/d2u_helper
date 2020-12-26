@@ -1,0 +1,224 @@
+/* consent_manager addon */
+.consent_manager-background {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: auto !important;
+	background: footer_color_bg !important;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 999999;
+	padding: 0 !important;
+	height: auto !important;
+	width: 100%;
+	overflow: hidden
+}
+.consent_manager-wrapper {
+	background: footer_color_bg !important;
+	color: white;
+	position: relative;
+	font-size: 15px;
+	width: 100%;
+	max-width: 1140px !important;
+	max-height: 100vh;
+	overflow-y: auto
+}
+.consent_manager-wrapper-inner {
+	padding: 1em !important;
+	position: relative
+}
+.consent_manager-hidden {
+	display: none
+}
+.consent_manager-detail {
+	margin-bottom: 1em
+}
+.consent_manager-headline {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-bottom: 1rem;
+}
+.consent_manager-headline span {
+	font-weight: normal
+}
+.consent_manager-show-details {
+	padding: 0 0 1em 0
+}
+.consent_manager-cookiegroup a, .consent_manager-cookiegroup a:hover, .consent_manager-show-details a, .consent_manager-show-details a:hover {
+	color: article_color_h  !important;
+	text-decoration: none
+}
+.consent_manager-save-selection, .consent_manager-accept-all {
+	transition: 200ms ease all;
+	background: article_color_h !important;
+	border: 1px solid article_color_h !important;
+	color: white !important;
+	padding: 0.5em 2em;
+	border-radius: 0.2em;
+	font-weight: bold;
+	text-align: center;
+	margin: 0.5em 0;
+	display: block;
+}
+.consent_manager-save-selection:hover, .consent_manager-accept-all:hover {
+	background: white !important;
+	border-color: white !important;
+	color: article_color_h !important;
+	text-decoration: none;
+}
+.consent_manager-save-selection {
+	background: none transparent !important;
+	border: 1px solid footer_color_box !important;
+	color: footer_color_box !important;
+}
+.consent_manager-save-selection:hover {
+	background: footer_color_box !important;
+	border-color: footer_color_box !important;
+	color: white !important;
+}
+.consent_manager-sitelinks a {
+	display: inline-block;
+	margin: 0.5em 0.5em 0.5em 0 !important;
+	color: white !important;
+	text-decoration: none;
+}
+.consent_manager-sitelinks a:hover {
+	color: article_color_h !important;
+	text-decoration: none;
+}
+.consent_manager-save-and-close {
+	color: article_color_h !important;
+}
+.consent_manager-save-and-close:hover {
+	color: article_color_h !important;
+}
+.consent_manager-close-box {
+	position: absolute;
+	right: 0.5em;
+	top: 0.5em;
+	display: block;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	cursor: pointer;
+	color: footer_color_box !important;
+	font-size: 1.8em;
+	background: none transparent;
+	line-height: 1;
+	text-decoration: none;
+}
+.consent_manager-close-box:before {
+	margin: 0
+}
+.consent_manager-close-box:hover {
+	color: article_color_h !important;
+	background: none transparent;
+	text-decoration: none;
+}
+.consent_manager-cookiegroup-checkbox {
+	display: block;
+	margin: 0 0 1em 0;
+}
+.consent_manager-cookiegroup-checkbox.pretty .state label {
+	color: white;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+.consent_manager-cookiegroup-checkbox.pretty.p-default input:checked~.state label:before {
+	border-color: article_color_h !important;
+}
+.consent_manager-cookiegroup-checkbox.pretty.p-default input:checked~.state label:after {
+	background-color: article_color_h !important;
+}
+.pretty .state label::after, .pretty .state label::before {
+	top: 0 !important;
+}
+.consent_manager-cookiegroup-checkbox.pretty.p-locked {
+	opacity: 0.75;
+}
+.consent_manager-cookiegroup+.consent_manager-cookiegroup-title {
+	margin-top: 1em;
+}
+.consent_manager-cookie {
+	margin-top: 0.5em;
+	border-left: 2px solid article_color_h !important;
+	padding: 0.5em 0.5em 0.5em 1em;
+	background-color: footer_color_bg !important;
+}
+.consent_manager-cookie span {
+	display: block
+}
+.consent_manager-text {
+	font-size: 1rem;
+	margin-bottom: 0.75em;
+}
+.icon-info-circled {
+	font-family: inherit;
+}
+.icon-info-circled::before {
+	margin-left: 0;
+}
+.pretty.p-icon .state .icon {
+	font-size: 1.15em;
+	transition: all 0.1s ease;
+	top: 0 !important;
+}
+.pretty.p-icon .state label:before {
+	margin-top: 0 !important;
+}
+#consent_manager-toggle-details:before {
+	margin-left: 0;
+}
+@media (min-width: 35em) {
+	.consent_manager-cookiegroups {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		padding: 0.5em 0 1em 0 !important;
+	}
+	.consent_manager-cookiegroup-checkbox {
+		margin: 0 2em 0 0
+	}
+	.consent_manager-show-details {
+		text-align: left !important;
+		padding: 0.5em 0 1em 0 !important;
+		margin-top: -3em;
+	}
+	.consent_manager-buttons {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center
+	}
+	.consent_manager-sitelinks {
+		text-align: right;
+		padding-right: 1.5em
+	}
+	.consent_manager-sitelinks a {
+		margin: 0.5em 1em 0.5em 0 !important;
+	}
+	.consent_manager-save-selection, .consent_manager-accept-all {
+		display: inline-block;
+		margin: 0 0 0 0.5em
+	}
+}
+@media (min-width: 50em) {
+	.consent_manager-wrapper-inner {
+		padding: 1em 15px !important;
+	}
+	.consent_manager-buttons-sitelinks {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-direction: row-reverse
+	}
+	.consent_manager-close-box {
+		font-size: 2em;
+		margin: 0
+	}
+}
+ul.cookie {
+	margin-top: 5px !important;
+}
