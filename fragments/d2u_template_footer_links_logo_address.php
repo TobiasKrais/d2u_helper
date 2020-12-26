@@ -9,7 +9,7 @@
 			print '<p><span class="fa-icon fa-link footer-icon"></span><a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a></p>';
 		}
 		if(rex_addon::get('consent_manager')->isAvailable()) {
-			print '<p><span class="fa-icon fa-link footer-icon"></span><a class="consent_manager-show-box-reload">'. \Sprog\Wildcard::get('d2u_helper_cookie_manager_template_edit_cookiesettings') .'</a></p>';
+			print '<p><span class="fa-icon fa-link footer-icon"></span><a class="consent_manager-show-box-reload">'. \Sprog\Wildcard::get('d2u_helper_consent_manager_template_edit_cookiesettings') .'</a></p>';
 		}
 		print '</div>';
 

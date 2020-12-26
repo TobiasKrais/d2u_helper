@@ -15,7 +15,7 @@
 		}
 		if(rex_addon::get('consent_manager')->isAvailable()) {
 			print '<div class="footerbox">';
-			print '<a class="consent_manager-show-box-reload">'. \Sprog\Wildcard::get('d2u_helper_cookie_manager_template_edit_cookiesettings') .'</a>';
+			print '<a class="consent_manager-show-box-reload">'. \Sprog\Wildcard::get('d2u_helper_consent_manager_template_edit_cookiesettings') .'</a>';
 			print '</div>';
 		}
 		print '</div>';
