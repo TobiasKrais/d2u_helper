@@ -132,6 +132,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		if(file_exists(rex_path::media('favicon.ico'))) {
 			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
 		}
+		if(rex_addon::get('consent_manager')->isAvailable()) {
+			print 'REX_CONSENT_MANAGER[]';
+		}
 	?>
 </head>
 

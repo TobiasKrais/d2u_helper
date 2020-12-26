@@ -9,6 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
 		print d2u_addon_frontend_helper::getMetaTags();
+		if(rex_addon::get('consent_manager')->isAvailable()) {
+			print 'REX_CONSENT_MANAGER[]';
+		}
 	?>
  	<link rel="stylesheet" href="/index.php?template_id=05-1&d2u_helper=template.css">
   	<link rel="icon" href="<?php print rex_url::media('favicon.ico'); ?>" />

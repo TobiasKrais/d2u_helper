@@ -8,10 +8,10 @@
 			print '</div>';
 			print '</div>';
 		}
-		if(rex_addon::get('iwcc')->isAvailable()) {
+		if(rex_addon::get('consent_manager')->isAvailable()) {
 			print '<div class="col-sm-6 col-md-4 col-lg-3">';
 			print '<div class="footerbox">';
-			print '<a class="iwcc-show-box">'. \Sprog\Wildcard::get('iwcc_template_edit_cookiesettings') .'</a>';
+			print '<a class="consent_manager-show-box-reload">'. \Sprog\Wildcard::get('d2u_helper_cookie_manager_template_edit_cookiesettings') .'</a>';
 			print '</div>';
 			print '</div>';
 		}

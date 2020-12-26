@@ -33,6 +33,9 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 		if(file_exists(rex_path::media('favicon.ico'))) {
 			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
 		}
+		if(rex_addon::get('consent_manager')->isAvailable()) {
+			print 'REX_CONSENT_MANAGER[]';
+		}
 	?>
 	<link rel="stylesheet" href="/index.php?template_id=03-1&d2u_helper=template.css">
 	<style>

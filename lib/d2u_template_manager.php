@@ -117,16 +117,16 @@ class D2UTemplateManager {
 		$d2u_templates = [];
 		$d2u_templates[] = new D2UTemplate("00-1",
 			"Big Header Template",
-			14);
+			15);
 		$d2u_templates[] = new D2UTemplate("01-1",
 			"Side Picture Template",
-			6);
+			7);
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
 			9);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
-			7);
+			8);
 		$d2u_templates[] = new D2UTemplate("03-2",
 			"Immo Window Advertising Template",
 			6);
@@ -135,16 +135,16 @@ class D2UTemplateManager {
 			6);
 		$d2u_templates[] = new D2UTemplate("04-2",
 			"Header Slider Template",
-			11);
+			12);
 		$d2u_templates[] = new D2UTemplate("04-3",
 			"Header Slider Template with news column",
-			5);
+			6);
 		$d2u_templates[] = new D2UTemplate("05-1",
 			"Double Logo Template",
-			7);
+			8);
 		$d2u_templates[] = new D2UTemplate("06-1",
 			"Paper Sheet Template",
-			2);
+			3);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",
 			1);
@@ -409,6 +409,10 @@ class D2UTemplate {
 			// Search icon CSS
 			if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'))) {
 				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'));
+			}
+			// Consent manager CSS
+			if (rex_addon::get('consent_manager')->isAvailable() && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'))) {
+				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'));
 			}
 
 			return $template_css;

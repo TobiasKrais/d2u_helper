@@ -3,9 +3,12 @@
 	<div class="panel-body">
 		<p>1.8.1-DEV</p>
 		<ul>
+			<li>ACHTUNG: Wenn bisher das Addon iwcc und ein Template aus diesem Addon verwendet wurde:
+				bitte nach Update das den Nachfolger des iwcc Addons consent_manager installieren und dessen Einstellungen importieren.</li>
 			<li>Templates: Bugfix im Cookie Hinweis im Footer.</li>
 			<li>Template "02-1 Header Pic Template" CSS Fehler bezüglich der Breite der Navigation behoben.</li>
 			<li>Template "04-3 Header Slider Template with news column" Darstellungsfehler von Navigation oben ist behoben.</li>
+			<li>Templates unterstützen jetzt alle das consent_manager Addon und binden es sobald es aktiviert ist.</li>
 		</ul>
 		<p>1.8.0</p>
 		<ul>
