@@ -11,7 +11,7 @@
 	float: left;
 	position: relative;
 }
-.modal-body img {
+.modal-body #langchooser img {
 	margin-right: 0.5em;
 	max-height: 25px;
 }

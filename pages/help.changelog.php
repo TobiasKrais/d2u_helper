@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.8.2</p>
+		<ul>
+			<li>CSS Fehler behoben der Detailbilder im Modul 03-2 "Bildergalerie Ekko Lightbox" zu klein gemacht hatte.</li>
+		</ul>
 		<p>1.8.1</p>
 		<ul>
 			<li>ACHTUNG: Wenn bisher das Addon iwcc und ein Template aus diesem Addon verwendet wurde:

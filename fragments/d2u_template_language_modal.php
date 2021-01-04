@@ -31,7 +31,7 @@ if(count($clangs) > 1) {
 				</button>
 			</div>
 			<div class="modal-body">
-				<ul>
+				<ul id="langchooser">
 					<?php
 						$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
 						foreach($clangs as $rex_clang) {
