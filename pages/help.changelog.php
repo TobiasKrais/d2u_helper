@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.8.3-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Spanische Übersetzungen werden nun korrekt installiert.</li>
 		</ul>
 		<p>1.8.2</p>
 		<ul>

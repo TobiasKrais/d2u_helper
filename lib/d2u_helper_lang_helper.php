@@ -398,6 +398,9 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 				else if($lang_replacement === 'russian' && isset($this->replacements_russian) && isset($this->replacements_russian[$key])) {
 					$value = $this->replacements_russian[$key];
 				}
+				else if($lang_replacement === 'spanish' && isset($this->replacements_spanish) && isset($this->replacements_spanish[$key])) {
+					$value = $this->replacements_spanish[$key];
+				}
 				else { 
 					$value = $this->replacements_english[$key];
 				}
