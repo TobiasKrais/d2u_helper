@@ -10,6 +10,9 @@ preg_match(
 	$matches
 );
 $youtube_id = $matches[1];
+if(strlen($youtube_id) == 0 && strpos('REX_VALUE[1]', 'youtu.be/') !== false) {
+	$youtube_id = substr('REX_VALUE[1]', strrpos('REX_VALUE[1]', '/') + 1);
+}
 $youtube_url = 'https://www.youtube-nocookie.com/embed/'. $youtube_id .'?autoplay=1';
 $youtube_previewimage_url = 'https://img.youtube.com/vi/'. $youtube_id .'/hqdefault.jpg';
 $previewimage_target_filename = 'youtube-'. $youtube_id .'.jpg';

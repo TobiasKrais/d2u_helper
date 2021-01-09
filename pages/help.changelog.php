@@ -17,6 +17,9 @@
 			<li>Template "02-1 Header Pic Template" CSS Fehler bezüglich der Breite der Navigation behoben.</li>
 			<li>Template "04-3 Header Slider Template with news column" Darstellungsfehler von Navigation oben ist behoben.</li>
 			<li>Templates unterstützen jetzt alle das consent_manager Addon und binden es sobald es aktiviert ist.</li>
+			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch youtu.be Links.</li>
+			<li>Modul 06-3 "Video mit Plyr einbinden": Position Stummschalten Button korrigiert.</li>
+			<li>Modul 06-4 "Videoliste mit Plyr einbinden": Position Stummschalten Button korrigiert.</li>
 		</ul>
 		<p>1.8.0</p>
 		<ul>
