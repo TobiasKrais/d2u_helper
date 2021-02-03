@@ -4,6 +4,7 @@
 		<p>1.8.3-DEV</p>
 		<ul>
 			<li>Spanische Übersetzungen werden nun korrekt installiert.</li>
+			<li>Bootstrap 4.6.0 Upgrade.</li>
 		</ul>
 		<p>1.8.2</p>
 		<ul>
@@ -96,7 +97,7 @@
 		<ul>
 			<li>WiredMinds eMetrics Tracking Option (siehe Einstellungen) auf aktuellen WiredMinds LeadLab Tracking Account Code aktualisiert.</li>
 			<li>Rewrite Schema für URL Encoded URLs verbessert (ACHTUNG: URL Kodierte URLs werden nur noch in Kleinbuchstaben ausgegeben).</li>
-			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)" auf YForm E-Mailtemplate umgestellt, damit "Antworten an" Feld benutzt werden kann.</li>
+			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)" auf YForm E-Mail-Template umgestellt, damit "Antworten an" Feld benutzt werden kann.</li>
 			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)" kann nun die Breite bestimmt werden.</li>
 			<li>JQuery Update 3.4.1.</li>
 			<li>Smartmenus Version 1.1.0 als Navigation zur Verfügung gestellt (<a href="https://www.smartmenus.org/">https://www.smartmenus.org/</a>).</li>
