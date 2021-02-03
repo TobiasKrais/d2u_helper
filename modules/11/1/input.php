@@ -92,7 +92,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		E-Mail Empfänger:<br />
+		E-Mail-Empfänger:<br />
 	</div>
 	<div class="col-xs-8">
 		<input type="text" style="width:100%" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" class="form-control"/>

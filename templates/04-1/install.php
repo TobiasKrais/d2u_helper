@@ -9,10 +9,6 @@ if(!rex_addon::get('yrewrite')->isAvailable()) {
 	return FALSE;
 }
 
-if(!rex_addon::get('emailobfuscator')->isAvailable()) {
-	print rex_view::warning(rex_i18n::msg('d2u_helper_templates_install_emailobfuscator'));
-}
-
 // Add clang_icon as Metainfo
 $query_clang_icon = "SELECT name FROM ". \rex::getTablePrefix() ."metainfo_field "
 	."WHERE name = 'clang_icon'";

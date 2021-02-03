@@ -5,6 +5,7 @@
 		<ul>
 			<li>Spanische Übersetzungen werden nun korrekt installiert.</li>
 			<li>Bootstrap 4.6.0 Upgrade.</li>
+			<li>Template Installation Empfehlung für emailobfuscator Addon entfernt.</li>
 		</ul>
 		<p>1.8.2</p>
 		<ul>
