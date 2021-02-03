@@ -77,7 +77,7 @@ function appendGoogleAnalytics(rex_extension_point $ep) {
  * @param rex_extension_point $ep Redaxo extension point
  */
 function appendToPageD2UHelperFiles(rex_extension_point $ep) {
-	$VERSION_BOOTSTRAP = '4.5.0';
+	$VERSION_BOOTSTRAP = '4.6.0';
 	$VERSION_POPPER = '1.16.0';
 	$addon = rex_addon::get("d2u_helper");
 	
