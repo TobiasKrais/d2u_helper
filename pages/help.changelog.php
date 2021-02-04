@@ -4,7 +4,8 @@
 		<p>1.8.3-DEV</p>
 		<ul>
 			<li>Spanische Übersetzungen werden nun korrekt installiert.</li>
-			<li>Bootstrap 4.6.0 Upgrade.</li>
+			<li>Bootstrap 4.6.0 Upgrade und Popper und Bootstrap JS in eine Datei gebündelt.</li>
+			<li>Template CSS an consent_manager 3.x angepasst.</li>
 			<li>Template Installation Empfehlung für emailobfuscator Addon entfernt.</li>
 		</ul>
 		<p>1.8.2</p>

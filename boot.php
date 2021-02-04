@@ -95,8 +95,6 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 		$insert_head .= '<script src="'. rex_url::coreAssets($file) .'?buster='. filemtime(rex_path::coreAssets($file)) .'"></script>' . PHP_EOL;
 	}
 	if($addon->getConfig('include_bootstrap4') == 'true') {
-		// Popper JavaScript
-		$insert_head .= '<script src="'. $addon->getAssetsUrl('bootstrap4/popper.min.js') .'?v='. $VERSION_POPPER .'"></script>' . PHP_EOL;
 		// Bootstrap CSS
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v='. $VERSION_BOOTSTRAP .'" />' . PHP_EOL;
 	}
@@ -117,7 +115,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 
 	// Vor dem </body> einfügen
 	if($addon->getConfig('include_bootstrap4') == 'true') {
-		$insert_body .= '<script src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.min.js') .'?v='. $VERSION_BOOTSTRAP .'"></script>' . PHP_EOL;
+		$insert_body .= '<script src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.bundle.min.js') .'?v='. $VERSION_BOOTSTRAP .'"></script>' . PHP_EOL;
 	}
 
 	// Module stuff in body
