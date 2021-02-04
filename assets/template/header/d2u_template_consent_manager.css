@@ -1,3 +1,13 @@
+@font-face{
+	font-family:'FontAwesome';
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?v=4.7.0");
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff2?v=4.7.0") format('woff2'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff?v=4.7.0") format('woff'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
+}
+
 /* consent_manager addon */
 .consent_manager-background {
 	position: fixed;
@@ -110,6 +120,15 @@
 	line-height: 1;
 	text-decoration: none;
 }
+.consent_manager-close.consent_manager-close-box {
+	background-color: transparent;
+	right: 15px;
+	text-indent: 0;
+	top: 15px;
+}
+.consent_manager-close.consent_manager-close-box::after, .consent_manager-close.consent_manager-close-box::before {
+	display: none;
+}
 .consent_manager-close-box:before {
 	margin: 0
 }
@@ -122,7 +141,19 @@
 	display: block;
 	margin: 0 0 1em 0;
 }
-.consent_manager-cookiegroup-checkbox.pretty .state label {
+.consent_manager-cookiegroups .consent_manager-cookiegroup-checkbox label>input[type="checkbox"]:disabled + * {
+	color: gray !important;
+}
+.consent_manager-cookiegroups .consent_manager-cookiegroup-checkbox label>input[type="checkbox"]:disabled + ::before{
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20version='1.1'%20height='20'%20width='20'%3E%3Cpath%20fill='none'%20stroke='gray'%20stroke-opacity='0.8'%20stroke-width='3'%20d='M1.73%2012.91l6.37%206.37L22.79%204.59'%20/%3E%3C/svg%3E") !important;
+}
+.consent_manager-cookiegroups .consent_manager-cookiegroup-checkbox label>input[type="checkbox"]:checked + * {
+	color: white;
+}
+.consent_manager-cookiegroups .consent_manager-cookiegroup-checkbox label>input[type="checkbox"]:checked + ::before {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20version='1.1'%20height='20'%20width='20'%3E%3Cpath%20fill='none'%20stroke='white'%20stroke-opacity='0.8'%20stroke-width='3'%20d='M1.73%2012.91l6.37%206.37L22.79%204.59'%20/%3E%3C/svg%3E");
+}
+.consent_manager-cookiegroup-checkbox.pretty .state label, .consent_manager-cookiegroups .consent_manager-cookiegroup-checkbox label {
 	color: white;
 	font-weight: bold;
 	font-size: 1.2em;
@@ -160,6 +191,12 @@
 }
 .icon-info-circled::before {
 	margin-left: 0;
+}
+.consent_manager-show-details #consent_manager-toggle-details.icon-info-circled::before {
+    color: green;
+    background-color: transparent;
+    content: "\f05a";
+    font-family: FontAweSome;
 }
 .pretty.p-icon .state .icon {
 	font-size: 1.15em;
