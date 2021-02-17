@@ -11,6 +11,7 @@ function printTemplate04_3Navi() {
 	// Languages
 	print '<div id="lang_chooser_div">';
 	$fragment = new rex_fragment();
+	$fragment->setVar('showLangDropdown', true, false);
 	echo $fragment->parse('d2u_template_language_modal.php');
 	print '</div>';
 	

@@ -32,10 +32,9 @@ nav {
 	font-size: 1.15em;
 }
 nav.bottom, nav.top {
-	background-color: navi_color_hover_bg;
+	background-color: navi_color_bg;
 }
 .navigation {
-	background-color: navi_color_bg;
 	padding-bottom: 1em;
 }
 .bottom .navigation {
@@ -69,6 +68,9 @@ nav.bottom, nav.top {
 #lang_chooser_div, #search_icon_div {
 	float: right;
 	padding-top: 10px;
+}
+.lang-code {
+	color: white;
 }
 #mobile-menu {
 	margin-bottom: 15px;

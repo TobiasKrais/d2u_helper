@@ -7,6 +7,7 @@
 			<li>Bootstrap 4.6.0 Upgrade und Popper und Bootstrap JS in eine Datei gebündelt.</li>
 			<li>Template CSS an consent_manager 3.x angepasst.</li>
 			<li>Template Installation Empfehlung für emailobfuscator Addon entfernt.</li>
+			<li>Template "04-3 Header Slider Template with news column": Sprachwähler Feintuning.</li>
 		</ul>
 		<p>1.8.2</p>
 		<ul>

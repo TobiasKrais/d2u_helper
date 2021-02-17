@@ -138,7 +138,7 @@ class D2UTemplateManager {
 			12);
 		$d2u_templates[] = new D2UTemplate("04-3",
 			"Header Slider Template with news column",
-			6);
+			7);
 		$d2u_templates[] = new D2UTemplate("05-1",
 			"Double Logo Template",
 			8);

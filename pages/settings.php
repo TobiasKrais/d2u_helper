@@ -232,7 +232,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							}
 							else if (selection === "links_address_contact_logo") {
 								$("dl[id='settings[footer_color_bg]']").show();
-								$("dl[id='settings[footer_color_box]']").hide();
+								$("dl[id='settings[footer_color_box]']").show();
 								$("dl[id='settings[footer_color_font]']").show();
 								$("dl[id='settings[footer_text_company]']").show();
 								$("dl[id='settings[footer_text_ceo]']").show();
