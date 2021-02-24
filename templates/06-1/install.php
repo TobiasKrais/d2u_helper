@@ -16,7 +16,7 @@ if($result_metainfo->getRows() == 0) {
 	$insertmod->setValue('name', 'art_file');
 	$insertmod->setValue('priority', 1);
 	$insertmod->setValue('type_id', 6);
-	$insertmod->setValue('params', 'types="png,jpg,PNG,JPG" preview="1"');
+	$insertmod->setValue('params', 'types="png,jpg,webp,PNG,JPG,WEBP" preview="1"');
 	$insertmod->addGlobalCreateFields();
 	$insertmod->insert();
 }

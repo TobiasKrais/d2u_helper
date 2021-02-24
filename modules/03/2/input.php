@@ -136,6 +136,6 @@
 		Bilder:
 	</div>
 	<div class="col-xs-8">
-		REX_MEDIALIST[id="1" types="jpg,png" widget="1"]
+		REX_MEDIALIST[id="1" types="jpg,png,webp" widget="1"]
 	</div>
 </div>

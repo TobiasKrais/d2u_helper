@@ -179,7 +179,7 @@
 		Bild:
 	</div>
 	<div class="col-xs-8">
-		REX_MEDIA[id="1" types="jpg,png" widget="1"]
+		REX_MEDIA[id="1" types="jpg,png,webp" widget="1"]
 	</div>
 </div>
 <div class="row">

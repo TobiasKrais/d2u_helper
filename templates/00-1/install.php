@@ -21,7 +21,7 @@ if($result_metainfo->getRows() == 0) {
 	$insertmod->setValue('name', 'art_file');
 	$insertmod->setValue('priority', 1);
 	$insertmod->setValue('type_id', 6);
-	$insertmod->setValue('params', 'types="png,jpg,PNG,JPG" preview="1"');
+	$insertmod->setValue('params', 'types="png,jpg,webp,PNG,JPG,WEBP" preview="1"');
 	$insertmod->addGlobalCreateFields();
 	$insertmod->insert();
 }
@@ -48,7 +48,7 @@ if($result_clang_icon->getRows() == 0) {
 	$insertmod->setValue('name', 'clang_icon');
 	$insertmod->setValue('priority', 1);
 	$insertmod->setValue('type_id', 6);
-	$insertmod->setValue('params', 'types="gif,jpg,png,svg,GIF,JPG,PNG,SVG" preview="1"');
+	$insertmod->setValue('params', 'types="gif,jpg,png,webp,svg,GIF,JPG,PNG, WEBP,SVG" preview="1"');
 	$insertmod->addGlobalCreateFields();
 	$insertmod->insert();
 }

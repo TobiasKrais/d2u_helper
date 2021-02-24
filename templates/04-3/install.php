@@ -25,7 +25,7 @@ if($result_clang_icon->getRows() == 0) {
 	$insertmod->setValue('name', 'clang_icon');
 	$insertmod->setValue('priority', 1);
 	$insertmod->setValue('type_id', 6);
-	$insertmod->setValue('params', 'types="gif,jpg,png,svg,GIF,JPG,PNG,SVG" preview="1"');
+	$insertmod->setValue('params', 'types="gif,jpg,png,svg,webp,GIF,JPG,PNG,SVG,WEBP" preview="1"');
 	$insertmod->addGlobalCreateFields();
 	$insertmod->insert();
 }
