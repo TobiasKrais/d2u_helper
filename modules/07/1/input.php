@@ -106,10 +106,77 @@
 	});
 </script>
 <div class="row">
-	<div class="col-xs-12"><div style="border-top: 1px darkgrey solid; margin: 1em 0;"></div></div>
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-4">
+		JavaScript Datei ...
+	</div>
+	<div class="col-xs-8">
+		<?php
+		$select_link = new rex_select(); 
+		$select_link->setName('REX_INPUT_VALUE[1]'); 
+		$select_link->setSize(1);
+		$select_link->setAttribute('class', 'form-control');
+		$select_link->setAttribute('id', 'selector');
+
+		$select_link->addOption("... aus Medienpool", "media"); 
+		$select_link->addOption("... von externem Server", "link"); 
+
+		$select_link->setSelected("REX_VALUE[1]");
+
+		echo $select_link->show();
+		?>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row" id="media">
+	<div class="col-xs-4">
+		JavaScript Datei aus Medienpool:
+	</div>
+	<div class="col-xs-8">
+		REX_MEDIA[id="1" types="js" widget="1"]
+	</div>
+</div>
+<div class="row" id="link">
+	<div class="col-xs-4">
+		Link zu exterem JavaScript:
+	</div>
+	<div class="col-xs-8">
+		<input type="text" size="250" name="REX_INPUT_VALUE[2]" value="REX_VALUE[2]" class="form-control"/>
+	</div>
+</div>
+<script>
+	function changeType() {
+		if($('#selector').val() === "link") {
+			$('#link').show();
+			$('#media').hide();
+		}
+		else if($('#selector').val() === "media") {
+			$('#link').hide();
+			$('#media').show();
+		}
+	}
+	
+	// On init
+	changeType();
+	
+	// On change
+	$('#selector').on('change', function() {
+		changeType();
+	});
+</script>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">JavaScript Code (mit &lt;script&gt; Tag)</div>
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		<textarea name="REX_INPUT_VALUE[1]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[1]</textarea>
+		<textarea name="REX_INPUT_VALUE[3]" class="form-control rex-code rex-js-code"  spellcheck="false"><?php echo ('REX_VALUE[3]' == "" ? "<script>". PHP_EOL ."</script>" : 'REX_VALUE[3]'); ?></textarea>
 	</div>
 </div>

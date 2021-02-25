@@ -23,22 +23,22 @@ if(class_exists('D2UModuleManager')) {
 		4);
 	$modules[] = new D2UModule("01-1",
 		"Texteditor",
-		9);
+		10);
 	$modules[] = new D2UModule("01-2",
 		"Texteditor mit Bild und Fettschrift",
-		11);
+		12);
 	$modules[] = new D2UModule("02-1",
 		"Überschrift",
 		8);
 	$modules[] = new D2UModule("02-2",
 		"Überschrift mit Klapptext",
-		3);
+		4);
 	$modules[] = new D2UModule("03-1",
 		"Bild",
-		8);
+		9);
 	$modules[] = new D2UModule("03-2",
 		"Bildergalerie Ekko Lightbox",
-		8);
+		9);
 	$modules[] = new D2UModule("04-1",
 		"Google Maps",
 		10);
@@ -60,12 +60,15 @@ if(class_exists('D2UModuleManager')) {
 	$modules[] = new D2UModule("06-4",
 		"Videoliste mit Plyr einbinden",
 		1);
+	$modules[] = new D2UModule("07-1",
+		"JavaScript einbinden",
+		1);
 	$modules[] = new D2UModule("10-1",
 		"Box mit Bild und Ueberschrift",
 		3);
 	$modules[] = new D2UModule("10-2",
 		"Box mit Bild und Text",
-		5);
+		2);
 	$modules[] = new D2UModule("10-3",
 		"Box mit Downloads",
 		6);
@@ -77,7 +80,7 @@ if(class_exists('D2UModuleManager')) {
 		3);
 	$modules[] = new D2UModule("13-1",
 		"Lauftext",
-		2);
+		3);
 	$modules[] = new D2UModule("14-1",
 		"Search It Suchmodul",
 		2);
@@ -112,31 +115,31 @@ if(class_exists('D2UTemplateManager')) {
 	$d2u_templates = [];
 	$d2u_templates[] = new D2UTemplate("00-1",
 		"Big Header Template",
-		15);
+		16);
 	$d2u_templates[] = new D2UTemplate("01-1",
 		"Side Picture Template",
-		7);
+		8);
 	$d2u_templates[] = new D2UTemplate("02-1",
 		"Header Pic Template",
 		9);
 	$d2u_templates[] = new D2UTemplate("03-1",
 		"Immo Template - 2 Columns",
-		8);
+		9);
 	$d2u_templates[] = new D2UTemplate("03-2",
 		"Immo Window Advertising Template",
-		6);
+		7);
 	$d2u_templates[] = new D2UTemplate("04-1",
 		"Header Slider Template with Slogan",
-		6);
+		7);
 	$d2u_templates[] = new D2UTemplate("04-2",
 		"Header Slider Template",
-		12);
+		13);
 	$d2u_templates[] = new D2UTemplate("04-3",
 		"Header Slider Template with news column",
-		7);
+		8);
 	$d2u_templates[] = new D2UTemplate("05-1",
 		"Double Logo Template",
-		8);
+		9);
 	$d2u_templates[] = new D2UTemplate("06-1",
 		"Paper Sheet Template",
 		3);

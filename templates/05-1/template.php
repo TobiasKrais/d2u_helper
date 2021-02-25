@@ -5,7 +5,6 @@
 <html lang="<?php echo rex_clang::getCurrent()->getCode(); ?>">
 <head>
     <meta charset="utf-8" />
-    <base href="<?php echo \rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer(); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
 		print d2u_addon_frontend_helper::getMetaTags();

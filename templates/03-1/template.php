@@ -26,7 +26,6 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 <?php echo '<html lang="'. rex_clang::getCurrent()->getCode() .'">'; ?>
 <head>
 	<meta charset="utf-8" />
-	<base href="<?php echo $current_domain; ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
 		print d2u_addon_frontend_helper::getMetaTags();

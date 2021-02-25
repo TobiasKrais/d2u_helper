@@ -14,7 +14,6 @@
 <html lang="<?php echo rex_clang::getCurrent()->getCode(); ?>">
 <head>
 	<meta charset="utf-8" />
-	<base href="<?php echo $current_domain; ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="robots" content="noindex, nofollow">
 	<meta http-equiv="refresh" content="10800; URL=<?php print rex_getUrl(); ?>">
