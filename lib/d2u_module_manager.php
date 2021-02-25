@@ -174,7 +174,7 @@ class D2UModuleManager {
 			6);
 		$modules[] = new D2UModule("06-2",
 			"IFrame einbinden",
-			3);
+			4);
 		$modules[] = new D2UModule("06-3",
 			"Video mit Plyr einbinden",
 			1);
