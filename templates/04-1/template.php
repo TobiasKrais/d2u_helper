@@ -214,7 +214,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 							print ' active';
 						}
 						print '">';
-						print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="">';
+						print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="" loading="lazy">';
 						print '</div>';
 					}
 					print '</div>';
