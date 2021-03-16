@@ -24,7 +24,7 @@ if ("REX_MEDIA[1]" != '') {
 		else {
 			print 'index.php?rex_media_type='. $picture_type .'&rex_media_file='. $picture;
 		}
-		print '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'" class="module_3_1_image">';
+		print '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'" class="module_3_1_image" loading="lazy">';
 		if($show_title && ($media->getValue('title') != "" || ($media->hasValue("med_title_". rex_clang::getCurrentId()) && $media->getValue("med_title_". rex_clang::getCurrentId()) != ""))) {
 			$med_title = ($media->hasValue("med_title_". rex_clang::getCurrentId()) && $media->getValue("med_title_". rex_clang::getCurrentId()) != "") ? $media->getValue("med_title_". rex_clang::getCurrentId()) : $media->getValue('title');
 			$html_picture .= '<figcaption class="d2u_figcaption">'. $med_title .'</figcaption>';
