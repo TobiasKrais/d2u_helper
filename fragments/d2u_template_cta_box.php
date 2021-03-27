@@ -25,7 +25,6 @@ if ($show_cta_box) {
 			if($d2u_helper->getConfig('footer_text_email', '') != '') {
 				print '<li><span class="cta_box_toggler fa-icon fa-envelope footer-icon"></span></li>';
 			}
-			print '<li><span class="cta_box_toggler fa-icon footer-icon"></span></li>';
 		?>
 		</ul>
 	</div>
@@ -34,7 +33,7 @@ if ($show_cta_box) {
 	<div id="cta_box_content">
 		<ul>
 		<?php
-			print '<li><span class="cta_box_toggler fa-icon fa-right footer-icon"></span></li>';
+			print '<li><span class="cta_box_toggler fa-icon fa-right footer-icon"></span><span class="cta_box_content">'. \Sprog\Wildcard::get('d2u_helper_template_cta_box') .'</span></li>';
 			if($d2u_helper->getConfig('footer_text_phone', '') != '') {
 				print '<li><span class="cta_box_toggler fa-icon fa-phone footer-icon"></span><span class="cta_box_content">'. $d2u_helper->getConfig('footer_text_phone') .'</span></li>';
 			}
@@ -51,7 +50,6 @@ if ($show_cta_box) {
 				print '<li><span class="cta_box_toggler fa-icon fa-envelope footer-icon"></span>'
 					. '<span class="cta_box_content"><a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a></span></li>';
 			}
-			print '<li><span class="cta_box_toggler fa-icon footer-icon"></span></li>';
 		?>
 		</ul>
 	</div>
