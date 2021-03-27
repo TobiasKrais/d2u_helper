@@ -25,7 +25,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 */                                                                                                
 function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
     $hexStr = preg_replace("/[^0-9A-Fa-f]/", '', $hexStr); // Gets a proper hex string
-    $rgbArray = array();
+    $rgbArray = [];
     if (strlen($hexStr) == 6) { //If a proper hex code, convert using bitwise operation. No overhead... faster
         $colorVal = hexdec($hexStr);
         $rgbArray['red'] = 0xFF & ($colorVal >> 0x10);
@@ -460,5 +460,8 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			$(".same-height").css("min-height", maxHeight);
 		});
 	</script>
+	<?php
+		echo $fragment->parse('d2u_template_cta_box.php');
+	?>
 </body>
 </html>

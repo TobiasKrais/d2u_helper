@@ -448,5 +448,8 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			$(".same-height").css("min-height", maxHeight);
 		});
 	</script>
+	<?php
+		echo $fragment->parse('d2u_template_cta_box.php');
+	?>
 </body>
 </html>

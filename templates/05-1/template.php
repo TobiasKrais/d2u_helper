@@ -209,5 +209,8 @@
 			</div>
 		</div>
 	</article>
+	<?php
+		echo $fragment->parse('d2u_template_cta_box.php');
+	?>
 </body>
 </html>

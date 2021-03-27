@@ -123,7 +123,7 @@ class D2UTemplateManager {
 			8);
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
-			9);
+			10);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
 			9);
@@ -413,6 +413,10 @@ class D2UTemplate {
 			// Consent manager CSS
 			if (rex_addon::get('consent_manager')->isAvailable() && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'))) {
 				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'));
+			}
+			// CTA box
+			if(rex_config::get('d2u_helper', 'show_cta_box', false)) {
+				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/d2u_template_cta_box.css'));
 			}
 
 			return $template_css;

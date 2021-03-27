@@ -146,5 +146,8 @@ $d2u_helper = rex_addon::get("d2u_helper");
 			</div>
 		</div>
 	</div>
+	<?php
+		echo $fragment->parse('d2u_template_cta_box.php');
+	?>
 </body>
 </html>

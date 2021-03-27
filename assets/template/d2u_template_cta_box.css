@@ -1,0 +1,81 @@
+#cta_icon_box, #cta_box {
+	position: fixed;
+	right: 0;
+	top: 225px;
+	z-index: 100;
+}
+#cta_icon_box {
+	z-index: 100;
+}
+#cta_box {
+	z-index: 101;
+}
+#cta_box_content, #cta_icon_box_content {
+	background-color: article_color_box;
+}
+.cta_box_content {
+	padding: 1em 1.5em;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#cta_box_content {
+	display: none;
+}
+#cta_icon_box_content ul, #cta_box_content ul {
+	margin: 0;
+	padding: 0;
+}
+#cta_icon_box_content li, #cta_box_content li {
+	height: 50px;
+	list-style: none;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.cta_box_toggler {
+	background-color: article_color_h;
+	color: article_color_bg;
+	display: inline-block;
+	height: 50px;
+	margin: 0;
+	max-height: 50px;
+	padding: 1em;
+	text-align: center;
+	width: 3em;
+}
+#cta_close {
+	float: right;
+	height: 50px;
+	padding: 1em 1.5em;
+	text-align: right;
+	width: 4em;
+}
+.fa-icon {
+	font-family: FontAwesome;
+}
+.fa-close:before {
+	content: "\f00d";
+}
+.fa-left:before {
+	content: "\f060";
+}
+.fa-right:before {
+	content: "\f061";
+}
+.fa-envelope:before {
+	content: "\f0e0";
+}
+.fa-facebook:before {
+	content: "\f230";
+}
+.fa-fax:before {
+	content: "\f1ac";
+}
+.fa-link:before {
+	content: "\f054";
+}
+.fa-mobile:before {
+	content: "\f10b";
+}
+.fa-phone:before {
+	content: "\f095";
+}
