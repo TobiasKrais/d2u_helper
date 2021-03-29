@@ -32,10 +32,6 @@ nav {
 	border-bottom: solid 1px white;
 	font-size: 1.15em;
 }
-#main-menu {
-	float: left;
-	padding-top: 1em;
-}
 .navigation a {
 	text-decoration: none !important;
 }
@@ -71,14 +67,6 @@ nav {
 .dl-menuwrapper button::after {
 	background: navi_color_hover_font !important;
 	box-shadow: 0 10px 0 navi_color_hover_font, 0 20px 0 navi_color_hover_font !important;
-}
-#lang_chooser_div, #search_icon_div {
-	float: right;
-	padding-top: 25px;
-}
-#mobile-menu {
-	float: right !important;
-	padding: 1em 0;
 }
 #logo {
 	margin: 1em 0;
@@ -290,14 +278,6 @@ a .box b {
 }
 .box img {
 	max-width: 100%;
-}
-.nav li, .nav li.active {
-	padding: 0 2em 0 0;
-}
-@media screen and (max-width: 991px) {
-	.nav li, .nav li.active {
-		padding: 0 1.5em 0 0;
-	}
 }
 .nav li a, .nav li.active a {
 	padding: 0;

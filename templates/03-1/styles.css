@@ -56,7 +56,7 @@ h1.subhead {
 	content: "\f015";
 }
 
-nav {
+.navigation {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
 }
@@ -80,10 +80,11 @@ nav a {
 	text-decoration: underline;
 }
 #lang_chooser_div, #search_icon_div {
-	float: right;
+	padding-left: 15px;
+	padding-right: 15px;
 }
-#lang_chooser_button, #search_icon {
-	margin-top: 10px;
+.main-menu-btn {
+	padding-left: 15px;
 }
 
 article {

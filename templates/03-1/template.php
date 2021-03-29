@@ -70,48 +70,15 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 				</div>
 			</div>
 		</header>
-		<?php
-			$fragment = new rex_fragment();
-			if($print == "") {
-		?>
-		<div class="row d-print-none">
-			<div class="col-12">
-				<div class="right-border distance-bottom">
-					<nav>
-						<div class="row">
-							<div class="col-12">
-									<?php
-										if(rex_addon::get('d2u_helper')->isAvailable()) {
-											if(rex_config::get('d2u_helper', 'include_menu_smartmenu', FALSE)) {
-												d2u_mobile_navi_smartmenus::getMenu();
-											}
-											else {
-												d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
-												d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
-											}
-										}
-									?>
-							</div>
-						</div>
-					</nav>
-					<?php
-						// Languages
-						print '<div id="lang_chooser_div">';
-						echo $fragment->parse('d2u_template_language_modal.php');
-						print '</div>';
-						// Search icon
-						if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
-							print '<div id="search_icon_div">';
-							echo $fragment->parse('d2u_template_search_icon.php');
-							print '</div>';
-						}
-					?>
-				</div>
-			</div>
-		</div>
-		<?php
-			}
-		?>
+	</div>
+	<?php
+		$fragment = new rex_fragment();
+		if($print == "") {
+			// Navi
+			echo $fragment->parse('d2u_template_nav.php');
+		}
+	?>
+	<div class="container">
 		<article>
 			<div class="row">
 				<?php

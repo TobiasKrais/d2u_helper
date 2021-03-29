@@ -27,17 +27,10 @@ img {
 }
 	
 /* Navi */
-#search_icon_div {
-	height: 50px;
-	position: relative;
-}
 nav {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
 	font-size: 1.15em;
-}
-.navigation {
-	padding-bottom: 1em;
 }
 .navigation a {
 	text-decoration: none !important;
@@ -60,18 +53,6 @@ nav {
 }
 .dl-menuwrapper .dl-menu.dl-menuopen {
 	font-size: 0.8em;
-}
-@media (min-width: navi-min-width) {
-	.navi {
-		bottom: 0;
-		position: absolute;
-	}
-}
-#lang_chooser_div {
-	padding-top: 25px;
-}
-#mobile-menu {
-	margin-bottom: 15px;
 }
 
 /* Header*/
@@ -199,14 +180,6 @@ article .form-group {
 }
 .box img {
 	max-width: 100%;
-}
-.nav li, .nav li.active {
-	padding: 0 2em 0 0;
-}
-@media screen and (max-width: 991px) {
-	.nav li, .nav li.active {
-		padding: 0 1.5em 0 0;
-	}
 }
 .nav li a, .nav li.active a {
 	padding: 0;

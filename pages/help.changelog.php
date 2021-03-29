@@ -10,9 +10,11 @@
 			<li>Template "04-3 Header Slider Template with news column": Sprachwähler Feintuning.</li>
 			<li>Templates 00-1, 01-1, 03-1, 03-2, 04-1, 04-2, 04-3 und 05-1: meta base Tag entfernt.</li>
 			<li>Templates 00-1, 01-1, 02-1, 03-1, 04-1, 04-2, 04-3, 05-1 und 06-1: in den Einstellungen kann festgelegt werden, ob am rechten Seitenrand eine CTA / Kontakt Box eingeblendet werden soll.</li>
+			<li>Templates 00-1, 01-1, 02-1, 03-1, 04-1, 04-2 und 04-3 benutzen nun die selbe Navigationsleiste aus einem neuen Fragment.</li>
 			<li>Module 01-1, 01-2, 02-2, 03-1, 03-2, 10-2 und 13-1 wurden um Dateityp WebP ergänzt und bei Textfeldern Tabluatoren in der Eingabe entfernt.</li>
 			<li>Modul "07-1 JavaScript einbinden" hizugefügt.</li>
 			<li>Modul "06-2 IFrame einbinden": die Breite des Blocks kann nun ausgewählt werden.</li>
+			<li>Upgrade Smartmenu auf Version 1.1.1.</li>
 		</ul>
 		<p>1.8.2</p>
 		<ul>

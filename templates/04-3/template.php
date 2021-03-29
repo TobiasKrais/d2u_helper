@@ -1,28 +1,4 @@
 <?php
-function printTemplate04_3Navi() {
-	$d2u_helper = rex_addon::get('d2u_helper');
-	// Navi
-	print '<div class="navi">';
-	if(rex_addon::get('d2u_helper')->isAvailable()) {
-		d2u_mobile_navi_smartmenus::getMenu();
-	}
-	print '</div>';
-
-	// Languages
-	print '<div id="lang_chooser_div">';
-	$fragment = new rex_fragment();
-	$fragment->setVar('showLangDropdown', true, false);
-	echo $fragment->parse('d2u_template_language_modal.php');
-	print '</div>';
-	
-	// Search icon
-	if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
-		print '<div id="search_icon_div">';
-		echo $fragment->parse('d2u_template_search_icon.php');
-		print '</div>';
-	}
-}
-
 // Get placeholder wildcard tags
 $sprog = rex_addon::get("sprog");
 $tag_open = $sprog->getConfig('wildcard_open_tag');
@@ -139,36 +115,28 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 </head>
 
 <body>
-	<?php
-		if(($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') || $d2u_helper->getConfig("template_logo", "") != "") {
-			print '<div class="container">';
-			print '<div class="row">';
-			// Navi, if configured on top
-			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') {
-				print '<div class="col-12'. ($d2u_helper->getConfig("template_logo", "") != "" ? ' col-md-8  col-lg-9' : '') .' d-print-none">';
-				print '<nav class="d-print-none top">';
-				print '<div class="navigation row">';
-				print '<div class="col-12">';
-				printTemplate04_3Navi();
-				print '</div>';
-				print '</div>';
-				print '</nav>';
-				print '</div>';
-			}
-
-			// Logo
-			if($d2u_helper->getConfig("template_logo", "") != "") {
-				print '<div class="col-12'. ($d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top' ? ' col-md-4 col-lg-3' : '') .'">';
-				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-				$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
-				if($media_logo instanceof rex_media) {
-					print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+	<div class="container">
+		<div class="row">
+			<?php
+				// Logo
+				if($d2u_helper->getConfig("template_logo", "") != "") {
+					print '<div class="col-12">';
+					print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
+					$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
+					if($media_logo instanceof rex_media) {
+						print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+					}
+					print '</a>';
+					print '</div>';
 				}
-				print '</a>';
-				print '</div>';
-			}
-			print '</div>';
-			print '</div>';
+			?>
+		</div>
+	</div>
+	<?php
+		$fragment = new rex_fragment();
+		if(($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top')) {
+			// Navi
+			echo $fragment->parse('d2u_template_nav.php');
 		}
 
 		$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
@@ -295,17 +263,8 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		}
 		// Navi, if configured on bottom
 		if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'bottom') {
-			print '<nav class="d-print-non bottom">';
-			print '<div class="container">';
-			print '<div class="navigation">';
-			print '<div class="row">';
-			print '<div class="col-12">';
-			printTemplate04_3Navi();
-			print '</div>';
-			print '</div>';
-			print '</div>';
-			print '</div>';
-			print '</nav>';
+			// Navi
+			echo $fragment->parse('d2u_template_nav.php');
 		}
 	?>
 	<section id="breadcrumbs">
@@ -504,7 +463,6 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	<footer class="d-print-none">
 		<div class="container footer">
 			<?php
-				$fragment = new rex_fragment();
 				echo $fragment->parse('d2u_template_footer.php');
 			?>
 		</div>

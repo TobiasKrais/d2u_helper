@@ -1,4 +1,8 @@
  /* search button */
+ #search_icon_div {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
 #search_icon {
 	background: transparent;
 	border: none;
@@ -17,8 +21,6 @@
 /* YForm input field styles */
 #fragment-search {
 	border: 1px solid #aaa;
-	float: right;
-	margin: 15px 0;
 	max-width: 100%;
 	position: relative;
 }

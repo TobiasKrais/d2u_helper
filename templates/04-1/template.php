@@ -140,55 +140,28 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 </head>
 
 <body>
-	<nav>
-		<div class="container d-print-none navigation">
-			<div class="row">
-				<?php
-					// Logo
-					if($d2u_helper->getConfig("template_logo", "") != "") {
-						print '<div class="col-12 col-md-4 col-lg-3">';
-						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
-						if($media_logo instanceof rex_media) {
-							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
-						}
-						print '</a>';
-						print '</div>';
-					}
-
-					print '<div class="col-12 col-md-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .' col-lg-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '9' : '12') .' navi-row">';
-					print '<div class="row">';
-					
-					// Navi
+	<div class="container">
+		<div class="row">
+			<?php
+				// Logo
+				if($d2u_helper->getConfig("template_logo", "") != "") {
 					print '<div class="col-12">';
-					if(rex_addon::get('d2u_helper')->isAvailable()) {
-						d2u_mobile_navi_smartmenus::getMenu();
+					print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
+					$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
+					if($media_logo instanceof rex_media) {
+						print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
 					}
-
-					// Langchooser 
-					if(count(rex_clang::getAllIds(true)) > 0) {
-						print '<div id="lang_chooser_div">';
-						$fragment = new rex_fragment();
-						echo $fragment->parse('d2u_template_language_modal.php');
-						print '</div>';
-					}
-
-					// Search icon
-					if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
-						print '<div id="search_icon_div">';
-						echo $fragment->parse('d2u_template_search_icon.php');
-						print '</div>';
-					}
-					
+					print '</a>';
 					print '</div>';
-
-					print '</div>';
-					print '</div>';
-				?>
-			</div>
+				}
+			?>
 		</div>
-	</nav>
+	</div>
 	<?php
+		$fragment = new rex_fragment();
+		// Navi
+		echo $fragment->parse('d2u_template_nav.php');
+
 		$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
 		if(count($slider_pics) > 0) {
 	?>

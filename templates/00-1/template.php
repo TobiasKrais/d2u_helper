@@ -150,68 +150,11 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			}
 		?>
 	</header>
-	<nav class="d-print-none">
-		<div class="container">
-			<div class="row">
-				<?php
-					// Navi
-					$show_lang_chooser = count(rex_clang::getAllIds(TRUE)) > 1 ? TRUE : FALSE;
-					$show_cart = (rex_addon::get('d2u_courses')->isAvailable() && rex_config::get('d2u_courses', 'article_id_shopping_cart', 0) > 0) ? TRUE : FALSE;
-					if($show_lang_chooser && $show_cart) {
-						print '<div class="col-4 col-sm-4 col-md-7 col-lg-9" data-match-height>';
-					}
-					else if($show_cart) {
-						print '<div class="col-8 col-sm-10 col-md-10 col-lg-11" data-match-height>';
-					}
-					else if($show_lang_chooser) {
-						print '<div class="col-6 col-sm-6 col-md-9 col-lg-10" data-match-height>';
-					}
-					else {
-						print '<div class="col-12" data-match-height>';
-					}
-					print '<div class="navi">';
-					if(rex_addon::get('d2u_helper')->isAvailable()) {
-						d2u_mobile_navi_smartmenus::getMenu();
-					}
-					print '</div>';
-					print '</div>';
-					// D2U Courses cart
-					if($show_cart) {
-						print '<div class="col-2 col-sm-2 col-md-2 col-lg-1">';
-						print '<a href="'. rex_getUrl(rex_config::get('d2u_courses', 'article_id_shopping_cart')) .'" class="cart_link">';
-						print '<div id="cart_symbol" class="desktop-inner">';
-						print '<img src="'. rex_url::addonAssets('d2u_courses', 'cart_only.png') .'" alt="'. rex_article::get(rex_config::get('d2u_courses', 'article_id_shopping_cart', 0))->getName() .'">';
-						if(count(\D2U_Courses\Cart::getCourseIDs()) > 0) {
-							print '<div id="cart_info">'. count(\D2U_Courses\Cart::getCourseIDs()) .'</div>';
-						}
-						print '</div>';
-						print '</a>';
-						print '</div>';
-					}
-					if($show_lang_chooser || (rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0)) {
-						$clangs = rex_clang::getAll(TRUE);
-						print '<div class="col-6 col-sm-6 col-md-3 col-lg-2">';
-						print '<div id="langchooser" class="desktop-inner">';
-						// Languages
-						if($show_lang_chooser) {
-							print '<div id="lang_chooser_div">';
-							$fragment = new rex_fragment();
-							echo $fragment->parse('d2u_template_language_modal.php');
-							print '</div>';
-						}
-						// Search icon
-						if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
-							print '<div id="search_icon_div">';
-							echo $fragment->parse('d2u_template_search_icon.php');
-							print '</div>';
-						}
-						print '</div>';
-						print '</div>';
-					}
-				?>
-			</div>
-		</div>
-	</nav>
+	<?php
+		$fragment = new rex_fragment();
+		// Navi
+		echo $fragment->parse('d2u_template_nav.php');
+	?>
 	<section id="breadcrumbs" class="subhead">
 		<div class="container">
 			<div class="row">
@@ -314,7 +257,6 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	<footer class="d-print-none">
 		<div class="container">
 			<?php
-				$fragment = new rex_fragment();
 				echo $fragment->parse('d2u_template_footer.php');
 			?>
 		</div>

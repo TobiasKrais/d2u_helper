@@ -395,35 +395,34 @@ class D2UTemplate {
 	 * @return string Template name
 	 */
 	public function getCSS() {
+		$template_css = '';
+		// Template CSS
 		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_CSS_FILE)) {
 			$template_css = file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_CSS_FILE);
-			// Footer CSS
-			$footer_type = rex_config::get('d2u_helper', 'footer_type', '');
-			if ($footer_type !== '' && file_exists(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'))) {
-				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'));
-			}
-			// Langugae Modal CSS
-			if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'))) {
-				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'));
-			}
-			// Search icon CSS
-			if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'))) {
-				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'));
-			}
-			// Consent manager CSS
-			if (rex_addon::get('consent_manager')->isAvailable() && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'))) {
-				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'));
-			}
-			// CTA box
-			if(rex_config::get('d2u_helper', 'show_cta_box', false)) {
-				$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/d2u_template_cta_box.css'));
-			}
+		}
+		// Footer CSS
+		$footer_type = rex_config::get('d2u_helper', 'footer_type', '');
+		if ($footer_type !== '' && file_exists(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'))) {
+			$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'));
+		}
+		// Langugae Modal CSS
+		if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'))) {
+			$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'));
+		}
+		// Search icon CSS
+		if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'))) {
+			$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'));
+		}
+		// Consent manager CSS
+		if (rex_addon::get('consent_manager')->isAvailable() && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'))) {
+			$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'));
+		}
+		// CTA box CSS
+		if(rex_config::get('d2u_helper', 'show_cta_box', false) &&  file_exists(rex_path::addonAssets('d2u_helper', 'template/d2u_template_cta_box.css'))) {
+			$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/d2u_template_cta_box.css'));
+		}
 
-			return $template_css;
-		}
-		else {
-			return "";
-		}
+		return $template_css;
 	}
 
 	/**

@@ -28,17 +28,12 @@ img {
 	
 /* Navi */
 nav {
+	background-color: navi_color_hover_bg;
 	border-bottom: solid 1px white;
 	font-size: 1.15em;
 }
-nav.bottom, nav.top {
-	background-color: navi_color_bg;
-}
 .navigation {
-	padding-bottom: 1em;
-}
-.bottom .navigation {
-	padding-bottom: 0;
+	background-color: navi_color_bg;
 }
 .navigation a {
 	text-decoration: none !important;
@@ -66,14 +61,11 @@ nav.bottom, nav.top {
 	font-size: 0.8em;
 }
 #lang_chooser_div, #search_icon_div {
-	float: right;
-	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
-.lang-code {
-	color: white;
-}
-#mobile-menu {
-	margin-bottom: 15px;
+.main-menu-btn {
+	padding-left: 15px;
 }
 
 /* Header*/
@@ -237,14 +229,6 @@ article .form-group {
 }
 .box img {
 	max-width: 100%;
-}
-.nav li, .nav li.active {
-	padding: 0 2em 0 0;
-}
-@media screen and (max-width: 991px) {
-	.nav li, .nav li.active {
-		padding: 0 1.5em 0 0;
-	}
 }
 .nav li a, .nav li.active a {
 	padding: 0;

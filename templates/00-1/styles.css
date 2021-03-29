@@ -56,22 +56,6 @@ header {
 	}
 }
 
-#langchooser {
-	float: right;
-	margin-top: -5px;
-}
-#langchooser img {
-	margin: 0 10px 3px 0;
-}
-#langchooser a {
-	color: white;
-}
-#lang_chooser_div, #search_icon_div {
-	float: right;
-}
-.cart_link {
-	float: right;
-}
 #cart_symbol {
 	padding-right: 0px !important;
 }

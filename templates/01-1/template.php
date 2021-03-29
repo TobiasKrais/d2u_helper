@@ -57,37 +57,11 @@ $d2u_helper = rex_addon::get("d2u_helper");
 			}
 		?>
 	</header>
-	<nav>
-		<div class="container">
-			<div class="row">
-				<div class="col-12" data-match-height>
-					<div class="navi">
-						<?php
-							// Navi
-							if(rex_addon::get('d2u_helper')->isAvailable()) {
-								d2u_mobile_navi_smartmenus::getMenu();
-							}
-						?>
-					</div>
-					<div id="lang_chooser_div">
-						<?php
-							// Languages
-							$fragment = new rex_fragment();
-							echo $fragment->parse('d2u_template_language_modal.php');
-						?>
-					</div>
-					<?php
-						// Search icon
-						if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
-							print '<div id="search_icon_div">';
-							echo $fragment->parse('d2u_template_search_icon.php');
-							print '</div>';
-						}
-					?>
-				</div>
-			</div>
-		</div>
-	</nav>
+<?php
+		$fragment = new rex_fragment();
+		// Navi
+		echo $fragment->parse('d2u_template_nav.php');
+?>
 	<article>
 		<div class="container">
 			<div class="row">

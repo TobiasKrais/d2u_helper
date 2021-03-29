@@ -80,12 +80,7 @@ nav a {
 .desktop-navi.current, .desktop-navi li.current {
 	background: rgba(255, 255, 255, 0.25);
 }
-#lang_chooser_div, #search_icon_div {
-	float: right;
-}
-#lang_chooser_button, #search_icon {
-	margin-top: 10px;
-}
+
 
 article {
 	background-color: article_color_bg;

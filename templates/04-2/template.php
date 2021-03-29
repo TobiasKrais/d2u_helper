@@ -115,62 +115,28 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 </head>
 
 <body>
-	<nav>
-		<div class="container d-print-none navigation">
-			<div class="row">
-				<?php
-					$fragment = new rex_fragment();
-					// Navi
-					print '<div class="col-'. ($d2u_helper->getConfig("template_logo", "") != "" ? '8' : '12') .'">';
-
-					// Search field
-					if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0 && rex_addon::get('yform_spam_protection')->isAvailable()) {
-						print '<div id="search_icon_div">';
-						$fragment->setVar('showSearchField', true, false);
-						echo $fragment->parse('d2u_template_search_icon.php');
-						print '</div>';
+	<div class="container">
+		<div class="row">
+			<?php
+				// Logo
+				if($d2u_helper->getConfig("template_logo", "") != "") {
+					print '<div class="col-12">';
+					print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
+					$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
+					if($media_logo instanceof rex_media) {
+						print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
 					}
-
-					print '<div class="navi">';
-					if(rex_addon::get('d2u_helper')->isAvailable()) {
-						d2u_mobile_navi_smartmenus::getMenu();
-					}
+					print '</a>';
 					print '</div>';
-					print '</div>';
-
-					// Logo and languages
-					$clangs = rex_clang::getAll(TRUE);
-					if($d2u_helper->getConfig("template_logo", "") != "" || count($clangs) > 1 || rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
-						print '<div class="col-4">';
-						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
-						if($media_logo instanceof rex_media) {
-							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
-						}
-						print '</a>';
-						
-						// Languages
-						if(count($clangs) > 1) {
-							print '<div id="lang_chooser_div">';
-							$fragment->setVar('showLangDropdown', true, false);
-							echo $fragment->parse('d2u_template_language_modal.php');
-							print '</div>';
-						}
-						
-						// Search icon
-						if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0 && !rex_addon::get('yform_spam_protection')->isAvailable()) {
-							print '<div id="search_icon_div">';
-							echo $fragment->parse('d2u_template_search_icon.php');
-							print '</div>';
-						}
-
-						print '</div>';
-					}
-				?>
-			</div>
+				}
+			?>
 		</div>
-	</nav>
+	</div>
 	<?php
+		$fragment = new rex_fragment();
+		// Navi
+		echo $fragment->parse('d2u_template_nav.php');
+
 		$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
 		if(count($slider_pics) > 0) {
 	?>

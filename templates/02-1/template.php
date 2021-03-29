@@ -51,27 +51,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 			$fragment = new rex_fragment();
 			// Navi if above header picture
 			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') {
-				print '<div class="row">';
-				print '<div class="col-12">';
-				print '<nav>';
-				print '<div class="row">';
-				print '<div class="col-12">';
-				d2u_mobile_navi_smartmenus::getMenu();
-				print '</div>';
-				print '</div>';
-				print '</nav>';
-				// Languages
-				print '<div id="lang_chooser_div">';
-				echo $fragment->parse('d2u_template_language_modal.php');
-				print '</div>';
-				// Search icon
-				if(rex_addon::get('search_it')->isAvailable() && rex_config::get('d2u_helper', 'article_id_search', 0) > 0) {
-					print '<div id="search_icon_div">';
-					echo $fragment->parse('d2u_template_search_icon.php');
-					print '</div>';
-				}
-				print '</div>';
-				print '</div>';
+				echo $fragment->parse('d2u_template_nav.php');
 			}
 		?>
 		<div class="row">
@@ -93,22 +73,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 		<?php
 			// Navi if below header picture
 			if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'bottom') {
-				print '<div class="row">';
-				print '<div class="col-12">';
-				print '<nav>';
-				print '<div class="row">';
-				print '<div class="col-12">';
-				d2u_mobile_navi_smartmenus::getMenu();
-				print '</div>';
-				print '</div>';
-				print '</nav>';
-				// Languages
-				print '<div id="lang_chooser_div">';
-				echo $fragment->parse('d2u_template_language_modal.php');
-				print '</div>';
-				
-				print '</div>';
-				print '</div>';
+				echo $fragment->parse('d2u_template_nav.php');
 			}
 		?>
 		<article>

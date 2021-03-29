@@ -22,6 +22,9 @@
 	border: none;
 	float: right;
 	font-size: 16px;
+	min-width: 90px;
+	padding-bottom: 10px;
+	padding-top: 10px;
 }
 #lang_chooser_button svg, #lang_chooser_button img {
 	color: navi_color_font;

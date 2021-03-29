@@ -15,6 +15,9 @@ class d2u_mobile_navi_smartmenus {
 		if(file_exists($addon->getAssetsPath("smartmenus/sm-core-css.css"))){
 			$css .= file_get_contents($addon->getAssetsPath("smartmenus/sm-core-css.css"));
 		}
+		if(file_exists($addon->getAssetsPath("smartmenus/custom.css"))){
+			$css .= file_get_contents($addon->getAssetsPath("smartmenus/custom.css"));
+		}
 		return $css;
 	}
 
@@ -27,6 +30,9 @@ class d2u_mobile_navi_smartmenus {
 		$js = "";
 		if(file_exists($addon->getAssetsPath("smartmenus/jquery.smartmenus.min.js"))){
 			$js .= file_get_contents($addon->getAssetsPath("smartmenus/jquery.smartmenus.min.js"));
+		}
+		if(file_exists($addon->getAssetsPath("smartmenus/menu-toggle.js"))){
+			$js .= file_get_contents($addon->getAssetsPath("smartmenus/menu-toggle.js"));
 		}
 		return $js;
 	}
@@ -51,6 +57,13 @@ class d2u_mobile_navi_smartmenus {
 	 * @param int $cat_parent_id Redaxo category ID, by default root categories are returned.
 	 */
 	public static function getMenu($cat_parent_id = 0) {
+		// Mobile menu toggle button (hamburger/x icon)
+		print '<input id="main-menu-state" type="checkbox" />';
+		print '<label class="main-menu-btn" for="main-menu-state">';
+		print '<span class="main-menu-btn-icon"></span>';
+		print '</label>';
+
+		// Menu
 		print '<ul id="main-menu" class="sm sm-simple">'. PHP_EOL;
 	
 		foreach(d2u_mobile_navi_smartmenus::getCategories($cat_parent_id) as $category) {
@@ -66,9 +79,6 @@ class d2u_mobile_navi_smartmenus {
 						.'<a href="'. $category->getUrl() .'" title="'. $category->getName() .'">'. $category->getName() .'</a>'. PHP_EOL;
 					print '<ul>'. PHP_EOL;
 					// Mit Untermenü
-					if($has_machine_submenu) {
-						d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
-					}
 					foreach($category->getChildren(true) as $lev2) {
 						if(count($lev2->getChildren(true)) == 0) {
 							// Without Redaxo submenu
@@ -86,11 +96,11 @@ class d2u_mobile_navi_smartmenus {
 		}
 		
 		print '</ul>';
-		print '<script type="text/javascript">
+		print '
+<script type="text/javascript">
 	$(function() {
 		$("#main-menu").smartmenus({
-			mainMenuSubOffsetX: -1,
-			subMenusSubOffsetX: 10,
+			subMenusSubOffsetX: 15,
 			subMenusSubOffsetY: 0
 		});
 	});
@@ -104,14 +114,10 @@ class d2u_mobile_navi_smartmenus {
 	private static function getSubmenu($rex_category) {
 		print '<li'. (rex_article::getCurrentId() == $rex_category->getId() || in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. $rex_category->getName() .'">'. $rex_category->getName() .'</a>'. PHP_EOL;
 		print '<ul>'. PHP_EOL;
-		if(rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') == 'show' && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_category->getId()) {
-			d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
-		}
 		foreach($rex_category->getChildren(true) as $rex_subcategory) {
 			// Check permissions if YCom ist installed
 			if(!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($rex_subcategory->getStartArticle()))) {
-				$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_subcategory->getId());
-				if(count($rex_subcategory->getChildren(true)) == 0 && !$has_machine_submenu) {
+				if(count($rex_subcategory->getChildren(true)) == 0) {
 					// Without Redaxo submenu
 					print '<li'. (rex_article::getCurrentId() == $rex_subcategory->getId() || in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
 				}
