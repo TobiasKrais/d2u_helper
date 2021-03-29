@@ -20,6 +20,7 @@
 #lang_chooser_button {
 	background: transparent;
 	border: none;
+	color: navi_color_font;
 	float: right;
 	font-size: 16px;
 	min-width: 90px;

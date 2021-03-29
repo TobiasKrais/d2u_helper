@@ -267,7 +267,7 @@
   left: 2px;
   height: 2px;
   width: 24px;
-  background: #212529;
+  background: navi_color_font;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
 }
