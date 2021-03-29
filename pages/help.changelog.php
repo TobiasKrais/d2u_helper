@@ -1,13 +1,12 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.8.3-DEV</p>
+		<p>1.8.3</p>
 		<ul>
 			<li>Spanische Übersetzungen werden nun korrekt installiert.</li>
 			<li>Bootstrap 4.6.0 Upgrade und Popper und Bootstrap JS in eine Datei gebündelt.</li>
 			<li>Template CSS an consent_manager 3.x angepasst.</li>
 			<li>Template Installation Empfehlung für emailobfuscator Addon entfernt.</li>
-			<li>Template "04-3 Header Slider Template with news column": Sprachwähler Feintuning.</li>
 			<li>Templates 00-1, 01-1, 03-1, 03-2, 04-1, 04-2, 04-3 und 05-1: meta base Tag entfernt.</li>
 			<li>Templates 00-1, 01-1, 02-1, 03-1, 04-1, 04-2, 04-3, 05-1 und 06-1: in den Einstellungen kann festgelegt werden, ob am rechten Seitenrand eine CTA / Kontakt Box eingeblendet werden soll.</li>
 			<li>Templates 00-1, 01-1, 02-1, 03-1, 04-1, 04-2 und 04-3 benutzen nun die selbe Navigationsleiste aus einem neuen Fragment.</li>
