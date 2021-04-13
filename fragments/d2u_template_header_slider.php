@@ -14,21 +14,17 @@
 			if(count($slider_pics) == 1) {
 				print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" id="background-single-image">';
 			}
-			else if(count($slider_pics) > 1) {
+			else {
 				// Slider
 				print '<div id="headerCarouselbg" class="carousel carousel-fade slide carousel-sync" data-pause="false">';
 
 				// Wrapper for slides
 				print '<div class="carousel-inner">';
 				for($i = 0; $i < count($slider_pics); $i++) {
-					$slider_pic = rex_media::get($slider_pics[$i]);
-					if($slider_pic instanceof rex_media) {
-						print '<div class="carousel-item';
-						if($i == 0) {
-							print ' active';
-						}
-						print '">';
-						print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="'. $slider_pic->getTitle() .'" loading="lazy">';
+					$rex_media_slider_pic = rex_media::get($slider_pics[$i]);
+					if($rex_media_slider_pic instanceof rex_media) {
+						print '<div class="carousel-item'. ($i == 0 ? ' active' : '') .'">';
+						print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="'. $rex_media_slider_pic->getTitle() .'"'. ($i > 0 ? ' loading="lazy"' : '') .'>';
 						print '</div>';
 					}
 				}
@@ -45,35 +41,27 @@
 					if(count($slider_pics) == 1) {
 						print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" style="max-width:100%;">';
 					}
-					else if(count($slider_pics) > 1) {
+					else {
 						// Slider
 						print '<div id="headerCarousel" class="carousel carousel-fade slide carousel-sync" data-ride="carousel" data-pause="false">';
 
 						// Slider indicators
 						print '<ol class="carousel-indicators">';
-						for($i = 0; $i < count($slider_pics); $i++) {
-							print '<li data-target="#headerCarousel" data-slide-to="'. $i .'"';
-							if($i == 0) {
-								print ' class="active"';
-							}
-							print '></li>';
+						for($j = 0; $j < count($slider_pics); $j++) {
+							print '<li data-target="#headerCarousel" data-slide-to="'. $j .'"'. ($j == 0 ? ' class="active"' : '') .'></li>';
 						}
 						print '</ol>';
 
 						// Wrapper for slides
 						print '<div class="carousel-inner">';
-						for($i = 0; $i < count($slider_pics); $i++) {
-							$slider_pic = rex_media::get($slider_pics[$i]);
+						for($k = 0; $k < count($slider_pics); $k++) {
+							$slider_pic = rex_media::get($slider_pics[$k]);
 							if($slider_pic instanceof rex_media) {
-								print '<div class="carousel-item';
-								if($i == 0) {
-									print ' active';
-								}
-								print '">';
+								print '<div class="carousel-item'. ($k == 0 ? ' active' : '') .'">';
 								// Image
 								$ratio = $slider_pic->getWidth() / $slider_pic->getHeight();
 								$ratio_min_style = ' style="min-height: 250px; min-width:'. round(250 * $ratio).'px;"';
-								print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="'. $slider_pic->getTitle() .'"'. $ratio_min_style .'>';
+								print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$k]) .'" alt="'. $slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .'>';
 								// Slogan
 								$article = rex_article::getCurrent();
 								$slogan_text = $article->getValue('art_slogan') != "" ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId());
