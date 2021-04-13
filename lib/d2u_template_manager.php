@@ -132,13 +132,13 @@ class D2UTemplateManager {
 			7);
 		$d2u_templates[] = new D2UTemplate("04-1",
 			"Header Slider Template with Slogan",
-			7);
+			8);
 		$d2u_templates[] = new D2UTemplate("04-2",
 			"Header Slider Template",
-			13);
+			14);
 		$d2u_templates[] = new D2UTemplate("04-3",
 			"Header Slider Template with news column",
-			8);
+			9);
 		$d2u_templates[] = new D2UTemplate("05-1",
 			"Double Logo Template",
 			9);
@@ -412,6 +412,10 @@ class D2UTemplate {
 		// Search icon CSS
 		if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'))) {
 			$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'));
+		}
+		// Header slider CSS
+		if (substr($this->d2u_template_id, 0, 2) == "04" && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_header_slider.css'))) {
+			$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_header_slider.css'));
 		}
 		// Consent manager CSS
 		if (rex_addon::get('consent_manager')->isAvailable() && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'))) {

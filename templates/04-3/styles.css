@@ -68,40 +68,6 @@ nav {
 	padding-left: 15px;
 }
 
-/* Header*/
-header {
-	overflow: hidden;
-}
-#background {
-	position: absolute;
-	left: 0;
-	right: 0;
-	opacity: 0.4;
-	z-index: -1;
-
-	display: block;
-	-webkit-filter: blur(10px);
-	-moz-filter: blur(10px);
-	-o-filter: blur(10px);
-	-ms-filter: blur(10px);
-	filter: blur(10px);
-}
-#background-single-image {
-	max-height: 600px;
-	max-width: 100%;
-	width: 100%;
-}
-#headerCarousel {
-	max-height: 600px;
-	width: 100%;
-}
-#headerCarouselbg {
-	max-height: 600px;
-}
-.carousel-item {
-	transition-duration: 3s !important
-}
-
 /* Subhead and Breadcrumbs */
 #breadcrumbs {
 	background-color: subhead_color_bg;

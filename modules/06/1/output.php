@@ -17,13 +17,14 @@ $youtube_url = 'https://www.youtube-nocookie.com/embed/'. $youtube_id .'?autopla
 $youtube_previewimage_url = 'https://img.youtube.com/vi/'. $youtube_id .'/hqdefault.jpg';
 $previewimage_target_filename = 'youtube-'. $youtube_id .'.jpg';
 
-// Copy preview image
-if(!is_dir(rex_path::addonCache('d2u_helper')) || !file_exists(rex_path::addonCache('d2u_helper', $previewimage_target_filename))) {
-	if(!is_dir(rex_path::addonCache('d2u_helper'))) {
-		mkdir(rex_path::addonCache('d2u_helper'), 0755, TRUE);
+if($youtube_id != "") {
+	// Copy preview image
+	if(!is_dir(rex_path::addonCache('d2u_helper')) || !file_exists(rex_path::addonCache('d2u_helper', $previewimage_target_filename))) {
+		if(!is_dir(rex_path::addonCache('d2u_helper'))) {
+			mkdir(rex_path::addonCache('d2u_helper'), 0755, TRUE);
+		}
+		copy($youtube_previewimage_url, rex_path::addonCache('d2u_helper', $previewimage_target_filename));
 	}
-	copy($youtube_previewimage_url, rex_path::addonCache('d2u_helper', $previewimage_target_filename));
-}
 ?>
 
 <div class="col-sm-12 col-md-<?php echo $cols; ?>">
@@ -42,3 +43,10 @@ if(!is_dir(rex_path::addonCache('d2u_helper')) || !file_exists(rex_path::addonCa
 		loadYoutubeVideo('<?=  $youtube_url; ?>', '<?= $youtube_id; ?>') ;
 	});
 </script>
+<?php
+}
+else {
+	if(rex::isBackend()) {
+		print "<p class='error'>Die YouTube URL ist ungültig!</p>";
+	}
+}

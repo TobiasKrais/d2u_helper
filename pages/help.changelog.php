@@ -3,7 +3,8 @@
 	<div class="panel-body">
 		<p>1.8.4-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 06-1 "YouTube Video einbinden": Warnungmeldung bei fehlerhaften URLs im Backend.</li>
+			<li>Templates 04-1, 04-2 und 04-3 benutzen nun einen gemeinsamten Slider als Fragment.</li>
 		</ul>
 		<p>1.8.3</p>
 		<ul>
