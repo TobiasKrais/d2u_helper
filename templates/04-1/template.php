@@ -140,23 +140,25 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 </head>
 
 <body>
-	<div class="container">
-		<div class="row">
-			<?php
-				// Logo
-				if($d2u_helper->getConfig("template_logo", "") != "") {
-					print '<div class="col-12">';
-					print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-					$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
-					if($media_logo instanceof rex_media) {
-						print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+	<section id="logo-container">
+		<div class="container">
+			<div class="row">
+				<?php
+					// Logo
+					if($d2u_helper->getConfig("template_logo", "") != "") {
+						print '<div class="col-12">';
+						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
+						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
+						if($media_logo instanceof rex_media) {
+							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+						}
+						print '</a>';
+						print '</div>';
 					}
-					print '</a>';
-					print '</div>';
-				}
-			?>
+				?>
+			</div>
 		</div>
-	</div>
+	</section>
 	<?php
 		$fragment = new rex_fragment();
 		// Navi
