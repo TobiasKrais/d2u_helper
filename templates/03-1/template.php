@@ -36,7 +36,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 			print 'REX_CONSENT_MANAGER[]';
 		}
 	?>
-	<link rel="stylesheet" href="/index.php?template_id=03-1&d2u_helper=template.css">
+	<link rel="stylesheet" href="/index.php?template_id=03-1&amp;d2u_helper=template.css">
 	<style>
 		.desktop-navi {
 			width: <?php print (100 / count(rex_category::getRootCategories(TRUE)));?>% !important;

@@ -23,7 +23,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 	<?php
 		print d2u_addon_frontend_helper::getMetaTags();
 	?>
-	<link rel="stylesheet" href="/index.php?template_id=01-1&d2u_helper=template.css">
+	<link rel="stylesheet" href="/index.php?template_id=01-1&amp;d2u_helper=template.css">
 	<?php
 		if(file_exists(rex_path::media('favicon.ico'))) {
 			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';

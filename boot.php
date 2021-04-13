@@ -108,7 +108,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 		
 	// Menu stuff in header
 	if($addon->getConfig("include_menu_multilevel", "false") == "true" || $addon->getConfig("include_menu_slicknav", "false") == "true" || $addon->getConfig("include_menu_smartmenu", "false") == "true") {
-		$insert_head .= '<script src="/index.php?position=head&d2u_helper=helper.js"></script>' . PHP_EOL;
+		$insert_head .= '<script src="/index.php?position=head&amp;d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 
 	$ep->setSubject(str_replace('</head>', $insert_head .'</head>', $ep->getSubject()));
@@ -120,7 +120,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 
 	// Module stuff in body
 	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true" && d2u_addon_frontend_helper::getModulesJS()) {
-		$insert_body .= '<script src="/index.php?position=body&d2u_helper=helper.js"></script>' . PHP_EOL;
+		$insert_body .= '<script src="/index.php?position=body&amp;d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
