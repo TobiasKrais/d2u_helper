@@ -162,10 +162,10 @@ class D2UModuleManager {
 			9);
 		$modules[] = new D2UModule("04-1",
 			"Google Maps Karte",
-			10);
+			11);
 		$modules[] = new D2UModule("04-2",
 			"OpenStreetMap Karte",
-			10);
+			1);
 		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
 			11);

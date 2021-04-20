@@ -3,8 +3,9 @@
 	<div class="panel-body">
 		<p>1.8.4-DEV</p>
 		<ul>
-			<li>Modul 06-1 "YouTube Video einbinden": Warnungmeldung bei fehlerhaften URLs im Backend.</li>
+			<li>Modul Modul 04-1 "Google Maps Karte" zeigt Datenschutzhinweis bevor die Karte gelasden wird.</li>
 			<li>Neues Modul Modul 04-2 "OpenStreetMap Karte" hinzugefügt (verwendet Leaflet 1.7.1).</li>
+			<li>Modul 06-1 "YouTube Video einbinden": Warnungmeldung bei fehlerhaften URLs im Backend.</li>
 			<li>Templates 04-1, 04-2 und 04-3 benutzen nun einen gemeinsamten Slider als Fragment.</li>
 		</ul>
 		<p>1.8.3</p>

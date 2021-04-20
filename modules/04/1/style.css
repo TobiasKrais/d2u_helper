@@ -1,0 +1,30 @@
+#map_canvas {
+	background-image: url('/assets/addons/d2u_helper/modules/04-1/map-dummy.jpg');
+	background-position: center;
+}
+
+.maps-gdpr-hint {
+	background-color: rgba(50,50,50,0.9);
+	color: white;
+	left: 50%;
+	max-width: 500px;
+	padding: 5%;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	transform: translate(-50.1%,-50%);
+	width: 75%;
+	z-index: 2;
+}
+@media screen and (max-width: 767px) {
+	.maps-gdpr-hint {
+		width: 100%;
+	}
+}
+.maps-gdpr-hint button {
+	background-color: article_color_h;
+	color: article_color_bg;
+	border: none;
+	margin-top: 15px;
+	padding: 15px;
+}

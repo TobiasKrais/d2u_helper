@@ -17,15 +17,36 @@
 	if($api_key != "") {
 		$api_key = "?key=". $api_key;
 	}
-	$substitute = array("\r\n" => "", "\r" => "", "\n" => "", '"' => "'");
+	$substitute = ["\r\n" => "", "\r" => "", "\n" => "", '"' => "'"];
 	$infotext = "REX_VALUE[id=2 output=html]";
 	$infotext = strtr($infotext, $substitute);
+	
+	$map_id = rand();
 ?>
-	<script src="https://maps.googleapis.com/maps/api/js<?php echo $api_key; ?>"></script> 
-	<div id="map_canvas" style="display: block; width: 100%; height: <?php echo $height; ?>"></div>
-	<script> 
+	<div id="map_canvas" style="display: block; width: 100%; height: <?php echo $height; ?>">
+		<div id="maps-gdpr-hint-<?= $map_id; ?>" class="maps-gdpr-hint">
+			<p><?php echo \Sprog\Wildcard::get('d2u_helper_module_04_gdpr_hint'); ?></p>
+			<button type="button" id="map-<?= $map_id; ?>" ><?php echo \Sprog\Wildcard::get('d2u_helper_module_04_load_map'); ?></button>
+		</div>
+	</div>
+	<script>
+		// Add event listener to activate map
+		document.getElementById('map-<?= $map_id; ?>').addEventListener('click', function() {
+			// Load Google Maps JS and go on
+			$.getScript("https://maps.googleapis.com/maps/api/js<?php echo $api_key; ?>", function(){
+				// Remove hint
+				g = document.getElementById('maps-gdpr-hint-<?= $map_id; ?>');
+				g.outerHTML = '';
+
+				// Init
+				infowindow = new google.maps.InfoWindow();
+				initialize();
+
+			 });
+		});
+
 		var map;
-		var infowindow = new google.maps.InfoWindow();
+		var infowindow;
 		var address = [<?php
 			print "[";
 			// Address for Geocoder
@@ -110,8 +131,5 @@
 			// Set map center on address
 			map.setCenter(location);
 		}
-
-		// Beim direkten Kartenaufruf initialisieren
-		initialize();
 	</script>
 </div>
