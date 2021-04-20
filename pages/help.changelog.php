@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.8.5-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.8.4</p>
 		<ul>
 			<li>Modul Modul 04-1 "Google Maps Karte" zeigt Datenschutzhinweis bevor die Karte geladen wird.</li>
