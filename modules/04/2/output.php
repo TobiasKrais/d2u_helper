@@ -17,7 +17,7 @@
 	
 	$map_id = rand();
 
-	$leaflet_js_file = 'leaflet/leaflet.js';
+	$leaflet_js_file = 'modules/04-2/leaflet.js';
 	print '<script src="'. rex_url::addonAssets('d2u_helper', $leaflet_js_file) .'?buster='. filemtime(rex_path::addonAssets('d2u_helper', $leaflet_js_file)) .'"></script>' . PHP_EOL;
 
 ?>
@@ -29,8 +29,8 @@
 		}).addTo(map);
 		map.scrollWheelZoom.disable();
 		var myIcon = L.icon({
-			iconUrl: '<?php echo rex_url::addonAssets('d2u_helper', 'leaflet/marker-icon.png'); ?>',
-			shadowUrl: '<?php echo rex_url::addonAssets('d2u_helper', 'leaflet/marker-shadow.png'); ?>',
+			iconUrl: '<?php echo rex_url::addonAssets('d2u_helper', 'modules/04-2/marker-icon.png'); ?>',
+			shadowUrl: '<?php echo rex_url::addonAssets('d2u_helper', 'modules/04-2/marker-shadow.png'); ?>',
 
 			iconSize:     [25, 41], // size of the icon
 			shadowSize:   [41, 41], // size of the shadow
