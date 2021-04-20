@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.8.4-DEV</p>
+		<p>1.8.4</p>
 		<ul>
 			<li>Modul Modul 04-1 "Google Maps Karte" zeigt Datenschutzhinweis bevor die Karte gelasden wird.</li>
 			<li>Neues Modul Modul 04-2 "OpenStreetMap Karte" hinzugefügt (verwendet Leaflet 1.7.1).</li>
