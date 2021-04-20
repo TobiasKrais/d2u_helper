@@ -264,16 +264,15 @@ class d2u_addon_frontend_helper {
 
 	/**
 	 * Get JavaScript stuff from modules as one string
-	 * @param string $addon_key If set, only JS for modules of this addon are returned
 	 * @return string JS
 	 */
-	public static function getModulesJS($addon_key = "") {
-		if(file_exists(rex_path::addonCache('d2u_helper', 'modules.jss'))) {
+	public static function getModulesJS() {
+		if(file_exists(rex_path::addonCache('d2u_helper', 'modules.js'))) {
 			// Read from cache
-			return file_get_contents(rex_path::addonCache('d2u_helper', 'modules.jss'));
+			return file_get_contents(rex_path::addonCache('d2u_helper', 'modules.js'));
 		}
 		else {
-			$installed_modules = D2UModuleManager::getModulePairs($addon_key);
+			$installed_modules = D2UModuleManager::getModulePairs();
 
 			$js = "";
 			foreach($installed_modules as $installed_module) {

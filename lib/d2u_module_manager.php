@@ -161,7 +161,10 @@ class D2UModuleManager {
 			"Bildergalerie Ekko Lightbox",
 			9);
 		$modules[] = new D2UModule("04-1",
-			"Google Maps",
+			"Google Maps Karte",
+			10);
+		$modules[] = new D2UModule("04-2",
+			"OpenStreetMap Karte",
 			10);
 		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
