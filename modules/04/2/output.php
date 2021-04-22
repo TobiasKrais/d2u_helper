@@ -13,7 +13,7 @@
 	$height_unit = "REX_VALUE[8]" == "" ? "px" : "REX_VALUE[8]";
 	$substitute = ["\r\n" => "", "\r" => "", "\n" => "", '"' => "'"];
 	$infotext = "REX_VALUE[id=2 output=html]";
-	$popup_js = $infotext != "" ? ".bindPopup('". strtr($infotext, $substitute) ."').openPopup()" : "";
+	$popup_js = $infotext != "" ? ".bindPopup('". addslashes(strtr($infotext, $substitute)) ."').openPopup()" : "";
 	
 	$map_id = rand();
 

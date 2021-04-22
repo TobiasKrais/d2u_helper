@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.8.5-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul Modul 04-2 "OpenStreetMap Karte" Bugfix, wenn Anführungszeichen im Infotext sind.</li>
 		</ul>
 		<p>1.8.4</p>
 		<ul>

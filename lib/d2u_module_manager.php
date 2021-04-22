@@ -165,7 +165,7 @@ class D2UModuleManager {
 			11);
 		$modules[] = new D2UModule("04-2",
 			"OpenStreetMap Karte",
-			1);
+			2);
 		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
 			11);
