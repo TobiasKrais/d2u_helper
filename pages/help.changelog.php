@@ -3,7 +3,8 @@
 	<div class="panel-body">
 		<p>1.8.5-DEV</p>
 		<ul>
-			<li>Modul Modul 04-2 "OpenStreetMap Karte" Bugfix, wenn Anführungszeichen im Infotext sind.</li>
+			<li>Modul 04-2 "OpenStreetMap Karte" Bugfix, wenn Anführungszeichen im Infotext sind.</li>
+			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch .../embed/... Links und entfernt überflüssige Leerzeichen.</li>
 		</ul>
 		<p>1.8.4</p>
 		<ul>
