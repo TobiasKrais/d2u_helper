@@ -194,7 +194,7 @@
 	margin-left: 0;
 }
 .consent_manager-show-details #consent_manager-toggle-details.icon-info-circled::before {
-    color: green;
+    color: article_color_h;
     background-color: transparent;
     content: "\f05a";
     font-family: FontAweSome;
