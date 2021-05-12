@@ -5,6 +5,7 @@
 		<ul>
 			<li>Modul 04-2 "OpenStreetMap Karte" Bugfix, wenn Anführungszeichen im Infotext sind.</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch .../embed/... Links und entfernt überflüssige Leerzeichen.</li>
+			<li>Modul 06-1 "YouTube Video einbinden": Datenschutzhinweis jetzt am Fuß des Vorschaubildes.</li>
 		</ul>
 		<p>1.8.4</p>
 		<ul>

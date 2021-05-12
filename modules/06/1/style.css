@@ -15,33 +15,32 @@
 }
 .youtube-gdpr-hint {
 	background-color: rgba(50,50,50,0.9);
+	bottom: 0;
 	color: white;
-	left: 50%;
-	max-width: 500px;
-	padding: 5%;
+	padding: 15px;
 	position: absolute;
 	text-align: center;
-	top: 50%;
-	transform: translate(-50.1%,-50%);
-	width: 75%;
 	z-index: 2;
 }
-@media screen and (max-width: 767px) {
-	.youtube-gdpr-hint {
-		width: 100%;
-	}
+.youtube-play-button {
+	color: white;
+	left: 50%;
+	padding: 15px;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50.1%,-50%);
+	z-index: 3;
 }
-.youtube-gdpr-hint button {
+.youtube-play-button button {
 	background-color: article_color_h;
 	border: none;
 	border-radius: 100%;
-	margin-top: 15px;
-	padding: 15px;
+	padding: 20px;
 }
-.youtube-gdpr-hint svg {
+.youtube-play-button svg {
     fill: white;
-	height: 25px;
+	height: 35px;
 	left: 3px;
 	position: relative;
-	width: 25px;
+	width: 35px;
 }

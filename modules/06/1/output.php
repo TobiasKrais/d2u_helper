@@ -29,9 +29,11 @@ if($youtube_id != "") {
 
 <div class="col-sm-12 col-md-<?php echo $cols; ?>">
 	<div id="youtubeWrapper-<?= $youtube_id; ?>" class="youtubeWrapper">
+		<div class="youtube-play-button">
+			<button type="button" id="play-<?= $youtube_id; ?>" ><svg aria-hidden="true" focusable="false" viewBox="0 0 18 18"><path d="M15.562 8.1L3.87.225c-.818-.562-1.87 0-1.87.9v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z"></path></svg></button>
+		</div>
 		<div class="youtube-gdpr-hint">
 			<p><?php echo \Sprog\Wildcard::get('d2u_helper_module_06_gdpr_hint'); ?></p>
-			<button type="button" id="play-<?= $youtube_id; ?>" ><svg aria-hidden="true" focusable="false" viewBox="0 0 18 18"><path d="M15.562 8.1L3.87.225c-.818-.562-1.87 0-1.87.9v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z"></path></svg></button>
 		</div>
 		<iframe width="1600" height="900" src="" id="player-<?= $youtube_id ?>" frameborder="0" webkitAllowFullScreen moziallowfullscreen allowfullscreen
 				style="background: url(<?php echo rex_media_manager::getUrl('d2u_helper_module_06-1_preview', $previewimage_target_filename); ?>) center; background-size: cover;"></iframe>
