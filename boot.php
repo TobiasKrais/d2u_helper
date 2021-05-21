@@ -237,7 +237,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 				$is_in_use = TRUE;
 		}
 		foreach(rex_clang::getAllIds() as $clang_id) {
-			if(($addon->hasConfig('template_04_header_slider_pics_clang_'. $clang_id) && strpos($addon->getConfig('template_04_header_slider_pics_clang_'. $clang_id), $filename) !== FALSE)) {
+			if(($addon->hasConfig('template_04_header_slider_pics_clang_'. $clang_id) && $filename != '' && strpos($addon->getConfig('template_04_header_slider_pics_clang_'. $clang_id), $filename) !== FALSE)) {
 				$is_in_use = TRUE;
 			}
 		}
