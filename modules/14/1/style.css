@@ -20,6 +20,9 @@
 	height: 50px;
 	width: 50px;
 }
+.search_it_yform_button svg {
+	width: 25px;
+}
 
 /* without YForm */
 .search_it-search {
@@ -42,7 +45,7 @@
 	color: article_color_bg;
 	height: 50px;
 	margin: 0 5px;
-	width: 30px;
+	width: 25px;
 }
 .search_it-flex {
 	position: relative;
