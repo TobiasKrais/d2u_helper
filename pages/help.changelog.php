@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.8.5-DEV</p>
 		<ul>
+			<li>Methode d2u_addon_frontend_helper::getMetaTags() nutzt nun die deutlich umfangreichere Funktion getTags aus dem URL Addon anstatt der einzelnen Funktionen der D2U Addons.</li>
 			<li>Modul 04-2 "OpenStreetMap Karte" Bugfix, wenn Anführungszeichen im Infotext sind.</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch .../embed/... Links und entfernt überflüssige Leerzeichen.</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Datenschutzhinweis jetzt am Fuß des Vorschaubildes.</li>

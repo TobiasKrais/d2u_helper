@@ -192,20 +192,21 @@ class d2u_addon_frontend_helper {
 	public static function getMetaTags() {
 		$meta_tags = "";
 		
-		if(rex_addon::get('d2u_courses')->isAvailable() && d2u_courses_frontend_helper::getMetaTags() != "") {
-			$meta_tags = d2u_courses_frontend_helper::getMetaTags();
-		}
-		else if(rex_addon::get('d2u_immo')->isAvailable() && d2u_immo_frontend_helper::getMetaTags() != "") {
-			$meta_tags = d2u_immo_frontend_helper::getMetaTags();
-		}
-		else if(rex_addon::get('d2u_jobs')->isAvailable() && d2u_jobs_frontend_helper::getMetaTags() != "") {
-			$meta_tags = d2u_jobs_frontend_helper::getMetaTags();
-		}
-		else if(rex_addon::get('d2u_machinery')->isAvailable() && d2u_machinery_frontend_helper::getMetaTags() != "") {
-			$meta_tags = d2u_machinery_frontend_helper::getMetaTags();
-		}
-		else if(rex_addon::get('d2u_references')->isAvailable() && d2u_references_frontend_helper::getMetaTags() != "") {
-			$meta_tags = d2u_references_frontend_helper::getMetaTags();
+		if(rex_addon::get('url')->isAvailable()) {
+			if(rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
+				// url addon 2.x
+				$urlSeo = new Url\Seo();
+				$meta_tags = $urlSeo->getTags();
+			}
+			else {
+				// url addon 1.x
+				$urlSeo = new Url\Seo();
+				$meta_tags = $urlSeo->getTitleTag() . PHP_EOL;
+				$meta_tags .= $urlSeo->getDescriptionTag() . PHP_EOL;
+				$meta_tags .= $urlSeo->getHreflangTags() . PHP_EOL;
+				$meta_tags .= $urlSeo->getCanonicalUrlTag() . PHP_EOL;
+				$meta_tags .= $urlSeo->getRobotsTag();
+			}
 		}
 		else if(rex_addon::get('yrewrite')->isAvailable()) {
 			$yrewrite = new rex_yrewrite_seo();
@@ -213,18 +214,7 @@ class d2u_addon_frontend_helper {
 			$meta_tags .= $yrewrite->getDescriptionTag() . PHP_EOL;
 			$meta_tags .= $yrewrite->getHreflangTags() . PHP_EOL;
 			$meta_tags .= $yrewrite->getCanonicalUrlTag() . PHP_EOL;
-		}
-		else {
-			// TODO Use Redaxo default
-		}
-		
-		// Robots tag
-		if(rex_addon::get('yrewrite')->isAvailable()) {
-			$yrewrite = new rex_yrewrite_seo();
 			$meta_tags .= $yrewrite->getRobotsTag();
-		}
-		else {
-			$meta_tags .= '<meta name="robots" content="index, follow">';
 		}
 		
 		return $meta_tags;
