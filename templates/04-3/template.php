@@ -263,7 +263,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		</div>
 	</section>
 	<article>
-		<div class="container article">
+		<div class="container">
 			<div class="row">
 				<?php
 					if(rex_addon::get('d2u_news')->isAvailable()) {

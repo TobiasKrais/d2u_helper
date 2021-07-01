@@ -78,8 +78,8 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 			echo $fragment->parse('d2u_template_nav.php');
 		}
 	?>
-	<div class="container">
-		<article>
+	<article>
+		<div class="container">
 			<div class="row">
 				<?php
 					// Breadcrumbs
@@ -122,7 +122,9 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 					print '</div>';
 				}
 			?>
-		</article>
+		</div>
+	</article>
+	<div class="container">
 		<div class="row">
 			<div class="col-12 d-print-none">
 				<footer id="footer_template">

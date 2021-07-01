@@ -103,7 +103,7 @@ h1.subhead {
 	padding: 0 0.6em;
 }
 
-article, .article {
+article {
 	background-color: article_color_bg;
 	padding: 1em 0;
 }

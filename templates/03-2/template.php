@@ -26,14 +26,14 @@
 </head>
 
 <body>
-	<div class="container">
-		<?php
-		$header_margin = "";
-			if($d2u_helper->hasConfig("template_03_2_margin_top") || $d2u_helper->getConfig("template_03_2_margin_top") != "") {
-				$header_margin = ' style="margin-top: '. $d2u_helper->getConfig("template_03_2_margin_top") .'px"';
-			}
-		?>
-		<header class="advertising"<?php print $header_margin; ?>>
+	<?php
+	$header_margin = "";
+		if($d2u_helper->hasConfig("template_03_2_margin_top") || $d2u_helper->getConfig("template_03_2_margin_top") != "") {
+			$header_margin = ' style="margin-top: '. $d2u_helper->getConfig("template_03_2_margin_top") .'px"';
+		}
+	?>
+	<header class="advertising"<?php print $header_margin; ?>>
+		<div class="container">
 			<div class="row">
 				<div class="col-12">
 					<?php
@@ -46,77 +46,79 @@
 					?>
 				</div>
 			</div>
-		</header>
-		<?php
-		$properties = [];
-		$ads = [];
-		if(rex_plugin::get('d2u_immo', 'window_advertising')->isInstalled()) {
-			$properties = D2U_Immo\Property::getAllWindowAdvertisingProperties(rex_clang::getCurrentId());
-			$ads = D2U_Immo\Advertisement::getAll(rex_clang::getCurrentId(), TRUE);
-		}
-		// Mix - not merge - arrays
-		$all_data = [];
+		</div>
+	</header>
+	<?php
+	$properties = [];
+	$ads = [];
+	if(rex_plugin::get('d2u_immo', 'window_advertising')->isInstalled()) {
+		$properties = D2U_Immo\Property::getAllWindowAdvertisingProperties(rex_clang::getCurrentId());
+		$ads = D2U_Immo\Advertisement::getAll(rex_clang::getCurrentId(), TRUE);
+	}
+	// Mix - not merge - arrays
+	$all_data = [];
 
-		if (count($properties) == 0) {
-			$all_data = $ads;
-		}
-		else if (count($ads) == 0) {
-			$all_data = $properties;
+	if (count($properties) == 0) {
+		$all_data = $ads;
+	}
+	else if (count($ads) == 0) {
+		$all_data = $properties;
+	}
+	else {
+		$counter_ads = 0;
+		$counter_properties = 0;
+		// Arrays je nach Verhaeltnis mischen
+		$number_properties = 1;
+		$number_ads = 1;
+		if(count($properties) > count($ads)) {
+			$number_properties = round(count($properties) / count($ads));
 		}
 		else {
-			$counter_ads = 0;
-			$counter_properties = 0;
-			// Arrays je nach Verhaeltnis mischen
-			$number_properties = 1;
-			$number_ads = 1;
-			if(count($properties) > count($ads)) {
-				$number_properties = round(count($properties) / count($ads));
-			}
-			else {
-				$number_ads = round(count($ads) / count($properties));
-			}
-			for ($i = 1; $i <= count($properties) + count($ads); $i++) {
-				$modulo = $number_properties + $number_ads;
-				if(count($properties) >= count($ads)) {
-					if($i % $modulo == 0) {
-						if($counter_ads < count($ads)) {
-							$all_data[$i] = $ads[$counter_ads++];
-						}
-						else {
-							$all_data[$i] = $properties[$counter_properties++];
-						}
+			$number_ads = round(count($ads) / count($properties));
+		}
+		for ($i = 1; $i <= count($properties) + count($ads); $i++) {
+			$modulo = $number_properties + $number_ads;
+			if(count($properties) >= count($ads)) {
+				if($i % $modulo == 0) {
+					if($counter_ads < count($ads)) {
+						$all_data[$i] = $ads[$counter_ads++];
 					}
 					else {
-						if($counter_properties < count($properties)) {
-							$all_data[$i] = $properties[$counter_properties++];
-						}
-						else {
-							$all_data[$i] = $ads[$counter_ads++];
-						}
+						$all_data[$i] = $properties[$counter_properties++];
 					}
 				}
 				else {
-					if($i % $modulo == 0) {
-						if($counter_properties < count($properties)) {
-							$all_data[$i] = $properties[$counter_properties++];
-						}
-						else {
-							$all_data[$i] = $ads[$counter_ads++];
-						}
+					if($counter_properties < count($properties)) {
+						$all_data[$i] = $properties[$counter_properties++];
 					}
 					else {
-						if($counter_ads < count($ads)) {
-							$all_data[$i] = $ads[$counter_ads++];
-						}
-						else {
-							$all_data[$i] = $properties[$counter_properties++];
-						}
+						$all_data[$i] = $ads[$counter_ads++];
 					}
 				}
 			}
-		}		
-		?>
-		<article>
+			else {
+				if($i % $modulo == 0) {
+					if($counter_properties < count($properties)) {
+						$all_data[$i] = $properties[$counter_properties++];
+					}
+					else {
+						$all_data[$i] = $ads[$counter_ads++];
+					}
+				}
+				else {
+					if($counter_ads < count($ads)) {
+						$all_data[$i] = $ads[$counter_ads++];
+					}
+					else {
+						$all_data[$i] = $properties[$counter_properties++];
+					}
+				}
+			}
+		}
+	}		
+	?>
+	<article>
+		<div class="container">
 			<div class="row">
 				<div class="col-12">
 					<?php
@@ -368,7 +370,9 @@
 					</div>
 				</div>
 			</div>
-		</article>
+		</div>
+	</article>
+	<div class="container">
 		<footer>
 			<div class="row">
 				<div class="col-12">
