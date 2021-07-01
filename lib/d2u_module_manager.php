@@ -141,7 +141,7 @@ class D2UModuleManager {
 		$modules = [];
 		$modules[] = new D2UModule("00-1",
 			"Umbruch ganze Breite",
-			4);
+			5);
 		$modules[] = new D2UModule("01-1",
 			"Texteditor",
 			10);
@@ -168,7 +168,7 @@ class D2UModuleManager {
 			2);
 		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
-			11);
+			12);
 		$modules[] = new D2UModule("05-2",
 			"Artikel aus anderer Sprache übernehmen",
 			4);

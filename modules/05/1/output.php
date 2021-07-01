@@ -101,7 +101,9 @@ else if($link_type == "d2u_courses_category") {
 				print "Weiterleitung zu D2U Veranstaltungen - Kategorie <a href='". $category->getUrl(TRUE) ."'>". $category->name ."</a>";
 			}
 			else {
-				$forward_url = $category->getUrl(TRUE);
+				if($category->isOnline()) {
+					$forward_url = $category->getUrl(TRUE);
+				}
 			}
 		}
 	}

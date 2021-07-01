@@ -4,7 +4,12 @@
 		<p>1.8.5-DEV</p>
 		<ul>
 			<li>Methode d2u_addon_frontend_helper::getMetaTags() nutzt nun die deutlich umfangreichere Funktion getTags aus dem URL Addon anstatt der einzelnen Funktionen der D2U Addons.</li>
+			<li>Stiländerung: Checkboxen in D2U Addons werden durch Schalter ersetzt.</li>
+			<li>Templates 02-1, 03-1, 03-2, 04-1, 04-2 und 04-3: Position des article tags und Bootstrap Containers vereinheitlicht.</li>
+			<li>Modul 00-1 "Umbruch ganze Breite": kann bei Verwendung in einem der Templates 00-1, 02-1, 04-1, 04-2 (alles einspaltige Designs)
+				auch einen neuen Bootstrap Container beginnen, der auch Fluid (ganze Breite) sein kann.</li>
 			<li>Modul 04-2 "OpenStreetMap Karte" Bugfix, wenn Anführungszeichen im Infotext sind.</li>
+			<li>Modul 05-1 "Artikelweiterleitung" Leitet zu einer D2U Veranstaltungen Kategorie nur weiter, wenn die Kategorie auch online ist.</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch .../embed/... Links und entfernt überflüssige Leerzeichen.</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Datenschutzhinweis jetzt am Fuß des Vorschaubildes.</li>
 		</ul>
