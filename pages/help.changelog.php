@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.8.6-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.8.5</p>
 		<ul>
 			<li>Methode d2u_addon_frontend_helper::getMetaTags() nutzt nun die deutlich umfangreichere Funktion getTags aus dem URL Addon anstatt der einzelnen Funktionen der D2U Addons.</li>
