@@ -1,8 +1,11 @@
 <?php
-// Correct name of rights
 if(\rex::isBackend() && is_object(\rex::getUser())) {
+	// Correct name of rights
 	rex_perm::register('d2u_helper[]', rex_i18n::msg('d2u_helper_rights_all'));
 	rex_perm::register('d2u_helper[settings]', rex_i18n::msg('d2u_helper_rights_settings'), rex_perm::OPTIONS);
+
+	rex_view::addCssFile($this->getAssetsUrl('d2u_helper_backend.css'));
+	//rex_view::addJsFile($addon->getAssetsUrl('js/script.js'), [rex_view::JS_IMMUTABLE => true]);
 }
 
 if(!\rex::isBackend()) {

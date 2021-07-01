@@ -1,0 +1,37 @@
+input[type=checkbox].d2u_helper_toggle, input[type=checkbox].d2u_helper_toggle:focus {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #ddd;
+    border-radius: 1.6em;
+    cursor: pointer;
+	float: right;
+    height: 1.5em;
+    margin-top: -6px;
+    outline: 0;
+    position: relative;
+    transition: background 0.1s ease-in-out;
+    vertical-align: middle;
+    -webkit-transition: background 0.1s ease-in-out;
+    width: 3em;
+}
+input[type=checkbox].d2u_helper_toggle::after {
+    content: '';
+    width: 1.5em;
+    height: 1.5em;
+    background: white;
+    position: absolute;
+    border-radius: 1.2em;
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+    left: 0;
+    box-shadow: 0 1px rgba(100, 100, 100, 0.5);
+    -webkit-transition: left 0.1s ease-in-out;
+    transition: left 0.1s ease-in-out;
+}
+input[type=checkbox].d2u_helper_toggle:checked {
+    background: #5bb585;
+}
+input[type=checkbox].d2u_helper_toggle:checked::after {
+    left: 1.5em;
+}
