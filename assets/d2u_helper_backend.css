@@ -16,6 +16,7 @@ input[type=checkbox].d2u_helper_toggle, input[type=checkbox].d2u_helper_toggle:f
     width: 3em;
 }
 input[type=checkbox].d2u_helper_toggle::after {
+	bottom: -1px;
     content: '';
     width: 1.5em;
     height: 1.5em;
