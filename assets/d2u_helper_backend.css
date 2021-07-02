@@ -36,3 +36,32 @@ input[type=checkbox].d2u_helper_toggle:checked {
 input[type=checkbox].d2u_helper_toggle:checked::after {
     left: 1.5em;
 }
+input[type=text].d2u_helper_color_text {
+	font-weight: normal;
+	width: 100px;
+}
+input[type=color].d2u_helper_color {
+	height: 36px;
+	margin-right: 10px;
+	width: 50px;
+}
+dd.d2u_helper_color_desc {
+	padding-top: 14px;
+}
+@media screen and (max-width: 991px) {
+	input[type=color].d2u_helper_color {
+		float: left;
+	}
+	input[type=text].d2u_helper_color_text {
+		float: left;
+		margin-right: 10px;
+	}
+}
+@media screen and (min-width: 992px) {
+	input[type=color].d2u_helper_color {
+		float: right;
+	}
+	input[type=text].d2u_helper_color_text {
+		float: right;
+	}
+}

@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.8.6-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Farbwähler Feld in allen D2U Addons um HEX Textfeld ergänzt.</li>
 		</ul>
 		<p>1.8.5</p>
 		<ul>

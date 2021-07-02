@@ -278,9 +278,18 @@ class d2u_addon_backend_helper {
 	 * @param string $type HTML5 input type, e.g. text, number or email
 	 */
 	public static function form_input($message_id, $fieldname, $value, $required = FALSE, $readonly = FALSE, $type = "text") {
+		$field_id = str_replace('[', "-", str_replace(']', "", $fieldname));
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		$label = '<label>' . rex_i18n::msg($message_id) . '</label>';
-		$input = '<input '. ($type != "color" ? 'class="form-control" ' : '') .'type="' . $type . '" name="' . $fieldname . '" value="' . str_replace('"', "'", $value) . '"';
+		$input = '';
+		if($type == "color") {
+			$input .= '<input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="' . str_replace('"', "'", $value) . '" id="text-' . $field_id . '">';
+			$input .= '<script>'.PHP_EOL
+				.'$("#color-'. $field_id .'").on("input", function() {$("#text-' . $field_id . '").val(this.value);});'.PHP_EOL
+				.'$("#text-' . $field_id . '").on("input", function() {$("#color-'. $field_id .'").val(this.value);});'. PHP_EOL
+				.'</script>';
+		}
+		$input .= '<input class="form-control'. ($type == "color" ? ' d2u_helper_color' : '') .'" type="' . $type . '" name="' . $fieldname . '" id="color-' . $field_id . '" value="' . str_replace('"', "'", $value) . '"';
 		if ($required && $readonly !== TRUE) {
 			$input .= ' required';
 		}
@@ -295,7 +304,7 @@ class d2u_addon_backend_helper {
 		}
 		$input .=  '/>';
 		print '<dt>'. ($type == "color" ? $input : $label) .'</dt>';
-		print '<dd>'. ($type == "color" ? $label : $input) .'</dd>';
+		print '<dd'. ($type == "color" ? ' class="d2u_helper_color_desc"' : '') .'>'. ($type == "color" ? $label : $input) .'</dd>';
 		print '</dl>';
 	}
 
