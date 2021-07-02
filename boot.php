@@ -32,10 +32,6 @@ if(!\rex::isBackend()) {
 	
 	// Only frontend call
 	rex_extension::register('OUTPUT_FILTER', 'appendToPageD2UHelperFiles');
-	rex_extension::register('OUTPUT_FILTER', 'appendWiredMindseMetrics');
-	if(rex_request('search_it_build_index', 'int', FALSE) === FALSE) {
-		rex_extension::register('OUTPUT_FILTER', 'appendGoogleAnalytics');
-	}
 	
 	if(rex_config::get("d2u_helper", "article_id_privacy_policy", 0) > 0 || rex_config::get("d2u_helper", "article_id_impress", 0) > 0) {
 		// Try to replace as last one, esp. after sprog calls OUTPUT_FILTER
@@ -48,31 +44,6 @@ else {
 	rex_extension::register('ART_PRE_DELETED', 'rex_d2u_helper_article_is_in_use');
 	rex_extension::register('CLANG_DELETED', 'rex_d2u_helper_clang_deleted');
 	rex_extension::register('MEDIA_IS_IN_USE', 'rex_d2u_helper_media_is_in_use');
-}
-
-/**
- * Adds Google Analytics stuff if Analytics ID is stored in settings
- * @param rex_extension_point $ep Redaxo extension point
- */
-function appendGoogleAnalytics(rex_extension_point $ep) {
-	$d2u_helper = rex_addon::get("d2u_helper");
-
-	$insert_body = "";
-
-	if($d2u_helper->hasConfig("google_analytics") && $d2u_helper->getConfig("google_analytics") !== "") {
-		// Analytics stuff
-		$insert_body = "<script>
-				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-				})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-				ga('create', '". $d2u_helper->getConfig("google_analytics") ."', 'auto');
-				ga('set', 'anonymizeIp', true);
-				ga('send', 'pageview');
-			</script>";
-	}
-	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
 
 /**
@@ -123,26 +94,6 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	// Module stuff in body
 	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true" && d2u_addon_frontend_helper::getModulesJS()) {
 		$insert_body .= '<script src="/index.php?position=body&amp;d2u_helper=helper.js"></script>' . PHP_EOL;
-	}
-	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
-}
-
-/**
- * Adds WiredMinds eMetrics stuff if ID is stored in settings
- * @param rex_extension_point $ep Redaxo extension point
- */
-function appendWiredMindseMetrics(rex_extension_point $ep) {
-	$insert_body = "";
-
-	if(rex_config::get("d2u_helper", "wiredminds_tracking_account_id", "") !== "") {
-		// eMatrics stuff
-		$insert_body = '
-		<script type="text/javascript">
-			(function(d,s){var l=d.createElement(s),e=d.getElementsByTagName(s)[0];
-			l.async=true;l.type="text/javascript";
-			l.src="https://c.leadlab.click/'. rex_config::get("d2u_helper", "wiredminds_tracking_account_id", "") .'.js";
-			e.parentNode.insertBefore(l,e);})(document,"script");
-		</script>';
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }

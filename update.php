@@ -331,6 +331,13 @@ if (rex_version::compare($this->getVersion(), '1.8.0', '<')) {
 		}
 	}
 }
+// Update to 1.8.6
+if($this->hasConfig('wiredminds_tracking_account_id')) {
+	$this->removeConfig('wiredminds_tracking_account_id');
+}
+if($this->hasConfig('google_analytics')) {
+	$this->removeConfig('google_analytics');
+}
 
 // Update translations
 if ($this->getConfig('lang_replacements_install', 'false')) {
