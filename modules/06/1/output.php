@@ -9,7 +9,7 @@ preg_match(
 	'REX_VALUE[1]',
 	$matches
 );
-$youtube_id = $matches[1];
+$youtube_id = trim($matches[1]);
 if(strlen($youtube_id) == 0 && (strpos('REX_VALUE[1]', 'youtu.be/') !== false || strpos('REX_VALUE[1]', '/embed/') !== false)) {
 	$youtube_id = trim(substr('REX_VALUE[1]', strrpos('REX_VALUE[1]', '/') + 1));
 }
