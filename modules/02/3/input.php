@@ -129,7 +129,21 @@
 	<div class="col-xs-12">&nbsp;</div>
 </div>
 <div class="row">
+	<div class="col-xs-4">
+		Untertitel:<br />
+	</div>
+	<div class="col-xs-8">
+		<textarea name="REX_INPUT_VALUE[3]" class="form-control" rows="3">REX_VALUE[3]</textarea>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
 	<div class="col-xs-12">
-		<textarea name="REX_INPUT_VALUE[3]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[3]</textarea>
+		Text
+	</div>
+	<div class="col-xs-12">
+		<textarea name="REX_INPUT_VALUE[4]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[4]</textarea>
 	</div>
 </div>

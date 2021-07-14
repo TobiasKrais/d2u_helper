@@ -1,0 +1,21 @@
+.helper-02-3-subtitle {
+	color: gray;
+	font-size: 1.5em;
+	font-weight: normal;
+}
+.helper-02-3-title {
+	color: #333;
+    display: inline-block;
+    position: relative;
+}
+.helper-02-3-title:before {
+    background: article_color_h;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 3px;
+    left: 0;
+    max-width: 50%;
+    position: absolute;
+	width: 250px;
+}

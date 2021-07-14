@@ -6,6 +6,7 @@
 			<li>Optionale Möglichkeit Google Analytics Code einzubinden entfernt, da Code nicht DSGVO konform eingebunden wurde.</li>
 			<li>Optionale Möglichkeit Wired Minds eMetrics Code einzubinden entfernt, da Code nicht DSGVO konform eingebunden wurde.</li>
 			<li>Farbwähler Feld in allen D2U Addons um HEX Textfeld ergänzt.</li>
+			<li>Modul 02-3 "Überschrift mit Untertitel und Textfeld" hinzugefügt</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Leerzeichen in Video URL hatte laden des Vorschaubildes verhindert.</li>
 		</ul>
 		<p>1.8.5</p>
