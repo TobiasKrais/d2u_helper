@@ -84,3 +84,23 @@
 		</select>
 	</div>
 </div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+	<div class="col-xs-4">
+		<input type="checkbox" name="REX_INPUT_VALUE[3]" value="true" <?php echo "REX_VALUE[3]" == 'true' ? ' checked="checked"' : ''; ?> style="float: right;" />
+	</div>
+	<div class="col-xs-8">
+		Überschrift zentrieren
+	</div>
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+	<div class="col-xs-4">
+		<input type="checkbox" name="REX_INPUT_VALUE[4]" value="true" <?php echo "REX_VALUE[4]" == 'true' ? ' checked="checked"' : ''; ?> style="float: right;" />
+	</div>
+	<div class="col-xs-8">
+		kurze Linie unter der Überschrift zeichnen
+	</div>
+	<div class="col-xs-12">&nbsp;</div>
+</div>

@@ -1,0 +1,22 @@
+.heading-02-1-center {
+	text-align: center;
+}
+.heading-02-1-line {
+	color: #333;
+    position: relative;
+}
+.heading-02-1-line:before {
+    background: article_color_h;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 3px;
+    left: 0;
+    max-width: 50%;
+    position: absolute;
+	width: 250px;
+}
+.heading-02-1-line-center:before {
+	margin: 0 auto;
+	right: 0;
+}

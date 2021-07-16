@@ -6,6 +6,7 @@
 			<li>Optionale Möglichkeit Google Analytics Code einzubinden entfernt, da Code nicht DSGVO konform eingebunden wurde.</li>
 			<li>Optionale Möglichkeit Wired Minds eMetrics Code einzubinden entfernt, da Code nicht DSGVO konform eingebunden wurde.</li>
 			<li>Farbwähler Feld in allen D2U Addons um HEX Textfeld ergänzt.</li>
+			<li>Modul 02-1 "Überschrift". Überschriften können zentriert und mit einer kurzen Linie unterstrichen werden.</li>
 			<li>Modul 02-3 "Überschrift mit Untertitel und Textfeld" hinzugefügt</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Leerzeichen in Video URL hatte laden des Vorschaubildes verhindert.</li>
 		</ul>
@@ -103,7 +104,7 @@
 			<li>Wenn Google Analytics in den Einstellungen aktiviert ist wird der Google Code nicht ausgegeben, wenn search_it die Seite zur Indexierung aufruft.</li>
 			<li>Prüft vor dem Löschen eines Bildes ob es in einem Redaxo Template verwendet wird.</li>
 			<li>Template Installation Empfehlung für email_obfuscator auf emailobfuscator Addon geändert.</li>
-			<li>Modul 02-1 "Überschrift". Überschriften werden mit einer eigenen Klasse ihres Grades versehen (z.B. mit der Klasse "h1" oder "h2".</li>
+			<li>Modul 02-1 "Überschrift". Überschriften werden mit einer eigenen Klasse ihres Grades versehen (z.B. mit der Klasse "h1" oder "h2").</li>
 			<li>Modul 03-1 "Bild" gibt Bild nur noch aus, wenn es auch im Medienpool vorhanden ist.</li>
 			<li>Modul 04-1 "Google Maps" PHP Warnung in Moduleingab behoben.</li>
 			<li>Modul 05-1 "Artikelweiterleitung" beherrscht nun auch Weiterleitungen zu Kategorien des D2U Veranstaltungen Addons.</li>

@@ -138,12 +138,18 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
+	<div class="col-xs-4">
+		<input type="checkbox" name="REX_INPUT_VALUE[5]" value="true" <?php echo "REX_VALUE[5]" == 'true' ? ' checked="checked"' : ''; ?> style="float: right;" />
+	</div>
+	<div class="col-xs-8">
+		Text neben Überschrift und Untertitel anzeigen
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		Text
-	</div>
-	<div class="col-xs-12">
-		<textarea name="REX_INPUT_VALUE[4]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[4]</textarea>
+		<textarea name="REX_INPUT_VALUE[4]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 300px">REX_VALUE[4]</textarea>
 	</div>
 </div>

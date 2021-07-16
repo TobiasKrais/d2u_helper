@@ -29,7 +29,7 @@ if(class_exists('D2UModuleManager')) {
 		12);
 	$modules[] = new D2UModule("02-1",
 		"Überschrift",
-		8);
+		9);
 	$modules[] = new D2UModule("02-2",
 		"Überschrift mit Klapptext",
 		4);
