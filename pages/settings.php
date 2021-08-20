@@ -308,6 +308,13 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								$("dl[id='settings[footer_text]']").show();
 								$("dl[id='MEDIA_footer_logo']").hide();
 							}
+							
+							if($("[name='settings[show_cta_box]']").is(':checked')) {
+								$("dl[id='settings[footer_text_phone]']").show();
+								$("dl[id='settings[footer_text_mobile]']").show();
+								$("dl[id='settings[footer_text_fax]']").show();
+								$("dl[id='settings[footer_text_email]']").show();
+							}
 						}
 
 						// Hide on document load
@@ -317,6 +324,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 
 						// Hide on selection change
 						$("select[name='settings[footer_type]").on('change', function(e) {
+							footer_type_changer();
+						});
+						$("input[name='settings[show_cta_box]").on('change', function(e) {
 							footer_type_changer();
 						});
 					</script>

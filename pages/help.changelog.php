@@ -6,9 +6,12 @@
 			<li>Optionale Möglichkeit Google Analytics Code einzubinden entfernt, da Code nicht DSGVO konform eingebunden wurde.</li>
 			<li>Optionale Möglichkeit Wired Minds eMetrics Code einzubinden entfernt, da Code nicht DSGVO konform eingebunden wurde.</li>
 			<li>Farbwähler Feld in allen D2U Addons um HEX Textfeld ergänzt.</li>
+			<li>Änderung für alle D2U Addons: Mehrfachauswahlfelder ab dieser Version als Selectpicker.</li>
+			<li>Bugfix Einstellungen. Erfoderliche Felder für CTA Box wurden nicht immer angezeigt.</li>
 			<li>Modul 02-1 "Überschrift". Überschriften können zentriert und mit einer kurzen Linie unterstrichen werden.</li>
 			<li>Modul 02-3 "Überschrift mit Untertitel und Textfeld" hinzugefügt</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Leerzeichen in Video URL hatte laden des Vorschaubildes verhindert.</li>
+			<li>Modul 06-3 "Video mit Plyr einbinden": Dateityp m4v hinzugefügt.</li>
 		</ul>
 		<p>1.8.5</p>
 		<ul>
