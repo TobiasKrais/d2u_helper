@@ -482,7 +482,7 @@ class d2u_addon_backend_helper {
 	 * @param bool $multiple TRUE if multiple selections are allowed
 	 * @param bool $readonly TRUE if field should have readonly attribute.
 	 */
-	public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size, $multiple = FALSE, $readonly = FALSE) {
+	public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size = 1, $multiple = FALSE, $readonly = FALSE) {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd>';

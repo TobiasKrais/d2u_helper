@@ -415,6 +415,29 @@ else {
 			</fieldset>
 			<?php
 				}
+				if(rex_plugin::get('d2u_machinery', 'machine_options_extension')->isAvailable()) {
+					$options = Option::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+			?>
+			<br>
+			<fieldset>
+				<legend><small><i class="rex-icon fa-plug"></i></small> <?php echo rex_i18n::msg('d2u_machinery_options'); ?></legend>
+				<div class="panel-body-wrapper slide">
+				<?php
+					if(count($options) > 0) {
+						print '<ul>';
+						foreach($options as $option) {
+							print '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_options_extension', ['entry_id' => $option->option_id, 'func' => 'edit']) .'">'. $option->name .'</a></li>';
+						}
+						print '</ul>';
+					}
+					else {
+						print $_SESSION['d2u_helper_translation']['filter'] == 'update' ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+					}
+				?>
+				</div>
+			</fieldset>
+			<?php
+				}
 				if(rex_plugin::get('d2u_machinery', 'machine_steel_processing_extension')->isAvailable()) {
 					$automations = Automation::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
 					$materials = Material::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
