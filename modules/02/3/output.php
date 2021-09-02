@@ -42,9 +42,9 @@
 				print $text;
 			}
 		}
+		print '</div>';
+		print '</div>';
 	}
-	print '</div>';
-	print '</div>';
 
 	print '</div>';
 	print '</div>';

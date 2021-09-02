@@ -1,0 +1,94 @@
+.helper-11-2-spacer {
+	margin: 0 0 3em 0;
+}
+.helper-11-2-wrapper {
+	hyphens: auto;
+	overflow: auto;
+}
+.helper-11-2-wrapper:hover img {
+	height: auto;
+	-webkit-transition: all 0.2s ease-out;
+	opacity: 0.7;
+    transition: all 0.2s ease-out;
+}
+
+.helper-11-2-title-box, .helper-11-2-title-box-left {
+	margin: -3em auto 0 1em;
+	max-width: 80%;
+	padding: 1em;
+	position: relative;
+}
+.helper-11-2-picture img {
+	width: 100%;
+}
+@media screen and (max-width: 767px) {
+	.helper-11-2-picture-right img {
+		width: 100%;
+	}
+}
+@media screen and (min-width: 768px) {
+	.helper-11-2-picture-right {
+		position: absolute;
+		right: 0px;
+	}
+	.helper-11-2-title-box-left {
+		margin: 2em 15px;
+		max-width: 25em;
+		min-width: 25%;
+		z-index: 2;
+	}
+	.helper-11-2-title-box-left {
+		margin-right: 2em;
+	}
+	.col-lg-12 .helper-11-2-title-box-left {
+		max-width: 40em;
+	}
+}
+.helper-11-2-title-box-left {
+	left: 0;
+}
+.helper-11-2-title-box a:hover {
+	text-decoration: none;
+}
+.helper-11-2-title {
+	color: white;
+	font-size: 1.75em;
+	margin: 0;
+	padding-bottom: 0.5em;
+}
+.helper-11-2-teaser {
+	color: white;
+	flex: 1 0 auto;
+}
+.helper-11-2-email {
+	background: #333;
+	color: white;
+	margin-top: 1em;
+	padding: 5px;
+	text-align: center;
+}
+.helper-11-2-email a, .helper-11-2-email a:hover {
+	color: white;
+}
+@font-face{
+	font-family:'FontAwesome';
+	font-display: auto;
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?v=4.7.0");
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff2?v=4.7.0") format('woff2'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff?v=4.7.0") format('woff'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
+}
+.fa-envelope:before {
+	content: "\f0e0";
+}
+.fa-icon {
+	font-family: FontAwesome;
+}
+.fa-mobile:before {
+	content: "\f10b";
+}
+.fa-phone:before {
+	content: "\f095";
+}

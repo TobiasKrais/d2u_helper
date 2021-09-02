@@ -408,6 +408,51 @@ class d2u_addon_backend_helper {
 	 * @param bool $readonly TRUE if field should have readonly attribute.
 	 */
 	public static function form_medialistfield($message_id, $fieldnumber, $values, $readonly = FALSE) {
+/*
+		$wdgtClass = ' rex-js-widget-imglist rex-js-widget-preview rex-js-widget-tooltip';
+		if (rex_addon::get('media_manager')->isAvailable()) {
+			$wdgtClass .= ' rex-js-widget-preview-media-manager';
+		}
+
+        $thumbnails = '';
+        $options = '';
+        if (is_array($values)) {
+            foreach ($values as $key => $file) {
+                if ($file != '') {
+
+                    $url = rex_url::backendController(['rex_media_type' => 'rex_medialistbutton_preview', 'rex_media_file' => $file]);
+                    if (pathinfo($file, PATHINFO_EXTENSION) === 'svg') {
+                        $url = rex_url::media($file);
+                    }
+                    $thumbnails .= '<li data-key="' . $key . '" value="' . $file . '" data-value="' . $file . '"><img class="thumbnail" src="' . $url . '" /></li>';
+
+                    $options .= '<option data-key="' . $key . '" value="' . $file . '">' . $file . '</option>';
+                }
+            }
+        }
+
+        $disabled = ' disabled';
+        if (rex::getUser()->getComplexPerm('media')->hasMediaPerm()) {
+            $disabled = '';
+        }
+
+        $id = str_replace(array('][', '[', ']'), '', $fieldnumber);
+
+        $e = [];
+        $e['before'] = '<div class="rex-js-widget custom-imglist ' . $wdgtClass . '" data-widget-id="' . $id . '">';
+        $e['field'] = '<ul class="form-control thumbnail-list" id="REX_IMGLIST_' . $id . '">' . $thumbnails . '</ul><select class="form-control" name="REX_MEDIALIST_SELECT[' . $id . ']" id="REX_MEDIALIST_SELECT_' . $id . '" size="10">' . $options . '</select><input type="hidden" name="' . $name . '" id="REX_MEDIALIST_' . $id . '" value="' . $value . '" />';
+        $e['functionButtons'] = ($readonly ? '' : '
+                <a href="#" class="btn btn-popup open" title="' . rex_i18n::msg('var_media_open') . '"' . $disabled . '><i class="rex-icon rex-icon-open-mediapool"></i></a>
+                <a href="#" class="btn btn-popup add" title="' . rex_i18n::msg('var_media_new') . '"' . $disabled . '><i class="rex-icon rex-icon-add-media"></i></a>
+                <a href="#" class="btn btn-popup delete" title="' . rex_i18n::msg('var_media_remove') . '"' . $disabled . '><i class="rex-icon rex-icon-delete-media"></i></a>
+                <a href="#" class="btn btn-popup view" title="' . rex_i18n::msg('var_media_view') . '"' . $disabled . '><i class="rex-icon rex-icon-view-media"></i></a>');
+        $e['after'] = '<div class="rex-js-media-preview"></div></div>';
+
+        $fragment = new rex_fragment();
+        $fragment->setVar('elements', [$e], false);
+        print $fragment->parse('core/form/widget_list.php');
+*/	
+
 		print '<dl class="rex-form-group form-group" id="MEDIALIST_'. $fieldnumber .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
@@ -433,11 +478,11 @@ class d2u_addon_backend_helper {
 	 * @param string $fieldname Select field name
 	 * @param string[] $values Field values.
 	 * @param string[] $selected_values Preselected value
-	 * @param int $size Size of the select field, default 1
+	 * @param int $size Size of the select field (parameter is no more used)
 	 * @param bool $multiple TRUE if multiple selections are allowed
 	 * @param bool $readonly TRUE if field should have readonly attribute.
 	 */
-	public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size = 1, $multiple = FALSE, $readonly = FALSE) {
+	public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size, $multiple = FALSE, $readonly = FALSE) {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd>';

@@ -113,6 +113,6 @@
 		Video- / Audiodatei:
 	</div>
 	<div class="col-xs-8">
-		REX_MEDIA[id="1" types="mp3,mp4" widget="1"]
+		REX_MEDIA[id="1" types="mp3,mp4,m4v" widget="1"]
 	</div>
 </div>

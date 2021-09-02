@@ -62,7 +62,7 @@ if(class_exists('D2UModuleManager')) {
 		4);
 	$modules[] = new D2UModule("06-3",
 		"Video mit Plyr einbinden",
-		1);
+		2);
 	$modules[] = new D2UModule("06-4",
 		"Videoliste mit Plyr einbinden",
 		1);
@@ -81,6 +81,9 @@ if(class_exists('D2UModuleManager')) {
 	$modules[] = new D2UModule("11-1",
 		"YForm Kontaktformular (DSGVO kompatibel)",
 		6);
+	$modules[] = new D2UModule("11-2",
+		"Box mit Kontaktinformationen",
+		1);
 	$modules[] = new D2UModule("12-1",
 		"Feeds Stream Galerie",
 		3);
