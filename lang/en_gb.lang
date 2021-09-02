@@ -18,7 +18,6 @@ d2u_helper_defaultlang = Base language
 d2u_helper_deleted = Object successfully deleted.
 d2u_helper_description = Description
 d2u_helper_description_long = Detailed description
-d2u_helper_description_short = Short description
 d2u_helper_d2u_id = ID
 d2u_address_geocode = Geocode address
 d2u_address_geocode_check = Check geolocation

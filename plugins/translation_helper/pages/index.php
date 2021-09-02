@@ -594,6 +594,29 @@ else {
 			</fieldset>
 			<?php
 				}
+				if(rex_plugin::get('d2u_machinery', 'production_lines')->isAvailable()) {
+					$production_lines = ProductionLine::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+			?>
+			<br>
+			<fieldset>
+				<legend><small><i class="rex-icon fa-plug"></i></small> <?php echo rex_i18n::msg('d2u_machinery_production_lines'); ?></legend>
+				<div class="panel-body-wrapper slide">
+				<?php
+					if(count($production_lines) > 0) {
+						print '<ul>';
+						foreach($production_lines as $production_line) {
+							print '<li><a href="'. rex_url::backendPage('d2u_machinery/production_lines', ['entry_id' => $production_line->production_line_id, 'func' => 'edit']) .'">'. $production_line->name .'</a></li>';
+						}
+						print '</ul>';
+					}
+					else {
+						print $_SESSION['d2u_helper_translation']['filter'] == 'update' ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+					}
+				?>
+				</div>
+			</fieldset>
+			<?php
+				}
 				if(rex_plugin::get('d2u_machinery', 'service_options')->isAvailable()) {
 					$service_options = ServiceOption::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
 			?>
