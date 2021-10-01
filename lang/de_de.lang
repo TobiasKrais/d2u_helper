@@ -25,6 +25,7 @@ d2u_helper_geocode_failure = Geocoding schlug fehl.
 d2u_helper_geocode_fields = Für eine Geocodierung müssen die Strasse, die PLZ und der Ort ausgefüllt sein.
 d2u_helper_geocode_hint = Wenn Google Maps die Adresse dieses Ortes nicht korrekt geocodiert, können optional die Längen- und Breitengrade manuell eingegeben werden. (<a href="https://wiki.opennet-initiative.de/wiki/Koordinaten_Bestimmung" target="_blank" style="color: blue">Koordinaten Bestimmung</a>)
 d2u_helper_help = Hilfe
+d2u_helper_icon = Piktogramm
 d2u_helper_install_error = Fehler beim Installieren
 d2u_helper_name = Name
 d2u_helper_no_categories_found = Es wurden noch keine Kategorien angelegt.

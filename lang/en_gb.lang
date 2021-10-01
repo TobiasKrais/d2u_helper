@@ -25,6 +25,7 @@ d2u_address_geocode_failure = Geocoding failed.
 d2u_address_geocode_fields = Street, zip code and city need to be filled in for geocoding.
 d2u_address_geocode = In case Google Maps does not geocode location correctly, you can define longitude and latitude manually. (<a href="https://wiki.opennet-initiative.de/wiki/Koordinaten_Bestimmung" target="_blank" style="color: blue">coordinate tool</a>)
 d2u_helper_help = Help
+d2u_helper_icon = Pictogram
 d2u_helper_install_error = Install error
 d2u_helper_name = Name
 d2u_helper_no_categories_found = No categories found.

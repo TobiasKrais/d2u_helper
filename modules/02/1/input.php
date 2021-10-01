@@ -64,7 +64,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		&Uuml;berschrift:<br />
+		&Uuml;berschrift:
 	</div>
 	<div class="col-xs-6">
 		<input type="text" size="50" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" class="form-control"/>

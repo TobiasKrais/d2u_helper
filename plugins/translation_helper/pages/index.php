@@ -622,7 +622,7 @@ else {
 			?>
 			<br>
 			<fieldset>
-				<legend><small><i class="rex-icon fa-plug"></i></small> <?php echo rex_i18n::msg('d2u_machinery_production_lines'); ?></legend>
+				<legend><small><i class="rex-icon fa-arrows-h"></i></small> <?php echo rex_i18n::msg('d2u_machinery_production_lines'); ?></legend>
 				<div class="panel-body-wrapper slide">
 				<?php
 					if(count($production_lines) > 0) {

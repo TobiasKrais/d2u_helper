@@ -143,8 +143,12 @@ class d2u_addon_frontend_helper {
 			$article = rex_category::get($id);
 			if($id != rex_article::getSiteStartArticleId()) {
 				$breadcrumb_start_only = FALSE;
+				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
 			}
-			$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
+			else {
+				$breadcrumb_start_only = TRUE;
+				$breadcrumbs = '<a href="' . $startarticle->getUrl() . '"><span class="fa-icon fa-home"></span></a>';
+			}
 		}
 		// Articles
 		if(!$current_article->isStartArticle() && !$current_article->isSiteStartArticle()) {
