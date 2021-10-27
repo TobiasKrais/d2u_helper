@@ -13,6 +13,14 @@ body, input {
 		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
 		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
 }
+@media print {
+	body .container {
+		margin-left: 0px;
+		margin-right: 0px;
+		width: 180mm !important;
+		max-width: 180mm !important;
+	}
+}
 body {
 	-moz-hyphens: auto;
 	-o-hyphens: auto;
