@@ -59,11 +59,30 @@ else {
 <?php
 
 	if(rex_addon::get('d2u_address')->isAvailable()) {
+		$continents = D2U_Address\Continent::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
 		$countries = D2U_Address\Country::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?php print rex_i18n::msg('d2u_address'); ?></div></header>
 		<div class="panel-body">
+			<fieldset>
+				<legend><small><i class="rex-icon fa-globe"></i></small> <?php echo rex_i18n::msg('d2u_address_continents'); ?></legend>
+				<div class="panel-body-wrapper slide">
+				<?php
+					if(count($continents) > 0) {
+						print '<ul>';
+						foreach($continents as $continent) {
+							print '<li><a href="'. rex_url::backendPage('d2u_address/continent', ['entry_id' => $continent->continent_id, 'func' => 'edit']) .'">'. $continent->name .'</a></li>';
+						}
+						print '</ul>';
+					}
+					else {
+						print $_SESSION['d2u_helper_translation']['filter'] == 'update' ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+					}
+				?>
+				</div>
+			</fieldset>
+			<br>
 			<fieldset>
 				<legend><small><i class="rex-icon fa-flag"></i></small> <?php echo rex_i18n::msg('d2u_address_countries'); ?></legend>
 				<div class="panel-body-wrapper slide">
