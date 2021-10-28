@@ -25,7 +25,7 @@
 							print '</div>';
 
 							// Languages
-							if(count(rex_clang::getAllIds()) > 1) {
+							if(count(rex_clang::getAllIds(true)) > 1) {
 								print '<div class="col-5 col-sm-3 col-md-2 align-self-center">';
 								print '<div id="lang_chooser_div">';
 								$fragment->setVar('showLangDropdown', true, false);
