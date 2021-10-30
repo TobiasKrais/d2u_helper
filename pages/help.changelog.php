@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.8.6-DEV</p>
+		<p>1.8.6</p>
 		<ul>
 			<li>Optionale Möglichkeit Google Analytics Code einzubinden entfernt, da Code nicht DSGVO konform eingebunden wurde.</li>
 			<li>Optionale Möglichkeit Wired Minds eMetrics Code einzubinden entfernt, da Code nicht DSGVO konform eingebunden wurde.</li>
