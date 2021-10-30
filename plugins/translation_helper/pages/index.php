@@ -259,7 +259,13 @@ else {
 						print '<ul>';
 						foreach($jobs as $job) {
 							if(!$job->name) {
-								$job = new \D2U_Jobs\Category($job->job_id, rex_config::get('d2u_helper', 'default_lang'));
+								foreach (rex_clang::getAllIds() as $clang_id) {
+									$temp_job = new \D2U_Jobs\Job($job->job_id, $clang_id);
+									if($temp_job->name) {
+										$job = $temp_job;
+										break;
+									}
+								}
 							}
 							print '<li><a href="'. rex_url::backendPage('d2u_jobs/jobs', ['entry_id' => $job->job_id, 'func' => 'edit']) .'">'. $job->name .'</a></li>';
 						}
