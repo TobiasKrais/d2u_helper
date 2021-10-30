@@ -15,6 +15,7 @@
 			<li>Modul 12-1 "Feeds": Fehler bei Modulinstallation behoben.</li>
 			<li>Neues Modul 11-2 "Box mit Kontaktinformationen".</li>
 			<li>Template 03-1 CSS für Druckansicht angepasst.</li>
+			<li>translation_helper Plugin: bei zu aktualisierenden Übersetzungen wurde manchmal der Name nicht angezeigt.</li>
 		</ul>
 		<p>1.8.5</p>
 		<ul>
