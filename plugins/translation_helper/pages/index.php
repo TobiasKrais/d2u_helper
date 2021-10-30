@@ -763,6 +763,7 @@ else {
 				?>
 				</div>
 			</fieldset>
+			<br>
 			<fieldset>
 				<legend><small><i class="rex-icon fa-newspaper-o"></i></small> <?php echo rex_i18n::msg('d2u_news_news_title'); ?></legend>
 				<div class="panel-body-wrapper slide">
@@ -834,6 +835,7 @@ else {
 				?>
 				</div>
 			</fieldset>
+			<br>
 			<fieldset>
 				<legend><small><i class="rex-icon fa-tags"></i></small> <?php echo rex_i18n::msg('d2u_references_tags'); ?></legend>
 				<div class="panel-body-wrapper slide">

@@ -12,6 +12,7 @@
 			<li>Modul 02-3 "Überschrift mit Untertitel und Textfeld" hinzugefügt</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Leerzeichen in Video URL hatte laden des Vorschaubildes verhindert.</li>
 			<li>Modul 06-3 "Video mit Plyr einbinden": Dateityp m4v hinzugefügt.</li>
+			<li>Modul 12-1 "Feeds": Fehler bei Modulinstallation behoben.</li>
 			<li>Neues Modul 11-2 "Box mit Kontaktinformationen".</li>
 			<li>Template 03-1 CSS für Druckansicht angepasst.</li>
 		</ul>
