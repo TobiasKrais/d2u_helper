@@ -46,6 +46,13 @@
 	<div class="col-xs-8">
 		REX_LINK[id="1" widget="1"]
 	</div>
+	<div class="col-xs-12">&nbsp;</div>
+	<div class="col-xs-4">
+		Anker (optional)
+	</div>
+	<div class="col-xs-8">
+		<input type="text" size="250" name="REX_INPUT_VALUE[7]" value="REX_VALUE[7]" class="form-control"/>
+	</div>
 </div>
 
 <div class="row" id="link">

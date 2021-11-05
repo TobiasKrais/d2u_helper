@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.8.7-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Anpassungen an den R5.13 Dark Mode.</li>
 		</ul>
 		<p>1.8.6</p>
 		<ul>

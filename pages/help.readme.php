@@ -11,7 +11,7 @@
 		<p>Beispielseite für Menü:
 			<a href="https://www.design-to-use.de/" target="_blank">https://www.design-to-use.de/</a>.</p>
 		<p>Beispiel PHP Code:</p>
-		<div style="background-color: #f9f2f4; border: solid 1px #dfe3e9; padding: 15px;">
+		<div style="border: solid 1px #dfe3e9; padding: 15px;">
 		<?php
 			highlight_string("<div class='navi'>
 	<?php
@@ -27,7 +27,7 @@
 	<header class="panel-heading"><div class="panel-title">Responsive MultiLevel Menu in eigenes Template einbinden</div></header>
 	<div class="panel-body">
 		<p>Beispiel PHP Code:</p>
-		<div style="background-color: #f9f2f4; border: solid 1px #dfe3e9; padding: 15px;">
+		<div style="border: solid 1px #dfe3e9; padding: 15px;">
 		<?php
 			highlight_string("<div class='navi'>
 	<?php
@@ -46,7 +46,7 @@
 		<p>Projektseite mit Beispielen und Dokumentation:
 			<a href="https://www.slicknav.io/" target="_blank">https://www.slicknav.io/</a>.</p>
 		<p>Beispiel PHP Code:</p>
-		<div style="background-color: #f9f2f4; border: solid 1px #dfe3e9; padding: 15px;">
+		<div style="border: solid 1px #dfe3e9; padding: 15px;">
 		<?php
 			highlight_string("<div class='navi'>
 	<?php
@@ -70,7 +70,7 @@
 		</div>
 		<p>Beispiel PHP und  HTML Code wenn Menü automatisch gemäß den Einstellungen dieses
 			Addons abhängig von der Bildschirmbreite aufgeklappt oder zugeklappt werden soll:</p>
-		<div style="background-color: #f9f2f4; border: solid 1px #dfe3e9; padding: 15px;">
+		<div style="border: solid 1px #dfe3e9; padding: 15px;">
 		<?php
 			highlight_string("<div class='navi'>
 	<div id='device-size-detector'>

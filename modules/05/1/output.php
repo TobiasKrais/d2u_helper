@@ -113,13 +113,17 @@ else if($link_type == "d2u_courses_category") {
 }
 else { // Backward compatibility module Version <= 3
 	$article_id = "REX_LINK[1]";
+	$anchor = "REX_VALUE[7]";
 	if($article_id > 0 && rex_article::get($article_id) instanceof rex_article) {
 		if(\rex::isBackend()) {
 			print "Weiterleitung zu Artikel: <a href='". rex_url::backendPage('content/edit', ['article_id'=>$article_id, 'clang'=> rex_clang::getCurrentId()]) ."'>"
-			. rex_article::get($article_id)->getValue('name') ." (Artikel ID ". $article_id .")</a>";
+				. rex_article::get($article_id)->getValue('name') ." (Artikel ID ". $article_id .")</a>";
+			if($anchor) {
+				print "<br>Name Anker: ". $anchor;
+			}
 		}
 		else {
-			$forward_url = rex_getUrl($article_id);
+			$forward_url = rex_getUrl($article_id) . ($anchor ? '#'.$anchor : '');
 		}
 	}
 }
