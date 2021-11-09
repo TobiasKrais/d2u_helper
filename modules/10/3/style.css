@@ -1,11 +1,17 @@
 .download-list {
+	background: article_color_box;
 	padding: 0;
 }
-.download-list li {
-	background: article_color_box;
-	list-style: none;
+.download-list .element, .download-list-pics .element {
 	margin-bottom: 1em;
 	padding: 0.5em 1em;
+}
+
+.download-list-pics {
+	padding-bottom: 2em;
+}
+.download-list-pics img {
+	padding-bottom: 1em;
 }
 
 .icon {

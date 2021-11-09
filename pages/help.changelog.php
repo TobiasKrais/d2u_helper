@@ -4,6 +4,7 @@
 		<p>1.8.7-DEV</p>
 		<ul>
 			<li>Anpassungen an den R5.13 Dark Mode.</li>
+			<li>Modul 10-3 "Box mit Downloads": Es gibt eine neue Option die automatisch generiert Vorschaubilder anzeigen lässt.</li>
 		</ul>
 		<p>1.8.6</p>
 		<ul>

@@ -128,3 +128,14 @@
 		REX_MEDIALIST[id=1 types="pdf" widget=1]
 	</div>
 </div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-4">
+		<input type="checkbox" name="REX_INPUT_VALUE[2]" value="true" <?php echo "REX_VALUE[2]" == 'true' ? ' checked="checked"' : ''; ?> style="float: right;" />
+	</div>
+	<div class="col-xs-8">
+		Vorschaubilder der Downloads anzeigen<br />
+	</div>
+</div>
