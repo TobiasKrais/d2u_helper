@@ -65,3 +65,9 @@ dd.d2u_helper_color_desc {
 		float: right;
 	}
 }
+
+body:not(.rex-theme-light)  div.code {
+	background-color: rgb(21, 28, 34);
+	border: solid 1px #dfe3e9;
+	padding: 15px;
+}

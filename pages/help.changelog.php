@@ -1,10 +1,11 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.8.7-DEV</p>
+		<p>1.8.7</p>
 		<ul>
-			<li>Anpassungen an den R5.13 Dark Mode.</li>
-			<li>Modul 10-3 "Box mit Downloads": Es gibt eine neue Option die automatisch generiert Vorschaubilder anzeigen lässt.</li>
+			<li>Kleinere Anpassungen in den Einstellungen und der Hilfe an den R5.13 Dark Mode.</li>
+			<li>Modul "10-3 Box mit Downloads": Es gibt eine neue Option die automatisch generierte Vorschaubilder anzeigen lässt.</li>
+			<li>Modul "15-1 Kategorie mit Liste der Unterkategorien" berücksichtigt nun auch YCom Rechte und es kann die Anzahl anzuzeigender Ebenen ausgewählt werden.</li>
 		</ul>
 		<p>1.8.6</p>
 		<ul>

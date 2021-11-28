@@ -122,12 +122,27 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
-</div>
-<div class="row">
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[1]" value="true" <?php echo "REX_VALUE[1]" == 'true' ? ' checked="checked"' : ''; ?> style="float: right;" />
+		Wie viele Ebenen sollen angezeigt werden
 	</div>
 	<div class="col-xs-8">
-		Auch Unterkategorien bis zur letzten Ebene anzeigen?<br />
+		<select name="REX_INPUT_VALUE[1]"  class="form-control">
+		<?php
+		$values_level = [1=>"1. Ebene anzeigen", 2=>"bis 2. Ebene anzeigen", 3=>"bis 3. Ebene anzeigen", 4=>"bis 4. Ebene anzeigen", 100=>"Alle Ebenen anzeigen"];
+		foreach($values_level as $key => $value) {
+			if("REX_VALUE[1]" == "true") {
+				// Backward compatibility
+				$key = 100;
+			}
+			
+			echo '<option value="'. $key .'" ';
+	
+			if ("REX_VALUE[1]" == $key) {
+				echo 'selected="selected" ';
+			}
+			echo '>'. $value .'</option>';
+		}
+		?>
+		</select>
 	</div>
 </div>

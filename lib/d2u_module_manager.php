@@ -216,7 +216,7 @@ class D2UModuleManager {
 			2);
 		$modules[] = new D2UModule("15-1",
 			"Kategorie mit Liste der Unterkategorien",
-			1);
+			2);
 		// 20-x reserved for D2U Addresss
 		// 21-x reserved for D2U History
 		// 22-x reserved for D2U Staff
