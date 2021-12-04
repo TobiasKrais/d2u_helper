@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.8.8-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.8.7</p>
 		<ul>
 			<li>Kleinere Anpassungen in den Einstellungen und der Hilfe an den R5.13 Dark Mode.</li>
