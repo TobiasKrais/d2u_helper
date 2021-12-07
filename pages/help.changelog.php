@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.8.8-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Bugfix: beim Neuinstallation wurden die Farben in den Einstellungen nicht korrekt gesetzt. Außerdem hatte das Farbfeld in den Einstellungen nicht korrekt funktioniert.</li>
 		</ul>
 		<p>1.8.7</p>
 		<ul>

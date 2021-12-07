@@ -283,11 +283,8 @@ class d2u_addon_backend_helper {
 		$label = '<label>' . rex_i18n::msg($message_id) . '</label>';
 		$input = '';
 		if($type == "color") {
-			$input .= '<input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="' . str_replace('"', "'", $value) . '" id="text-' . $field_id . '">';
-			$input .= '<script>'.PHP_EOL
-				.'$("#color-'. $field_id .'").on("input", function() {$("#text-' . $field_id . '").val(this.value);});'.PHP_EOL
-				.'$("#text-' . $field_id . '").on("input", function() {$("#color-'. $field_id .'").val(this.value);});'. PHP_EOL
-				.'</script>';
+			$input .= '<input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
+				. 'value="' . str_replace('"', "'", $value) . '" id="text-' . $field_id . '" onChange="document.getElementById(\'color-' . $field_id . '\').value = this.value">';
 		}
 		$input .= '<input class="form-control'. ($type == "color" ? ' d2u_helper_color' : '') .'" type="' . $type . '" name="' . $fieldname . '" id="color-' . $field_id . '" value="' . str_replace('"', "'", $value) . '"';
 		if ($required && $readonly !== TRUE) {
@@ -298,6 +295,7 @@ class d2u_addon_backend_helper {
 		}
 		if($type == "color" || $type == "number") {
 			$input .= ' style="max-width: 150px;"';
+			$input .= ' onChange="document.getElementById(\'text-' . $field_id . '\').value = this.value"';
 		}
 		if($type == "date") {
 			$input .= ' placeholder="Format: JJJJ-MM-TT"';
