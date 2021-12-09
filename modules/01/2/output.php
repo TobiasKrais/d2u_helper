@@ -1,40 +1,44 @@
 <?php
-	$cols = "REX_VALUE[20]" == "" ? 8 : "REX_VALUE[20]";
-	$offset_lg_cols = intval("REX_VALUE[17]");
-	$offset_lg = "";
-	if($offset_lg_cols > 0) {
-		$offset_lg = " mr-lg-auto ml-lg-auto ";
-	}
-	$heading = "REX_VALUE[1]";
-	$same_height = "REX_VALUE[5]" == 'true' ? 'same-height ' : '';
-	$show_title = ("REX_VALUE[9]" == 'true');
+$cols = "REX_VALUE[20]" == "" ? 8 : "REX_VALUE[20]";
+$offset_lg_cols = intval("REX_VALUE[17]");
+$offset_lg = "";
+if($offset_lg_cols > 0) {
+	$offset_lg = " mr-lg-auto ml-lg-auto ";
+}
+$heading = "REX_VALUE[1]";
+$same_height = "REX_VALUE[5]" == 'true' ? 'same-height ' : '';
+$show_title = ("REX_VALUE[9]" == 'true');
 
-	// Link
-	$link_type = "REX_VALUE[7]";
-	$link_url = "";
-	if($link_type == "link") {
-		$link_url = "REX_VALUE[8]";
+// Link
+$link_type = "REX_VALUE[7]";
+$link_url = "";
+if($link_type == "link") {
+	$link_url = "REX_VALUE[8]";
+}
+else if($link_type == "download") {
+	$link_url = rex_url::media("REX_MEDIA[2]");
+}
+else if($link_type == "article") {
+	$article_id = "REX_LINK[1]";
+	if($article_id > 0 && rex_article::get($article_id) instanceof rex_article) {
+		$link_url = rex_getUrl($article_id);
 	}
-	else if($link_type == "download") {
-		$link_url = rex_url::media("REX_MEDIA[2]");
-	}
-	else if($link_type == "article") {
-		$article_id = "REX_LINK[1]";
-		if($article_id > 0 && rex_article::get($article_id) instanceof rex_article) {
-			$link_url = rex_getUrl($article_id);
-		}
-	}
-	
-	// Picture
-	$picture = "REX_MEDIA[1]";
-	$picture_cols = "REX_VALUE[6]" == "" ? 4 : "REX_VALUE[6]";
-	$picture_type = "REX_VALUE[3]";
-	$picture_position = "REX_VALUE[4]";
-	
+}
+
+$text_1 = 'REX_VALUE[id=2 output="html"]';
+$show_text_2 = "REX_VALUE[10]" == 'true' ? TRUE : FALSE;
+$text_2 = 'REX_VALUE[id=11 output="html"]';
+
+// Picture
+$picture = "REX_MEDIA[1]";
+$picture_cols = "REX_VALUE[6]" == "" ? 4 : "REX_VALUE[6]";
+$picture_type = "REX_VALUE[3]";
+$picture_position = "REX_VALUE[4]";
+
+$container_classes = "col-12 col-lg-". $cols . $offset_lg;
+if($picture_position == "left") {
 	$container_classes = "col-12 col-lg-". $cols . $offset_lg;
-	if($picture_position == "left") {
-		$container_classes = "col-12 col-lg-". $cols . $offset_lg;
-	}
+}
 ?>
 <div class="<?php echo $container_classes; ?> abstand">
 	<div class="<?php print $same_height; ?>module-box wysiwyg_content">
@@ -89,16 +93,29 @@
 						print '</a>';
 					}
 				}
-				if ('REX_VALUE[id=2 isset=1]') {
-					if(rex_config::get('d2u_helper', 'editor', '') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
-						print markitup::parseOutput ('markdown', 'REX_VALUE[id=2 output="html"]');
-					}
-					else if(rex_config::get('d2u_helper', 'editor', '') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
-						print markitup::parseOutput ('textile', 'REX_VALUE[id=2 output="html"]');
-					}
-					else {
-						print 'REX_VALUE[id=2 output=html]';
-					}
+				if ($text_1) {
+					print d2u_addon_frontend_helper::prepareEditorField($text_1);
+				}
+				if ($show_text_2 && $text_2) {
+					$id = rand();
+					print '<div class="wysiwyg_content">';
+					print '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
+					print '<div id="second_text_'. $id .'" class="hide-text">';
+					print d2u_addon_frontend_helper::prepareEditorField($text_2);	
+					print '</div>';
+					print '</div>';
+
+					print '<script>';
+					print 'function toggle_text_'. $id .'() {'. PHP_EOL;
+						print '$("#second_text_'. $id .'").slideToggle();'. PHP_EOL;
+						print 'if($("#button_'. $id .'").hasClass("angle-down")) {';
+							print '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_less')) .'").removeClass("angle-down").addClass("angle-up").fadeIn(500); });';
+						print '}'. PHP_EOL;
+						print 'else {';
+							print '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_more')) .'").removeClass("angle-up").addClass("angle-down").fadeIn(500); });';
+						print '}'. PHP_EOL;
+					print '}'. PHP_EOL;
+					print '</script>';
 				}
 
 				print '</div>';

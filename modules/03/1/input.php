@@ -104,7 +104,7 @@
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
-				<input class="form-control" type="checkbox" name="REX_INPUT_VALUE[2]" value="true"<?php if("REX_VALUE[2]" == 'true') { print ' checked="checked"'; } ?> style="float: right; height: auto; width: auto;">
+				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[2]" value="true"<?php if("REX_VALUE[2]" == 'true') { print ' checked="checked"'; } ?>>
 			</dt>
 			<dd>
 				<label>Soll der Bildtitel aus dem Medienpool unterhalb des Bildes angezeigt werden?

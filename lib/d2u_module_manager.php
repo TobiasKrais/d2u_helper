@@ -147,7 +147,7 @@ class D2UModuleManager {
 			11);
 		$modules[] = new D2UModule("01-2",
 			"Texteditor mit Bild und Fettschrift",
-			12);
+			13);
 		$modules[] = new D2UModule("02-1",
 			"Überschrift",
 			10);
@@ -159,7 +159,7 @@ class D2UModuleManager {
 			6);
 		$modules[] = new D2UModule("03-1",
 			"Bild",
-			9);
+			10);
 		$modules[] = new D2UModule("03-2",
 			"Bildergalerie Ekko Lightbox",
 			9);

@@ -6,8 +6,6 @@
 	padding: .25rem 1rem;
 	transition: opacity 0.5s ease-in-out;
 }
-.fa-icon {
-}
 .angle-down:after {
 	content: "\f107";
 	font-family: FontAwesome;

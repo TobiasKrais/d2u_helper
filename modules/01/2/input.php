@@ -66,7 +66,7 @@
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
-				<input class="form-control" type="checkbox" name="REX_INPUT_VALUE[5]" value="true"<?php if("REX_VALUE[5]" == 'true') { print ' checked="checked"'; } ?> style="float: right; height: auto; width: auto;">
+				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[5]" value="true"<?php if("REX_VALUE[5]" == 'true') { print ' checked="checked"'; } ?>>
 			</dt>
 			<dd>
 				<label>Soll die Höhe dieses Blocks an die Höhe anderer Blöcke dieses Moduls auf dieser Seite angeglichen werden?</label>
@@ -82,7 +82,7 @@
 		&Uuml;berschrift (Fettschrift, optional):<br />
 	</div>
 	<div class="col-xs-8">
-		<input type="text" style="width: 100%;" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" />
+		<input type="text" class="form-control" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" />
 	</div>
 </div>
 <div class="row">
@@ -128,7 +128,7 @@
 		Link URL:
 	</div>
 	<div class="col-xs-8">
-		<input type="text" size="250" name="REX_INPUT_VALUE[8]" value="REX_VALUE[8]" style="max-width: 100%"/>
+		<input type="text" size="250" name="REX_INPUT_VALUE[8]" value="REX_VALUE[8]" class="form-control"/>
 	</div>
 </div>
 <div class="row" id="download">
@@ -258,7 +258,7 @@
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
-				<input class="form-control" type="checkbox" name="REX_INPUT_VALUE[9]" value="true"<?php if("REX_VALUE[9]" == 'true') { print ' checked="checked"'; } ?> style="float: right; height: auto; width: auto;">
+				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[9]" value="true"<?php if("REX_VALUE[9]" == 'true') { print ' checked="checked"'; } ?>>
 			</dt>
 			<dd>
 				<label>Soll der Bildtitel aus dem Medienpool unterhalb des Bildes angezeigt werden?
@@ -280,3 +280,43 @@
 		<textarea name="REX_INPUT_VALUE[2]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[2]</textarea>
 	</div>
 </div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-4">
+		<input type="checkbox" name="REX_INPUT_VALUE[10]" value="true" <?php echo "REX_VALUE[10]" == 'true' ? ' checked="checked"' : ''; ?> class="form-control d2u_helper_toggle" />
+	</div>
+	<div class="col-xs-8">
+		Unterhalb vom Text einen zusätzlichen aufklappbaren Text anzeigen<br />
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">Text, der zusätzliche eingeblendet werden kann:</div>
+	<div class="col-xs-12">
+		<textarea name="REX_INPUT_VALUE[11]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[11]</textarea>
+	</div>
+</div>
+<script>
+	function container_changer() {
+		if ($("input[name='REX_INPUT_VALUE[10]']").is(':checked')) {
+			$("textarea[name='REX_INPUT_VALUE[11]']").parent().parent().slideDown();
+		}
+		else {
+			$("textarea[name='REX_INPUT_VALUE[11]']").parent().parent().slideUp();
+		}
+	}
+
+	// Hide on document load
+	$(document).ready(function() {
+		container_changer();
+	});
+
+	// Hide on selection change
+	$("input[name='REX_INPUT_VALUE[10]']").on('change', function(e) {
+		container_changer();
+	});
+</script>
