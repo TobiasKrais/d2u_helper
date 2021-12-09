@@ -17,18 +17,35 @@ if($offset_lg_cols > 0) {
 	$offset_lg = " mr-lg-auto ml-lg-auto ";
 }
 
+$text_1 = 'REX_VALUE[id=1 output="html"]';
+$show_text_2 = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
+$text_2 = 'REX_VALUE[id=3 output="html"]';
+
 print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
-print '<div class="wysiwyg_content">';
-if ('REX_VALUE[id=1 isset=1]') {
-	if(rex_config::get('d2u_helper', 'editor', '') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
-		print markitup::parseOutput ('markdown', 'REX_VALUE[id=1 output="html"]');
-	}
-	else if(rex_config::get('d2u_helper', 'editor', '') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
-		print markitup::parseOutput ('textile', 'REX_VALUE[id=1 output="html"]');
-	}
-	else {
-		print 'REX_VALUE[id=1 output=html]';
-	}
+if ($text_1) {
+	print '<div class="wysiwyg_content">';
+	print d2u_addon_frontend_helper::prepareEditorField($text_1);
+	print '</div>';
 }
-print '</div>';
+if ($show_text_2 && $text_2) {
+	$id = rand();
+	print '<div class="wysiwyg_content">';
+	print '<div id="second_text_'. $id .'" class="hide-text">';
+	print d2u_addon_frontend_helper::prepareEditorField($text_2);	
+	print '</div>';
+	print '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
+	print '</div>';
+
+	print '<script>';
+	print 'function toggle_text_'. $id .'() {'. PHP_EOL;
+		print '$("#second_text_'. $id .'").slideToggle();'. PHP_EOL;
+		print 'if($("#button_'. $id .'").hasClass("angle-down")) {';
+			print '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_less')) .'").removeClass("angle-down").addClass("angle-up").fadeIn(500); });';
+		print '}'. PHP_EOL;
+		print 'else {';
+			print '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_more')) .'").removeClass("angle-up").addClass("angle-down").fadeIn(500); });';
+		print '}'. PHP_EOL;
+	print '}'. PHP_EOL;
+	print '</script>';
+}
 print '</div>';

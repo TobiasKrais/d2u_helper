@@ -20,22 +20,22 @@ if(class_exists('D2UModuleManager')) {
 	$modules = [];
 	$modules[] = new D2UModule("00-1",
 		"Umbruch ganze Breite",
-		5);
+		6);
 	$modules[] = new D2UModule("01-1",
 		"Texteditor",
-		10);
+		11);
 	$modules[] = new D2UModule("01-2",
 		"Texteditor mit Bild und Fettschrift",
 		12);
 	$modules[] = new D2UModule("02-1",
 		"Überschrift",
-		9);
+		10);
 	$modules[] = new D2UModule("02-2",
 		"Überschrift mit Klapptext",
 		4);
 	$modules[] = new D2UModule("02-3",
 		"Überschrift mit Untertitel und Textfeld",
-		5);
+		6);
 	$modules[] = new D2UModule("03-1",
 		"Bild",
 		9);
@@ -77,10 +77,10 @@ if(class_exists('D2UModuleManager')) {
 		2);
 	$modules[] = new D2UModule("10-3",
 		"Box mit Downloads",
-		7);
+		8);
 	$modules[] = new D2UModule("11-1",
 		"YForm Kontaktformular (DSGVO kompatibel)",
-		6);
+		7);
 	$modules[] = new D2UModule("11-2",
 		"Box mit Kontaktinformationen",
 		1);
@@ -92,7 +92,7 @@ if(class_exists('D2UModuleManager')) {
 		3);
 	$modules[] = new D2UModule("14-1",
 		"Search It Suchmodul",
-		2);
+		3);
 	$modules[] = new D2UModule("15-1",
 		"Kategorie mit Liste der Unterkategorien",
 		2);

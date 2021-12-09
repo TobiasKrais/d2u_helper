@@ -4,6 +4,9 @@
 		<p>1.8.8-DEV</p>
 		<ul>
 			<li>Bugfix: beim Neuinstallation wurden die Farben in den Einstellungen nicht korrekt gesetzt. Außerdem hatte das Farbfeld in den Einstellungen nicht korrekt funktioniert.</li>
+			<li>Modul "01-1 Texteditor" mit optionalem ausklappbaren Text.</li>
+			<li>Modul "14-1 - Search It Suchmodul" fatal error behoben</li>
+			<li>Module 00-1, 01-1, 02-1, 02-3, 10-3, 11-1, 14-1 Eingabe jetzt mit animierten Checkboxen.</li>
 		</ul>
 		<p>1.8.7</p>
 		<ul>

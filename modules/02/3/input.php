@@ -139,7 +139,7 @@
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[5]" value="true" <?php echo "REX_VALUE[5]" == 'true' ? ' checked="checked"' : ''; ?> style="float: right;" />
+		<input type="checkbox" name="REX_INPUT_VALUE[5]" value="true" <?php echo "REX_VALUE[5]" == 'true' ? ' checked="checked"' : ''; ?> class="form-control d2u_helper_toggle" />
 	</div>
 	<div class="col-xs-8">
 		Text neben Überschrift und Untertitel anzeigen

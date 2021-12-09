@@ -113,3 +113,43 @@
 		<textarea name="REX_INPUT_VALUE[1]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[1]</textarea>
 	</div>
 </div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-4">
+		<input type="checkbox" name="REX_INPUT_VALUE[2]" value="true" <?php echo "REX_VALUE[2]" == 'true' ? ' checked="checked"' : ''; ?> class="form-control d2u_helper_toggle" />
+	</div>
+	<div class="col-xs-8">
+		Unterhalb vom Text einen zusätzlichen aufklappbaren Text anzeigen<br />
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">Text, der zusätzliche eingeblendet werden kann:</div>
+	<div class="col-xs-12">
+		<textarea name="REX_INPUT_VALUE[3]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[3]</textarea>
+	</div>
+</div>
+<script>
+	function container_changer() {
+		if ($("input[name='REX_INPUT_VALUE[2]']").is(':checked')) {
+			$("textarea[name='REX_INPUT_VALUE[3]']").parent().parent().slideDown();
+		}
+		else {
+			$("textarea[name='REX_INPUT_VALUE[3]']").parent().parent().slideUp();
+		}
+	}
+
+	// Hide on document load
+	$(document).ready(function() {
+		container_changer();
+	});
+
+	// Hide on selection change
+	$("input[name='REX_INPUT_VALUE[2]']").on('change', function(e) {
+		container_changer();
+	});
+</script>

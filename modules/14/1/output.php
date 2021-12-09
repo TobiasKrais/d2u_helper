@@ -154,7 +154,7 @@ if(((rex_addon::get('yform_spam_protection')->isAvailable() && count($yform->get
 				if(is_object($media)) { 
 					$has_permission = true;
 					if(rex_plugin::get('ycom', 'media_auth')->isAvailable()) {
-						$has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create(null, pathinfo($hit['filename'], PATHINFO_BASENAME)));
+						$has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create('', pathinfo($hit['filename'], PATHINFO_BASENAME)));
 					}
 					if($has_permission) {
 						$hit_link = $server . rex_url::media($media->getFileName());
@@ -175,7 +175,7 @@ if(((rex_addon::get('yform_spam_protection')->isAvailable() && count($yform->get
 					if(is_object($media)) { 
 						$has_permission = FALSE;
 						if(rex_plugin::get('ycom', 'media_auth')->isAvailable()) {
-							$has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create(null, $media->getFileName()));
+							$has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create('', $media->getFileName()));
 						}
 						if($has_permission) {
 							$hit_link = $server . rex_url::media($media->getFileName());
