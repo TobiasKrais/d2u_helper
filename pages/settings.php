@@ -45,7 +45,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['submenu_use_articlename'] = array_key_exists('submenu_use_articlename', $settings);
 	$settings['template_04_header_slider_pics_full_width'] = array_key_exists('template_04_header_slider_pics_full_width', $settings);
-	
+
 	// Save settings
 	if(rex_config::set("d2u_helper", $settings)) {
 		// Install / update language replacements
@@ -148,6 +148,15 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						print '<hr style="border-top: 1px solid #333">';
 						print '<h3>'. rex_i18n::msg('d2u_helper_settings_header') .'</h3>';
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_header_pic', 'template_header_pic', $this->getConfig('template_header_pic'));
+						$options_media_manager = ["" => "Bild im Original einbinden"];
+						$sql_options_media_manager = rex_sql::factory();
+						$result_options_media_manager = $sql_options_media_manager->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
+						for($i = 0; $i < $result_options_media_manager->getRows(); $i++) {
+							$name = $result_options_media_manager->getValue("name");
+							$options_media_manager[$name] = $name;
+							$result_options_media_manager->next();
+						}
+						d2u_addon_backend_helper::form_select('d2u_helper_settings_header_media_type', 'settings[template_header_media_manager_type]', $options_media_manager, [$this->getConfig('template_header_media_manager_type')]);
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_logo', 'template_logo', $this->getConfig('template_logo'));
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_bg', 'settings[navi_color_bg]', $this->getConfig('navi_color_bg'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_font', 'settings[navi_color_font]', $this->getConfig('navi_color_font'), FALSE, FALSE, "color");

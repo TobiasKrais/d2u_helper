@@ -38,7 +38,8 @@
 				<div class="col-12">
 					<?php
 						if($d2u_helper->hasConfig("template_03_2_header_pic") || $d2u_helper->getConfig("template_03_2_header_pic") != "") {
-							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_03_2_header_pic")) .'" alt="">';
+							$header_image = $d2u_helper->getConfig("template_03_2_header_pic");
+							print '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_url::media($header_image) : rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image)) .'" alt="">';
 						}
 						else {
 							print "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";

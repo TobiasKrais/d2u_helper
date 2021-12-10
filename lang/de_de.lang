@@ -125,6 +125,7 @@ d2u_helper_settings_footer_type_option_links_text = 2 Spalten - 1. Links, 2. Fre
 d2u_helper_settings_footer_type_option_text = Einzeiliger Text
 d2u_helper_settings_header = Header / Seitenkopf
 d2u_helper_settings_header_lang_icon = Eigenes Icon für Sprachwähler
+d2u_helper_settings_header_media_type = Headerbild Media Manager Typ
 d2u_helper_settings_include_bootstrap = Bootstrap 4 mit Popper CSS / JS automatisch einbinden<br>(bitte aktivieren, wenn Templates dieses Addons installiert sind)
 d2u_helper_settings_include_jquery = Aktuelles JQuery JS automatisch einbinden<br>(bitte aktivieren, wenn Templates dieses Addons installiert sind)
 d2u_helper_settings_include_menu_multilevel = CSS / JS des Responsive MultiLevel Menüs automatisch einbinden

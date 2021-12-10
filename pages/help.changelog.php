@@ -8,6 +8,8 @@
 			<li>Modul "01-2 Texteditor mit Bild und Fettschrift" mit optionalem ausklappbaren Text.</li>
 			<li>Modul "14-1 - Search It Suchmodul" fatal error behoben</li>
 			<li>Module 00-1, 01-1, 02-1, 02-3, 03-1, 10-3, 11-1, 14-1 Eingabe jetzt mit animierten Checkboxen.</li>
+			<li>In den Einstellungen lässt sich jetzt ein Media Manager Typ für das Headerbild einstellen.</li>
+			<li>Templates 00-1, 01-1, 02-1, 03-1, 03-2, 05-1 und 06-1 Anpassungen an neue Einstellungen für Headerbild Typ.</li>
 		</ul>
 		<p>1.8.7</p>
 		<ul>

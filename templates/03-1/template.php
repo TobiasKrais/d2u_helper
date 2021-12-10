@@ -36,7 +36,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 			print 'REX_CONSENT_MANAGER[]';
 		}
 	?>
-	<link rel="stylesheet" href="/index.php?template_id=03-1&amp;d2u_helper=template.css">
+	<link rel="stylesheet" href="/?template_id=03-1&amp;d2u_helper=template.css">
 	<style>
 		.desktop-navi {
 			width: <?php print (100 / count(rex_category::getRootCategories(TRUE)));?>% !important;
@@ -60,7 +60,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 							}
 							$media_header_pic = rex_media::get($header_image);
 							if($media_header_pic instanceof rex_media) {
-								print '<img src="'. rex_url::media($header_image) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" class="d-print-none">';
+								print '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_url::media($header_image) : rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image)) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" class="d-print-none">';
 							}
 						}
 						if($d2u_helper->hasConfig("template_print_header_pic") || $d2u_helper->getConfig("template_print_header_pic") != "") {

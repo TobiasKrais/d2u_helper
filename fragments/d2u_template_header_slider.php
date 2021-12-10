@@ -24,7 +24,8 @@
 					$rex_media_slider_pic = rex_media::get($slider_pics[$i]);
 					if($rex_media_slider_pic instanceof rex_media) {
 						print '<div class="carousel-item'. ($i == 0 ? ' active' : '') .'">';
-						print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$i]) .'" alt="'. $rex_media_slider_pic->getTitle() .'"'. ($i > 0 ? ' loading="lazy"' : '') .'>';
+						print '<img class="d-block w-100" src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_url::media($slider_pics[$i]) : rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[$i]))
+							.'" alt="'. $rex_media_slider_pic->getTitle() .'"'. ($i > 0 ? ' loading="lazy"' : '') .'>';
 						print '</div>';
 					}
 				}
@@ -60,8 +61,9 @@
 								print '<div class="carousel-item'. ($k == 0 ? ' active' : '') .'">';
 								// Image
 								$ratio = $slider_pic->getWidth() / $slider_pic->getHeight();
-								$ratio_min_style = ' style="min-height: 250px; min-width:'. round(250 * $ratio).'px;"';
-								print '<img class="d-block w-100" src="'. rex_url::media($slider_pics[$k]) .'" alt="'. $slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .'>';
+								$ratio_min_style = $d2u_helper->getConfig('template_header_media_manager_type', '') ? '' : ' style="min-height: 250px; min-width:'. round(250 * $ratio).'px;"';
+								print '<img class="d-block w-100" src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_url::media($slider_pics[$k]) : rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[$k]))
+									.'" alt="'. $slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .'>';
 								// Slogan
 								$article = rex_article::getCurrent();
 								$slogan_text = $article->getValue('art_slogan') != "" ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId());

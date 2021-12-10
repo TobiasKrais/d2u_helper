@@ -125,7 +125,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
 				$header_image = $this->getValue("art_file");
 			}
-			$header_css = 'style="background-image: url('. rex_url::media($header_image) .')"';
+			$header_css = 'style="background-image: url('. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_url::media($header_image) : rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image)) .')"';
 		}
 	?>
 	<header <?php echo $header_css; ?>>
