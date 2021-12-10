@@ -109,7 +109,7 @@
 					$titelbild = rex_media::get($header_image);
 					if($titelbild instanceof rex_media) {
 						$header_pic_style = 'background: url('.
-								($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_url::media($header_image) : rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image)) .') center center; background-size: cover;';
+								($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .') center center; background-size: cover;';
 					}
 				?>
 				<div class="col-12 col-xl-8" style="<?php print $header_pic_style; ?>">

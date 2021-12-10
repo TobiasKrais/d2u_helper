@@ -28,7 +28,7 @@
 							<?php
 								if(rex_config::get("d2u_helper", "template_header_pic", "") != "") {
 									$header_image = rex_media::get(rex_config::get("d2u_helper", "template_header_pic"));
-									print '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_url::media($header_image) : rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image)) .'" alt="'. $media_background->getTitle() .'" id="header-image">';
+									print '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_background->getTitle() .'" id="header-image">';
 								}
 								if(rex_config::get("d2u_helper", "template_logo", "") != "") {
 									$media_logo = rex_media::get(rex_config::get("d2u_helper", "template_logo"));
