@@ -116,27 +116,23 @@
 	border: 0;
 	cursor: pointer;
 	color: footer_color_box !important;
-	font-size: 1.8em;
+	font-size: 1.25em;
 	background: none transparent;
 	line-height: 1;
 	text-decoration: none;
 }
 .consent_manager-close.consent_manager-close-box {
 	background-color: transparent;
+	color: transparent !important;
 	right: 15px;
 	text-indent: 0;
-	top: 15px;
+	top: 10px;
 }
-.consent_manager-close.consent_manager-close-box::after, .consent_manager-close.consent_manager-close-box::before {
-	display: none;
+.consent_manager-close-box:hover.consent_manager-close-box:after, .consent_manager-close-box:hover.consent_manager-close-box:before {
+	background-color: article_color_h !important;
 }
 .consent_manager-close-box:before {
 	margin: 0
-}
-.consent_manager-close-box:hover {
-	color: article_color_h !important;
-	background: none transparent;
-	text-decoration: none;
 }
 .consent_manager-cookiegroup-checkbox {
 	display: block;
