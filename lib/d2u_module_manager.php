@@ -171,7 +171,7 @@ class D2UModuleManager {
 			2);
 		$modules[] = new D2UModule("05-1",
 			"Artikelweiterleitung",
-			12);
+			13);
 		$modules[] = new D2UModule("05-2",
 			"Artikel aus anderer Sprache übernehmen",
 			4);

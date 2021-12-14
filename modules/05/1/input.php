@@ -48,6 +48,13 @@
 	</div>
 	<div class="col-xs-12">&nbsp;</div>
 	<div class="col-xs-4">
+		Parameter ohne "?", Beispiel "param1=1&amp;param2=2" (optional)
+	</div>
+	<div class="col-xs-8">
+		<input type="text" size="250" name="REX_INPUT_VALUE[8]" value="REX_VALUE[8]" class="form-control"/>
+	</div>
+	<div class="col-xs-12">&nbsp;</div>
+	<div class="col-xs-4">
 		Anker (optional)
 	</div>
 	<div class="col-xs-8">
