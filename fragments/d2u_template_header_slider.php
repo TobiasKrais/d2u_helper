@@ -63,7 +63,8 @@
 								print '<div class="carousel-item'. ($k == 0 ? ' active' : '') .'">';
 								// Image
 								$ratio = $slider_pic->getWidth() / $slider_pic->getHeight();
-								$ratio_min_style = ' style="min-height: 250px; min-width:'. round(250 * $ratio).'px;"';
+								$min_height = $slider_pic->getHeight() < 250 ? $slider_pic->getHeight() : 250;
+								$ratio_min_style = ' style="min-height: '. $min_height .'px; min-width:'. round($min_height * $ratio).'px;"';
 								print '<img class="d-block w-100" src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type'), $slider_pics[$k]) : rex_url::media($slider_pics[$k]))
 									.'" alt="'. $rex_media_slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .'>';
 								// Slogan
