@@ -3,6 +3,11 @@ $cols = "REX_VALUE[20]";
 if($cols == "") {
 	$cols = 8;
 }
+$offset_lg_cols = intval("REX_VALUE[17]");
+$offset_lg = "";
+if($offset_lg_cols > 0) {
+	$offset_lg = " mr-lg-auto ml-lg-auto ";
+}
 
 preg_match(
 	'/[\\?\\&]v=([^\\?\\&]+)/',
@@ -27,7 +32,7 @@ if($youtube_id != "") {
 	}
 ?>
 
-<div class="col-sm-12 col-md-<?php echo $cols; ?>">
+<div class="col-sm-12 col-md-<?php echo $cols . $offset_lg; ?>">
 	<div id="youtubeWrapper-<?= $youtube_id; ?>" class="youtubeWrapper">
 		<div class="youtube-play-button" id="youtube-play-button-<?= $youtube_id; ?>">
 			<button type="button" id="play-<?= $youtube_id; ?>" ><svg aria-hidden="true" focusable="false" viewBox="0 0 18 18"><path d="M15.562 8.1L3.87.225c-.818-.562-1.87 0-1.87.9v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z"></path></svg></button>
