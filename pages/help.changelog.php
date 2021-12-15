@@ -4,6 +4,7 @@
 		<p>1.8.8-DEV</p>
 		<ul>
 			<li>Bugfix: beim Neuinstallation wurden die Farben in den Einstellungen nicht korrekt gesetzt. Außerdem hatte das Farbfeld in den Einstellungen nicht korrekt funktioniert.</li>
+			<li>Bugfix: die Option "Beim Löschen eines Mediums aus dem Medienpool prüfen, ob es in einem Template verwendet wird." in den Einstellungen funktioniert wieder korrekt.</li>
 			<li>Modul "01-1 - Texteditor" mit optionalem ausklappbaren Text.</li>
 			<li>Modul "01-2 - Texteditor mit Bild und Fettschrift" mit optionalem ausklappbaren Text.</li>
 			<li>Modul "05-1 - Artikelweiterleitung" Weiterleitung zu Redao Artikel um Parameter ergänzt.</li>

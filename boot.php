@@ -204,7 +204,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 		}
 
 		// Tempaltes
-		if(rex_config::get("d2u_helper", "check_media_template", FALSE) === "true") {
+		if(rex_config::get("d2u_helper", "check_media_template", FALSE)) {
 			$sql_template = \rex_sql::factory();
 			$query = 'SELECT DISTINCT id, name FROM ' . rex::getTablePrefix() . 'template WHERE content REGEXP ' . $sql_template->escape('(^|[^[:alnum:]+_-])'. $filename);
 			$sql_template->setQuery($query);
