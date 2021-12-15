@@ -49,7 +49,7 @@
 			$pics_cols .= ' col-md-4';
 		}
 
-		if($cols_lg == 12) {
+		if($cols_lg >= 10) {
 			$pics_cols .= ' col-lg-2';
 		}
 		elseif($cols_lg == 8) {
