@@ -96,9 +96,17 @@ if($picture_position == "left") {
 				if ($text_1) {
 					print d2u_addon_frontend_helper::prepareEditorField($text_1);
 				}
+
+				print '</div>';
+				
+				// Picture right
+				if($picture_position == "right" || $picture_position == "bottom") {
+					print $html_picture;
+				}
+
 				if ($show_text_2 && $text_2) {
 					$id = rand();
-					print '<div class="wysiwyg_content">';
+					print '<div class="col-12">';
 					print '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
 					print '<div id="second_text_'. $id .'" class="hide-text">';
 					print d2u_addon_frontend_helper::prepareEditorField($text_2);	
@@ -116,13 +124,6 @@ if($picture_position == "left") {
 						print '}'. PHP_EOL;
 					print '}'. PHP_EOL;
 					print '</script>';
-				}
-
-				print '</div>';
-				
-				// Picture right
-				if($picture_position == "right" || $picture_position == "bottom") {
-					print $html_picture;
 				}
 			?>
 		</div>
