@@ -360,6 +360,9 @@ if($this->hasConfig('google_analytics')) {
 // Update to 1.8.8
 if (rex_version::compare($this->getVersion(), '1.8.8', '<')) {
 	$sql->setQuery("UPDATE ". \rex::getTablePrefix() ."media_manager_type SET status = 0 WHERE name LIKE 'd2u_helper_%'");
+	if(rex_addon::get('sprog')->isAvailable()) {
+		$sql->setQuery("DELETE FROM ". \rex::getTablePrefix() ."sprog_wildcard WHERE wildcard LIKE 'd2u_helper_module_11_%'");
+	}
 }
 
 // Update translations
