@@ -27,7 +27,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 		$yform->setObjectparams("submit_btn_show", false);
 		$yform->setObjectparams("form_action", rex_getUrl(rex_article::getCurrentId()));
 		$yform->setObjectparams("form_anchor", "search-field");
-		$yform->setObjectparams("Error-occured", \Sprog\Wildcard::get('d2u_helper_module_11_validate_title'));
+		$yform->setObjectparams("Error-occured", \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
 		$yform->setObjectparams("real_field_names", TRUE);
 		$yform->setObjectparams("form_showformafterupdate", true);
 
