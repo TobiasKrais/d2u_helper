@@ -1,20 +1,20 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.8.8-DEV</p>
+		<p>1.8.8</p>
 		<ul>
 			<li>Bugfix: beim Neuinstallation wurden die Farben in den Einstellungen nicht korrekt gesetzt. Außerdem hatte das Farbfeld in den Einstellungen nicht korrekt funktioniert.</li>
 			<li>Bugfix: die Option "Beim Löschen eines Mediums aus dem Medienpool prüfen, ob es in einem Template verwendet wird." in den Einstellungen funktioniert wieder korrekt.</li>
-			<li>Wildcards für Übersetzungen in Modul 11-1 umbenannt.</li>
+			<li>Sprog Wildcards für Übersetzungen in Modul 11-1 umbenannt.</li>
 			<li>Modul "01-1 - Texteditor" mit optionalem ausklappbaren Text.</li>
 			<li>Modul "01-2 - Texteditor mit Bild und Fettschrift" mit optionalem ausklappbaren Text.</li>
-			<li>Modul "05-1 - Artikelweiterleitung" Weiterleitung zu Redao Artikel um Parameter ergänzt.</li>
+			<li>Modul "05-1 - Artikelweiterleitung" Weiterleitung zu Redaxo Artikel um Parameter ergänzt.</li>
 			<li>Modul "06-1 - YouTube Video einbingen" Kann jetzt zentriert werden.</li>
 			<li>Modul "14-1 - Search It Suchmodul" fatal error behoben</li>
 			<li>Module 01-1, 02-1, 03-1, 03-2, 06-1 Spaltenbreite jetzt auch 10 Spalten.</li>
 			<li>Module 00-1, 01-1, 02-1, 02-3, 03-1, 10-3, 11-1, 14-1 Eingabe jetzt mit animierten Checkboxen.</li>
 			<li>Niederländische Modulübersetzungen hinzugefügt.</li>
-			<li>In den Einstellungen lässt sich jetzt ein Media Manager Typ für das Headerbild einstellen.</li>
+			<li>In den Einstellungen lässt sich jetzt ein Media Manager Typ für das Headerbild in den angebotenen Templates einstellen.</li>
 			<li>Templates 00-1, 01-1, 02-1, 03-1, 03-2, 05-1 und 06-1 Anpassungen an neue Einstellungen für Headerbild Typ.</li>
 		</ul>
 		<p>1.8.7</p>
