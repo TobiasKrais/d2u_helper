@@ -123,7 +123,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_module_14_search_template_contact' => 'Contact',
 		'd2u_helper_module_14_search_template_links' => 'Links',
 		'd2u_helper_module_14_validate_spam_detected' => 'Uw verzoek is geclassificeerd als spam en is verwijderd. Je was of te snel of er waren te veel verzoeken van je IP-adres. Neem een ​​paar seconden de tijd om het formulier in te vullen of probeer het later opnieuw.',
-		'd2u_helper_module_form_city' => 'Locatie',
+		'd2u_helper_module_form_city' => 'Woonplaats',
 		'd2u_helper_module_form_contact_request' => 'Contactverzoek',
 		'd2u_helper_module_form_contact_request_intro' => 'De volgende waarden zijn ingevuld in het aanvraagformulier',
 		'd2u_helper_module_form_country' => 'Land',

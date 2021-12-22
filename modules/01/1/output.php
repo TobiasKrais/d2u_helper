@@ -32,7 +32,7 @@ if ($show_text_2 && $text_2) {
 	print '<div class="wysiwyg_content">';
 	print '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
 	print '<div id="second_text_'. $id .'" class="hide-text">';
-	print d2u_addon_frontend_helper::prepareEditorField($text_2);	
+	print d2u_addon_frontend_helper::prepareEditorField($text_2);
 	print '</div>';
 	print '</div>';
 
