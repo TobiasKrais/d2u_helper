@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.8.9-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.8.8</p>
 		<ul>
 			<li>Bugfix: beim Neuinstallation wurden die Farben in den Einstellungen nicht korrekt gesetzt. Außerdem hatte das Farbfeld in den Einstellungen nicht korrekt funktioniert.</li>
@@ -9,7 +13,7 @@
 			<li>Modul "01-1 - Texteditor" mit optionalem ausklappbaren Text.</li>
 			<li>Modul "01-2 - Texteditor mit Bild und Fettschrift" mit optionalem ausklappbaren Text.</li>
 			<li>Modul "05-1 - Artikelweiterleitung" Weiterleitung zu Redaxo Artikel um Parameter ergänzt.</li>
-			<li>Modul "06-1 - YouTube Video einbingen" Kann jetzt zentriert werden.</li>
+			<li>Modul "06-1 - YouTube Video einbinden" Kann jetzt zentriert werden.</li>
 			<li>Modul "14-1 - Search It Suchmodul" fatal error behoben</li>
 			<li>Module 01-1, 02-1, 03-1, 03-2, 06-1 Spaltenbreite jetzt auch 10 Spalten.</li>
 			<li>Module 00-1, 01-1, 02-1, 02-3, 03-1, 10-3, 11-1, 14-1 Eingabe jetzt mit animierten Checkboxen.</li>
