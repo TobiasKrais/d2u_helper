@@ -423,6 +423,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								'd2u_helper_lang_english' => 'english',
 								'd2u_helper_lang_french' => 'french',
 								'd2u_helper_lang_german' => 'german',
+								'd2u_helper_lang_dutch' => 'dutch',
 								'd2u_helper_lang_spanish' => 'spanish',
 								'd2u_helper_lang_russian' => 'russian',
 								'd2u_helper_lang_chinese' => 'chinese',
