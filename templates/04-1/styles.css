@@ -8,6 +8,9 @@
 		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
 		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
 	-moz-hyphens: auto;
 	-o-hyphens: auto;

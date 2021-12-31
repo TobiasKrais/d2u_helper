@@ -14,6 +14,9 @@
 .fa-home:before {
 	content: "\f015";
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
 	background: linear-gradient(to right, navi_color_bg 50%, navi_color_hover_bg 50%);
 	font-family: Arial, sans-serif;

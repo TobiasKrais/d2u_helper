@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 body, input {
 	font-family: 'Arial', sans-serif !important;
 	color: #3c3c3c;

@@ -19,6 +19,9 @@ img {
 	max-width: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 #body {
 	background-color: #ececec;
 	color: #4e4e4e;

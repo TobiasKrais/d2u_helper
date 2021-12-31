@@ -21,6 +21,9 @@ body, input {
 		max-width: 180mm !important;
 	}
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
 	-moz-hyphens: auto;
 	-o-hyphens: auto;
