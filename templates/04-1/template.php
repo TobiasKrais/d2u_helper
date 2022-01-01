@@ -140,6 +140,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 </head>
 
 <body>
+	<a name="top"></a>
 	<section id="logo-container">
 		<div class="container">
 			<div class="row">
@@ -291,6 +292,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	</article>
 	<footer class="d-print-none">
 		<div class="container footer">
+			<a href="#top" id="jump-top"></a>
 			<?php
 				echo $fragment->parse('d2u_template_footer.php');
 			?>

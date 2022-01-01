@@ -108,7 +108,7 @@ h1.subhead {
 
 article {
 	background-color: article_color_bg;
-	padding: 1em 0;
+	padding: 1em 0 2em 0;
 }
 article a, article a:visited, article a:hover {
 	color: article_color_h;
@@ -131,6 +131,25 @@ article label {
 }
 article .form-group {
 	margin-bottom: 0.5rem;
+}
+
+.footer {
+	position: relative;
+}
+#jump-top {
+	background-color: footer_color_box;
+	border-radius: 50%;
+	font-family: FontAwesome;
+	padding: 8px 15px;
+	position: absolute;
+	right: 15px;
+	top: -30px;
+}
+#jump-top:hover {
+	text-decoration: none;
+}
+#jump-top:before {
+	content: "\f106";
 }
 
 .btn-primary {

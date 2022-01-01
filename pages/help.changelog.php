@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.8.9-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Templates 04-1, 04-2 und 04-3: Sprungpunkt vom Fuß zum Kopf der Seite hinzugefügt.</li>
 		</ul>
 		<p>1.8.8</p>
 		<ul>
