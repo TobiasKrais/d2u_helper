@@ -1,8 +1,9 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.8.9-DEV</p>
+		<p>1.8.9</p>
 		<ul>
+			<li>Bugfix: Neuinstallation des Addons schlug fehl.</li>
 			<li>Templates 04-1, 04-2 und 04-3: Sprungpunkt vom Fuß zum Kopf der Seite hinzugefügt.</li>
 		</ul>
 		<p>1.8.8</p>
