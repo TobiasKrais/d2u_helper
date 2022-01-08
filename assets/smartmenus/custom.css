@@ -252,8 +252,8 @@
 .main-menu-btn {
   position: relative;
   display: inline-block;
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   text-indent: 28px;
   white-space: nowrap;
   overflow: hidden;
@@ -264,8 +264,8 @@
 .main-menu-btn-icon, .main-menu-btn-icon:before, .main-menu-btn-icon:after {
   position: absolute;
   top: 50%;
-  left: 2px;
-  height: 2px;
+  left: 15px;
+  height: 3px;
   width: 24px;
   background: navi_color_font;
   -webkit-transition: all 0.25s;
@@ -273,12 +273,12 @@
 }
 .main-menu-btn-icon:before {
   content: '';
-  top: -7px;
+  top: -8px;
   left: 0;
 }
 .main-menu-btn-icon:after {
   content: '';
-  top: 7px;
+  top: 8px;
   left: 0;
 }
 /* x icon */

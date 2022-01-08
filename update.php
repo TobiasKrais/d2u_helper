@@ -124,28 +124,28 @@ if(class_exists('D2UTemplateManager')) {
 	$d2u_templates = [];
 	$d2u_templates[] = new D2UTemplate("00-1",
 		"Big Header Template",
-		17);
+		18);
 	$d2u_templates[] = new D2UTemplate("01-1",
 		"Side Picture Template",
-		9);
+		10);
 	$d2u_templates[] = new D2UTemplate("02-1",
 		"Header Pic Template",
-		12);
+		13);
 	$d2u_templates[] = new D2UTemplate("03-1",
 		"Immo Template - 2 Columns",
-		11);
+		12);
 	$d2u_templates[] = new D2UTemplate("03-2",
 		"Immo Window Advertising Template",
 		9);
 	$d2u_templates[] = new D2UTemplate("04-1",
 		"Header Slider Template with Slogan",
-		10);
+		11);
 	$d2u_templates[] = new D2UTemplate("04-2",
 		"Header Slider Template",
-		16);
+		17);
 	$d2u_templates[] = new D2UTemplate("04-3",
 		"Header Slider Template with news column",
-		11);
+		12);
 	$d2u_templates[] = new D2UTemplate("05-1",
 		"Double Logo Template",
 		10);

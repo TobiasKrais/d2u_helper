@@ -35,6 +35,9 @@ nav {
 	background-color: navi_color_hover_bg;
 	border-bottom: solid 1px white;
 	font-size: 1.15em;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
 }
 .navigation {
 	background-color: navi_color_bg;

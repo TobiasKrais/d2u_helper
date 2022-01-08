@@ -72,6 +72,11 @@ h1.subhead {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
 }
+nav {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
 nav a {
 	text-decoration: none;
 }

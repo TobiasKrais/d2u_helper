@@ -63,13 +63,13 @@
 						</div>
 						<div class="row">
 							<div class="col-12">
-								<navi>
+								<nav>
 									<?php
 										if(rex_addon::get('d2u_helper')->isAvailable()) {
 											d2u_mobile_navi_smartmenus::getMenu();
 										}
 									?>
-								</navi>
+								</nav>
 							</div>
 						</div>
 					</div>

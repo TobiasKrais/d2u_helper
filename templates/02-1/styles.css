@@ -36,7 +36,7 @@ img {
 header {
 	background-position: center;
 	background-size: cover;
-	padding: 2em 0;
+	padding-top: 2em;
 }
 
 .subhead {
@@ -65,6 +65,12 @@ h1.subhead {
 }
 
 nav {
+	margin-bottom: 2em;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+.navigation {
 	background-color: navi_color_bg;
 	border-bottom: solid 1px white;
 }

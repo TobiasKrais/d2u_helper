@@ -9,6 +9,7 @@
 		<ul>
 			<li>Bugfix: Neuinstallation des Addons schlug fehl.</li>
 			<li>Templates 04-1, 04-2 und 04-3: Sprungpunkt vom Fuß zum Kopf der Seite hinzugefügt.</li>
+			<li>Templates 00-1, 01-1, 02-1, 03-1, 04-1, 04-2 und 04-3 Navigation ist jetzt Sticky und scrollt am Seitenkopf mit.</li>
 		</ul>
 		<p>1.8.8</p>
 		<ul>
