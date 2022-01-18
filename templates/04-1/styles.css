@@ -167,6 +167,7 @@ article strong, article b {
 }
 
 .footer {
+	padding-top: 1.5em;
 	position: relative;
 }
 #jump-top {
