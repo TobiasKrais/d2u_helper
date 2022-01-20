@@ -1,3 +1,10 @@
+.youtubeTitleWrapper {
+	background: article_color_box;
+	margin-bottom: 15px;
+}
+.youtubeTitleWrapper h2 {
+	padding: 0 15px 15px 15px;
+}
 .youtubeWrapper {
 	height: 0;
 	margin-bottom: 15px;
