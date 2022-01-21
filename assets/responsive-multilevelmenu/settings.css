@@ -39,7 +39,7 @@ button.dl-trigger, button.dl-trigger:hover {
 	transition: all 0.5s;
 }
 .dl-menu li:hover, .dl-submenu li:hover {
-	background-color: navi_color_hover_bg;
+	background-color: navi_color_hover_bg !important;
 	transition: all 0.5s;
 }
 .dl-menu li:hover, .dl-subviewopen .dl-submenu li:hover {
