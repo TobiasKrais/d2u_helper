@@ -4,6 +4,7 @@
 		<p>1.9.0-DEV</p>
 		<ul>
 			<li>Modul "06-1 - YouTube Video einbinden" Kann Titel des Videos von YouTube auslesen und anzeigen lassen. Außerdem kann die Breite des für mittlere und kleine Bildschirme eingestellt werden.</li>
+			<li>Bugfix: Beim Löschen von Medien die im Template verwendet werden wurde der Name der verlinkenden Quelle in der Warnmeldung nicht immer korrekt angegeben.</li>
 		</ul>
 		<p>1.8.9</p>
 		<ul>
