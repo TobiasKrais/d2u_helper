@@ -49,6 +49,9 @@
 	text-align: right;
 	width: 4em;
 }
+#cta_box_content a, #cta_box_content a:visited, #cta_box_content a:hover {
+	color: article_color_h;
+}
 .fa-icon {
 	font-family: FontAwesome;
 }
