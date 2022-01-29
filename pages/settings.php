@@ -7,9 +7,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$link_ids = filter_input_array(INPUT_POST, ['REX_INPUT_LINK'=> ['filter' => FILTER_VALIDATE_INT, 'flags' => FILTER_REQUIRE_ARRAY]]);
 	$settings['article_id_privacy_policy'] = $link_ids["REX_INPUT_LINK"][1];
 	$settings['article_id_impress'] = $link_ids["REX_INPUT_LINK"][2];
-	$settings['article_id_search'] = $link_ids["REX_INPUT_LINK"][3];
-	$linklist_ids = filter_input_array(INPUT_POST, ['REX_INPUT_LINKLIST'=> ['flags' => FILTER_REQUIRE_ARRAY]]);
-	$settings['template_02_3_footer_linklist'] = $linklist_ids["REX_INPUT_LINKLIST"][1];
+	$settings['article_id_search'] = isset($link_ids["REX_INPUT_LINK"][3]) ? $link_ids["REX_INPUT_LINK"][3] : 0;
 
 	// Special treatment for media fields
 	$input_media = (array) rex_post('REX_INPUT_MEDIA', 'array', []);
