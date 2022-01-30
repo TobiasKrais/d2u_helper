@@ -230,6 +230,11 @@ if (!$this->hasConfig('editor')) {
 		$this->setConfig('editor', 'tinymce4');
 	}
 }
+else {
+	if(rex_addon::get('tinymce5')->isAvailable() && $this->getConfig('editor') == 'tinymce5') {
+		$this->setConfig('editor', 'tinymce5_full');
+	}
+}
 
 // 1.5.0 Update
 if($this->hasConfig('include_bootstrap')) {
