@@ -872,6 +872,14 @@ else {
 						foreach($news as $current_news) {
 							if(!$current_news->name) {
 								$current_news = new \D2U_News\News($current_news->news_id, rex_config::get('d2u_helper', 'default_lang'));
+								if(!$current_news->name) {
+									foreach(rex_clang::getAllIds() as $clang_id) {
+										$current_news = new \D2U_News\News($current_news->news_id, $clang_id);								
+										if($current_news->name) {
+											break;
+										}
+									}
+								}
 							}
 							print '<li><a href="'. rex_url::backendPage('d2u_news/news', ['entry_id' => $current_news->news_id, 'func' => 'edit']) .'">'. $current_news->name .'</a></li>';
 						}

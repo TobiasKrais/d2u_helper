@@ -5,6 +5,7 @@
 		<ul>
 			<li>In den Einstellungen können beim Lieblingseditor nun Profile des TinyMCE 5 Addons ausgewählt werden.</li>
 			<li>Modul "06-1 - YouTube Video einbinden" Kann Titel des Videos von YouTube auslesen und anzeigen lassen. Außerdem kann die Breite des für mittlere und kleine Bildschirme eingestellt werden.</li>
+			<li>Bugfix: Im Übersetzungshilfe Plugin wurden Titel aus dem D2U News Addon manchmal nicht angezeigt.</li>
 			<li>Bugfix: Beim Löschen von Medien die im Template verwendet werden wurde der Name der verlinkenden Quelle in der Warnmeldung nicht immer korrekt angegeben.</li>
 			<li>Bugfix: 2 Warnungen auf Einstellungsseite entfernt.</li>
 			<li>Templates: Farbe der Links in CTA Box an die Linkfarbe der Artikel angepasst.</li>
