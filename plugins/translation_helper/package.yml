@@ -5,5 +5,5 @@ supportpage: http://github.com/tobiaskrais/d2u_helper
 
 page:
     title: 'translate:d2u_helper_meta_translations'
-    perm: d2u_helper[translation_helper]
+    perm: 'd2u_helper[translation_helper]'
     icon: rex-icon rex-icon-language
