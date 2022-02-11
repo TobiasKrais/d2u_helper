@@ -556,23 +556,15 @@ class d2u_addon_backend_helper {
 	 * namespace does not exist, nothing happens.
 	 */
 	public static function generateUrlCache($namespace = "") {
-		if(\rex_addon::get('url')->isAvailable()) {
-			if(\rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
-				// url version 2.x
-				
-				// Delete url addon cache file
-				\Url\Cache::deleteProfiles();
-				// Read profile
-				$profiles = $namespace != "" ? \Url\Profile::getByNamespace($namespace) : \Url\Profile::getAll();
-				foreach($profiles as $profile) {
-					// generate URLs
-					$profile->deleteUrls();
-					$profile->buildUrls();
-				}
-			}
-			else {
-				// url version 1.x
-				\UrlGenerator::generatePathFile([]);
+		if(\rex_addon::get('url')->isAvailable() && \rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=')) {
+			// Delete url addon cache file
+			\Url\Cache::deleteProfiles();
+			// Read profile
+			$profiles = $namespace != "" ? \Url\Profile::getByNamespace($namespace) : \Url\Profile::getAll();
+			foreach($profiles as $profile) {
+				// generate URLs
+				$profile->deleteUrls();
+				$profile->buildUrls();
 			}
 		}
 	}
@@ -597,25 +589,17 @@ class d2u_addon_backend_helper {
 	 * @param int $article_id Redaxo article id
 	 */
     public static function update_url_scheme($table_name, $article_id) {
-		if(rex_addon::get('url')->isAvailable()) {
+		if(rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=')) {
 			$sql = rex_sql::factory();
-			if(rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
-				// url version 2.x
-				$query = "UPDATE `". \rex::getTablePrefix() ."url_generator_profile` SET `article_id` = ". $article_id ." "
-					."WHERE `table_name` LIKE '%". $table_name ."'";
-				$sql->setQuery($query);
-				$query = "SELECT namespace FROM  `". \rex::getTablePrefix() ."url_generator_profile` "
-					."WHERE `table_name` LIKE '%". $table_name ."'";
-				$sql->setQuery($query);
-				if($sql->getRows() > 0) {
-					self::generateUrlCache($sql->getValue('namespace'));
-				}
-			}
-			else {
-				// url version 1.x
-				$query = "UPDATE `". \rex::getTablePrefix() ."url_generate` SET `article_id` = ". $article_id ." "
-					."WHERE `table` LIKE '%". $table_name ."'";
-				$sql->setQuery($query);
+			// url version 2.x
+			$query = "UPDATE `". \rex::getTablePrefix() ."url_generator_profile` SET `article_id` = ". $article_id ." "
+				."WHERE `table_name` LIKE '%". $table_name ."'";
+			$sql->setQuery($query);
+			$query = "SELECT namespace FROM  `". \rex::getTablePrefix() ."url_generator_profile` "
+				."WHERE `table_name` LIKE '%". $table_name ."'";
+			$sql->setQuery($query);
+			if($sql->getRows() > 0) {
+				self::generateUrlCache($sql->getValue('namespace'));
 			}
 		}
     }
