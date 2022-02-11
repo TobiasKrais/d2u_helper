@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.9.0-DEV</p>
+		<p>1.9.0</p>
 		<ul>
 			<li>Anpassungen an Publish Github Release to Redaxo.</li>
 			<li>Unterstützt nur noch URL Addon >= 2.0.</li>
