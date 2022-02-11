@@ -196,21 +196,9 @@ class d2u_addon_frontend_helper {
 	public static function getMetaTags() {
 		$meta_tags = "";
 		
-		if(rex_addon::get('url')->isAvailable()) {
-			if(rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
-				// url addon 2.x
-				$urlSeo = new Url\Seo();
-				$meta_tags = $urlSeo->getTags();
-			}
-			else {
-				// url addon 1.x
-				$urlSeo = new Url\Seo();
-				$meta_tags = $urlSeo->getTitleTag() . PHP_EOL;
-				$meta_tags .= $urlSeo->getDescriptionTag() . PHP_EOL;
-				$meta_tags .= $urlSeo->getHreflangTags() . PHP_EOL;
-				$meta_tags .= $urlSeo->getCanonicalUrlTag() . PHP_EOL;
-				$meta_tags .= $urlSeo->getRobotsTag();
-			}
+		if(rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=') && rex::isFrontend()) {
+			$urlSeo = new Url\Seo();
+			$meta_tags = $urlSeo->getTags();
 		}
 		else if(rex_addon::get('yrewrite')->isAvailable()) {
 			$yrewrite = new rex_yrewrite_seo();
@@ -292,17 +280,11 @@ class d2u_addon_frontend_helper {
 	 * @return int URL addon dataset id
 	 */
 	public static function getUrlId() {
-		if(self::$url_id == 0 && rex_addon::get("url")->isAvailable()) {
-			if(rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
-				// URL Addon 2.x
-				$manager = \Url\Url::resolveCurrent();
-				if($manager) {
-					self::$url_id = $manager->getDatasetId();
-				}
-			}
-			else {
-				// URL Addon 1.x
-				self::$url_id = UrlGenerator::getId();
+		if(self::$url_id == 0 && rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=')) {
+			// URL Addon 2.x
+			$manager = \Url\Url::resolveCurrent();
+			if($manager) {
+				self::$url_id = $manager->getDatasetId();
 			}
 		}
 		return self::$url_id;
@@ -314,20 +296,11 @@ class d2u_addon_frontend_helper {
 	 * @return string URL addon namespace
 	 */
 	public static function getUrlNamespace() {
-		if(self::$url_namespace == "" && rex_addon::get("url")->isAvailable()) {
-			if(rex_version::compare(\rex_addon::get('url')->getVersion(), '1.5', '>=')) {
-				// URL Addon 2.x
-				$manager = \Url\Url::resolveCurrent();
-				if($manager && $manager->getProfile()) {
-					self::$url_namespace = $manager->getProfile()->getNamespace();
-				}
-			}
-			else {
-				// URL Addon 1.x
-				$url_data = UrlGenerator::getData();
-				if(isset($url_data->urlParamKey)) {
-					self::$url_namespace = $url_data->urlParamKey;
-				}
+		if(self::$url_namespace == "" && rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=')) {
+			// URL Addon 2.x
+			$manager = \Url\Url::resolveCurrent();
+			if($manager && $manager->getProfile()) {
+				self::$url_namespace = $manager->getProfile()->getNamespace();
 			}
 		}
 		return self::$url_namespace;

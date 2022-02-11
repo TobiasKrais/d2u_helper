@@ -22,3 +22,7 @@ page:
 
 requires:
     redaxo: '>=5.10.0'
+    
+conflicts:
+    packages:
+        url: '<2.0'

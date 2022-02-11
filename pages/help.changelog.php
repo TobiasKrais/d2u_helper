@@ -4,6 +4,7 @@
 		<p>1.9.0-DEV</p>
 		<ul>
 			<li>Anpassungen an Publish Github Release to Redaxo.</li>
+			<li>Unterstützt nur noch URL Addon >= 2.0.</li>
 			<li>In den Einstellungen können beim Lieblingseditor nun Profile des TinyMCE 5 Addons ausgewählt werden.</li>
 			<li>Modul "06-1 - YouTube Video einbinden" Kann Titel des Videos von YouTube auslesen und anzeigen lassen. Außerdem kann die Breite des für mittlere und kleine Bildschirme eingestellt werden.</li>
 			<li>Bugfix: Im Übersetzungshilfe Plugin wurden Titel aus dem D2U News Addon manchmal nicht angezeigt.</li>
