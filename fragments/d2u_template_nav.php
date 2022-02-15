@@ -29,7 +29,7 @@
 								print '<div class="col-5 col-sm-3 col-md-2 align-self-center">';
 								print '<div id="lang_chooser_div">';
 								$fragment->setVar('showLangDropdown', true, false);
-								echo $fragment->parse('d2u_template_language_modal.php');
+								echo $fragment->parse('d2u_template_language_icon.php');
 								print '</div>';
 								print '</div>';
 							}
@@ -60,3 +60,5 @@
 		</div>
 	</div>
 </nav>
+<?php
+	echo $fragment->parse('d2u_template_language_modal.php');

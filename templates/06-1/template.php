@@ -49,6 +49,7 @@
 									$fragment = new rex_fragment();
 									if(count(rex_clang::getAllIds(true)) > 1) {
 										print '<div id="lang_chooser_div">';
+										echo $fragment->parse('d2u_template_language_icon.php');
 										echo $fragment->parse('d2u_template_language_modal.php');
 										print '</div>';
 									}

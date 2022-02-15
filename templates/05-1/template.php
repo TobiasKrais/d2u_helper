@@ -143,6 +143,7 @@
 						// Languages
 						print '<div id="lang_chooser_div">';
 						$fragment = new rex_fragment();
+						echo $fragment->parse('d2u_template_language_icon.php');
 						echo $fragment->parse('d2u_template_language_modal.php');
 						print '</div>';
 						// Search icon

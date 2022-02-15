@@ -1,9 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.9.1-DEV</p>
+		<p>1.9.1</p>
 		<ul>
-			<li>...</li>
+			<li>Templates allgemein: Sprachmodal war nicht klickbar.</li>
+			<li>Templates 05-1 und 06-1: Anpassungen an Sprachwähler.</li>
 		</ul>
 		<p>1.9.0</p>
 		<ul>

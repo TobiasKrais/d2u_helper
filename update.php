@@ -148,10 +148,10 @@ if(class_exists('D2UTemplateManager')) {
 		12);
 	$d2u_templates[] = new D2UTemplate("05-1",
 		"Double Logo Template",
-		10);
+		11);
 	$d2u_templates[] = new D2UTemplate("06-1",
 		"Paper Sheet Template",
-		4);
+		5);
 	$d2u_templates[] = new D2UTemplate("99-1",
 		"Feed Generator",
 		1);
