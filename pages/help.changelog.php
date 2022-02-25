@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.9.2-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Template "06-1 - Paper Sheet Template" Fehler anzeige Navigation behoben.</li>
 		</ul>
 		<p>1.9.1</p>
 		<ul>

@@ -27,8 +27,11 @@
 						<div class="col-12">
 							<?php
 								if(rex_config::get("d2u_helper", "template_header_pic", "") != "") {
-									$header_image = rex_media::get(rex_config::get("d2u_helper", "template_header_pic"));
-									print '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_background->getTitle() .'" id="header-image">';
+									$header_image_filename = rex_config::get("d2u_helper", "template_header_pic");
+									$header_image = rex_media::get($header_image_filename);
+									if($header_image) {
+										print '<img src="'. (rex_config::get('d2u_helper', 'template_header_media_manager_type', '') ? rex_media_manager::getUrl(rex_config::get('d2u_helper', 'template_header_media_manager_type', ''), $header_image_filename) : rex_url::media($header_image_filename)) .'" alt="'. $header_image->getTitle() .'" id="header-image">';
+									}
 								}
 								if(rex_config::get("d2u_helper", "template_logo", "") != "") {
 									$media_logo = rex_media::get(rex_config::get("d2u_helper", "template_logo"));

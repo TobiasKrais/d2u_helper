@@ -52,13 +52,21 @@ header {
 }
 
 #main-menu {
+	display: block !important;
+	min-width: 200px !important;
 	padding-bottom: 2em;
+}
+.main-menu-btn {
+	display: none !important;
 }
 #main-menu a {
 	background-color: navi_color_bg;
 }
 #main-menu .current > a, #main-menu a:hover {
 	background-color: navi_color_hover_bg;
+}
+#main-menu .main {
+	float: none !important;
 }
 
 article a, article a:hover, article a:focus, article a:visited, footer a, footer a:hover, footer a:focus, footer a:visited {
