@@ -4,6 +4,7 @@
 		<p>1.9.2-DEV</p>
 		<ul>
 			<li>Template "06-1 - Paper Sheet Template" Fehler anzeige Navigation behoben.</li>
+			<li>Templates und Module: CSS Ladegeschwindigkeit von Fonts verbessert.</li>
 		</ul>
 		<p>1.9.1</p>
 		<ul>
