@@ -113,6 +113,6 @@ header, #article-content {
 	background-color: navi_color_hover_bg;
 	color: navi_color_hover_font;
 }
-#teaser-inner-frame a {
-	color: navi_color_hover_font;
+#teaser-inner-frame a, #teaser-inner-frame ul, #teaser-inner-frame p {
+	color: navi_color_bg;
 }
