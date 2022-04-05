@@ -5,6 +5,7 @@
 		<ul>
 			<li>Template "06-1 - Paper Sheet Template" Fehler anzeige Navigation behoben.</li>
 			<li>Templates und Module: CSS Ladegeschwindigkeit von Fonts verbessert.</li>
+			<li>Sporg Sprachersetzungen für Google Analytics 4 zur Verfügung gestellt.</li>
 		</ul>
 		<p>1.9.1</p>
 		<ul>

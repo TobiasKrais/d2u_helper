@@ -256,3 +256,6 @@
 ul.cookie {
 	margin-top: 5px !important;
 }
+.consent_manager-cookiegroup-title {
+	background-color: article_color_h !important;
+}
