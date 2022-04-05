@@ -19,7 +19,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_consent_manager_cookies_days' => 'days',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga' => 'Used to distinguish users.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga_id' => 'Used to persist session state.',
-		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Contains campaign related information. If you have linked your Google Analytics and Google Ads accounts, Google Ads website conversion tags will read this cookie unless you opt-out.',
+		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Contains campaign related information.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gat' => 'Prevents data from being transferred to the Analytics server in too rapid a sequence.', // Deprecated, GA3, unused in GA4
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gid' => 'Used to distinguish users.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_name' => 'Google Analytics',
@@ -100,7 +100,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_consent_manager_cookies_days' => 'Dagen',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga' => 'Wordt gebruikt om gebruikers van elkaar te onderscheiden.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga_id' => 'Wordt gebruikt om de sessiestatus te behouden.',
-		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Bevat campagnegerelateerde informatie. Als u uw Google Analytics- en Google Ads-accounts heeft gekoppeld, wordt deze cookie gelezen door websiteconversietags van Google Ads, tenzij u zich hiervoor afmeldt.',
+		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Bevat campagnegerelateerde informatie.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gat' => 'Voorkomt dat gegevens te snel naar de Analytics Server worden verzonden.', // Deprecated, GA3, unused in GA4
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gid' => 'Wordt gebruikt om gebruikers van elkaar te onderscheiden.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_name' => 'Google Analytics',
@@ -178,7 +178,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_consent_manager_cookies_days' => 'Jours',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga' => 'Permet de distinguer les utilisateurs.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga_id' => "Permet de conserver l'état de la session.",
-		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => "Contient des informations sur la campagne. Si vous avez associé vos comptes Google Analytics et Google Ads, les balises de conversion sur les sites Web Google Ads lisent ce cookie, sauf si vous en avez désactivé l'utilisation.",
+		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => "Contient des informations sur la campagne.",
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gat' => 'Empêche le transfert de données vers le serveur Analytics dans une séquence trop rapide.', // Deprecated, GA3, unused in GA4
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gid' => 'Permet de distinguer les utilisateurs.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_name' => 'Analytique de Google',
@@ -259,7 +259,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_consent_manager_cookies_days' => 'Tage',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga' => 'Wird verwendet, um Nutzer zu unterscheiden.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga_id' => 'Wird verwendet, um den Sitzungsstatus zu erhalten.',
-		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Enthält kampagnenbezogene Informationen. Wenn Sie Ihr Google Analytics-Konto mit Ihrem Google Ads-Konto verknüpt haben, wird dieses Cookie von den Website-Conversion-Tags von Google Ads ausgelesen, sofern Sie diese Funktion nicht deaktivieren.',
+		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Enthält kampagnenbezogene Informationen.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gat' => 'Verhindert, dass in zu schneller Folge Daten an den Analytics Server übertragen werden.', // Deprecated, GA3, unused in GA4
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gid' => 'Wird verwendet, um Nutzer zu unterscheiden.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_name' => 'Google Analytics',
@@ -340,7 +340,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_consent_manager_cookies_days' => 'días',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga' => 'Se usa para distinguir a los usuarios.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga_id' => 'Se usa para mantener el estado de la sesión.',
-		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Incluye información relacionada con la campaña. Si ha vinculado sus cuentas de Google Analytics y Google Ads, las etiquetas de conversión en sitio web de Google Ads leerán esta cookie, a menos que la inhabilite.',
+		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Incluye información relacionada con la campaña.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gat' => 'Impide que los datos se transfieran al servidor de Analytics en una secuencia demasiado rápida.', // Deprecated, GA3, unused in GA4
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gid' => 'Se usa para distinguir a los usuarios.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_name' => 'Google Analytics',
@@ -421,7 +421,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_consent_manager_cookies_days' => 'дни',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga' => 'Позволяет идентифицировать пользователей.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga_id' => 'Позволяет сохранять состояние сеанса.',
-		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Содержит данные, связанные с кампанией. После установления связи между аккаунтами Google Аналитики и Google Рекламы размещенные на сайте теги конверсии Google Рекламы будут получать данные из файла cookie, если вы не отключите эту возможность.',
+		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => 'Содержит данные, связанные с кампанией.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gat' => 'Предотвращение слишком быстрой передачи данных на сервер Analytics.', // Deprecated, GA3, unused in GA4
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gid' => 'Позволяет идентифицировать пользователей.',
 		'd2u_helper_consent_manager_cookies_googleanalytics_name' => 'Google Analytics',
@@ -502,7 +502,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 		'd2u_helper_consent_manager_cookies_days' => '天',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga' => '用于区分用户。',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_ga_id' => '用于保留会话状态。',
-		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => '包含广告系列相关信息。如果您已将 Google Analytics（分析）帐号与 Google Ads 帐号相关联，Google Ads 网站转化跟踪代码会读取此 Cookie，除非您选择停用此功能。',
+		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gac_gb_id' => '包含广告系列相关信息。',
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gat' => '防止数据以太快的顺序传输到分析服务器。', // Deprecated, GA3, unused in GA4
 		'd2u_helper_consent_manager_cookies_googleanalytics_cookie_gid' => '用于区分用户。',
 		'd2u_helper_consent_manager_cookies_googleanalytics_name' => '谷歌分析',
