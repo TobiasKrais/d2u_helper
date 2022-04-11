@@ -15,7 +15,7 @@ $show_title = ("REX_VALUE[2]" == 'true');
 if ("REX_MEDIA[1]" != '') {
 	$media = rex_media::get("REX_MEDIA[1]");
 	if($media instanceof rex_media) {
-		print '<div class="col-12 col-sm-'. $cols . $offset_lg .'">';
+		print '<div class="col-12 col-md-'. $cols . $offset_lg .'">';
 		print '<figure>';
 		print '<img src="';
 		if($picture_type == "") {
