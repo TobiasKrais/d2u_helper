@@ -19,6 +19,14 @@ if ($show_cta_box) {
 			if($d2u_helper->getConfig('footer_text_fax', '') != '') {
 				print '<li><span class="cta_box_toggler fa-icon fa-fax footer-icon"></span></li>';
 			}
+			if($d2u_helper->getConfig('cta_box_article_ids', '') != '') {
+				foreach(explode(',', $d2u_helper->getConfig('cta_box_article_ids', '')) as $article_id) {
+					$article = rex_article::get($article_id);
+					if($article) {
+						print '<li><span class="cta_box_toggler fa-icon fa-link footer-icon"></span></li>';
+					}
+				}
+			}
 			if($d2u_helper->getConfig('footer_facebook_link', '') != '') {
 				print '<li><span class="cta_box_toggler fa-icon fa-facebook footer-icon"></span></li>';
 			}
@@ -42,6 +50,14 @@ if ($show_cta_box) {
 			}
 			if($d2u_helper->getConfig('footer_text_fax', '') != '') {
 				print '<li><span class="cta_box_toggler fa-icon fa-fax footer-icon"></span><span class="cta_box_content">'. $d2u_helper->getConfig('footer_text_fax') .'</span></li>';
+			}
+			if($d2u_helper->getConfig('cta_box_article_ids', '') != '') {
+				foreach(explode(',', $d2u_helper->getConfig('cta_box_article_ids', '')) as $article_id) {
+					$article = rex_article::get($article_id);
+					if($article) {
+						print '<li><span class="cta_box_toggler fa-icon fa-link footer-icon"></span><span class="cta_box_content"><a href="'. rex_getUrl($article_id) .'">'. $article->getName() .'</a></span></li>';
+					}
+				}
 			}
 			if($d2u_helper->getConfig('footer_facebook_link', '') != '') {
 				print '<li><span class="cta_box_toggler fa-icon fa-facebook footer-icon"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig("footer_facebook_link") .'" target="_blank">Facebook</a></span></li>';

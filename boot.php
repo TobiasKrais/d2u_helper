@@ -130,8 +130,9 @@ function rex_d2u_helper_article_is_in_use(rex_extension_point $ep) {
 	// Settings
 	$addon = rex_addon::get("d2u_helper");
 	if(($addon->hasConfig("article_id_privacy_policy") && $addon->getConfig("article_id_privacy_policy") == $article_id) ||
-		($addon->hasConfig("article_id_impress") && $addon->getConfig("article_id_impress") == $article_id)) {
-		$message = '<a href="/index.php?page=d2u_helper/settings">'.
+		($addon->hasConfig("article_id_impress") && $addon->getConfig("article_id_impress") == $article_id) ||
+		in_array($article_id, is_array(explode(',', $addon->getConfig("cta_box_article_ids"))) ? explode(',', $addon->getConfig("cta_box_article_ids")) : []) ) {
+		$message = '<a href="index.php?page=d2u_helper/settings">'.
 			 rex_i18n::msg('d2u_helper_rights_all') ." - ". rex_i18n::msg('d2u_helper_settings') . '</a>';
 		if(!in_array($message, $warning)) {
 			$warning[] = $message .'<br>';

@@ -8,7 +8,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['article_id_privacy_policy'] = $link_ids["REX_INPUT_LINK"][1];
 	$settings['article_id_impress'] = $link_ids["REX_INPUT_LINK"][2];
 	$settings['article_id_search'] = isset($link_ids["REX_INPUT_LINK"][3]) ? $link_ids["REX_INPUT_LINK"][3] : 0;
-
+	$linklist_ids = filter_input_array(INPUT_POST, ['REX_INPUT_LINKLIST'=> ['flags' => FILTER_REQUIRE_ARRAY]]);
+	$settings['cta_box_article_ids'] = $linklist_ids["REX_INPUT_LINKLIST"][1];
+	
 	// Special treatment for media fields
 	$input_media = (array) rex_post('REX_INPUT_MEDIA', 'array', []);
 	$settings['custom_css'] = $input_media['custom_css'];
@@ -189,6 +191,27 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_box', 'settings[footer_color_box]', $this->getConfig('footer_color_box'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_font', 'settings[footer_color_font]', $this->getConfig('footer_color_font'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_cta_box', 'settings[show_cta_box]', 'true', $this->getConfig('show_cta_box') == 'true');
+						d2u_addon_backend_helper::form_linklistfield('d2u_helper_settings_article_ids_cta_box', 1, is_array(explode(',', $this->getConfig('cta_box_article_ids'))) ? explode(',', $this->getConfig('cta_box_article_ids')) : [], rex_clang::getStartId());
+					?>
+					<script>
+						function changeCTABoxFields() {
+							if($('input[name="settings\\[show_cta_box\\]"]').is(':checked')) {
+								$('#LINKLIST_1').fadeIn();
+							}
+							else {
+								$('#LINKLIST_1').hide();
+							}
+						}
+
+						// On init
+						changeCTABoxFields();
+						// On change
+						$('input[name="settings\\[show_cta_box\\]"]').on('change', function() {
+							changeCTABoxFields();
+						});
+					</script>
+
+					<?php
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_company', 'settings[footer_text_company]', $this->getConfig('footer_text_company'), FALSE, FALSE);
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_ceo', 'settings[footer_text_ceo]', $this->getConfig('footer_text_ceo'), FALSE, FALSE);
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_street', 'settings[footer_text_street]', $this->getConfig('footer_text_street'), FALSE, FALSE);

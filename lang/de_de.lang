@@ -97,6 +97,7 @@ d2u_helper_settings_article_color_h = Artikel Farbe Überschriften / Links
 d2u_helper_settings_article_id_impress = Link Impressum
 d2u_helper_settings_article_id_privacy_policy = Link Datenschutzerklärung
 d2u_helper_settings_article_id_search = Link Suche
+d2u_helper_settings_article_ids_cta_box = Artikellinks in CTA Box
 d2u_helper_settings_check_media_template = Beim Löschen eines Mediums aus dem Medienpool prüfen, ob es in einem Template verwendet wird.
 d2u_helper_settings_custom_css = Zusätzlich eigenes CSS einbinden
 d2u_helper_settings_editor = Lieblingseditor
