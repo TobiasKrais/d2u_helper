@@ -29,6 +29,7 @@ header {
 }
 .slogan {
 	left: 0;
+	line-height: 1.45;
 	position: absolute;
 	width: 100%;
 }
