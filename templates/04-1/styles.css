@@ -29,7 +29,24 @@ img {
 .abstand {
 	margin-bottom: 1em;
 }
-	
+/* Header */
+#slogan-top {
+	color: article_color_h;
+	float: left;
+	font-weight: bold;
+	font-size: 1.6em;
+	padding-top: 0.75em;
+}
+@media screen and (min-width: 768px) and (max-width: 959px) {
+	#slogan-top {
+		font-size: 1.25em;
+	}
+}
+@media screen and (max-width: 767px) {
+	#slogan-top {
+		font-size: 1em;
+	}
+}
 /* Navi */
 nav {
 	background-color: navi_color_bg;

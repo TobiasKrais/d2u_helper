@@ -141,26 +141,30 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 
 <body>
 	<a name="top"></a>
-	<section id="logo-container">
-		<div class="container">
-			<div class="row">
-				<?php
-					// Logo
-					if($d2u_helper->getConfig("template_logo", "") != "") {
-						print '<div class="col-12">';
-						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
-						if($media_logo instanceof rex_media) {
-							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
-						}
-						print '</a>';
-						print '</div>';
-					}
-				?>
-			</div>
-		</div>
-	</section>
 	<?php
+		// Logo
+		$slogan_text = ($current_article->hasValue('art_slogan') && $current_article->getValue('art_slogan') != "") ? $current_article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId(), '');
+		if($d2u_helper->getConfig("template_logo", "") != "" || ($d2u_helper->getConfig('template_slogan_position', 'slider') == 'top' && $slogan)) {
+			print '<section id="logo-container">';
+			print '<div class="container">';
+			print '<div class="row">';
+			print '<div class="col-12">';
+			if($slogan_text) {
+				print '<div id="slogan-top">'. nl2br($slogan_text, FALSE) .'</div>';
+			}
+			if($d2u_helper->getConfig("template_logo", "") != "") {
+				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
+				$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
+				if($media_logo instanceof rex_media) {
+					print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+				}
+				print '</a>';
+			}
+			print '</div>';
+			print '</div>';
+			print '</div>';
+			print '</section>';
+		}
 		$fragment = new rex_fragment();
 		// Navi
 		echo $fragment->parse('d2u_template_nav.php');

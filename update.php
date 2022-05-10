@@ -139,7 +139,7 @@ if(class_exists('D2UTemplateManager')) {
 		9);
 	$d2u_templates[] = new D2UTemplate("04-1",
 		"Header Slider Template with Slogan",
-		11);
+		12);
 	$d2u_templates[] = new D2UTemplate("04-2",
 		"Header Slider Template",
 		17);

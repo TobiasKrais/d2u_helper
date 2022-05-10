@@ -4,7 +4,8 @@
 		<p>1.9.2-DEV</p>
 		<ul>
 			<li>Modul "06-1 - YouTube Video einbinden" Notice entfernt.</li>
-			<li>Template "06-1 - Paper Sheet Template" Fehler anzeige Navigation behoben.</li>
+			<li>Template "04-1 - Header Slider Template with Slogan": Position des Slogans kann in den Einstellungen festgelegt werden (Optionen: Slider oder Header).</li>
+			<li>Template "06-1 - Paper Sheet Template" Fehler Anzeige Navigation behoben.</li>
 			<li>Templates und Module: CSS Ladegeschwindigkeit von Fonts verbessert.</li>
 			<li>CTA Box kann nun auch Redaxo Artikel verlinken, z.B. für Kontaktformular.</li>
 			<li>Sporg Sprachersetzungen für Google Analytics 4 zur Verfügung gestellt.</li>

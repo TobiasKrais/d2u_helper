@@ -71,7 +71,7 @@
 								$article = rex_article::getCurrent();
 								$slogan_text = $article->getValue('art_slogan') != "" ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId());
 								$slogan = '<span class="slogan-text-row">'. str_replace('<br>', '</span><span class="slogan-text-row">', nl2br($slogan_text, FALSE)) .'</span>';
-								if($slogan_text != "") {
+								if($slogan_text != "" && $d2u_helper->getConfig('template_slogan_position', 'slider') == 'slider') {
 									print '<div class="slogan"><div class="container"><span class="slogan-text">'. $slogan .'</span></div></div>';
 								}
 								print '</div>';

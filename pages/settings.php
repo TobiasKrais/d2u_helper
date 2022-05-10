@@ -30,7 +30,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 		$settings['template_04_header_slider_pics_clang_'. $clang_id] = isset($input_media_list[$clang_id]) ? $input_media_list[$clang_id] : '';
 	}
 
-	// Checkbox also need special treatment if empty
+	// Checkbox also needs special treatment if empty
 	$settings['check_media_template'] = array_key_exists('check_media_template', $settings);
 	$settings['include_bootstrap4'] = array_key_exists('include_bootstrap4', $settings);
 	$settings['include_jquery'] = array_key_exists('include_jquery', $settings);
@@ -45,7 +45,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['subhead_include_articlename'] = array_key_exists('subhead_include_articlename', $settings);
 	$settings['submenu_use_articlename'] = array_key_exists('submenu_use_articlename', $settings);
 	$settings['template_04_header_slider_pics_full_width'] = array_key_exists('template_04_header_slider_pics_full_width', $settings);
-
+	
 	// Save settings
 	if(rex_config::set("d2u_helper", $settings)) {
 		// Install / update language replacements
@@ -398,6 +398,11 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 										$slider_pics = preg_grep('/^\s*$/s', explode(",", $this->getConfig('template_04_header_slider_pics_clang_'. $rex_clang->getId())), PREG_GREP_INVERT);
 										d2u_addon_backend_helper::form_medialistfield('d2u_helper_settings_template_04_slider_pics', $rex_clang->getId(), $slider_pics);
 										if($d2u_template->getD2UId() === "04-1" && $d2u_template->isInstalled()) {
+											$options_slogan = [
+												'slider' => rex_i18n::msg('d2u_helper_settings_template_slogan_position_slider'),
+												'top' => rex_i18n::msg('d2u_helper_settings_template_slogan_position_top'),
+											];
+											d2u_addon_backend_helper::form_select('d2u_helper_settings_template_slogan_position', 'settings[template_slogan_position]', $options_slogan, [$this->getConfig('template_slogan_position', 'slider')]);
 											d2u_addon_backend_helper::form_textarea('d2u_helper_settings_template_04_1_slogan', 'settings[template_04_1_slider_slogan_clang_' . $rex_clang->getId() . ']', $this->getConfig('template_04_1_slider_slogan_clang_' . $rex_clang->getId()), 3, FALSE, FALSE, FALSE);
 										}
 										print '</div>';
