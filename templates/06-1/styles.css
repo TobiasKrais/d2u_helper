@@ -97,6 +97,9 @@ article .btn-primary, article .btn-primary:hover {
 	background-color: navi_color_hover_bg;
 	color: navi_color_hover_font;
 }
+article input:invalid, article textarea:invalid {
+	background-color: article_color_h10;
+}
 
 footer {
 	border-top: 1px solid footer_color_font;

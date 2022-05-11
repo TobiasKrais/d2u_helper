@@ -183,6 +183,9 @@ article .form-group {
 article strong, article b {
 	color: article_color_h;
 }
+article input:invalid, article textarea:invalid {
+	background-color: article_color_h10;
+}
 
 .footer {
 	padding-top: 1.5em;

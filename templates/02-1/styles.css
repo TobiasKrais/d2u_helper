@@ -136,6 +136,9 @@ article .btn-primary {
 	background-color: article_color_h;
 	border-color: article_color_h;
 }
+article input:invalid, article textarea:invalid {
+	background-color: article_color_h10;
+}
 
 .btn-primary {
 	background-color: article_color_h !important;

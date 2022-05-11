@@ -136,6 +136,9 @@ article label {
 article .form-group {
 	margin-bottom: 0.5rem;
 }
+article input:invalid, article textarea:invalid {
+	background-color: article_color_h10;
+}
 
 .footer {
 	padding-top: 1.5em;

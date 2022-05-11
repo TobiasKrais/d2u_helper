@@ -7,6 +7,7 @@
 			<li>Template "04-1 - Header Slider Template with Slogan": Position des Slogans kann in den Einstellungen festgelegt werden (Optionen: Slider oder Header).</li>
 			<li>Template "06-1 - Paper Sheet Template" Fehler Anzeige Navigation behoben.</li>
 			<li>Templates und Module: CSS Ladegeschwindigkeit von Fonts verbessert.</li>
+			<li>Templates: Invalid Eingabefelder an Hauptfarben angepasst.</li>
 			<li>CTA Box kann nun auch Redaxo Artikel verlinken, z.B. für Kontaktformular.</li>
 			<li>Sporg Sprachersetzungen für Google Analytics 4 zur Verfügung gestellt.</li>
 		</ul>

@@ -113,6 +113,9 @@ article h2 {
 article h3 {
 	font-size: 1.6em
 }
+article input:invalid, article textarea:invalid {
+	background-color: article_color_h10;
+}
 
 section {
 	font-family: 'Arial', sans-serif;

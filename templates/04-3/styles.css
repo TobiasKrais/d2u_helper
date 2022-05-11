@@ -168,6 +168,9 @@ article .form-group {
 #content {
 	padding-bottom: 2em;
 }
+article input:invalid, article textarea:invalid {
+	background-color: article_color_h10;
+}
 
 .footer {
 	padding-top: 1.5em;

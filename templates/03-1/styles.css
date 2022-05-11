@@ -155,6 +155,9 @@ article .infobox .right {
 article .infobox .right img {
 	padding-bottom: 5px;
 }
+article input:invalid, article textarea:invalid {
+	background-color: article_color_h10;
+}
 
 footer {
 	background-color: footer_color_bg;
