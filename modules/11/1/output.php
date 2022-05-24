@@ -36,14 +36,14 @@
 			
 	if(rex_addon::get('yform_spam_protection')->isAvailable()) {
 		$form_data .= '
-			spam_protection|honeypot|Bitte nicht ausfüllen|'. $tag_open .'d2u_helper_module_form_validate_spam_detected'. $tag_close .'|0';					
+			spam_protection|honeypot|Bitte nicht ausfüllen|'. \Sprog\Wildcard::get('d2u_helper_module_form_validate_spam_detected') .'|0';					
 	}
 	else {
 		// Spam protection
 		$form_data .= '
 			html|honeypot||<div class="hide-validation">
-			text|mailvalidate|'. $tag_open .'d2u_helper_module_form_email'. $tag_close .'||no_db
-			validate|compare_value|mailvalidate||!=|'. $tag_open .'d2u_helper_module_form_validate_spam_detected'. $tag_close .'|
+			text|mailvalidate|'. \Sprog\Wildcard::get('d2u_helper_module_form_email') .'||no_db
+			validate|compare_value|mailvalidate||!=|'. \Sprog\Wildcard::get('d2u_helper_module_form_validate_spam_detected') .'|
 			html|honeypot||</div>';
 		$yform->setValueField('php', [
 			'validate_timer',
