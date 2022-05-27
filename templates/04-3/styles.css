@@ -48,6 +48,8 @@ nav {
 }
 .navi {
 	float: left;
+	max-height: calc(100vh - 10px);
+	overflow-y: auto;
 }
 .desktop-inner {
 	padding: 15px 20px;

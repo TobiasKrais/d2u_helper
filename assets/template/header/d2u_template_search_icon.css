@@ -1,7 +1,10 @@
- /* search button */
- #search_icon_div {
-	padding-bottom: 10px;
-	padding-top: 10px;
+/* search button */
+#search_icon_div {
+	float: right;
+	padding: 10px 0 10px 15px;
+}
+#search_icon_div input {
+	max-width:150px;
 }
 #search_icon {
 	background: transparent;

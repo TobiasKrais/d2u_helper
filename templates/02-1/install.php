@@ -10,28 +10,4 @@ if(!rex_addon::get('yrewrite')->isAvailable()) {
 }
 
 // Add art_file as Metainfo
-$query_metainfo = "SELECT name FROM ". \rex::getTablePrefix() ."metainfo_field "
-	."WHERE name = 'art_file'";
-$result_metainfo = rex_sql::factory();
-$result_metainfo->setQuery($query_metainfo);
-if($result_metainfo->getRows() == 0) {
-	$insertmod = rex_sql::factory();
-	$insertmod->setTable(\rex::getTablePrefix() . 'metainfo_field');
-	$insertmod->setValue('title', 'translate:d2u_helper_metainfo_headerpic');
-	$insertmod->setValue('name', 'art_file');
-	$insertmod->setValue('priority', 1);
-	$insertmod->setValue('type_id', 6);
-	$insertmod->setValue('params', 'types="png,jpg,webp,PNG,JPG,WEBP" preview="1"');
-	$insertmod->addGlobalCreateFields();
-	$insertmod->insert();
-}
-// Add art_file as column
-$query_art_file = "SHOW COLUMNS FROM ". \rex::getTablePrefix() ."article LIKE 'art_file'";
-$result_art_file = rex_sql::factory();
-$result_art_file->setQuery($query_art_file);
-if($result_art_file->getRows() == 0) {
-	$query_add_art_file = "ALTER TABLE ". \rex::getTablePrefix() ."article "
-		. "ADD art_file VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL";
-	$result_add_art_file = rex_sql::factory();
-	$result_add_art_file->setQuery($query_add_art_file);
-}
+rex_metainfo_add_field('translate:d2u_helper_metainfo_headerpic', 'art_file', 1, '', rex_metainfo_table_manager::FIELD_REX_MEDIA_WIDGET, '', 'types="gif,jpg,png,webp,svg" preview="1"');

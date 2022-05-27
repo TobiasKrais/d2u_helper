@@ -72,6 +72,8 @@ nav a {
 }
 .navi {
 	float: left;
+	max-height: calc(100vh - 10px);
+	overflow-y: auto;
 }
 .desktop-inner {
 	font-weight: bold;

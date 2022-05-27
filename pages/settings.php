@@ -35,9 +35,6 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['include_bootstrap4'] = array_key_exists('include_bootstrap4', $settings);
 	$settings['include_jquery'] = array_key_exists('include_jquery', $settings);
 	$settings['include_module'] = array_key_exists('include_module', $settings);
-	$settings['include_menu_multilevel'] = array_key_exists('include_menu_multilevel', $settings);
-	$settings['include_menu_slicknav'] = array_key_exists('include_menu_slicknav', $settings);
-	$settings['include_menu_smartmenu'] = array_key_exists('include_menu_smartmenu', $settings);
 	$settings['lang_replacements_install'] = array_key_exists('lang_replacements_install', $settings);
 	$settings['lang_wildcard_overwrite'] = array_key_exists('lang_wildcard_overwrite', $settings) ? "true" : "false";
 	$settings['show_breadcrumbs'] = array_key_exists('show_breadcrumbs', $settings);
@@ -59,6 +56,14 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 		}
 		else if ($settings['lang_replacements_install']) {
 			echo rex_view::error(rex_i18n::msg('d2u_helper_settings_install_sprog'));
+		}
+		
+		// Install metafields
+		if($settings['include_menu'] == 'megamenu') {
+			$added = rex_metainfo_add_field('translate:d2u_helper_icon', 'cat_d2u_helper_icon', 10, '', rex_metainfo_table_manager::FIELD_REX_MEDIA_WIDGET, '','types="gif,jpg,png,webp,svg" preview="1"');
+			if($added === true) {
+				rex_delete_cache();
+			}
 		}
 
 		echo rex_view::success(rex_i18n::msg('form_saved'));
@@ -102,10 +107,15 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				<legend><small><i class="rex-icon fa-navicon"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_menu'); ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
-						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_multilevel', 'settings[include_menu_multilevel]', 'true', $this->getConfig('include_menu_multilevel') == 'true');
-						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_slicknav', 'settings[include_menu_slicknav]', 'true', $this->getConfig('include_menu_slicknav') == 'true');
-						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_menu_smartmenu', 'settings[include_menu_smartmenu]', 'true', $this->getConfig('include_menu_smartmenu') == 'true');
 						d2u_addon_backend_helper::form_infotext('d2u_helper_settings_include_prevent', 'prevent_include_info');
+						$menu_options = [
+							"none" => rex_i18n::msg('d2u_helper_settings_include_menu_none'),
+							"megamenu" => rex_i18n::msg('d2u_helper_settings_include_menu_megamenu'),
+							"multilevel" => rex_i18n::msg('d2u_helper_settings_include_menu_multilevel'),
+							"slicknav" => rex_i18n::msg('d2u_helper_settings_include_menu_slicknav'),
+							"smartmenu" => rex_i18n::msg('d2u_helper_settings_include_menu_smartmenu')
+						];
+						d2u_addon_backend_helper::form_select('d2u_helper_settings_include_menu', 'settings[include_menu]', $menu_options, [$this->getConfig('include_menu')]);
 						$width_options = [
 							"xs" => rex_i18n::msg('d2u_helper_settings_width_xs'),
 							"sm" => rex_i18n::msg('d2u_helper_settings_width_sm'),

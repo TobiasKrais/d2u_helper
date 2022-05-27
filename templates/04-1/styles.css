@@ -60,6 +60,11 @@ nav {
 .navigation a {
 	text-decoration: none !important;
 }
+.navi {
+	float: left;
+	max-height: calc(100vh - 10px);
+	overflow-y: auto;
+}
 .desktop-inner {
 	padding: 1em 1.75em 1em 0;
 }
@@ -75,9 +80,6 @@ nav {
 }
 .desktop-navi.current, .desktop-navi:hover {
 	border-bottom-color: navi_color_hover_bg !important;
-}
-.dl-menuwrapper .dl-menu {
-	right: 0;
 }
 .dl-menuwrapper .dl-menu.dl-menuopen, .dl-menuwrapper li .dl-submenu {
 	background-color: navi_color_fontD9;

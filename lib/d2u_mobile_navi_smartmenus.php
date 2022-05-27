@@ -66,7 +66,7 @@ class d2u_mobile_navi_smartmenus {
 		// Menu
 		print '<ul id="main-menu" class="sm sm-simple">'. PHP_EOL;
 	
-		foreach(d2u_mobile_navi_smartmenus::getCategories($cat_parent_id) as $category) {
+		foreach(self::getCategories($cat_parent_id) as $category) {
 			// Check permissions if YCom ist installed
 			if(!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($category->getStartArticle()))) {
 				$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') == 'show' && rex_config::get('d2u_machinery', 'article_id', 0) == $category->getId());

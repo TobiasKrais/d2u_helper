@@ -3,11 +3,15 @@
 	<div class="panel-body">
 		<p>1.9.2-DEV</p>
 		<ul>
+			<li>Updateskript und Installationsskript vereinheitlicht.</li>
 			<li>Modul "06-1 - YouTube Video einbinden" Notice entfernt.</li>
+			<li>Modul "11-1 - YForm Kontaktformular (DSGVO kompatibel)" Notice entfernt.</li>
 			<li>Template "04-1 - Header Slider Template with Slogan": Position des Slogans kann in den Einstellungen festgelegt werden (Optionen: Slider oder Header).</li>
 			<li>Template "06-1 - Paper Sheet Template" Fehler Anzeige Navigation behoben.</li>
 			<li>Templates und Module: CSS Ladegeschwindigkeit von Fonts verbessert.</li>
 			<li>Templates: Invalid Eingabefelder an Hauptfarben angepasst.</li>
+			<li>Templates: Einige Templates erlauben nun auch ein Megamenü.</li>
+			<li>Templates: Installation der Metafelder nun mit Redaxo interner Methode und nicht mehr über die Datenbank. Außerdem werden diese Metafelder bei Addon Deinstallation wieder gelöscht.</li>
 			<li>CTA Box kann nun auch Redaxo Artikel verlinken, z.B. für Kontaktformular.</li>
 			<li>Sporg Sprachersetzungen für Google Analytics 4 zur Verfügung gestellt.</li>
 		</ul>

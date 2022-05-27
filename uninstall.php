@@ -14,6 +14,12 @@ if($sql->getRows() > 0) {
 	$sql->setQuery("DELETE FROM ". \rex::getTablePrefix() ."media_manager_type WHERE `type_id` = ". $id);
 }
 
+// Delete Metainfo fields
+rex_metainfo_delete_field('art_file');
+rex_metainfo_delete_field('art_slogan');
+rex_metainfo_delete_field('cat_d2u_helper_icon');
+rex_metainfo_delete_field('clang_icon');
+
 // Delete language replacements
 if(!class_exists('d2u_helper_lang_helper')) {
 	// Load class in case addon is deactivated

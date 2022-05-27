@@ -22,3 +22,21 @@ page:
 
 requires:
     redaxo: '>=5.10.0'
+
+default_config:
+    article_color_h: '#ffba23'
+    article_color_bg: '#ffffff'
+    article_color_box: '#eeeeee'
+    footer_color_bg: '#4e4e4e'
+    footer_color_box: '#a7a7a7'
+    include_menu: 'none'
+    include_menu_show: 'sm'
+    include_module: 'true'
+    navi_color_bg: '#ffba23'
+    navi_color_font: '#ffffff'
+    navi_color_hover_bg: '#ffffff'
+    navi_color_hover_font: '#4e4e4e'
+    show_breadcrumbs: 'true'
+    subhead_color_bg: '#4e4e4e'
+    subhead_color_font: '#ffffff'
+    subhead_include_articlename: 'true'

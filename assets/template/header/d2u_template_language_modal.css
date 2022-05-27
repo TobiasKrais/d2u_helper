@@ -1,5 +1,9 @@
- /* langauge chooser */
+ /* language chooser */
 
+ #lang_chooser_div {
+	 float: right;
+ }
+ 
 /* Modal Content/Box */
 .modal-body a {
 	color: #333;

@@ -405,7 +405,7 @@ class D2UTemplate {
 		if ($footer_type !== '' && file_exists(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'))) {
 			$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'));
 		}
-		// Langugae Modal CSS
+		// Language modal CSS
 		if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'))) {
 			$template_css .= file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'));
 		}
