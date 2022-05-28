@@ -75,12 +75,10 @@ if ($show_cta_box) {
 	// On change
 	$('.cta_box_toggler').on('click', function() {
 		if($('#cta_box_content').is(':hidden')) {
-			$('#cta_icon_box_content').animate( { width: 'toggle' }, 1000);
 			$('#cta_box_content').animate( { width: 'toggle' }, 1000);
 		}
 		else {
 			$('#cta_box_content').animate( { width: 'toggle' }, 1000);
-			$('#cta_icon_box_content').show();
 		}
 	});
 </script>

@@ -12,10 +12,10 @@ class d2u_mobile_navi {
 	public static function getAutoCSS() {
 		$addon = rex_addon::get("d2u_helper");
 		$css = "";
-		if(file_exists($addon->getAssetsPath("responsive-multilevelmenu/component.css"))){
+		if(file_exists($addon->getAssetsPath("responsive-multilevelmenu/component.css"))) {
 			$css .= file_get_contents($addon->getAssetsPath("responsive-multilevelmenu/component.css"));
 		}
-		if(file_exists($addon->getAssetsPath("responsive-multilevelmenu/settings.css"))){
+		if(file_exists($addon->getAssetsPath("responsive-multilevelmenu/settings.css"))) {
 			$css .= file_get_contents($addon->getAssetsPath("responsive-multilevelmenu/settings.css"));
 		}
 		return $css;

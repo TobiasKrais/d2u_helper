@@ -51,7 +51,7 @@ else {
  * @param rex_extension_point $ep Redaxo extension point
  */
 function appendToPageD2UHelperFiles(rex_extension_point $ep) {
-	$VERSION_BOOTSTRAP = '4.6.0';
+	$VERSION_BOOTSTRAP = '4.6.1';
 	$addon = rex_addon::get("d2u_helper");
 	
 	// If insertion should be prevented, detect class "prevent_d2u_helper_styles"

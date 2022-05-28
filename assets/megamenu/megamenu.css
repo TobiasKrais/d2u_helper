@@ -12,6 +12,8 @@
 
 /* Custom styles */
 .navi .navbar {
+	max-height: calc(100vh - 10px);
+	overflow-y: auto;
 	padding: 0;
     position: unset;
 }

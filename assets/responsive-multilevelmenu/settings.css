@@ -9,7 +9,7 @@
 	width: 300px !important;
 }
 .dl-menuwrapper button, .dl-menuwrapper button:hover, .dl-menuwrapper button.dl-active, .dl-menuwrapper ul, .dl-menuwrapper li .desktop-navi,  #dl-menu button.dl-active {
-	background: navi_color_hover_bg;
+	background: navi_color_bg;
 	transition: all 0.5s;
 }
 button.dl-trigger, button.dl-trigger:hover {
@@ -20,10 +20,10 @@ button.dl-trigger, button.dl-trigger:hover {
 	color: navi_color_font;
 }
 .dl-menuwrapper button:after {
-	background: navi_color_font;
+	background: navi_color_font !important;
 	box-shadow: 
 		0 10px 0 navi_color_font, 
-		0 20px 0 navi_color_font;
+		0 20px 0 navi_color_font !important;
 }
 /* Hover */
 .desktop-navi:hover div.desktop-inner {
@@ -52,13 +52,6 @@ button.dl-trigger, button.dl-trigger:hover {
 }
 .dl-subviewopen .dl-submenu li a {
 	color: navi_color_font;
-}
-.dl-menuwrapper button.dl-active:after {
-	background: navi_color_hover_font;
-	box-shadow: 
-		0 10px 0 navi_color_hover_font, 
-		0 20px 0 navi_color_hover_font;
-	transition: all 0.5s;
 }
 .dl-back a:hover {
 	text-decoration: none;

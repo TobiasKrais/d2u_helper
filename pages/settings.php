@@ -94,10 +94,10 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							d2u_addon_backend_helper::form_select('d2u_helper_settings_editor', 'settings[editor]', d2u_addon_backend_helper::getWYSIWYGEditors(), [$this->getConfig('editor')]);
 						}
 						
-						d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_privacy_policy', '1', $this->getConfig('article_id_privacy_policy'), rex_config::get("d2u_helper", "article_id_privacy_policy", rex_clang::getStartId()));
-						d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_impress', '2', $this->getConfig('article_id_impress'), rex_config::get("d2u_helper", "article_id_impress", rex_clang::getStartId()));
+						d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_privacy_policy', '1', $this->getConfig('article_id_privacy_policy'), $this->getConfig('default_lang'));
+						d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_impress', '2', $this->getConfig('article_id_impress'),$this->getConfig('default_lang'));
 						if(rex_addon::get('search_it')->isAvailable()) {
-							d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_search', '3', $this->getConfig('article_id_search'), rex_config::get("d2u_helper", "article_id_search", rex_clang::getStartId()));
+							d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_search', '3', $this->getConfig('article_id_search'), $this->getConfig('default_lang'));
 						}
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_check_media_template', 'settings[check_media_template]', 'true', $this->getConfig('check_media_template') == 'true');
 					?>

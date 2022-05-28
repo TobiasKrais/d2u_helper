@@ -82,3 +82,18 @@
 .fa-phone:before {
 	content: "\f095";
 }
+@media screen and (max-width: 600px) {
+	#cta_icon_box {
+		bottom: 0;
+		top: unset;
+	}
+	
+	#cta_icon_box_content li {
+		float: right;
+	}
+	
+	#cta_box {
+		bottom: 0;
+		top: unset;
+	}
+}

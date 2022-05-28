@@ -62,8 +62,6 @@ nav {
 }
 .navi {
 	float: left;
-	max-height: calc(100vh - 10px);
-	overflow-y: auto;
 }
 .desktop-inner {
 	padding: 1em 1.75em 1em 0;
@@ -90,10 +88,6 @@ nav {
 }
 .dl-menu li:hover a, .dl-subviewopen .dl-submenu li:hover a {
 	color: navi_color_hover_font !important;
-}
-.dl-menuwrapper button::after {
-	background: navi_color_hover_font !important;
-	box-shadow: 0 10px 0 navi_color_hover_font, 0 20px 0 navi_color_hover_font !important;
 }
 #logo {
 	margin: 1em 0;

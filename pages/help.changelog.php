@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.9.2-DEV</p>
 		<ul>
+			<li>Bootstrap 4.6.1 Upgrade.</li>
 			<li>Updateskript und Installationsskript vereinheitlicht.</li>
 			<li>Modul "06-1 - YouTube Video einbinden" Notice entfernt.</li>
 			<li>Modul "11-1 - YForm Kontaktformular (DSGVO kompatibel)" Notice entfernt.</li>
@@ -12,8 +13,9 @@
 			<li>Templates: Invalid Eingabefelder an Hauptfarben angepasst.</li>
 			<li>Templates: Einige Templates erlauben nun auch ein Megamenü.</li>
 			<li>Templates: Installation der Metafelder nun mit Redaxo interner Methode und nicht mehr über die Datenbank. Außerdem werden diese Metafelder bei Addon Deinstallation wieder gelöscht.</li>
-			<li>CTA Box kann nun auch Redaxo Artikel verlinken, z.B. für Kontaktformular.</li>
+			<li>CTA Box kann nun auch Redaxo Artikel verlinken, z.B. für Kontaktformular. Auf kleinen Bildschirmen ist CTA Box ab jetzt am unteren Bildschirmrand zu finden, um Text nicht zu überdecken.</li>
 			<li>Sporg Sprachersetzungen für Google Analytics 4 zur Verfügung gestellt.</li>
+			<li>Bugfix: Einstellungen hatten den Artikelnamen teilweise in falscher Sprache angezeigt.</li>
 		</ul>
 		<p>1.9.1</p>
 		<ul>
