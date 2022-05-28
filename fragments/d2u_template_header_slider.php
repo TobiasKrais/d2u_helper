@@ -5,14 +5,28 @@
 	if(count($slider_pics) > 0) {
 ?>
 <header>
-	<?php 
+	<?php
+		$d2u_helper = rex_addon::get('d2u_helper');
+		
+		$media_manager_webp_exists = false;
+		$media_manager_webp_type_name = '';
+		if($d2u_helper->getConfig('template_header_media_manager_type')) {
+			$sql = rex_sql::factory();
+			$sql->setQuery('SELECT * FROM '. rex::getTablePrefix() .'media_manager_type WHERE name = "'. $d2u_helper->getConfig('template_header_media_manager_type', '') .'_webp"');
+			if($sql->getRows() > 0) {
+				$media_manager_webp_exists = true;
+				$media_manager_webp_type_name = $d2u_helper->getConfig('template_header_media_manager_type') .'_webp';
+			}
+		}
+		
 		if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", FALSE) == FALSE) {
 			// START Only if slider background slider is shown
 	?>
 	<div id="background">
 		<?php
 			if(count($slider_pics) == 1) {
-				print '<img src="'. rex_url::media($slider_pics[0]) .'" alt="" id="background-single-image">';
+				$srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[0]) .' 2000w"' : '';
+				print '<img'. $srcset .' src="'. rex_url::media($slider_pics[0]) .'" alt="" id="background-single-image">';
 			}
 			else {
 				// Slider
@@ -24,7 +38,8 @@
 					$rex_media_slider_pic = rex_media::get($slider_pics[$i]);
 					if($rex_media_slider_pic instanceof rex_media) {
 						print '<div class="carousel-item'. ($i == 0 ? ' active' : '') .'">';
-						print '<img class="d-block w-100" src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[$i]) : rex_url::media($slider_pics[$i]))
+						$srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[$i]) .' 2000w"' : '';
+						print '<img class="d-block w-100"'. $srcset .' src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[$i]) : rex_url::media($slider_pics[$i]))
 							.'" alt="'. $rex_media_slider_pic->getTitle() .'"'. ($i > 0 ? ' loading="lazy"' : '') .'>';
 						print '</div>';
 					}
@@ -40,7 +55,8 @@
 				<?php
 		}  // END Only if slider background slider is shown
 					if(count($slider_pics) == 1) {
-						print '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[0]) : rex_url::media($slider_pics[0]))
+						$srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[0]) .' 2000w"' : '';
+						print '<img'. $srcset .' src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[0]) : rex_url::media($slider_pics[0]))
 							.'" alt="" style="max-width:100%;">';
 					}
 					else {
@@ -65,8 +81,9 @@
 								$ratio = $slider_pic->getWidth() / $slider_pic->getHeight();
 								$min_height = $slider_pic->getHeight() < 250 ? $slider_pic->getHeight() : 250;
 								$ratio_min_style = ' style="min-height: '. $min_height .'px; min-width:'. round($min_height * $ratio).'px;"';
-								print '<img class="d-block w-100" src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type'), $slider_pics[$k]) : rex_url::media($slider_pics[$k]))
-									.'" alt="'. $rex_media_slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .'>';
+								$srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[$k]) .' 2000w"' : '';
+								print '<img class="d-block w-100"'. $srcset .'  src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type'), $slider_pics[$k]) : rex_url::media($slider_pics[$k]))
+									.'" alt="'. $rex_media_slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .' width="'. $slider_pic->getWidth() .'px"  height="'. $slider_pic->getHeight() .'px">';
 								// Slogan
 								$article = rex_article::getCurrent();
 								$slogan_text = $article->getValue('art_slogan') != "" ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId());

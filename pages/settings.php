@@ -167,6 +167,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							$result_options_media_manager->next();
 						}
 						d2u_addon_backend_helper::form_select('d2u_helper_settings_header_media_type', 'settings[template_header_media_manager_type]', $options_media_manager, [$this->getConfig('template_header_media_manager_type')]);
+						d2u_addon_backend_helper::form_infotext('d2u_helper_settings_header_media_type_info', 'template_header_media_manager_type_info');
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_logo', 'template_logo', $this->getConfig('template_logo'));
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_bg', 'settings[navi_color_bg]', $this->getConfig('navi_color_bg'), FALSE, FALSE, "color");
 						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_font', 'settings[navi_color_font]', $this->getConfig('navi_color_font'), FALSE, FALSE, "color");
