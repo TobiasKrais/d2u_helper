@@ -121,7 +121,7 @@ class d2u_addon_backend_helper {
 			$wysiwyg_class = ' tinyMCEEditor';
 		}
 		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'tinymce5') !== FALSE && rex_addon::get('tinymce5')->isAvailable()) {
-			$wysiwyg_class = ' tiny5-editor" data-profile="full';
+			$wysiwyg_class = ' tiny5-editor" data-profile="default';
 			foreach(TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles() as $profile_infos) {
 				if(rex_config::get('d2u_helper', 'editor') == 'tinymce5_'. $profile_infos['name']) {
 					$wysiwyg_class = ' tiny5-editor" data-profile="'. $profile_infos['name'] ;

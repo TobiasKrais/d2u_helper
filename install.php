@@ -56,12 +56,12 @@ if (!$this->hasConfig('editor')) {
 		$this->setConfig('editor', 'markitup');
 	}
 	else {
-		$this->setConfig('editor', 'tinymce5_full');
+		$this->setConfig('editor', 'tinymce5_default');
 	}
 }
 else {
 	if(rex_addon::get('tinymce5')->isAvailable() && $this->getConfig('editor') == 'tinymce5') {
-		$this->setConfig('editor', 'tinymce5_full');
+		$this->setConfig('editor', 'tinymce5_default');
 	}
 }
 if (!$this->hasConfig('default_lang')) {
