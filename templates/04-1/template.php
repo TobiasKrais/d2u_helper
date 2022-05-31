@@ -144,12 +144,12 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	<?php
 		// Logo
 		$slogan_text = ($current_article->hasValue('art_slogan') && $current_article->getValue('art_slogan') != "") ? $current_article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId(), '');
-		if($d2u_helper->getConfig("template_logo", "") != "" || ($d2u_helper->getConfig('template_slogan_position', 'slider') == 'top' && $slogan)) {
+		if($d2u_helper->getConfig("template_logo", "") != "" || ($d2u_helper->getConfig('template_slogan_position', 'slider') == 'top' && $slogan_text)) {
 			print '<section id="logo-container">';
 			print '<div class="container">';
 			print '<div class="row">';
 			print '<div class="col-12">';
-			if($slogan_text) {
+			if($d2u_helper->getConfig('template_slogan_position', 'slider') == 'top' && $slogan_text) {
 				print '<div id="slogan-top">'. nl2br($slogan_text, FALSE) .'</div>';
 			}
 			if($d2u_helper->getConfig("template_logo", "") != "") {
