@@ -30,8 +30,8 @@
 #navbar .nav-item:hover a, #navbar .nav-item.dropdown.megamenu-li.show, #navbar .show a {
 	color: navi_color_hover_font;
 }
-#navbar .dropdown-menu.megamenu.show a, #navbar .nav-item.dropdown.megamenu-li.show .dropdown-menu.megamenu.show {
-	color: navi_color_font;
+#navbar .nav-item.dropdown.megamenu-li.show .dropdown-menu.megamenu.show {
+	color: #333333;
 }
 #navbar .nav-item a.nav-link {
 	padding: 15px 20px;
