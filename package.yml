@@ -40,3 +40,6 @@ default_config:
     subhead_color_bg: '#4e4e4e'
     subhead_color_font: '#ffffff'
     subhead_include_articlename: 'true'
+        
+installer_ignore:
+    - .github

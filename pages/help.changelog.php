@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.9.2-DEV</p>
 		<ul>
+			<li>.github Verzeichnis aus Installer Action ausgeschlossen.</li>
 			<li>Bootstrap 4.6.1 Upgrade.</li>
 			<li>Updateskript und Installationsskript vereinheitlicht.</li>
 			<li>Modul "06-1 - YouTube Video einbinden" Notice entfernt.</li>
