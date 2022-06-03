@@ -47,14 +47,18 @@ $d2u_helper = rex_addon::get("d2u_helper");
 					</a>
 				</div>
 			</div>
-			<?php
-				}
-				$fragment = new rex_fragment();
-				// Navi if above header picture
-				if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') {
-					echo $fragment->parse('d2u_template_nav.php');
-				}
-			?>
+		</div>
+	</header>
+	<?php
+		}
+		$fragment = new rex_fragment();
+		// Navi if above header picture
+		if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top') {
+			echo $fragment->parse('d2u_template_nav.php');
+		}
+	?>
+	<header class="second-header">
+		<div class="container">
 			<div class="row">
 				<div class="col-12">
 					<?php

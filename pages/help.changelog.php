@@ -7,6 +7,7 @@
 			<li>Updateskript und Installationsskript vereinheitlicht.</li>
 			<li>Modul "06-1 - YouTube Video einbinden" Notice entfernt.</li>
 			<li>Modul "11-1 - YForm Kontaktformular (DSGVO kompatibel)" Notice entfernt.</li>
+			<li>Template "02-1 - Header Pic Template": Wenn Menü oberhalb des Headerbildes eingestellt war, ist Breite des Menüs.</li>
 			<li>Template "04-1 - Header Slider Template with Slogan": Position des Slogans kann in den Einstellungen festgelegt werden (Optionen: Slider oder Header).</li>
 			<li>Template "06-1 - Paper Sheet Template" Fehler Anzeige Navigation behoben.</li>
 			<li>Templates und Module: CSS Ladegeschwindigkeit von Fonts verbessert.</li>

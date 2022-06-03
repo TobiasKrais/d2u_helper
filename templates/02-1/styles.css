@@ -38,6 +38,9 @@ header {
 	background-size: cover;
 	padding-top: 2em;
 }
+header.second-header {
+	padding-top: 0;	
+}
 
 .subhead {
 	background-color: subhead_color_bg;
@@ -69,6 +72,9 @@ nav {
 	position: sticky;
 	top: 0;
 	z-index: 1000;
+}
+nav.top{
+	margin-bottom: 0;
 }
 .navigation {
 	background-color: navi_color_bg;

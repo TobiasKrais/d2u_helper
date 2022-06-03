@@ -307,7 +307,7 @@ if(class_exists('D2UTemplateManager')) {
 		10);
 	$d2u_templates[] = new D2UTemplate("02-1",
 		"Header Pic Template",
-		13);
+		14);
 	$d2u_templates[] = new D2UTemplate("03-1",
 		"Immo Template - 2 Columns",
 		12);
