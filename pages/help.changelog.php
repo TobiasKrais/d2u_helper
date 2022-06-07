@@ -15,6 +15,7 @@
 			<li>Templates: Invalid Eingabefelder an Hauptfarben angepasst.</li>
 			<li>Templates: Einige Templates erlauben nun auch ein Megamenü.</li>
 			<li>Templates: Installation der Metafelder nun mit Redaxo interner Methode und nicht mehr über die Datenbank. Außerdem werden diese Metafelder bei Addon Deinstallation wieder gelöscht.</li>
+			<li>Templates: Meta Tags in Fragment ausgelagert.</li>
 			<li>Templates mit Slider: wird ein Media Manager Typ für den Slider ausgewählt, kann ein zweiter Typ mit gleichem Namen und der Endung _webp erstellt werden um die Bilder SEO optimiert auszugeben.</li>
 			<li>CTA Box kann nun auch Redaxo Artikel verlinken, z.B. für Kontaktformular. Auf kleinen Bildschirmen ist CTA Box ab jetzt am unteren Bildschirmrand zu finden, um Text nicht zu überdecken.</li>
 			<li>Sporg Sprachersetzungen für Google Analytics 4 zur Verfügung gestellt.</li>

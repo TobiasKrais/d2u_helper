@@ -4,16 +4,11 @@
 <!DOCTYPE html>
 <html lang="<?php echo rex_clang::getCurrent()->getCode(); ?>">
 <head>
-    <meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
-		print d2u_addon_frontend_helper::getMetaTags();
-		if(rex_addon::get('consent_manager')->isAvailable()) {
-			print 'REX_CONSENT_MANAGER[]';
-		}
+		$fragment = new rex_fragment();
+		// <head></head>
+		echo $fragment->parse('d2u_template_head.php');
 	?>
- 	<link rel="stylesheet" href="/index.php?template_id=05-1&amp;d2u_helper=template.css">
-  	<link rel="icon" href="<?php print rex_url::media('favicon.ico'); ?>" />
 </head>
 
 <body>
@@ -142,7 +137,6 @@
 					<?php
 						// Languages
 						print '<div id="lang_chooser_div">';
-						$fragment = new rex_fragment();
 						echo $fragment->parse('d2u_template_language_icon.php');
 						echo $fragment->parse('d2u_template_language_modal.php');
 						print '</div>';

@@ -2,19 +2,10 @@
 
 <html lang="<?php echo rex_clang::getCurrent()->getCode(); ?>">
 <head>
-    <meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
-		print d2u_addon_frontend_helper::getMetaTags();
-	?>
-	<link rel="stylesheet" href="/index.php?template_id=06-1&amp;d2u_helper=template.css">
-	<?php
-		if(file_exists(rex_path::media('favicon.ico'))) {
-			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
-		}
-		if(rex_addon::get('consent_manager')->isAvailable()) {
-			print 'REX_CONSENT_MANAGER[]';
-		}
+		$fragment = new rex_fragment();
+		// <head></head>
+		echo $fragment->parse('d2u_template_head.php');
 	?>
 </head>
 
@@ -49,7 +40,6 @@
 							<div class="col-12">
 								<?php
 									// Languages
-									$fragment = new rex_fragment();
 									if(count(rex_clang::getAllIds(true)) > 1) {
 										print '<div id="lang_chooser_div">';
 										echo $fragment->parse('d2u_template_language_icon.php');

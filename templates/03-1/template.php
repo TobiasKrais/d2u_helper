@@ -1,21 +1,4 @@
 <?php
-// SEO stuff
-$alternate = ""; 
-$canonical = "";
-$current_domain = \rex::getServer();
-$description = "";
-$robots = "";
-$title = "";
-if (rex_addon::get('yrewrite')->isAvailable()) {
-	$yrewrite = new rex_yrewrite_seo();
-	$alternate = $yrewrite->getHreflangTags();
-	$canonical = $yrewrite->getCanonicalUrlTag();
-	$current_domain = rex_yrewrite::getCurrentDomain()->getUrl();
-	$description = $yrewrite->getDescriptionTag();
-	$robots = $yrewrite->getRobotsTag();
-	$title = $yrewrite->getTitleTag();
-}
-
 // Get d2u_helper stuff
 $d2u_helper = rex_addon::get("d2u_helper");
 
@@ -25,18 +8,11 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 <!DOCTYPE html>
 <?php echo '<html lang="'. rex_clang::getCurrent()->getCode() .'">'; ?>
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
-		print d2u_addon_frontend_helper::getMetaTags();
-		if(file_exists(rex_path::media('favicon.ico'))) {
-			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
-		}
-		if(rex_addon::get('consent_manager')->isAvailable()) {
-			print 'REX_CONSENT_MANAGER[]';
-		}
+		$fragment = new rex_fragment();
+		// <head></head>
+		echo $fragment->parse('d2u_template_head.php');
 	?>
-	<link rel="stylesheet" href="/?template_id=03-1&amp;d2u_helper=template.css">
 	<style>
 		.desktop-navi {
 			width: <?php print (100 / count(rex_category::getRootCategories(TRUE)));?>% !important;
@@ -72,7 +48,6 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 		</header>
 	</div>
 	<?php
-		$fragment = new rex_fragment();
 		if($print == "") {
 			// Navi
 			echo $fragment->parse('d2u_template_nav.php');

@@ -7,9 +7,6 @@
 #cta_icon_box {
 	z-index: 1001;
 }
-#cta_box {
-	z-index: 101;
-}
 #cta_box_content, #cta_icon_box_content {
 	background-color: article_color_box;
 }

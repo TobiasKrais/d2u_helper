@@ -13,16 +13,12 @@
 <!DOCTYPE html>
 <html lang="<?php echo rex_clang::getCurrent()->getCode(); ?>">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="robots" content="noindex, nofollow">
-	<meta http-equiv="refresh" content="10800; URL=<?php print rex_getUrl(); ?>">
-	<link rel="stylesheet" href="/index.php?template_id=03-2&amp;d2u_helper=template.css">
 	<?php
-		if(file_exists(rex_path::media('favicon.ico'))) {
-			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
-		}
+		$fragment = new rex_fragment();
+		// <head></head>
+		echo $fragment->parse('d2u_template_head.php');
 	?>
+	<meta http-equiv="refresh" content="10800; URL=<?php print rex_getUrl(); ?>">
 </head>
 
 <body>

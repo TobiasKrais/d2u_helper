@@ -98,19 +98,10 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 <!DOCTYPE html>
 <html lang="<?php echo rex_clang::getCurrent()->getCode(); ?>">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
-		print d2u_addon_frontend_helper::getMetaTags();
-	?>
-	<link rel="stylesheet" href="/index.php?template_id=04-2&amp;d2u_helper=template.css">
-	<?php
-		if(file_exists(rex_path::media('favicon.ico'))) {
-			print '<link rel="icon" href="'. rex_url::media('favicon.ico') .'">';
-		}
-		if(rex_addon::get('consent_manager')->isAvailable()) {
-			print 'REX_CONSENT_MANAGER[]';
-		}
+		$fragment = new rex_fragment();
+		// <head></head>
+		echo $fragment->parse('d2u_template_head.php');
 	?>
 </head>
 
@@ -136,7 +127,6 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		</div>
 	</section>
 	<?php
-		$fragment = new rex_fragment();
 		// Navi
 		echo $fragment->parse('d2u_template_nav.php');
 
