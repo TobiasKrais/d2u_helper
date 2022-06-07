@@ -1,7 +1,7 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.9.2-DEV</p>
+		<p>1.9.2</p>
 		<ul>
 			<li>.github Verzeichnis aus Installer Action ausgeschlossen.</li>
 			<li>Bootstrap 4.6.1 Upgrade.</li>
