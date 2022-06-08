@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.9.3-DEV</p>
 		<ul>
-			<li>....</li>
+			<li>Modul "10-2 Box mit Bild und Text": Eingabefelder besser formatiert.</li>
 		</ul>
 		<p>1.9.2</p>
 		<ul>

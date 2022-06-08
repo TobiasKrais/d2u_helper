@@ -244,7 +244,7 @@ if(class_exists('D2UModuleManager')) {
 		3);
 	$modules[] = new D2UModule("10-2",
 		"Box mit Bild und Text",
-		2);
+		10);
 	$modules[] = new D2UModule("10-3",
 		"Box mit Downloads",
 		8);

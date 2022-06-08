@@ -68,8 +68,10 @@
 	<div class="col-xs-12">&nbsp;</div>
 </div>
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-xs-4">
 		Soll Block die gleiche Höhe haben wie andere Box-Blöcke auf dieser Seite?
+	</div>
+	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[17]" class="form-control">
 		<?php
 		$values = array("true"=>"Ja", "false"=>"Nein");
@@ -126,10 +128,10 @@
 	<div class="col-xs-12">&nbsp;</div>
 </div>
 <div class="row">
-	<div class="col-xs-4">
+	<div class="col-xs-12">
 		Text:<br />
 	</div>
-	<div class="col-xs-12 col-sm-8">
+	<div class="col-xs-12">
 		<br>
 		<textarea name="REX_INPUT_VALUE[1]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[1]</textarea>
 	</div>
