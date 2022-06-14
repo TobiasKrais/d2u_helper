@@ -1,9 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.9.3-DEV</p>
+		<p>1.9.3</p>
 		<ul>
 			<li>Modul "10-2 Box mit Bild und Text": Eingabefelder besser formatiert.</li>
+			<li>Templates: Einige Templates haben fälschlicherweise CSS eines anderen Templates geladen.</li>
 		</ul>
 		<p>1.9.2</p>
 		<ul>
