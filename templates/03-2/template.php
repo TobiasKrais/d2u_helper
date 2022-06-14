@@ -18,6 +18,7 @@
 		// <head></head>
 		echo $fragment->parse('d2u_template_head.php');
 	?>
+	<link rel="stylesheet" href="/index.php?template_id=03-2&amp;d2u_helper=template.css">
 	<meta http-equiv="refresh" content="10800; URL=<?php print rex_getUrl(); ?>">
 </head>
 

@@ -10,4 +10,3 @@
 		print 'REX_CONSENT_MANAGER[]';
 	}
 ?>
-<link rel="stylesheet" href="/index.php?template_id=04-1&amp;d2u_helper=template.css">

@@ -128,6 +128,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		// <head></head>
 		echo $fragment->parse('d2u_template_head.php');
 	?>
+	<link rel="stylesheet" href="/index.php?template_id=04-1&amp;d2u_helper=template.css">
 </head>
 
 <body>

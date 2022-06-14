@@ -117,34 +117,34 @@ class D2UTemplateManager {
 		$d2u_templates = [];
 		$d2u_templates[] = new D2UTemplate("00-1",
 			"Big Header Template",
-			19);
+			20);
 		$d2u_templates[] = new D2UTemplate("01-1",
 			"Side Picture Template",
-			11);
+			12);
 		$d2u_templates[] = new D2UTemplate("02-1",
 			"Header Pic Template",
-			14);
+			15);
 		$d2u_templates[] = new D2UTemplate("03-1",
 			"Immo Template - 2 Columns",
-			13);
+			14);
 		$d2u_templates[] = new D2UTemplate("03-2",
 			"Immo Window Advertising Template",
-			10);
+			11);
 		$d2u_templates[] = new D2UTemplate("04-1",
 			"Header Slider Template with Slogan",
-			12);
+			13);
 		$d2u_templates[] = new D2UTemplate("04-2",
 			"Header Slider Template",
-			18);
+			19);
 		$d2u_templates[] = new D2UTemplate("04-3",
 			"Header Slider Template with news column",
-			13);
+			14);
 		$d2u_templates[] = new D2UTemplate("05-1",
 			"Double Logo Template",
-			12);
+			13);
 		$d2u_templates[] = new D2UTemplate("06-1",
 			"Paper Sheet Template",
-			6);
+			7);
 		$d2u_templates[] = new D2UTemplate("99-1",
 			"Feed Generator",
 			1);
@@ -400,6 +400,7 @@ class D2UTemplate {
 		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_CSS_FILE)) {
 			$template_css = file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_CSS_FILE);
 		}
+
 		// Footer CSS
 		$footer_type = rex_config::get('d2u_helper', 'footer_type', '');
 		if ($footer_type !== '' && file_exists(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'))) {

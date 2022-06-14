@@ -31,6 +31,7 @@ img {
 header {
 	background-position: center;
 	background-size: cover;
+	height: 400px;
 	padding: 2em 0;
 }
 @media screen and (min-width: 1200px) {
