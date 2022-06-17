@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.9.4-DEV</p>
+		<ul>
+			<li>Nutzt die getTags Methode von YRewrite 3.</li>
+		</ul>
 		<p>1.9.3</p>
 		<ul>
 			<li>Modul "10-2 Box mit Bild und Text": Eingabefelder besser formatiert.</li>

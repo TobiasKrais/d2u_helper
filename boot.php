@@ -332,7 +332,7 @@ function sendD2UHelperTemplateCSS($d2u_template_id = "") {
 	}		
 
 	// Apply template settings and compress
-//	print d2u_addon_frontend_helper::prepareCSS($css);
+	print d2u_addon_frontend_helper::prepareCSS($css);
 
 	exit;	
 }

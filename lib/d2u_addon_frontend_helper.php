@@ -200,6 +200,10 @@ class d2u_addon_frontend_helper {
 			$urlSeo = new Url\Seo();
 			$meta_tags = $urlSeo->getTags();
 		}
+		else if(rex_addon::get('yrewrite')->isAvailable() && rex_version::compare(\rex_addon::get('yrewrite')->getVersion(), '3.0', '>=')) {
+			$yrewrite = new rex_yrewrite_seo();
+			$meta_tags = $yrewrite->getTags() . PHP_EOL;
+		}
 		else if(rex_addon::get('yrewrite')->isAvailable()) {
 			$yrewrite = new rex_yrewrite_seo();
 			$meta_tags = $yrewrite->getTitleTag() . PHP_EOL;
