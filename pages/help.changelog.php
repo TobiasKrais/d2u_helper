@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.9.4-DEV</p>
 		<ul>
-			<li>Nutzt die getTags() Methode von YRewrite 3.</li>
+			<li>Nutzt die getTags() Methode von YRewrite 2.9.</li>
 		</ul>
 		<p>1.9.3</p>
 		<ul>

@@ -196,11 +196,11 @@ class d2u_addon_frontend_helper {
 	public static function getMetaTags() {
 		$meta_tags = "";
 		
-		if(rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=') && rex::isFrontend()) {
+		if(rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=') && rex::isFrontend() && self::getUrlId()) {
 			$urlSeo = new Url\Seo();
 			$meta_tags = $urlSeo->getTags();
 		}
-		else if(rex_addon::get('yrewrite')->isAvailable() && rex_version::compare(\rex_addon::get('yrewrite')->getVersion(), '3.0', '>=')) {
+		else if(rex_addon::get('yrewrite')->isAvailable() && rex_version::compare(\rex_addon::get('yrewrite')->getVersion(), '2.9', '>=')) {
 			$yrewrite = new rex_yrewrite_seo();
 			$meta_tags = $yrewrite->getTags() . PHP_EOL;
 		}
@@ -279,8 +279,7 @@ class d2u_addon_frontend_helper {
 	}
 
 	/**
-	 * Get URL addon id if available. Works with all Versions of URL addon. If
-	 * id is not available, "0" is returned.
+	 * Get URL addon id if available. If id is not available, "0" is returned.
 	 * @return int URL addon dataset id
 	 */
 	public static function getUrlId() {
@@ -295,8 +294,7 @@ class d2u_addon_frontend_helper {
 	}
 
 	/**
-	 * Get URL addon namespace (former param_key) if available. Works with all
-	 * Versions of URL addon. If id is not available, an empty string is returned.
+	 * Get URL addon namespace (former param_key) if available. If id is not available, an empty string is returned.
 	 * @return string URL addon namespace
 	 */
 	public static function getUrlNamespace() {
