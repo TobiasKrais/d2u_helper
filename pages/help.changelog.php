@@ -4,6 +4,7 @@
 		<p>1.9.4-DEV</p>
 		<ul>
 			<li>Nutzt die getTags() Methode von YRewrite 2.9.</li>
+			<li>Fehler im Megamenü behoben: Elemente in der ersten Ebene ohne Untermenü waren nicht klickbar.</li>
 		</ul>
 		<p>1.9.3</p>
 		<ul>

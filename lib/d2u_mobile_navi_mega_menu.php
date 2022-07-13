@@ -72,7 +72,7 @@ class d2u_mobile_navi_mega_menu {
 
 				if(count($category->getChildren(true)) == 0 /*&& !$has_machine_submenu */) {
 					// Ohne Untermenü
-					print '<a class="nav-link'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'" href="'. $category->getUrl() .'" id="dropdown'. $category->getId() .'" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">'. $category->getName() .'</a>';
+					print '<a class="nav-link'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'" href="'. $category->getUrl() .'" id="dropdown'. $category->getId() .'">'. $category->getName() .'</a>';
 				}
 				else {
 					print '<a class="nav-link dropdown-toggle'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'" href="'. $category->getUrl() .'" id="dropdown'. $category->getId() .'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'. $category->getName() .'</a>';
