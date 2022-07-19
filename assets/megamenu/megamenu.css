@@ -48,13 +48,13 @@
 	white-space: unset;
 }
 #navbar h4 {
-	padding-bottom: 0.5em;
+	padding-bottom: 0;
 }
 .megamenu_itemlist_header {
 	padding-bottom: 0.25em;	
 }
 .megamenu_itemlist {
-	padding-bottom: 0.5em;
+	padding-bottom: 0.25em;
 }
 .megamenu_lev1_icon {
 	margin-bottom: 5px;
@@ -66,4 +66,7 @@
 }
 .dropdown-toggle {
 	position: relative;
+}
+.dropdown-menu.megamenu h4 {
+	margin-bottom: 0;
 }
