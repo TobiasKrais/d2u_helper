@@ -21,7 +21,7 @@
 	background: navi_color_bg;
 	font-size: 16px;
 }
-#navbar .nav-item:hover, #navbar .nav-item.dropdown.megamenu-li.show {
+#navbar .nav-item:hover, #navbar .nav-item.dropdown.megamenu-li.show, #navbar .dropdown-item:active {
 	background: navi_color_hover_bg;
 }
 #navbar .nav-item a {
