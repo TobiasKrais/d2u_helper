@@ -194,6 +194,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							'box_logo' => rex_i18n::msg('d2u_helper_settings_footer_type_option_box_logo'),
 							'links_logo_address' => rex_i18n::msg('d2u_helper_settings_footer_type_option_links_logo_address'),
 							'links_address_contact_logo' => rex_i18n::msg('d2u_helper_settings_footer_type_option_links_address_contact_logo'),
+							'simple_contact_links' => rex_i18n::msg('d2u_helper_settings_footer_type_option_simple_contact_links'),
 							'links_text' => rex_i18n::msg('d2u_helper_settings_footer_type_option_links_text'),
 							'text' => rex_i18n::msg('d2u_helper_settings_footer_type_option_text'),
 						];
