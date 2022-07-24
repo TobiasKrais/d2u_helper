@@ -135,10 +135,10 @@
   .sm-simple a, .sm-simple a:focus, .sm-simple a:active {
     color: navi_color_font;
   }
-  .sm-simple a:hover, .sm-simple a.highlighted {
+  .sm-simple a:hover, .sm-simple a.highlighted, .sm-simple .current a {
     color: navi_color_hover_font;
   }
-  .sm-simple a:hover, .sm-simple a:focus, .sm-simple a:active, .sm-simple a.highlighted {
+  .sm-simple a:hover, .sm-simple a:focus, .sm-simple a:active, .sm-simple a.highlighted, .sm-simple .current a {
     background: navi_color_hover_bg;
   }
   .sm-simple a.current {
