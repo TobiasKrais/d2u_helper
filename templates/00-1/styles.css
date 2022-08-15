@@ -191,6 +191,10 @@ section {
 	border: none !important;
 }
 
+.footerbox a {
+	color: footer_color_font;
+}
+
 /* Machinery Addon */
 .box {
 	background-color: article_color_h;

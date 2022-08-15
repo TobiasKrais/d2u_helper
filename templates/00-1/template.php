@@ -116,7 +116,12 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
 				$header_image = $this->getValue("art_file");
 			}
-			$header_css = 'style="background-image: url('. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .')"';
+			if($header_image) {
+				$header_css = 'style="background-image: url('. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .')"';
+			}
+			else {
+				$header_css = 'style="height: 100px"';
+			}
 		}
 	?>
 	<header <?php echo $header_css; ?>>
@@ -125,7 +130,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		?>
 		<div class="container">
 			<div class="row">
-				<div class="col-9 col-md-6">
+				<div class="col-12">
 					<a href="<?php echo rex_getUrl(rex_article::getSiteStartArticleId()); ?>">
 						<?php
 						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));

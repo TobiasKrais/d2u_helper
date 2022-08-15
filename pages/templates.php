@@ -41,7 +41,6 @@ $d2u_template_manager->showManagerList();
 		Template eignet sich für das D2U Maschinen und D2U Veranstaltungen Addon, funktioniert aber auch ohne diese Addons.<br>
 		<a href="https://www.aberer-automobile.de/" target="_blank">Aberer Automobile - Ihr Renault und Dacia Partner in Lörrach</a><br>
 		<a href="https://www.justjazz.net/" target="_blank">Just Jazz</a><br>
-		<a href="https://www.design-to-use.de/" target="_blank">design-to-use.de - Benutzerfreundliches Webdesign</a><br>
 	</li>
 	<li><b>01-1	Side Picture Template</b><br>
 		<a href="http://www.staub-schoene-zaehne.de/" target="_blank">Staub Zahntechnik - Schöne Zähne</a><br>
