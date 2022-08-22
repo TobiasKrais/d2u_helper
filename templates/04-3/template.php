@@ -293,43 +293,45 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 
 								if(count($news) > 0) {
 									foreach ($news as $nachricht) {
-										print '<div class="col-12 col-sm-6 col-md-12">';
-										print '<div class="newsbox">';
-										// Heading
-										if(trim($nachricht->name) != "") {
-											print '<div class="newshead">';
-											if($nachricht->getUrl() != "") {
-												print '<a href="'. $nachricht->getUrl() .'">';
+										if(!$nachricht->hide_this_lang) {
+											print '<div class="col-12 col-sm-6 col-md-12">';
+											print '<div class="newsbox">';
+											// Heading
+											if(trim($nachricht->name) != "") {
+												print '<div class="newshead">';
+												if($nachricht->getUrl() != "") {
+													print '<a href="'. $nachricht->getUrl() .'">';
+												}
+												print $nachricht->name;
+												if($nachricht->getUrl() != "") {
+													print '</a>';
+												}
+												print '</div>';
 											}
-											print $nachricht->name;
-											if($nachricht->getUrl() != "") {
-												print '</a>';
+
+											// Picture
+											if($nachricht->picture != "") {
+												print '<div class="newspic">';
+												if($nachricht->getUrl() != "") {
+													print '<a href="'. $nachricht->getUrl() .'">';
+												}
+												print '<img src="index.php?rex_media_type=news_preview&rex_media_file='. $nachricht->picture .'" alt="'. $nachricht->name .'" class="listpic">';
+												if($nachricht->getUrl() != "") {
+													print '</a>';
+												}
+												print '</div>';
 											}
+
+											// Text
+											if($nachricht->teaser != "") {
+												print '<div class="news">';
+												print d2u_addon_frontend_helper::prepareEditorField($nachricht->teaser);
+												print '</div>';
+											}
+
+											print '</div>';
 											print '</div>';
 										}
-
-										// Picture
-										if($nachricht->picture != "") {
-											print '<div class="newspic">';
-											if($nachricht->getUrl() != "") {
-												print '<a href="'. $nachricht->getUrl() .'">';
-											}
-											print '<img src="index.php?rex_media_type=news_preview&rex_media_file='. $nachricht->picture .'" alt="'. $nachricht->name .'" class="listpic">';
-											if($nachricht->getUrl() != "") {
-												print '</a>';
-											}
-											print '</div>';
-										}
-
-										// Text
-										if($nachricht->teaser != "") {
-											print '<div class="news">';
-											print d2u_addon_frontend_helper::prepareEditorField($nachricht->teaser);
-											print '</div>';
-										}
-
-										print '</div>';
-										print '</div>';
 									}
 								}
 							?>

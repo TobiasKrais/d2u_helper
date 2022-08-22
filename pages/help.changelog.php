@@ -8,6 +8,7 @@
 			<li>Smartmenu: aktives Navigationselement wird mit Hover Elementen hervorgehoben.</li>
 			<li>Fragment für Sprachwähler: Standardicon entfernt.</li>
 			<li>Template 04-1, 04-2 und 04-3: Ausgabe von unnötigem Code verhindert.</li>
+			<li>Template "04-3 Header Slider Template with news column" berücksichtigt nun auch, ob News in der Sprache ausgeblendet werden sollen.</li>
 			<li>Template "00-1 Big Header Template" Ausgabe korrigiert, wenn kein Headerbild angegeben ist.</li>
 			<li>Templates: neuer Footer "Einfache Zeilen mit Adresse, Kontakt und Links" steht zur Verfügung.</li>
 		</ul>
