@@ -13,7 +13,6 @@
 	$height_unit = "REX_VALUE[8]" == "" ? "px" : "REX_VALUE[8]";
 	$substitute = ["\r\n" => "", "\r" => "", "\n" => "", '"' => "'"];
 	$infotext = "REX_VALUE[id=2 output=html]";
-	$popup_js = $infotext != "" ? ".bindPopup('". addslashes(strtr($infotext, $substitute)) ."').openPopup()" : "";
 	
 	$map_id = rand();
 
@@ -99,21 +98,17 @@
 
 		$mapsetId = (int) 'REX_VALUE[9]';
 		
-		$rex_map = \Geolocation\mapset::take($mapsetId)
-			->attributes( 'id', $mapsetId )
-			->attributes( 'style', 'height: '. $height . $height_unit .';width:100%;' )
-			->dataset( 'center', [[$latitude, $longitude], $maps_zoom] )
-			->dataset( 'position', [$latitude, $longitude] )
-			->dataset( 'infobox',[[$latitude,$longitude],$infotext])
-		->parse();
-
-		// Ausgabe
-		echo $rex_map;
-?>
-
-<?php	
+		echo \Geolocation\mapset::take($mapsetId)
+			->attributes('id', $mapsetId)
+			->attributes('style', 'height: '. $height . $height_unit .';width:100%;')
+			->dataset('center', [[$latitude, $longitude], $maps_zoom])
+			->dataset('position', [$latitude, $longitude])
+			->dataset('infobox',[[$latitude, $longitude], $infotext])
+			->parse();
 	}
 	else if(rex_addon::get('osmproxy')->isAvailable()) {
+		$popup_js = $infotext != "" ? ".bindPopup('". addslashes(strtr($infotext, $substitute)) ."').openPopup()" : "";
+	
 		$leaflet_js_file = 'modules/04-2/leaflet.js';
 		print '<script src="'. rex_url::addonAssets('d2u_helper', $leaflet_js_file) .'?buster='. filemtime(rex_path::addonAssets('d2u_helper', $leaflet_js_file)) .'"></script>' . PHP_EOL;
 
