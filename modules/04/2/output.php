@@ -18,9 +18,10 @@
 	$map_id = rand();
 
 	if(rex_addon::get('geolocation')->isAvailable()) {
-		if(rex::isFrontend()) {
-			try {
+		try {
+			if(rex::isFrontend()) {
 				\Geolocation\tools::echoAssetTags();
+			}
 ?>
 	<script>
 		Geolocation.default.positionColor = '<?= str_replace('#', '%23', rex_config::get('d2u_helper', 'article_color_h')); ?>';
@@ -93,9 +94,8 @@
 		Geolocation.tools.infobox = function(...args) { return new Geolocation.Tools.Infobox(args); };
 	</script>
 <?php
-			}
-			catch (Exception $e) {}
 		}
+		catch (Exception $e) {}
 
 		$mapsetId = (int) 'REX_VALUE[9]';
 		
