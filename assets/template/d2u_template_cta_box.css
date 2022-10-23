@@ -2,10 +2,10 @@
 	position: fixed;
 	right: 0;
 	top: 225px;
-	z-index: 1001;
+	z-index: 1002;
 }
 #cta_icon_box {
-	z-index: 1001;
+	z-index: 1002;
 }
 #cta_box_content, #cta_icon_box_content {
 	background-color: article_color_box;

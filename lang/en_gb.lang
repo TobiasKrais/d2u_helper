@@ -67,7 +67,7 @@ d2u_helper_lang_wildcard_overwrite = Overwrite custom translations during addon 
 d2u_helper_metainfo_headerpic = Header picture
 
 d2u_helper_modules_d2u_module_name = D2U module name
-d2u_helper_modules_error_osmproxy = Error: this module depends on the OSM proxy addon.
+d2u_helper_modules_error_gelocation = Error: this module depends on the Geolocation addon.
 d2u_helper_modules_error_playr = Error: this module depends on the Plyr addon.
 d2u_helper_modules_error_settings_translations = Error: please enable the translation installation option in settings of this addon.
 d2u_helper_modules_error_search_it =  Error: please install Search It addon.

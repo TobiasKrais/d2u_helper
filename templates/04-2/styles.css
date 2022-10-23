@@ -38,7 +38,7 @@ nav {
 	padding: 5px 0;
 	position: sticky;
 	top: 0;
-	z-index: 1000;
+	z-index: 1001;
 }
 .navigation a {
 	text-decoration: none !important;

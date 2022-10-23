@@ -65,7 +65,7 @@ nav {
 	border-bottom: solid 1px white;
 	position: sticky;
 	top: 0;
-	z-index: 1000;
+	z-index: 1001;
 }
 nav a {
 	text-decoration: none !important;

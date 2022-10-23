@@ -75,7 +75,7 @@ h1.subhead {
 nav {
 	position: sticky;
 	top: 0;
-	z-index: 1000;
+	z-index: 1001;
 }
 nav a {
 	text-decoration: none;

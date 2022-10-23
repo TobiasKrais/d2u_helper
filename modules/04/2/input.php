@@ -21,19 +21,19 @@
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
 	<div class="col-xs-4">
-		L&auml;ngengrad:
+		Breitengrad:
 	</div>
 	<div class="col-xs-8">
-		<input type="text" size="12" name="REX_INPUT_VALUE[4]" value="REX_VALUE[4]" class="form-control"/>
+		<input type="text" size="12" name="REX_INPUT_VALUE[5]" value="REX_VALUE[5]" class="form-control"/>
 	</div>
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
 	<div class="col-xs-4">
-		Breitengrad:
+		L&auml;ngengrad:
 	</div>
 	<div class="col-xs-8">
-		<input type="text" size="12" name="REX_INPUT_VALUE[5]" value="REX_VALUE[5]" class="form-control"/>
+		<input type="text" size="12" name="REX_INPUT_VALUE[4]" value="REX_VALUE[4]" class="form-control"/>
 	</div>
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
@@ -88,3 +88,27 @@
 		</select>
 	</div>
 </div>
+<?php
+	if(rex_addon::get('geolocation')->isAvailable()) {
+?>
+<div class="row"><div class="col-xs-12">&nbsp;</div></div>
+<div class="row">
+	<div class="col-xs-4">
+		Auswahl Geolocation Karte
+	</div>
+	<div class="col-xs-8">
+		<select name="REX_INPUT_VALUE[9]" id="mapset-select" class="form-control">
+            <option value="">(Standardkarte)</option>
+            <?php
+				$mapsets = \Geolocation\mapset::query()
+					->orderBy('title')
+					->findValues('title', 'id');
+				foreach( $mapsets as $k=>$v ){
+					echo '<option value="',$k,'"',($k == REX_VALUE[9] ? ' selected="selected"' : ''),'>',$v,'</option>';
+				}
+            ?>
+		</select>
+	</div>
+</div>
+<?php
+	}
