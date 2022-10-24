@@ -34,7 +34,8 @@ class D2UModuleManager {
 	 * Trailing slash must be included. Default is D2UModuleManager::MODULE_FOLDER.
 	 * @param string $addon_key Redaxo Addon name module belongs to, default "d2u_helper"
 	 */
-	public function __construct($d2u_modules, $module_folder = D2UModuleManager::MODULE_FOLDER, $addon_key = "d2u_helper") {
+	public function __construct($d2u_modules, $module_folder = "", $addon_key = "d2u_helper") {
+		$module_folder = $module_folder ?: D2UModuleManager::MODULE_FOLDER;
 		$this->module_addon = rex_addon::get($addon_key);
 		$this->module_folder = $this->module_addon->getPath($module_folder);
 		// Path during addon update
@@ -567,7 +568,7 @@ class D2UModule {
 				return FALSE;
 			}
 		}
-		
+	
 		if($this->rex_module_id == 0 && $rex_module_id > 0) {
 			$this->rex_module_id = $rex_module_id;
 		}
