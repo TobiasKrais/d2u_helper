@@ -23,7 +23,7 @@
 			}
 ?>
 	<script>
-		Geolocation.default.positionColor = '<?= str_replace('#', '%23', rex_config::get('d2u_helper', 'article_color_h')); ?>';
+		Geolocation.default.positionColor = '<?= rex_config::get('d2u_helper', 'article_color_h'); ?>';
 
 		// adjust zoom level
 		Geolocation.Tools.Center = class extends Geolocation.Tools.Template{
