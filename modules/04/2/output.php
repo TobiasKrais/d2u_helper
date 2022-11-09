@@ -17,10 +17,13 @@
 	$map_id = rand();
 
 	if(rex_addon::get('geolocation')->isAvailable()) {
-		try {
-			if(rex::isFrontend()) {
-				\Geolocation\tools::echoAssetTags();
-			}
+		$modInUse = rex::getProperty("d2u_module_04-2_used", 0);
+		rex::setProperty("d2u_module_geolocation_used", ++$modInUse);
+		if($modInUse == 1) {
+			try {
+				if(rex::isFrontend()) {
+					\Geolocation\tools::echoAssetTags();
+				}
 ?>
 	<script>
 		Geolocation.default.positionColor = '<?= rex_config::get('d2u_helper', 'article_color_h'); ?>';
@@ -93,8 +96,9 @@
 		Geolocation.tools.infobox = function(...args) { return new Geolocation.Tools.Infobox(args); };
 	</script>
 <?php
+			}
+			catch (Exception $e) {}
 		}
-		catch (Exception $e) {}
 
 		$mapsetId = (int) 'REX_VALUE[9]';
 		
