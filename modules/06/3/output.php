@@ -17,12 +17,31 @@ if($offset_lg_cols > 0) {
 	$offset_lg = " mr-lg-auto ml-lg-auto ";
 }
 
-$media_filename = "REX_MEDIA[1]";
-$media = rex_media::get($media_filename);
-if($media instanceof rex_media) {
+$description = 'REX_VALUE[1]';
+$filename_video = 'REX_MEDIA[1]';
+$media_video = rex_media::get($filename_video);
+$filename_preview = 'REX_MEDIA[2]';
+$media_preview = rex_media::get($filename_preview);
+if($media_video) {
+	$server = rtrim((rex_addon::get('yrewrite')->isAvailable() ? rex_yrewrite::getCurrentDomain()->getUrl() : rex::getServer()), "/");
 	print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .' plyr-container">';
-	$plyr_media = rex_plyr::outputMedia($media_filename, 'play-large,play,progress,current-time,duration,restart,volume,mute,pip,fullscreen' /*, '/media/cover/REX_MEDIA[2]'*/);
+	$plyr_media = rex_plyr::outputMedia($filename_video, 'play-large,play,progress,current-time,duration,restart,volume,mute,pip,fullscreen' /*, '/media/cover/REX_MEDIA[2]'*/);
 	print $plyr_media;
+	
+	if($media_preview) {
+		print '<script type="application/ld+json">'. PHP_EOL;
+		print '{'. PHP_EOL;
+		print '"@context": "https://schema.org",'. PHP_EOL;
+		print '"@type": "VideoObject",'. PHP_EOL;
+		print '"name": "'. $media_video->getTitle() .'",'. PHP_EOL;
+		print '"description": "'. ($description ?: $media_video->getTitle()) .'",'. PHP_EOL;
+		print '"thumbnailUrl": [ "'. $server . $media_preview->getUrl() .'" ],'. PHP_EOL;
+		print '"uploadDate": "'. date('c', $media_video->getUpdateDate()) .'",'. PHP_EOL;
+		print '"contentUrl": "'. $server . $media_video->getUrl() .'"'. PHP_EOL;
+		print '}'. PHP_EOL;
+		print '</script>'. PHP_EOL;
+	}
+
 	print '</div>';
 }
 

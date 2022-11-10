@@ -116,3 +116,28 @@
 		REX_MEDIA[id="1" types="mp3,mp4,m4v" widget="1"]
 	</div>
 </div>
+<div class="row">
+	<div class="col-xs-12"><div style="border-top: 1px darkgrey solid; margin: 1em 0;"></div></div>
+</div>
+<div class="row">
+	<div class="col-xs-4">
+		Vorschaubild für Videosuchmaschinen
+	</div>
+	<div class="col-xs-8">
+		REX_MEDIA[id="2" types="jpg,webp" widget="2"]
+	</div>
+	<div class="col-xs-12">
+		<small>(Ohne Vorschaubild werden keine Daten für die Suchmaschine ausgegeben.)</small>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
+<div class="row">
+	<div class="col-xs-4">
+		Beschreibung für Videosuchmaschinen
+	</div>
+	<div class="col-xs-8">
+		<input type="text" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" class="form-control"/>
+	</div>
+</div>
