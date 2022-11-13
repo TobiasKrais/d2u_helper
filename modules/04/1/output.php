@@ -3,8 +3,14 @@
 	if($cols == "") {
 		$cols = 8;
 	}
+	
+	$offset_lg_cols = intval("REX_VALUE[17]");
+	$offset_lg = "";
+	if($offset_lg_cols > 0) {
+		$offset_lg = " mr-lg-auto ml-lg-auto ";
+	}
 ?>
-<div class="col-sm-<?php echo $cols; ?>">
+<div class="col-sm-<?php echo $cols . $offset_lg; ?>">
 <?php
 	$longitude = "REX_VALUE[4]" == "" ? 0 : "REX_VALUE[4]";
 	$latitude = "REX_VALUE[5]" == "" ? 0 : "REX_VALUE[5]";

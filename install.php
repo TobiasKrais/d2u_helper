@@ -214,7 +214,7 @@ if(class_exists('D2UModuleManager')) {
 		10);
 	$modules[] = new D2UModule("04-1",
 		"Google Maps Karte",
-		11);
+		12);
 	$modules[] = new D2UModule("04-2",
 		"OpenStreetMap Karte",
 		3);

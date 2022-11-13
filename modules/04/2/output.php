@@ -3,8 +3,14 @@
 	if($cols == "") {
 		$cols = 8;
 	}
+	
+	$offset_lg_cols = intval("REX_VALUE[17]");
+	$offset_lg = "";
+	if($offset_lg_cols > 0) {
+		$offset_lg = " mr-lg-auto ml-lg-auto ";
+	}
 ?>
-<div class="col-sm-<?php echo $cols; ?>">
+<div class="col-sm-<?php echo $cols . $offset_lg; ?>">
 <?php
 	$longitude = "REX_VALUE[4]" == "" ? 0 : "REX_VALUE[4]";
 	$latitude = "REX_VALUE[5]" == "" ? 0 : "REX_VALUE[5]";
@@ -17,13 +23,10 @@
 	$map_id = rand();
 
 	if(rex_addon::get('geolocation')->isAvailable()) {
-		$modInUse = rex::getProperty("d2u_module_04-2_used", 0);
-		rex::setProperty("d2u_module_geolocation_used", ++$modInUse);
-		if($modInUse == 1) {
-			try {
-				if(rex::isFrontend()) {
-					\Geolocation\tools::echoAssetTags();
-				}
+		try {
+			if(rex::isFrontend()) {
+				\Geolocation\tools::echoAssetTags();
+			}
 ?>
 	<script>
 		Geolocation.default.positionColor = '<?= rex_config::get('d2u_helper', 'article_color_h'); ?>';
@@ -96,9 +99,8 @@
 		Geolocation.tools.infobox = function(...args) { return new Geolocation.Tools.Infobox(args); };
 	</script>
 <?php
-			}
-			catch (Exception $e) {}
 		}
+		catch (Exception $e) {}
 
 		$mapsetId = (int) 'REX_VALUE[9]';
 		
