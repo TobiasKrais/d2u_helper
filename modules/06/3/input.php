@@ -121,7 +121,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		Vorschaubild für Videosuchmaschinen
+		Vorschaubild
 	</div>
 	<div class="col-xs-8">
 		REX_MEDIA[id="2" types="jpg,webp" widget="2"]

@@ -23,12 +23,12 @@ $media_video = rex_media::get($filename_video);
 $filename_preview = 'REX_MEDIA[2]';
 $media_preview = rex_media::get($filename_preview);
 if($media_video) {
-	$server = rtrim((rex_addon::get('yrewrite')->isAvailable() ? rex_yrewrite::getCurrentDomain()->getUrl() : rex::getServer()), "/");
 	print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .' plyr-container">';
-	$plyr_media = rex_plyr::outputMedia($filename_video, 'play-large,play,progress,current-time,duration,restart,volume,mute,pip,fullscreen' /*, '/media/cover/REX_MEDIA[2]'*/);
+	$plyr_media = rex_plyr::outputMedia($filename_video, 'play-large,play,progress,current-time,duration,restart,volume,mute,pip,fullscreen' , ($media_preview ? $media_preview->getUrl() : null));
 	print $plyr_media;
 	
 	if($media_preview) {
+		$server = rtrim((rex_addon::get('yrewrite')->isAvailable() ? rex_yrewrite::getCurrentDomain()->getUrl() : rex::getServer()), "/");
 		print '<script type="application/ld+json">'. PHP_EOL;
 		print '{'. PHP_EOL;
 		print '"@context": "https://schema.org",'. PHP_EOL;
