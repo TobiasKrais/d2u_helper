@@ -25,7 +25,7 @@ print '</div>';
 if(!function_exists('loadJsPlyr')) {
 	function loadJsPlyr() {
 		print '<script src="'. rex_url::base('assets/addons/plyr/vendor/plyr/dist/plyr.min.js') .'"></script>';
-		print '<script src="'. rex_url::base('assets/addons/plyr/plyr_playlist.js') .'"></script>';
 	}
 	loadJsPlyr();
+	print '<script src="'. rex_url::base('assets/addons/plyr/plyr_playlist.js') .'"></script>';
 }

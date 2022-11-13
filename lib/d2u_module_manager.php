@@ -186,7 +186,7 @@ class D2UModuleManager {
 			3);
 		$modules[] = new D2UModule("06-4",
 			"Videoliste mit Plyr einbinden",
-			1);
+			2);
 		$modules[] = new D2UModule("07-1",
 			"JavaScript einbinden",
 			1);
