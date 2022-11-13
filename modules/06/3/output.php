@@ -50,5 +50,5 @@ if(!function_exists('loadJsPlyr')) {
 		print '<script src="'. rex_url::base('assets/addons/plyr/vendor/plyr/dist/plyr.min.js') .'"></script>';
 	}
 	loadJsPlyr();
-	print '<script src="'. rex_url::base('assets/addons/plyr/plyr_init.js') .'"></script>';
 }
+print '<script src="'. rex_url::base('assets/addons/plyr/plyr_init.js') .'"></script>';
