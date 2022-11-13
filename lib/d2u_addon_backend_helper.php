@@ -525,7 +525,7 @@ class d2u_addon_backend_helper {
 	 * @param bool $required TRUE if field should have required attribute. If
 	 * $use_wysiwyg is TRUE, $required is automatically FALSE
 	 * @param bool $readonly TRUE if field should have readonly attribute.
-	 * @param string $use_wysiwyg Use WYSIWYG Editor
+	 * @param bool $use_wysiwyg Use WYSIWYG Editor
 	 */
 	public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = FALSE, $readonly = FALSE, $use_wysiwyg = TRUE) {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';

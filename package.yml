@@ -21,6 +21,7 @@ page:
                 changelog: { title: 'translate:d2u_helper_help_chapter_changelog' }
 
 requires:
+    php: '>=7.4'
     redaxo: '>=5.10.0'
 
 default_config:
