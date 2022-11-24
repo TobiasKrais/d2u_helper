@@ -11,7 +11,8 @@
 	background-color: article_color_box;
 }
 .cta_box_content {
-	padding: 1em 1.5em;
+	line-height: 50px;
+	padding: 0 1.5em;
 	overflow: hidden;
 	white-space: nowrap;
 }
@@ -23,6 +24,7 @@
 	padding: 0;
 }
 #cta_icon_box_content li, #cta_box_content li {
+	display: flex;
 	height: 50px;
 	list-style: none;
 	overflow: hidden;
