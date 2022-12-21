@@ -48,7 +48,7 @@ else {
 
 /**
  * Adds some style and script stuff to the header
- * @param rex_extension_point $ep Redaxo extension point
+ * @param rex_extension_point<string> $ep Redaxo extension point
  */
 function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$VERSION_BOOTSTRAP = '4.6.1';
@@ -99,7 +99,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 /**
  * Replaces +++LINK_PRIVACY_POLICY+++ and +++LINK_IMPRESS+++ with URLs
  * for privacy policy an impress. The article ids are set in D2U Helper settings.
- * @param rex_extension_point $ep Redaxo extension point
+ * @param rex_extension_point<string> $ep Redaxo extension point
  */
 function replace_privacy_policy_links(rex_extension_point $ep) {
 	$content = $ep->getSubject();
@@ -116,7 +116,7 @@ function replace_privacy_policy_links(rex_extension_point $ep) {
 
 /**
  * Checks if article is used by this addon
- * @param rex_extension_point $ep Redaxo extension point
+ * @param rex_extension_point<string> $ep Redaxo extension point
  * @return string Warning message as array
  * @throws rex_api_exception If article is used
  */
@@ -132,7 +132,7 @@ function rex_d2u_helper_article_is_in_use(rex_extension_point $ep) {
 		in_array($article_id, is_array(explode(',', $addon->getConfig("cta_box_article_ids"))) ? explode(',', $addon->getConfig("cta_box_article_ids")) : []) ) {
 		$message = '<a href="index.php?page=d2u_helper/settings">'.
 			 rex_i18n::msg('d2u_helper_rights_all') ." - ". rex_i18n::msg('d2u_helper_settings') . '</a>';
-		if(!in_array($message, $warning)) {
+		if(!in_array($message, $warning, true)) {
 			$warning[] = $message .'<br>';
 		}
 	}
@@ -147,10 +147,11 @@ function rex_d2u_helper_article_is_in_use(rex_extension_point $ep) {
 
 /**
  * Deletes language specific configurations and objects
- * @param rex_extension_point $ep Redaxo extension point
+ * @param rex_extension_point<string> $ep Redaxo extension point
  * @return string[] Warning message as array
  */
 function rex_d2u_helper_clang_deleted(rex_extension_point $ep) {
+	/** @var string[] $warning */
 	$warning = $ep->getSubject();
 	$params = $ep->getParams();
 	$clang_id = $params['id'];
@@ -165,10 +166,11 @@ function rex_d2u_helper_clang_deleted(rex_extension_point $ep) {
 
 /**
  * Checks if media is used by this addon
- * @param rex_extension_point $ep Redaxo extension point
+ * @param rex_extension_point<string> $ep Redaxo extension point
  * @return string[] Warning message as array
  */
 function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
+	/** @var string[] $warning */
 	$warning = $ep->getSubject();
 	$params = $ep->getParams();
 	$filename = addslashes($params['filename']);
@@ -197,7 +199,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 		if($is_in_use) {
 			$message = '<a href="javascript:openPage(\'index.php?page=d2u_helper/settings\')">'.
 				 rex_i18n::msg('d2u_helper_meta_title') ." ". rex_i18n::msg('d2u_helper_settings') . '</a>';
-			if(!in_array($message, $warning)) {
+			if(!in_array($message, $warning, true)) {
 				$warning[] = $message.'<br>';
 			}
 		}
@@ -211,7 +213,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 			// Prepare warnings for templates
 			for($i = 0; $i < $sql_template->getRows(); $i++) {
 				$message = '<a href="javascript:openPage(\''. rex_url::backendPage('templates', ['template_id' => $sql_template->getValue('id'), 'function' => 'edit']) .'\')">'. rex_i18n::msg('header_template') .': '. $sql_template->getValue('name') .'</a>';
-				if(!in_array($message, $warning)) {
+				if(!in_array($message, $warning, true)) {
 					$warning[] = $message.'<br>';
 				}
 				$sql_template->next();

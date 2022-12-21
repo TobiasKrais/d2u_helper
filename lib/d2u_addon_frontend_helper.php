@@ -287,7 +287,7 @@ class d2u_addon_frontend_helper {
 			// URL Addon 2.x
 			$manager = \Url\Url::resolveCurrent();
 			if($manager) {
-				self::$url_id = $manager->getDatasetId();
+				self::$url_id = intval($manager->getDatasetId());
 			}
 		}
 		return self::$url_id;

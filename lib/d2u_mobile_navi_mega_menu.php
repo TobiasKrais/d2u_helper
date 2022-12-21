@@ -72,10 +72,10 @@ class d2u_mobile_navi_mega_menu {
 
 				if(count($category->getChildren(true)) == 0 /*&& !$has_machine_submenu */) {
 					// Ohne Untermenü
-					print '<a class="nav-link'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'" href="'. $category->getUrl() .'" id="dropdown'. $category->getId() .'">'. $category->getName() .'</a>';
+					print '<a class="nav-link'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'" href="'. $category->getURL() .'" id="dropdown'. $category->getId() .'">'. $category->getName() .'</a>';
 				}
 				else {
-					print '<a class="nav-link dropdown-toggle'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'" href="'. $category->getUrl() .'" id="dropdown'. $category->getId() .'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'. $category->getName() .'</a>';
+					print '<a class="nav-link dropdown-toggle'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'" href="'. $category->getURL() .'" id="dropdown'. $category->getId() .'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'. $category->getName() .'</a>';
 					
 					print '<div class="dropdown-menu megamenu" aria-labelledby="dropdown'. $category->getId() .'">';
 					print '<div class="row">';
@@ -86,7 +86,7 @@ class d2u_mobile_navi_mega_menu {
 							$lev1_icon = '<img src="'. $lev1_icon_media->getUrl() .'" alt="'. $category->getName() .'" title="'. $category->getName() .'" class="megamenu_lev1_icon"> ';
 						}
 					}
-					print '<div class="col-12"><h4><a href="'. $category->getUrl() .'" title="'. $category->getName() .'">'. $lev1_icon . $category->getName() .'</a></h4></div>';
+					print '<div class="col-12"><h4><a href="'. $category->getURL() .'" title="'. $category->getName() .'">'. $lev1_icon . $category->getName() .'</a></h4></div>';
 					
 					foreach($category->getChildren(true) as $lev2) {
 						if(!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev2->getStartArticle()))) {

@@ -88,7 +88,7 @@ class d2u_mobile_navi {
 				$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') == 'show' && rex_config::get('d2u_machinery', 'article_id', 0) == $category->getId());
 				if(count($category->getChildren(true)) == 0 && !$has_machine_submenu) {
 					// Ohne Untermenü
-					print '<div class="desktop-navi'. (rex_article::getCurrentId() == $category->getId() ? ' current' : '') .'"><a href="'. $category->getUrl() .'" title="'. $category->getName() .'"><div class="desktop-inner">'. $category->getName() .'</div></a></div>';
+					print '<div class="desktop-navi'. (rex_article::getCurrentId() == $category->getId() ? ' current' : '') .'"><a href="'. $category->getURL() .'" title="'. $category->getName() .'"><div class="desktop-inner">'. $category->getName() .'</div></a></div>';
 				}
 				else {
 					print '<div id="dl-menu-'. $category->getId() .'" class="dl-menuwrapper desktop-navi'.
@@ -97,7 +97,7 @@ class d2u_mobile_navi {
 					print '<ul class="dl-menu">';
 					// Mit Untermenü
 					$cat_name = rex_config::get('d2u_helper', 'submenu_use_articlename', FALSE) == TRUE ? rex_article::get($category->getId())->getName() : strtoupper($category->getName());
-					print '<li><a href="'. $category->getUrl() .'" title="'. $cat_name .'">'. $cat_name .'</a></li>';
+					print '<li><a href="'. $category->getURL() .'" title="'. $cat_name .'">'. $cat_name .'</a></li>';
 					if($has_machine_submenu) {
 						d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
 					}

@@ -32,8 +32,8 @@ else {
 					if(count(rex_clang::getAll()) > 1) {
 						$lang_options = [];
 						foreach(rex_clang::getAll() as $rex_clang) {
-							if(rex_config::get('d2u_helper', 'default_lang') != $rex_clang->getId() &&
-								(\rex::getUser()->isAdmin() || \rex::getUser()->getComplexPerm('clang')->hasPerm($rex_clang->getId()))) {
+							if(rex_config::get('d2u_helper', 'default_lang') != $rex_clang->getId() && rex::getUser() instanceof rex_user &&
+							(\rex::getUser()->isAdmin() || \rex::getUser()->getComplexPerm('clang') instanceof rex_clang_perm && \rex::getUser()->getComplexPerm('clang')->hasPerm($rex_clang->getId()))) {
 								$lang_options[$rex_clang->getId()] = $rex_clang->getName();
 							}
 						}
