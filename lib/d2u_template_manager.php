@@ -154,7 +154,7 @@ class D2UTemplateManager {
 	/**
 	 * Get initialized template by ID.
 	 * @param string $template_id D2U template ID
-	 * @return D2UTemplate Requested template object, in case template was not found: FALSE
+	 * @return D2UTemplate Requested template object, in case template was not found: false
 	 */
 	public function getTemplate($template_id) {
 		foreach($this->d2u_templates as $d2u_template) {
@@ -162,7 +162,7 @@ class D2UTemplateManager {
 				return $d2u_template;
 			}
 		}
-		return FALSE;
+		return false;
 	}	
 	
 	/**
@@ -179,7 +179,7 @@ class D2UTemplateManager {
 		$result_paired = rex_sql::factory();
 		$result_paired->setQuery($query_paired);
 		for($i = 0; $i < $result_paired->getRows(); $i++) {
-			$template_info = json_decode($result_paired->getValue("value"), TRUE);
+			$template_info = json_decode($result_paired->getValue("value"), true);
 			if(is_array($template_info) && key_exists('rex_template_id', $template_info)) {
 				$paired_templates[$template_info['rex_template_id']] =	[
 					'd2u_id' => str_replace('template_', '', $result_paired->getValue("key")),
@@ -193,10 +193,10 @@ class D2UTemplateManager {
 	
 	/**
 	 * Gets Redaxo Templates.
-	 * @param bool If TRUE, reload of templates is performed.
+	 * @param bool If true, reload of templates is performed.
 	 * @return string[] Redaxo templates. Key ist the template ID, value ist the template name
 	 */
-	public static function getRexTemplates($unpaired_only = FALSE) {
+	public static function getRexTemplates($unpaired_only = false) {
 		$rex_templates = [];
 		// Get Redaxo modules (must be after form actions, in case new module was installed)
 		$query = 'SELECT id, name FROM ' . \rex::getTablePrefix() . 'template ORDER BY name';
@@ -245,7 +245,7 @@ class D2UTemplateManager {
 
 		// Redaxo templates
 		$rex_templates = D2UTemplateManager::getRexTemplates();
-		$unpaired_rex_templates = D2UTemplateManager::getRexTemplates(TRUE);
+		$unpaired_rex_templates = D2UTemplateManager::getRexTemplates(true);
 
 		foreach($this->d2u_templates as $template) {
 			print '<tr>';
@@ -333,9 +333,9 @@ class D2UTemplate {
 	private $d2u_template_id = "";
 	
 	/**
-	 * @var bool TRUE if autoupdate ist activated
+	 * @var bool true if autoupdate ist activated
 	 */
-	private $autoupdate = FALSE;
+	private $autoupdate = false;
 
 	/**
 	 * @var string Templates title or name
@@ -378,7 +378,7 @@ class D2UTemplate {
 	 * Activate autoupdate.
 	 */
 	public function activateAutoupdate() {
-		$this->autoupdate = TRUE;
+		$this->autoupdate = true;
 		$this->setConfig();
 	}
 
@@ -386,7 +386,7 @@ class D2UTemplate {
 	 * Disable autoupdate.
 	 */
 	public function disableAutoupdate() {
-		$this->autoupdate = FALSE;
+		$this->autoupdate = false;
 		$this->setConfig();
 	}
 
@@ -476,7 +476,7 @@ class D2UTemplate {
 				// Get paired template id
 				$this->rex_template_id = $config["rex_template_id"];
 				// Get Autoupdate settings
-				$this->autoupdate = $config["autoupdate"] == "active" ? TRUE : FALSE;
+				$this->autoupdate = $config["autoupdate"] == "active" ? true : false;
 			}
 			else {
 				// If template no more exists, delete pairing
@@ -491,13 +491,13 @@ class D2UTemplate {
 	/**
 	 * Installes or updates the template in redaxo template table.
 	 * @param int Redaxo template id, if not passed, already available ID is taken.
-	 * @return bool TRUE if installed, otherwise FALSE
+	 * @return bool true if installed, otherwise false
 	 */
 	public function install($rex_template_id = 0) {
 		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_INSTALL)) {
 			$success = include $this->template_folder . D2UTemplate::TEMPLATE_INSTALL;
 			if(!$success) {
-				return FALSE;
+				return false;
 			}
 		}
 		
@@ -512,7 +512,7 @@ class D2UTemplate {
 		$insert->setValue('content', file_get_contents($this->template_folder . D2UTemplate::TEMPLATE_FILE));
 		$insert->setValue('active', 1);
 		$insert->setValue('revision', $this->revision);
-		if($this->rex_template_id == 0) {
+		if($this->rex_template_id === 0) {
 			$insert->addGlobalCreateFields();
 			$insert->setValue('attributes', '{"modules":{"1":{"all":"1"}},"ctype":[],"categories":{"all":"1"}}');
 			$insert->insert();
@@ -527,7 +527,7 @@ class D2UTemplate {
 		// save pairing in config
 		$this->setConfig();
 		
-		return TRUE;
+		return true;
 	}
 	
 	/**
@@ -542,10 +542,10 @@ class D2UTemplate {
 	 */
 	public function isInstalled() {
 		if($this->rex_template_id > 0) {
-			return TRUE;
+			return true;
 		}
 		else {
-			return FALSE;
+			return false;
 		}
 	}
 
@@ -559,10 +559,10 @@ class D2UTemplate {
 			$result = rex_sql::factory();
 			$result->setQuery($query);
 			if($result->getRows() > 0 && $result->getValue("revision") >= $this->revision) {
-				return FALSE;
+				return false;
 			}
 		}
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -583,7 +583,7 @@ class D2UTemplate {
 		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_UNINSTALL)) {
 			$success = include $this->template_folder . D2UTemplate::TEMPLATE_UNINSTALL;
 			if(!$success) {
-				return FALSE;
+				return false;
 			}
 		}
 	}

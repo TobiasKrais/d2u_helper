@@ -28,7 +28,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 		$yform->setObjectparams("form_action", rex_getUrl(rex_article::getCurrentId()));
 		$yform->setObjectparams("form_anchor", "search-field");
 		$yform->setObjectparams("Error-occured", \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
-		$yform->setObjectparams("real_field_names", TRUE);
+		$yform->setObjectparams("real_field_names", true);
 		$yform->setObjectparams("form_showformafterupdate", true);
 
 		echo $yform->getForm();
@@ -173,7 +173,7 @@ if(((rex_addon::get('yform_spam_protection')->isAvailable() && count($yform->get
 				if($hit['table'] == rex::getTablePrefix() .'media' && isset($hit['values']['filetype']) && substr($hit['values']['filetype'], 0, 5) === "image") {
 					$media = rex_media::get($hit['values']['filename']);
 					if(is_object($media)) { 
-						$has_permission = FALSE;
+						$has_permission = false;
 						if(rex_plugin::get('ycom', 'media_auth')->isAvailable()) {
 							$has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create('', $media->getFileName()));
 						}
@@ -202,7 +202,7 @@ if(((rex_addon::get('yform_spam_protection')->isAvailable() && count($yform->get
 	else if(!$result['count']) {
 		echo '<p class="search_it-zero">'. $tag_open .'d2u_helper_module_14_search_results_none'. $tag_close .'</p>';
 
-		$activate_similarity_search = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
+		$activate_similarity_search = "REX_VALUE[2]" == 'true' ? true : false;
 		// Similarity search
 		$search_it_sim = new search_it(rex_clang::getCurrentId());
 		$search_it_sim->setLimit(0, 1);

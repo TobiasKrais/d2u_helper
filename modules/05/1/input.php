@@ -91,7 +91,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		$select_link->setSize(1);
 		$select_link->setAttribute('class', 'form-control');
 
-		$machines = Machine::getAll(rex_clang::getCurrentId(), TRUE);
+		$machines = Machine::getAll(rex_clang::getCurrentId(), true);
 		foreach($machines as $machine)  {
 			$select_link->addOption($machine->name, $machine->machine_id); 
 		}
@@ -112,7 +112,7 @@ if(rex_plugin::get('d2u_machinery', 'industry_sectors')->isAvailable()) {
 		$select_link->setSize(1);
 		$select_link->setAttribute('class', 'form-control');
 
-		$industry_sectors = IndustrySector::getAll(rex_clang::getCurrentId(), TRUE);
+		$industry_sectors = IndustrySector::getAll(rex_clang::getCurrentId(), true);
 		foreach($industry_sectors as $industry_sector)  {
 			$select_link->addOption($industry_sector->name, $industry_sector->industry_sector_id); 
 		}
@@ -133,7 +133,7 @@ if(rex_plugin::get('d2u_machinery', 'used_machines')->isAvailable()) {
 		$select_link->setSize(1);
 		$select_link->setAttribute('class', 'form-control');
 
-		$used_machines = UsedMachine::getAll(rex_clang::getCurrentId(), TRUE);
+		$used_machines = UsedMachine::getAll(rex_clang::getCurrentId(), true);
 		foreach($used_machines as $used_machine)  {
 			$select_link->addOption($used_machine->name, $used_machine->used_machine_id); 
 		}
@@ -154,7 +154,7 @@ if(rex_addon::get('d2u_immo')->isAvailable()) {
 		$select_link->setSize(1);
 		$select_link->setAttribute('class', 'form-control');
 
-		$properties = \D2U_Immo\Property::getAll(rex_clang::getCurrentId(), '', TRUE);
+		$properties = \D2U_Immo\Property::getAll(rex_clang::getCurrentId(), '', true);
 		foreach($properties as $property)  {
 			$select_link->addOption($property->name, $property->property_id); 
 		}
@@ -176,7 +176,7 @@ if(rex_addon::get('d2u_courses')->isAvailable()) {
 		$select_link->setSize(1);
 		$select_link->setAttribute('class', 'form-control');
 
-		$categories = \D2U_Courses\Category::getAll(TRUE);
+		$categories = \D2U_Courses\Category::getAll(true);
 		foreach($categories as $category)  {
 			$select_link->addOption((($category->parent_category ? ($category->parent_category->parent_category ? $category->parent_category->parent_category->name ." → " : "" ). $category->parent_category->name ." → " : "" ). $category->name), $category->category_id); 
 		}

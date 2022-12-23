@@ -1,7 +1,7 @@
 <?php
 	$fragment = new rex_fragment();
 	$d2u_helper = rex_addon::get("d2u_helper");
-	$clangs = rex_clang::getAll(TRUE);
+	$clangs = rex_clang::getAll(true);
 ?>
 <nav class="d-print-none<?= $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top' ? ' top' : '' ?>">
 	<div class="container">

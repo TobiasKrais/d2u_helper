@@ -26,12 +26,12 @@ class d2u_addon_backend_helper {
 	 * Create a HTML String with Redaxo Media Buttons for opening Mediapool,
 	 * add, delete and view medias
 	 * @param string $field_id Name of die media field
-	 * @param bool $isList TRUE if field is a medialist field
+	 * @param bool $isList true if field is a medialist field
 	 * @param string $filetypes Comma separated list of filetypes.
 	 * @param int $category_id Comma separated list of filetypes.
 	 * @return string HTML String with buttons
 	 */
-	public static function getMediaManagingButtons($field_id, $isList = FALSE, $filetypes = '', $category_id = 0) {
+	public static function getMediaManagingButtons($field_id, $isList = false, $filetypes = '', $category_id = 0) {
 		$type_html = "Media";
 		if ($isList) {
 			$type_html = "Medialist";
@@ -120,7 +120,7 @@ class d2u_addon_backend_helper {
 		if(rex_config::get('d2u_helper', 'editor') == 'tinymce4' && rex_addon::get('tinymce4')->isAvailable()) {
 			$wysiwyg_class = ' tinyMCEEditor';
 		}
-		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'tinymce5') !== FALSE && rex_addon::get('tinymce5')->isAvailable()) {
+		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'tinymce5') !== false && rex_addon::get('tinymce5')->isAvailable()) {
 			$wysiwyg_class = ' tiny5-editor" data-profile="default';
 			foreach(TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles() as $profile_infos) {
 				if(rex_config::get('d2u_helper', 'editor') == 'tinymce5_'. $profile_infos['name']) {
@@ -132,7 +132,7 @@ class d2u_addon_backend_helper {
 		else if(rex_config::get('d2u_helper', 'editor') == 'redactor2' && rex_addon::get('redactor2')->isAvailable()) {
 			$wysiwyg_class = ' redactorEditor2-full';
 		}
-		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'cke5-editor') !== FALSE && rex_addon::get('cke5')->isAvailable()) {
+		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'cke5-editor') !== false && rex_addon::get('cke5')->isAvailable()) {
 			$wysiwyg_class = ' cke5-editor" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang();
 			foreach(\Cke5\Creator\Cke5ProfilesApi::getAllProfiles() as $cke5_profile) {
 				if(rex_config::get('d2u_helper', 'editor') == 'cke5-editor_'. $cke5_profile["name"]) {
@@ -141,7 +141,7 @@ class d2u_addon_backend_helper {
 				}
 			}
 		}
-		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'ckeditor') !== FALSE && rex_addon::get('ckeditor')->isAvailable()) {
+		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'ckeditor') !== false && rex_addon::get('ckeditor')->isAvailable()) {
 			$wysiwyg_class = ' ckeditor" data-ckeditor-profile="standard';
 			if(method_exists('rex_ckeditor', 'getProfiles')) {
 				foreach(rex_ckeditor::getProfiles() as $cke_profile_name) {
@@ -248,10 +248,10 @@ class d2u_addon_backend_helper {
 	 * @param string $message_id rex_i18n message id for the label text.
 	 * @param string $fieldname Input field name.
 	 * @param string $value Field value.
-	 * @param string $checked TRUE if checked
-	 * @param bool $readonly TRUE if field should have readonly attribute.
+	 * @param bool $checked true if checked
+	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_checkbox($message_id, $fieldname, $value, $checked = FALSE, $readonly = FALSE) {
+	public static function form_checkbox($message_id, $fieldname, $value, $checked = false, $readonly = false) {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><input class="form-control d2u_helper_toggle" type="checkbox" name="' . $fieldname . '" value="' . $value . '"'
 			.($checked ? ' checked="checked"' : '') . ($readonly ? ' disabled' : '') .' />';
@@ -280,22 +280,22 @@ class d2u_addon_backend_helper {
 	 * Prints a row with an input field
 	 * @param string $message_id rex_i18n message id for the label text.
 	 * @param string $fieldname Input field name.
-	 * @param string $value Field value.
-	 * @param bool $required TRUE if field should have required attribute.
-	 * @param bool $readonly TRUE if field should have readonly attribute.
+	 * @param string|int $value Field value.
+	 * @param bool $required true if field should have required attribute.
+	 * @param bool $readonly true if field should have readonly attribute.
 	 * @param string $type HTML5 input type, e.g. text, number or email
 	 */
-	public static function form_input($message_id, $fieldname, $value, $required = FALSE, $readonly = FALSE, $type = "text") {
+	public static function form_input($message_id, $fieldname, $value, $required = false, $readonly = false, $type = "text") {
 		$field_id = str_replace('[', "-", str_replace(']', "", $fieldname));
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		$label = '<label>' . rex_i18n::msg($message_id) . '</label>';
 		$input = '';
 		if($type == "color") {
 			$input .= '<input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
-				. 'value="' . str_replace('"', "'", $value) . '" id="text-' . $field_id . '" onChange="document.getElementById(\'color-' . $field_id . '\').value = this.value">';
+				. 'value="' . str_replace('"', "'", (string) $value) . '" id="text-' . $field_id . '" onChange="document.getElementById(\'color-' . $field_id . '\').value = this.value">';
 		}
-		$input .= '<input class="form-control'. ($type == "color" ? ' d2u_helper_color' : '') .'" type="' . $type . '" name="' . $fieldname . '" id="color-' . $field_id . '" value="' . str_replace('"', "'", $value) . '"';
-		if ($required && $readonly !== TRUE) {
+		$input .= '<input class="form-control'. ($type == "color" ? ' d2u_helper_color' : '') .'" type="' . $type . '" name="' . $fieldname . '" id="color-' . $field_id . '" value="' . str_replace('"', "'", (string) $value) . '"';
+		if ($required && $readonly !== true) {
 			$input .= ' required';
 		}
 		if ($readonly) {
@@ -320,9 +320,9 @@ class d2u_addon_backend_helper {
 	 * @param string $fieldname Input field name (without REX_LINK_NAME part).
 	 * @param int $article_id ID of the selected article.
 	 * @param int $clang_id ID of the selected language.
-	 * @param bool $readonly TRUE if field should have readonly attribute.
+	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_linkfield($message_id, $fieldname, $article_id, $clang_id, $readonly = FALSE) {
+	public static function form_linkfield($message_id, $fieldname, $article_id, $clang_id, $readonly = false) {
 		if (!in_array($clang_id, rex_clang::getAllIds())) {
 			$clang_id = rex_clang::getStartId();
 		}
@@ -351,9 +351,9 @@ class d2u_addon_backend_helper {
 	 * @param int $fieldnumber Input field name (without REX_MEDIALIST_SELECT part).
 	 * @param int[] $article_ids ID of the selected articles.
 	 * @param int $clang_id ID of the selected language.
-	 * @param bool $readonly TRUE if field should have readonly attribute.
+	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_linklistfield($message_id, $fieldnumber, $article_ids, $clang_id, $readonly = FALSE) {
+	public static function form_linklistfield($message_id, $fieldnumber, $article_ids, $clang_id, $readonly = false) {
 		print '<dl class="rex-form-group form-group" id="LINKLIST_'. $fieldnumber .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
@@ -386,11 +386,11 @@ class d2u_addon_backend_helper {
 	 * @param string $message_id rex_i18n message id for the label text.
 	 * @param string $fieldname Input field name (without REX_INPUT_MEDIA part).
 	 * @param string $value Field value.
-	 * @param bool $readonly TRUE if field should have readonly attribute.
+	 * @param bool $readonly true if field should have readonly attribute.
 	 * @param string $filetypes for allowed filetypes.
 	 * @param int $category_id for default media-category.
 	 */
-	public static function form_mediafield($message_id, $fieldname, $value, $readonly = FALSE, $filetypes = '', $category_id = 0) {
+	public static function form_mediafield($message_id, $fieldname, $value, $readonly = false, $filetypes = '', $category_id = 0) {
 		$filetypes = strtolower(str_replace(' ', '', $filetypes));
 		print '<dl class="rex-form-group form-group" id="MEDIA_'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
@@ -398,7 +398,7 @@ class d2u_addon_backend_helper {
 		print '<input class="form-control" type="text" name="REX_INPUT_MEDIA[' . $fieldname . ']" value="' . $value . '" id="REX_MEDIA_' . $fieldname . '" readonly="readonly">';
 		print '<span class="input-group-btn">';
 		if (!$readonly) {
-			print d2u_addon_backend_helper::getMediaManagingButtons($fieldname, FALSE, $filetypes, $category_id);
+			print d2u_addon_backend_helper::getMediaManagingButtons($fieldname, false, $filetypes, $category_id);
 		}
 		print '</span>';
 		print '</div><div class="rex-js-media-preview"></div></dd>';
@@ -411,9 +411,9 @@ class d2u_addon_backend_helper {
 	 * @param string $message_id rex_i18n message id for the label text.
 	 * @param int $fieldnumber Input field name (without REX_MEDIALIST_SELECT part).
 	 * @param string[] $values Field values.
-	 * @param bool $readonly TRUE if field should have readonly attribute.
+	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_medialistfield($message_id, $fieldnumber, $values, $readonly = FALSE) {
+	public static function form_medialistfield($message_id, $fieldnumber, $values, $readonly = false) {
 /*
 		$wdgtClass = ' rex-js-widget-imglist rex-js-widget-preview rex-js-widget-tooltip';
 		if (rex_addon::get('media_manager')->isAvailable()) {
@@ -471,7 +471,7 @@ class d2u_addon_backend_helper {
 		print '<span class="input-group-addon">';
 		if (!$readonly) {
 			print '<div class="btn-group-vertical">' . d2u_addon_backend_helper::getMediaPositionButtons($fieldnumber) . '</div>';
-			print '<div class="btn-group-vertical">' . d2u_addon_backend_helper::getMediaManagingButtons($fieldnumber, TRUE) . '</div>';
+			print '<div class="btn-group-vertical">' . d2u_addon_backend_helper::getMediaManagingButtons($fieldnumber, true) . '</div>';
 		}
 		print '</span>';
 		print '</div><div class="rex-js-media-preview"></div></dd>';
@@ -482,13 +482,13 @@ class d2u_addon_backend_helper {
 	 * Prints a select field
 	 * @param string $message_id rex_i18n message id for the label text.
 	 * @param string $fieldname Select field name
-	 * @param string[] $values Field values.
-	 * @param string[] $selected_values Preselected value
+	 * @param string[<string|int, string|int>]|int[<string|int, string|int>] $values Field values.
+	 * @param string[<string|int, string|int>]|int[<string|int, string|int>] $selected_values Preselected value
 	 * @param int $size Size of the select field (parameter is no more used)
-	 * @param bool $multiple TRUE if multiple selections are allowed
-	 * @param bool $readonly TRUE if field should have readonly attribute.
+	 * @param bool $multiple true if multiple selections are allowed
+	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size = 1, $multiple = FALSE, $readonly = FALSE) {
+	public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size = 1, $multiple = false, $readonly = false) {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd>';
@@ -504,10 +504,10 @@ class d2u_addon_backend_helper {
 		}
 		foreach ($values as $key => $value) {
 			$selected = '';
-			if(is_array($selected_values) && in_array($key, $selected_values)) {
+			if(is_array($selected_values) && in_array($key, $selected_values, true)) {
 				$selected = ' selected="selected"';
 			}
-			else if($key == $selected_values) {
+			else if($key === $selected_values) {
 				$selected = ' selected="selected"';
 			}
 			print '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
@@ -522,12 +522,12 @@ class d2u_addon_backend_helper {
 	 * @param string $fieldname Textarea field name.
 	 * @param string $value Textarea value.
 	 * @param int $rows Number rows
-	 * @param bool $required TRUE if field should have required attribute. If
-	 * $use_wysiwyg is TRUE, $required is automatically FALSE
-	 * @param bool $readonly TRUE if field should have readonly attribute.
+	 * @param bool $required true if field should have required attribute. If
+	 * $use_wysiwyg is true, $required is automatically false
+	 * @param bool $readonly true if field should have readonly attribute.
 	 * @param bool $use_wysiwyg Use WYSIWYG Editor
 	 */
-	public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = FALSE, $readonly = FALSE, $use_wysiwyg = TRUE) {
+	public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = false, $readonly = false, $use_wysiwyg = true) {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		$wysiwyg_class = ' ';

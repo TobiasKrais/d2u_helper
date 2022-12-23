@@ -1,5 +1,5 @@
 <?php
-$clangs = rex_clang::getAll(TRUE);
+$clangs = rex_clang::getAll(true);
 if(count($clangs) > 1) {
 ?>
 

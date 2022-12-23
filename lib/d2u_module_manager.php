@@ -260,10 +260,10 @@ class D2UModuleManager {
 	
 	/**
 	 * Gets Redaxo Modules.
-	 * @param bool If TRUE, only unpaired modules are returned.
+	 * @param bool If true, only unpaired modules are returned.
 	 * @return string[] Redaxo modules. Key ist the module ID, value ist the module name
 	 */
-	public static function getRexModules($unpaired_only = FALSE) {
+	public static function getRexModules($unpaired_only = false) {
 		$rex_modules = [];
 		// Get Redaxo modules (must be after form actions, in case new module was installed)
 		$query = 'SELECT id, name FROM ' . \rex::getTablePrefix() . 'module '
@@ -310,12 +310,12 @@ class D2UModuleManager {
 		
 		// Redaxo modules
 		$rex_modules = D2UModuleManager::getRexModules();
-		$unpaired_rex_modules = D2UModuleManager::getRexModules(TRUE);
+		$unpaired_rex_modules = D2UModuleManager::getRexModules(true);
 		// Fix follows: directly after module installation, newly paired module is not detected as paired
 		$installed_d2u_module_id = rex_request('d2u_module_id', 'string');
 		if($installed_d2u_module_id != "") {
 			foreach($unpaired_rex_modules as $rex_id => $name) {
-				if(strpos($name, $installed_d2u_module_id) !== FALSE) {
+				if(strpos($name, $installed_d2u_module_id) !== false) {
 					unset($unpaired_rex_modules[$rex_id]);
 				}
 			}
@@ -417,9 +417,9 @@ class D2UModule {
 	private $d2u_module_id = "";
 	
 	/**
-	 * @var bool TRUE if autoupdate ist activated
+	 * @var bool true if autoupdate ist activated
 	 */
-	private $autoupdate = FALSE;
+	private $autoupdate = false;
 
 	/**
 	 * @var string Folder within addon, in which modules can be found. Trailing
@@ -465,7 +465,7 @@ class D2UModule {
 	 * Activate autoupdate.
 	 */
 	public function activateAutoupdate() {
-		$this->autoupdate = TRUE;
+		$this->autoupdate = true;
 		$this->setAttributes();
 	}
 
@@ -473,7 +473,7 @@ class D2UModule {
 	 * Disable autoupdate.
 	 */
 	public function disableAutoupdate() {
-		$this->autoupdate = FALSE;
+		$this->autoupdate = false;
 		$this->setAttributes();
 	}
 
@@ -533,11 +533,11 @@ class D2UModule {
 
 	/**
 	 * Initializes object in Redaxo context: sets Redaxo module id and folders
-	 * @param rex_addon Redaxo Addon module belongs to
+	 * @param rex_addon_interface|rex_addon Redaxo Addon module belongs to
 	 * @param string Complete folder string, in which module files can be found.
 	 * Trailing slash must be included.
 	 */
-	public function initRedaxoContext(rex_addon $module_addon, string $module_folder) {
+	public function initRedaxoContext(rex_addon_interface $module_addon, string $module_folder) {
 		$this->rex_addon = $module_addon;
 		$sql = rex_sql::factory();
 		$sql->setTable(rex::getTablePrefix(). 'module');
@@ -559,13 +559,13 @@ class D2UModule {
 	/**
 	 * Installes or updates the module in redaxo module table.
 	 * @param int Redaxo module id, if not passed, already available ID is taken.
-	 * @return bool TRUE if installed, otherwise FALSE
+	 * @return bool true if installed, otherwise false
 	 */
 	public function install($rex_module_id = 0) {
 		if(file_exists($this->module_folder . D2UModule::MODULE_INSTALL)) {
 			$success = include $this->module_folder . D2UModule::MODULE_INSTALL;
 			if(!$success) {
-				return FALSE;
+				return false;
 			}
 		}
 	
@@ -580,7 +580,7 @@ class D2UModule {
 		$insertmod->setValue('input', file_get_contents($this->module_folder . D2UModule::MODULE_INPUT));
 		$insertmod->setValue('output', file_get_contents($this->module_folder . D2UModule::MODULE_OUTPUT));
 		$insertmod->setValue('revision', $this->revision);
-		if($this->rex_module_id == 0) {
+		if($this->rex_module_id === 0) {
 			$insertmod->addGlobalCreateFields();
 			$insertmod->insert();
 			$this->rex_module_id = $insertmod->getLastId();
@@ -596,7 +596,7 @@ class D2UModule {
 		// Delete addon cache for new styles could have been added
 		d2u_addon_frontend_helper::deleteCache();
 		
-		return TRUE;
+		return true;
 	}
 	
 	/**
@@ -616,13 +616,13 @@ class D2UModule {
 	/**
 	 * Static method equivalent to isInstalled()
 	 * @param string $d2u_module_id D2U Module ID, e.g. "03-2"
-	 * @return bool TRUE if D2U module is installed, otherwise FALSE
+	 * @return bool true if D2U module is installed, otherwise false
 	 */
 	public static function isModuleIDInstalled($d2u_module_id) {
 		$query = 'SELECT * FROM ' . \rex::getTablePrefix() . 'module WHERE `key` = "d2u_'. $d2u_module_id .'"';
 		$result = rex_sql::factory();
 		$result->setQuery($query);
-		return $result->getRows() > 0 ? TRUE : FALSE;
+		return $result->getRows() > 0 ? true : false;
 	}
 
 	/**
@@ -635,10 +635,10 @@ class D2UModule {
 			$result = rex_sql::factory();
 			$result->setQuery($query);
 			if($result->getRows() > 0 && $result->getValue("revision") >= $this->revision) {
-				return FALSE;
+				return false;
 			}
 		}
-		return TRUE;
+		return true;
 	}
 
 	/**

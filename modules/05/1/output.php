@@ -30,10 +30,10 @@ else if($link_type == "d2u_machinery_machine") {
 		if($machine_id > 0) {
 			$machine = new Machine($machine_id, rex_clang::getCurrentId());
 			if(\rex::isBackend()) {
-				print "Weiterleitung zu D2U Machinen - Maschine <a href='". $machine->getUrl(TRUE) ."'>". $machine->name ."</a>";
+				print "Weiterleitung zu D2U Machinen - Maschine <a href='". $machine->getUrl(true) ."'>". $machine->name ."</a>";
 			}
 			else {
-				$forward_url = $machine->getUrl(TRUE);
+				$forward_url = $machine->getUrl(true);
 			}
 		}
 	}
@@ -47,10 +47,10 @@ else if($link_type == "d2u_machinery_industry_sector") {
 		if($industry_sector_id > 0) {
 			$industry_sector = new IndustrySector($industry_sector_id, rex_clang::getCurrentId());
 			if(\rex::isBackend()) {
-				print "Weiterleitung zu D2U Machinen - Branche <a href='". $industry_sector->getUrl(TRUE) ."'>". $industry_sector->name ."</a>";
+				print "Weiterleitung zu D2U Machinen - Branche <a href='". $industry_sector->getUrl(true) ."'>". $industry_sector->name ."</a>";
 			}
 			else {
-				$forward_url = $industry_sector->getUrl(TRUE);
+				$forward_url = $industry_sector->getUrl(true);
 			}
 		}
 	}
@@ -64,10 +64,10 @@ else if($link_type == "d2u_machinery_used_machine") {
 		if($used_machine_id > 0) {
 			$used_machine = new UsedMachine($used_machine_id, rex_clang::getCurrentId());
 			if(\rex::isBackend()) {
-				print "Weiterleitung zu D2U Machinen - Branche <a href='". $used_machine->getUrl(TRUE) ."'>". $used_machine->name ."</a>";
+				print "Weiterleitung zu D2U Machinen - Branche <a href='". $used_machine->getUrl(true) ."'>". $used_machine->name ."</a>";
 			}
 			else {
-				$forward_url = $used_machine->getUrl(TRUE);
+				$forward_url = $used_machine->getUrl(true);
 			}
 		}
 	}
@@ -81,10 +81,10 @@ else if($link_type == "d2u_immo_property") {
 		if($property_id > 0) {
 			$property = new \D2U_Immo\Property($property_id, rex_clang::getCurrentId());
 			if(\rex::isBackend()) {
-				print "Weiterleitung zu D2U Immobilien - Immobilie <a href='". $property->getUrl(TRUE) ."'>". $property->name ."</a>";
+				print "Weiterleitung zu D2U Immobilien - Immobilie <a href='". $property->getUrl(true) ."'>". $property->name ."</a>";
 			}
 			else {
-				$forward_url = $property->getUrl(TRUE);
+				$forward_url = $property->getUrl(true);
 			}
 		}
 	}
@@ -98,11 +98,11 @@ else if($link_type == "d2u_courses_category") {
 		if($category_id > 0) {
 			$category = new \D2U_Courses\Category($category_id);
 			if(\rex::isBackend()) {
-				print "Weiterleitung zu D2U Veranstaltungen - Kategorie <a href='". $category->getUrl(TRUE) ."'>". $category->name ."</a>";
+				print "Weiterleitung zu D2U Veranstaltungen - Kategorie <a href='". $category->getUrl(true) ."'>". $category->name ."</a>";
 			}
 			else {
 				if($category->isOnline()) {
-					$forward_url = $category->getUrl(TRUE);
+					$forward_url = $category->getUrl(true);
 				}
 			}
 		}

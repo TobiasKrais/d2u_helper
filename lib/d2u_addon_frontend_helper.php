@@ -117,7 +117,7 @@ class d2u_addon_frontend_helper {
 			$alternate_URLs = d2u_references_frontend_helper::getAlternateURLs();
 		}
 		else {
-			foreach (rex_clang::getAllIds(TRUE) as $clang_id) {
+			foreach (rex_clang::getAllIds(true) as $clang_id) {
 				$article = rex_article::getCurrent($clang_id);
 				if($article->isOnline()) {
 					$alternate_URLs[$clang_id] = $article->getUrl();
@@ -134,7 +134,7 @@ class d2u_addon_frontend_helper {
 	 */
 	public static function getBreadcrumbs() {
 		$startarticle = rex_article::get(rex_article::getSiteStartArticleId());
-		$breadcrumb_start_only = TRUE;
+		$breadcrumb_start_only = true;
 		$breadcrumbs = '<a href="' . $startarticle->getUrl() . '"><span class="fa-icon fa-home"></span></a>';
 		$current_article = rex_article::getCurrent();
 		$path = $current_article->getPathAsArray();
@@ -142,48 +142,48 @@ class d2u_addon_frontend_helper {
 		foreach ($path as $id) {
 			$article = rex_category::get($id);
 			if($id != rex_article::getSiteStartArticleId()) {
-				$breadcrumb_start_only = FALSE;
+				$breadcrumb_start_only = false;
 				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
 			}
 			else {
-				$breadcrumb_start_only = TRUE;
+				$breadcrumb_start_only = true;
 				$breadcrumbs = '<a href="' . $startarticle->getUrl() . '"><span class="fa-icon fa-home"></span></a>';
 			}
 		}
 		// Articles
 		if(!$current_article->isStartArticle() && !$current_article->isSiteStartArticle()) {
 			$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $current_article->getUrl() . '">' . $current_article->getName() . '</a>';
-			$breadcrumb_start_only = FALSE;
+			$breadcrumb_start_only = false;
 		}
 		// Addons
 		if(rex_addon::get('d2u_courses')->isAvailable()) {
 			foreach(d2u_courses_frontend_helper::getBreadcrumbs() as $breadcrumb) {
 				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-				$breadcrumb_start_only = FALSE;
+				$breadcrumb_start_only = false;
 			}
 		}
 		if(rex_addon::get('d2u_immo')->isAvailable()) {
 			foreach(d2u_immo_frontend_helper::getBreadcrumbs() as $breadcrumb) {
 				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-				$breadcrumb_start_only = FALSE;
+				$breadcrumb_start_only = false;
 			}
 		}
 		if(rex_addon::get('d2u_jobs')->isAvailable()) {
 			foreach(d2u_jobs_frontend_helper::getBreadcrumbs() as $breadcrumb) {
 				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-				$breadcrumb_start_only = FALSE;
+				$breadcrumb_start_only = false;
 			}
 		}
 		if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			foreach(d2u_machinery_frontend_helper::getBreadcrumbs() as $breadcrumb) {
 				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-				$breadcrumb_start_only = FALSE;
+				$breadcrumb_start_only = false;
 			}
 		}
 		if(rex_addon::get('d2u_references')->isAvailable()) {
 			foreach(d2u_references_frontend_helper::getBreadcrumbs() as $breadcrumb) {
 				$breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-				$breadcrumb_start_only = FALSE;
+				$breadcrumb_start_only = false;
 			}
 		}
 		return ($breadcrumb_start_only ? "" : $breadcrumbs);
@@ -240,7 +240,7 @@ class d2u_addon_frontend_helper {
 
 			// Write to cache
 			if(!is_dir(rex_path::addonCache('d2u_helper'))) {
-				mkdir(rex_path::addonCache('d2u_helper'), 0755, TRUE);
+				mkdir(rex_path::addonCache('d2u_helper'), 0755, true);
 			}
 			file_put_contents(rex_path::addonCache('d2u_helper', 'modules.css'), self::prepareCSS($css));
 
@@ -270,7 +270,7 @@ class d2u_addon_frontend_helper {
 
 			// Write to cache
 			if(!is_dir(rex_path::addonCache('d2u_helper'))) {
-				mkdir(rex_path::addonCache('d2u_helper'), 0755, TRUE);
+				mkdir(rex_path::addonCache('d2u_helper'), 0755, true);
 			}
 			file_put_contents(rex_path::addonCache('d2u_helper', 'modules.js'), $js);
 
@@ -354,7 +354,7 @@ class d2u_addon_frontend_helper {
 	 * @param string $label Field label
 	 * @param int $microtime Microtime value defined in field
 	 * @param int $seconds to wait
-	 * @return bool TRUE if user took long enougth to fill out fields
+	 * @return bool true if user took long enougth to fill out fields
 	 */
 	public static function yform_validate_timer($label, $microtime, $seconds) {
 		if (($microtime + $seconds) > microtime(true)) {

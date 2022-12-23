@@ -51,7 +51,7 @@
 	$ads = [];
 	if(rex_plugin::get('d2u_immo', 'window_advertising')->isInstalled()) {
 		$properties = D2U_Immo\Property::getAllWindowAdvertisingProperties(rex_clang::getCurrentId());
-		$ads = D2U_Immo\Advertisement::getAll(rex_clang::getCurrentId(), TRUE);
+		$ads = D2U_Immo\Advertisement::getAll(rex_clang::getCurrentId(), true);
 	}
 	// Mix - not merge - arrays
 	$all_data = [];
@@ -129,11 +129,11 @@
 					<div id="immo_advertising" class="carousel slide" data-ride="carousel"<?php print $interval ?> data-cycle="true">
 						<div class="carousel-inner" role="listbox">
 							<?php
-								$active = TRUE;
+								$active = true;
 								foreach($all_data as $data_row) {
 									print '<div class="carousel-item'.  ($active ? ' active' : '') .'">';
 									print '<div class="row">';
-									$active = FALSE;
+									$active = false;
 									if($data_row instanceof D2U_Immo\Advertisement) {
 										$advertisement = $data_row;
 										print '<div class="col-12 contact-advertising"></div>';
@@ -341,10 +341,10 @@
 											if($property->firing_type > 0) {
 												print '<div class="col-6"><ul><li>'. $tag_open .'d2u_immo_firing_type'. $tag_close .':</li></ul></div>';
 												print '<div class="col-6">';
-												$first_element = TRUE;
+												$first_element = true;
 												foreach($property->firing_type as $firing_type) {
 													print ($first_element ? "" : ", ") . $tag_open .'d2u_immo_firing_type_'. $firing_type . $tag_close;
-													$first_element = FALSE;
+													$first_element = false;
 												}
 												print '</div>';
 											}

@@ -12,7 +12,7 @@ abstract class ACronJob {
 	
 	/**
 	 * Activate CronJob.
-	 * @return bool TRUE if successful, otherwise FALSE
+	 * @return bool true if successful, otherwise false
 	 */
 	public function activate() {
 		if(\rex_addon::get('cronjob')->isAvailable() && self::isInstalled()) {
@@ -25,32 +25,32 @@ abstract class ACronJob {
 			
 			self::setConfig();
 			
-			return TRUE;
+			return true;
 		}
 		else {
-			return FALSE;
+			return false;
 		}
 	}
 	
 	/**
 	 * Deactivate CronJob.
-	 * @return bool TRUE if successful, otherwise FALSE
+	 * @return bool true if successful, otherwise false
 	 */
 	public function deactivate() {
 		if(\rex_addon::get('cronjob')->isAvailable() && self::isInstalled()) {
 			$query = "UPDATE `". \rex::getTablePrefix() ."cronjob` SET status = 0 WHERE `name` = '". $this->name ."'";
 			$sql = \rex_sql::factory();
 			$sql->setQuery($query);
-			return TRUE;
+			return true;
 		}
 		else {
-			return FALSE;
+			return false;
 		}
 	}
 
 	/**
 	 * Delete CronJob.
-	 * @return bool TRUE if successful, otherwise FALSE
+	 * @return bool true if successful, otherwise false
 	 */
 	public function delete() {
 		if(\rex_addon::get('cronjob')->isAvailable()) {
@@ -59,7 +59,7 @@ abstract class ACronJob {
 			$sql->setQuery($query);
 			return !$sql->hasError();
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -75,7 +75,7 @@ abstract class ACronJob {
 
 	/**
 	 * Checks if  cron job is installed.
-	 * @return bool TRUE if CronJob is installed, otherwise FALSE.
+	 * @return bool true if CronJob is installed, otherwise false.
 	 */
 	public function isInstalled() {
 		if(\rex_addon::get('cronjob')->isAvailable()) {
@@ -83,10 +83,10 @@ abstract class ACronJob {
 			$sql = \rex_sql::factory();
 			$sql->setQuery($query);
 			if($sql->getRows() > 0) {
-				return TRUE;
+				return true;
 			}
 			else {
-				return FALSE;
+				return false;
 			}
 		}
 	}
@@ -97,9 +97,9 @@ abstract class ACronJob {
 	 * @param string $description Description
 	 * @param string $php_code PHP Code, please just one line
 	 * @param string $interval JSON encoded interval, e.g. {\"minutes\":[0],\"hours\":[0],\"days\":\"all\",\"weekdays\":[1],\"months\":\"all\"}
-	 * @param bool $activate TRUE if CronJob should be activated, otherwise FALSE
+	 * @param bool $activate true if CronJob should be activated, otherwise false
 	 */
-	protected function save($description, $php_code, $interval, $activate = TRUE) {
+	protected function save($description, $php_code, $interval, $activate = true) {
 		if(\rex_addon::get('cronjob')->isAvailable()) {
 			$query = "INSERT INTO `". \rex::getTablePrefix() ."cronjob` (`name`, `description`, `type`, `parameters`, `interval`, `nexttime`, `environment`, `execution_moment`, `execution_start`, `status`, `createdate`, `createuser`) VALUES "
 				."('". $this->name ."', '". $description ."', 'rex_cronjob_phpcode', '{\"rex_cronjob_phpcode_code\":\"". $php_code ."\"}', '". $interval ."', '". date("Y-m-d H:i:s", strtotime("+5 min")) ."', '|frontend|backend|', 0, '1970-01-01 01:00:00', ". ($activate ? "1" : "0") .", CURRENT_TIMESTAMP, '". \rex::getUser()->getLogin() ."');";

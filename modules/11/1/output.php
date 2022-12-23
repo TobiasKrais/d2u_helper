@@ -19,8 +19,8 @@
 	
 	print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
 	
-	$ask_address = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
-	$show_gdpr_hint = "REX_VALUE[3]" == 'true' ? TRUE : FALSE;
+	$ask_address = "REX_VALUE[2]" == 'true' ? true : false;
+	$show_gdpr_hint = "REX_VALUE[3]" == 'true' ? true : false;
 
 	// Form
 	$yform = new rex_yform();
@@ -83,7 +83,7 @@
 
 	$yform->setObjectparams("form_action", rex_getUrl(rex_article::getCurrentId()));
 	$yform->setObjectparams("Error-occured", \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
-	$yform->setObjectparams("real_field_names", TRUE);
+	$yform->setObjectparams("real_field_names", true);
 
 	// action - showtext
 	$yform->setActionField("showtext", [\Sprog\Wildcard::get('d2u_helper_module_form_thanks')]);

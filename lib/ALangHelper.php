@@ -50,12 +50,12 @@ abstract class ALangHelper {
 	 * @param string $key Wildcard key
 	 * @param string $value Wildcard value
 	 * @param int $clang_id Wildcard language ID
-	 * @param bool $overwrite Overwrite value if key already exists. Default is FALSE.
-	 * @return bool TRUE if successfully saved
+	 * @param bool $overwrite Overwrite value if key already exists. Default is false.
+	 * @return bool true if successfully saved
 	 */
-	protected static function saveValue($key, $value, $clang_id, $overwrite = FALSE) {
+	protected static function saveValue($key, $value, $clang_id, $overwrite = false) {
 		if(!\rex_addon::get('sprog')->isAvailable()) {
-			return FALSE;
+			return false;
 		}
 		
 		$select_pid_query = "SELECT pid FROM ". \rex::getTablePrefix() ."sprog_wildcard WHERE wildcard = '". $key ."' AND clang_id = ". $clang_id .";";

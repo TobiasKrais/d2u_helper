@@ -12,7 +12,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['cta_box_article_ids'] = $linklist_ids["REX_INPUT_LINKLIST"][1];
 	
 	// Special treatment for media fields
-	$input_media = (array) rex_post('REX_INPUT_MEDIA', 'array', []);
+	$input_media = rex_post('REX_INPUT_MEDIA', 'array', []);
 	$settings['custom_css'] = $input_media['custom_css'];
 	$settings['template_header_pic'] = $input_media['template_header_pic'];
 	$settings['template_logo'] = $input_media['template_logo'];
@@ -25,7 +25,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 	$settings['template_03_2_header_pic'] = isset($input_media['template_03_2_header_pic']) ? $input_media['template_03_2_header_pic'] : '';
 	$settings['template_03_2_footer_pic'] = isset($input_media['template_03_2_footer_pic']) ? $input_media['template_03_2_footer_pic'] : '';
 
-	$input_media_list = (array) rex_post('REX_INPUT_MEDIALIST', 'array', []);
+	$input_media_list = rex_post('REX_INPUT_MEDIALIST', 'array', []);
 	foreach(rex_clang::getAllIds() as $clang_id) {
 		$settings['template_04_header_slider_pics_clang_'. $clang_id] = isset($input_media_list[$clang_id]) ? $input_media_list[$clang_id] : '';
 	}
@@ -169,10 +169,10 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						d2u_addon_backend_helper::form_select('d2u_helper_settings_header_media_type', 'settings[template_header_media_manager_type]', $options_media_manager, [$this->getConfig('template_header_media_manager_type')]);
 						d2u_addon_backend_helper::form_infotext('d2u_helper_settings_header_media_type_info', 'template_header_media_manager_type_info');
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_logo', 'template_logo', $this->getConfig('template_logo'));
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_bg', 'settings[navi_color_bg]', $this->getConfig('navi_color_bg'), FALSE, FALSE, "color");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_font', 'settings[navi_color_font]', $this->getConfig('navi_color_font'), FALSE, FALSE, "color");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_hover_bg', 'settings[navi_color_hover_bg]', $this->getConfig('navi_color_hover_bg'), FALSE, FALSE, "color");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_hover_font', 'settings[navi_color_hover_font]', $this->getConfig('navi_color_hover_font'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_bg', 'settings[navi_color_bg]', $this->getConfig('navi_color_bg'), false, false, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_font', 'settings[navi_color_font]', $this->getConfig('navi_color_font'), false, false, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_hover_bg', 'settings[navi_color_hover_bg]', $this->getConfig('navi_color_hover_bg'), false, false, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_navi_color_hover_font', 'settings[navi_color_hover_font]', $this->getConfig('navi_color_hover_font'), false, false, "color");
 						if(count(rex_clang::getAllIds()) > 1) {
 							d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_header_lang_icon', 'header_lang_icon', $this->getConfig('header_lang_icon'));
 						}
@@ -181,11 +181,11 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 						print '<h3>'. rex_i18n::msg('d2u_helper_settings_article') .'</h3>';
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_breadcrumbs', 'settings[show_breadcrumbs]', 'true', $this->getConfig('show_breadcrumbs') == 'true');
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_subhead_include_articlename', 'settings[subhead_include_articlename]', 'true', $this->getConfig('subhead_include_articlename') == 'true');
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_subhead_color_bg', 'settings[subhead_color_bg]', $this->getConfig('subhead_color_bg'), FALSE, FALSE, "color");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_subhead_color_font', 'settings[subhead_color_font]', $this->getConfig('subhead_color_font'), FALSE, FALSE, "color");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_bg', 'settings[article_color_bg]', $this->getConfig('article_color_bg'), FALSE, FALSE, "color");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_h', 'settings[article_color_h]', $this->getConfig('article_color_h'), FALSE, FALSE, "color");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_box', 'settings[article_color_box]', $this->getConfig('article_color_box'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_subhead_color_bg', 'settings[subhead_color_bg]', $this->getConfig('subhead_color_bg'), false, false, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_subhead_color_font', 'settings[subhead_color_font]', $this->getConfig('subhead_color_font'), false, false, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_bg', 'settings[article_color_bg]', $this->getConfig('article_color_bg'), false, false, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_h', 'settings[article_color_h]', $this->getConfig('article_color_h'), false, false, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_box', 'settings[article_color_box]', $this->getConfig('article_color_box'), false, false, "color");
 
 						print '<hr style="border-top: 1px solid #333">';
 						print '<h3>'. rex_i18n::msg('d2u_helper_settings_footer') .'</h3>';
@@ -199,9 +199,9 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 							'text' => rex_i18n::msg('d2u_helper_settings_footer_type_option_text'),
 						];
 						d2u_addon_backend_helper::form_select('d2u_helper_settings_footer_type', 'settings[footer_type]', $options_footer, [$this->getConfig('footer_type')]);
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_bg', 'settings[footer_color_bg]', $this->getConfig('footer_color_bg'), FALSE, FALSE, "color");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_box', 'settings[footer_color_box]', $this->getConfig('footer_color_box'), FALSE, FALSE, "color");
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_font', 'settings[footer_color_font]', $this->getConfig('footer_color_font'), FALSE, FALSE, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_bg', 'settings[footer_color_bg]', $this->getConfig('footer_color_bg'), false, false, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_box', 'settings[footer_color_box]', $this->getConfig('footer_color_box'), false, false, "color");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_font', 'settings[footer_color_font]', $this->getConfig('footer_color_font'), false, false, "color");
 						d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_cta_box', 'settings[show_cta_box]', 'true', $this->getConfig('show_cta_box') == 'true');
 						d2u_addon_backend_helper::form_linklistfield('d2u_helper_settings_article_ids_cta_box', 1, is_array(explode(',', $this->getConfig('cta_box_article_ids'))) ? explode(',', $this->getConfig('cta_box_article_ids')) : [], rex_clang::getStartId());
 					?>
@@ -224,18 +224,18 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 					</script>
 
 					<?php
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_company', 'settings[footer_text_company]', $this->getConfig('footer_text_company'), FALSE, FALSE);
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_ceo', 'settings[footer_text_ceo]', $this->getConfig('footer_text_ceo'), FALSE, FALSE);
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_street', 'settings[footer_text_street]', $this->getConfig('footer_text_street'), FALSE, FALSE);
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_zip_city', 'settings[footer_text_zip_city]', $this->getConfig('footer_text_zip_city'), FALSE, FALSE);
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_phone', 'settings[footer_text_phone]', $this->getConfig('footer_text_phone'), FALSE, FALSE);
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_mobile', 'settings[footer_text_mobile]', $this->getConfig('footer_text_mobile'), FALSE, FALSE);
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_fax', 'settings[footer_text_fax]', $this->getConfig('footer_text_fax'), FALSE, FALSE);
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_email', 'settings[footer_text_email]', $this->getConfig('footer_text_email'), FALSE, FALSE);
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_facebook_link', 'settings[footer_facebook_link]', $this->getConfig('footer_facebook_link'), FALSE, FALSE);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_company', 'settings[footer_text_company]', $this->getConfig('footer_text_company'), false, false);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_ceo', 'settings[footer_text_ceo]', $this->getConfig('footer_text_ceo'), false, false);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_street', 'settings[footer_text_street]', $this->getConfig('footer_text_street'), false, false);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_zip_city', 'settings[footer_text_zip_city]', $this->getConfig('footer_text_zip_city'), false, false);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_phone', 'settings[footer_text_phone]', $this->getConfig('footer_text_phone'), false, false);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_mobile', 'settings[footer_text_mobile]', $this->getConfig('footer_text_mobile'), false, false);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_fax', 'settings[footer_text_fax]', $this->getConfig('footer_text_fax'), false, false);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text_email', 'settings[footer_text_email]', $this->getConfig('footer_text_email'), false, false);
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_facebook_link', 'settings[footer_facebook_link]', $this->getConfig('footer_facebook_link'), false, false);
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_footer_facebook_icon', 'footer_facebook_icon', $this->getConfig('footer_facebook_icon'));
 						d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_footer_logo', 'footer_logo', $this->getConfig('footer_logo'));
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text', 'settings[footer_text]', $this->getConfig('footer_text'), FALSE, FALSE, "text");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_text', 'settings[footer_text]', $this->getConfig('footer_text'), false, false, "text");
 					?>
 					<script>
 						function footer_type_changer() {
@@ -395,8 +395,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								if($d2u_template->getD2UId() === "03-2" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_2_header_pic', 'template_03_2_header_pic', $this->getConfig('template_03_2_header_pic'));
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_03_2_footer_pic', 'template_03_2_footer_pic', $this->getConfig('template_03_2_footer_pic'));
-									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_margin_top', 'settings[template_03_2_margin_top]', $this->getConfig('template_03_2_margin_top'), FALSE, FALSE, "number");
-									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_time_show_ad', 'settings[template_03_2_time_show_ad]', $this->getConfig('template_03_2_time_show_ad'), FALSE, FALSE, "number");
+									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_margin_top', 'settings[template_03_2_margin_top]', $this->getConfig('template_03_2_margin_top'), false, false, "number");
+									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_time_show_ad', 'settings[template_03_2_time_show_ad]', $this->getConfig('template_03_2_time_show_ad'), false, false, "number");
 								}
 								if(($d2u_template->getD2UId() === "04-1" || $d2u_template->getD2UId() === "04-2" || $d2u_template->getD2UId() === "04-3") && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'full', $this->getConfig('template_04_header_slider_pics_full_width') == 'full');
@@ -415,7 +415,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 												'top' => rex_i18n::msg('d2u_helper_settings_template_slogan_position_top'),
 											];
 											d2u_addon_backend_helper::form_select('d2u_helper_settings_template_slogan_position', 'settings[template_slogan_position]', $options_slogan, [$this->getConfig('template_slogan_position', 'slider')]);
-											d2u_addon_backend_helper::form_textarea('d2u_helper_settings_template_04_1_slogan', 'settings[template_04_1_slider_slogan_clang_' . $rex_clang->getId() . ']', $this->getConfig('template_04_1_slider_slogan_clang_' . $rex_clang->getId()), 3, FALSE, FALSE, FALSE);
+											d2u_addon_backend_helper::form_textarea('d2u_helper_settings_template_04_1_slogan', 'settings[template_04_1_slider_slogan_clang_' . $rex_clang->getId() . ']', $this->getConfig('template_04_1_slider_slogan_clang_' . $rex_clang->getId()), 3, false, false, false);
 										}
 										print '</div>';
 									}
@@ -430,8 +430,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 								}
 								if($d2u_template->getD2UId() === "05-1" && $d2u_template->isInstalled()) {
 									d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_template_05_1_logo', 'template_logo_2', $this->getConfig('template_logo_2'));
-									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_05_1_logo_link', 'settings[template_logo_2_link]', $this->getConfig('template_logo_2_link'), FALSE, FALSE);
-									d2u_addon_backend_helper::form_textarea('d2u_helper_settings_template_05_1_info_text', 'settings[template_05_1_info_text]', $this->getConfig('template_05_1_info_text'), 5, FALSE, FALSE, TRUE);
+									d2u_addon_backend_helper::form_input('d2u_helper_settings_template_05_1_logo_link', 'settings[template_logo_2_link]', $this->getConfig('template_logo_2_link'), false, false);
+									d2u_addon_backend_helper::form_textarea('d2u_helper_settings_template_05_1_info_text', 'settings[template_05_1_info_text]', $this->getConfig('template_05_1_info_text'), 5, false, false, true);
 								}
 							}
 						}
@@ -442,7 +442,7 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 				<legend><small><i class="rex-icon fa-google"></i></small> <?php echo rex_i18n::msg('d2u_helper_settings_analytics'); ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
-						d2u_addon_backend_helper::form_input('d2u_helper_settings_analytics_maps_key', 'settings[maps_key]', $this->getConfig('maps_key'), FALSE, FALSE, "text");
+						d2u_addon_backend_helper::form_input('d2u_helper_settings_analytics_maps_key', 'settings[maps_key]', $this->getConfig('maps_key'), false, false, "text");
 					?>
 				</div>
 			</fieldset>

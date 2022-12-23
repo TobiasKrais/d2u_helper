@@ -31,13 +31,13 @@ $youtube_previewimage_url = 'https://img.youtube.com/vi/'. $youtube_id .'/hqdefa
 $youtube_videoinfo_url = 'https://www.youtube.com/oembed?format=json&url=https%3A//youtube.com/watch%3Fv%3D'. $youtube_id;
 $previewimage_target_filename = 'youtube-'. $youtube_id .'.jpg';
 
-$show_title = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
+$show_title = "REX_VALUE[2]" == 'true' ? true : false;
 
 if($youtube_id != "") {
 	// Copy preview image
 	if(!is_dir(rex_path::addonCache('d2u_helper')) || !file_exists(rex_path::addonCache('d2u_helper', $previewimage_target_filename))) {
 		if(!is_dir(rex_path::addonCache('d2u_helper'))) {
-			mkdir(rex_path::addonCache('d2u_helper'), 0755, TRUE);
+			mkdir(rex_path::addonCache('d2u_helper'), 0755, true);
 		}
 		copy($youtube_previewimage_url, rex_path::addonCache('d2u_helper', $previewimage_target_filename));
 	}

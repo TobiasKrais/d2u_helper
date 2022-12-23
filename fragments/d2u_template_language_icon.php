@@ -1,5 +1,5 @@
 <?php
-$clangs = rex_clang::getAll(TRUE);
+$clangs = rex_clang::getAll(true);
 if(count($clangs) > 1) {
 ?>
 <button id="lang_chooser_button" data-toggle="modal" data-target="#lang_chooser_modal">

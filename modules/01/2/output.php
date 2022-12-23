@@ -26,7 +26,7 @@ else if($link_type == "article") {
 }
 
 $text_1 = 'REX_VALUE[id=2 output="html"]';
-$show_text_2 = "REX_VALUE[10]" == 'true' ? TRUE : FALSE;
+$show_text_2 = "REX_VALUE[10]" == 'true' ? true : false;
 $text_2 = 'REX_VALUE[id=11 output="html"]';
 
 // Picture

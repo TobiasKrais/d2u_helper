@@ -1,14 +1,14 @@
 <?php
 if(!rex_addon::get('sprog')->isAvailable()) {
 	print rex_view::error(rex_i18n::msg('d2u_helper_modules_error_sprog'));
-	$return = $return ? FALSE : $return;
+	$return = $return ? false : $return;
 }
 
 $sql = rex_sql::factory();
 
 // insert module specific media manager type
 $sql->setQuery("SELECT * FROM ". \rex::getTablePrefix() ."media_manager_type WHERE name = 'd2u_helper_module_06-1_preview'");
-if($sql->getRows() == 0) {
+if(intval($sql->getRows()) === 0) {
 	$sql->setQuery("INSERT INTO ". \rex::getTablePrefix() ."media_manager_type (`status`, `name`, `description`) VALUES
 		(0, 'd2u_helper_module_06-1_preview', 'D2U Helper Modul 06-1: Vorschaubild des Youtube Videos');");
 	$last_id = $sql->getLastId();

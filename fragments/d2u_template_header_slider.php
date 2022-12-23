@@ -19,7 +19,7 @@
 			}
 		}
 		
-		if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", FALSE) == FALSE) {
+		if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", false) == false) {
 			// START Only if slider background slider is shown
 	?>
 	<div id="background">
@@ -87,7 +87,7 @@
 								// Slogan
 								$article = rex_article::getCurrent();
 								$slogan_text = $article->getValue('art_slogan') != "" ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId());
-								$slogan = '<span class="slogan-text-row">'. str_replace('<br>', '</span><span class="slogan-text-row">', nl2br($slogan_text, FALSE)) .'</span>';
+								$slogan = '<span class="slogan-text-row">'. str_replace('<br>', '</span><span class="slogan-text-row">', nl2br($slogan_text, false)) .'</span>';
 								if($slogan_text != "" && $d2u_helper->getConfig('template_slogan_position', 'slider') == 'slider') {
 									print '<div class="slogan"><div class="container"><span class="slogan-text">'. $slogan .'</span></div></div>';
 								}
@@ -97,7 +97,7 @@
 						print '</div>';
 
 						// Left and right controls
-						if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", FALSE)) {
+						if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", false)) {
 							print '<a class="carousel-control-prev" href="#headerCarousel" role="button" data-slide="prev">';
 							print '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
 							print '<span class="sr-only">Previous</span>';
@@ -109,7 +109,7 @@
 						}
 						print '</div>';
 					}
-		if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", FALSE) == FALSE) {
+		if($d2u_helper->getConfig("template_04_header_slider_pics_full_width", false) == false) {
 			// START Only if slider background slider is shown
 				?>
 			</div>

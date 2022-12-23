@@ -18,10 +18,10 @@ $d2u_helper = rex_addon::get("d2u_helper");
 
 // Get d2u_machinery stuff
 $d2u_machinery = rex_addon::get("d2u_machinery");
-$category = FALSE;
-$industry_sector = FALSE;
-$machine = FALSE;
-$used_machine = FALSE;
+$category = false;
+$industry_sector = false;
+$machine = false;
+$used_machine = false;
 
 $url_namespace = d2u_addon_frontend_helper::getUrlNamespace();
 $url_id = d2u_addon_frontend_helper::getUrlId();
@@ -163,7 +163,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 				?>
 				<div class="col-12 subhead-nav">
 					<?php
-						if($machine !== FALSE) {
+						if($machine !== false) {
 							print '<h1 class="subhead">'. ($machine->lang_name == "" ? $machine->name : $machine->lang_name) .'</h1>';
 							print '<ul class="nav nav-pills">';
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
@@ -193,7 +193,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_request"><span class="fa-icon fa-envelope-o d-block d-lg-none" title="'. $tag_open .'d2u_machinery_request'. $tag_close .'"></span><span class="d-none d-lg-block">'. $tag_open .'d2u_machinery_request'. $tag_close .'</span><div class="active-navi-pill"></div></a></li>';
 							print '</ul>';
 						}
-						else if($category !== FALSE && (count($category->getMachines()) > 0 || count($category->getUsedMachines()) > 0)) {
+						else if($category !== false && (count($category->getMachines()) > 0 || count($category->getUsedMachines()) > 0)) {
 							print '<h1 class="subhead">'. $category->name .'</h1>';
 							if((rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && $d2u_machinery->getConfig("show_categories_usage_areas", "hide") == "show")
 								|| $d2u_machinery->getConfig("show_techdata", "hide") == "show") {
@@ -208,7 +208,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 								print '</ul>';
 							}
 						}
-						else if($used_machine !== FALSE) {
+						else if($used_machine !== false) {
 							print '<h1 class="subhead">'. $used_machine->manufacturer .' '. $used_machine->name .'</h1>';
 							print '<ul class="nav nav-pills">';
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'<div class="active-navi-pill"></div></a></li>';

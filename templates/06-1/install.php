@@ -1,7 +1,7 @@
 <?php
 if(!rex_addon::get('metainfo')->isAvailable()) {
 	print rex_view::error(rex_i18n::msg('d2u_helper_templates_install_metainfo'));
-	return FALSE;
+	return false;
 }
 
 // Add art_file as Metainfo

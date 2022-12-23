@@ -606,7 +606,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 					$value = $this->replacements_english[$key];
 				}
 
-				$overwrite = rex_config::get('d2u_helper', 'lang_wildcard_overwrite', FALSE) === "true" ? TRUE : FALSE;
+				$overwrite = rex_config::get('d2u_helper', 'lang_wildcard_overwrite', false) === "true" ? true : false;
 				parent::saveValue($key, $value, $clang_id, $overwrite);
 			}
 		}

@@ -18,7 +18,7 @@ if($offset_lg_cols > 0) {
 }
 
 $text_1 = 'REX_VALUE[id=1 output="html"]';
-$show_text_2 = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
+$show_text_2 = "REX_VALUE[2]" == 'true' ? true : false;
 $text_2 = 'REX_VALUE[id=3 output="html"]';
 
 print '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';

@@ -1,12 +1,12 @@
 <?php
 if(!rex_addon::get('metainfo')->isAvailable()) {
 	print rex_view::error(rex_i18n::msg('d2u_helper_templates_install_metainfo'));
-	return FALSE;
+	return false;
 }
 
 if(!rex_addon::get('yrewrite')->isAvailable()) {
 	print rex_view::error(rex_i18n::msg('d2u_helper_templates_install_yrewrite'));
-	return FALSE;
+	return false;
 }
 
 // Add clang_icon as Metainfo

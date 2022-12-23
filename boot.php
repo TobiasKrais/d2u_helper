@@ -55,7 +55,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$addon = rex_addon::get("d2u_helper");
 	
 	// If insertion should be prevented, detect class "prevent_d2u_helper_styles"
-	if(strpos($ep->getSubject(), 'prevent_d2u_helper_styles') !== FALSE) {
+	if(strpos($ep->getSubject(), 'prevent_d2u_helper_styles') !== false) {
 		return;
 	}
 
@@ -178,7 +178,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 	if($filename) {
 		// Settings
 		$addon = rex_addon::get("d2u_helper");
-		$is_in_use = FALSE;
+		$is_in_use = false;
 		if(($addon->hasConfig("template_header_pic") && $addon->getConfig("template_header_pic") == $filename) ||
 				($addon->hasConfig("template_logo") && $addon->getConfig("template_logo") == $filename) ||
 				($addon->hasConfig("template_print_header_pic") && $addon->getConfig("template_print_header_pic") == $filename) ||
@@ -189,11 +189,11 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 				($addon->hasConfig("footer_facebook_icon") && $addon->getConfig("footer_facebook_icon") == $filename) ||
 				($addon->hasConfig("custom_css") && $addon->getConfig("custom_css") == $filename)
 			) {
-				$is_in_use = TRUE;
+				$is_in_use = true;
 		}
 		foreach(rex_clang::getAllIds() as $clang_id) {
-			if(($addon->hasConfig('template_04_header_slider_pics_clang_'. $clang_id) && strpos($addon->getConfig('template_04_header_slider_pics_clang_'. $clang_id), $filename) !== FALSE)) {
-				$is_in_use = TRUE;
+			if(($addon->hasConfig('template_04_header_slider_pics_clang_'. $clang_id) && strpos($addon->getConfig('template_04_header_slider_pics_clang_'. $clang_id), $filename) !== false)) {
+				$is_in_use = true;
 			}
 		}
 		if($is_in_use) {
@@ -205,7 +205,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 		}
 
 		// Templates
-		if(rex_config::get("d2u_helper", "check_media_template", FALSE)) {
+		if(rex_config::get("d2u_helper", "check_media_template", false)) {
 			$sql_template = \rex_sql::factory();
 			$query = 'SELECT DISTINCT id, name FROM ' . rex::getTablePrefix() . 'template WHERE content REGEXP ' . $sql_template->escape('(^|[^[:alnum:]+_-])'. $filename);
 			$sql_template->setQuery($query);
@@ -322,7 +322,7 @@ function sendD2UHelperTemplateCSS($d2u_template_id = "") {
 	if($d2u_template_id != "") {
 		$template_manager = new D2UTemplateManager(D2UTemplateManager::getD2UHelperTemplates());
 		$current_template = $template_manager->getTemplate($d2u_template_id);
-		if($current_template !== FALSE) {
+		if($current_template !== false) {
 			$css .= $current_template->getCSS();
 		}
 	}

@@ -1,7 +1,7 @@
 <?php
 $sql = rex_sql::factory();
 $sql->setQuery("SELECT * FROM ". \rex::getTablePrefix() ."media_manager_type WHERE name = 'd2u_helper_module_d2u_10-3'");
-if($sql->getRows() == 0) {
+if(intval($sql->getRows()) === 0) {
 	$sql->setQuery("INSERT INTO ". \rex::getTablePrefix() ."media_manager_type (`status`, `name`, `description`) VALUES
 		(0, 'd2u_helper_module_d2u_10-3', 'Vorschaubilder für Dateien im Modul Box mit Downloads (d2u_10-3)');");
 	$last_id = $sql->getLastId();

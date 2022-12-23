@@ -17,7 +17,7 @@ if($offset_lg_cols > 0) {
 	$offset_lg = " mr-lg-auto ml-lg-auto ";
 }
 
-$show_preview_pictures = "REX_VALUE[2]" == 'true' ? TRUE : FALSE;
+$show_preview_pictures = "REX_VALUE[2]" == 'true' ? true : false;
 
 // Number downloads per row
 $downloads_cols = 'col-12';
@@ -62,7 +62,7 @@ foreach($documents as $document) {
 		$title = $rex_document->getValue("med_title_". rex_clang::getCurrentId()) ?: ($rex_document->getTitle() ?: $document);
 
 		// Check permissions
-		$has_permission = TRUE;
+		$has_permission = true;
 		if(rex_plugin::get('ycom', 'media_auth')->isAvailable()) {
 			$has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create("", $document));
 		}
