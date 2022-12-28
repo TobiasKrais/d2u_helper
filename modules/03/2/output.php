@@ -62,7 +62,8 @@
 	
 	$type_thumb = "d2u_helper_gallery_thumb";
 	$type_detail = "d2u_helper_gallery_detail";
-	$pics = preg_grep('/^\s*$/s', explode(",", REX_MEDIALIST[1]), PREG_GREP_INVERT);
+	$pics_unfiltered = preg_grep('/^\s*$/s', explode(",", REX_MEDIALIST[1]), PREG_GREP_INVERT);
+	$pics = is_array($pics_unfiltered) ? $pics_unfiltered : [];
 	
 	$lightbox_id = rand();
 

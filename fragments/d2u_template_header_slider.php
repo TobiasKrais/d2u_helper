@@ -1,7 +1,8 @@
 <?php 
 	$d2u_helper = rex_addon::get("d2u_helper");
 	
-	$slider_pics = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
+	$slider_pics_unfiltered = preg_grep('/^\s*$/s', explode(",", $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
+	$slider_pics = is_array($slider_pics_unfiltered) ? $slider_pics_unfiltered : [];
 	if(count($slider_pics) > 0) {
 ?>
 <header>

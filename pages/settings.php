@@ -407,7 +407,8 @@ if (filter_input(INPUT_POST, "btn_save") == 'save') {
 										print '<dt><label></label></dt>';
 										print '<dd><b>'. rex_i18n::msg('d2u_helper_settings_lang_specific') .' '. $rex_clang->getName() .'</b></dd>';
 										print '</dl>';
-										$slider_pics = preg_grep('/^\s*$/s', explode(",", $this->getConfig('template_04_header_slider_pics_clang_'. $rex_clang->getId())), PREG_GREP_INVERT);
+										$slider_pics_unfiltered = preg_grep('/^\s*$/s', explode(",", $this->getConfig('template_04_header_slider_pics_clang_'. $rex_clang->getId())), PREG_GREP_INVERT);
+										$slider_pics = is_array($slider_pics_unfiltered) ? $slider_pics_unfiltered : [];
 										d2u_addon_backend_helper::form_medialistfield('d2u_helper_settings_template_04_slider_pics', $rex_clang->getId(), $slider_pics);
 										if($d2u_template->getD2UId() === "04-1" && $d2u_template->isInstalled()) {
 											$options_slogan = [
