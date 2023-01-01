@@ -1,5 +1,6 @@
 <?php
 /**
+ * @api
  * Class managing modules published by www.design-to-use.de
  *
  * @author Tobias Krais
@@ -22,7 +23,7 @@ class D2UModuleManager {
 	var $module_folder = "";
 
 	/**
-	 * @var rex_addon Redaxo Addon module belongs to
+	 * @var rex_addon_interface Redaxo Addon module belongs to
 	 */
 	private $module_addon;
 	
@@ -35,7 +36,7 @@ class D2UModuleManager {
 	 * @param string $addon_key Redaxo Addon name module belongs to, default "d2u_helper"
 	 */
 	public function __construct($d2u_modules, $module_folder = "", $addon_key = "d2u_helper") {
-		$module_folder = $module_folder ?: D2UModuleManager::MODULE_FOLDER;
+		$module_folder = $module_folder !== '' ? $module_folder : D2UModuleManager::MODULE_FOLDER;
 		$this->module_addon = rex_addon::get($addon_key);
 		$this->module_folder = $this->module_addon->getPath($module_folder);
 		// Path during addon update
@@ -54,7 +55,7 @@ class D2UModuleManager {
 	/**
 	 * Update modules.
 	 */
-	public function autoupdate() {
+	public function autoupdate():void {
 		foreach($this->d2u_modules as $module) {
 			// Only check autoupdate, not if needed. That would not work during addon update
 			if($module->isAutoupdateActivated()) {
@@ -70,12 +71,12 @@ class D2UModuleManager {
 	 * @param string $function Possible values: autoupdate, unlink
 	 * @param int $paired_module_id Redaxo module ID
 	 */
-	public function doActions($d2u_module_id, $function, $paired_module_id) {
+	public function doActions($d2u_module_id, $function, $paired_module_id):void {
 		// Form actions
 		for($i = 0; $i < count($this->d2u_modules); $i++) {
 			$module = $this->d2u_modules[$i];
-			if($module->getD2UId() == $d2u_module_id) {
-				if($function == "autoupdate") {
+			if($module->getD2UId() === $d2u_module_id) {
+				if($function === "autoupdate") {
 					if($module->isAutoupdateActivated()) {
 						$module->disableAutoupdate();
 						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_autoupdate_deactivated'));
@@ -85,7 +86,7 @@ class D2UModuleManager {
 						print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_autoupdate_activated'));
 					}
 				}
-				else if($function == "unlink") {
+				else if($function === "unlink") {
 					$module->unlink();
 					$this->d2u_modules[$i] = $module;
 					print rex_view::success($module->getD2UId() ." ". $module->getName() .": ". rex_i18n::msg('d2u_helper_modules_pair_unlinked'));
@@ -112,7 +113,7 @@ class D2UModuleManager {
 	public function getAutoCSS() {
 		$css = "";
 		foreach($this->d2u_modules as $module) {
-			if($module->isInstalled() && $module->getCSS() != "") {
+			if($module->isInstalled() && $module->getCSS() !== "") {
 				$css .= $module->getCSS() . PHP_EOL;
 			}
 		}
@@ -126,7 +127,7 @@ class D2UModuleManager {
 	public function getAutoJS() {
 		$js = "";
 		foreach($this->d2u_modules as $module) {
-			if($module->isInstalled() && $module->getJS() != "") {
+			if($module->isInstalled() && $module->getJS() !== "") {
 				$js .= $module->getJS() . PHP_EOL;
 			}
 		}
@@ -247,11 +248,13 @@ class D2UModuleManager {
 		$result_paired = rex_sql::factory();
 		$result_paired->setQuery($query_paired);
 		for($i = 0; $i < $result_paired->getRows(); $i++) {
-			$attributes = json_decode($result_paired->getValue("attributes"), true);
-			$paired_modules[$result_paired->getValue('id')] = [
-				'd2u_id' => str_replace('d2u_', '', $result_paired->getValue("key")),
-				'addon_key' => $attributes['addon_key']
-			];
+			$attributes = json_decode((string) $result_paired->getValue("attributes"), true);
+			if(is_array($attributes)) {
+				$paired_modules[(int) $result_paired->getValue('id')] = [
+					'd2u_id' => str_replace('d2u_', '', (string) $result_paired->getValue("key")),
+					'addon_key' => strval($attributes['addon_key'])
+				];
+			}
 			$result_paired->next();
 		}
 
@@ -260,7 +263,7 @@ class D2UModuleManager {
 	
 	/**
 	 * Gets Redaxo Modules.
-	 * @param bool If true, only unpaired modules are returned.
+	 * @param bool $unpaired_only If true, only unpaired modules are returned.
 	 * @return string[] Redaxo modules. Key ist the module ID, value ist the module name
 	 */
 	public static function getRexModules($unpaired_only = false) {
@@ -272,7 +275,7 @@ class D2UModuleManager {
 		$result = rex_sql::factory();
 		$result->setQuery($query);
 		for($i = 0; $i < $result->getRows(); $i++) {
-			$rex_modules[$result->getValue("id")] = $result->getValue("name");
+			$rex_modules[(int) $result->getValue("id")] = (string) $result->getValue("name");
 			$result->next();
 		}
 
@@ -282,11 +285,11 @@ class D2UModuleManager {
 	/**
 	 * Prints list that offers module managing options
 	 */
-	public function showManagerList() {
+	public function showManagerList():void {
 		$url_params = [];
 		// Compatibility for MultiNewsletter installation site
-		if(filter_input(INPUT_GET, "chapter") != "") {
-			$url_params["chapter"] = filter_input(INPUT_GET, "chapter");
+		if(filter_input(INPUT_GET, "chapter") !== "") {
+			$url_params["chapter"] = strval(filter_input(INPUT_GET, "chapter"));
 		}
 		print '<form action="'. rex_url::currentBackendPage($url_params) .'" method="post">';
 		print '<section class="rex-page-section">';
@@ -313,7 +316,7 @@ class D2UModuleManager {
 		$unpaired_rex_modules = D2UModuleManager::getRexModules(true);
 		// Fix follows: directly after module installation, newly paired module is not detected as paired
 		$installed_d2u_module_id = rex_request('d2u_module_id', 'string');
-		if($installed_d2u_module_id != "") {
+		if($installed_d2u_module_id !== "") {
 			foreach($unpaired_rex_modules as $rex_id => $name) {
 				if(strpos($name, $installed_d2u_module_id) !== false) {
 					unset($unpaired_rex_modules[$rex_id]);
@@ -328,7 +331,7 @@ class D2UModuleManager {
 			print '<td>'. $module->getRevision() .'</td>';
 			// Redaxo modules
 			print '<td>';
-			if($module->getRedaxoId() == 0) {
+			if($module->getRedaxoId() === 0) {
 				$modules_select = new rex_select();
 				$modules_select->addOption(rex_i18n::msg('d2u_helper_modules_pair_new'), 0);
 				$modules_select->addArrayOptions($unpaired_rex_modules);
@@ -376,6 +379,7 @@ class D2UModuleManager {
 }
 
 /**
+ * @api
  * Class managing modules published by www.design-to-use.de
  *
  * @author Tobias Krais
@@ -412,40 +416,40 @@ class D2UModule {
 	const MODULE_UNINSTALL = 'uninstall.php';
 
 	/**
-	 * @var int D2U Module ID
+	 * @var string D2U Module ID
 	 */
-	private $d2u_module_id = "";
+	private string $d2u_module_id = "";
 	
 	/**
 	 * @var bool true if autoupdate ist activated
 	 */
-	private $autoupdate = false;
+	private bool $autoupdate = false;
 
 	/**
 	 * @var string Folder within addon, in which modules can be found. Trailing
 	 * slash must be included.
 	 */
-	private $module_folder = "";
+	private string $module_folder = "";
 
 	/**
 	 * @var string Modules title or name
 	 */
-	private $name = "";
+	private string $name = "";
 	
 	/**
 	 * @var int Module version number
 	 */
-	private $revision = 0;
+	private int $revision = 0;
 
 	/**
 	 * @var int Redaxo Module ID
 	 */
-	private $rex_module_id = 0;
+	private int $rex_module_id = 0;
 	
 	/**
-	 * @var rex_addon Redaxo Addon module belongs to
+	 * @var rex_addon_interface Redaxo Addon module belongs to
 	 */
-	private $rex_addon;
+	private rex_addon_interface $rex_addon;
 
 	/**
 	 * Constructor. Sets values.
@@ -464,7 +468,7 @@ class D2UModule {
 	/**
 	 * Activate autoupdate.
 	 */
-	public function activateAutoupdate() {
+	public function activateAutoupdate():void {
 		$this->autoupdate = true;
 		$this->setAttributes();
 	}
@@ -472,7 +476,7 @@ class D2UModule {
 	/**
 	 * Disable autoupdate.
 	 */
-	public function disableAutoupdate() {
+	public function disableAutoupdate():void {
 		$this->autoupdate = false;
 		$this->setAttributes();
 	}
@@ -482,8 +486,9 @@ class D2UModule {
 	 * @return string CSS
 	 */
 	public function getCSS() {
-		if(D2UModule::MODULE_CSS_FILE != "" && file_exists($this->module_folder . D2UModule::MODULE_CSS_FILE)){
-			return file_get_contents($this->module_folder . D2UModule::MODULE_CSS_FILE);
+		if(file_exists($this->module_folder . D2UModule::MODULE_CSS_FILE)) {
+			$content = file_get_contents($this->module_folder . D2UModule::MODULE_CSS_FILE);
+			return $content !== false ? $content : '';
 		}
 		return "";
 	}
@@ -501,10 +506,11 @@ class D2UModule {
 	 * @return string JS
 	 */
 	public function getJS() {
-		if(D2UModule::MODULE_JS_FILE != "" && file_exists($this->module_folder . D2UModule::MODULE_JS_FILE)){
-			return file_get_contents($this->module_folder . D2UModule::MODULE_JS_FILE);
+		if(file_exists($this->module_folder . D2UModule::MODULE_JS_FILE)) {
+			$content = file_get_contents($this->module_folder . D2UModule::MODULE_JS_FILE);
+			return $content !== false ? $content : '';
 		}
-		return "";
+		return '';
 	}
 
 	/**
@@ -525,19 +531,18 @@ class D2UModule {
 	
 	/**
 	 * Get Redaxo module Id.
-	 * @return string Redaxo Module Id
+	 * @return int Redaxo Module Id
 	 */
 	public function getRedaxoId() {
 		return $this->rex_module_id;
 	}
 
 	/**
-	 * Initializes object in Redaxo context: sets Redaxo module id and folders
-	 * @param rex_addon_interface|rex_addon Redaxo Addon module belongs to
-	 * @param string Complete folder string, in which module files can be found.
-	 * Trailing slash must be included.
+	 * Initializes object in Redaxo context: sets Redaxo module id and folders.
+	 * @param rex_addon_interface $module_addon Redaxo Addon module belongs to
+	 * @param string $module_folder Complete folder string, in which module files can be found.Trailing slash must be included.
 	 */
-	public function initRedaxoContext(rex_addon_interface $module_addon, string $module_folder) {
+	public function initRedaxoContext($module_addon, string $module_folder):void {
 		$this->rex_addon = $module_addon;
 		$sql = rex_sql::factory();
 		$sql->setTable(rex::getTablePrefix(). 'module');
@@ -545,10 +550,10 @@ class D2UModule {
 		$sql->select();
 		foreach ($sql->getArray() as $result) {
 			// Get redaxo module id
-			$this->rex_module_id = $result['id'];
+			$this->rex_module_id = (int) $result['id'];
 			// Get Autoupdate settings
-			$attributes = json_decode($result['attributes'], true);
-			$this->autoupdate = key_exists('autoupdate', $attributes) && $attributes['autoupdate'] == "active" ? true : false;
+			$attributes = json_decode((string) $result['attributes'], true);
+			$this->autoupdate = is_array($attributes) && key_exists('autoupdate', $attributes) && $attributes['autoupdate'] === "active" ? true : false;
 		}
 		
 		// Set folders correctly
@@ -558,7 +563,7 @@ class D2UModule {
 
 	/**
 	 * Installes or updates the module in redaxo module table.
-	 * @param int Redaxo module id, if not passed, already available ID is taken.
+	 * @param int $rex_module_id Redaxo module id, if not passed, already available ID is taken.
 	 * @return bool true if installed, otherwise false
 	 */
 	public function install($rex_module_id = 0) {
@@ -569,7 +574,7 @@ class D2UModule {
 			}
 		}
 	
-		if($this->rex_module_id == 0 && $rex_module_id > 0) {
+		if($this->rex_module_id === 0 && $rex_module_id > 0) {
 			$this->rex_module_id = $rex_module_id;
 		}
 		
@@ -583,7 +588,7 @@ class D2UModule {
 		if($this->rex_module_id === 0) {
 			$insertmod->addGlobalCreateFields();
 			$insertmod->insert();
-			$this->rex_module_id = $insertmod->getLastId();
+			$this->rex_module_id = intval($insertmod->getLastId());
 		}
 		else {
 			$insertmod->addGlobalUpdateFields();
@@ -601,6 +606,7 @@ class D2UModule {
 	
 	/**
 	 * Checks if module should be automatically updated if new revision is available
+	 * @return bool true if autoupdate is activated
 	 */
 	public function isAutoupdateActivated() {
 		return $this->autoupdate;
@@ -608,6 +614,7 @@ class D2UModule {
 
 	/**
 	 * Checks if module is installed in Redaxo
+	 * @return bool true if installed
 	 */
 	public function isInstalled() {
 		return ($this->rex_module_id > 0);
@@ -627,6 +634,7 @@ class D2UModule {
 
 	/**
 	 * Checks id module in Redaxo DB needs update or needs to be installed.
+	 * @return bool true if update is needed
 	 */
 	public function isUpdateNeeded() {
 		if($this->isInstalled()) {
@@ -644,7 +652,7 @@ class D2UModule {
 	/**
 	 * Removes the module from redaxo module table
 	 */
-	public function delete() {
+	public function delete():void {
 		$removemod = rex_sql::factory();
 		$removemod->setTable(\rex::getTablePrefix() . 'module');
 		$removemod->setWhere(['id' => $this->d2u_module_id]);
@@ -659,7 +667,7 @@ class D2UModule {
 	/**
 	 * Save module config.
 	 */
-	private function setAttributes() {
+	private function setAttributes():void {
 		// Autoupdate
 		$params = [
 			"autoupdate" => ($this->isAutoupdateActivated() ? "active" : "inactive"),
@@ -675,7 +683,7 @@ class D2UModule {
 	/**
 	 * Remove module pair config.
 	 */
-	public function unlink() {
+	public function unlink():void {
 		$sql = rex_sql::factory();
 		$sql->setQuery("UPDATE ". rex::getTablePrefix() ."module "
 			."SET `key` = NULL, attributes = NULL "
