@@ -22,17 +22,17 @@
 		print '<div class="col-12 col-md-4">';
 		print '<div id="footer-address">';
 		print '<div class="footer-title">'. \Sprog\Wildcard::get('d2u_helper_module_14_search_template_address') .'</div>';
-		if($d2u_helper->getConfig('footer_text_company', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_company', '')) !== '') {
 			print '<span class="fa-icon fa-user footer-icon"></span>'. $d2u_helper->getConfig('footer_text_company') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_ceo', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_ceo', '')) !== '') {
 			print '<span class="fa-icon footer-icon"></span>'. \Sprog\Wildcard::get('d2u_helper_module_14_search_template_ceo') .':<br>';
 			print '<span class="fa-icon footer-icon"></span>'. $d2u_helper->getConfig('footer_text_ceo') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_street', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_street', '')) !== '') {
 			print '<span class="fa-icon fa-home footer-icon"></span>'. $d2u_helper->getConfig('footer_text_street') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_zip_city', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_zip_city', '')) !== '') {
 			print '<span class="fa-icon footer-icon"></span>'. $d2u_helper->getConfig('footer_text_zip_city') .'<br>';
 		}
 		print '</div>';
@@ -41,19 +41,19 @@
 		print '<div class="col-12 col-md-4">';
 		print '<div id="footer-address">';
 		print '<div class="footer-title">'. \Sprog\Wildcard::get('d2u_helper_module_14_search_template_contact') .'</div>';
-		if($d2u_helper->getConfig('footer_text_phone', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_phone', '')) !== '') {
 			print '<span class="fa-icon fa-phone footer-icon"></span>'. $d2u_helper->getConfig('footer_text_phone') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_mobile', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_mobile', '')) !== '') {
 			print '<span class="fa-icon fa-mobile footer-icon"></span>'. $d2u_helper->getConfig('footer_text_mobile') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_fax', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_fax', '')) !== '') {
 			print '<span class="fa-icon fa-fax footer-icon"></span>'. $d2u_helper->getConfig('footer_text_fax') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_facebook_link', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_facebook_link', '')) !== '') {
 			print '<span class="fa-icon fa-facebook footer-icon"></span><a href="'. $d2u_helper->getConfig("footer_facebook_link") .'" target="_blank">Facebook</a><br>';
 		}
-		if($d2u_helper->getConfig('footer_text_email', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_email', '')) !== '') {
 			print '<span class="fa-icon fa-envelope footer-icon"></span><a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
 		}
 		print '</div>';
@@ -62,14 +62,12 @@
 		print '<div class="col-12">&nbsp;</div>';
 
 		// Logo footer
-		$media_logo_footer = rex_media::get($d2u_helper->getConfig("footer_logo", "") ?? $d2u_helper->getConfig("template_logo"));
+		$media_logo_footer = rex_media::get(strval($d2u_helper->getConfig("footer_logo", "")) !== '' ? strval($d2u_helper->getConfig("template_logo")) : '');
 		if($media_logo_footer instanceof rex_media) {
 			print '<div class="col-12 col-md-4 offset-md-4 footer-logo-col">';
-			if($media_logo_footer instanceof rex_media) {
-				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">'
-					.'<img src="'. rex_url::media($media_logo_footer->getFileName()) .'" alt="'. $media_logo_footer->getTitle() .'" title="'. $media_logo_footer->getTitle() .'" id="logo-footer" loading="lazy">'
-					.'</a>';
-			}
+			print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">'
+				.'<img src="'. rex_url::media($media_logo_footer->getFileName()) .'" alt="'. $media_logo_footer->getTitle() .'" title="'. $media_logo_footer->getTitle() .'" id="logo-footer" loading="lazy">'
+				.'</a>';
 			print '</div>';
 		}
 	?>

@@ -15,11 +15,11 @@
 
 		// Logo large displays
 		print '<div class="d-none d-lg-block col-lg-4 text-lg-center">';
-		if($d2u_helper->getConfig("footer_logo", "") != "") {
+		if(strval($d2u_helper->getConfig("footer_logo", "")) !== "") {
 				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-				$media_logo = rex_media::get($d2u_helper->getConfig("footer_logo"));
+				$media_logo = rex_media::get(strval($d2u_helper->getConfig("footer_logo")));
 				if($media_logo instanceof rex_media) {
-					print '<img src="'. rex_url::media($d2u_helper->getConfig("footer_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
+					print '<img src="'. rex_url::media(strval($d2u_helper->getConfig("footer_logo"))) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
 				}
 				print '</a>';
 		}
@@ -29,33 +29,33 @@
 		print '<div class="col-12 d-md-none">&nbsp;</div>';
 		print '<div class="col-12 col-md-6 col-lg-4">';
 		print '<p class="text-md-right">';
-		if($d2u_helper->getConfig('footer_text_company', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_company', '')) !== '') {
 			print $d2u_helper->getConfig('footer_text_company') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_ceo', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_ceo', '')) !== '') {
 			print \Sprog\Wildcard::get('d2u_helper_module_14_search_template_ceo') .':<br>';
 			print $d2u_helper->getConfig('footer_text_ceo') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_street', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_street', '')) !== '') {
 			print $d2u_helper->getConfig('footer_text_street') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_zip_city', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_zip_city', '')) !== '') {
 			print $d2u_helper->getConfig('footer_text_zip_city') .'<br>';
 		}
 		print '<br>';
-		if($d2u_helper->getConfig('footer_text_phone', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_phone', '')) !== '') {
 			print '<span class="fa-icon fa-phone footer-icon"></span> '. $d2u_helper->getConfig('footer_text_phone') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_mobile', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_mobile', '')) !== '') {
 			print '<span class="fa-icon fa-mobile footer-icon"></span> '. $d2u_helper->getConfig('footer_text_mobile') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_fax', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_fax', '')) !== '') {
 			print '<span class="fa-icon fa-fax footer-icon"></span> '. $d2u_helper->getConfig('footer_text_fax') .'<br>';
 		}
-		if($d2u_helper->getConfig('footer_text_email', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_text_email', '')) !== '') {
 			print '<span class="fa-icon fa-envelope footer-icon"></span> <a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
 		}
-		if($d2u_helper->getConfig('footer_facebook_link', '') != '') {
+		if(strval($d2u_helper->getConfig('footer_facebook_link', '')) !== '') {
 			print '<span class="fa-icon fa-facebook footer-icon"></span> <a href="'. $d2u_helper->getConfig("footer_facebook_link") .'" target="_blank">Facebook</a>';
 		}
 		print '</p>';
@@ -64,11 +64,11 @@
 		// Logo small displays
 		print '<div class="col-12 col-lg-0 d-lg-none">&nbsp;</div>';
 		print '<div class="col-12 d-lg-none text-center">';
-		if($d2u_helper->getConfig("footer_logo", "") != "") {
+		if(strval($d2u_helper->getConfig("footer_logo", "")) !== "") {
 				print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-				$media_logo = rex_media::get($d2u_helper->getConfig("footer_logo"));
+				$media_logo = rex_media::get(strval($d2u_helper->getConfig("footer_logo")));
 				if($media_logo instanceof rex_media) {
-					print '<img src="'. rex_url::media($d2u_helper->getConfig("footer_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
+					print '<img src="'. rex_url::media(strval($d2u_helper->getConfig("footer_logo"))) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
 				}
 				print '</a>';
 		}

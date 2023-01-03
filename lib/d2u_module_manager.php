@@ -239,7 +239,7 @@ class D2UModuleManager {
 	
 	/**
 	 * Get paired module ids. 
-	 * @return string[] Paired module ids. Key is Redaxo module id, value is 
+	 * @return array<int, array<string, string>> Paired module ids. Key is Redaxo module id, value is 
 	 * D2U module id.
 	 */
 	public static function getModulePairs() {
@@ -264,7 +264,7 @@ class D2UModuleManager {
 	/**
 	 * Gets Redaxo Modules.
 	 * @param bool $unpaired_only If true, only unpaired modules are returned.
-	 * @return string[] Redaxo modules. Key ist the module ID, value ist the module name
+	 * @return array<int, string> Redaxo modules. Key ist the module ID, value ist the module name
 	 */
 	public static function getRexModules($unpaired_only = false) {
 		$rex_modules = [];

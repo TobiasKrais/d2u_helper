@@ -1,10 +1,10 @@
 <div class="row">
 	<?php
 		$rex_articles = rex_article::getRootArticles(true);
-		foreach($rex_articles as $rex_articles) {
+		foreach($rex_articles as $rex_article) {
 			print '<div class="col-sm-6 col-md-4 col-lg-3">';
 			print '<div class="footerbox">';
-			print '<a href="'. $rex_articles->getUrl() .'">'. $rex_articles->getName() .'</a>';
+			print '<a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a>';
 			print '</div>';
 			print '</div>';
 		}

@@ -4,28 +4,31 @@ if(\rex::isBackend() && is_object(\rex::getUser())) {
 	rex_perm::register('d2u_helper[]', rex_i18n::msg('d2u_helper_rights_all'));
 	rex_perm::register('d2u_helper[settings]', rex_i18n::msg('d2u_helper_rights_settings'), rex_perm::OPTIONS);
 
-	rex_view::addCssFile($this->getAssetsUrl('d2u_helper_backend.css'));
+	$d2u_helper = rex_addon::get('d2u_helper');
+	if($d2u_helper instanceof rex_addon) {
+		rex_view::addCssFile($d2u_helper->getAssetsUrl('d2u_helper_backend.css'));
+	}
 	//rex_view::addJsFile($addon->getAssetsUrl('js/script.js'), [rex_view::JS_IMMUTABLE => true]);
 }
 
 if(!\rex::isBackend()) {
     rex_extension::register('PACKAGES_INCLUDED', function ($params) {
 		// If CSS or JS is requested
-		if (rex_request('d2u_helper', 'string') == 'helper.css') {
+		if (rex_request('d2u_helper', 'string') === 'helper.css') {
 			sendD2UHelperCSS();
 		}
-		else if (rex_request('d2u_helper', 'string') == 'helper.js') {
-			if(rex_request('position', 'string') == "head") {
+		else if (rex_request('d2u_helper', 'string') === 'helper.js') {
+			if(rex_request('position', 'string') === "head") {
 				sendD2UHelperJS("head");
 			}
 			else {
 				sendD2UHelperJS("body");
 			}
 		}
-		else if (rex_request('d2u_helper', 'string') == 'template.css') {
+		else if (rex_request('d2u_helper', 'string') === 'template.css') {
 			sendD2UHelperTemplateCSS(rex_request('template_id', 'string', ''));
 		}
-		else if (rex_request('d2u_helper', 'string') == 'custom.css') {
+		else if (rex_request('d2u_helper', 'string') === 'custom.css') {
 			sendD2UHelperCustomCSS();
 		}
     });
@@ -50,7 +53,7 @@ else {
  * Adds some style and script stuff to the header
  * @param rex_extension_point<string> $ep Redaxo extension point
  */
-function appendToPageD2UHelperFiles(rex_extension_point $ep) {
+function appendToPageD2UHelperFiles(rex_extension_point $ep):void {
 	$VERSION_BOOTSTRAP = '4.6.1';
 	$addon = rex_addon::get("d2u_helper");
 	
@@ -62,35 +65,35 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
 	$insert_head = "";
 	$insert_body = "";
 	// Vor dem </head> einfügen
-	if($addon->getConfig('include_jquery') == 'true') {
+	if(boolval($addon->getConfig('include_jquery', false))) {
 		// JQuery
 		$file = 'jquery.min.js';
 		$insert_head .= '<script src="'. rex_url::coreAssets($file) .'?buster='. filemtime(rex_path::coreAssets($file)) .'"></script>' . PHP_EOL;
 	}
-	if($addon->getConfig('include_bootstrap4') == 'true') {
+	if(boolval($addon->getConfig('include_bootstrap4', false))) {
 		// Bootstrap CSS
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v='. $VERSION_BOOTSTRAP .'" />' . PHP_EOL;
 	}
 
 	// Consider module css or menu css
-	if(($addon->getConfig("include_module", "false") == "true" && d2u_addon_frontend_helper::getModulesCSS() != "")	|| $addon->getConfig("include_menu") != "none") {
+	if((boolval($addon->getConfig("include_module", false)) && d2u_addon_frontend_helper::getModulesCSS() !== "") || strval($addon->getConfig("include_menu")) !== "none") {
 		$insert_head .= '<link rel="stylesheet" type="text/css" href="/index.php?d2u_helper=helper.css" />' . PHP_EOL;
 	}
 		
 	// Menu stuff in header
-	if($addon->getConfig("include_menu") != "none") {
+	if(strval($addon->getConfig("include_menu")) !== "none") {
 		$insert_head .= '<script src="/index.php?position=head&amp;d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 
 	$ep->setSubject(str_replace('</head>', $insert_head .'</head>', $ep->getSubject()));
 
 	// Vor dem </body> einfügen
-	if($addon->getConfig('include_bootstrap4') == 'true') {
+	if(boolval($addon->getConfig('include_bootstrap4', false))) {
 		$insert_body .= '<script src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.bundle.min.js') .'?v='. $VERSION_BOOTSTRAP .'"></script>' . PHP_EOL;
 	}
 
 	// Module stuff in body
-	if($addon->hasConfig("include_module") && $addon->getConfig("include_module") == "true" && d2u_addon_frontend_helper::getModulesJS()) {
+	if(boolval($addon->getConfig("include_module", false)) && d2u_addon_frontend_helper::getModulesJS() !== '') {
 		$insert_body .= '<script src="/index.php?position=body&amp;d2u_helper=helper.js"></script>' . PHP_EOL;
 	}
 	$ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
@@ -101,14 +104,14 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep) {
  * for privacy policy an impress. The article ids are set in D2U Helper settings.
  * @param rex_extension_point<string> $ep Redaxo extension point
  */
-function replace_privacy_policy_links(rex_extension_point $ep) {
+function replace_privacy_policy_links(rex_extension_point $ep):void {
 	$content = $ep->getSubject();
 
 	if(rex_config::get("d2u_helper", "article_id_privacy_policy", 0) > 0) {
-		$content = str_replace('+++LINK_PRIVACY_POLICY+++', rex_getUrl(rex_config::get("d2u_helper", "article_id_privacy_policy")), $content);
+		$content = str_replace('+++LINK_PRIVACY_POLICY+++', rex_getUrl(strval(rex_config::get("d2u_helper", "article_id_privacy_policy"))), $content);
 	}
 	if(rex_config::get("d2u_helper", "article_id_impress", 0) > 0) {
-		$content = str_replace('+++LINK_IMPRESS+++', rex_getUrl(rex_config::get("d2u_helper", "article_id_impress")), $content);
+		$content = str_replace('+++LINK_IMPRESS+++', rex_getUrl(strval(rex_config::get("d2u_helper", "article_id_impress"))), $content);
 	}
 
 	$ep->setSubject($content);
@@ -123,18 +126,15 @@ function replace_privacy_policy_links(rex_extension_point $ep) {
 function rex_d2u_helper_article_is_in_use(rex_extension_point $ep) {
 	$warning = [];
 	$params = $ep->getParams();
-	$article_id = $params['id'];
+	$article_id = (int) $params['id'];
 	
 	// Settings
 	$addon = rex_addon::get("d2u_helper");
-	if(($addon->hasConfig("article_id_privacy_policy") && $addon->getConfig("article_id_privacy_policy") == $article_id) ||
-		($addon->hasConfig("article_id_impress") && $addon->getConfig("article_id_impress") == $article_id) ||
-		in_array($article_id, is_array(explode(',', $addon->getConfig("cta_box_article_ids"))) ? explode(',', $addon->getConfig("cta_box_article_ids")) : []) ) {
-		$message = '<a href="index.php?page=d2u_helper/settings">'.
-			 rex_i18n::msg('d2u_helper_rights_all') ." - ". rex_i18n::msg('d2u_helper_settings') . '</a>';
-		if(!in_array($message, $warning, true)) {
-			$warning[] = $message .'<br>';
-		}
+	if(($addon->hasConfig("article_id_privacy_policy") && intval($addon->getConfig("article_id_privacy_policy")) === $article_id) ||
+		($addon->hasConfig("article_id_impress") && intval($addon->getConfig("article_id_impress")) === $article_id) ||
+		in_array($article_id, array_map('intval', explode(',', strval($addon->getConfig("cta_box_article_ids")))), true) ) {
+		$warning[] = '<a href="index.php?page=d2u_helper/settings">'.
+			 rex_i18n::msg('d2u_helper_rights_all') ." - ". rex_i18n::msg('d2u_helper_settings') . '</a><br>';
 	}
 
 	if(count($warning) > 0) {
@@ -154,10 +154,10 @@ function rex_d2u_helper_clang_deleted(rex_extension_point $ep) {
 	/** @var string[] $warning */
 	$warning = $ep->getSubject();
 	$params = $ep->getParams();
-	$clang_id = $params['id'];
+	$clang_id = (int) $params['id'];
 
 	// Correct settings
-	if(rex_config::get('d2u_helper', 'default_lang', 0) == $clang_id) {
+	if(intval(rex_config::get('d2u_helper', 'default_lang', 0)) === $clang_id) {
 		rex_config::set('d2u_helper', 'default_lang', rex_clang::getStartId());
 	}
 
@@ -175,24 +175,24 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 	$params = $ep->getParams();
 	$filename = addslashes($params['filename']);
 
-	if($filename) {
+	if($filename !== '') {
 		// Settings
 		$addon = rex_addon::get("d2u_helper");
 		$is_in_use = false;
-		if(($addon->hasConfig("template_header_pic") && $addon->getConfig("template_header_pic") == $filename) ||
-				($addon->hasConfig("template_logo") && $addon->getConfig("template_logo") == $filename) ||
-				($addon->hasConfig("template_print_header_pic") && $addon->getConfig("template_print_header_pic") == $filename) ||
-				($addon->hasConfig("template_print_footer_pic") && $addon->getConfig("template_print_footer_pic") == $filename) ||
-				($addon->hasConfig("footer_logo") && $addon->getConfig("footer_logo") == $filename) ||
-				($addon->hasConfig("template_03_2_header_pic") && $addon->getConfig("template_03_2_header_pic") == $filename) ||
-				($addon->hasConfig("template_03_2_footer_pic") && $addon->getConfig("template_03_2_footer_pic") == $filename) ||
-				($addon->hasConfig("footer_facebook_icon") && $addon->getConfig("footer_facebook_icon") == $filename) ||
-				($addon->hasConfig("custom_css") && $addon->getConfig("custom_css") == $filename)
+		if(($addon->hasConfig("template_header_pic") && strval($addon->getConfig("template_header_pic")) === $filename) ||
+				($addon->hasConfig("template_logo") && strval($addon->getConfig("template_logo")) === $filename) ||
+				($addon->hasConfig("template_print_header_pic") && strval($addon->getConfig("template_print_header_pic")) === $filename) ||
+				($addon->hasConfig("template_print_footer_pic") && strval($addon->getConfig("template_print_footer_pic")) === $filename) ||
+				($addon->hasConfig("footer_logo") && strval($addon->getConfig("footer_logo")) === $filename) ||
+				($addon->hasConfig("template_03_2_header_pic") && strval($addon->getConfig("template_03_2_header_pic")) === $filename) ||
+				($addon->hasConfig("template_03_2_footer_pic") && strval($addon->getConfig("template_03_2_footer_pic")) === $filename) ||
+				($addon->hasConfig("footer_facebook_icon") && strval($addon->getConfig("footer_facebook_icon")) === $filename) ||
+				($addon->hasConfig("custom_css") && strval($addon->getConfig("custom_css")) === $filename)
 			) {
 				$is_in_use = true;
 		}
 		foreach(rex_clang::getAllIds() as $clang_id) {
-			if(($addon->hasConfig('template_04_header_slider_pics_clang_'. $clang_id) && strpos($addon->getConfig('template_04_header_slider_pics_clang_'. $clang_id), $filename) !== false)) {
+			if(($addon->hasConfig('template_04_header_slider_pics_clang_'. $clang_id) && strpos(strval($addon->getConfig('template_04_header_slider_pics_clang_'. $clang_id)), $filename) !== false)) {
 				$is_in_use = true;
 			}
 		}
@@ -205,7 +205,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
 		}
 
 		// Templates
-		if(rex_config::get("d2u_helper", "check_media_template", false)) {
+		if(strval(rex_config::get("d2u_helper", "check_media_template", 'false')) !== 'false') {
 			$sql_template = \rex_sql::factory();
 			$query = 'SELECT DISTINCT id, name FROM ' . rex::getTablePrefix() . 'template WHERE content REGEXP ' . $sql_template->escape('(^|[^[:alnum:]+_-])'. $filename);
 			$sql_template->setQuery($query);
@@ -228,26 +228,26 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep) {
  * Sends CSS file and exits PHP Script. The CSS file consists of module and menu
  * css.
  */
-function sendD2UHelperCSS() {
+function sendD2UHelperCSS():void {
 	header('Content-type: text/css');
 	$d2u_helper = rex_addon::get('d2u_helper');
 	$css = "";
 	// Module CSS
-	if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
+	if(boolval($d2u_helper->getConfig("include_module", false))) {
 		$css .= d2u_addon_frontend_helper::getModulesCSS();
 	}
 
 	// Include menu CSS
-	if($d2u_helper->getConfig("include_menu") == "megamenu") {
+	if(strval($d2u_helper->getConfig("include_menu")) === "megamenu") {
 		$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_mega_menu::getAutoCSS());
 	}
-	else if($d2u_helper->getConfig("include_menu") == "multilevel") {
+	else if(strval($d2u_helper->getConfig("include_menu")) === "multilevel") {
 		$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi::getAutoCSS());
 	}
-	else if($d2u_helper->getConfig("include_menu") == "slicknav") {
+	else if(strval($d2u_helper->getConfig("include_menu")) === "slicknav") {
 		$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_slicknav::getAutoCSS());
 	}
-	else if($d2u_helper->getConfig("include_menu") == "smartmenu") {
+	else if(strval($d2u_helper->getConfig("include_menu")) === "smartmenu") {
 		$css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_smartmenus::getAutoCSS());
 	}
 
@@ -259,31 +259,31 @@ function sendD2UHelperCSS() {
  * Sends JS file and exits PHP Script. The JS file consists of module js.
  * @param string $position JS position ("head" oder "body") 
  */
-function sendD2UHelperJS($position = "head") {
+function sendD2UHelperJS($position = "head"):void {
 	header('Content-type: application/javascript');
 	$d2u_helper = rex_addon::get('d2u_helper');
 	$js = "";
-	if($position == "body") {
+	if($position === "body") {
 		// Module JS
-		if($d2u_helper->hasConfig("include_module") && $d2u_helper->getConfig("include_module") == "true") {
+		if(boolval($d2u_helper->getConfig("include_module", false))) {
 			$js .= d2u_addon_frontend_helper::getModulesJS();
 		}
 	}
-	else if($position == "head") {
+	else if($position === "head") {
 		// MultiLevel menu JS
-		if($d2u_helper->getConfig("include_menu") == "multilevel") {
+		if(strval($d2u_helper->getConfig("include_menu")) === "multilevel") {
 			$js .= d2u_mobile_navi::getAutoJS();
 		}
 		// Slicknav menu JS
-		if($d2u_helper->getConfig("include_menu") == "slicknav") {
+		if(strval($d2u_helper->getConfig("include_menu")) === "slicknav") {
 			$js .= d2u_mobile_navi_slicknav::getAutoJS();
 		}
 		// Smartmenu menu JS
-		if($d2u_helper->getConfig("include_menu") == "smartmenu") {
+		if(strval($d2u_helper->getConfig("include_menu")) === "smartmenu") {
 			$js .= d2u_mobile_navi_smartmenus::getAutoJS();
 		}
 		// Mega menu JS
-		if($d2u_helper->getConfig("include_menu") == "megamenu") {
+		if(strval($d2u_helper->getConfig("include_menu")) === "megamenu") {
 			$js .= d2u_mobile_navi_mega_menu::getAutoJS();
 		}
 	}
@@ -294,14 +294,14 @@ function sendD2UHelperJS($position = "head") {
 /**
  * Sends CustomCSS file and exits PHP Script.
  */
-function sendD2UHelperCustomCSS() {
+function sendD2UHelperCustomCSS():void {
 	header('Content-type: text/css');
 	$css = "";
 
 	// Custom CSS
 	$d2u_helper = rex_addon::get('d2u_helper');
-	if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media($d2u_helper->getConfig("custom_css")))) {
-			$css .= file_get_contents(rex_path::media($d2u_helper->getConfig("custom_css")));
+	if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media(strval($d2u_helper->getConfig("custom_css"))))) {
+			$css .= file_get_contents(rex_path::media(strval($d2u_helper->getConfig("custom_css"))));
 	}		
 
 	// Apply template settings and compress
@@ -315,22 +315,22 @@ function sendD2UHelperCustomCSS() {
  * - if in settings checked - also module css.
  * @param string $d2u_template_id
  */
-function sendD2UHelperTemplateCSS($d2u_template_id = "") {
+function sendD2UHelperTemplateCSS($d2u_template_id = ""):void {
 	header('Content-type: text/css');
 	$css = "";
 	// Template CSS
-	if($d2u_template_id != "") {
+	if($d2u_template_id !== "") {
 		$template_manager = new D2UTemplateManager(D2UTemplateManager::getD2UHelperTemplates());
 		$current_template = $template_manager->getTemplate($d2u_template_id);
-		if($current_template !== false) {
+		if($current_template instanceof D2UTemplate) {
 			$css .= $current_template->getCSS();
 		}
 	}
 
 	// Custom CSS
 	$d2u_helper = rex_addon::get('d2u_helper');
-	if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media($d2u_helper->getConfig("custom_css")))) {
-			$css .= file_get_contents(rex_path::media($d2u_helper->getConfig("custom_css")));
+	if($d2u_helper->hasConfig("custom_css") && file_exists(rex_path::media(strval($d2u_helper->getConfig("custom_css"))))) {
+			$css .= file_get_contents(rex_path::media(strval($d2u_helper->getConfig("custom_css"))));
 	}		
 
 	// Apply template settings and compress

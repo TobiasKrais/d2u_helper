@@ -154,7 +154,7 @@ class D2UTemplateManager {
 	/**
 	 * Get initialized template by ID.
 	 * @param string $template_id D2U template ID
-	 * @return D2UTemplate Requested template object, in case template was not found: false
+	 * @return D2UTemplate|bool Requested template object, in case template was not found: false
 	 */
 	public function getTemplate($template_id) {
 		foreach($this->d2u_templates as $d2u_template) {
