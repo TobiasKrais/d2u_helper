@@ -3,7 +3,7 @@
 	$d2u_helper = rex_addon::get("d2u_helper");
 	$clangs = rex_clang::getAll(true);
 ?>
-<nav class="d-print-none<?= $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top' ? ' top' : '' ?>">
+<nav class="d-print-none<?= $d2u_helper->getConfig('template_navi_pos', 'bottom') === 'top' ? ' top' : '' ?>">
 	<div class="container">
 		<div class="navigation">
 			<div class="row">
@@ -12,14 +12,14 @@
 						// Navi
 						print '<div class="navi">';
 						if(rex_addon::get('d2u_helper')->isAvailable()) {
-							if(rex_config::get('d2u_helper', 'include_menu') == 'smartmenu') {
+							if(rex_config::get('d2u_helper', 'include_menu') === 'smartmenu') {
 								d2u_mobile_navi_smartmenus::getMenu();
 							}
-							else if (rex_config::get('d2u_helper', 'include_menu') == 'multilevel') {
+							else if (rex_config::get('d2u_helper', 'include_menu') === 'multilevel') {
 								d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
 								d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
 							}
-							else if (rex_config::get('d2u_helper', 'include_menu') == 'megamenu') {
+							else if (rex_config::get('d2u_helper', 'include_menu') === 'megamenu') {
 								d2u_mobile_navi_mega_menu::getMenu();
 							}
 						}

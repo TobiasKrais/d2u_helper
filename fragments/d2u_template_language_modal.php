@@ -18,7 +18,7 @@ if(count($clangs) > 1) {
 						foreach($clangs as $rex_clang) {
 							$link = isset($alternate_urls[$rex_clang->getId()]) ? $alternate_urls[$rex_clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $rex_clang->getId());
 							print '<li><a href="'. $link .'">'
-									.'<img class="lang-chooser-flag" src="'. rex_url::media($rex_clang->getValue('clang_icon')) .'" loading="lazy" alt="'. $rex_clang->getName() .'">'
+									.'<img class="lang-chooser-flag" src="'. rex_url::media(strval($rex_clang->getValue('clang_icon'))) .'" loading="lazy" alt="'. $rex_clang->getName() .'">'
 									.'<span class="lang-text">'. $rex_clang->getName() .'</span></a></li>';
 						}
 					?>

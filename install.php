@@ -1,4 +1,6 @@
 <?php
+$d2u_helper = rex_addon::get('d2u_helper');
+
 $sql = rex_sql::factory();
 
 /*
@@ -31,7 +33,7 @@ if(intval($sql->getRows()) === 0) {
 		(". $last_id .", 'resize', '{\"rex_effect_convert2img\":{\"rex_effect_convert2img_convert_to\":\"jpg\",\"rex_effect_convert2img_density\":\"100\"},\"rex_effect_crop\":{\"rex_effect_crop_width\":\"\",\"rex_effect_crop_height\":\"\",\"rex_effect_crop_offset_width\":\"\",\"rex_effect_crop_offset_height\":\"\",\"rex_effect_crop_hpos\":\"left\",\"rex_effect_crop_vpos\":\"top\"},\"rex_effect_filter_blur\":{\"rex_effect_filter_blur_repeats\":\"\",\"rex_effect_filter_blur_type\":\"\",\"rex_effect_filter_blur_smoothit\":\"\"},\"rex_effect_filter_colorize\":{\"rex_effect_filter_colorize_filter_r\":\"\",\"rex_effect_filter_colorize_filter_g\":\"\",\"rex_effect_filter_colorize_filter_b\":\"\"},\"rex_effect_filter_sharpen\":{\"rex_effect_filter_sharpen_amount\":\"\",\"rex_effect_filter_sharpen_radius\":\"\",\"rex_effect_filter_sharpen_threshold\":\"\"},\"rex_effect_flip\":{\"rex_effect_flip_flip\":\"X\"},\"rex_effect_header\":{\"rex_effect_header_download\":\"open_media\",\"rex_effect_header_cache\":\"no_cache\"},\"rex_effect_insert_image\":{\"rex_effect_insert_image_brandimage\":\"\",\"rex_effect_insert_image_hpos\":\"left\",\"rex_effect_insert_image_vpos\":\"top\",\"rex_effect_insert_image_padding_x\":\"\",\"rex_effect_insert_image_padding_y\":\"\"},\"rex_effect_mediapath\":{\"rex_effect_mediapath_mediapath\":\"\"},\"rex_effect_mirror\":{\"rex_effect_mirror_height\":\"\",\"rex_effect_mirror_set_transparent\":\"colored\",\"rex_effect_mirror_bg_r\":\"\",\"rex_effect_mirror_bg_g\":\"\",\"rex_effect_mirror_bg_b\":\"\"},\"rex_effect_resize\":{\"rex_effect_resize_width\":\"768\",\"rex_effect_resize_height\":\"768\",\"rex_effect_resize_style\":\"maximum\",\"rex_effect_resize_allow_enlarge\":\"enlarge\"},\"rex_effect_rotate\":{\"rex_effect_rotate_rotate\":\"0\"},\"rex_effect_rounded_corners\":{\"rex_effect_rounded_corners_topleft\":\"\",\"rex_effect_rounded_corners_topright\":\"\",\"rex_effect_rounded_corners_bottomleft\":\"\",\"rex_effect_rounded_corners_bottomright\":\"\"},\"rex_effect_workspace\":{\"rex_effect_workspace_width\":\"\",\"rex_effect_workspace_height\":\"\",\"rex_effect_workspace_hpos\":\"left\",\"rex_effect_workspace_vpos\":\"top\",\"rex_effect_workspace_set_transparent\":\"colored\",\"rex_effect_workspace_bg_r\":\"\",\"rex_effect_workspace_bg_g\":\"\",\"rex_effect_workspace_bg_b\":\"\"}}', 1, CURRENT_TIMESTAMP, 'd2u_helper');");
 }
 // Update to 1.8.8
-if (rex_version::compare($this->getVersion(), '1.8.8', '<')) {
+if (rex_version::compare($d2u_helper->getVersion(), '1.8.8', '<')) {
 	$sql->setQuery("UPDATE ". \rex::getTablePrefix() ."media_manager_type SET status = 0 WHERE name LIKE 'd2u_helper_%'");
 }
 /*
@@ -42,129 +44,129 @@ if (rex_version::compare($this->getVersion(), '1.8.8', '<')) {
  *  START managing settings
  */
 // Standard settings that cannot be set in package.yml
-if (!$this->hasConfig('editor')) {
+if (!$d2u_helper->hasConfig('editor')) {
 	if(rex_addon::get('tinymce4')->isAvailable()) {
-		$this->setConfig('editor', 'tinymce4');
+		$d2u_helper->setConfig('editor', 'tinymce4');
 	}
 	elseif(rex_addon::get('redactor2')->isAvailable()) {
-		$this->setConfig('editor', 'redactor2');
+		$d2u_helper->setConfig('editor', 'redactor2');
 	}
 	elseif(rex_addon::get('ckeditor')->isAvailable()) {
-		$this->setConfig('editor', 'ckeditor');
+		$d2u_helper->setConfig('editor', 'ckeditor');
 	}
 	elseif(rex_addon::get('markitup')->isAvailable()) {
-		$this->setConfig('editor', 'markitup');
+		$d2u_helper->setConfig('editor', 'markitup');
 	}
 	else {
-		$this->setConfig('editor', 'tinymce5_default');
+		$d2u_helper->setConfig('editor', 'tinymce5_default');
 	}
 }
 else {
-	if(rex_addon::get('tinymce5')->isAvailable() && $this->getConfig('editor') == 'tinymce5') {
-		$this->setConfig('editor', 'tinymce5_default');
+	if(rex_addon::get('tinymce5')->isAvailable() && $d2u_helper->getConfig('editor') === 'tinymce5') {
+		$d2u_helper->setConfig('editor', 'tinymce5_default');
 	}
 }
-if (!$this->hasConfig('default_lang')) {
-	$this->setConfig('default_lang', rex_clang::getStartId());
+if (!$d2u_helper->hasConfig('default_lang')) {
+	$d2u_helper->setConfig('default_lang', rex_clang::getStartId());
 }
 
 // Set default lang
-if (!$this->hasConfig('default_lang')) {
-	$this->setConfig('default_lang', rex_clang::getStartId());
+if (!$d2u_helper->hasConfig('default_lang')) {
+	$d2u_helper->setConfig('default_lang', rex_clang::getStartId());
 }
 
 // 1.5.0 Update
-if($this->hasConfig('include_bootstrap')) {
-	if($this->getConfig('include_bootstrap') == 'true') {
-		$this->setConfig('include_bootstrap4', 'true');
-		$this->setConfig('include_jquery', 'true');
+if($d2u_helper->hasConfig('include_bootstrap')) {
+	if(boolval($d2u_helper->getConfig('include_bootstrap'))) {
+		$d2u_helper->setConfig('include_bootstrap4', true);
+		$d2u_helper->setConfig('include_jquery', true);
 	}
 	else {
-		$this->setConfig('include_bootstrap4', 'false');
-		$this->setConfig('include_jquery', 'false');
+		$d2u_helper->setConfig('include_bootstrap4', false);
+		$d2u_helper->setConfig('include_jquery', false);
 	}
-	$this->removeConfig('include_bootstrap');
+	$d2u_helper->removeConfig('include_bootstrap');
 }
 
 // Update to 1.6.0
-if (rex_version::compare($this->getVersion(), '1.6.0', '<')) {
+if (rex_version::compare($d2u_helper->getVersion(), '1.6.0', '<')) {
 	// Update settings to switch from multilevel menu to smartmenu
 	if((rex_config::has('d2u_helper', 'template_00-1') || rex_config::has('d2u_helper', 'template_01-1') || rex_config::has('d2u_helper', 'template_02-1')
 			|| rex_config::has('d2u_helper', 'template_04-1') || rex_config::has('d2u_helper', 'template_04-2') || rex_config::has('d2u_helper', 'template_04-3'))
-		&& rex_config::get('d2u_helper', 'include_menu_multilevel', false) == true) {
-		$this->setConfig('include_menu', 'smartmenu');
+		&& boolval(rex_config::get('d2u_helper', 'include_menu_multilevel', false)) === true) {
+		$d2u_helper->setConfig('include_menu', 'smartmenu');
 	}
 }
-if($this->hasConfig('template_02_1_navi_pos')) {
-	$this->setConfig('template_navi_pos', $this->getConfig('template_02_1_navi_pos'));
-	$this->removeConfig('template_02_1_navi_pos');
+if($d2u_helper->hasConfig('template_02_1_navi_pos')) {
+	$d2u_helper->setConfig('template_navi_pos', $d2u_helper->getConfig('template_02_1_navi_pos'));
+	$d2u_helper->removeConfig('template_02_1_navi_pos');
 }
-if($this->hasConfig('emetrics_customno')) {
-	$this->setConfig('wiredminds_tracking_account_id', $this->getConfig('emetrics_customno'));
-	$this->removeConfig('emetrics_customno');
+if($d2u_helper->hasConfig('emetrics_customno')) {
+	$d2u_helper->setConfig('wiredminds_tracking_account_id', $d2u_helper->getConfig('emetrics_customno'));
+	$d2u_helper->removeConfig('emetrics_customno');
 }
 
 // Update to 1.6.1
-if($this->hasConfig('activate_rewrite_scheme')) {
-	$this->removeConfig('activate_rewrite_scheme');
+if($d2u_helper->hasConfig('activate_rewrite_scheme')) {
+	$d2u_helper->removeConfig('activate_rewrite_scheme');
 	foreach (rex_clang::getAll() as $rex_clang) {
-		if($this->hasConfig('rewrite_scheme_clang_'. $rex_clang->getId())) {
-			$this->removeConfig('rewrite_scheme_clang_'. $rex_clang->getId());
+		if($d2u_helper->hasConfig('rewrite_scheme_clang_'. $rex_clang->getId())) {
+			$d2u_helper->removeConfig('rewrite_scheme_clang_'. $rex_clang->getId());
 		}
 	}
 }
 
 // Update to 1.8
-if($this->hasConfig('template_02_1_footer_text')) {
-	$this->setConfig('footer_text', $this->getConfig('template_02_1_footer_text'));
-	$this->removeConfig('template_02_1_footer_text');
+if($d2u_helper->hasConfig('template_02_1_footer_text')) {
+	$d2u_helper->setConfig('footer_text', $d2u_helper->getConfig('template_02_1_footer_text'));
+	$d2u_helper->removeConfig('template_02_1_footer_text');
 }
-if($this->hasConfig('template_05_1_footer_text')) {
-	$this->setConfig('footer_text', $this->getConfig('template_05_1_footer_text'));
-	$this->removeConfig('template_05_1_footer_text');
+if($d2u_helper->hasConfig('template_05_1_footer_text')) {
+	$d2u_helper->setConfig('footer_text', $d2u_helper->getConfig('template_05_1_footer_text'));
+	$d2u_helper->removeConfig('template_05_1_footer_text');
 }
-if($this->hasConfig('template_04_1_footer_logo')) {
-	$this->setConfig('footer_logo', $this->getConfig('template_04_1_footer_logo'));
-	$this->removeConfig('template_04_1_footer_logo');
+if($d2u_helper->hasConfig('template_04_1_footer_logo')) {
+	$d2u_helper->setConfig('footer_logo', $d2u_helper->getConfig('template_04_1_footer_logo'));
+	$d2u_helper->removeConfig('template_04_1_footer_logo');
 }
-if($this->hasConfig('template_04_2_facebook_link')) {
-	$this->setConfig('footer_facebook_link', $this->getConfig('template_04_2_facebook_link'));
-	$this->removeConfig('template_04_2_facebook_link');
+if($d2u_helper->hasConfig('template_04_2_facebook_link')) {
+	$d2u_helper->setConfig('footer_facebook_link', $d2u_helper->getConfig('template_04_2_facebook_link'));
+	$d2u_helper->removeConfig('template_04_2_facebook_link');
 }
-if($this->hasConfig('template_04_2_facebook_icon')) {
-	$this->setConfig('footer_facebook_icon', $this->getConfig('template_04_2_facebook_icon'));
-	$this->removeConfig('template_04_2_facebook_icon');
+if($d2u_helper->hasConfig('template_04_2_facebook_icon')) {
+	$d2u_helper->setConfig('footer_facebook_icon', $d2u_helper->getConfig('template_04_2_facebook_icon'));
+	$d2u_helper->removeConfig('template_04_2_facebook_icon');
 }
 
 // Update to 1.8.6
-if($this->hasConfig('wiredminds_tracking_account_id')) {
-	$this->removeConfig('wiredminds_tracking_account_id');
+if($d2u_helper->hasConfig('wiredminds_tracking_account_id')) {
+	$d2u_helper->removeConfig('wiredminds_tracking_account_id');
 }
-if($this->hasConfig('google_analytics')) {
-	$this->removeConfig('google_analytics');
+if($d2u_helper->hasConfig('google_analytics')) {
+	$d2u_helper->removeConfig('google_analytics');
 }
 
 // Update settings to 1.9.2
-if($this->hasConfig('include_menu_multilevel')) {
-	if($this->getConfig('include_menu_multilevel') == 'true') {
-		$this->setConfig('include_menu', 'multilevel');
+if($d2u_helper->hasConfig('include_menu_multilevel')) {
+	if($d2u_helper->getConfig('include_menu_multilevel') === 'true') {
+		$d2u_helper->setConfig('include_menu', 'multilevel');
 	}
-	$this->removeConfig('include_menu_multilevel');
+	$d2u_helper->removeConfig('include_menu_multilevel');
 }
-if($this->hasConfig('include_menu_slicknav')) {
-	if($this->getConfig('include_menu_slicknav') == 'true') {
-		$this->setConfig('include_menu', 'slicknav');
+if($d2u_helper->hasConfig('include_menu_slicknav')) {
+	if($d2u_helper->getConfig('include_menu_slicknav') === 'true') {
+		$d2u_helper->setConfig('include_menu', 'slicknav');
 	}
-	$this->removeConfig('include_menu_slicknav');
+	$d2u_helper->removeConfig('include_menu_slicknav');
 }
-if($this->hasConfig('include_menu_smartmenu')) {
-	if($this->getConfig('include_menu_smartmenu') == 'true') {
-		$this->setConfig('include_menu', 'smartmenu');
+if($d2u_helper->hasConfig('include_menu_smartmenu')) {
+	if($d2u_helper->getConfig('include_menu_smartmenu') === 'true') {
+		$d2u_helper->setConfig('include_menu', 'smartmenu');
 	}
-	$this->removeConfig('include_menu_smartmenu');
+	$d2u_helper->removeConfig('include_menu_smartmenu');
 }
-if($this->getConfig('include_menu', 'true') == 'true') {
-	$this->setConfig('include_menu', 'none');
+if($d2u_helper->getConfig('include_menu', 'true') === 'true') {
+	$d2u_helper->setConfig('include_menu', 'none');
 }
 /*
  *  END managing settings
@@ -176,12 +178,14 @@ if($this->getConfig('include_menu', 'true') == 'true') {
 // Move module config from rex_config to rex_module
 $sql->setQuery("SELECT * FROM `". rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
 foreach ($sql->getArray() as $result) {
-	$attributes = json_decode($result['value'], true);
+	$attributes = json_decode((string) $result['value'], true);
 
-	$sql_module = rex_sql::factory();
-	$sql_module->setQuery("UPDATE `". rex::getTablePrefix() ."module` "
-		. "SET `key` = '". str_replace("module_", "d2u_", $result['key'])."', attributes = '". json_encode(["autoupdate" => $attributes['autoupdate'], "addon_key" => $result['namespace']]) ."'"
-		. "where id = ". $attributes['rex_module_id']);
+	if(is_array($attributes)) {
+		$sql_module = rex_sql::factory();
+		$sql_module->setQuery("UPDATE `". rex::getTablePrefix() ."module` "
+			. "SET `key` = '". str_replace("module_", "d2u_", (string) $result['key'])."', attributes = '". json_encode(["autoupdate" => $attributes['autoupdate'], "addon_key" => $result['namespace']]) ."'"
+			. "where id = ". $attributes['rex_module_id']);
+	}
 }
 $sql->setQuery("DELETE FROM `". rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
  
@@ -276,7 +280,7 @@ if(class_exists('D2UModuleManager')) {
 /*
  *  START update templates
  */
-if (rex_version::compare($this->getVersion(), '1.5.4', '<')) {
+if (rex_version::compare($d2u_helper->getVersion(), '1.5.4', '<')) {
 	// Rename template 02-2 to 04-2
 	if(rex_config::has('d2u_helper', 'template_02-2')) {
 		$result = rex_sql::factory();
@@ -287,11 +291,15 @@ if (rex_version::compare($this->getVersion(), '1.5.4', '<')) {
 		// Force template update
 		if(class_exists('D2UTemplate')) {
 			ob_start();
+			$d2u_templates = [];
 			$d2u_templates[] = new D2UTemplate("04-2",
 				"Header Slider Template",
 				5);
 			$d2u_template_manager = new D2UTemplateManager($d2u_templates);
-			$d2u_template_manager->doActions("04-2", "", rex_config::get('d2u_helper', 'template_02-2')['rex_template_id']);
+			$template_02_2 =  rex_config::get('d2u_helper', 'template_02-2');
+			if(is_array($template_02_2) && array_key_exists('rex_template_id', $template_02_2)) {
+				$d2u_template_manager->doActions("04-2", "", intval($template_02_2['rex_template_id']));
+			}
 			ob_end_clean();
 			rex_delete_cache();
 		}
@@ -335,15 +343,15 @@ if(class_exists('D2UTemplateManager')) {
 	$d2u_template_manager = new D2UTemplateManager($d2u_templates);
 	$d2u_template_manager->autoupdate();
 
-	if (rex_version::compare($this->getVersion(), '1.8.0', '<')) {
-		if(!$this->hasConfig('footer_color_font')) {
-			$this->setConfig('footer_color_font', '#ffffff');
+	if (rex_version::compare($d2u_helper->getVersion(), '1.8.0', '<')) {
+		if(!$d2u_helper->hasConfig('footer_color_font')) {
+			$d2u_helper->setConfig('footer_color_font', '#ffffff');
 			foreach ($d2u_templates as $d2u_template) {
 				if($d2u_template->getD2UId() === "05-1" && $d2u_template->isInstalled()) {
-					$this->setConfig('footer_color_font', $this->getConfig('navi_color_bg'));
+					$d2u_helper->setConfig('footer_color_font', $d2u_helper->getConfig('navi_color_bg'));
 				}
 				else if($d2u_template->getD2UId() === "06-1" && $d2u_template->isInstalled()) {
-					$this->setConfig('footer_color_font', '#777777');
+					$d2u_helper->setConfig('footer_color_font', '#777777');
 				}
 			}
 		}
@@ -352,28 +360,28 @@ if(class_exists('D2UTemplateManager')) {
 			if(($d2u_template->getD2UId() === "00-1" && $d2u_template->isInstalled()) ||
 				($d2u_template->getD2UId() === "01-1" && $d2u_template->isInstalled()) ||
 				($d2u_template->getD2UId() === "04-3" && $d2u_template->isInstalled())) {
-				$this->setConfig('footer_type', 'box');
+				$d2u_helper->setConfig('footer_type', 'box');
 			}
 			else if($d2u_template->getD2UId() === "02-1" && $d2u_template->isInstalled() ||
 				$d2u_template->getD2UId() === "03-1" && $d2u_template->isInstalled()) {
-				$this->setConfig('footer_type', 'links_text');
+				$d2u_helper->setConfig('footer_type', 'links_text');
 			}
 			else if($d2u_template->getD2UId() === "04-1" && $d2u_template->isInstalled()) {
-				$this->setConfig('footer_type', 'links_logo_address');
+				$d2u_helper->setConfig('footer_type', 'links_logo_address');
 			}
 			else if($d2u_template->getD2UId() === "04-2" && $d2u_template->isInstalled()) {
-				$this->setConfig('footer_type', 'box_logo');
+				$d2u_helper->setConfig('footer_type', 'box_logo');
 			}
 			else if($d2u_template->getD2UId() === "05-1" && $d2u_template->isInstalled()) {
-				$this->setConfig('footer_type', 'text');
+				$d2u_helper->setConfig('footer_type', 'text');
 			}
 		}
 	}
-	if (rex_version::compare($this->getVersion(), '1.8.8', '<')) {
+	if (rex_version::compare($d2u_helper->getVersion(), '1.8.8', '<')) {
 		// set footer type
 		foreach ($d2u_templates as $d2u_template) {
 			if($d2u_template->getD2UId() === "05-1" && $d2u_template->isInstalled()) {
-				$this->setConfig('template_header_media_manager_type', 'titelbild');
+				$d2u_helper->setConfig('template_header_media_manager_type', 'titelbild');
 			}
 		}
 	}
@@ -385,7 +393,7 @@ if(class_exists('D2UTemplateManager')) {
 /*
  *  START update translations
  */
-if ($this->getConfig('lang_replacements_install', 'false')) {
+if ($d2u_helper->getConfig('lang_replacements_install', 'false') === 'true') {
 	
 	if(!class_exists('d2u_helper_lang_helper')) {
 		// Load class in case addon is deactivated
@@ -394,7 +402,7 @@ if ($this->getConfig('lang_replacements_install', 'false')) {
 	d2u_helper_lang_helper::factory()->install();
 
 	// Update to 1.8.8
-	if (rex_version::compare($this->getVersion(), '1.8.8', '<')) {
+	if (rex_version::compare($d2u_helper->getVersion(), '1.8.8', '<')) {
 		if(rex_addon::get('sprog')->isAvailable()) {
 			$sql->setQuery("DELETE FROM ". \rex::getTablePrefix() ."sprog_wildcard WHERE wildcard LIKE 'd2u_helper_module_11_%'");
 		}

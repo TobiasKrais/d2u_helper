@@ -1,6 +1,6 @@
 <?php
-$article_id_search = rex_config::get('d2u_helper', 'article_id_search', 0);
-if(rex_addon::get('search_it')->isAvailable() && $article_id_search > 0 && $article_id_search != rex_article::getCurrentId()) {
+$article_id_search = intval(rex_config::get('d2u_helper', 'article_id_search', 0));
+if(rex_addon::get('search_it')->isAvailable() && $article_id_search > 0 && $article_id_search !== rex_article::getCurrentId()) {
 	if(rex_addon::get('yform_spam_protection')->isAvailable()  && $this->getVar('showSearchField', false)) {
 		// Show YForm search field
 		print '<div id="fragment-search">';
