@@ -2,6 +2,7 @@
 namespace D2U_Helper;
 
 /**
+ * @api
  * Administrates CronJob for D2U Helper Addons.
  */
 abstract class ACronJob {
@@ -71,7 +72,7 @@ abstract class ACronJob {
 	/**
 	 * Install CronJob.
 	 */
-	abstract public function install();
+	abstract public function install():void;
 
 	/**
 	 * Checks if  cron job is installed.
@@ -85,10 +86,8 @@ abstract class ACronJob {
 			if($sql->getRows() > 0) {
 				return true;
 			}
-			else {
-				return false;
-			}
 		}
+		return false;
 	}
 	
 	/**
@@ -99,10 +98,10 @@ abstract class ACronJob {
 	 * @param string $interval JSON encoded interval, e.g. {\"minutes\":[0],\"hours\":[0],\"days\":\"all\",\"weekdays\":[1],\"months\":\"all\"}
 	 * @param bool $activate true if CronJob should be activated, otherwise false
 	 */
-	protected function save($description, $php_code, $interval, $activate = true) {
+	protected function save($description, $php_code, $interval, $activate = true):void {
 		if(\rex_addon::get('cronjob')->isAvailable()) {
 			$query = "INSERT INTO `". \rex::getTablePrefix() ."cronjob` (`name`, `description`, `type`, `parameters`, `interval`, `nexttime`, `environment`, `execution_moment`, `execution_start`, `status`, `createdate`, `createuser`) VALUES "
-				."('". $this->name ."', '". $description ."', 'rex_cronjob_phpcode', '{\"rex_cronjob_phpcode_code\":\"". $php_code ."\"}', '". $interval ."', '". date("Y-m-d H:i:s", strtotime("+5 min")) ."', '|frontend|backend|', 0, '1970-01-01 01:00:00', ". ($activate ? "1" : "0") .", CURRENT_TIMESTAMP, '". \rex::getUser()->getLogin() ."');";
+				."('". $this->name ."', '". $description ."', 'rex_cronjob_phpcode', '{\"rex_cronjob_phpcode_code\":\"". $php_code ."\"}', '". $interval ."', '". date("Y-m-d H:i:s", strtotime("+5 min")) ."', '|frontend|backend|', 0, '1970-01-01 01:00:00', ". ($activate ? "1" : "0") .", CURRENT_TIMESTAMP, '". (\rex::getUser() instanceof \rex_user ? \rex::getUser()->getLogin() : '') ."');";
 			$sql = \rex_sql::factory();
 			$sql->setQuery($query);
 
@@ -113,7 +112,7 @@ abstract class ACronJob {
 	/**
 	 * Set nexttime rex_config for CronJob addon.
 	 */
-	private function setConfig() {
+	private function setConfig():void {
 		if(\rex_config::get('cronjob', 'nexttime', 0) > strtotime('+5 minutes')) {
 			\rex_config::set('cronjob', 'nexttime', strtotime('+5 minutes'));
 		}		

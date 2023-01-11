@@ -4,10 +4,10 @@
  */
 class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	/**
-	 * @var string[] Array with english replacements. Key is the wildcard,
+	 * @var array<string, string> Array with english replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_english = [
+	protected array $replacements_english = [
 		'd2u_helper_consent_manager_cookiegroup_necessary' => 'Required',
 		'd2u_helper_consent_manager_cookiegroup_necessary_description' => 'Necessary cookies enable basic functions and are necessary for the website to function properly.',
 		'd2u_helper_consent_manager_cookiegroup_statistics' => 'Statistics',
@@ -85,10 +85,10 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	];
 	
 	/**
-	 * @var string[] Array with german replacements. Key is the wildcard,
+	 * @var array<string, string> Array with german replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_dutch = [
+	protected array $replacements_dutch = [
 		'd2u_helper_consent_manager_cookiegroup_necessary' => 'Noodzakelijk',
 		'd2u_helper_consent_manager_cookiegroup_necessary_description' => 'Noodzakelijke cookies maken basisfuncties mogelijk en zijn nodig om de website goed te laten functioneren.',
 		'd2u_helper_consent_manager_cookiegroup_statistics' => 'Statistieken',
@@ -163,10 +163,10 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	];
 
 	/**
-	 * @var string[] Array with french replacements. Key is the wildcard,
+	 * @var array<string, string> Array with french replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_french = [
+	protected array $replacements_french = [
 		'd2u_helper_consent_manager_cookiegroup_necessary' => 'Nécessaire',
 		'd2u_helper_consent_manager_cookiegroup_necessary_description' => 'Des cookies nécessaires activent les fonctions de base et sont indispensables au bon fonctionnement du site Web.',
 		'd2u_helper_consent_manager_cookiegroup_statistics' => 'Statistique',
@@ -244,10 +244,10 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	];
 	
 	/**
-	 * @var string[] Array with german replacements. Key is the wildcard,
+	 * @var array<string, string> Array with german replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_german = [
+	protected array $replacements_german = [
 		'd2u_helper_consent_manager_cookiegroup_necessary' => 'Notwendig',
 		'd2u_helper_consent_manager_cookiegroup_necessary_description' => 'Notwendige Cookies ermöglichen grundlegende Funktionen und sind für die einwandfreie Funktion der Website erforderlich.',
 		'd2u_helper_consent_manager_cookiegroup_statistics' => 'Statistik',
@@ -325,10 +325,10 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	];
 	
 	/**
-	 * @var string[] Array with spanish replacements. Key is the wildcard,
+	 * @var array<string, string> Array with spanish replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_spanish = [
+	protected array $replacements_spanish = [
 		'd2u_helper_consent_manager_cookiegroup_necessary' => 'Necesario',
 		'd2u_helper_consent_manager_cookiegroup_necessary_description' => 'Las cookies necesarias habilitan funciones básicas y son necesarias para que el sitio web funcione correctamente.',
 		'd2u_helper_consent_manager_cookiegroup_statistics' => 'Estadísticas',
@@ -406,10 +406,10 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	];
 	
 	/**
-	 * @var string[] Array with russian replacements. Key is the wildcard,
+	 * @var array<string, string> Array with russian replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_russian = [
+	protected array $replacements_russian = [
 		'd2u_helper_consent_manager_cookiegroup_necessary' => 'Обязательные',
 		'd2u_helper_consent_manager_cookiegroup_necessary_description' => 'Обязательные файлы cookies необходимы в технических целях для корректного функционирования нашего сайта.',
 		'd2u_helper_consent_manager_cookiegroup_statistics' => 'Статистические',
@@ -487,10 +487,10 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	];
 	
 	/**
-	 * @var string[] Array with chinese replacements. Key is the wildcard,
+	 * @var array<string, string> Array with chinese replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected $replacements_chinese = [
+	protected array $replacements_chinese = [
 		'd2u_helper_consent_manager_cookiegroup_necessary' => '必须',
 		'd2u_helper_consent_manager_cookiegroup_necessary_description' => '必要的cookie启用基本功能，并且是网站正常运行所必需的。',
 		'd2u_helper_consent_manager_cookiegroup_statistics' => '统计',
@@ -578,7 +578,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	/**
 	 * Installs the replacement table for this addon.
 	 */
-	public function install() {
+	public function install():void {
 		foreach($this->replacements_english as $key => $value) {
 			foreach (rex_clang::getAllIds() as $clang_id) {
 				$lang_replacement = rex_config::get('d2u_helper', 'lang_replacement_'. $clang_id, '');

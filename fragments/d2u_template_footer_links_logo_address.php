@@ -44,10 +44,10 @@
 		}
 		print '<br>';
 		if(strval($d2u_helper->getConfig('footer_text_phone', '')) !== '') {
-			print '<span class="fa-icon fa-phone footer-icon"></span> '. $d2u_helper->getConfig('footer_text_phone') .'<br>';
+			print '<span class="fa-icon fa-phone footer-icon"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_phone') .'">'. $d2u_helper->getConfig('footer_text_phone') .'</a><br>';
 		}
 		if(strval($d2u_helper->getConfig('footer_text_mobile', '')) !== '') {
-			print '<span class="fa-icon fa-mobile footer-icon"></span> '. $d2u_helper->getConfig('footer_text_mobile') .'<br>';
+			print '<span class="fa-icon fa-mobile footer-icon"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_mobile') .'">'. $d2u_helper->getConfig('footer_text_mobile') .'</a><br>';
 		}
 		if(strval($d2u_helper->getConfig('footer_text_fax', '')) !== '') {
 			print '<span class="fa-icon fa-fax footer-icon"></span> '. $d2u_helper->getConfig('footer_text_fax') .'<br>';

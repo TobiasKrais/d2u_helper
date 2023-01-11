@@ -2,17 +2,19 @@
 namespace D2U_Helper;
 
 /**
+ * @api
  * Superclass for all lang helper classes of D2U addons.
  */
 abstract class ALangHelper {
 	/**
-	 * @var string[] Array with english replacements. Key is the wildcard,
+	 * @var array<string, string> Array with english replacements. Key is the wildcard,
 	 * value the replacement. Every ALangHelper child has this variable
 	 */
-	protected $replacements_english = [];
+	protected array $replacements_english = [];
 
 	/**
 	 * Factory method.
+	 * @return ALangHelper Lang helper object
 	 */
 	abstract public static function factory();
 	
@@ -26,13 +28,13 @@ abstract class ALangHelper {
 		$select_id_sql = \rex_sql::factory();
 		$select_id_sql->setQuery($select_id_query);
 		if($select_id_sql->getRows() > 0) {
-			return $select_id_sql->getValue('id');
+			return (int) $select_id_sql->getValue('id');
 		}
 		else {
 			$select_id_query = "SELECT MAX(id) + 1 AS max_id FROM ". \rex::getTablePrefix() ."sprog_wildcard;";
 			$select_id_sql->setQuery($select_id_query);
-			if($select_id_sql->getValue('max_id') != NULL) {
-				return $select_id_sql->getValue('max_id');
+			if(intval($select_id_sql->getValue('max_id')) > 0) {
+				return (int) $select_id_sql->getValue('max_id');
 			}
 		}
 
@@ -43,7 +45,7 @@ abstract class ALangHelper {
 	/**
 	 * Installs the replacement table for this addon.
 	 */
-	abstract public function install();
+	abstract public function install():void;
 
 	/**
 	 * Save value in sprog wildcard table
@@ -67,7 +69,7 @@ abstract class ALangHelper {
 				$query = "UPDATE ". \rex::getTablePrefix() ."sprog_wildcard SET "
 					."`replace` = '". addslashes($value) ."', "
 					."updatedate = '". \rex_sql::datetime() ."', "
-					."updateuser = '". \rex::getUser()->getValue('login') ."' "
+					."updateuser = '". (\rex::getUser() instanceof \rex_user ? \rex::getUser()->getValue('login') : '') ."' "
 					."WHERE pid = ". $select_pid_sql->getValue('pid') .";COMMIT;";
 				$sql = \rex_sql::factory();
 				$sql->setQuery($query);
@@ -82,13 +84,15 @@ abstract class ALangHelper {
 				."wildcard = '". $key ."', "
 				."`replace` = '". addslashes($value) ."', "
 				."createdate = '". \rex_sql::datetime() ."', "
-				."createuser = '". \rex::getUser()->getValue('login') ."', "
+				."createuser = '". (\rex::getUser() instanceof \rex_user ? \rex::getUser()->getValue('login') : '') ."', "
 				."updatedate = '". \rex_sql::datetime() ."', "
-				."updateuser = '". \rex::getUser()->getValue('login') ."';";
+				."updateuser = '". (\rex::getUser() instanceof \rex_user ? \rex::getUser()->getValue('login') : '') ."';";
 			$sql = \rex_sql::factory();
 			$sql->setQuery($query);
 			return !$sql->hasError();
 		}
+		
+		return true;
 	}
 	
 	/**
@@ -96,7 +100,7 @@ abstract class ALangHelper {
 	 * @param int $clang_id Redaxo language ID, if 0, replacements of all languages
 	 * will be deleted. Otherwise only one specified language will be deleted.
 	 */
-	public function uninstall($clang_id = 0) {
+	public function uninstall($clang_id = 0):void {
 		foreach(array_keys($this->replacements_english) as $key) {
 			if(\rex_addon::get('sprog')->isAvailable()) {
 				// Delete 

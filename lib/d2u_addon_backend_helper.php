@@ -1,13 +1,13 @@
 <?php
 /**
- * Offers methods for Redaxo backend forms, mostly used bei Addons published by
+ * Offers methods for Redaxo backend forms, used by addons published by
  * www.design-to-use.de.
  */
 class d2u_addon_backend_helper {
 	/**
 	 * Create a HTML String with Redaxo Media Buttons for managing the element
 	 * postition
-	 * @param string $field_id Name of die media field
+	 * @param int $field_id Name of die media field
 	 * @return string HTML String with buttons
 	 */
 	private static function getLinkPositionButtons($field_id) {
@@ -25,19 +25,19 @@ class d2u_addon_backend_helper {
 	/**
 	 * Create a HTML String with Redaxo Media Buttons for opening Mediapool,
 	 * add, delete and view medias
-	 * @param string $field_id Name of die media field
+	 * @param string|int $field_id Name of die media field
 	 * @param bool $isList true if field is a medialist field
 	 * @param string $filetypes Comma separated list of filetypes.
 	 * @param int $category_id Comma separated list of filetypes.
 	 * @return string HTML String with buttons
 	 */
-	public static function getMediaManagingButtons($field_id, $isList = false, $filetypes = '', $category_id = 0) {
+	private static function getMediaManagingButtons($field_id, $isList = false, $filetypes = '', $category_id = 0) {
 		$type_html = "Media";
 		if ($isList) {
 			$type_html = "Medialist";
 		}
 		$args = "";
-		if($filetypes) {
+		if($filetypes !== '') {
 			$args .= "&args[types]=". $filetypes;
 		} 
 		if($category_id > 0)	{
@@ -57,7 +57,7 @@ class d2u_addon_backend_helper {
 	/**
 	 * Create a HTML String with Redaxo Media Buttons for managing the element
 	 * postition
-	 * @param string $field_id Name of die media field
+	 * @param int $field_id Name of die media field
 	 * @return string HTML String with buttons
 	 */
 	public static function getMediaPositionButtons($field_id) {
@@ -79,9 +79,12 @@ class d2u_addon_backend_helper {
 	public static function getWYSIWYGEditors() {
 		$options_editor = [];
 		if(rex_addon::get('ckeditor')->isAvailable()) {
-			if(method_exists('rex_ckeditor', 'getProfiles')) {
-				foreach(rex_ckeditor::getProfiles() as $cke_profile_name) {
-					$options_editor['ckeditor_'. $cke_profile_name] = rex_i18n::msg('ckeditor_title') ." - ". $cke_profile_name;
+			if(method_exists(rex_ckeditor::class, 'getProfiles')) { /** @phpstan-ignore-line */
+				$ckeditor_profiles = \rex_ckeditor::getProfiles(); /** @phpstan-ignore-line */
+				if(is_array($ckeditor_profiles)) {
+					foreach($ckeditor_profiles as $cke_profile_name) {
+						$options_editor['ckeditor_'. $cke_profile_name] = rex_i18n::msg('ckeditor_title') ." - ". $cke_profile_name;
+					}
 				}
 			}
 			else {
@@ -89,8 +92,13 @@ class d2u_addon_backend_helper {
 			}
 		}
 		if(rex_addon::get('cke5')->isAvailable()) {
-			foreach(\Cke5\Creator\Cke5ProfilesApi::getAllProfiles() as $cke5_profile) {
-				$options_editor['cke5-editor_'. $cke5_profile["name"]] = rex_i18n::msg('cke5_title') ." - ". $cke5_profile["name"];
+			$cke5_profiles = \Cke5\Creator\Cke5ProfilesApi::getAllProfiles();  /** @phpstan-ignore-line */
+			if(is_array($cke5_profiles)) {
+				foreach($cke5_profiles as $cke5_profile) {
+					if(is_array($cke5_profile) && array_key_exists('name', $cke5_profile)) {
+						$options_editor['cke5-editor_'. $cke5_profile["name"]] = rex_i18n::msg('cke5_title') ." - ". $cke5_profile["name"];
+					}
+				}
 			}
 		}
 		if(rex_addon::get('markitup')->isAvailable()) {
@@ -104,8 +112,11 @@ class d2u_addon_backend_helper {
 			$options_editor['tinymce4'] = "TinyMCE 4";
 		}
 		if(rex_addon::get('tinymce5')->isAvailable()) {
-			foreach(TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles() as $profile_infos) {
-				$options_editor['tinymce5_'. $profile_infos['name']] = rex_i18n::msg('tinymce5_title') ." - ". $profile_infos['name'];
+			$tinymce5_profiles = \TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles();
+			if(is_array($tinymce5_profiles)) {
+				foreach($tinymce5_profiles as $profile_infos) {
+					$options_editor['tinymce5_'. $profile_infos['name']] = rex_i18n::msg('tinymce5_title') ." - ". $profile_infos['name'];
+				}
 			}
 		}
 		return $options_editor;
@@ -117,45 +128,54 @@ class d2u_addon_backend_helper {
 	 */
 	public static function getWYSIWYGEditorClass() {
 		$wysiwyg_class = '';
-		if(rex_config::get('d2u_helper', 'editor') == 'tinymce4' && rex_addon::get('tinymce4')->isAvailable()) {
+		if(strval(strval(rex_config::get('d2u_helper', 'editor'))) === 'tinymce4' && rex_addon::get('tinymce4') instanceof rex_addon && rex_addon::get('tinymce4')->isAvailable()) {
 			$wysiwyg_class = ' tinyMCEEditor';
 		}
-		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'tinymce5') !== false && rex_addon::get('tinymce5')->isAvailable()) {
+		else if(strpos(strval(rex_config::get('d2u_helper', 'editor')), 'tinymce5') !== false && rex_addon::get('tinymce5') instanceof rex_addon && rex_addon::get('tinymce5')->isAvailable()) {
 			$wysiwyg_class = ' tiny5-editor" data-profile="default';
-			foreach(TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles() as $profile_infos) {
-				if(rex_config::get('d2u_helper', 'editor') == 'tinymce5_'. $profile_infos['name']) {
-					$wysiwyg_class = ' tiny5-editor" data-profile="'. $profile_infos['name'] ;
-					break;
-				}
-			}
-		}
-		else if(rex_config::get('d2u_helper', 'editor') == 'redactor2' && rex_addon::get('redactor2')->isAvailable()) {
-			$wysiwyg_class = ' redactorEditor2-full';
-		}
-		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'cke5-editor') !== false && rex_addon::get('cke5')->isAvailable()) {
-			$wysiwyg_class = ' cke5-editor" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang();
-			foreach(\Cke5\Creator\Cke5ProfilesApi::getAllProfiles() as $cke5_profile) {
-				if(rex_config::get('d2u_helper', 'editor') == 'cke5-editor_'. $cke5_profile["name"]) {
-					$wysiwyg_class = ' cke5-editor" data-profile="'. $cke5_profile["name"] .'" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang();
-					break;
-				}
-			}
-		}
-		else if(strpos(rex_config::get('d2u_helper', 'editor'), 'ckeditor') !== false && rex_addon::get('ckeditor')->isAvailable()) {
-			$wysiwyg_class = ' ckeditor" data-ckeditor-profile="standard';
-			if(method_exists('rex_ckeditor', 'getProfiles')) {
-				foreach(rex_ckeditor::getProfiles() as $cke_profile_name) {
-					if(rex_config::get('d2u_helper', 'editor') == 'ckeditor_'. $cke_profile_name) {
-						$wysiwyg_class = ' ckeditor" data-ckeditor-profile="'. $cke_profile_name ;
+			$tinymce5_profiles = \TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles();
+			if(is_array($tinymce5_profiles)) {
+				foreach($tinymce5_profiles as $profile_infos) {
+					if(rex_config::get('d2u_helper', 'editor') === 'tinymce5_'. $profile_infos['name']) {
+						$wysiwyg_class = ' tiny5-editor" data-profile="'. $profile_infos['name'] ;
 						break;
 					}
 				}
 			}
 		}
-		else if(rex_config::get('d2u_helper', 'editor') == 'markitup' && rex_addon::get('markitup')->isAvailable()) {
+		else if(rex_config::get('d2u_helper', 'editor') === 'redactor2' && rex_addon::get('redactor2')->isAvailable()) {
+			$wysiwyg_class = ' redactorEditor2-full';
+		}
+		else if(strpos(strval(rex_config::get('d2u_helper', 'editor')), 'cke5-editor') !== false && rex_addon::get('cke5')->isAvailable()) {
+			$wysiwyg_class = ' cke5-editor" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang(); /** @phpstan-ignore-line */
+			$cke5_profiles = \Cke5\Creator\Cke5ProfilesApi::getAllProfiles();  /** @phpstan-ignore-line */
+			if(is_array($cke5_profiles)) {
+				foreach($cke5_profiles as $cke5_profile) {
+					if(is_array($cke5_profile) && array_key_exists('name', $cke5_profile) && rex_config::get('d2u_helper', 'editor') === 'cke5-editor_'. $cke5_profile["name"]) {
+						$wysiwyg_class = ' cke5-editor" data-profile="'. $cke5_profile["name"] .'" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang(); /** @phpstan-ignore-line */
+						break;
+					}
+				}
+			}
+		}
+		else if(strpos(strval(rex_config::get('d2u_helper', 'editor')), 'ckeditor') !== false && rex_addon::get('ckeditor')->isAvailable()) {
+			$wysiwyg_class = ' ckeditor" data-ckeditor-profile="standard';
+			if(method_exists(rex_ckeditor::class, 'getProfiles')) { /** @phpstan-ignore-line */
+				$ckeditor_profiles = \rex_ckeditor::getProfiles(); /** @phpstan-ignore-line */
+				if(is_array($ckeditor_profiles)) {
+					foreach($ckeditor_profiles as $cke_profile_name) {
+						if(rex_config::get('d2u_helper', 'editor') === 'ckeditor_'. $cke_profile_name) {
+							$wysiwyg_class = ' ckeditor" data-ckeditor-profile="'. $cke_profile_name ;
+							break;
+						}
+					}
+				}
+			}
+		}
+		else if(rex_config::get('d2u_helper', 'editor') === 'markitup' && rex_addon::get('markitup')->isAvailable()) {
 			$wysiwyg_class .= ' markitupEditor-markdown_full';
 		}
-		else if(rex_config::get('d2u_helper', 'editor') == 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
+		else if(rex_config::get('d2u_helper', 'editor') === 'markitup_textile' && rex_addon::get('markitup')->isAvailable()) {
 			$wysiwyg_class .= ' markitupEditor-textile_full';
 		}
 
@@ -251,7 +271,7 @@ class d2u_addon_backend_helper {
 	 * @param bool $checked true if checked
 	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_checkbox($message_id, $fieldname, $value, $checked = false, $readonly = false) {
+	public static function form_checkbox($message_id, $fieldname, $value, $checked = false, $readonly = false):void {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><input class="form-control d2u_helper_toggle" type="checkbox" name="' . $fieldname . '" value="' . $value . '"'
 			.($checked ? ' checked="checked"' : '') . ($readonly ? ' disabled' : '') .' />';
@@ -269,7 +289,7 @@ class d2u_addon_backend_helper {
 	 * @param string $message_id rex_i18n message id for the info text.
 	 * @param string $fieldname Input field name.
 	 */
-	public static function form_infotext($message_id, $fieldname) {
+	public static function form_infotext($message_id, $fieldname):void {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label></label></dt>';
 		print '<dd>' . htmlspecialchars_decode(rex_i18n::msg($message_id)) . '</dd>';
@@ -285,32 +305,32 @@ class d2u_addon_backend_helper {
 	 * @param bool $readonly true if field should have readonly attribute.
 	 * @param string $type HTML5 input type, e.g. text, number or email
 	 */
-	public static function form_input($message_id, $fieldname, $value, $required = false, $readonly = false, $type = "text") {
+	public static function form_input($message_id, $fieldname, $value, $required = false, $readonly = false, $type = "text"):void {
 		$field_id = str_replace('[', "-", str_replace(']', "", $fieldname));
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		$label = '<label>' . rex_i18n::msg($message_id) . '</label>';
 		$input = '';
-		if($type == "color") {
+		if($type === "color") {
 			$input .= '<input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
 				. 'value="' . str_replace('"', "'", (string) $value) . '" id="text-' . $field_id . '" onChange="document.getElementById(\'color-' . $field_id . '\').value = this.value">';
 		}
-		$input .= '<input class="form-control'. ($type == "color" ? ' d2u_helper_color' : '') .'" type="' . $type . '" name="' . $fieldname . '" id="color-' . $field_id . '" value="' . str_replace('"', "'", (string) $value) . '"';
+		$input .= '<input class="form-control'. ($type === "color" ? ' d2u_helper_color' : '') .'" type="' . $type . '" name="' . $fieldname . '" id="color-' . $field_id . '" value="' . str_replace('"', "'", (string) $value) . '"';
 		if ($required && $readonly !== true) {
 			$input .= ' required';
 		}
 		if ($readonly) {
 			$input .= ' readonly';
 		}
-		if($type == "color" || $type == "number") {
+		if($type === "color" || $type === "number") {
 			$input .= ' style="max-width: 150px;"';
 			$input .= ' onChange="document.getElementById(\'text-' . $field_id . '\').value = this.value"';
 		}
-		if($type == "date") {
+		if($type === "date") {
 			$input .= ' placeholder="Format: JJJJ-MM-TT"';
 		}
 		$input .=  '/>';
-		print '<dt>'. ($type == "color" ? $input : $label) .'</dt>';
-		print '<dd'. ($type == "color" ? ' class="d2u_helper_color_desc"' : '') .'>'. ($type == "color" ? $label : $input) .'</dd>';
+		print '<dt>'. ($type === "color" ? $input : $label) .'</dt>';
+		print '<dd'. ($type === "color" ? ' class="d2u_helper_color_desc"' : '') .'>'. ($type === "color" ? $label : $input) .'</dd>';
 		print '</dl>';
 	}
 
@@ -322,8 +342,8 @@ class d2u_addon_backend_helper {
 	 * @param int $clang_id ID of the selected language.
 	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_linkfield($message_id, $fieldname, $article_id, $clang_id, $readonly = false) {
-		if (!in_array($clang_id, rex_clang::getAllIds())) {
+	public static function form_linkfield($message_id, $fieldname, $article_id, $clang_id, $readonly = false):void {
+		if (!in_array($clang_id, rex_clang::getAllIds(), true)) {
 			$clang_id = rex_clang::getStartId();
 		}
 		print '<dl class="rex-form-group form-group" id="LINK_'. $fieldname .'">';
@@ -353,7 +373,7 @@ class d2u_addon_backend_helper {
 	 * @param int $clang_id ID of the selected language.
 	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_linklistfield($message_id, $fieldnumber, $article_ids, $clang_id, $readonly = false) {
+	public static function form_linklistfield($message_id, $fieldnumber, $article_ids, $clang_id, $readonly = false):void {
 		print '<dl class="rex-form-group form-group" id="LINKLIST_'. $fieldnumber .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd><div class="input-group">';
@@ -390,7 +410,7 @@ class d2u_addon_backend_helper {
 	 * @param string $filetypes for allowed filetypes.
 	 * @param int $category_id for default media-category.
 	 */
-	public static function form_mediafield($message_id, $fieldname, $value, $readonly = false, $filetypes = '', $category_id = 0) {
+	public static function form_mediafield($message_id, $fieldname, $value, $readonly = false, $filetypes = '', $category_id = 0):void {
 		$filetypes = strtolower(str_replace(' ', '', $filetypes));
 		print '<dl class="rex-form-group form-group" id="MEDIA_'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
@@ -413,7 +433,7 @@ class d2u_addon_backend_helper {
 	 * @param string[] $values Field values.
 	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_medialistfield($message_id, $fieldnumber, $values, $readonly = false) {
+	public static function form_medialistfield($message_id, $fieldnumber, $values, $readonly = false):void {
 /*
 		$wdgtClass = ' rex-js-widget-imglist rex-js-widget-preview rex-js-widget-tooltip';
 		if (rex_addon::get('media_manager')->isAvailable()) {
@@ -482,13 +502,13 @@ class d2u_addon_backend_helper {
 	 * Prints a select field
 	 * @param string $message_id rex_i18n message id for the label text.
 	 * @param string $fieldname Select field name
-	 * @param string[<string|int, string|int>]|int[<string|int, string|int>] $values Field values.
-	 * @param string[<string|int, string|int>]|int[<string|int, string|int>] $selected_values Preselected value
+	 * @param array<string|int, string|int>|array<string|int, string|int> $values Field values.
+	 * @param array<string|int, string|int>|array<string|int, string|int> $selected_values Preselected value
 	 * @param int $size Size of the select field (parameter is no more used)
 	 * @param bool $multiple true if multiple selections are allowed
 	 * @param bool $readonly true if field should have readonly attribute.
 	 */
-	public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size = 1, $multiple = false, $readonly = false) {
+	public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size = 1, $multiple = false, $readonly = false):void {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		print '<dd>';
@@ -527,7 +547,7 @@ class d2u_addon_backend_helper {
 	 * @param bool $readonly true if field should have readonly attribute.
 	 * @param bool $use_wysiwyg Use WYSIWYG Editor
 	 */
-	public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = false, $readonly = false, $use_wysiwyg = true) {
+	public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = false, $readonly = false, $use_wysiwyg = true):void {
 		print '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
 		print '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
 		$wysiwyg_class = ' ';
@@ -555,12 +575,12 @@ class d2u_addon_backend_helper {
 	 * should be generated. This works only for url Addon Version >=2. If
 	 * namespace does not exist, nothing happens.
 	 */
-	public static function generateUrlCache($namespace = "") {
+	public static function generateUrlCache($namespace = ""):void {
 		if(\rex_addon::get('url')->isAvailable() && \rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=')) {
 			// Delete url addon cache file
 			\Url\Cache::deleteProfiles();
 			// Read profile
-			$profiles = $namespace != "" ? \Url\Profile::getByNamespace($namespace) : \Url\Profile::getAll();
+			$profiles = $namespace !== "" ? \Url\Profile::getByNamespace($namespace) : \Url\Profile::getAll();
 			foreach($profiles as $profile) {
 				// generate URLs
 				$profile->deleteUrls();
@@ -570,25 +590,11 @@ class d2u_addon_backend_helper {
 	}
 	
 	/**
-	 * Updates search it index for urls from url addon (code is integrated in search_it
-	 * since version 3.4.3
-	 * @deprecated since version 1.8.1
-	 */
-    public static function update_searchit_url_index() {
-		if(rex_addon::get('search_it')->isAvailable() && rex_addon::get('search_it')->getConfig('index_url_addon') && search_it_isUrlAddOnAvailable()) {
-			$search_it = new search_it();
-			$search_it->unindexDeletedURLs();
-			$search_it->indexNewURLs();
-			$search_it->indexUpdatedURLs();
-		}
-    }
-	
-	/**
 	 * Updates url addon scheme article id.
 	 * @param string $table_name Table/view name (version 1.x) or namespace (version 2.x) used for url scheme. Parameter is used as identifier.
 	 * @param int $article_id Redaxo article id
 	 */
-    public static function update_url_scheme($table_name, $article_id) {
+    public static function update_url_scheme($table_name, $article_id):void {
 		if(rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=')) {
 			$sql = rex_sql::factory();
 			// url version 2.x
@@ -599,7 +605,7 @@ class d2u_addon_backend_helper {
 				."WHERE `table_name` LIKE '%". $table_name ."'";
 			$sql->setQuery($query);
 			if($sql->getRows() > 0) {
-				self::generateUrlCache($sql->getValue('namespace'));
+				self::generateUrlCache((string) $sql->getValue('namespace'));
 			}
 		}
     }

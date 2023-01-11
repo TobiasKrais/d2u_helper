@@ -25,13 +25,13 @@
 		print '<ul id="footer-contact">';
 		if($d2u_helper instanceof rex_addon) {
 			if(strval($d2u_helper->getConfig('footer_text_phone', '')) !== '') {
-				print '<li>'. $d2u_helper->getConfig('footer_text_phone') .'</li>';
+				print '<li><span class="fa-icon fa-phone footer-icon"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_phone') .'">'. $d2u_helper->getConfig('footer_text_phone') .'</a></li>';
 			}
 			if(strval($d2u_helper->getConfig('footer_text_mobile', '')) !== '') {
-				print '<li>'. $d2u_helper->getConfig('footer_text_mobile') .'</li>';
+				print '<li>span class="fa-icon fa-mobile footer-icon"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_mobile') .'">'. $d2u_helper->getConfig('footer_text_mobile') .'</a></li>';
 			}
 			if(strval($d2u_helper->getConfig('footer_text_fax', '')) !== '') {
-				print '<li>'. $d2u_helper->getConfig('footer_text_fax') .'</li>';
+				print '<li><span class="fa-icon fa-fax footer-icon"></span> '. $d2u_helper->getConfig('footer_text_fax') .'</li>';
 			}
 			if(strval($d2u_helper->getConfig('footer_facebook_link', '')) !== '') {
 				print '<li><a href="'. $d2u_helper->getConfig("footer_facebook_link") .'" target="_blank">Facebook</a></li>';

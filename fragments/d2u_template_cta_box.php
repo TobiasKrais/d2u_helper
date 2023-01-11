@@ -1,5 +1,5 @@
 <?php
-$show_cta_box = rex_config::get('d2u_helper', 'show_cta_box', 'false') === 'true' ? true : false;
+$show_cta_box = boolval(rex_config::get('d2u_helper', 'show_cta_box', false));
 
 if ($show_cta_box) {
 	$d2u_helper = rex_addon::get('d2u_helper');
@@ -43,10 +43,10 @@ if ($show_cta_box) {
 		<?php
 			print '<li><span class="cta_box_toggler fa-icon fa-right footer-icon"></span><span class="cta_box_content">'. \Sprog\Wildcard::get('d2u_helper_template_cta_box') .'</span></li>';
 			if(strval($d2u_helper->getConfig('footer_text_phone', '')) !== '') {
-				print '<li><span class="cta_box_toggler fa-icon fa-phone footer-icon"></span><span class="cta_box_content">'. $d2u_helper->getConfig('footer_text_phone') .'</span></li>';
+				print '<li><span class="cta_box_toggler fa-icon fa-phone footer-icon"></span><span class="cta_box_content"><a href="tel:'. $d2u_helper->getConfig('footer_text_phone') .'">'. $d2u_helper->getConfig('footer_text_phone') .'</a></span></li>';
 			}
 			if(strval($d2u_helper->getConfig('footer_text_mobile', '')) !== '') {
-				print '<li><span class="cta_box_toggler fa-icon fa-mobile footer-icon"></span><span class="cta_box_content">'. $d2u_helper->getConfig('footer_text_mobile') .'</span></li>';
+				print '<li><span class="cta_box_toggler fa-icon fa-mobile footer-icon"></span><span class="cta_box_content"><a href="tel:'. $d2u_helper->getConfig('footer_text_mobile') .'">'. $d2u_helper->getConfig('footer_text_mobile') .'</a></span></li>';
 			}
 			if(strval($d2u_helper->getConfig('footer_text_fax', '')) !== '') {
 				print '<li><span class="cta_box_toggler fa-icon fa-fax footer-icon"></span><span class="cta_box_content">'. $d2u_helper->getConfig('footer_text_fax') .'</span></li>';

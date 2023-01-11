@@ -23,6 +23,18 @@ page:
 requires:
     php: '>=7.4'
     redaxo: '>=5.10.0'
+    
+conflicts:
+    d2u_address: '<1.2.3'
+    d2u_courses: '<3.2.5'
+    d2u_guestbook: '<1.1.0'
+    d2u_history: '<1.0.2'
+    d2u_immo: '<1.1.7'
+    d2u_jobs: '<1.2.4'
+    d2u_machinery: '<1.4.1'
+    d2u_news: '<1.1.5'
+    d2u_references: '<1.0.9'
+    d2u_staff: '<1.1.2'
 
 default_config:
     article_color_h: '#ffba23'
