@@ -7,8 +7,8 @@ if(!isset($_SESSION['d2u_helper_translation'])) {
 }
 
 // Save form in session
-if (filter_input(INPUT_POST, "btn_save") == 'save') {
-	$settings = (array) rex_post('settings', 'array', []);
+if (filter_input(INPUT_POST, 'btn_save') === 'save') {
+	$settings = rex_post('settings', 'array', []);
 	$_SESSION['d2u_helper_translation']['clang_id'] =  $settings['clang_id'];
 	$_SESSION['d2u_helper_translation']['filter'] = $settings['filter'];
 }

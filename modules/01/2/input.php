@@ -9,7 +9,7 @@
 		foreach($values as $key => $value) {
 			echo '<option value="'. $key .'" ';
 	
-			if ("REX_VALUE[20]" == $key) {
+			if (intval("REX_VALUE[20]") === $key) { /** @phpstan-ignore-line */
 				echo 'selected="selected" ';
 			}
 			echo '>'. $value .'</option>';
@@ -30,7 +30,7 @@
 		foreach($values_offset as $key => $value) {
 			echo '<option value="'. $key .'" ';
 	
-			if ("REX_VALUE[17]" == $key) {
+			if (intval("REX_VALUE[17]") === $key) { /** @phpstan-ignore-line */
 				echo 'selected="selected" ';
 			}
 			echo '>'. $value .'</option>';

@@ -2,7 +2,7 @@
 $cols = "REX_VALUE[20]" == "" ? 8 : "REX_VALUE[20]";
 $offset_lg_cols = intval("REX_VALUE[17]");
 $offset_lg = "";
-if($offset_lg_cols > 0) {
+if($offset_lg_cols > 0) { /** @phpstan-ignore-line */
 	$offset_lg = " mr-lg-auto ml-lg-auto ";
 }
 $heading = "REX_VALUE[1]";

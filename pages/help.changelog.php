@@ -1,8 +1,9 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.9.4-DEV</p>
+		<p>1.10.0-DEV</p>
 		<ul>
+			<li>Knapp 3000 rexstan Verbesserungen.</li>
 			<li>Nutzt die getTags() Methode von YRewrite 2.9.</li>
 			<li>Fehler im Megamenü behoben: Elemente in der ersten Ebene ohne Untermenü waren nicht klickbar.</li>
 			<li>Smartmenu: aktives Navigationselement wird mit Hover Elementen hervorgehoben.</li>

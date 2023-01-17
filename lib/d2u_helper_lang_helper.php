@@ -7,7 +7,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper {
 	 * @var array<string, string> Array with english replacements. Key is the wildcard,
 	 * value the replacement. 
 	 */
-	protected array $replacements_english = [
+	var $replacements_english = [
 		'd2u_helper_consent_manager_cookiegroup_necessary' => 'Required',
 		'd2u_helper_consent_manager_cookiegroup_necessary_description' => 'Necessary cookies enable basic functions and are necessary for the website to function properly.',
 		'd2u_helper_consent_manager_cookiegroup_statistics' => 'Statistics',

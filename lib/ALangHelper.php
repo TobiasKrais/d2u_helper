@@ -10,7 +10,7 @@ abstract class ALangHelper {
 	 * @var array<string, string> Array with english replacements. Key is the wildcard,
 	 * value the replacement. Every ALangHelper child has this variable
 	 */
-	protected array $replacements_english = [];
+	var $replacements_english = [];
 
 	/**
 	 * Factory method.

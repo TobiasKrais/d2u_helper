@@ -568,7 +568,7 @@ class D2UTemplate {
 	/**
 	 * Removes the template from redaxo template table
 	 */
-	public function delete() {
+	public function delete():void {
 		$removemod = rex_sql::factory();
 		$removemod->setTable(\rex::getTablePrefix() . 'template');
 		$removemod->setWhere(['id' => $this->d2u_template_id]);
@@ -581,10 +581,7 @@ class D2UTemplate {
 		
 		// template specific uninstall action
 		if(file_exists($this->template_folder . D2UTemplate::TEMPLATE_UNINSTALL)) {
-			$success = include $this->template_folder . D2UTemplate::TEMPLATE_UNINSTALL;
-			if(!$success) {
-				return false;
-			}
+			include $this->template_folder . D2UTemplate::TEMPLATE_UNINSTALL;
 		}
 	}
 
