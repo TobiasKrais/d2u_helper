@@ -13,6 +13,7 @@
 			<li>Modul 04-2 "OpenStreetMap Karte": Funktioniert nun auch mit dem Geolocation, nicht nur mit OSM Proxy und kann nun auch zentriert werden.</li>
 			<li>Modul 06-3 "Video mit Plyr einbinden": kann nun Informationen für Videosuchmaschinen ausgeben, wenn Vorschaubild angegeben wird.</li>
 			<li>Modul 06-4 "Videoliste mit Plyr einbinden": hatte Playlist unter bestimmten Umständen nicht angezeigt.</li>
+			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)" YForm Template Fehler behoben.</li>
 			<li>Template 04-1, 04-2 und 04-3: Ausgabe von unnötigem Code verhindert.</li>
 			<li>Template "04-3 Header Slider Template with news column" berücksichtigt nun auch, ob News in der Sprache ausgeblendet werden sollen und Fehler in der Hintergrundfarbe der Navigation korrigiert.</li>
 			<li>Template "00-1 Big Header Template" Ausgabe korrigiert, wenn kein Headerbild angegeben ist.</li>
