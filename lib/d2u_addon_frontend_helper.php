@@ -196,21 +196,9 @@ class d2u_addon_frontend_helper {
 	public static function getMetaTags() {
 		$meta_tags = "";
 		
-		if(rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=') && rex::isFrontend() && self::getUrlId()) {
-			$urlSeo = new Url\Seo();
-			$meta_tags = $urlSeo->getTags();
-		}
-		else if(rex_addon::get('yrewrite')->isAvailable() && rex_version::compare(\rex_addon::get('yrewrite')->getVersion(), '2.9', '>=')) {
+		if(rex_addon::get('yrewrite')->isAvailable()) {
 			$yrewrite = new rex_yrewrite_seo();
 			$meta_tags = $yrewrite->getTags() . PHP_EOL;
-		}
-		else if(rex_addon::get('yrewrite')->isAvailable()) {
-			$yrewrite = new rex_yrewrite_seo();
-			$meta_tags = $yrewrite->getTitleTag() . PHP_EOL;
-			$meta_tags .= $yrewrite->getDescriptionTag() . PHP_EOL;
-			$meta_tags .= $yrewrite->getHreflangTags() . PHP_EOL;
-			$meta_tags .= $yrewrite->getCanonicalUrlTag() . PHP_EOL;
-			$meta_tags .= $yrewrite->getRobotsTag();
 		}
 		
 		return $meta_tags;

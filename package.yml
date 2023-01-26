@@ -24,6 +24,10 @@ requires:
     php: '>=7.4'
     redaxo: '>=5.10.0'
 
+conflicts:
+    url: '<2.1.0'
+    yrewrite: '<2.9.0'
+    
 default_config:
     article_color_h: '#ffba23'
     article_color_bg: '#ffffff'
