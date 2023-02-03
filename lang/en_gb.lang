@@ -69,7 +69,6 @@ d2u_helper_metainfo_headerpic = Header picture
 d2u_helper_modules_d2u_module_name = D2U module name
 d2u_helper_modules_error_gelocation = Error: this module depends on the Geolocation addon.
 d2u_helper_modules_error_playr = Error: this module depends on the Plyr addon.
-d2u_helper_modules_error_settings_translations = Error: please enable the translation installation option in settings of this addon.
 d2u_helper_modules_error_search_it =  Error: please install Search It addon.
 d2u_helper_modules_error_sprog = Error: please install SProg addon.
 d2u_helper_modules_error_sprog_replacements = Error: please install SProg language replacements for modules and templates. The option can be set in settings page of this addon.
