@@ -78,6 +78,11 @@
 .fa-mobile:before {
 	content: "\f10b";
 }
+#cta_icon_box_content .fa-mobile:before {
+	font-size: 25px;
+	position: relative;
+	top: -7px;
+}
 .fa-phone:before {
 	content: "\f095";
 }
