@@ -27,7 +27,7 @@ class d2u_addon_frontend_helper
             'footer_color_bg', 'footer_color_box', 'footer_color_font'];
         foreach ($colors as $color) {
             if ($d2u_helper->hasConfig($color)) {
-                $css = str_replace($color, $d2u_helper->getConfig($color), $css);
+                $css = str_replace($color, (string) $d2u_helper->getConfig($color), $css);
             }
         }
 
@@ -64,7 +64,7 @@ class d2u_addon_frontend_helper
      * @param string $css CSS string
      * @return string compressed CSS
      */
-    private static function compressCSS($css)
+    private static function compressCSS($css = '')
     {
         $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
         $css = str_replace(["\r\n", "\r", "\n", "\t", '  ', '    ', '    '], '', $css);
@@ -84,7 +84,7 @@ class d2u_addon_frontend_helper
     /**
      * Delete addon cache.
      */
-    public static function deleteCache()
+    public static function deleteCache(): void
     {
         if (is_dir(rex_path::addonCache('d2u_helper'))) {
             $finder = rex_finder::factory(rex_path::addonCache('d2u_helper'))
