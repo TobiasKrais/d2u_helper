@@ -3,6 +3,7 @@
 	<div class="panel-body">
 		<p>1.10.0-DEV</p>
 		<ul>
+			<li>PHP-CS-Fixer Code Verbesserungen.</li>
 			<li>Knapp 3000 rexstan Verbesserungen.</li>
 			<li>Nutzt die getTags() Methode von YRewrite 2.9. Daher nicht mehr kompatibel mit YRewrite <2.9.0 und URL <2.1.0.</li>
 			<li>Fehler im Megamenü behoben: Elemente in der ersten Ebene ohne Untermenü waren nicht klickbar.</li>
