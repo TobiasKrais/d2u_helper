@@ -15,5 +15,5 @@
 
 ?>
 <div class="col-12 col-lg-<?= $cols . $offset_lg ?>">
-	<REX_VALUE[2] class="REX_VALUE[2]<?=($center ? ' heading-02-1-center' : '') . ($line ? ' heading-02-1-line' : '') . ($center && $line ? ' heading-02-1-line-center' : '') ?>">REX_VALUE[1]</REX_VALUE[2]>
+	<REX_VALUE[2] class="REX_VALUE[2]<?= ($center ? ' heading-02-1-center' : '') . ($line ? ' heading-02-1-line' : '') . ($center && $line ? ' heading-02-1-line-center' : '') ?>">REX_VALUE[1]</REX_VALUE[2]>
 </div>

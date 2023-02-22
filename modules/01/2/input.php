@@ -67,8 +67,8 @@
 		<dl class="rex-form-group form-group">
 			<dt>
 				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[5]" value="true"<?php if ('REX_VALUE[5]' == 'true') {
-				echo ' checked="checked"';
-				} ?>>
+                echo ' checked="checked"';
+                } ?>>
 			</dt>
 			<dd>
 				<label>Soll die Höhe dieses Blocks an die Höhe anderer Blöcke dieses Moduls auf dieser Seite angeglichen werden?</label>
@@ -261,8 +261,8 @@
 		<dl class="rex-form-group form-group">
 			<dt>
 				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[9]" value="true"<?php if ('REX_VALUE[9]' == 'true') {
-				echo ' checked="checked"';
-				} ?>>
+                echo ' checked="checked"';
+                } ?>>
 			</dt>
 			<dd>
 				<label>Soll der Bildtitel aus dem Medienpool unterhalb des Bildes angezeigt werden?
