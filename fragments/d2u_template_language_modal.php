@@ -1,6 +1,6 @@
 <?php
 $clangs = rex_clang::getAll(true);
-if(count($clangs) > 1) {
+if (count($clangs) > 1) {
 ?>
 
 <div class="modal fade" id="lang_chooser_modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -14,14 +14,14 @@ if(count($clangs) > 1) {
 			<div class="modal-body">
 				<ul id="langchooser">
 					<?php
-						$alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
-						foreach($clangs as $rex_clang) {
-							$link = isset($alternate_urls[$rex_clang->getId()]) ? $alternate_urls[$rex_clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $rex_clang->getId());
-							print '<li><a href="'. $link .'">'
-									.'<img class="lang-chooser-flag" src="'. rex_url::media(strval($rex_clang->getValue('clang_icon'))) .'" loading="lazy" alt="'. $rex_clang->getName() .'">'
-									.'<span class="lang-text">'. $rex_clang->getName() .'</span></a></li>';
-						}
-					?>
+                        $alternate_urls = d2u_addon_frontend_helper::getAlternateURLs();
+                        foreach ($clangs as $rex_clang) {
+                            $link = isset($alternate_urls[$rex_clang->getId()]) ? $alternate_urls[$rex_clang->getId()] : rex_getUrl(rex_article::getSiteStartArticleId(), $rex_clang->getId());
+                            echo '<li><a href="'. $link .'">'
+                                    .'<img class="lang-chooser-flag" src="'. rex_url::media((string) $rex_clang->getValue('clang_icon')) .'" loading="lazy" alt="'. $rex_clang->getName() .'">'
+                                    .'<span class="lang-text">'. $rex_clang->getName() .'</span></a></li>';
+                        }
+                    ?>
 				</ul>
 			</div>
 		</div>

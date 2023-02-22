@@ -1,35 +1,35 @@
 <?php
-	$cols = "REX_VALUE[20]";
-	if($cols == "") {
-		$cols = 8;
-	}
-	
-	$offset_lg_cols = intval("REX_VALUE[17]");
-	$offset_lg = "";
-	if($offset_lg_cols > 0) { /** @phpstan-ignore-line */
-		$offset_lg = " mr-lg-auto ml-lg-auto ";
-	}
-?>
-<div class="col-sm-<?php echo $cols . $offset_lg; ?>">
-<?php
-	$longitude = "REX_VALUE[4]" == "" ? 0 : "REX_VALUE[4]";
-	$latitude = "REX_VALUE[5]" == "" ? 0 : "REX_VALUE[5]";
-	$maps_zoom = "REX_VALUE[3]" == "" ? 15 : "REX_VALUE[3]";
-	$height = "REX_VALUE[7]" == "" ? "500" : "REX_VALUE[7]";
-	$height_unit = "REX_VALUE[8]" == "" ? "px" : "REX_VALUE[8]";
-	$substitute = ["\r\n" => "", "\r" => "", "\n" => "", '"' => "'"];
-	$infotext = "REX_VALUE[id=2 output=html]";
-	
-	$map_id = rand();
+    $cols = 'REX_VALUE[20]';
+    if ('' == $cols) {
+        $cols = 8;
+    }
 
-	if(rex_addon::get('geolocation')->isAvailable()) {
-		try {
-			if(rex::isFrontend()) {
-				\Geolocation\tools::echoAssetTags();
-			}
+    $offset_lg_cols = (int) 'REX_VALUE[17]';
+    $offset_lg = '';
+    if ($offset_lg_cols > 0) { /** @phpstan-ignore-line */
+        $offset_lg = ' mr-lg-auto ml-lg-auto ';
+    }
+?>
+<div class="col-sm-<?= $cols . $offset_lg ?>">
+<?php
+    $longitude = 'REX_VALUE[4]' == '' ? 0 : 'REX_VALUE[4]';
+    $latitude = 'REX_VALUE[5]' == '' ? 0 : 'REX_VALUE[5]';
+    $maps_zoom = 'REX_VALUE[3]' == '' ? 15 : 'REX_VALUE[3]';
+    $height = 'REX_VALUE[7]' == '' ? '500' : 'REX_VALUE[7]';
+    $height_unit = 'REX_VALUE[8]' == '' ? 'px' : 'REX_VALUE[8]';
+    $substitute = ["\r\n" => '', "\r" => '', "\n" => '', '"' => "'"];
+    $infotext = 'REX_VALUE[id=2 output=html]';
+
+    $map_id = random_int(0, getrandmax());
+
+    if (rex_addon::get('geolocation')->isAvailable()) {
+        try {
+            if (rex::isFrontend()) {
+                \Geolocation\tools::echoAssetTags();
+            }
 ?>
 	<script>
-		Geolocation.default.positionColor = '<?= rex_config::get('d2u_helper', 'article_color_h'); ?>';
+		Geolocation.default.positionColor = '<?= rex_config::get('d2u_helper', 'article_color_h') ?>';
 
 		// adjust zoom level
 		Geolocation.Tools.Center = class extends Geolocation.Tools.Template{
@@ -73,7 +73,7 @@
 			}
 		};
 		Geolocation.tools.center = function(...args) { return new Geolocation.Tools.Center(args); };
-		
+
 		// add info box
 		Geolocation.Tools.Infobox = class extends Geolocation.Tools.Position{
 			setValue( dataset ) {
@@ -99,36 +99,35 @@
 		Geolocation.tools.infobox = function(...args) { return new Geolocation.Tools.Infobox(args); };
 	</script>
 <?php
-		}
-		catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
-		$mapsetId = (int) 'REX_VALUE[9]';
-		
-		echo \Geolocation\mapset::take($mapsetId)
-			->attributes('id', $mapsetId)
-			->attributes('style', 'height: '. $height . $height_unit .';width:100%;')
-			->dataset('center', [[$latitude, $longitude], $maps_zoom])
-			->dataset('position', [$latitude, $longitude])
-			->dataset('infobox',[[$latitude, $longitude], $infotext])
-			->parse();
-	}
-	else if(rex_addon::get('osmproxy')->isAvailable()) {
-		$popup_js = $infotext != "" ? ".bindPopup('". addslashes(strtr($infotext, $substitute)) ."').openPopup()" : "";
-	
-		$leaflet_js_file = 'modules/04-2/leaflet.js';
-		print '<script src="'. rex_url::addonAssets('d2u_helper', $leaflet_js_file) .'?buster='. filemtime(rex_path::addonAssets('d2u_helper', $leaflet_js_file)) .'"></script>' . PHP_EOL;
+        $mapsetId = (int) 'REX_VALUE[9]';
+
+        echo \Geolocation\mapset::take($mapsetId)
+            ->attributes('id', $mapsetId)
+            ->attributes('style', 'height: '. $height . $height_unit .';width:100%;')
+            ->dataset('center', [[$latitude, $longitude], $maps_zoom])
+            ->dataset('position', [$latitude, $longitude])
+            ->dataset('infobox', [[$latitude, $longitude], $infotext])
+            ->parse();
+    } elseif (rex_addon::get('osmproxy')->isAvailable()) {
+        $popup_js = '' != $infotext ? ".bindPopup('". addslashes(strtr($infotext, $substitute)) ."').openPopup()" : '';
+
+        $leaflet_js_file = 'modules/04-2/leaflet.js';
+        echo '<script src="'. rex_url::addonAssets('d2u_helper', $leaflet_js_file) .'?buster='. filemtime(rex_path::addonAssets('d2u_helper', $leaflet_js_file)) .'"></script>' . PHP_EOL;
 
 ?>
-		<div id="map-<?php echo $map_id; ?>" style="width:100%;height: <?php echo $height . $height_unit; ?>"></div>
+		<div id="map-<?= $map_id ?>" style="width:100%;height: <?= $height . $height_unit ?>"></div>
 		<script type="text/javascript" async="async">
-			var map = L.map('map-<?php echo $map_id; ?>').setView([<?= $latitude; ?>, <?= $longitude; ?>], <?php echo $maps_zoom; ?>);
+			var map = L.map('map-<?= $map_id ?>').setView([<?= $latitude ?>, <?= $longitude ?>], <?= $maps_zoom ?>);
 			L.tileLayer('/?osmtype=german&z={z}&x={x}&y={y}', {
 				attribution: 'Map data &copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
 			}).addTo(map);
 			map.scrollWheelZoom.disable();
 			var myIcon = L.icon({
-				iconUrl: '<?php echo rex_url::addonAssets('d2u_helper', 'modules/04-2/marker-icon.png'); ?>',
-				shadowUrl: '<?php echo rex_url::addonAssets('d2u_helper', 'modules/04-2/marker-shadow.png'); ?>',
+				iconUrl: '<?= rex_url::addonAssets('d2u_helper', 'modules/04-2/marker-icon.png') ?>',
+				shadowUrl: '<?= rex_url::addonAssets('d2u_helper', 'modules/04-2/marker-shadow.png') ?>',
 
 				iconSize:     [25, 41], // size of the icon
 				shadowSize:   [41, 41], // size of the shadow
@@ -136,12 +135,12 @@
 				shadowAnchor: [13, 40], // the same for the shadow
 				popupAnchor:  [0, -41]  // point from which the popup should open relative to the iconAnchor
 			});
-			var marker = L.marker([<?= $latitude; ?>, <?= $longitude; ?>], {
+			var marker = L.marker([<?= $latitude ?>, <?= $longitude ?>], {
 				draggable: false,
 				icon: myIcon
-			}).addTo(map)<?php echo $popup_js; ?>;
+			}).addTo(map)<?= $popup_js ?>;
 		</script>
 <?php
-	}
+    }
 ?>
 </div>

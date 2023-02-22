@@ -5,8 +5,8 @@ $d2u_module_manager = new D2UModuleManager(D2UModuleManager::getModules());
 $d2u_module_id = rex_request('d2u_module_id', 'string');
 $paired_module = rex_request('pair_'. $d2u_module_id, 'int');
 $function = rex_request('function', 'string');
-if($d2u_module_id !== "") {
-	$d2u_module_manager->doActions($d2u_module_id, $function, $paired_module);
+if ('' !== $d2u_module_id) {
+    $d2u_module_manager->doActions($d2u_module_id, $function, $paired_module);
 }
 
 // D2UModuleManager show list
@@ -26,7 +26,7 @@ $d2u_module_manager->showManagerList();
 			automatisch einbinden" aktiviert werden oder das sie CSS / JS Dateiinhalte
 			manuell nachgeladen werden. Wo findet man die CSS / JS Dateien? Im
 			Dateisystem im Redaxo Addon Order unter module/. Dann die Modulnummer.
-			Die CSS Datei trägt den Namen style.css und die JS Datei js.js.		
+			Die CSS Datei trägt den Namen style.css und die JS Datei js.js.
 	</li>
 	<li><b>Wie kann der in den Modulen verwendete Editor geändert werden?</b><br>
 		Um den Lieblingseditor für die Module und und die D2U Addons

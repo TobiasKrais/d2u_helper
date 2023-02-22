@@ -155,7 +155,7 @@
 		</ul>
 		<p>1.8.0</p>
 		<ul>
-			<li>ACHTUNG: wenn Templates aus diesem Addon verwendet werden, müssen nach dem Update die Einstellungen überarbeitet werden. 
+			<li>ACHTUNG: wenn Templates aus diesem Addon verwendet werden, müssen nach dem Update die Einstellungen überarbeitet werden.
 				Sofern das verwendete Template einen Footer mit Links hat, kann nun der Stil in den Einstellungen ausgewählt werden.</li>
 			<li>Templates: alle Templates auf Mehrsprachigkeit erweitert. Neben der Navigation wird ein Sprachwähler angeboten.</li>
 			<li>Templates: alle Templates um ein Icon für die Seitensuche erweitert, wenn das Addon search_it installiert und in den Einstellungen der Artikel mit der Suche hinterlegt ist.</li>

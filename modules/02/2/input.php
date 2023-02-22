@@ -5,16 +5,16 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[20]"  class="form-control">
 		<?php
-		$values = [12=>"12 von 12 Spalten (ganze Breite)", 9=>"9 von 12 Spalten", 8=>"8 von 12 Spalten", 6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten"];
-		foreach($values as $key => $value) {
-			echo '<option value="'. $key .'" ';
-	
-			if (intval("REX_VALUE[20]") === $key) { /** @phpstan-ignore-line */
-				echo 'selected="selected" ';
-			}
-			echo '>'. $value .'</option>';
-		}
-		?>
+        $values = [12 => '12 von 12 Spalten (ganze Breite)', 9 => '9 von 12 Spalten', 8 => '8 von 12 Spalten', 6 => '6 von 12 Spalten', 4 => '4 von 12 Spalten', 3 => '3 von 12 Spalten'];
+        foreach ($values as $key => $value) {
+            echo '<option value="'. $key .'" ';
+
+            if ((int) 'REX_VALUE[20]' === $key) { /** @phpstan-ignore-line */
+                echo 'selected="selected" ';
+            }
+            echo '>'. $value .'</option>';
+        }
+        ?>
 		</select>
 	</div>
 </div>
@@ -28,16 +28,16 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[19]"  class="form-control">
 		<?php
-		$values = [12=>"12 von 12 Spalten (ganze Breite)", 9=>"9 von 12 Spalten", 8=>"8 von 12 Spalten", 6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten"];
-		foreach($values as $key => $value) {
-			echo '<option value="'. $key .'" ';
-	
-			if (intval("REX_VALUE[19]") === $key) { /** @phpstan-ignore-line */
-				echo 'selected="selected" ';
-			}
-			echo '>'. $value .'</option>';
-		}
-		?>
+        $values = [12 => '12 von 12 Spalten (ganze Breite)', 9 => '9 von 12 Spalten', 8 => '8 von 12 Spalten', 6 => '6 von 12 Spalten', 4 => '4 von 12 Spalten', 3 => '3 von 12 Spalten'];
+        foreach ($values as $key => $value) {
+            echo '<option value="'. $key .'" ';
+
+            if ((int) 'REX_VALUE[19]' === $key) { /** @phpstan-ignore-line */
+                echo 'selected="selected" ';
+            }
+            echo '>'. $value .'</option>';
+        }
+        ?>
 		</select>
 	</div>
 </div>
@@ -51,16 +51,16 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[18]"  class="form-control">
 		<?php
-		$values = [12=>"12 von 12 Spalten (ganze Breite)", 9=>"9 von 12 Spalten", 8=>"8 von 12 Spalten", 6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten"];
-		foreach($values as $key => $value) {
-			echo '<option value="'. $key .'" ';
-	
-			if (intval("REX_VALUE[18]") === $key) { /** @phpstan-ignore-line */
-				echo 'selected="selected" ';
-			}
-			echo '>'. $value .'</option>';
-		}
-		?>
+        $values = [12 => '12 von 12 Spalten (ganze Breite)', 9 => '9 von 12 Spalten', 8 => '8 von 12 Spalten', 6 => '6 von 12 Spalten', 4 => '4 von 12 Spalten', 3 => '3 von 12 Spalten'];
+        foreach ($values as $key => $value) {
+            echo '<option value="'. $key .'" ';
+
+            if ((int) 'REX_VALUE[18]' === $key) { /** @phpstan-ignore-line */
+                echo 'selected="selected" ';
+            }
+            echo '>'. $value .'</option>';
+        }
+        ?>
 		</select>
 	</div>
 </div>
@@ -72,16 +72,16 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[17]"  class="form-control">
 		<?php
-		$values_offset = [0=>"Nicht zentrieren.", 1=>"Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird"];
-		foreach($values_offset as $key => $value) {
-			echo '<option value="'. $key .'" ';
-	
-			if (intval("REX_VALUE[17]") === $key) { /** @phpstan-ignore-line */
-				echo 'selected="selected" ';
-			}
-			echo '>'. $value .'</option>';
-		}
-		?>
+        $values_offset = [0 => 'Nicht zentrieren.', 1 => 'Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird'];
+        foreach ($values_offset as $key => $value) {
+            echo '<option value="'. $key .'" ';
+
+            if ((int) 'REX_VALUE[17]' === $key) { /** @phpstan-ignore-line */
+                echo 'selected="selected" ';
+            }
+            echo '>'. $value .'</option>';
+        }
+        ?>
 		</select>
 	</div>
 </div>
@@ -118,10 +118,10 @@
 	<div class="col-xs-2">
 		<select name="REX_INPUT_VALUE[2]" class="form-control">
 		<?php
-		foreach (["h1" => "h1", "h2" => "h2", "h3" => "h3", "h4" => "h4", "h5" => "h5", "h6" => "h6", "b" => "Fett", "p" => "Absatz"] as $html_tag => $value) {
-			echo '<option value="'. $html_tag .'" '. ( "REX_VALUE[2]" == "$html_tag" ? 'selected="selected" ' : '') .'>'. $value .'</option>';
-		}
-		?>
+        foreach (['h1' => 'h1', 'h2' => 'h2', 'h3' => 'h3', 'h4' => 'h4', 'h5' => 'h5', 'h6' => 'h6', 'b' => 'Fett', 'p' => 'Absatz'] as $html_tag => $value) {
+            echo '<option value="'. $html_tag .'" '. ('REX_VALUE[2]' == "$html_tag" ? 'selected="selected" ' : '') .'>'. $value .'</option>';
+        }
+        ?>
 		</select>
 	</div>
 </div>
@@ -130,6 +130,6 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		<textarea name="REX_INPUT_VALUE[3]" class="form-control <?php print d2u_addon_backend_helper::getWYSIWYGEditorClass(); ?>" style="height: 500px">REX_VALUE[3]</textarea>
+		<textarea name="REX_INPUT_VALUE[3]" class="form-control <?= d2u_addon_backend_helper::getWYSIWYGEditorClass() ?>" style="height: 500px">REX_VALUE[3]</textarea>
 	</div>
 </div>

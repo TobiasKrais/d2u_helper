@@ -5,16 +5,16 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[20]" class="form-control">
 		<?php
-		$values = [12=>"12 von 12 Spalten (ganze Breite)", 10=>"10 von 12 Spalten", 8=>"8 von 12 Spalten", 6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten"];
-		foreach($values as $key => $value) {
-			echo '<option value="'. $key .'" ';
-	
-			if (intval("REX_VALUE[20]") === $key) { /** @phpstan-ignore-line */
-				echo 'selected="selected" ';
-			}
-			echo '>'. $value .'</option>';
-		}
-		?>
+        $values = [12 => '12 von 12 Spalten (ganze Breite)', 10 => '10 von 12 Spalten', 8 => '8 von 12 Spalten', 6 => '6 von 12 Spalten', 4 => '4 von 12 Spalten', 3 => '3 von 12 Spalten'];
+        foreach ($values as $key => $value) {
+            echo '<option value="'. $key .'" ';
+
+            if ((int) 'REX_VALUE[20]' === $key) { /** @phpstan-ignore-line */
+                echo 'selected="selected" ';
+            }
+            echo '>'. $value .'</option>';
+        }
+        ?>
 		</select>
 	</div>
 </div>
@@ -26,16 +26,16 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[17]"  class="form-control">
 		<?php
-		$values_offset = [0=>"Nicht zentrieren.", 1=>"Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird"];
-		foreach($values_offset as $key => $value) {
-			echo '<option value="'. $key .'" ';
-	
-			if (intval("REX_VALUE[17]") === $key) { /** @phpstan-ignore-line */
-				echo 'selected="selected" ';
-			}
-			echo '>'. $value .'</option>';
-		}
-		?>
+        $values_offset = [0 => 'Nicht zentrieren.', 1 => 'Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird'];
+        foreach ($values_offset as $key => $value) {
+            echo '<option value="'. $key .'" ';
+
+            if ((int) 'REX_VALUE[17]' === $key) { /** @phpstan-ignore-line */
+                echo 'selected="selected" ';
+            }
+            echo '>'. $value .'</option>';
+        }
+        ?>
 		</select>
 	</div>
 </div>
@@ -81,19 +81,19 @@
 		<select name="REX_INPUT_VALUE[1]" class="form-control">
 			<option value="">Bild im Original einbinden</option>
 		<?php
-			$sql = rex_sql::factory();
-			$result = $sql->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
-			for($i = 0; $i < $result->getRows(); $i++) {
-				$name = $result->getValue("name");
-				echo '<option value="'. $name .'" ';
-	
-				if ("REX_VALUE[1]" == $name) {
-					echo 'selected="selected" ';
-				}
-				echo '>'. $name .'</option>';
-				$result->next();
-			}
-		?>
+            $sql = rex_sql::factory();
+            $result = $sql->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
+            for ($i = 0; $i < $result->getRows(); ++$i) {
+                $name = $result->getValue('name');
+                echo '<option value="'. $name .'" ';
+
+                if ('REX_VALUE[1]' == $name) {
+                    echo 'selected="selected" ';
+                }
+                echo '>'. $name .'</option>';
+                $result->next();
+            }
+        ?>
 		</select>
 	</div>
 </div>
@@ -104,15 +104,17 @@
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
-				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[2]" value="true"<?php if("REX_VALUE[2]" == 'true') { print ' checked="checked"'; } ?>>
+				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[2]" value="true"<?php if ('REX_VALUE[2]' == 'true') {
+				echo ' checked="checked"';
+				} ?>>
 			</dt>
 			<dd>
 				<label>Soll der Bildtitel aus dem Medienpool unterhalb des Bildes angezeigt werden?
 					<?php
-						if(count(rex_clang::getAllIds(false)) > 1) {
-							print '<br><small>(Sprachbezogenes Feld med_title_<i>sprach_id</i> kann angelegt werden um Titel in mehreren Sprachen zu verwalten.)</small>';
-						}
-					?>
+                        if (count(rex_clang::getAllIds(false)) > 1) {
+                            echo '<br><small>(Sprachbezogenes Feld med_title_<i>sprach_id</i> kann angelegt werden um Titel in mehreren Sprachen zu verwalten.)</small>';
+                        }
+                    ?>
 				</label>
 			</dd>
 		</dl>

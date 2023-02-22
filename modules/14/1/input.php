@@ -11,15 +11,15 @@
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[2]" value="true" <?php echo "REX_VALUE[2]" == 'true' ? ' checked="checked"' : ''; ?> class="form-control d2u_helper_toggle" />
+		<input type="checkbox" name="REX_INPUT_VALUE[2]" value="true" <?= 'REX_VALUE[2]' == 'true' ? ' checked="checked"' : '' ?> class="form-control d2u_helper_toggle" />
 	</div>
 	<div class="col-xs-8">
 		Ähnliche Suchtreffer anzeigen, wenn keine Treffer gefunden werden?<br />
 		<?php
-			if(rex_config::get('search_it', 'similarwordsmode', 0) === 0) {
-				print "<b>Die Ähnlichkeitssuche muss in den Search It Einstellungen aktiviert werden!</b>";
-			}
-		?>
+            if (0 === rex_config::get('search_it', 'similarwordsmode', 0)) {
+                echo '<b>Die Ähnlichkeitssuche muss in den Search It Einstellungen aktiviert werden!</b>';
+            }
+        ?>
 	</div>
 </div>
 <div class="row">
@@ -32,20 +32,20 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[3]" class="form-control">
 		<?php
-			$sql = rex_sql::factory();
-			$selected = "REX_VALUE[3]" ?: "rex_mediapool_preview";
-			$result = $sql->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
-			for($i = 0; $i < $result->getRows(); $i++) {
-				$name = $result->getValue("name");
-				echo '<option value="'. $name .'" ';
-	
-				if ("REX_VALUE[3]" == $name) {
-					echo 'selected="selected" ';
-				}
-				echo '>'. $name .'</option>';
-				$result->next();
-			}
-		?>
+            $sql = rex_sql::factory();
+            $selected = 'REX_VALUE[3]' ?: 'rex_mediapool_preview';
+            $result = $sql->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
+            for ($i = 0; $i < $result->getRows(); ++$i) {
+                $name = $result->getValue('name');
+                echo '<option value="'. $name .'" ';
+
+                if ('REX_VALUE[3]' == $name) {
+                    echo 'selected="selected" ';
+                }
+                echo '>'. $name .'</option>';
+                $result->next();
+            }
+        ?>
 		</select>
 	</div>
 </div>

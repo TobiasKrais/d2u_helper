@@ -5,16 +5,16 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[20]" class="form-control">
 		<?php
-		$values = [12=>"12 von 12 Spalten (ganze Breite)", 9=>"9 von 12 Spalten", 8=>"8 von 12 Spalten", 6=>"6 von 12 Spalten", 4=>"4 von 12 Spalten", 3=>"3 von 12 Spalten"];
-		foreach($values as $key => $value) {
-			echo '<option value="'. $key .'" ';
-	
-			if (intval("REX_VALUE[20]") === $key) { /** @phpstan-ignore-line */
-				echo 'selected="selected" ';
-			}
-			echo '>'. $value .'</option>';
-		}
-		?>
+        $values = [12 => '12 von 12 Spalten (ganze Breite)', 9 => '9 von 12 Spalten', 8 => '8 von 12 Spalten', 6 => '6 von 12 Spalten', 4 => '4 von 12 Spalten', 3 => '3 von 12 Spalten'];
+        foreach ($values as $key => $value) {
+            echo '<option value="'. $key .'" ';
+
+            if ((int) 'REX_VALUE[20]' === $key) { /** @phpstan-ignore-line */
+                echo 'selected="selected" ';
+            }
+            echo '>'. $value .'</option>';
+        }
+        ?>
 		</select>
 	</div>
 </div>
@@ -26,16 +26,16 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[17]"  class="form-control">
 		<?php
-		$values_offset = [0=>"Nicht zentrieren.", 1=>"Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird"];
-		foreach($values_offset as $key => $value) {
-			echo '<option value="'. $key .'" ';
-	
-			if (intval("REX_VALUE[17]") === $key) { /** @phpstan-ignore-line */
-				echo 'selected="selected" ';
-			}
-			echo '>'. $value .'</option>';
-		}
-		?>
+        $values_offset = [0 => 'Nicht zentrieren.', 1 => 'Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird'];
+        foreach ($values_offset as $key => $value) {
+            echo '<option value="'. $key .'" ';
+
+            if ((int) 'REX_VALUE[17]' === $key) { /** @phpstan-ignore-line */
+                echo 'selected="selected" ';
+            }
+            echo '>'. $value .'</option>';
+        }
+        ?>
 		</select>
 	</div>
 </div>
@@ -69,7 +69,7 @@
 	</div>
 </div>
 <?php
-if(rex_config::get("d2u_helper", "maps_key", "") == "") {
+if ('' == rex_config::get('d2u_helper', 'maps_key', '')) {
 ?>
 	<div class="row"><div class="col-xs-12">&nbsp;</div></div>
 	<div class="row">
@@ -81,14 +81,13 @@ if(rex_config::get("d2u_helper", "maps_key", "") == "") {
 		</div>
 	</div>
 <?php
-}
-else {
+} else {
 ?>
-	<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo rex_config::get("d2u_helper", "maps_key", ""); ?>"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=<?= rex_config::get('d2u_helper', 'maps_key', '') ?>"></script>
 	<script>
 		function geocode() {
 			if($("input[name='REX_INPUT_VALUE[1]']").val() === "") {
-				alert("<?php echo rex_i18n::msg('d2u_helper_geocode_fields'); ?>");
+				alert("<?= rex_i18n::msg('d2u_helper_geocode_fields') ?>");
 				return;
 			}
 
@@ -103,7 +102,7 @@ else {
 					$("#check_geocode").parent().show();
 				}
 				else {
-					alert("<?php echo rex_i18n::msg('d2u_helper_geocode_failure'); ?>");
+					alert("<?= rex_i18n::msg('d2u_helper_geocode_failure') ?>");
 				}
 			});
 		}
@@ -112,22 +111,22 @@ else {
 	<div class="row">
 		<div class="col-xs-4"></div>
 		<div class="col-xs-8">
-			<input type="submit" value="<?php echo rex_i18n::msg('d2u_helper_geocode'); ?>" onclick="geocode(); return false;" class="btn btn-save">
-			<div class="btn btn-abort"><a href="https://maps.google.com/?q=REX_VALUE[4],REX_VALUE[5]&z=17" id="check_geocode" target="_blank"><?php echo rex_i18n::msg('d2u_helper_geocode_check'); ?></a></div>
+			<input type="submit" value="<?= rex_i18n::msg('d2u_helper_geocode') ?>" onclick="geocode(); return false;" class="btn btn-save">
+			<div class="btn btn-abort"><a href="https://maps.google.com/?q=REX_VALUE[4],REX_VALUE[5]&z=17" id="check_geocode" target="_blank"><?= rex_i18n::msg('d2u_helper_geocode_check') ?></a></div>
 		</div>
 	</div>
 <?php
-	$latitude = "REX_VALUE[4]";
-	$longitude = "REX_VALUE[5]";
-	if($latitude == "" && $longitude == "") {
-		print '<script>jQuery(document).ready(function($) { $("#check_geocode").parent().hide(); });</script>';
-	}
+    $latitude = 'REX_VALUE[4]';
+    $longitude = 'REX_VALUE[5]';
+    if ('' == $latitude && '' == $longitude) {
+        echo '<script>jQuery(document).ready(function($) { $("#check_geocode").parent().hide(); });</script>';
+    }
 }
 ?>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
 	<div class="col-xs-4"></div>
-	<div class="col-xs-8"><?php print htmlspecialchars_decode(rex_i18n::msg('d2u_helper_geocode_hint')); ?></div>
+	<div class="col-xs-8"><?= htmlspecialchars_decode(rex_i18n::msg('d2u_helper_geocode_hint')) ?></div>
 </div>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
@@ -164,15 +163,15 @@ else {
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[3]" class="form-control">
 			<?php
-			foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] as $value) {
-				echo '<option value="'.$value.'" ';
-	
-				if ("REX_VALUE[3]" == "$value") {
-					echo 'selected="selected" ';
-				}
-				echo '>'.$value.'</option>';
-			}
-			?>
+            foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] as $value) {
+                echo '<option value="'.$value.'" ';
+
+                if ('REX_VALUE[3]' == "$value") {
+                    echo 'selected="selected" ';
+                }
+                echo '>'.$value.'</option>';
+            }
+            ?>
 		</select>
 	</div>
 </div>
@@ -184,15 +183,15 @@ else {
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[6]" class="form-control">
 			<?php
-			foreach (['HYBRID', 'ROADMAP', 'SATELLITE', 'TERRAIN'] as $value) {
-				echo '<option value="'.$value.'" ';
-	
-				if ( "REX_VALUE[6]"=="$value" ) {
-					echo 'selected="selected" ';
-				}
-				echo '>'.$value.'</option>';
-			}
-			?>
+            foreach (['HYBRID', 'ROADMAP', 'SATELLITE', 'TERRAIN'] as $value) {
+                echo '<option value="'.$value.'" ';
+
+                if ('REX_VALUE[6]' == "$value") {
+                    echo 'selected="selected" ';
+                }
+                echo '>'.$value.'</option>';
+            }
+            ?>
 		</select>
 	</div>
 </div>
@@ -207,15 +206,15 @@ else {
 	<div class="col-xs-2">
 		<select name="REX_INPUT_VALUE[8]"class="form-control">
 			<?php
-			foreach (array("px", "%") as $value) {
-				echo '<option value="'.$value.'" ';
-	
-				if ( "REX_VALUE[8]"=="$value" ) {
-					echo 'selected="selected" ';
-				}
-				echo '>'.$value.'</option>';
-			}
-			?>
+            foreach (['px', '%'] as $value) {
+                echo '<option value="'.$value.'" ';
+
+                if ('REX_VALUE[8]' == "$value") {
+                    echo 'selected="selected" ';
+                }
+                echo '>'.$value.'</option>';
+            }
+            ?>
 		</select>
 	</div>
 </div>

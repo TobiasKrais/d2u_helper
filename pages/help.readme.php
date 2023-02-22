@@ -13,14 +13,14 @@
 		<p>Beispiel PHP Code:</p>
 		<div class="code">
 		<?php
-			highlight_string("<div class='navi'>
+            highlight_string("<div class='navi'>
 	<?php
 		if(rex_addon::get('d2u_helper')->isAvailable()) {
 			d2u_mobile_navi_smartmenus::getMenu();
 		}
 	?>
 </div>");
-		?>
+        ?>
 		</div>
 	</div>
 
@@ -29,7 +29,7 @@
 		<p>Beispiel PHP Code:</p>
 		<div class="code">
 		<?php
-			highlight_string("<div class='navi'>
+            highlight_string("<div class='navi'>
 	<?php
 		if(rex_addon::get('d2u_helper')->isAvailable()) {
 			d2u_mobile_navi::getResponsiveMultiLevelMobileMenu(); // Mobiles Menü
@@ -37,7 +37,7 @@
 		}
 	?>
 </div>");
-		?>
+        ?>
 		</div>
 	</div>
 
@@ -48,7 +48,7 @@
 		<p>Beispiel PHP Code:</p>
 		<div class="code">
 		<?php
-			highlight_string("<div class='navi'>
+            highlight_string("<div class='navi'>
 	<?php
 		if(rex_addon::get('d2u_helper')->isAvailable()) {
 			d2u_mobile_navi_slicknav::getMobileMenu(); // Mobiles Menü
@@ -57,22 +57,22 @@
 	<navi>
 		<div id='navi_desktop'></div>
 		<script>
-			$(document).ready(function() { 
+			$(document).ready(function() {
 				$('#slicknav-mobile-menu').slicknav({
 					label: '', // Menu label
 					prependTo: '#navi_desktop'
 				});
 			});
-		</script>				
+		</script>
 	</navi>
 </div>");
-		?>
+        ?>
 		</div>
 		<p>Beispiel PHP und  HTML Code wenn Menü automatisch gemäß den Einstellungen dieses
 			Addons abhängig von der Bildschirmbreite aufgeklappt oder zugeklappt werden soll:</p>
 		<div class="code">
 		<?php
-			highlight_string("<div class='navi'>
+            highlight_string("<div class='navi'>
 	<div id='device-size-detector'>
 		<div id='xs' class='d-block d-sm-none'></div>
 		<div id='sm' class='d-none d-sm-block d-md-none'></div>
@@ -101,12 +101,12 @@
 			else {
 				\$show_screen_size = 'false';
 			}
-		}		
+		}
 	?>
 	<navi>
 		<div id='navi_desktop'></div>
 		<script>
-			$(document).ready(function() { 
+			$(document).ready(function() {
 				$('#slicknav-mobile-menu').slicknav({
 					label: '', // Label menu
 					prependTo: '#navi_desktop'
@@ -117,20 +117,20 @@
 				}
 
 				function checkMenu() {
-					var screen = getBootstrapDeviceSize();    
+					var screen = getBootstrapDeviceSize();
 					if(<?php print \$show_screen_size; ?>) {
 						$('#slicknav-mobile-menu').slicknav('open');
 					} else {
 						$('#slicknav-mobile-menu').slicknav('close');
-					}       
+					}
 				}
 				checkMenu();
 				$(window).on('resize', checkMenu);
 			});
-		</script>				
+		</script>
 	</navi>
 </div>");
-		?>
+        ?>
 		</div>
 	</div>
 </div>
