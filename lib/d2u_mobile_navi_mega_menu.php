@@ -71,7 +71,7 @@ class d2u_mobile_navi_mega_menu
         echo '<ul class="navbar-nav mr-auto">';
         foreach (self::getCategories($cat_parent_id) as $category) {
             // Check permissions if YCom ist installed
-            if (!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($category->getStartArticle()))) {
+            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($category->getStartArticle()))) {
                 //				$has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') == 'show' && rex_config::get('d2u_machinery', 'article_id', 0) == $category->getId());
                 echo '<li class="nav-item dropdown megamenu-li">';
 
@@ -93,7 +93,7 @@ class d2u_mobile_navi_mega_menu
                     echo '<div class="col-12"><h4><a href="'. $category->getURL() .'" title="'. $category->getName() .'">'. $lev1_icon . $category->getName() .'</a></h4></div>';
 
                     foreach ($category->getChildren(true) as $lev2) {
-                        if (!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev2->getStartArticle()))) {
+                        if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev2->getStartArticle()))) {
                             echo '<div class="col-sm-6 col-lg-4 megamenu_itemlist">';
                             $lev2_icon = '';
                             if ($lev2->getValue('cat_d2u_helper_icon')) {
@@ -104,7 +104,7 @@ class d2u_mobile_navi_mega_menu
                             }
                             echo '<div class="megamenu_itemlist_header"><b><a href="'. $lev2->getUrl() .'" title="'. $lev2->getName() .'">'. $lev2_icon . $lev2->getName() .'</a></b></div>';
                             foreach ($lev2->getChildren(true) as $lev3) {
-                                if (!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev3->getStartArticle()))) {
+                                if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev3->getStartArticle()))) {
                                     echo '<a class="dropdown-item'. (rex_article::getCurrentId() == $lev3->getId() || in_array($lev3->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'" href="'. $lev3->getUrl() .'" title="'. $lev3->getName() .'">'. $lev3->getName() .'</a>';
                                 }
                             }

@@ -32,7 +32,7 @@ if (!function_exists('getSubcategories')) {
         ++$level_number;
         echo '<ul class="sub-categories-list">';
         foreach ($category->getChildren(true) as $sub_category) {
-            if (!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($sub_category->getStartArticle()))) {
+            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($sub_category->getStartArticle()))) {
                 echo '<li><a href="'. $sub_category->getUrl() .'" title="'. $sub_category->getName() .'">'. $sub_category->getName() .'</a>';
                 if ($level_number < $max_number_subcategories && count($sub_category->getChildren(true)) > 0) {
                     getSubcategories($sub_category, $level_number, $max_number_subcategories);
@@ -54,7 +54,7 @@ if ($article instanceof rex_article) {
         echo '<h1>'. ($top_category ? $top_category->getName() : rex::getServerName()) .'</h1>';
         echo '<ul class="categories-list">';
         foreach ($sub_categories as $sub_category) {
-            if (!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($sub_category->getStartArticle()))) {
+            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($sub_category->getStartArticle()))) {
                 echo '<li><a href="'. $sub_category->getUrl() .'" title="'. $sub_category->getName() .'">'. $sub_category->getName() .'</a>';
                 if ($level_number < $max_number_subcategories && count($sub_category->getChildren(true)) > 0) {
                     getSubcategories($sub_category, $level_number, $max_number_subcategories);

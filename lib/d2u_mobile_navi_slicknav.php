@@ -60,7 +60,7 @@ class d2u_mobile_navi_slicknav
         echo '<ul id="slicknav-mobile-menu">';
         foreach (self::getCategories($cat_parent_id) as $lev1) {
             // Check permissions if YCom ist installed
-            if (!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev1->getStartArticle()))) {
+            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev1->getStartArticle()))) {
                 if (0 == count($lev1->getChildren(true))) {
                     // Without Redaxo submenu
                     echo '<li'. (rex_article::getCurrentId() == $lev1->getId() || in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'" title="'. $lev1->getName() .'">'. $lev1->getName() .'</a></li>';
@@ -89,7 +89,7 @@ class d2u_mobile_navi_slicknav
 
         foreach ($rex_category->getChildren(true) as $rex_subcategory) {
             // Check permissions if YCom ist installed
-            if (!rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($rex_subcategory->getStartArticle()))) {
+            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($rex_subcategory->getStartArticle()))) {
                 if (0 == count($rex_subcategory->getChildren(true))) {
                     // Without Redaxo submenu
                     echo '<li'. (rex_article::getCurrentId() == $rex_subcategory->getId() || in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
