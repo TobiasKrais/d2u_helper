@@ -133,7 +133,7 @@ class d2u_addon_backend_helper
     public static function getWYSIWYGEditorClass()
     {
         $wysiwyg_class = '';
-        if ('tinymce4' === (string) ((string) rex_config::get('d2u_helper', 'editor')) && rex_addon::get('tinymce4') instanceof rex_addon && rex_addon::get('tinymce4')->isAvailable()) {
+        if ('tinymce4' === (string) rex_config::get('d2u_helper', 'editor') && rex_addon::get('tinymce4') instanceof rex_addon && rex_addon::get('tinymce4')->isAvailable()) {
             $wysiwyg_class = ' tinyMCEEditor';
         } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'tinymce5') && rex_addon::get('tinymce5') instanceof rex_addon && rex_addon::get('tinymce5')->isAvailable()) {
             $wysiwyg_class = ' tiny5-editor" data-profile="default';
