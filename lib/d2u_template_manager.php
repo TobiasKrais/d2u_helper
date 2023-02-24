@@ -1,5 +1,6 @@
 <?php
 /**
+ * @api
  * Class managing templates published by www.design-to-use.de.
  *
  * @author Tobias Krais
@@ -11,7 +12,7 @@ class D2UTemplateManager
      */
     public const TEMPLATE_FOLDER = 'templates/';
 
-    /** @var D2UTemplate[] Array with D2U templates */
+    /** @var array<D2UTemplate> Array with D2U templates */
     public $d2u_templates = [];
 
     /**
@@ -20,20 +21,20 @@ class D2UTemplateManager
      */
     public $template_folder = '';
 
-    /** @var rex_addon Redaxo Addon template belongs to */
-    private $template_addon;
+    /** @var rex_addon_interface Redaxo Addon template belongs to */
+    private rex_addon_interface $template_addon;
 
     /**
      * Constructor. Sets values. The path that is constructed is during addon
      * update the path of the new addon folder. Otherwise the normal addon path.
-     * @param D2UTemplate[] $d2u_templates Array with D2U templates
+     * @param array<D2UTemplate> $d2u_templates Array with D2U templates
      * @param string $template_folder Folder, in which templates can be found.
      * Trailing slash must be included. Default is D2UTemplateManager::TEMPLATE_FOLDER.
      * @param string $addon_key Redaxo Addon name template belongs to, default "d2u_helper"
      */
     public function __construct($d2u_templates, $template_folder = '', $addon_key = 'd2u_helper')
     {
-        $template_folder = $template_folder ?: self::TEMPLATE_FOLDER;
+        $template_folder = $template_folder !== '' ? $template_folder : self::TEMPLATE_FOLDER;
         $this->template_addon = rex_addon::get($addon_key);
         $this->template_folder = $this->template_addon->getPath($template_folder);
         // Path during addon update
@@ -52,7 +53,7 @@ class D2UTemplateManager
     /**
      * Perform pending template updates.
      */
-    public function autoupdate()
+    public function autoupdate():void
     {
         foreach ($this->d2u_templates as $template) {
             // Only check autoupdate, not if update is needed. That would not work during addon update
@@ -69,13 +70,13 @@ class D2UTemplateManager
      * @param string $function Possible values: autoupdate
      * @param int $paired_template_id Redaxo template ID
      */
-    public function doActions($d2u_template_id, $function, $paired_template_id)
+    public function doActions($d2u_template_id, $function, $paired_template_id):void
     {
         // Form actions
         for ($i = 0; $i < count($this->d2u_templates); ++$i) {
             $template = $this->d2u_templates[$i];
-            if ($template->getD2UId() == $d2u_template_id) {
-                if ('autoupdate' == $function) {
+            if ($template->getD2UId() === $d2u_template_id) {
+                if ('autoupdate' === $function) {
                     if ($template->isAutoupdateActivated()) {
                         $template->disableAutoupdate();
                         echo rex_view::success($template->getD2UId() .' '. $template->getName() .': '. rex_i18n::msg('d2u_helper_autoupdate_deactivated'));
@@ -83,7 +84,7 @@ class D2UTemplateManager
                         $template->activateAutoupdate();
                         echo rex_view::success($template->getD2UId() .' '. $template->getName() .': '. rex_i18n::msg('d2u_helper_autoupdate_activated'));
                     }
-                } elseif ('unlink' == $function) {
+                } elseif ('unlink' === $function) {
                     $template->unlink();
                     $this->d2u_templates[$i] = $template;
                     echo rex_view::success($template->getD2UId() .' '. $template->getName() .': '. rex_i18n::msg('d2u_helper_templates_pair_unlinked'));
@@ -156,7 +157,7 @@ class D2UTemplateManager
     public function getTemplate($template_id)
     {
         foreach ($this->d2u_templates as $d2u_template) {
-            if ($d2u_template->getD2UId() == $template_id) {
+            if ($d2u_template->getD2UId() === $template_id) {
                 return $d2u_template;
             }
         }
@@ -167,22 +168,22 @@ class D2UTemplateManager
      * Get paired template ids.
      * @param string $addon_key Redaxo addon key for filtering pairs. If missing,
      * pairs of all D2U addons are searched.
-     * @return string[] Paired template ids. Key is Redaxo template id, value is
+     * @return array<int, array<string, string>> Paired template ids. Key is Redaxo template id, value is
      * an array width D2U template id (named "d2u_id") and addon key (named "addon_key").
      */
-    public static function getTemplatePairs($addon_key = '')
+    private static function getTemplatePairs($addon_key = '')
     {
         $paired_templates = [];
         $query_paired = 'SELECT * FROM `'. \rex::getTablePrefix() .'config` WHERE `key` LIKE "template_%"'
-            .('' == $addon_key ? '' : ' AND `namespace` = "'. $addon_key .'"');
+            .('' === $addon_key ? '' : ' AND `namespace` = "'. $addon_key .'"');
         $result_paired = rex_sql::factory();
         $result_paired->setQuery($query_paired);
         for ($i = 0; $i < $result_paired->getRows(); ++$i) {
-            $template_info = json_decode($result_paired->getValue('value'), true);
+            $template_info = json_decode((string) $result_paired->getValue('value'), true);
             if (is_array($template_info) && array_key_exists('rex_template_id', $template_info)) {
-                $paired_templates[$template_info['rex_template_id']] = [
-                    'd2u_id' => str_replace('template_', '', $result_paired->getValue('key')),
-                    'addon_key' => $result_paired->getValue('key'),
+                $paired_templates[(int) $template_info['rex_template_id']] = [
+                    'd2u_id' => str_replace('template_', '', (string) $result_paired->getValue('key')),
+                    'addon_key' => (string) $result_paired->getValue('key'),
                 ];
             }
             $result_paired->next();
@@ -192,7 +193,7 @@ class D2UTemplateManager
 
     /**
      * Gets Redaxo Templates.
-     * @param bool if true, reload of templates is performed
+     * @param bool $unpaired_only if true, reload of templates is performed
      * @return string[] Redaxo templates. Key ist the template ID, value ist the template name
      */
     public static function getRexTemplates($unpaired_only = false)

@@ -1,5 +1,6 @@
 <?php
 /**
+ * @api
  * Offers methods for Redaxo backend forms, used by addons published by
  * www.design-to-use.de.
  */

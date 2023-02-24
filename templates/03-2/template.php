@@ -55,9 +55,9 @@
     // Mix - not merge - arrays
     $all_data = [];
 
-    if (0 == count($properties)) {
+    if (0 === count($properties)) {
         $all_data = $ads;
-    } elseif (0 == count($ads)) {
+    } elseif (0 === count($ads)) {
         $all_data = $properties;
     } else {
         $counter_ads = 0;

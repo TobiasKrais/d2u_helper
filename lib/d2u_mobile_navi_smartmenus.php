@@ -44,7 +44,7 @@ class d2u_mobile_navi_smartmenus
      * Redaxo categories.
      * @param int $cat_parent_id Parent category ID. If 0, Redaxo root categories
      * are returned
-     * @return rex_category[] Array containing Redaxo categories
+     * @return array<rex_category> Array containing Redaxo categories
      */
     private static function getCategories($cat_parent_id = 0)
     {
@@ -63,7 +63,7 @@ class d2u_mobile_navi_smartmenus
      * Returns menu.
      * @param int $cat_parent_id redaxo category ID, by default root categories are returned
      */
-    public static function getMenu($cat_parent_id = 0):void
+    public static function getMenu($cat_parent_id = 0): void
     {
         // Mobile menu toggle button (hamburger/x icon)
         echo '<input id="main-menu-state" type="checkbox" />';
@@ -77,9 +77,9 @@ class d2u_mobile_navi_smartmenus
         foreach (self::getCategories($cat_parent_id) as $category) {
             // Check permissions if YCom ist installed
             $category_start_article = $category->getStartArticle();
-            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($category_start_article))) {
+            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($category_start_article)) {
 
-                $has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && 'show' == rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && rex_config::get('d2u_machinery', 'article_id', 0) == $category->getId());
+                $has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && 'show' === (string) rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && (int) rex_config::get('d2u_machinery', 'article_id', 0) === $category->getId());
                 if (0 === count($category->getChildren(true)) && !$has_machine_submenu) {
                     // Ohne Untermenü
                     echo '<li class="main'. (rex_article::getCurrentId() === $category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' current' : '') .'"><a href="'. $category->getUrl() .'" title="'. $category->getName() .'">'. $category->getName() .'</a></li>'. PHP_EOL;
@@ -89,16 +89,16 @@ class d2u_mobile_navi_smartmenus
                     echo '<ul>'. PHP_EOL;
                     // Mit Untermenü
                     if ($has_machine_submenu) {
-                        if (method_exists('d2u_machinery_frontend_helper', 'getD2UMachinerySmartmenuSubmenu')) {
+                        if (method_exists(d2u_machinery_frontend_helper::class, 'getD2UMachinerySmartmenuSubmenu')) {
                             d2u_machinery_frontend_helper::getD2UMachinerySmartmenuSubmenu();
                         } else {
                             d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
                         }
                     }
                     foreach ($category->getChildren(true) as $lev2) {
-                        if (0 == count($lev2->getChildren(true))) {
+                        if (0 === count($lev2->getChildren(true))) {
                             // Without Redaxo submenu
-                            echo '<li'. (rex_article::getCurrentId() == $lev2->getId() || in_array($lev2->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $lev2->getUrl() .'" title="'. $lev2->getName() .'">'. $lev2->getName() .'</a></li>'. PHP_EOL;
+                            echo '<li'. (rex_article::getCurrentId() === $lev2->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev2->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $lev2->getUrl() .'" title="'. $lev2->getName() .'">'. $lev2->getName() .'</a></li>'. PHP_EOL;
                         } else {
                             // Mit Untermenü
                             self::getSubmenu($lev2);
@@ -126,12 +126,12 @@ class d2u_mobile_navi_smartmenus
      * Returns Mobile Responsive MultiLevel submenu.
      * @param rex_category $rex_category Redaxo category
      */
-    private static function getSubmenu($rex_category)
+    private static function getSubmenu($rex_category):void
     {
-        echo '<li'. (rex_article::getCurrentId() == $rex_category->getId() || in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. $rex_category->getName() .'">'. $rex_category->getName() .'</a>'. PHP_EOL;
+        echo '<li'. (rex_article::getCurrentId() === $rex_category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. $rex_category->getName() .'">'. $rex_category->getName() .'</a>'. PHP_EOL;
         echo '<ul>'. PHP_EOL;
-        if (rex_addon::get('d2u_machinery')->isAvailable() && 'show' == rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_category->getId()) {
-            if (method_exists('d2u_machinery_frontend_helper', 'getD2UMachinerySmartmenuSubmenu')) {
+        if (rex_addon::get('d2u_machinery')->isAvailable() && 'show' === (string) rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && (int) rex_config::get('d2u_machinery', 'article_id', 0) === $rex_category->getId()) {
+            if (method_exists(d2u_machinery_frontend_helper::class, 'getD2UMachinerySmartmenuSubmenu')) {
                 d2u_machinery_frontend_helper::getD2UMachinerySmartmenuSubmenu();
             } else {
                 d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
@@ -139,11 +139,11 @@ class d2u_mobile_navi_smartmenus
         }
         foreach ($rex_category->getChildren(true) as $rex_subcategory) {
             // Check permissions if YCom ist installed
-            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($rex_subcategory->getStartArticle()))) {
-                $has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && rex_config::get('d2u_machinery', 'article_id', 0) == $rex_subcategory->getId());
-                if (0 == count($rex_subcategory->getChildren(true)) && !$has_machine_submenu) {
+            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($rex_subcategory->getStartArticle())) {
+                $has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && (int) rex_config::get('d2u_machinery', 'article_id', 0) === $rex_subcategory->getId());
+                if (0 === count($rex_subcategory->getChildren(true)) && !$has_machine_submenu) {
                     // Without Redaxo submenu
-                    echo '<li'. (rex_article::getCurrentId() == $rex_subcategory->getId() || in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
+                    echo '<li'. (rex_article::getCurrentId() === $rex_subcategory->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
                 } else {
                     // Mit Untermenü
                     self::getSubmenu($rex_subcategory);

@@ -93,7 +93,7 @@ class d2u_mobile_navi
         foreach (self::getCategories($cat_parent_id) as $category) {
             // Check permissions if YCom ist installed
             $startarticle = $category->getStartArticle();
-            if (rex_addon::get('ycom')->isAvailable() === false || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($startarticle))) {
+            if (rex_addon::get('ycom')->isAvailable() === false || rex_ycom_auth::articleIsPermitted($startarticle)) {
                 $has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && 'show' === rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && (int) rex_config::get('d2u_machinery', 'article_id', 0) === $category->getId());
                 if (0 === count($category->getChildren(true)) && !$has_machine_submenu) {
                     // Ohne Untermenü
@@ -177,7 +177,7 @@ class d2u_mobile_navi
         foreach (self::getCategories($cat_parent_id) as $lev1) {
             // Check permissions if YCom ist installed
             $lev1_start_article = $lev1->getStartArticle();
-            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev1_start_article))) {
+            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($lev1_start_article)) {
                 if (0 === count($lev1->getChildren(true))) {
                     // Without Redaxo submenu
                     echo '<li'. (rex_article::getCurrentId() === $lev1->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'" title="'. $lev1->getName() .'">'. $lev1->getName() .'</a></li>';
@@ -216,7 +216,7 @@ class d2u_mobile_navi
         foreach ($rex_category->getChildren(true) as $rex_subcategory) {
             // Check permissions if YCom ist installed
             $rex_subcategory_article = $rex_subcategory->getStartArticle();
-            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($rex_subcategory_article))) {
+            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($rex_subcategory_article)) {
                 $has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && (int) rex_config::get('d2u_machinery', 'article_id', 0) === $rex_subcategory->getId());
                 if (0 === count($rex_subcategory->getChildren(true)) && !$has_machine_submenu) {
                     // Without Redaxo submenu

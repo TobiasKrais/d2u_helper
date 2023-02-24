@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class for SlickNav menu (HTTPS://GITHUB.COM/COMPUTERWOLF/SLICKNAV).
  *
@@ -57,16 +58,17 @@ class d2u_mobile_navi_slicknav
      * Returns a SlickNav menu for mobile view.
      * @param int $cat_parent_id redaxo category ID, default root categories are returned
      */
-    public static function getMobileMenu($cat_parent_id = 0):void
+    public static function getMobileMenu($cat_parent_id = 0): void
     {
         echo '<div id="mobile-menu">';
         echo '<ul id="slicknav-mobile-menu">';
         foreach (self::getCategories($cat_parent_id) as $lev1) {
             // Check permissions if YCom ist installed
-            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev1->getStartArticle()))) {
-                if (0 == count($lev1->getChildren(true))) {
+            $lev1_start_article = $lev1->getStartArticle();
+            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($lev1_start_article)) {
+                if (0 === count($lev1->getChildren(true))) {
                     // Without Redaxo submenu
-                    echo '<li'. (rex_article::getCurrentId() == $lev1->getId() || in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'" title="'. $lev1->getName() .'">'. $lev1->getName() .'</a></li>';
+                    echo '<li'. (rex_article::getCurrentId() === $lev1->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'" title="'. $lev1->getName() .'">'. $lev1->getName() .'</a></li>';
                 } else {
                     // With submenu
                     self::getSubmenu($lev1);
@@ -83,19 +85,19 @@ class d2u_mobile_navi_slicknav
      * Returns slicknav submenu.
      * @param rex_category $rex_category Redaxo category
      */
-    private static function getSubmenu($rex_category)
+    private static function getSubmenu($rex_category):void
     {
         echo '<li><a href="'. $rex_category->getUrl() .'" title="'. $rex_category->getName() .'">'. $rex_category->getName() .'</a>';
         echo '<ul>';
-        $cat_name = true == rex_config::get('d2u_helper', 'submenu_use_articlename', false) ? rex_article::get($rex_category->getId())->getName() : strtoupper($rex_category->getName());
-        echo '<li'. (rex_article::getCurrentId() == $rex_category->getId() || in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. $cat_name .'">'. $cat_name .'</a></li>';
+        $cat_name = true === (bool) rex_config::get('d2u_helper', 'submenu_use_articlename', false) && rex_article::get($rex_category->getId()) instanceof rex_article ? rex_article::get($rex_category->getId())->getName() : strtoupper($rex_category->getName());
+        echo '<li'. (rex_article::getCurrentId() === $rex_category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. $cat_name .'">'. $cat_name .'</a></li>';
 
         foreach ($rex_category->getChildren(true) as $rex_subcategory) {
             // Check permissions if YCom ist installed
-            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($rex_subcategory->getStartArticle()))) {
-                if (0 == count($rex_subcategory->getChildren(true))) {
+            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($rex_subcategory->getStartArticle())) {
+                if (0 === count($rex_subcategory->getChildren(true))) {
                     // Without Redaxo submenu
-                    echo '<li'. (rex_article::getCurrentId() == $rex_subcategory->getId() || in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
+                    echo '<li'. (rex_article::getCurrentId() === $rex_subcategory->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
                 } else {
                     // Mit Untermenü
                     self::getSubmenu($rex_subcategory);

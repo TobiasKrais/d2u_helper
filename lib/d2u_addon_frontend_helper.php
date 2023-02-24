@@ -291,7 +291,7 @@ class d2u_addon_frontend_helper
         if (0 === self::$url_id && rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=')) {
             // URL Addon 2.x
             $manager = \Url\Url::resolveCurrent();
-            if ($manager instanceof \Url\Url) {
+            if ($manager instanceof \Url\UrlManager) {
                 self::$url_id = (int) $manager->getDatasetId();
             }
         }
@@ -307,7 +307,7 @@ class d2u_addon_frontend_helper
         if ('' === self::$url_namespace && rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=')) {
             // URL Addon 2.x
             $manager = \Url\Url::resolveCurrent();
-            if ($manager instanceof \Url\Url && $manager->getProfile()) {
+            if ($manager instanceof \Url\UrlManager && $manager->getProfile() instanceof \Url\Profile) {
                 self::$url_namespace = $manager->getProfile()->getNamespace();
             }
         }

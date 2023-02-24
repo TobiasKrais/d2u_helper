@@ -12,17 +12,11 @@ footer a:hover {
 	text-decoration: underline;
 }
 footer ul {
-	display: flex;
 	justify-content: center;
 	margin-bottom: 0.5rem;
 }
 footer li {
-	float: left;
 	list-style: none;
-}
-footer li:after {
-	content: "|";
-	padding: 0 15px;
 }
 footer li:last-child:after {
 	content: "";
@@ -58,4 +52,16 @@ footer li:last-child:after {
 .footer-icon {
 	display: inline-block;
 	width: 1.5em;
+}
+@media screen and (min-width: 768px) {
+	footer ul {
+		display: flex;
+	}
+	footer li:after {
+		content: "|";
+		padding: 0 15px;
+	}
+	footer li {
+		float: left;
+	}	
 }
