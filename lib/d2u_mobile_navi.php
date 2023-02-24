@@ -176,8 +176,8 @@ class d2u_mobile_navi
         echo '<ul class="dl-menu">';
         foreach (self::getCategories($cat_parent_id) as $lev1) {
             // Check permissions if YCom ist installed
-            $lev1_startarticle = $lev1->getStartArticle();
-            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev1_startarticle))) {
+            $lev1_start_article = $lev1->getStartArticle();
+            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($lev1_start_article))) {
                 if (0 === count($lev1->getChildren(true))) {
                     // Without Redaxo submenu
                     echo '<li'. (rex_article::getCurrentId() === $lev1->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'" title="'. $lev1->getName() .'">'. $lev1->getName() .'</a></li>';

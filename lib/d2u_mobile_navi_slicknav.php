@@ -43,7 +43,10 @@ class d2u_mobile_navi_slicknav
     private static function getCategories($cat_parent_id = 0)
     {
         if ($cat_parent_id > 0) {
-            return rex_category::get($cat_parent_id)->getChildren(true);
+            $rex_category = rex_category::get($cat_parent_id);
+            if ($rex_category instanceof rex_category) {
+                return $rex_category->getChildren(true);
+            }
         }
 
         return rex_category::getRootCategories(true);

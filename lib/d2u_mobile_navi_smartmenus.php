@@ -49,7 +49,10 @@ class d2u_mobile_navi_smartmenus
     private static function getCategories($cat_parent_id = 0)
     {
         if ($cat_parent_id > 0) {
-            return rex_category::get($cat_parent_id)->getChildren(true);
+            $rex_category = rex_category::get($cat_parent_id);
+            if ($rex_category instanceof rex_category) {
+                return $rex_category->getChildren(true);
+            }
         }
 
         return rex_category::getRootCategories(true);
@@ -60,7 +63,7 @@ class d2u_mobile_navi_smartmenus
      * Returns menu.
      * @param int $cat_parent_id redaxo category ID, by default root categories are returned
      */
-    public static function getMenu($cat_parent_id = 0)
+    public static function getMenu($cat_parent_id = 0):void
     {
         // Mobile menu toggle button (hamburger/x icon)
         echo '<input id="main-menu-state" type="checkbox" />';
@@ -73,14 +76,16 @@ class d2u_mobile_navi_smartmenus
 
         foreach (self::getCategories($cat_parent_id) as $category) {
             // Check permissions if YCom ist installed
-            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($category->getStartArticle()))) {
+            $category_start_article = $category->getStartArticle();
+            if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($category_start_article))) {
+
                 $has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && 'show' == rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && rex_config::get('d2u_machinery', 'article_id', 0) == $category->getId());
-                if (0 == count($category->getChildren(true)) && !$has_machine_submenu) {
+                if (0 === count($category->getChildren(true)) && !$has_machine_submenu) {
                     // Ohne Untermenü
-                    echo '<li class="main'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'"><a href="'. $category->getURL() .'" title="'. $category->getName() .'">'. $category->getName() .'</a></li>'. PHP_EOL;
+                    echo '<li class="main'. (rex_article::getCurrentId() === $category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' current' : '') .'"><a href="'. $category->getUrl() .'" title="'. $category->getName() .'">'. $category->getName() .'</a></li>'. PHP_EOL;
                 } else {
-                    echo '<li class="main'. (rex_article::getCurrentId() == $category->getId() || in_array($category->getId(), rex_article::getCurrent()->getPathAsArray()) ? ' current' : '') .'">'
-                        .'<a href="'. $category->getURL() .'" title="'. $category->getName() .'">'. $category->getName() .'</a>'. PHP_EOL;
+                    echo '<li class="main'. (rex_article::getCurrentId() === $category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' current' : '') .'">'
+                        .'<a href="'. $category->getUrl() .'" title="'. $category->getName() .'">'. $category->getName() .'</a>'. PHP_EOL;
                     echo '<ul>'. PHP_EOL;
                     // Mit Untermenü
                     if ($has_machine_submenu) {
