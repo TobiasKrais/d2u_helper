@@ -57,7 +57,7 @@ class d2u_mobile_navi_slicknav
      * Returns a SlickNav menu for mobile view.
      * @param int $cat_parent_id redaxo category ID, default root categories are returned
      */
-    public static function getMobileMenu($cat_parent_id = 0)
+    public static function getMobileMenu($cat_parent_id = 0):void
     {
         echo '<div id="mobile-menu">';
         echo '<ul id="slicknav-mobile-menu">';
