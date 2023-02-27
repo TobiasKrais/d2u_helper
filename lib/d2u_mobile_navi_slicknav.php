@@ -94,7 +94,8 @@ class d2u_mobile_navi_slicknav
 
         foreach ($rex_category->getChildren(true) as $rex_subcategory) {
             // Check permissions if YCom ist installed
-            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($rex_subcategory->getStartArticle())) {
+            $subcategory_start_article = $rex_subcategory->getStartArticle();
+            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($subcategory_start_article)) {
                 if (0 === count($rex_subcategory->getChildren(true))) {
                     // Without Redaxo submenu
                     echo '<li'. (rex_article::getCurrentId() === $rex_subcategory->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
