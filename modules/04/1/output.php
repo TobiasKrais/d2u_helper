@@ -1,26 +1,18 @@
 <?php
-    $cols = 'REX_VALUE[20]';
-    if ('' == $cols) {
-        $cols = 8;
-    }
-
-    $offset_lg_cols = (int) 'REX_VALUE[17]';
-    $offset_lg = '';
-    if ($offset_lg_cols > 0) { /** @phpstan-ignore-line */
-        $offset_lg = ' mr-lg-auto ml-lg-auto ';
-    }
+$cols = 0 === (int) 'REX_VALUE[20]' ? 8 : (int) 'REX_VALUE[20]'; /** @phpstan-ignore-line */
+$offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @phpstan-ignore-line */
 ?>
 <div class="col-sm-<?= $cols . $offset_lg ?>">
 <?php
-    $longitude = 'REX_VALUE[4]' == '' ? 0 : 'REX_VALUE[4]';
-    $latitude = 'REX_VALUE[5]' == '' ? 0 : 'REX_VALUE[5]';
-    $map_type = 'REX_VALUE[6]' == '' ? 'HYBRID' : 'REX_VALUE[6]';
-    $maps_zoom = 'REX_VALUE[3]' == '' ? 15 : 'REX_VALUE[3]';
-    $height = 'REX_VALUE[7]' == '' ? '500' : 'REX_VALUE[7]';
-    $height_unit = 'REX_VALUE[8]' == '' ? 'px' : 'REX_VALUE[8]';
+    $longitude = 'REX_VALUE[4]' === '' ? 0 : 'REX_VALUE[4]'; /** @phpstan-ignore-line */
+    $latitude = 'REX_VALUE[5]' === '' ? 0 : 'REX_VALUE[5]'; /** @phpstan-ignore-line */
+    $map_type = 'REX_VALUE[6]' === '' ? 'HYBRID' : 'REX_VALUE[6]'; /** @phpstan-ignore-line */
+    $maps_zoom = 'REX_VALUE[3]' === '' ? 15 : (int) 'REX_VALUE[3]'; /** @phpstan-ignore-line */
+    $height = 'REX_VALUE[7]' === '' ? '500' : 'REX_VALUE[7]'; /** @phpstan-ignore-line */
+    $height_unit = 'REX_VALUE[8]' === '' ? 'px' : 'REX_VALUE[8]'; /** @phpstan-ignore-line */
     $height .= $height_unit;
-    $api_key = 'REX_VALUE[11]' == '' ? rex_config::get('d2u_helper', 'maps_key') : 'REX_VALUE[11]';
-    if ('' != $api_key) {
+    $api_key = 'REX_VALUE[11]' === '' ? (string) rex_config::get('d2u_helper', 'maps_key') : 'REX_VALUE[11]'; /** @phpstan-ignore-line */
+    if ('' !== $api_key) { /** @phpstan-ignore-line */
         $api_key = '?key='. $api_key;
     }
     $substitute = ["\r\n" => '', "\r" => '', "\n" => '', '"' => "'"];

@@ -16,21 +16,23 @@
 			<?php
                 $line = 'REX_VALUE[1]';
                 echo '<option value="">ohne Linie</option>';
-                echo '<option value="line"'. ('line' == $line ? ' selected="selected"' : '') .'>mit Linie</option>';
+                echo '<option value="line"'. ('line' === $line ? ' selected="selected"' : '') .'>mit Linie</option>'; /** @phpstan-ignore-line */
             ?>
 		</select>
 	</div>
 </div>
 <?php
-$current_template = new rex_template(rex_article::getCurrent()->getTemplateId());
-if (in_array(str_replace('d2u_', '', $current_template->getKey()), ['00-1', '02-1', '04-1', '04-2'])) {
+$current_article = rex_article::getCurrent();
+if ($current_article instanceof rex_article) {
+	$current_template = new rex_template($current_article->getTemplateId());
+	if (in_array(str_replace('d2u_', '', $current_template->getKey() !== null ? $current_template->getKey() : ''), ['00-1', '02-1', '04-1', '04-2'], true)) {
 ?>
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[2]" value="true" <?= 'REX_VALUE[2]' == 'true' ? ' checked="checked"' : '' ?> class="form-control d2u_helper_toggle" />
+		<input type="checkbox" name="REX_INPUT_VALUE[2]" value="true" <?= 'REX_VALUE[2]' === 'true' ? ' checked="checked"' : '' /** @phpstan-ignore-line */ ?> class="form-control d2u_helper_toggle" />
 	</div>
 	<div class="col-xs-8">
 		Bootstrap Container schließen und neuen Bootstrap Container beginnen<br />
@@ -40,7 +42,7 @@ if (in_array(str_replace('d2u_', '', $current_template->getKey()), ['00-1', '02-
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[3]" value="true" <?= 'REX_VALUE[3]' == 'true' ? ' checked="checked"' : '' ?> class="form-control d2u_helper_toggle" />
+		<input type="checkbox" name="REX_INPUT_VALUE[3]" value="true" <?= 'REX_VALUE[3]' === 'true' ? ' checked="checked"' : '' /** @phpstan-ignore-line */ ?> class="form-control d2u_helper_toggle" />
 	</div>
 	<div class="col-xs-8">
 		Neuen Container Fluid, also gesamte Breite des Browserfensters, setzen?<br />
@@ -79,4 +81,5 @@ if (in_array(str_replace('d2u_', '', $current_template->getKey()), ['00-1', '02-
 	});
 </script>
 <?php
+	}
 }

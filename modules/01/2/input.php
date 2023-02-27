@@ -66,7 +66,7 @@
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
-				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[5]" value="true"<?php if ('REX_VALUE[5]' == 'true') {
+				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[5]" value="true"<?php if ('REX_VALUE[5]' === 'true') { /** @phpstan-ignore-line */ 
                 echo ' checked="checked"';
                 } ?>>
 			</dt>
@@ -201,7 +201,7 @@
                 $name = $result->getValue('name');
                 echo '<option value="'. $name .'" ';
 
-                if ('REX_VALUE[3]' == $name) {
+                if ('REX_VALUE[3]' === $name) {
                     echo 'selected="selected" ';
                 }
                 echo '>'. $name .'</option>';
@@ -225,7 +225,7 @@
         foreach ($values as $key => $value) {
             echo '<option value="'. $key .'" ';
 
-            if ('REX_VALUE[6]' == $key) {
+            if ('REX_VALUE[6]' === $key) { /** @phpstan-ignore-line */
                 echo 'selected="selected" ';
             }
             echo '>'. $value .'</option>';
@@ -245,10 +245,10 @@
 		<select name="REX_INPUT_VALUE[4]" class="form-control">
 			<?php
                 $picture_position = 'REX_VALUE[4]';
-                echo '<option value="top"'. ('top' == $picture_position ? ' selected="selected"' : '') .'>Oberhalb vom Text</option>';
-                echo '<option value="left"'. ('left' == $picture_position ? ' selected="selected"' : '') .'>Links vom Text</option>';
-                echo '<option value="right"'. ('right' == $picture_position ? ' selected="selected"' : '') .'>Rechts vom Text</option>';
-                echo '<option value="bottom"'. ('bottom' == $picture_position ? ' selected="selected"' : '') .'>Unterhalb vom Text</option>';
+                echo '<option value="top"'. ('top' === $picture_position ? ' selected="selected"' : '') .'>Oberhalb vom Text</option>'; /** @phpstan-ignore-line */ 
+                echo '<option value="left"'. ('left' === $picture_position ? ' selected="selected"' : '') .'>Links vom Text</option>'; /** @phpstan-ignore-line */ 
+                echo '<option value="right"'. ('right' === $picture_position ? ' selected="selected"' : '') .'>Rechts vom Text</option>'; /** @phpstan-ignore-line */ 
+                echo '<option value="bottom"'. ('bottom' === $picture_position ? ' selected="selected"' : '') .'>Unterhalb vom Text</option>'; /** @phpstan-ignore-line */ 
             ?>
 		</select>
 	</div>
@@ -260,7 +260,7 @@
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
-				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[9]" value="true"<?php if ('REX_VALUE[9]' == 'true') {
+				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[9]" value="true"<?php if ('REX_VALUE[9]' === 'true') { /** @phpstan-ignore-line */ 
                 echo ' checked="checked"';
                 } ?>>
 			</dt>
@@ -289,7 +289,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[10]" value="true" <?= 'REX_VALUE[10]' == 'true' ? ' checked="checked"' : '' ?> class="form-control d2u_helper_toggle" />
+		<input type="checkbox" name="REX_INPUT_VALUE[10]" value="true" <?= 'REX_VALUE[10]' === 'true' ? ' checked="checked"' : ''/** @phpstan-ignore-line */ ?> class="form-control d2u_helper_toggle" />
 	</div>
 	<div class="col-xs-8">
 		Unterhalb vom Text einen zusätzlichen aufklappbaren Text anzeigen<br />

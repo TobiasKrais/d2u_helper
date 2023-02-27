@@ -11,7 +11,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[2]" value="true" <?= 'REX_VALUE[2]' == 'true' ? ' checked="checked"' : '' ?> class="form-control d2u_helper_toggle" />
+		<input type="checkbox" name="REX_INPUT_VALUE[2]" value="true" <?= 'REX_VALUE[2]' === 'true' ? ' checked="checked"' : '' /** @phpstan-ignore-line */ ?> class="form-control d2u_helper_toggle" />
 	</div>
 	<div class="col-xs-8">
 		Ähnliche Suchtreffer anzeigen, wenn keine Treffer gefunden werden?<br />

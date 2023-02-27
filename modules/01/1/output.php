@@ -1,34 +1,21 @@
 <?php
 
-$cols_sm = 'REX_VALUE[20]';
-if ('' == $cols_sm) {
-    $cols_sm = 12;
-}
-$cols_md = 'REX_VALUE[19]';
-if ('' == $cols_md) {
-    $cols_md = 12;
-}
-$cols_lg = 'REX_VALUE[18]';
-if ('' == $cols_lg) {
-    $cols_lg = 8;
-}
-$offset_lg_cols = (int) 'REX_VALUE[17]';
-$offset_lg = '';
-if ($offset_lg_cols > 0) { /** @phpstan-ignore-line */
-    $offset_lg = ' mr-lg-auto ml-lg-auto ';
-}
+$cols_sm = 0 === (int) 'REX_VALUE[20]' ? 12 : (int) 'REX_VALUE[20]'; /** @phpstan-ignore-line */
+$cols_md = 0 === (int) 'REX_VALUE[19]' ? 12 : (int) 'REX_VALUE[19]'; /** @phpstan-ignore-line */
+$cols_lg = 0 === (int) 'REX_VALUE[18]' ? 12 : (int) 'REX_VALUE[18]'; /** @phpstan-ignore-line */
+$offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @phpstan-ignore-line */
 
 $text_1 = 'REX_VALUE[id=1 output="html"]';
-$show_text_2 = 'REX_VALUE[2]' == 'true' ? true : false;
+$show_text_2 = 'REX_VALUE[2]' === 'true' ? true : false; /** @phpstan-ignore-line */
 $text_2 = 'REX_VALUE[id=3 output="html"]';
 
 echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
-if ($text_1) {
+if ($text_1 !== '') { /** @phpstan-ignore-line */
     echo '<div class="wysiwyg_content">';
     echo d2u_addon_frontend_helper::prepareEditorField($text_1);
     echo '</div>';
 }
-if ($show_text_2 && $text_2) {
+if ($show_text_2 && $text_2 !== '') { /** @phpstan-ignore-line */
     $id = random_int(0, getrandmax());
     echo '<div class="wysiwyg_content">';
     echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';

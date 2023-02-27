@@ -101,7 +101,7 @@
         foreach (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $value) {
             echo '<option value="'.$value.'" ';
 
-            if ('REX_VALUE[2]' == "$value") {
+            if ('REX_VALUE[2]' === $value) {
                 echo 'selected="selected" ';
             }
             echo '>'.$value.'</option>';

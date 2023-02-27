@@ -195,7 +195,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 == count($yfor
     } elseif (!$result['count']) {
         echo '<p class="search_it-zero">'. $tag_open .'d2u_helper_module_14_search_results_none'. $tag_close .'</p>';
 
-        $activate_similarity_search = 'REX_VALUE[2]' == 'true' ? true : false;
+        $activate_similarity_search = 'REX_VALUE[2]' === 'true' ? true : false; /** @phpstan-ignore-line */
         // Similarity search
         $search_it_sim = new search_it(rex_clang::getCurrentId());
         $search_it_sim->setLimit(0, 1);

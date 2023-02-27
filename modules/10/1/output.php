@@ -6,7 +6,7 @@
 	<div class="module-box<?= $same_height ?>">
 		<REX_VALUE[2]>REX_VALUE[1]</REX_VALUE[2]>
 		<?php
-            if ('REX_MEDIA[1]' != '') {
+            if ('REX_MEDIA[1]' !== '') { /** @phpstan-ignore-line */
                 $media = rex_media::get('REX_MEDIA[1]');
                 echo '<img src="index.php?rex_media_type='. $picture_type .'&rex_media_file=REX_MEDIA[1]" alt="'.
                     $media->getValue('title') .'" title="'. $media->getValue('title') .'">';

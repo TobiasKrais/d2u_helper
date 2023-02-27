@@ -84,10 +84,10 @@
             $sql = rex_sql::factory();
             $result = $sql->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
             for ($i = 0; $i < $result->getRows(); ++$i) {
-                $name = $result->getValue('name');
+                $name = (string) $result->getValue('name');
                 echo '<option value="'. $name .'" ';
 
-                if ('REX_VALUE[1]' == $name) {
+                if ('REX_VALUE[1]' === $name) {
                     echo 'selected="selected" ';
                 }
                 echo '>'. $name .'</option>';
@@ -104,7 +104,7 @@
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
-				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[2]" value="true"<?php if ('REX_VALUE[2]' == 'true') {
+				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[2]" value="true"<?php if ('REX_VALUE[2]' === 'true') { /** @phpstan-ignore-line */
                 echo ' checked="checked"';
                 } ?>>
 			</dt>

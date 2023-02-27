@@ -18,7 +18,7 @@ if ($offset_lg_cols > 0) { /** @phpstan-ignore-line */
     $offset_lg = ' mr-lg-auto ml-lg-auto ';
 }
 
-$show_preview_pictures = 'REX_VALUE[2]' == 'true' ? true : false;
+$show_preview_pictures = 'REX_VALUE[2]' === 'true' ? true : false; /** @phpstan-ignore-line */
 
 // Number downloads per row
 $downloads_cols = 'col-12';

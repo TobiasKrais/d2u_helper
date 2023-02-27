@@ -1,21 +1,8 @@
 <?php
-$cols_sm = 'REX_VALUE[20]';
-if ('' == $cols_sm) {
-    $cols_sm = 12;
-}
-$cols_md = 'REX_VALUE[19]';
-if ('' == $cols_md) {
-    $cols_md = 12;
-}
-$cols_lg = 'REX_VALUE[18]';
-if ('' == $cols_lg) {
-    $cols_lg = 8;
-}
-$offset_lg_cols = (int) 'REX_VALUE[17]';
-$offset_lg = '';
-if ($offset_lg_cols > 0) { /** @phpstan-ignore-line */
-    $offset_lg = ' mr-lg-auto ml-lg-auto ';
-}
+$cols_sm = 0 === (int) 'REX_VALUE[20]' ? 12 : (int) 'REX_VALUE[20]'; /** @phpstan-ignore-line */
+$cols_md = 0 === (int) 'REX_VALUE[19]' ? 12 : (int) 'REX_VALUE[19]'; /** @phpstan-ignore-line */
+$cols_lg = 0 === (int) 'REX_VALUE[18]' ? 12 : (int) 'REX_VALUE[18]'; /** @phpstan-ignore-line */
+$offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @phpstan-ignore-line */
 
 preg_match(
     '/[\\?\\&]v=([^\\?\\&]+)/',
@@ -31,7 +18,7 @@ $youtube_previewimage_url = 'https://img.youtube.com/vi/'. $youtube_id .'/hqdefa
 $youtube_videoinfo_url = 'https://www.youtube.com/oembed?format=json&url=https%3A//youtube.com/watch%3Fv%3D'. $youtube_id;
 $previewimage_target_filename = 'youtube-'. $youtube_id .'.jpg';
 
-$show_title = 'REX_VALUE[2]' == 'true' ? true : false;
+$show_title = 'REX_VALUE[2]' === 'true' ? true : false; /** @phpstan-ignore-line */
 
 if ('' != $youtube_id) {
     // Copy preview image

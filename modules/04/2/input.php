@@ -97,7 +97,7 @@
             foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18] as $value) {
                 echo '<option value="'.$value.'" ';
 
-                if ('REX_VALUE[3]' == "$value") {
+                if ('REX_VALUE[3]' === $value) { /** @phpstan-ignore-line */
                     echo 'selected="selected" ';
                 }
                 echo '>'.$value.'</option>';
@@ -120,7 +120,7 @@
             foreach (['px', '%'] as $value) {
                 echo '<option value="'.$value.'" ';
 
-                if ('REX_VALUE[8]' == "$value") {
+                if ('REX_VALUE[8]' === $value) { /** @phpstan-ignore-line */
                     echo 'selected="selected" ';
                 }
                 echo '>'.$value.'</option>';
@@ -130,7 +130,7 @@
 	</div>
 </div>
 <?php
-    if (rex_addon::get('geolocation')->isAvailable()) {
+if (rex_addon::get('geolocation')->isAvailable()) {
 ?>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
@@ -145,11 +145,11 @@
                     ->orderBy('title')
                     ->findValues('title', 'id');
                 foreach ($mapsets as $k => $v) {
-                    echo '<option value="',$k,'"', $k == REX_VALUE[9] ? ' selected="selected"' : '','>',$v,'</option>';
+                    echo '<option value="'. $k .'"'. ($k === 'REX_VALUE[9]' ? ' selected="selected"' : '') .'>'. $v .'</option>';
                 }
             ?>
 		</select>
 	</div>
 </div>
 <?php
-    }
+}

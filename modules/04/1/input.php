@@ -69,7 +69,7 @@
 	</div>
 </div>
 <?php
-if ('' == rex_config::get('d2u_helper', 'maps_key', '')) {
+if ('' === (string) rex_config::get('d2u_helper', 'maps_key', '')) {
 ?>
 	<div class="row"><div class="col-xs-12">&nbsp;</div></div>
 	<div class="row">
@@ -118,7 +118,7 @@ if ('' == rex_config::get('d2u_helper', 'maps_key', '')) {
 <?php
     $latitude = 'REX_VALUE[4]';
     $longitude = 'REX_VALUE[5]';
-    if ('' == $latitude && '' == $longitude) {
+    if ('' === $latitude && '' === $longitude) { /** @phpstan-ignore-line */
         echo '<script>jQuery(document).ready(function($) { $("#check_geocode").parent().hide(); });</script>';
     }
 }
@@ -166,7 +166,7 @@ if ('' == rex_config::get('d2u_helper', 'maps_key', '')) {
             foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] as $value) {
                 echo '<option value="'.$value.'" ';
 
-                if ('REX_VALUE[3]' == "$value") {
+                if ('REX_VALUE[3]' === $value) { /** @phpstan-ignore-line */
                     echo 'selected="selected" ';
                 }
                 echo '>'.$value.'</option>';
@@ -186,7 +186,7 @@ if ('' == rex_config::get('d2u_helper', 'maps_key', '')) {
             foreach (['HYBRID', 'ROADMAP', 'SATELLITE', 'TERRAIN'] as $value) {
                 echo '<option value="'.$value.'" ';
 
-                if ('REX_VALUE[6]' == "$value") {
+                if ('REX_VALUE[6]' === $value) { /** @phpstan-ignore-line */
                     echo 'selected="selected" ';
                 }
                 echo '>'.$value.'</option>';
@@ -209,7 +209,7 @@ if ('' == rex_config::get('d2u_helper', 'maps_key', '')) {
             foreach (['px', '%'] as $value) {
                 echo '<option value="'.$value.'" ';
 
-                if ('REX_VALUE[8]' == "$value") {
+                if ('REX_VALUE[8]' === $value) { /** @phpstan-ignore-line */
                     echo 'selected="selected" ';
                 }
                 echo '>'.$value.'</option>';

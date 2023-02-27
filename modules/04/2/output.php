@@ -1,14 +1,6 @@
 <?php
-    $cols = 'REX_VALUE[20]';
-    if ('' == $cols) {
-        $cols = 8;
-    }
-
-    $offset_lg_cols = (int) 'REX_VALUE[17]';
-    $offset_lg = '';
-    if ($offset_lg_cols > 0) { /** @phpstan-ignore-line */
-        $offset_lg = ' mr-lg-auto ml-lg-auto ';
-    }
+$cols = 0 === (int) 'REX_VALUE[20]' ? 8 : (int) 'REX_VALUE[20]'; /** @phpstan-ignore-line */
+$offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @phpstan-ignore-line */
 ?>
 <div class="col-sm-<?= $cols . $offset_lg ?>">
 <?php

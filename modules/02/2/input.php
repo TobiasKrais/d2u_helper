@@ -119,7 +119,7 @@
 		<select name="REX_INPUT_VALUE[2]" class="form-control">
 		<?php
         foreach (['h1' => 'h1', 'h2' => 'h2', 'h3' => 'h3', 'h4' => 'h4', 'h5' => 'h5', 'h6' => 'h6', 'b' => 'Fett', 'p' => 'Absatz'] as $html_tag => $value) {
-            echo '<option value="'. $html_tag .'" '. ('REX_VALUE[2]' == "$html_tag" ? 'selected="selected" ' : '') .'>'. $value .'</option>';
+            echo '<option value="'. $html_tag .'" '. ('REX_VALUE[2]' === $html_tag ? 'selected="selected" ' : '') .'>'. $value .'</option>'; /** @phpstan-ignore-line */
         }
         ?>
 		</select>

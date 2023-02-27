@@ -119,7 +119,7 @@
 		<select name="REX_INPUT_VALUE[2]" class="form-control">
 		<?php
         foreach (['h1' => 'h1', 'h2' => 'h2', 'h3' => 'h3', 'h4' => 'h4', 'h5' => 'h5', 'h6' => 'h6', 'b' => 'Fett', 'p' => 'Absatz'] as $html_tag => $value) {
-            echo '<option value="'. $html_tag .'" '. ('REX_VALUE[2]' == "$html_tag" ? 'selected="selected" ' : '') .'>'. $value .'</option>';
+            echo '<option value="'. $html_tag .'" '. ('REX_VALUE[2]' === $html_tag ? 'selected="selected" ' : '') .'>'. $value .'</option>'; /** @phpstan-ignore-line */
         }
         ?>
 		</select>
@@ -139,7 +139,7 @@
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[5]" value="true" <?= 'REX_VALUE[5]' == 'true' ? ' checked="checked"' : '' ?> class="form-control d2u_helper_toggle" />
+		<input type="checkbox" name="REX_INPUT_VALUE[5]" value="true" <?= 'REX_VALUE[5]' === 'true' ? ' checked="checked"' : '' /** @phpstan-ignore-line */ ?> class="form-control d2u_helper_toggle" />
 	</div>
 	<div class="col-xs-8">
 		Text neben Überschrift und Untertitel anzeigen

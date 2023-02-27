@@ -73,9 +73,9 @@
 		<select name="REX_INPUT_VALUE[2]" class="form-control">
 		<?php
         foreach (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $value) {
-            echo '<option value="'.$value.'" ';
+            echo '<option value="'. $value .'" ';
 
-            if ('REX_VALUE[2]' == "$value") {
+            if ('REX_VALUE[2]' === $value) { /** @phpstan-ignore-line */
                 echo 'selected="selected" ';
             }
             echo '>'.$value.'</option>';
@@ -87,7 +87,7 @@
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[3]" value="true" <?= 'REX_VALUE[3]' == 'true' ? ' checked="checked"' : '' ?> class="form-control d2u_helper_toggle" />
+		<input type="checkbox" name="REX_INPUT_VALUE[3]" value="true" <?= 'REX_VALUE[3]' === 'true' ? ' checked="checked"' : '' /** @phpstan-ignore-line */ ?> class="form-control d2u_helper_toggle" />
 	</div>
 	<div class="col-xs-8">
 		Überschrift zentrieren
@@ -97,7 +97,7 @@
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
 	<div class="col-xs-4">
-		<input type="checkbox" name="REX_INPUT_VALUE[4]" value="true" <?= 'REX_VALUE[4]' == 'true' ? ' checked="checked"' : '' ?> class="form-control d2u_helper_toggle" />
+		<input type="checkbox" name="REX_INPUT_VALUE[4]" value="true" <?= 'REX_VALUE[4]' === 'true' ? ' checked="checked"' : '' /** @phpstan-ignore-line */ ?> class="form-control d2u_helper_toggle" />
 	</div>
 	<div class="col-xs-8">
 		kurze Linie unter der Überschrift zeichnen
