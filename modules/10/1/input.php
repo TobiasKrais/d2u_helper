@@ -101,7 +101,7 @@
         foreach (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $value) {
             echo '<option value="'.$value.'" ';
 
-            if ('REX_VALUE[2]' === $value) {
+            if ('REX_VALUE[2]' === $value) { /** @phpstan-ignore-line */
                 echo 'selected="selected" ';
             }
             echo '>'.$value.'</option>';
@@ -138,7 +138,7 @@
                 $name = $result->getValue('name');
                 echo '<option value="'. $name .'" ';
 
-                if ('REX_VALUE[3]' == $name) {
+                if ('REX_VALUE[3]' === $name) {
                     echo 'selected="selected" ';
                 }
                 echo '>'. $name .'</option>';

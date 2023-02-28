@@ -113,10 +113,10 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		}
 		else {
 			$header_image = $d2u_helper->getConfig("template_header_pic");
-			if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
+			if($this->hasValue("art_file") && $this->getValue('art_file') !== '') {
 				$header_image = $this->getValue("art_file");
 			}
-			if($header_image) {
+			if($header_image !== '') {
 				$header_css = 'style="background-image: url('. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .')"';
 			}
 			else {
@@ -126,7 +126,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	?>
 	<header <?php echo $header_css; ?>>
 		<?php
-			if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig("template_logo") != "") {
+			if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig('template_logo') !== '') {
 		?>
 		<div class="container">
 			<div class="row">
@@ -155,7 +155,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			<div class="row">
 				<?php
 					// Breadcrumbs
-					if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
+					if($d2u_helper->hasConfig("show_breadcrumbs") && '' !== $d2u_helper->getConfig("show_breadcrumbs")) {
 						print '<div class="col-12 d-print-none">';
 						print d2u_addon_frontend_helper::getBreadcrumbs();
 						print '</div>';
@@ -164,16 +164,16 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 				<div class="col-12 subhead-nav">
 					<?php
 						if($machine !== false) {
-							print '<h1 class="subhead">'. ($machine->lang_name == "" ? $machine->name : $machine->lang_name) .'</h1>';
+							print '<h1 class="subhead">'. ($machine->lang_name === "" ? $machine->name : $machine->lang_name) .'</h1>';
 							print '<ul class="nav nav-pills">';
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
-							if(rex_plugin::get("d2u_machinery", "machine_agitator_extension")->isAvailable() && $machine->agitator_type_id > 0 && $machine->agitator_type_id > 0 && $machine->category->show_agitators == "show") {
+							if(rex_plugin::get("d2u_machinery", "machine_agitator_extension")->isAvailable() && $machine->agitator_type_id > 0 && $machine->agitator_type_id > 0 && $machine->category instanceof Category && $machine->category->show_agitators === "show") {
 								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_agitator">'. $tag_open .'d2u_machinery_agitator'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
 							}
 							if(rex_plugin::get("d2u_machinery", "machine_features_extension")->isAvailable() && count($machine->feature_ids) > 0){
 								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_features">'. $tag_open .'d2u_machinery_features'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
 							}
-							if($d2u_machinery->getConfig("show_techdata", "hide") == "show" && count($machine->getTechnicalData()) > 0){
+							if($d2u_machinery->getConfig("show_techdata", "hide") === "show" && count($machine->getTechnicalData()) > 0){
 								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_tech_data"><span class="fa-icon fa-list-ul d-block d-md-none" title="'. $tag_open .'d2u_machinery_tech_data'. $tag_close .'"></span><span class="d-none d-md-block">'. $tag_open .'d2u_machinery_tech_data'. $tag_close .'</span><div class="active-navi-pill"></div></a></li>';
 							}
 							if(rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && $d2u_machinery->getConfig("show_machine_usage_areas", "hide") == "show" && count($machine->usage_area_ids) > 0) {

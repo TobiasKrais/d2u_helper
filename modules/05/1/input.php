@@ -4,6 +4,9 @@
 	</div>
 	<div class="col-xs-8">
 		<?php
+
+use D2U_Courses\Category;
+
         $select_link = new rex_select();
         $select_link->setName('REX_INPUT_VALUE[1]');
         $select_link->setSize(1);
@@ -31,7 +34,7 @@
 
         $select_link->setSelected('REX_VALUE[1]');
 
-        echo $select_link->show();
+        $select_link->show();
         ?>
 	</div>
 </div>
@@ -98,7 +101,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 
         $select_link->setSelected('REX_VALUE[3]');
 
-        echo $select_link->show();
+        $select_link->show();
     echo '</div>';
     echo '</div>';
 }
@@ -119,7 +122,7 @@ if (rex_plugin::get('d2u_machinery', 'industry_sectors')->isAvailable()) {
 
         $select_link->setSelected('REX_VALUE[4]');
 
-        echo $select_link->show();
+        $select_link->show();
     echo '</div>';
     echo '</div>';
 }
@@ -140,7 +143,7 @@ if (rex_plugin::get('d2u_machinery', 'used_machines')->isAvailable()) {
 
         $select_link->setSelected('REX_VALUE[5]');
 
-        echo $select_link->show();
+        $select_link->show();
     echo '</div>';
     echo '</div>';
 }
@@ -161,7 +164,7 @@ if (rex_addon::get('d2u_immo')->isAvailable()) {
 
         $select_link->setSelected('REX_VALUE[6]');
 
-        echo $select_link->show();
+        $select_link->show();
     echo '</div>';
     echo '</div>';
 }
@@ -178,12 +181,12 @@ if (rex_addon::get('d2u_courses')->isAvailable()) {
 
         $categories = \D2U_Courses\Category::getAll(true);
         foreach ($categories as $category) {
-            $select_link->addOption(($category->parent_category ? ($category->parent_category->parent_category ? $category->parent_category->parent_category->name .' → ' : ''). $category->parent_category->name .' → ' : ''). $category->name, $category->category_id);
+            $select_link->addOption(($category->parent_category instanceof Category ? ($category->parent_category->parent_category instanceof Category ? $category->parent_category->parent_category->name .' → ' : ''). $category->parent_category->name .' → ' : ''). $category->name, $category->category_id);
         }
 
         $select_link->setSelected('REX_VALUE[6]');
 
-        echo $select_link->show();
+        $select_link->show();
     echo '</div>';
     echo '</div>';
 }

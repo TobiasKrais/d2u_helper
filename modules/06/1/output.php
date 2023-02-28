@@ -10,8 +10,8 @@ preg_match(
     $matches,
 );
 $youtube_id = isset($matches[1]) ? trim($matches[1]) : '';
-if (0 == strlen($youtube_id) && (str_contains('REX_VALUE[1]', 'youtu.be/') || str_contains('REX_VALUE[1]', '/embed/'))) {
-    $youtube_id = trim(substr('REX_VALUE[1]', strrpos('REX_VALUE[1]', '/') + 1));
+if (0 === strlen($youtube_id) && (str_contains('REX_VALUE[1]', 'youtu.be/') || str_contains('REX_VALUE[1]', '/embed/'))) {
+    $youtube_id = trim(substr('REX_VALUE[1]', (int) strrpos('REX_VALUE[1]', '/') + 1));
 }
 $youtube_url = 'https://www.youtube-nocookie.com/embed/'. $youtube_id .'?autoplay=1';
 $youtube_previewimage_url = 'https://img.youtube.com/vi/'. $youtube_id .'/hqdefault.jpg';
@@ -20,7 +20,7 @@ $previewimage_target_filename = 'youtube-'. $youtube_id .'.jpg';
 
 $show_title = 'REX_VALUE[2]' === 'true' ? true : false; /** @phpstan-ignore-line */
 
-if ('' != $youtube_id) {
+if ('' !== $youtube_id) {
     // Copy preview image
     if (!is_dir(rex_path::addonCache('d2u_helper')) || !file_exists(rex_path::addonCache('d2u_helper', $previewimage_target_filename))) {
         if (!is_dir(rex_path::addonCache('d2u_helper'))) {
@@ -30,7 +30,7 @@ if ('' != $youtube_id) {
     }
 
     echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
-    if ($show_title) {
+    if ($show_title) { /** @phpstan-ignore-line */
         echo '<div class="same-height youtubeTitleWrapper">';
     }
 ?>
@@ -47,9 +47,12 @@ if ('' != $youtube_id) {
 				style="background: url(<?= rex_media_manager::getUrl('d2u_helper_module_06-1_preview', $previewimage_target_filename) ?>) center; background-size: cover;"></iframe>
 	</div>
 <?php
-    if ($show_title) {
-        $video_info = json_decode(file_get_contents($youtube_videoinfo_url));
-        echo '<h2>'. $video_info->title .'</h2>';
+    if ($show_title) { /** @phpstan-ignore-line */
+        $video_info_raw = file_get_contents($youtube_videoinfo_url);
+        if (false !== $video_info_raw) {
+            $video_info = json_decode($video_info_raw);
+            echo '<h2>'. $video_info->title .'</h2>';
+        }
         echo '</div>';
     }
 ?>

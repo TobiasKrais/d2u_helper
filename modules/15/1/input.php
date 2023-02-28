@@ -130,14 +130,14 @@
 		<?php
         $values_level = [1 => '1. Ebene anzeigen', 2 => 'bis 2. Ebene anzeigen', 3 => 'bis 3. Ebene anzeigen', 4 => 'bis 4. Ebene anzeigen', 100 => 'Alle Ebenen anzeigen'];
         foreach ($values_level as $key => $value) {
-            if ('REX_VALUE[1]' == 'true') {
+            if ('REX_VALUE[1]' === 'true') { /** @phpstan-ignore-line */
                 // Backward compatibility
                 $key = 100;
             }
 
             echo '<option value="'. $key .'" ';
 
-            if ('REX_VALUE[1]' == $key) {
+            if ('REX_VALUE[1]' === $key) { /** @phpstan-ignore-line */
                 echo 'selected="selected" ';
             }
             echo '>'. $value .'</option>';

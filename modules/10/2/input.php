@@ -114,7 +114,7 @@
                 $name = $result->getValue('name');
                 echo '<option value="'. $name .'" ';
 
-                if ('REX_VALUE[3]' == $name) {
+                if ('REX_VALUE[3]' === $name) { /** @phpstan-ignore-line */
                     echo 'selected="selected" ';
                 }
                 echo '>'. $name .'</option>';

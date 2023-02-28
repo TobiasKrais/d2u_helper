@@ -1,8 +1,9 @@
 <?php
 
+$return = true;
 if (!rex_addon::get('sprog')->isAvailable()) {
     echo rex_view::error(rex_i18n::msg('d2u_helper_modules_error_sprog'));
-    $return = $return ? false : $return;
+    $return = false;
 }
 
 $sql = rex_sql::factory();
@@ -24,3 +25,5 @@ if ($sql->getRows() > 0 && $sql->getValue('revision') < 11) {
     $sql_update = rex_sql::factory();
     $sql_update->setQuery('UPDATE '. \rex::getTablePrefix() ."article_slice SET value18 = value20, value20 = '12' WHERE module_id = ". $sql->getValue('id'));
 }
+
+return $return;

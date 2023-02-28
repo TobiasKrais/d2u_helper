@@ -1,5 +1,5 @@
 <?php
-$seconds = 'REX_VALUE[2]' ?: 20;
+$seconds = 'REX_VALUE[2]' !== ''? 'REX_VALUE[2]' : 20; /** @phpstan-ignore-line */
 ?>
 <div class="col-12">
 	<div class="marquee text-intro subtle">

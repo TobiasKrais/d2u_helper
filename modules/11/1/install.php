@@ -3,11 +3,11 @@
 $return = true;
 if (!rex_addon::get('sprog')->isAvailable()) {
     echo rex_view::error(rex_i18n::msg('d2u_helper_modules_error_sprog'));
-    $return = $return ? false : $return;
+    $return = false;
 }
 if (!rex_addon::get('yform')->isAvailable() || !rex_plugin::get('yform', 'email')->isAvailable()) {
     echo rex_view::error(rex_i18n::msg('d2u_helper_modules_error_yform'));
-    $return = $return ? false : $return;
+    $return = false;
 } else {
     // YForm e-mail template
     $sql = rex_sql::factory();
@@ -20,9 +20,9 @@ if (!rex_addon::get('yform')->isAvailable() || !rex_plugin::get('yform', 'email'
         $sql->setQuery('UPDATE '. \rex::getTablePrefix() ."yform_email_template SET `subject` = REPLACE(`subject`, 'rex::getServer())', 'rex::getServer());') WHERE name = 'd2u_helper_module_11_1' AND `subject` LIKE '%rex::getServer())'");
     }
 }
-if (!rex_config::get('d2u_helper', 'lang_replacements_install', false)) {
+if (!(bool) rex_config::get('d2u_helper', 'lang_replacements_install', false)) {
     echo rex_view::error(rex_i18n::msg('d2u_helper_modules_error_sprog_replacements'));
-    $return = $return ? false : $return;
+    $return = false;
 }
 
 return $return;

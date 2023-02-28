@@ -108,15 +108,15 @@
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		YFeed Profil:
+		Feeds Profil:
 	</div>
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[1]" class="form-control">
 		<?php
-        foreach (rex_yfeed_stream::getAllActivated() as $feed) {
+        foreach (rex_feeds_stream::getAllActivated() as $feed) {
             echo '<option value="'. $feed->getStreamId() .'" ';
 
-            if ('REX_VALUE[1]' == $feed->getStreamId()) {
+            if ('REX_VALUE[1]' === $feed->getStreamId()) {
                 echo 'selected="selected" ';
             }
             echo '>'. $feed->getTitle() .'</option>';
@@ -150,7 +150,7 @@
         foreach ($values as $value) {
             echo '<option value="'. $value .'" ';
 
-            if ('REX_VALUE[4]' == $value) {
+            if ('REX_VALUE[4]' === $value) { /** @phpstan-ignore-line */
                 echo 'selected="selected" ';
             }
             echo '>'. $value .'</option>';
@@ -168,8 +168,8 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[3]" class="form-control">
 		<?php
-            echo '<option value="picture" '. ('REX_VALUE[3]' == 'picture' ? 'selected="selected" ' : '') .'>Zeigt Bild in groß</option>';
-            echo '<option value="feed" '. ('REX_VALUE[3]' == 'feed' ? 'selected="selected" ' : '') .'>Zeigt Feed Vorschau</option>';
+            echo '<option value="picture" '. ('REX_VALUE[3]' === 'picture' ? 'selected="selected" ' : '') .'>Zeigt Bild in groß</option>'; /** @phpstan-ignore-line */
+            echo '<option value="feed" '. ('REX_VALUE[3]' === 'feed' ? 'selected="selected" ' : '') .'>Zeigt Feed Vorschau</option>'; /** @phpstan-ignore-line */
         ?>
 		</select>
 	</div>

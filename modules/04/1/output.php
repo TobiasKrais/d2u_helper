@@ -68,7 +68,7 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
 			var myOptions = {
 				zoom: <?= $maps_zoom ?>,
 				center: latlng,
-				mapTypeId: google.maps.MapTypeId.<?= $map_type ?>
+				mapTypeId: google.maps.MapTypeId.<?= $map_type ?>,
 			};
 			// create map
 			map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);

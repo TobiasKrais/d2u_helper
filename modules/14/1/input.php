@@ -33,13 +33,13 @@
 		<select name="REX_INPUT_VALUE[3]" class="form-control">
 		<?php
             $sql = rex_sql::factory();
-            $selected = 'REX_VALUE[3]' ?: 'rex_mediapool_preview';
+            $selected = 'REX_VALUE[3]' !== '' ? 'REX_VALUE[3]' : 'rex_mediapool_preview'; /** @phpstan-ignore-line */
             $result = $sql->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
             for ($i = 0; $i < $result->getRows(); ++$i) {
                 $name = $result->getValue('name');
                 echo '<option value="'. $name .'" ';
 
-                if ('REX_VALUE[3]' == $name) {
+                if ('REX_VALUE[3]' === $name) { /** @phpstan-ignore-line */
                     echo 'selected="selected" ';
                 }
                 echo '>'. $name .'</option>';

@@ -29,7 +29,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 <body>
 	<header>
 		<?php
-			if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig("template_logo") != "") {
+			if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig('template_logo') !== '') {
 		?>
 		<div class="container">
 			<div class="row">
@@ -63,7 +63,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 						}
 						
 						$header_image = $d2u_helper->getConfig("template_header_pic");
-						if($this->hasValue("art_file") && $this->getValue("art_file") != "") {
+						if($this->hasValue("art_file") && $this->getValue('art_file') !== '') {
 							$header_image = $this->getValue("art_file");
 						}
 						$media_header_pic = rex_media::get($header_image);

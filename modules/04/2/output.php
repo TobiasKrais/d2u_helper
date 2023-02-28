@@ -4,11 +4,11 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
 ?>
 <div class="col-sm-<?= $cols . $offset_lg ?>">
 <?php
-    $longitude = 'REX_VALUE[4]' == '' ? 0 : 'REX_VALUE[4]';
-    $latitude = 'REX_VALUE[5]' == '' ? 0 : 'REX_VALUE[5]';
-    $maps_zoom = 'REX_VALUE[3]' == '' ? 15 : 'REX_VALUE[3]';
-    $height = 'REX_VALUE[7]' == '' ? '500' : 'REX_VALUE[7]';
-    $height_unit = 'REX_VALUE[8]' == '' ? 'px' : 'REX_VALUE[8]';
+    $longitude = 'REX_VALUE[4]' === '' ? 0 : 'REX_VALUE[4]'; /** @phpstan-ignore-line */
+    $latitude = 'REX_VALUE[5]' === '' ? 0 : 'REX_VALUE[5]'; /** @phpstan-ignore-line */
+    $maps_zoom = 'REX_VALUE[3]' === '' ? 15 : 'REX_VALUE[3]'; /** @phpstan-ignore-line */
+    $height = 'REX_VALUE[7]' === '' ? '500' : 'REX_VALUE[7]'; /** @phpstan-ignore-line */
+    $height_unit = 'REX_VALUE[8]' === '' ? 'px' : 'REX_VALUE[8]'; /** @phpstan-ignore-line */
     $substitute = ["\r\n" => '', "\r" => '', "\n" => '', '"' => "'"];
     $infotext = 'REX_VALUE[id=2 output=html]';
 
@@ -97,14 +97,14 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
         $mapsetId = (int) 'REX_VALUE[9]';
 
         echo \Geolocation\mapset::take($mapsetId)
-            ->attributes('id', $mapsetId)
+            ->attributes('id', (string) $mapsetId)
             ->attributes('style', 'height: '. $height . $height_unit .';width:100%;')
             ->dataset('center', [[$latitude, $longitude], $maps_zoom])
             ->dataset('position', [$latitude, $longitude])
             ->dataset('infobox', [[$latitude, $longitude], $infotext])
             ->parse();
     } elseif (rex_addon::get('osmproxy')->isAvailable()) {
-        $popup_js = '' != $infotext ? ".bindPopup('". addslashes(strtr($infotext, $substitute)) ."').openPopup()" : '';
+        $popup_js = '' !== $infotext ? ".bindPopup('". addslashes(strtr($infotext, $substitute)) ."').openPopup()" : ''; /** @phpstan-ignore-line */
 
         $leaflet_js_file = 'modules/04-2/leaflet.js';
         echo '<script src="'. rex_url::addonAssets('d2u_helper', $leaflet_js_file) .'?buster='. filemtime(rex_path::addonAssets('d2u_helper', $leaflet_js_file)) .'"></script>' . PHP_EOL;
