@@ -1,17 +1,17 @@
 <?php
+
 // Set Session
-if (!isset($_SESSION['d2u_helper_translation'])) {
-    $_SESSION['d2u_helper_translation'] = [];
-    $_SESSION['d2u_helper_translation']['clang_id'] = rex_clang::getStartId();
-    $_SESSION['d2u_helper_translation']['filter'] = 'update';
+if (rex_session('d2u_helper_translation') === '') {
+    $default_settings = ['clang_id' => rex_clang::getStartId(), 'filter' => 'update'];
+    rex_request::setSession('d2u_helper_translation', $default_settings);
 }
 
 // Save form in session
 if ('save' === filter_input(INPUT_POST, 'btn_save')) {
     $settings = rex_post('settings', 'array', []);
-    $_SESSION['d2u_helper_translation']['clang_id'] = $settings['clang_id'];
-    $_SESSION['d2u_helper_translation']['filter'] = $settings['filter'];
+    rex_request::setSession('d2u_helper_translation', $settings);
 }
+
 ?>
 
 <h2><?= rex_i18n::msg('d2u_helper_meta_translations') ?></h2>
@@ -37,13 +37,13 @@ if (1 === count(rex_clang::getAll())) {
                             }
                         }
                     }
-                    d2u_addon_backend_helper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [$_SESSION['d2u_helper_translation']['clang_id']]);
+                    d2u_addon_backend_helper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [rex_session('d2u_helper_translation')['clang_id']]);
 
                     $filter_options = [
                         'update' => rex_i18n::msg('d2u_helper_translations_filter_update'),
                         'missing' => rex_i18n::msg('d2u_helper_translations_filter_missing'),
                     ];
-                    d2u_addon_backend_helper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [$_SESSION['d2u_helper_translation']['filter']]);
+                    d2u_addon_backend_helper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [rex_session('d2u_helper_translation')['filter']]);
                 ?>
 			</div>
 			<footer class="panel-footer">
@@ -58,8 +58,8 @@ if (1 === count(rex_clang::getAll())) {
 <?php
 
     if (rex_addon::get('d2u_address')->isAvailable()) {
-        $continents = D2U_Address\Continent::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-        $countries = D2U_Address\Country::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $continents = D2U_Address\Continent::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+        $countries = D2U_Address\Country::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_address') ?></div></header>
@@ -78,7 +78,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -98,7 +98,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -109,7 +109,7 @@ if (1 === count(rex_clang::getAll())) {
     }
 
     if (rex_addon::get('d2u_history')->isAvailable()) {
-        $history_events = D2U_History\History::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $history_events = D2U_History\History::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_history') ?></div></header>
@@ -128,7 +128,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -139,8 +139,8 @@ if (1 === count(rex_clang::getAll())) {
     }
 
     if (rex_addon::get('d2u_immo')->isAvailable()) {
-        $categories = D2U_Immo\Category::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-        $properties = D2U_Immo\Property::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $categories = D2U_Immo\Category::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+        $properties = D2U_Immo\Property::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_immo') ?></div></header>
@@ -159,7 +159,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -179,14 +179,14 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
 			</fieldset>
 			<?php
                 if (rex_plugin::get('d2u_immo', 'window_advertising')->isAvailable()) {
-                    $ads = D2U_Immo\Advertisement::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $ads = D2U_Immo\Advertisement::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -203,7 +203,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -217,8 +217,8 @@ if (1 === count(rex_clang::getAll())) {
     }
 
     if (rex_addon::get('d2u_jobs')->isAvailable()) {
-        $categories = D2U_Jobs\Category::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-        $jobs = D2U_Jobs\Job::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $categories = D2U_Jobs\Category::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+        $jobs = D2U_Jobs\Job::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_jobs') ?></div></header>
@@ -237,7 +237,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -263,7 +263,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -274,7 +274,7 @@ if (1 === count(rex_clang::getAll())) {
     }
 
     if (rex_addon::get('d2u_linkbox')->isAvailable()) {
-        $linkboxes = \D2U_Linkbox\Linkbox::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $linkboxes = \D2U_Linkbox\Linkbox::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_linkbox') ?></div></header>
@@ -293,7 +293,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -304,8 +304,8 @@ if (1 === count(rex_clang::getAll())) {
     }
 
         if (rex_addon::get('d2u_machinery')->isAvailable()) {
-        $categories = Category::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-        $machines = Machine::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $categories = Category::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+        $machines = Machine::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_machinery_meta_title') ?></div></header>
@@ -324,7 +324,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -344,15 +344,15 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
 			</fieldset>
 			<?php
                 if (rex_plugin::get('d2u_machinery', 'equipment')->isAvailable()) {
-                    $equipments = Equipment::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-                    $equipment_groups = EquipmentGroup::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $equipments = Equipment::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+                    $equipment_groups = EquipmentGroup::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -369,7 +369,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -389,7 +389,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -397,7 +397,7 @@ if (1 === count(rex_clang::getAll())) {
 			<?php
                 }
                 if (rex_plugin::get('d2u_machinery', 'industry_sectors')->isAvailable()) {
-                    $industry_sectors = IndustrySector::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $industry_sectors = IndustrySector::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -414,7 +414,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -422,7 +422,7 @@ if (1 === count(rex_clang::getAll())) {
 			<?php
                 }
                 if (rex_plugin::get('d2u_machinery', 'machine_certificates_extension')->isAvailable()) {
-                    $certificates = Certificate::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $certificates = Certificate::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -439,7 +439,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -447,7 +447,7 @@ if (1 === count(rex_clang::getAll())) {
 			<?php
                 }
                 if (rex_plugin::get('d2u_machinery', 'machine_features_extension')->isAvailable()) {
-                    $features = Feature::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $features = Feature::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -464,7 +464,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -472,7 +472,7 @@ if (1 === count(rex_clang::getAll())) {
 			<?php
                 }
                 if (rex_plugin::get('d2u_machinery', 'machine_options_extension')->isAvailable()) {
-                    $options = Option::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $options = Option::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -489,7 +489,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -497,14 +497,14 @@ if (1 === count(rex_clang::getAll())) {
 			<?php
                 }
                 if (rex_plugin::get('d2u_machinery', 'machine_steel_processing_extension')->isAvailable()) {
-                    $automations = Automation::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-                    $materials = Material::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-                    $procedures = Procedure::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-                    $processes = Process::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-                    $profiles = Profile::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-                    $supplies = Supply::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-                    $tools = Tool::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-                    $weldings = Welding::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $automations = Automation::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+                    $materials = Material::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+                    $procedures = Procedure::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+                    $processes = Process::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+                    $profiles = Profile::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+                    $supplies = Supply::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+                    $tools = Tool::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+                    $weldings = Welding::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -521,7 +521,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -541,7 +541,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -561,7 +561,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -581,7 +581,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -601,7 +601,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -621,7 +621,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -641,7 +641,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -661,7 +661,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -669,7 +669,7 @@ if (1 === count(rex_clang::getAll())) {
 			<?php
                 }
                 if (rex_plugin::get('d2u_machinery', 'machine_usage_area_extension')->isAvailable()) {
-                    $usage_areas = UsageArea::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $usage_areas = UsageArea::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -686,7 +686,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -694,7 +694,7 @@ if (1 === count(rex_clang::getAll())) {
 			<?php
                 }
                 if (rex_plugin::get('d2u_machinery', 'production_lines')->isAvailable()) {
-                    $production_lines = ProductionLine::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $production_lines = ProductionLine::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -711,7 +711,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -719,7 +719,7 @@ if (1 === count(rex_clang::getAll())) {
 			<?php
                 }
                 if (rex_plugin::get('d2u_machinery', 'service_options')->isAvailable()) {
-                    $service_options = ServiceOption::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $service_options = ServiceOption::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -736,7 +736,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -744,7 +744,7 @@ if (1 === count(rex_clang::getAll())) {
 			<?php
                 }
                 if (rex_plugin::get('d2u_machinery', 'used_machines')->isAvailable()) {
-                    $used_machines = UsedMachine::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $used_machines = UsedMachine::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -761,7 +761,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -775,7 +775,7 @@ if (1 === count(rex_clang::getAll())) {
     }
 
     if (rex_addon::get('d2u_staff')->isAvailable()) {
-        $staff_members = Staff::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $staff_members = Staff::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_staff') ?></div></header>
@@ -794,7 +794,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -805,8 +805,8 @@ if (1 === count(rex_clang::getAll())) {
     }
 
     if (rex_addon::get('d2u_news')->isAvailable()) {
-        $news = \D2U_News\News::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-        $news_categories = \D2U_News\Category::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $news = \D2U_News\News::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+        $news_categories = \D2U_News\Category::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_news') ?></div></header>
@@ -825,7 +825,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -853,14 +853,14 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
 			</fieldset>
 			<?php
                 if (rex_plugin::get('d2u_news', 'news_types')->isAvailable()) {
-                    $news_types = \D2U_News\Type::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+                    $news_types = \D2U_News\Type::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
             ?>
 			<br>
 			<fieldset>
@@ -877,7 +877,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -891,8 +891,8 @@ if (1 === count(rex_clang::getAll())) {
     }
 
     if (rex_addon::get('d2u_references')->isAvailable()) {
-        $references = Reference::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
-        $tags = Tag::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $references = Reference::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
+        $tags = Tag::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_references') ?></div></header>
@@ -911,7 +911,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -931,7 +931,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
@@ -942,7 +942,7 @@ if (1 === count(rex_clang::getAll())) {
     }
 
     if (rex_addon::get('d2u_videos')->isAvailable()) {
-        $videos = Video::getTranslationHelperObjects($_SESSION['d2u_helper_translation']['clang_id'], $_SESSION['d2u_helper_translation']['filter']);
+        $videos = Video::getTranslationHelperObjects(rex_session('d2u_helper_translation')['clang_id'], rex_session('d2u_helper_translation')['filter']);
 ?>
 	<div class="panel panel-edit">
 		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_videos') ?></div></header>
@@ -961,7 +961,7 @@ if (1 === count(rex_clang::getAll())) {
                         }
                         echo '</ul>';
                     } else {
-                        echo 'update' === $_SESSION['d2u_helper_translation']['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+                        echo 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
                     }
                 ?>
 				</div>
