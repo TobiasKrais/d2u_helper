@@ -18,18 +18,20 @@
 					<div class="row">
 						<div class="col-12">
 							<?php
-								if(rex_config::get("d2u_helper", "template_header_pic", "") != "") {
+								if('' !== rex_config::get("d2u_helper", "template_header_pic", "")) {
 									$header_image_filename = rex_config::get("d2u_helper", "template_header_pic");
 									$header_image = rex_media::get($header_image_filename);
-									if($header_image) {
-										print '<img src="'. (rex_config::get('d2u_helper', 'template_header_media_manager_type', '') ? rex_media_manager::getUrl(rex_config::get('d2u_helper', 'template_header_media_manager_type', ''), $header_image_filename) : rex_url::media($header_image_filename)) .'" alt="'. $header_image->getTitle() .'" id="header-image">';
+									if($header_image instanceof rex_media) {
+										print '<img src="'. ('' !== rex_config::get('d2u_helper', 'template_header_media_manager_type', '') ? rex_media_manager::getUrl(rex_config::get('d2u_helper', 'template_header_media_manager_type', ''), $header_image_filename) : rex_url::media($header_image_filename)) .'" alt="'. $header_image->getTitle() .'" id="header-image">';
 									}
 								}
-								if(rex_config::get("d2u_helper", "template_logo", "") != "") {
+								if('' !== rex_config::get("d2u_helper", "template_logo", "")) {
 									$media_logo = rex_media::get(rex_config::get("d2u_helper", "template_logo"));
-									print '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
-									print '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-top">';
-									print '</a>';
+									if ($media_logo instanceof rex_media) {
+										echo '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
+										echo '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-top">';
+										echo '</a>';
+									}
 								}
 							?>
 						</div>
@@ -73,7 +75,7 @@
 							<div class="row">
 								<?php
 									// Content follows
-									print $this->getArticle();
+									print $this->getArticle(); /** @phpstan-ignore-line */
 								?>
 							</div>
 						</article>
@@ -85,22 +87,24 @@
 							<?php
 								$rex_articles = rex_article::getRootArticles(true);
 								$show_separator = false;
-								foreach($rex_articles as $rex_articles) {
+								foreach($rex_articles as $rex_article) {
 									if($show_separator) {
 										print "&nbsp;&nbsp;|&nbsp;&nbsp;";
 									}
-									print '<a href="'. $rex_articles->getUrl() .'">'. $rex_articles->getName() .'</a>';
+									print '<a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a>';
 									$show_separator = true;
 								}
 							?>
 						</div>
 						<div class="col-12 col-sm-4 col-lg-2" id="footer-right">
 							<?php
-								if(rex_config::get("d2u_helper", "template_logo", "") != "") {
+								if('' !== rex_config::get("d2u_helper", "template_logo", "")) {
 									$media_logo = rex_media::get(rex_config::get("d2u_helper", "template_logo"));
-									print '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
-									print '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-footer">';
-									print '</a>';
+									if ($media_logo instanceof rex_media) {
+										echo '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
+										echo '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-footer">';
+										echo '</a>';
+									}
 								}
 							?>
 						</div>

@@ -26,7 +26,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
 	<header>
 		<div class="container">
 			<?php
-                if ($d2u_helper->hasConfig('template_logo') && '' != $d2u_helper->getConfig('template_logo')) {
+                if ($d2u_helper->hasConfig('template_logo') && '' !== $d2u_helper->getConfig('template_logo')) {
             ?>
 			<div class="row abstand" id="headerdiv">
 				<div class="col-12">
@@ -45,7 +45,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
 	<?php
         }
         // Navi if above header picture
-        if ($d2u_helper->isAvailable() && 'top' == $d2u_helper->getConfig('template_navi_pos', 'bottom')) {
+        if ($d2u_helper->isAvailable() && 'top' === $d2u_helper->getConfig('template_navi_pos', 'bottom')) {
             echo $fragment->parse('d2u_template_nav.php');
         }
     ?>
@@ -54,14 +54,14 @@ $d2u_helper = rex_addon::get('d2u_helper');
 			<div class="row">
 				<div class="col-12">
 					<?php
-                        if ($d2u_helper->hasConfig('template_header_pic') && '' != $d2u_helper->getConfig('template_header_pic')) {
+                        if ($d2u_helper->hasConfig('template_header_pic') && '' !== $d2u_helper->getConfig('template_header_pic')) {
                             $header_image = $d2u_helper->getConfig('template_header_pic');
-                            if ($this->hasValue('art_file') && '' != $this->getValue('art_file')) {
-                                $header_image = $this->getValue('art_file');
+                            if ($this->hasValue('art_file') && '' !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
+                                $header_image = $this->getValue('art_file'); /** @phpstan-ignore-line */
                             }
                             $media_header_pic = rex_media::get($header_image);
                             if ($media_header_pic instanceof rex_media) {
-                                echo '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" id="header" width="1200px">';
+                                echo '<img src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" id="header" width="1200px">';
                             }
                         }
                     ?>
@@ -71,7 +71,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
 	</header>
 	<?php
         // Navi if below header picture
-        if ($d2u_helper->isAvailable() && 'bottom' == $d2u_helper->getConfig('template_navi_pos', 'bottom')) {
+        if ($d2u_helper->isAvailable() && 'bottom' === $d2u_helper->getConfig('template_navi_pos', 'bottom')) {
             echo $fragment->parse('d2u_template_nav.php');
         }
     ?>
@@ -80,23 +80,23 @@ $d2u_helper = rex_addon::get('d2u_helper');
 			<div class="row">
 				<?php
                     // Breadcrumbs
-                    if ($d2u_helper->hasConfig('show_breadcrumbs') && $d2u_helper->getConfig('show_breadcrumbs')) {
+                    if ($d2u_helper->hasConfig('show_breadcrumbs') && (bool) $d2u_helper->getConfig('show_breadcrumbs')) {
                         echo '<div class="col-12">';
                         echo '<div id="breadcrumbs">';
                         echo d2u_addon_frontend_helper::getBreadcrumbs();
                         echo '</div>';
                         echo '</div>';
                     }
-                    if ($d2u_helper->hasConfig('subhead_include_articlename') && 'true' == $d2u_helper->getConfig('subhead_include_articlename')) {
+                    if (rex_article::getCurrent() instanceof rex_article && $d2u_helper->hasConfig('subhead_include_articlename') && (bool) $d2u_helper->getConfig('subhead_include_articlename')) {
                         echo '<div class="col-12">';
-                        echo '<h1 class="subhead">'. $current_article->getName() .'</h1>';
+                        echo '<h1 class="subhead">'. rex_article::getCurrent()->getName() .'</h1>';
                         echo '</div>';
-                    } elseif ($d2u_helper->hasConfig('show_breadcrumbs') && $d2u_helper->getConfig('show_breadcrumbs')) {
+                    } elseif ($d2u_helper->hasConfig('show_breadcrumbs') && (bool) $d2u_helper->getConfig('show_breadcrumbs')) {
                         // If not title, but breadcrumbs: dhow empty row
                         echo '<div class="col-12 abstand"></div>';
                     }
                     // Content follows
-                    echo $this->getArticle();
+                    echo $this->getArticle(); /** @phpstan-ignore-line */
                 ?>
 			</div>
 		</div>

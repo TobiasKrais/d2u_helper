@@ -19,17 +19,17 @@
         if ($d2u_helper->isAvailable()) {
             d2u_mobile_navi_slicknav::getMobileMenu();
 
-            $include_menu_show = $d2u_helper->getConfig('include_menu_show', 'md');
-            if ('xs' == $include_menu_show) {
+            $include_menu_show = (string) $d2u_helper->getConfig('include_menu_show', 'md');
+            if ('xs' === $include_menu_show) {
                 $show_screen_size = 'screen == "sm" || screen == "md" || screen == "lg" ||  screen == "xl"';
                 $menu_icon_min_width = '576px';
-            } elseif ('sm' == $include_menu_show) {
+            } elseif ('sm' === $include_menu_show) {
                 $show_screen_size = 'screen == "md" || screen == "lg" ||  screen == "xl"';
                 $menu_icon_min_width = '768px';
-            } elseif ('md' == $include_menu_show) {
+            } elseif ('md' === $include_menu_show) {
                 $show_screen_size = 'screen == "lg" ||  screen == "xl"';
                 $menu_icon_min_width = '992px';
-            } elseif ('lg' == $include_menu_show) {
+            } elseif ('lg' === $include_menu_show) {
                 $show_screen_size = 'screen == "xl"';
                 $menu_icon_min_width = '1200px';
             } else {
@@ -37,7 +37,7 @@
             }
         }
 
-        if ('' != $menu_icon_min_width) {
+        if ('' !== $menu_icon_min_width) {
     ?>
   	<style>
   		@media screen and (min-width: <?= $menu_icon_min_width ?>) {
@@ -60,9 +60,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-6 col-xl-2">
-					<div id="logo-left" align="right">
+					<div id="logo-left">
 						<?php
-                            if ('' != $d2u_helper->getConfig('template_logo', '')) {
+                            if ('' !== $d2u_helper->getConfig('template_logo', '')) {
                                 echo '<a href="'. (\rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer()) .'">';
                                 $media_logo = rex_media::get($d2u_helper->getConfig('template_logo'));
                                 if ($media_logo instanceof rex_media) {
@@ -76,15 +76,15 @@
 				<div class="col-6 d-block d-xl-none">
 					<div id="logo-right">
 						<?php
-                            if ('' != $d2u_helper->getConfig('template_logo_2', '')) {
-                                if ('' != $d2u_helper->getConfig('template_logo_2_link', '')) {
+                            if ('' !== $d2u_helper->getConfig('template_logo_2', '')) {
+                                if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '<a href="'. $d2u_helper->getConfig('template_logo_2_link', '') .'">';
                                 }
                                 $media_logo = rex_media::get($d2u_helper->getConfig('template_logo_2'));
                                 if ($media_logo instanceof rex_media) {
                                     echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
                                 }
-                                if ('' != $d2u_helper->getConfig('template_logo_2_link', '')) {
+                                if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '</a>';
                                 }
                             }
@@ -95,13 +95,13 @@
                     $header_pic_style = '';
                     // Vorschaubild berechnen
                     $header_image = rex_config::get('d2u_helper', 'template_header_pic', '');
-                    if ($this->hasValue('art_file') && '' != $this->getValue('art_file')) {
-                        $header_image = $this->getValue('art_file');
+                    if ($this->hasValue('art_file') && '' !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
+                        $header_image = $this->getValue('art_file'); /** @phpstan-ignore-line */
                     }
                     $titelbild = rex_media::get($header_image);
                     if ($titelbild instanceof rex_media) {
                         $header_pic_style = 'background: url('.
-                                ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .') center center; background-size: cover;';
+                                ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .') center center; background-size: cover;';
                     }
                 ?>
 				<div class="col-12 col-xl-8" style="<?= $header_pic_style ?>">
@@ -109,15 +109,15 @@
 				<div class="d-none d-xl-block col-xl-2">
 					<div id="logo-right">
 						<?php
-                            if ('' != $d2u_helper->getConfig('template_logo_2', '')) {
-                                if ('' != $d2u_helper->getConfig('template_logo_2_link', '')) {
+                            if ('' !== $d2u_helper->getConfig('template_logo_2', '')) {
+                                if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '<a href="'. $d2u_helper->getConfig('template_logo_2_link', '') .'">';
                                 }
                                 $media_logo = rex_media::get($d2u_helper->getConfig('template_logo_2'));
                                 if ($media_logo instanceof rex_media) {
                                     echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
                                 }
-                                if ('' != $d2u_helper->getConfig('template_logo_2_link', '')) {
+                                if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '</a>';
                                 }
                             }
@@ -175,14 +175,14 @@
 					<div class="row">
 						<?php
                             // Breadcrumbs
-                            if ('true' == $d2u_helper->getConfig('show_breadcrumbs', 'false')) {
+                            if ((bool) $d2u_helper->getConfig('show_breadcrumbs', 'false')) {
                                 echo '<div class="col-12 d-print-none" id="breadcrumbs">';
                                 echo d2u_addon_frontend_helper::getBreadcrumbs();
                                 echo '</div>';
                             }
 
                             // Content follows
-                            echo $this->getArticle();
+                            echo $this->getArticle(); /** @phpstan-ignore-line */
 
                             // Footer
                             echo '<div class="col-12" id="footer">';

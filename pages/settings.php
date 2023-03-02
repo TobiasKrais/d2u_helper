@@ -401,7 +401,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                                     d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'full', 'full' === rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width'));
                                     // Language specific settings
                                     foreach (rex_clang::getAll() as $rex_clang) {
-                                        echo '<div style="margin-bottom: 1em; padding: 1em;">';
+                                        echo '<div style="margin-bottom: 1em;">';
                                         echo '<dl class="rex-form-group form-group" id="specific_clang'. $rex_clang->getId() .'">';
                                         echo '<dt><label></label></dt>';
                                         echo '<dd><b>'. rex_i18n::msg('d2u_helper_settings_lang_specific') .' '. $rex_clang->getName() .'</b></dd>';

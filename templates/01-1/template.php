@@ -58,17 +58,17 @@ $d2u_helper = rex_addon::get("d2u_helper");
 			<div class="row">
 				<div class="col-12 col-md-6">
 					<?php
-						if(!$d2u_helper->hasConfig("template_header_pic") || $d2u_helper->getConfig("template_header_pic") == "") {
+						if(!$d2u_helper->hasConfig("template_header_pic") || $d2u_helper->getConfig("template_header_pic") === "") {
 							print "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
 						}
 						
 						$header_image = $d2u_helper->getConfig("template_header_pic");
-						if($this->hasValue("art_file") && $this->getValue('art_file') !== '') {
-							$header_image = $this->getValue("art_file");
+						if($this->hasValue("art_file") && '' !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
+							$header_image = $this->getValue("art_file"); /** @phpstan-ignore-line */
 						}
 						$media_header_pic = rex_media::get($header_image);
 						if($media_header_pic instanceof rex_media) {
-							print '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" id="logo">';
+							print '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') !== '' ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" id="logo">';
 						}
 					?>
 				</div>
@@ -76,20 +76,20 @@ $d2u_helper = rex_addon::get("d2u_helper");
 					<div class="row">
 						<?php
 							// Breadcrumbs
-							if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
+							if($d2u_helper->hasConfig("show_breadcrumbs") && (bool) $d2u_helper->getConfig("show_breadcrumbs")) {
 								print '<div class="col-12">';
 								print '<div id="breadcrumbs">';
 								print d2u_addon_frontend_helper::getBreadcrumbs();
 								print '</div>';
 								print '</div>';
 							}
-							if($d2u_helper->hasConfig('subhead_include_articlename') && $d2u_helper->getConfig('subhead_include_articlename') == "true") {
+							if(rex_article::getCurrent() instanceof rex_article && $d2u_helper->hasConfig('subhead_include_articlename') && (bool) $d2u_helper->getConfig('subhead_include_articlename') === true) {
 								print '<div class="col-12">';
 								print '<h1 class="subhead">'. rex_article::getCurrent()->getName() .'</h1>';
 								print '</div>';
 							}
 							// Content follows
-							print $this->getArticle();
+							print $this->getArticle(); /** @phpstan-ignore-line */
 						?>
 					</div>
 				</div>

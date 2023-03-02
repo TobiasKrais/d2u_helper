@@ -113,7 +113,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			<div class="row">
 				<?php
 					// Logo
-					if($d2u_helper->getConfig("template_logo", "") != "") {
+					if('' !== $d2u_helper->getConfig('template_logo', '')) {
 						print '<div class="col-12">';
 						print '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
 						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
@@ -128,7 +128,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		</div>
 	</section>
 	<?php
-		if(($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'top')) {
+		if(($d2u_helper->isAvailable() && 'top' === $d2u_helper->getConfig('template_navi_pos', 'bottom'))) {
 			// Navi
 			echo $fragment->parse('d2u_template_nav.php');
 		}
@@ -137,7 +137,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		echo $fragment->parse('d2u_template_header_slider.php');
 
 		// Navi, if configured on bottom
-		if($d2u_helper->isAvailable() && $d2u_helper->getConfig('template_navi_pos', 'bottom') == 'bottom') {
+		if($d2u_helper->isAvailable() && 'bottom' === $d2u_helper->getConfig('template_navi_pos', 'bottom')) {
 			// Navi
 			echo $fragment->parse('d2u_template_nav.php');
 		}
@@ -147,9 +147,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			<div class="row">
 				<?php
 					$show_cart = (rex_addon::get('d2u_courses')->isAvailable() && rex_config::get('d2u_courses', 'article_id_shopping_cart', 0) > 0) ? true : false;
-					if($d2u_helper->getConfig("show_breadcrumbs", false) || $show_cart) {
+					if((bool) $d2u_helper->getConfig("show_breadcrumbs", false) || $show_cart) {
 						// Breadcrumbs
-						if($d2u_helper->hasConfig("show_breadcrumbs") && $d2u_helper->getConfig("show_breadcrumbs")) {
+						if($d2u_helper->hasConfig("show_breadcrumbs") && (bool) $d2u_helper->getConfig("show_breadcrumbs")) {
 							if($show_cart) {
 								print '<div class="col-8 col-sm-10 col-lg-11 d-print-none">';
 							}
@@ -162,11 +162,12 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 							print '</div>';
 						}
 						// D2U Courses cart
-						if($show_cart) {
+						$cart_article = rex_article::get((int) rex_config::get('d2u_courses', 'article_id_shopping_cart', 0));
+						if($show_cart && $cart_article instanceof rex_article) {
 							print '<div class="col-4 col-sm-2 col-lg-1">';
 							print '<a href="'. rex_getUrl(rex_config::get('d2u_courses', 'article_id_shopping_cart')) .'" class="cart_link">';
 							print '<div id="cart_symbol" class="desktop-inner">';
-							print '<img src="'. rex_url::addonAssets('d2u_courses', 'cart_only.png') .'" alt="'. rex_article::get(rex_config::get('d2u_courses', 'article_id_shopping_cart', 0))->getName() .'">';
+							print '<img src="'. rex_url::addonAssets('d2u_courses', 'cart_only.png') .'" alt="'. $cart_article->getName() .'">';
 							if(count(\D2U_Courses\Cart::getCourseIDs()) > 0) {
 								print '<div id="cart_info">'. count(\D2U_Courses\Cart::getCourseIDs()) .'</div>';
 							}
@@ -179,27 +180,27 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					$has_subhead = false;
 					if($machine !== false || $used_machine !== false ||
 						($category !== false && (count($category->getMachines()) > 0 || count($category->getUsedMachines()) > 0)) ||
-						($current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_rent', 0) || $current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_sale', 0)) ||
-						($d2u_helper->hasConfig('subhead_include_articlename') && $d2u_helper->getConfig('subhead_include_articlename') == "true")) {
+						($current_article instanceof rex_article && ($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_rent', 0) || $current_article->getId() === (int)  $d2u_machinery->getConfig('used_machine_article_id_sale', 0))) ||
+						($d2u_helper->hasConfig('subhead_include_articlename') && (bool) $d2u_helper->getConfig('subhead_include_articlename') === true)) {
 						$has_subhead = true;
 					}
 					if($has_subhead) {
 						print '<div class="col-12 subhead-nav">';
 					}
 					if($machine !== false) {
-						print '<h1 class="subhead">'. ($machine->lang_name == "" ? $machine->name : $machine->lang_name) .'</h1>';
+						print '<h1 class="subhead">'. ('' === $machine->lang_name ? $machine->name : $machine->lang_name) .'</h1>';
 						print '<ul class="nav nav-pills">';
 						print '<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
-						if(rex_plugin::get("d2u_machinery", "machine_agitator_extension")->isAvailable() && $machine->agitator_type_id > 0 && $machine->agitator_type_id > 0 && $machine->category->show_agitators == "show") {
+						if(rex_plugin::get("d2u_machinery", "machine_agitator_extension")->isAvailable() && $machine->agitator_type_id > 0 && $machine->category instanceof Category && $machine->category->show_agitators === "show") {
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_agitator">'. $tag_open .'d2u_machinery_agitator'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
 						}
 						if(rex_plugin::get("d2u_machinery", "machine_features_extension")->isAvailable() && count($machine->feature_ids) > 0){
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_features">'. $tag_open .'d2u_machinery_features'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
 						}
-						if($d2u_machinery->getConfig("show_techdata", "hide") == "show" && count($machine->getTechnicalData()) > 0){
+						if($d2u_machinery->getConfig("show_techdata", "hide") === "show" && count($machine->getTechnicalData()) > 0){
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_tech_data"><span class="fa-icon fa-list-ul d-block d-md-none" title="'. $tag_open .'d2u_machinery_tech_data'. $tag_close .'"></span><span class="d-none d-md-block">'. $tag_open .'d2u_machinery_tech_data'. $tag_close .'</span><div class="active-navi-pill"></div></a></li>';
 						}
-						if(rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && $d2u_machinery->getConfig("show_machine_usage_areas", "hide") == "show" && count($machine->usage_area_ids) > 0) {
+						if(rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && $d2u_machinery->getConfig("show_machine_usage_areas", "hide") === "show" && count($machine->usage_area_ids) > 0) {
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_usage_areas"><span class="fa-icon fa-codepen d-block d-md-none" title="'. $tag_open .'d2u_machinery_usage_areas'. $tag_close .'"></span><span class="d-none d-md-block">'. $tag_open .'d2u_machinery_usage_areas'. $tag_close .'</span><div class="active-navi-pill"></div></a></li>';
 						}
 						if(rex_plugin::get("d2u_machinery", "machine_construction_equipment_extension")->isAvailable()) {
@@ -218,14 +219,14 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					}
 					else if($category !== false && (count($category->getMachines()) > 0 || count($category->getUsedMachines()) > 0)) {
 						print '<h1 class="subhead">'. $category->name .'</h1>';
-						if((rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && $d2u_machinery->getConfig("show_categories_usage_areas", "hide") == "show")
-							|| $d2u_machinery->getConfig("show_techdata", "hide") == "show") {
+						if((rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && $d2u_machinery->getConfig("show_categories_usage_areas", "hide") === "show")
+							|| $d2u_machinery->getConfig("show_techdata", "hide") === "show") {
 							print '<ul class="nav nav-pills">';
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
-							if(rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && $d2u_machinery->getConfig("show_categories_usage_areas", "hide") == "show" && count($category->getUsageAreaMatrix()) > 0) {
+							if(rex_plugin::get("d2u_machinery", "machine_usage_area_extension")->isAvailable() && $d2u_machinery->getConfig("show_categories_usage_areas", "hide") === "show" && count($category->getUsageAreaMatrix()) > 0) {
 								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_usage_areas">'. $tag_open .'d2u_machinery_usage_areas'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
 							}
-							if($d2u_machinery->getConfig("show_techdata", "hide") == "show") {
+							if($d2u_machinery->getConfig("show_techdata", "hide") === "show") {
 								print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_tech_data">'. $tag_open .'d2u_machinery_tech_data'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
 							}
 							print '</ul>';
@@ -235,26 +236,26 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						print '<h1 class="subhead">'. $used_machine->manufacturer .' '. $used_machine->name .'</h1>';
 						print '<ul class="nav nav-pills">';
 						print '<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#tab_overview">'. $tag_open .'d2u_machinery_overview'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
-						if(rex_config::get('d2u_machinery', 'used_machines_pic_type', 'slider') == 'lightbox') {
+						if(rex_config::get('d2u_machinery', 'used_machines_pic_type', 'slider') === 'lightbox') {
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_pics">'. $tag_open .'d2u_machinery_pics'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
 						}
 						print '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_request"><span class="fa-icon fa-envelope-o d-block d-lg-none" title="'. $tag_open .'d2u_machinery_request'. $tag_close .'"></span><span class="d-none d-lg-block">'. $tag_open .'d2u_machinery_request'. $tag_close .'</span><div class="active-navi-pill"></div></a></li>';
 						print '</ul>';
 					}
-					else if($current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_rent', 0) || $current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_sale', 0)) {
+					else if($current_article instanceof rex_article && ($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_rent', 0) || $current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_sale', 0))) {
 						print '<h1 class="subhead">'. $current_article->getName() .'</h1>';
 						print '<ul class="nav nav-pills">';
 						$class_active = ' active';
-						if($current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_sale')) {
+						if($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_sale')) {
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link'. $class_active .'" href="#tab_sale">'. $tag_open .'d2u_machinery_used_machines_offers_sale'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
 							$class_active = '';
 						}
-						if($current_article->getId() == $d2u_machinery->getConfig('used_machine_article_id_rent')) {
+						if($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_rent')) {
 							print '<li class="nav-item"><a data-toggle="tab" class="nav-link'. $class_active .'" href="#tab_rent">'. $tag_open .'d2u_machinery_used_machines_offers_rent'. $tag_close .'<div class="active-navi-pill"></div></a></li>';
 						}
 						print '</ul>';
 					}
-					else if($d2u_helper->hasConfig('subhead_include_articlename') && $d2u_helper->getConfig('subhead_include_articlename') == "true") {
+					else if($current_article instanceof rex_article && $d2u_helper->hasConfig('subhead_include_articlename') && (bool) $d2u_helper->getConfig('subhead_include_articlename') === true) {
 						print '<h1 class="subhead">'. $current_article->getName() .'</h1>';
 					}
 					if($has_subhead) {
@@ -274,7 +275,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						<div class="row" id="content">
 							<?php
 								// Content follows
-								print $this->getArticle();
+								print $this->getArticle(); /** @phpstan-ignore-line */
 							?>
 						</div>
 					</div>
@@ -284,11 +285,11 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 								// News / Teaser
 								$news_category = new \D2U_News\Category(rex_config::get('d2u_helper', 'template_news_category'), rex_clang::getCurrentId());
 								$news = [];
-								if($news_category !== false) {
+								if($news_category->category_id > 0) {
 									$news = $news_category->getNews(true);
 								}
 								else {
-									$news = \D2U_News\News::getAll(rex_clang::getCurrentId(), $counter_news, true);
+									$news = \D2U_News\News::getAll(rex_clang::getCurrentId(), 5, true);
 								}
 
 								if(count($news) > 0) {
@@ -297,33 +298,33 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 											print '<div class="col-12 col-sm-6 col-md-12">';
 											print '<div class="newsbox">';
 											// Heading
-											if(trim($nachricht->name) != "") {
+											if('' !== trim($nachricht->name)) {
 												print '<div class="newshead">';
-												if($nachricht->getUrl() != "") {
+												if('' !== $nachricht->getUrl()) {
 													print '<a href="'. $nachricht->getUrl() .'">';
 												}
 												print $nachricht->name;
-												if($nachricht->getUrl() != "") {
+												if('' !== $nachricht->getUrl()) {
 													print '</a>';
 												}
 												print '</div>';
 											}
 
 											// Picture
-											if($nachricht->picture != "") {
+											if('' !== $nachricht->picture) {
 												print '<div class="newspic">';
-												if($nachricht->getUrl() != "") {
+												if('' !== $nachricht->getUrl()) {
 													print '<a href="'. $nachricht->getUrl() .'">';
 												}
 												print '<img src="index.php?rex_media_type=news_preview&rex_media_file='. $nachricht->picture .'" alt="'. $nachricht->name .'" class="listpic">';
-												if($nachricht->getUrl() != "") {
+												if('' !== $nachricht->getUrl()) {
 													print '</a>';
 												}
 												print '</div>';
 											}
 
 											// Text
-											if($nachricht->teaser != "") {
+											if('' !== $nachricht->teaser) {
 												print '<div class="news">';
 												print d2u_addon_frontend_helper::prepareEditorField($nachricht->teaser);
 												print '</div>';
@@ -341,7 +342,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					}
 					else {
 						// Content follows
-						print $this->getArticle();
+						print $this->getArticle(); /** @phpstan-ignore-line */
 					}
 				?>
 			</div>

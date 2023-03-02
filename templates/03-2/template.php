@@ -25,7 +25,7 @@
 <body>
 	<?php
     $header_margin = '';
-        if ($d2u_helper->hasConfig('template_03_2_margin_top') || '' != $d2u_helper->getConfig('template_03_2_margin_top')) {
+        if ($d2u_helper->hasConfig('template_03_2_margin_top') || '' !== $d2u_helper->getConfig('template_03_2_margin_top')) {
             $header_margin = ' style="margin-top: '. $d2u_helper->getConfig('template_03_2_margin_top') .'px"';
         }
     ?>
@@ -34,9 +34,9 @@
 			<div class="row">
 				<div class="col-12">
 					<?php
-                        if ($d2u_helper->hasConfig('template_03_2_header_pic') || '' != $d2u_helper->getConfig('template_03_2_header_pic')) {
+                        if ($d2u_helper->hasConfig('template_03_2_header_pic') || '' !== $d2u_helper->getConfig('template_03_2_header_pic')) {
                             $header_image = $d2u_helper->getConfig('template_03_2_header_pic');
-                            echo '<img src="'. ($d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="">';
+                            echo '<img src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="">';
                         } else {
                             echo "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
                         }
@@ -73,7 +73,7 @@
         for ($i = 1; $i <= count($properties) + count($ads); ++$i) {
             $modulo = $number_properties + $number_ads;
             if (count($properties) >= count($ads)) {
-                if (0 == $i % $modulo) {
+                if (0 === $i % $modulo) {
                     if ($counter_ads < count($ads)) {
                         $all_data[$i] = $ads[$counter_ads++];
                     } else {
@@ -87,7 +87,7 @@
                     }
                 }
             } else {
-                if (0 == $i % $modulo) {
+                if (0 === $i % $modulo) {
                     if ($counter_properties < count($properties)) {
                         $all_data[$i] = $properties[$counter_properties++];
                     } else {
@@ -132,7 +132,7 @@
 
                                         echo '<div class="col-12 print-border">';
                                         echo '<div class="row">';
-                                        if ('' != $advertisement->picture) {
+                                        if ('' !== $advertisement->picture) {
                                             echo '<div class="col-12 col-md-6">';
                                             echo '<img src="index.php?rex_media_type=d2u_helper_sm&rex_media_file='.
                                                     $advertisement->picture .'" alt='. $advertisement->title .' class="overviewpic">';
@@ -149,7 +149,7 @@
                                         echo '</div>';
                                         echo '</div>';
 
-                                    } elseif ($data_row instanceof D2U_Immo\Property) {
+                                    } elseif ($data_row instanceof \D2U_Immo\Property) {
                                         $property = $data_row;
                                         echo '<div class="col-12 contact-advertising">';
                                         echo '<p>'. $property->contact->firstname .' '. $property->contact->lastname .'<br />';
@@ -192,7 +192,7 @@
                                         }
                                         echo '<div class="row">';
 
-                                        if ('KAUF' == strtoupper($property->market_type)) {
+                                        if ('KAUF' === strtoupper($property->market_type)) {
                                             if ($property->purchase_price > 0) {
                                                 echo '<div class="col-6">'. $tag_open .'d2u_immo_purchase_price'. $tag_close .':</div>';
                                                 echo '<div class="col-6"><b>'. number_format($property->purchase_price, 0, ',', '.') .',-&nbsp;'. $property->currency_code .'</b></div>';
@@ -222,23 +222,23 @@
                                                 echo '<div class="col-12">'. $tag_open .'d2u_immo_prices_plus_vat'. $tag_close .'</div>';
                                                 echo '<div class="col-12">&nbsp;</div>';
                                             }
-                                            if ('' != $property->deposit) {
+                                            if ($property->deposit > 0) {
                                                 echo '<div class="col-6">'. $tag_open .'d2u_immo_deposit'. $tag_close .':</div>';
-                                                echo '<div class="col-6">'.  number_format($property->deposit, 2, ',', '.') .'&nbsp;'. $property->currency_code .'</div>';
+                                                echo '<div class="col-6">'.  number_format((float) $property->deposit, 2, ',', '.') .'&nbsp;'. $property->currency_code .'</div>';
                                             }
                                             echo '<div class="col-6">'. $tag_open .'d2u_immo_courtage'. $tag_close .'</div>';
-                                            if ('' == $property->courtage) {
+                                            if ('' === $property->courtage) {
                                                 echo '<div class="col-6">'. $tag_open .'d2u_immo_courtage_no'. $tag_close .'</div>';
                                             } else {
                                                 echo '<div class="col-6">'. $property->courtage .' '. $tag_open .'d2u_immo_courtage_incl_vat'. $tag_close .'</div>';
                                             }
                                         }
 
-                                        if ('HAUS' == strtoupper($property->object_type) || 'WOHNUNG' == strtoupper($property->object_type) || 'BUERO_PRAXEN' == strtoupper($property->object_type)) {
+                                        if ('HAUS' === strtoupper($property->object_type) || 'WOHNUNG' === strtoupper($property->object_type) || 'BUERO_PRAXEN' === strtoupper($property->object_type)) {
                                             if ($property->living_area > 0) {
-                                                if ('HAUS' == strtoupper($property->object_type) || 'WOHNUNG' == strtoupper($property->object_type)) {
+                                                if ('HAUS' === strtoupper($property->object_type) || 'WOHNUNG' === strtoupper($property->object_type)) {
                                                     echo '<div class="col-6">'. $tag_open .'d2u_immo_living_area'. $tag_close .':</div>';
-                                                } elseif ('BUERO_PRAXEN' == strtoupper($property->object_type)) {
+                                                } elseif ('BUERO_PRAXEN' === strtoupper($property->object_type)) {
                                                     echo '<div class="col-6">'. $tag_open .'d2u_immo_office_area'. $tag_close .':</div>';
                                                 }
                                                 echo '<div class="col-6">'. number_format($property->living_area, 2, ',', '.') .'&nbsp;m²</div>';
@@ -259,12 +259,12 @@
                                                 echo '<div class="col-6">'. $tag_open .'d2u_immo_yes'. $tag_close .'</div>';
                                             }
 
-                                            if ('' != $property->condition_type) {
+                                            if ('' !== $property->condition_type) {
                                                 echo '<div class="col-6">'. $tag_open .'d2u_immo_condition'. $tag_close .':</div>';
                                                 echo '<div class="col-6">'. $tag_open .'d2u_immo_condition_'. $property->condition_type . $tag_close .'</div>';
                                             }
 
-                                            if ('' != $property->available_from) {
+                                            if ('' !== $property->available_from && date_create_from_format('Y-m-d', $property->available_from) instanceof DateTime) {
                                                 echo '<div class="col-6">'. $tag_open .'d2u_immo_available_from'. $tag_close .':</div>';
                                                 echo '<div class="col-6">'. date_format(date_create_from_format('Y-m-d', $property->available_from), 'd.m.Y') .'</div>';
                                             }
@@ -300,12 +300,14 @@
                                             }
                                         }
 
-                                        if (('grundstueck' != $property->object_type && 'parken' != $property->object_type) && strlen($property->energy_pass) > 5) {
+                                        if (('grundstueck' !== $property->object_type && 'parken' !== $property->object_type) && strlen($property->energy_pass) > 5) {
                                             echo '<div class="col-6">'. $tag_open .'d2u_immo_energy_pass'. $tag_close .'</div>';
                                             echo '<div class="col-6">'. $tag_open .'d2u_immo_energy_pass_'. $property->energy_pass . $tag_close .'</div>';
 
-                                            echo '<div class="col-6"><ul><li>'. $tag_open .'d2u_immo_energy_pass_valid_until'. $tag_close .':</li></ul></div>';
-                                            echo '<div class="col-6">'. date_format(date_create_from_format('Y-m-d', $property->energy_pass_valid_until), 'd.m.Y') .'</div>';
+                                            if (date_create_from_format('Y-m-d', $property->energy_pass_valid_until) instanceof DateTime) {
+                                                echo '<div class="col-6"><ul><li>'. $tag_open .'d2u_immo_energy_pass_valid_until'. $tag_close .':</li></ul></div>';
+                                                echo '<div class="col-6">'. date_format(date_create_from_format('Y-m-d', $property->energy_pass_valid_until), 'd.m.Y') .'</div>';
+                                            }
 
                                             echo '<div class="col-6"><ul><li>'. $tag_open .'d2u_immo_energy_pass_value'. $tag_close .':</li></ul></div>';
                                             echo '<div class="col-6">'. $property->energy_consumption .'&nbsp;kWh/(m²*a)</div>';
@@ -320,7 +322,7 @@
                                                 echo '<div class="col-6">'. $property->construction_year .'</div>';
                                             }
 
-                                            if ($property->firing_type > 0) {
+                                            if (count($property->firing_type) > 0) {
                                                 echo '<div class="col-6"><ul><li>'. $tag_open .'d2u_immo_firing_type'. $tag_close .':</li></ul></div>';
                                                 echo '<div class="col-6">';
                                                 $first_element = true;
@@ -357,7 +359,7 @@
 			<div class="row">
 				<div class="col-12">
 					<?php
-                        if ($d2u_helper->hasConfig('template_03_2_footer_pic') || '' != $d2u_helper->getConfig('template_03_2_footer_pic')) {
+                        if ($d2u_helper->hasConfig('template_03_2_footer_pic') || '' !== $d2u_helper->getConfig('template_03_2_footer_pic')) {
                             echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_03_2_footer_pic')) .'" alt="">';
                         } else {
                             echo "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";

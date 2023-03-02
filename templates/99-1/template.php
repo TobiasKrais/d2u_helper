@@ -100,21 +100,21 @@ class FeedItem extends HtmlDescribable
     /**
      * Mandatory attributes of an item.
      */
-    public $title;
-    public $description;
-    public $link;
+    public string $title;
+    public string $description;
+    public string $link;
 
     /**
      * Optional attributes of an item.
      */
-    public $author;
-    public $authorEmail;
-    public $image;
-    public $category;
-    public $comments;
-    public $guid;
-    public $source;
-    public $creator;
+    public string $author;
+    public string $authorEmail;
+    public string $image;
+    public string $category;
+    public string $comments;
+    public string $guid;
+    public string $source;
+    public string $creator;
 
     /**
      * Publishing date of an item. May be in one of the following formats:.
@@ -139,7 +139,7 @@ class FeedItem extends HtmlDescribable
      * if $value contains markup. This may be abused to embed tags not implemented by
      * the FeedCreator class used.
      */
-    public $additionalElements = [];
+    public array $additionalElements = [];
 
     // on hold
     // var $source;
@@ -155,16 +155,16 @@ class FeedImage extends HtmlDescribable
     /**
      * Mandatory attributes of an image.
      */
-    public $title;
-    public $url;
-    public $link;
+    public string $title;
+    public string $url;
+    public string $link;
 
     /**
      * Optional attributes of an image.
      */
-    public $width;
-    public $height;
-    public $description;
+    public string $width;
+    public string $height;
+    public string $description;
 }
 
 /**
@@ -176,12 +176,12 @@ class HtmlDescribable
     /**
      * Indicates whether the description field should be rendered in HTML.
      */
-    public $descriptionHtmlSyndicated;
+    public string $descriptionHtmlSyndicated;
 
     /**
      * Indicates whether and to how many characters a description should be truncated.
      */
-    public $descriptionTruncSize;
+    public string $descriptionTruncSize;
 
     /**
      * Returns a formatted description field, depending on descriptionHtmlSyndicated and
@@ -209,13 +209,13 @@ class FeedHtmlField
     /**
      * Mandatory attributes of a FeedHtmlField.
      */
-    public $rawFieldContent;
+    public string $rawFieldContent;
 
     /**
      * Optional attributes of a FeedHtmlField.
      */
-    public $truncSize;
-    public $syndicateHtml;
+    public string $truncSize;
+    public string $syndicateHtml;
 
     /**
      * Creates a new instance of FeedHtmlField.
@@ -237,12 +237,12 @@ class FeedHtmlField
         // when field available and syndicated in html we assume
         // - valid html in $rawFieldContent and we enclose in CDATA tags
         // - no truncation (truncating risks producing invalid html)
-        if (!$this->rawFieldContent) {
+        if ('' !== $this->rawFieldContent) {
             $result = '';
-        } elseif ($this->syndicateHtml) {
+        } elseif ('' !== $this->syndicateHtml) {
             $result = '<![CDATA['.$this->rawFieldContent.']]>';
         } else {
-            if ($this->truncSize && is_int($this->truncSize)) {
+            if ('' !== $this->truncSize && is_int($this->truncSize)) {
                 $result = FeedCreator::iTrunc(htmlspecialchars($this->rawFieldContent), $this->truncSize);
             } else {
                 $result = htmlspecialchars($this->rawFieldContent);
@@ -263,9 +263,12 @@ class FeedHtmlField
  */
 class UniversalFeedCreator extends FeedCreator
 {
-    public $_feed;
+    public string $_feed;
 
-    public function _setFormat($format)
+    /**
+     * @param string $format Feed format
+     */
+    public function _setFormat($format):void
     {
         switch (strtoupper($format)) {
 
