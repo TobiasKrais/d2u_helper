@@ -10,7 +10,7 @@
 			<li>Smartmenu: aktives Navigationselement wird mit Hover Elementen hervorgehoben.</li>
 			<li>Fragment für Sprachwähler: Standardicon entfernt und Link zur Standardsprache korrigiert.</li>
 			<li>Fragment für Footer/CTA Box: Telefonnnummern mit 'tel:' Links versehen.</li>
-			<li>Modul 04-2 "Google Maps Karte": Kann nun auch zentriert werden.</li>
+			<li>Modul 04-1 "Google Maps Karte": Kann nun auch zentriert werden.</li>
 			<li>Modul 04-2 "OpenStreetMap Karte": Funktioniert nun auch mit dem Geolocation, nicht nur mit OSM Proxy und kann nun auch zentriert werden.</li>
 			<li>Modul 06-3 "Video mit Plyr einbinden": kann nun Informationen für Videosuchmaschinen ausgeben, wenn Vorschaubild angegeben wird.</li>
 			<li>Modul 06-4 "Videoliste mit Plyr einbinden": hatte Playlist unter bestimmten Umständen nicht angezeigt.</li>
@@ -18,6 +18,7 @@
 			<li>Template 04-1, 04-2 und 04-3: Ausgabe von unnötigem Code verhindert.</li>
 			<li>Template "04-3 Header Slider Template with news column" berücksichtigt nun auch, ob News in der Sprache ausgeblendet werden sollen und Fehler in der Hintergrundfarbe der Navigation korrigiert.</li>
 			<li>Template "00-1 Big Header Template" Ausgabe korrigiert, wenn kein Headerbild angegeben ist.</li>
+			<li>Template "99-1 Feed Template" entfernt.</li>
 			<li>Templates: neuer Footer "Einfache Zeilen mit Adresse, Kontakt und Links" steht zur Verfügung.</li>
 		</ul>
 		<p>1.9.3</p>

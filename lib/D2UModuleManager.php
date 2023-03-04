@@ -146,28 +146,28 @@ class D2UModuleManager
         $modules = [];
         $modules[] = new D2UModule('00-1',
             'Umbruch ganze Breite',
-            6);
+            7);
         $modules[] = new D2UModule('01-1',
             'Texteditor',
-            11);
+            12);
         $modules[] = new D2UModule('01-2',
             'Texteditor mit Bild und Fettschrift',
-            13);
+            14);
         $modules[] = new D2UModule('02-1',
             'Überschrift',
-            10);
+            11);
         $modules[] = new D2UModule('02-2',
             'Überschrift mit Klapptext',
-            4);
+            5);
         $modules[] = new D2UModule('02-3',
             'Überschrift mit Untertitel und Textfeld',
-            6);
+            7);
         $modules[] = new D2UModule('03-1',
             'Bild',
-            10);
+            11);
         $modules[] = new D2UModule('03-2',
             'Bildergalerie Ekko Lightbox',
-            10);
+            11);
         $modules[] = new D2UModule('04-1',
             'Google Maps Karte',
             12);
@@ -176,16 +176,16 @@ class D2UModuleManager
             3);
         $modules[] = new D2UModule('05-1',
             'Artikelweiterleitung',
-            13);
+            14);
         $modules[] = new D2UModule('05-2',
             'Artikel aus anderer Sprache übernehmen',
-            4);
+            5);
         $modules[] = new D2UModule('06-1',
             'YouTube Video einbinden',
-            12);
+            13);
         $modules[] = new D2UModule('06-2',
             'IFrame einbinden',
-            4);
+            5);
         $modules[] = new D2UModule('06-3',
             'Video mit Plyr einbinden',
             3);
@@ -194,34 +194,34 @@ class D2UModuleManager
             2);
         $modules[] = new D2UModule('07-1',
             'JavaScript einbinden',
-            1);
+            2);
         $modules[] = new D2UModule('10-1',
             'Box mit Bild und Ueberschrift',
-            3);
+            4);
         $modules[] = new D2UModule('10-2',
             'Box mit Bild und Text',
-            3);
+            4);
         $modules[] = new D2UModule('10-3',
             'Box mit Downloads',
-            8);
+            9);
         $modules[] = new D2UModule('11-1',
             'YForm Kontaktformular (DSGVO kompatibel)',
             9);
         $modules[] = new D2UModule('11-2',
             'Box mit Kontaktinformationen',
-            1);
+            2);
         $modules[] = new D2UModule('12-1',
             'Feeds Stream Galerie',
-            3);
+            4);
         $modules[] = new D2UModule('13-1',
             'Lauftext',
-            3);
+            4);
         $modules[] = new D2UModule('14-1',
             'Search It Suchmodul',
-            3);
+            4);
         $modules[] = new D2UModule('15-1',
             'Kategorie mit Liste der Unterkategorien',
-            2);
+            3);
         // 20-x reserved for D2U Addresss
         // 21-x reserved for D2U History
         // 22-x reserved for D2U Staff

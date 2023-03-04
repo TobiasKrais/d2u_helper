@@ -147,9 +147,6 @@ class D2UTemplateManager
         $d2u_templates[] = new D2UTemplate('06-1',
             'Paper Sheet Template',
             7);
-        $d2u_templates[] = new D2UTemplate('99-1',
-            'Feed Generator',
-            1);
         return $d2u_templates;
     }
 
