@@ -98,7 +98,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                         if (rex_addon::get('search_it')->isAvailable()) {
                             d2u_addon_backend_helper::form_linkfield('d2u_helper_settings_article_id_search', '3', rex_config::get('d2u_helper', 'article_id_search'), rex_config::get('d2u_helper', 'default_lang'));
                         }
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_check_media_template', 'settings[check_media_template]', 'true', 'true' === rex_config::get('d2u_helper', 'check_media_template'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_check_media_template', 'settings[check_media_template]', 'true', (bool) rex_config::get('d2u_helper', 'check_media_template'));
                     ?>
 				</div>
 			</fieldset>
@@ -123,7 +123,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                             'xl' => rex_i18n::msg('d2u_helper_settings_width_xl'),
                         ];
                         d2u_addon_backend_helper::form_select('d2u_helper_settings_menu_show', 'settings[include_menu_show]', $width_options, [rex_config::get('d2u_helper', 'include_menu_show')]);
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_submenu_use_articlename', 'settings[submenu_use_articlename]', 'true', 'true' === rex_config::get('d2u_helper', 'submenu_use_articlename'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_submenu_use_articlename', 'settings[submenu_use_articlename]', 'true', (bool) rex_config::get('d2u_helper', 'submenu_use_articlename'));
                     ?>
 					<script>
 						function changeSubmenuUseArticlename() {
@@ -148,9 +148,9 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?= rex_i18n::msg('d2u_helper_settings_templates') ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_jquery', 'settings[include_jquery]', 'true', 'true' === rex_config::get('d2u_helper', 'include_jquery'));
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap4]', 'true', 'true' === rex_config::get('d2u_helper', 'include_bootstrap4'));
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_module', 'settings[include_module]', 'true', 'true' === rex_config::get('d2u_helper', 'include_module'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_jquery', 'settings[include_jquery]', 'true', (bool) rex_config::get('d2u_helper', 'include_jquery'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap4]', 'true', (bool) rex_config::get('d2u_helper', 'include_bootstrap4'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_include_module', 'settings[include_module]', 'true', (bool) rex_config::get('d2u_helper', 'include_module'));
                         d2u_addon_backend_helper::form_infotext('d2u_helper_settings_include_prevent', 'prevent_include_info');
                         d2u_addon_backend_helper::form_mediafield('d2u_helper_settings_custom_css', 'custom_css', rex_config::get('d2u_helper', 'custom_css'));
 
@@ -178,8 +178,8 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 
                         echo '<hr style="border-top: 1px solid #333">';
                         echo '<h3>'. rex_i18n::msg('d2u_helper_settings_article') .'</h3>';
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_breadcrumbs', 'settings[show_breadcrumbs]', 'true', 'true' === rex_config::get('d2u_helper', 'show_breadcrumbs'));
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_subhead_include_articlename', 'settings[subhead_include_articlename]', 'true', 'true' === rex_config::get('d2u_helper', 'subhead_include_articlename'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_breadcrumbs', 'settings[show_breadcrumbs]', 'true', (bool) rex_config::get('d2u_helper', 'show_breadcrumbs'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_subhead_include_articlename', 'settings[subhead_include_articlename]', 'true', (bool) rex_config::get('d2u_helper', 'subhead_include_articlename'));
                         d2u_addon_backend_helper::form_input('d2u_helper_settings_subhead_color_bg', 'settings[subhead_color_bg]', rex_config::get('d2u_helper', 'subhead_color_bg'), false, false, 'color');
                         d2u_addon_backend_helper::form_input('d2u_helper_settings_subhead_color_font', 'settings[subhead_color_font]', rex_config::get('d2u_helper', 'subhead_color_font'), false, false, 'color');
                         d2u_addon_backend_helper::form_input('d2u_helper_settings_article_color_bg', 'settings[article_color_bg]', rex_config::get('d2u_helper', 'article_color_bg'), false, false, 'color');
@@ -201,7 +201,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                         d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_bg', 'settings[footer_color_bg]', rex_config::get('d2u_helper', 'footer_color_bg'), false, false, 'color');
                         d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_box', 'settings[footer_color_box]', rex_config::get('d2u_helper', 'footer_color_box'), false, false, 'color');
                         d2u_addon_backend_helper::form_input('d2u_helper_settings_footer_color_font', 'settings[footer_color_font]', rex_config::get('d2u_helper', 'footer_color_font'), false, false, 'color');
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_cta_box', 'settings[show_cta_box]', 'true', 'true' === rex_config::get('d2u_helper', 'show_cta_box'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_show_cta_box', 'settings[show_cta_box]', 'true', (bool) rex_config::get('d2u_helper', 'show_cta_box'));
                         d2u_addon_backend_helper::form_linklistfield('d2u_helper_settings_article_ids_cta_box', 1, array_map('intval', explode(',', rex_config::get('d2u_helper', 'cta_box_article_ids'))), rex_clang::getStartId());
                     ?>
 					<script>
@@ -450,8 +450,8 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 				<legend><small><i class="rex-icon rex-icon-language"></i></small> <?= rex_i18n::msg('d2u_helper_settings_lang_replacements') ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_lang_install', 'settings[lang_replacements_install]', 'true', 'true' === rex_config::get('d2u_helper', 'lang_replacements_install'));
-                        d2u_addon_backend_helper::form_checkbox('d2u_helper_lang_wildcard_overwrite', 'settings[lang_wildcard_overwrite]', 'true', 'true' === rex_config::get('d2u_helper', 'lang_wildcard_overwrite'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_lang_install', 'settings[lang_replacements_install]', 'true', (bool) rex_config::get('d2u_helper', 'lang_replacements_install'));
+                        d2u_addon_backend_helper::form_checkbox('d2u_helper_lang_wildcard_overwrite', 'settings[lang_wildcard_overwrite]', 'true', (bool) rex_config::get('d2u_helper', 'lang_wildcard_overwrite'));
                         foreach (rex_clang::getAll() as $rex_clang) {
                             echo '<dl class="rex-form-group form-group" id="settings[lang_replacement_'. $rex_clang->getId() .']">';
                             echo '<dt><label>'. $rex_clang->getName() .'</label></dt>';
