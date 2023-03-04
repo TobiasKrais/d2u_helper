@@ -1,11 +1,11 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.10.0-DEV</p>
+		<p>1.10.0</p>
 		<ul>
 			<li>PHP-CS-Fixer Code Verbesserungen.</li>
 			<li>Knapp 3000 rexstan Verbesserungen.</li>
-			<li>Nutzt die getTags() Methode von YRewrite 2.9. Daher nicht mehr kompatibel mit YRewrite <2.9.0 und URL <2.1.0.</li>
+			<li>Nutzt die getTags() Methode von YRewrite 2.9. Daher nicht mehr kompatibel mit YRewrite < 2.9.0 und URL < 2.1.0.</li>
 			<li>Fehler im Megamenü behoben: Elemente in der ersten Ebene ohne Untermenü waren nicht klickbar.</li>
 			<li>Smartmenu: aktives Navigationselement wird mit Hover Elementen hervorgehoben.</li>
 			<li>Fragment für Sprachwähler: Standardicon entfernt und Link zur Standardsprache korrigiert.</li>
