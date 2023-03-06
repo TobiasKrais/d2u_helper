@@ -49,7 +49,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 		</header>
 	</div>
 	<?php
-        if ('' === $print) {
+        if (null === $print) {
             // Navi
             echo $fragment->parse('d2u_template_nav.php');
         }
@@ -59,7 +59,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 			<div class="row">
 				<?php
                     // Breadcrumbs
-                    if ('' === $print) {
+                    if (null === $print) {
                         if ($d2u_helper->hasConfig('show_breadcrumbs') && (bool) $d2u_helper->getConfig('show_breadcrumbs')) {
                             echo '<div class="col-12 d-print-none">';
                             echo '<div id="breadcrumbs">';
@@ -79,14 +79,14 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
                 ?>
 			</div>
 			<?php
-                if ('' === $print) { // Remove when https://github.com/twbs/bootstrap/issues/22753 is solved
+                if (null === $print) { // Remove when https://github.com/twbs/bootstrap/issues/22753 is solved
                     echo '<div class="row">';
                     echo '<div class="col-12 col-lg-9">';
                     echo '<div class="row">';
                 }
                 // Content follows
                 echo $this->getArticle(1); /** @phpstan-ignore-line */
-                if ('' === $print) { // Remove when https://github.com/twbs/bootstrap/issues/22753 is solved
+                if (null === $print) { // Remove when https://github.com/twbs/bootstrap/issues/22753 is solved
                     echo '</div>';
                     echo '</div>';
                     echo '<div class="col-12 col-lg-3 d-print-none">';
