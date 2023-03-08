@@ -3,7 +3,9 @@
 	<div class="panel-body">
 		<p>1.10.1-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 01-3 "Texteditor in Alertbox" hinzugefügt.</li>
+			<li>Modul 04-1 "Google Maps Karte": Bugfix Typprüfung Eingabefeld.</li>
+			<li>Modul 04-2 "OpenStreetMap Karte": Bugfix Typprüfung Eingabefeld.</li>
 		</ul>
 		<p>1.10.0</p>
 		<ul>

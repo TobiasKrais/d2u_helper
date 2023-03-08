@@ -32,7 +32,7 @@ class D2UModuleManager
     /**
      * Constructor. Sets values. The path that is constructed is during addon
      * update the path of the new addon folder. Otherwise the normal addon path.
-     * @param D2UModule[] $d2u_modules Array with D2U modules
+     * @param array<D2UModule> $d2u_modules Array with D2U modules
      * @param string $module_folder Folder, in which modules can be found.
      * Trailing slash must be included. Default is D2UModuleManager::MODULE_FOLDER.
      * @param string $addon_key Redaxo Addon name module belongs to, default "d2u_helper"
@@ -153,6 +153,9 @@ class D2UModuleManager
         $modules[] = new D2UModule('01-2',
             'Texteditor mit Bild und Fettschrift',
             14);
+        $modules[] = new D2UModule('01-3',
+            'Texteditor in Alertbox',
+            1);
         $modules[] = new D2UModule('02-1',
             'Überschrift',
             11);
@@ -170,10 +173,10 @@ class D2UModuleManager
             11);
         $modules[] = new D2UModule('04-1',
             'Google Maps Karte',
-            12);
+            13);
         $modules[] = new D2UModule('04-2',
             'OpenStreetMap Karte',
-            3);
+            4);
         $modules[] = new D2UModule('05-1',
             'Artikelweiterleitung',
             14);

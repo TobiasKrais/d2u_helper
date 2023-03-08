@@ -97,7 +97,7 @@
             foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18] as $value) {
                 echo '<option value="'.$value.'" ';
 
-                if ('REX_VALUE[3]' === $value) { /** @phpstan-ignore-line */
+                if ((int) 'REX_VALUE[3]' === $value) { /** @phpstan-ignore-line */
                     echo 'selected="selected" ';
                 }
                 echo '>'.$value.'</option>';
@@ -145,7 +145,7 @@ if (rex_addon::get('geolocation')->isAvailable()) {
                     ->orderBy('title')
                     ->findValues('title', 'id');
                 foreach ($mapsets as $k => $v) {
-                    echo '<option value="'. $k .'"'. ($k === 'REX_VALUE[9]' ? ' selected="selected"' : '') .'>'. $v .'</option>';
+                    echo '<option value="'. $k .'"'. ($k === (int) 'REX_VALUE[9]' ? ' selected="selected"' : '') .'>'. $v .'</option>';
                 }
             ?>
 		</select>
