@@ -228,7 +228,7 @@ if (class_exists('D2UModuleManager')) {
         5);
     $modules[] = new D2UModule('06-1',
         'YouTube Video einbinden',
-        13);
+        14);
     $modules[] = new D2UModule('06-2',
         'IFrame einbinden',
         5);
