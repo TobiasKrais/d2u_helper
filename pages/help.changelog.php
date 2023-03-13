@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.10.2-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.10.1</p>
 		<ul>
 			<li>Cache Pfadrechte waren fehlerhaft.</li>
