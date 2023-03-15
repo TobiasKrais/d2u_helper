@@ -1,6 +1,8 @@
 <?php
 
-$cols = 0 === (int) 'REX_VALUE[20]' ? 8 : (int) 'REX_VALUE[20]'; /** @phpstan-ignore-line */
+$cols_sm = 0 === (int) 'REX_VALUE[20]' ? 12 : (int) 'REX_VALUE[20]'; /** @phpstan-ignore-line */
+$cols_md = 0 === (int) 'REX_VALUE[19]' ? 12 : (int) 'REX_VALUE[19]'; /** @phpstan-ignore-line */
+$cols_lg = 0 === (int) 'REX_VALUE[18]' ? 8 : (int) 'REX_VALUE[18]'; /** @phpstan-ignore-line */
 $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @phpstan-ignore-line */
 
 $picture = 'REX_MEDIA[1]';
@@ -10,7 +12,7 @@ $show_title = ('REX_VALUE[2]' === 'true'); /** @phpstan-ignore-line */
 if ('REX_MEDIA[1]' !== '') { /** @phpstan-ignore-line */
     $media = rex_media::get('REX_MEDIA[1]');
     if ($media instanceof rex_media) {
-        echo '<div class="col-12 col-md-'. $cols . $offset_lg .'">';
+        echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
         echo '<figure>';
         echo '<img src="';
         if ('' === $picture_type) { /** @phpstan-ignore-line */

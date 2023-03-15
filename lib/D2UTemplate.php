@@ -8,22 +8,22 @@
 class D2UTemplate
 {
     /**
-     * CSS file name for modules.
+     * CSS file name for templates.
      */
     private const TEMPLATE_CSS_FILE = 'styles.css';
 
     /**
-     * CSS file name for modules.
+     * CSS file name for templates.
      */
     private const TEMPLATE_FILE = 'template.php';
 
     /**
-     * CSS file name for modules.
+     * CSS file name for templates.
      */
     private const TEMPLATE_INSTALL = 'install.php';
 
     /**
-     * CSS file name for modules.
+     * CSS file name for templates.
      */
     private const TEMPLATE_UNINSTALL = 'uninstall.php';
 

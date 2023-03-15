@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.10.2-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 03-1 "Bild" Kann jetzt auch die Breite für mittlere und kleine Bildschirme einstellen.</li>
 		</ul>
 		<p>1.10.1</p>
 		<ul>

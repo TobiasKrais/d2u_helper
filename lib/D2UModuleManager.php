@@ -167,7 +167,7 @@ class D2UModuleManager
             7);
         $modules[] = new D2UModule('03-1',
             'Bild',
-            11);
+            12);
         $modules[] = new D2UModule('03-2',
             'Bildergalerie Ekko Lightbox',
             11);
