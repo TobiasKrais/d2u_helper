@@ -1,5 +1,6 @@
 <?php
 /**
+ * @api
  * Offers helper functions for language issues.
  */
 class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
