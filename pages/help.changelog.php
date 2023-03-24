@@ -1,6 +1,10 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.10.3-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.10.2</p>
 		<ul>
 			<li>Modul 03-1 "Bild": Kann jetzt auch die Breite für mittlere und kleine Bildschirme einstellen.</li>
