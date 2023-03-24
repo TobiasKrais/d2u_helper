@@ -221,7 +221,7 @@ class D2UModuleManager
             4);
         $modules[] = new D2UModule('14-1',
             'Search It Suchmodul',
-            4);
+            5);
         $modules[] = new D2UModule('15-1',
             'Kategorie mit Liste der Unterkategorien',
             3);

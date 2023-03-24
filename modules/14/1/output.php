@@ -22,13 +22,15 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 				spam_protection|honeypot|Bitte nicht ausfüllen|'. $tag_open .'d2u_helper_module_14_validate_spam_detected'. $tag_close .'|0'. PHP_EOL;
         $yform->setFormData(trim($form_data));
 
-        $yform->setObjectparams('submit_btn_show', false);
+        $yform->setObjectparams('csrf_protection', false);
+        $yform->setObjectparams('Error-occured', \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
         $yform->setObjectparams('form_action', rex_getUrl());
         $yform->setObjectparams('form_anchor', 'search-field');
-        $yform->setObjectparams('Error-occured', \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
-        $yform->setObjectparams('real_field_names', true);
-        $yform->setObjectparams('form_showformafterupdate', true);
         $yform->setObjectparams('form_name', 'd2u_helper_module_14_1_'. rand(1, 100));
+        $yform->setObjectparams('form_showformafterupdate', true);
+        $yform->setObjectparams('real_field_names', true);
+        $yform->setObjectparams('submit_btn_show', false);
+
         echo $yform->getForm();
 
         if (rex_plugin::get('search_it', 'autocomplete')->isAvailable()) {
@@ -72,7 +74,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
 
     echo '<a name="search-results"></a>';
     echo '<h2 class="search_it-headline">'. $tag_open .'d2u_helper_module_14_search_results'. $tag_close .'</h2>';
-    if ($result['count']) {
+    if ((int) $result['count'] > 0) {
         // Pagination
         $pagination = '';
         if ($result['count'] > $limit) {
@@ -112,8 +114,8 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
             } elseif ('url' === $hit['type']) {
                 // url hits
                 $url_sql = rex_sql::factory();
-                $url_sql->setTable(rex::getTablePrefix() . \Url\UrlManagerSql::TABLE_NAME);
-                $url_sql->setWhere("url_hash = '". $hit['fid'] ."'");
+                $url_sql->setQuery('SELECT * FROM '. rex::getTablePrefix() . \Url\UrlManagerSql::TABLE_NAME .' WHERE url_hash = "'. $hit['fid'] .'"');
+
                 // Check in case URL IDs changed
                 if ($url_sql->getRows() > 0) {
                     $article_hit = rex_article::get((int) $url_sql->getValue('article_id'));

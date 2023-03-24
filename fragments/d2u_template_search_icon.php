@@ -11,15 +11,16 @@ if (rex_addon::get('search_it')->isAvailable() && $article_id_search > 0 && $art
 				spam_protection|honeypot|Bitte nicht ausfüllen|'.  \Sprog\Wildcard::get('d2u_helper_module_14_validate_spam_detected') .'|0'. PHP_EOL;
         $yform->setFormData(trim($form_data));
 
-        $yform->setObjectparams('submit_btn_show', false);
+        $yform->setObjectparams('csrf_protection', false);
+        $yform->setObjectparams('Error-occured', \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
         $yform->setObjectparams('form_action', rex_getUrl($article_id_search));
         $yform->setObjectparams('form_anchor', 'search-field');
-        $yform->setObjectparams('Error-occured', \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
-        $yform->setObjectparams('real_field_names', true);
-        $yform->setObjectparams('form_showformafterupdate', true);
-        $yform->setObjectparams('hide_top_warning_messages', true);
-        $yform->setObjectparams('hide_field_warning_messages', true);
         $yform->setObjectparams('form_name', 'd2u_helper_search_box_'. rand(1, 100));
+        $yform->setObjectparams('form_showformafterupdate', true);
+        $yform->setObjectparams('hide_field_warning_messages', true);
+        $yform->setObjectparams('hide_top_warning_messages', true);
+        $yform->setObjectparams('real_field_names', true);
+        $yform->setObjectparams('submit_btn_show', false);
 
         echo $yform->getForm();
 

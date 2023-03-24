@@ -1,9 +1,9 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.10.3-DEV</p>
+		<p>1.10.3</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 14-1 "Search It Suchmodul": Fehlerbehebung für Sucheergebnissen mit URLs aus dem URL Addon.</li>
 		</ul>
 		<p>1.10.2</p>
 		<ul>
