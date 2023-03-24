@@ -19,6 +19,7 @@ if (rex_addon::get('search_it')->isAvailable() && $article_id_search > 0 && $art
         $yform->setObjectparams('form_showformafterupdate', true);
         $yform->setObjectparams('hide_top_warning_messages', true);
         $yform->setObjectparams('hide_field_warning_messages', true);
+        $yform->setObjectparams('form_name', 'd2u_helper_search_box_'. rand(1, 100));
 
         echo $yform->getForm();
 

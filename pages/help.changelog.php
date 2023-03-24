@@ -1,9 +1,11 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.10.2-DEV</p>
+		<p>1.10.2</p>
 		<ul>
-			<li>Modul 03-1 "Bild" Kann jetzt auch die Breite für mittlere und kleine Bildschirme einstellen.</li>
+			<li>Modul 03-1 "Bild": Kann jetzt auch die Breite für mittlere und kleine Bildschirme einstellen.</li>
+			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)": Formularname hinzugefügt, damit mehrere Formulare auf einer Webseite mit YFrom Spamprotection funktionieren.</li>
+			<li>Fragment für Suchfunktion: Formularname hinzugefügt, damit mehrere Formulare auf einer Webseite mit YFrom Spamprotection funktionieren.</li>
 		</ul>
 		<p>1.10.1</p>
 		<ul>

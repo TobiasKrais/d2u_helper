@@ -71,6 +71,7 @@ $yform->setFormData(trim($form_data));
 $yform->setObjectparams('form_action', rex_getUrl(rex_article::getCurrentId()));
 $yform->setObjectparams('Error-occured', \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
 $yform->setObjectparams('real_field_names', true);
+$yform->setObjectparams('form_name', 'd2u_helper_module_11_1_'. rand(1, 100));
 
 // action - showtext
 $yform->setActionField('showtext', [\Sprog\Wildcard::get('d2u_helper_module_form_thanks')]);

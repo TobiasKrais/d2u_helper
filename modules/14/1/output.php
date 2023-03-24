@@ -28,7 +28,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
         $yform->setObjectparams('Error-occured', \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
         $yform->setObjectparams('real_field_names', true);
         $yform->setObjectparams('form_showformafterupdate', true);
-
+        $yform->setObjectparams('form_name', 'd2u_helper_module_14_1_'. rand(1, 100));
         echo $yform->getForm();
 
         if (rex_plugin::get('search_it', 'autocomplete')->isAvailable()) {
