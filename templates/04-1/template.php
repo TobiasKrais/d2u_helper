@@ -162,7 +162,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						$cart_article = rex_article::get((int) rex_config::get('d2u_courses', 'article_id_shopping_cart', 0));
 						if($show_cart && $cart_article instanceof rex_article) {
 							print '<div class="col-4 col-sm-2 col-lg-1">';
-							print '<a href="'. rex_getUrl(rex_config::get('d2u_courses', 'article_id_shopping_cart')) .'" class="cart_link">';
+							print '<a href="'. rex_getUrl((int) rex_config::get('d2u_courses', 'article_id_shopping_cart')) .'" class="cart_link">';
 							print '<div id="cart_symbol" class="desktop-inner">';
 							print '<img src="'. rex_url::addonAssets('d2u_courses', 'cart_only.png') .'" alt="'. $cart_article->getName() .'">';
 							if(count(\D2U_Courses\Cart::getCourseIDs()) > 0) {
