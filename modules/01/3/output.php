@@ -9,7 +9,7 @@ $type = 'REX_VALUE[1]';
 $text = 'REX_VALUE[id=2 output="html"]';
 
 echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .' d2u-module-01-3">';
-if ($text !== '') { /** @phpstan-ignore-line */
+if ('' !== $text) { /** @phpstan-ignore-line */
     echo '<div class="alert alert-'. $type .'" role="alert">';
     echo d2u_addon_frontend_helper::prepareEditorField($text);
     echo '</div>';

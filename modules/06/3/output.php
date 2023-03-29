@@ -22,7 +22,7 @@ if ($media_video instanceof rex_media) {
         echo '"@context": "https://schema.org",'. PHP_EOL;
         echo '"@type": "VideoObject",'. PHP_EOL;
         echo '"name": "'. $media_video->getTitle() .'",'. PHP_EOL;
-        echo '"description": "'. ($description !== '' ? $description : $media_video->getTitle()) .'",'. PHP_EOL; /** @phpstan-ignore-line */
+        echo '"description": "'. ('' !== $description ? $description : $media_video->getTitle()) .'",'. PHP_EOL; /** @phpstan-ignore-line */
         echo '"thumbnailUrl": [ "'. $server . $media_preview->getUrl() .'" ],'. PHP_EOL;
         echo '"uploadDate": "'. date('c', $media_video->getUpdateDate()) .'",'. PHP_EOL;
         echo '"contentUrl": "'. $server . $media_video->getUrl() .'"'. PHP_EOL;
@@ -35,7 +35,7 @@ if ($media_video instanceof rex_media) {
 
 // Load player JS only one time per page
 if (!function_exists('loadJsPlyr')) {
-    function loadJsPlyr():void
+    function loadJsPlyr(): void
     {
         echo '<script src="'. rex_url::base('assets/addons/plyr/vendor/plyr/dist/plyr.min.js') .'"></script>';
     }

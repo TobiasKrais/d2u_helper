@@ -380,7 +380,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                             if (in_array($d2u_template->getD2UId(), $d2u_template_ids_for_settings, true) && $d2u_template->isInstalled()) {
                                 echo '<hr style="border-top: 1px solid #333">';
                                 echo '<h3>'. rex_i18n::msg('d2u_helper_settings_template') ." '". $d2u_template->getD2UId() .' '. $d2u_template->getName() ."'</h3>";
-                                if (('02-1' === $d2u_template->getD2UId() || '04-3' === $d2u_template->getD2UId())) {
+                                if ('02-1' === $d2u_template->getD2UId() || '04-3' === $d2u_template->getD2UId()) {
                                     $navi_pos_options = [
                                         'bottom' => rex_i18n::msg('d2u_helper_settings_template_navi_pos_bottom'),
                                         'top' => rex_i18n::msg('d2u_helper_settings_template_navi_pos_top'),
@@ -397,7 +397,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                                     d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_margin_top', 'settings[template_03_2_margin_top]', rex_config::get('d2u_helper', 'template_03_2_margin_top'), false, false, 'number');
                                     d2u_addon_backend_helper::form_input('d2u_helper_settings_template_03_2_time_show_ad', 'settings[template_03_2_time_show_ad]', rex_config::get('d2u_helper', 'template_03_2_time_show_ad'), false, false, 'number');
                                 }
-                                if (('04-1' === $d2u_template->getD2UId() || '04-2' === $d2u_template->getD2UId() || '04-3' === $d2u_template->getD2UId())) {
+                                if ('04-1' === $d2u_template->getD2UId() || '04-2' === $d2u_template->getD2UId() || '04-3' === $d2u_template->getD2UId()) {
                                     d2u_addon_backend_helper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'full', 'full' === rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width'));
                                     // Language specific settings
                                     foreach (rex_clang::getAll() as $rex_clang) {

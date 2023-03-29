@@ -13,9 +13,7 @@ class D2UModuleManager
      */
     public const MODULE_FOLDER = 'modules/';
 
-    /** 
-     * @var array<D2UModule> Array with D2U modules
-     */
+    /** @var array<D2UModule> Array with D2U modules */
     public array $d2u_modules = [];
 
     /**
@@ -24,9 +22,7 @@ class D2UModuleManager
      */
     public string $module_folder = '';
 
-    /** 
-     * @var rex_addon_interface Redaxo Addon module belongs to 
-     */
+    /** @var rex_addon_interface Redaxo Addon module belongs to */
     private rex_addon_interface $module_addon;
 
     /**

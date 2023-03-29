@@ -101,15 +101,15 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
         if (\rex::isBackend()) {
             echo "Weiterleitung zu Artikel: <a href='". rex_url::backendPage('content/edit', ['article_id' => $article_id, 'clang' => rex_clang::getCurrentId()]) ."'>"
                 . rex_article::get($article_id)->getValue('name') .' (Artikel ID '. $article_id .')</a>';
-            if ($params !== '') {
+            if ('' !== $params) {
                 echo '<br>Zusätzliche Parameter: '. $params;
             }
-            if ($anchor !== '') { /** @phpstan-ignore-line */
+            if ('' !== $anchor) { /** @phpstan-ignore-line */
                 echo '<br>Name Anker: '. $anchor;
             }
         } else {
             $link = rex_getUrl($article_id);
-            $forward_url = $link . ($params !== '' ? (false === strstr($link, '?') ? '?' : '&') . $params : '') . ($anchor !== '' ? '#'. $anchor : ''); /** @phpstan-ignore-line */
+            $forward_url = $link . ('' !== $params ? (false === strstr($link, '?') ? '?' : '&') . $params : '') . ('' !== $anchor ? '#'. $anchor : ''); /** @phpstan-ignore-line */
         }
     }
 }

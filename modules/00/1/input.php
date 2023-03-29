@@ -24,8 +24,8 @@
 <?php
 $current_article = rex_article::getCurrent();
 if ($current_article instanceof rex_article) {
-	$current_template = new rex_template($current_article->getTemplateId());
-	if (in_array(str_replace('d2u_', '', $current_template->getKey() !== null ? $current_template->getKey() : ''), ['00-1', '02-1', '04-1', '04-2'], true)) {
+    $current_template = new rex_template($current_article->getTemplateId());
+    if (in_array(str_replace('d2u_', '', null !== $current_template->getKey() ? $current_template->getKey() : ''), ['00-1', '02-1', '04-1', '04-2'], true)) {
 ?>
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
@@ -81,5 +81,5 @@ if ($current_article instanceof rex_article) {
 	});
 </script>
 <?php
-	}
+    }
 }

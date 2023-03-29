@@ -15,7 +15,7 @@ if (rex_addon::get('search_it')->isAvailable() && $article_id_search > 0 && $art
         $yform->setObjectparams('Error-occured', \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
         $yform->setObjectparams('form_action', rex_getUrl($article_id_search));
         $yform->setObjectparams('form_anchor', 'search-field');
-        $yform->setObjectparams('form_name', 'd2u_helper_search_box_'. rand(1, 100));
+        $yform->setObjectparams('form_name', 'd2u_helper_search_box_'. random_int(1, 100));
         $yform->setObjectparams('form_showformafterupdate', true);
         $yform->setObjectparams('hide_field_warning_messages', true);
         $yform->setObjectparams('hide_top_warning_messages', true);

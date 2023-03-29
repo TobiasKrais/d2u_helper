@@ -27,39 +27,25 @@ class D2UTemplate
      */
     private const TEMPLATE_UNINSTALL = 'uninstall.php';
 
-    /** 
-     * @var string D2U Template ID
-     */
+    /** @var string D2U Template ID */
     private string $d2u_template_id = '0';
 
-    /**
-     * @var bool true if autoupdate ist activated
-     */
+    /** @var bool true if autoupdate ist activated */
     private bool $autoupdate = false;
 
-    /**
-     * @var string Templates title or name
-     */
+    /** @var string Templates title or name */
     private string $name = '';
 
-    /** 
-     * @var int Template version number
-     */
+    /** @var int Template version number */
     private int $revision = 0;
 
-    /** 
-     * @var int Redaxo Template ID
-    */
+    /** @var int Redaxo Template ID */
     private int $rex_template_id = 0;
 
-    /**
-     * @var rex_addon_interface Redaxo Addon template belongs to
-     */
+    /** @var rex_addon_interface Redaxo Addon template belongs to */
     private rex_addon_interface $rex_addon;
 
-    /**
-     * @var string template_folder Redaxo Addon template folder7
-     */
+    /** @var string template_folder Redaxo Addon template folder7 */
     private string $template_folder;
 
     /**
@@ -78,7 +64,7 @@ class D2UTemplate
     /**
      * Activate autoupdate.
      */
-    public function activateAutoupdate():void
+    public function activateAutoupdate(): void
     {
         $this->autoupdate = true;
         $this->setConfig();
@@ -87,7 +73,7 @@ class D2UTemplate
     /**
      * Disable autoupdate.
      */
-    public function disableAutoupdate():void
+    public function disableAutoupdate(): void
     {
         $this->autoupdate = false;
         $this->setConfig();
@@ -103,39 +89,39 @@ class D2UTemplate
         // Template CSS
         if (file_exists($this->template_folder . self::TEMPLATE_CSS_FILE)) {
             $css = file_get_contents($this->template_folder . self::TEMPLATE_CSS_FILE);
-            $template_css = $css !== false ? $css : '';
+            $template_css = false !== $css ? $css : '';
         }
 
         // Footer CSS
         $footer_type = rex_config::get('d2u_helper', 'footer_type', '');
         if ('' !== $footer_type && file_exists(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'))) {
             $css = file_get_contents(rex_path::addonAssets('d2u_helper', 'template/footer/d2u_template_footer_'. $footer_type .'.css'));
-            $template_css .= $css !== false ? $css : '';
+            $template_css .= false !== $css ? $css : '';
         }
         // Language modal CSS
         if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'))) {
             $css = file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_language_modal.css'));
-            $template_css .= $css !== false ? $css : '';
+            $template_css .= false !== $css ? $css : '';
         }
         // Search icon CSS
         if (file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'))) {
             $css = file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_search_icon.css'));
-            $template_css .= $css !== false ? $css : '';
+            $template_css .= false !== $css ? $css : '';
         }
         // Header slider CSS
         if ('04' === substr($this->d2u_template_id, 0, 2) && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_header_slider.css'))) {
             $css = file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_header_slider.css'));
-            $template_css .= $css !== false ? $css : '';
+            $template_css .= false !== $css ? $css : '';
         }
         // Consent manager CSS
         if (rex_addon::get('consent_manager')->isAvailable() && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'))) {
             $css = file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'));
-            $template_css .= $css !== false ? $css : '';
+            $template_css .= false !== $css ? $css : '';
         }
         // CTA box CSS
         if ((bool) rex_config::get('d2u_helper', 'show_cta_box', false) && file_exists(rex_path::addonAssets('d2u_helper', 'template/d2u_template_cta_box.css'))) {
             $css = file_get_contents(rex_path::addonAssets('d2u_helper', 'template/d2u_template_cta_box.css'));
-            $template_css .= $css !== false ? $css : '';
+            $template_css .= false !== $css ? $css : '';
         }
 
         return $template_css;
@@ -183,7 +169,7 @@ class D2UTemplate
      * @param string $template_folder Complete folder string, in which template files can be found.
      * Trailing slash must be included.
      */
-    public function initRedaxoContext($template_addon, $template_folder):void
+    public function initRedaxoContext($template_addon, $template_folder): void
     {
         $this->rex_addon = $template_addon;
         if ($this->rex_addon->hasConfig('template_'. $this->d2u_template_id)) {
@@ -289,7 +275,7 @@ class D2UTemplate
     /**
      * Removes the template from redaxo template table.
      */
-    public function delete():void
+    public function delete(): void
     {
         $removetemp = rex_sql::factory();
         $removetemp->setTable(\rex::getTablePrefix() . 'template');
@@ -310,7 +296,7 @@ class D2UTemplate
     /**
      * Save template config.
      */
-    private function setConfig():void
+    private function setConfig(): void
     {
         // Template pairing
         $params = ['rex_template_id' => $this->rex_template_id];
@@ -327,7 +313,7 @@ class D2UTemplate
     /**
      * Remove template pair config.
      */
-    public function unlink():void
+    public function unlink(): void
     {
         // unlink
         $this->rex_addon->removeConfig('template_'. $this->d2u_template_id);

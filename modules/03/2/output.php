@@ -45,7 +45,6 @@ $pics = is_array($pics_unfiltered) ? $pics_unfiltered : [];
 
 $lightbox_id = random_int(0, getrandmax());
 
-
 ?>
 <div class="col-12 col-sm-<?= $cols_sm ?> col-md-<?= $cols_md ?> col-lg-<?= $cols_lg . $offset_lg ?>">
 	<div class="row">

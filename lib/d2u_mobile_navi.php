@@ -64,7 +64,7 @@ class d2u_mobile_navi
      * Returns a Responsive MultiLevel menu for desktop view.
      * @param int $cat_parent_id redaxo category ID, default root categories are returned
      */
-    public static function getResponsiveMultiLevelDesktopMenu($cat_parent_id = 0):void
+    public static function getResponsiveMultiLevelDesktopMenu($cat_parent_id = 0): void
     {
         $addon = rex_addon::get('d2u_helper');
         $show_class = '';
@@ -93,7 +93,7 @@ class d2u_mobile_navi
         foreach (self::getCategories($cat_parent_id) as $category) {
             // Check permissions if YCom ist installed
             $startarticle = $category->getStartArticle();
-            if (rex_addon::get('ycom')->isAvailable() === false || rex_ycom_auth::articleIsPermitted($startarticle)) {
+            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($startarticle)) {
                 $has_machine_submenu = (rex_addon::get('d2u_machinery')->isAvailable() && 'show' === rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && (int) rex_config::get('d2u_machinery', 'article_id', 0) === $category->getId());
                 if (0 === count($category->getChildren(true)) && !$has_machine_submenu) {
                     // Ohne Untermenü
@@ -105,9 +105,9 @@ class d2u_mobile_navi
                     echo '<ul class="dl-menu">';
                     // Mit Untermenü
                     $cat_name = strtoupper($category->getName());
-                    if((bool) rex_config::get('d2u_helper', 'submenu_use_articlename', false)) {
+                    if ((bool) rex_config::get('d2u_helper', 'submenu_use_articlename', false)) {
                         $category_article = rex_article::get($category->getId());
-                        if($category_article instanceof rex_article) {
+                        if ($category_article instanceof rex_article) {
                             $cat_name = $category_article->getName();
                         }
                     }
@@ -146,7 +146,7 @@ class d2u_mobile_navi
      * Returns a Responsive MultiLevel menu for mobile view.
      * @param int $cat_parent_id redaxo category ID, default root categories are returned
      */
-    public static function getResponsiveMultiLevelMobileMenu($cat_parent_id = 0):void
+    public static function getResponsiveMultiLevelMobileMenu($cat_parent_id = 0): void
     {
         $addon = rex_addon::get('d2u_helper');
         $show_class = '';
@@ -202,7 +202,7 @@ class d2u_mobile_navi
      * Returns Mobile Responsive MultiLevel submenu.
      * @param rex_category $rex_category Redaxo category
      */
-    private static function getSubmenu($rex_category):void
+    private static function getSubmenu($rex_category): void
     {
         echo '<li'. (rex_article::getCurrentId() === $rex_category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. $rex_category->getName() .'">'. $rex_category->getName() .'</a>';
         echo '<ul class="dl-submenu">';

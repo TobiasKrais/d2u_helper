@@ -60,7 +60,7 @@ class d2u_mobile_navi_mega_menu
      * Returns menu.
      * @param int $cat_parent_id redaxo category ID, by default root categories are returned
      */
-    public static function getMenu($cat_parent_id = 0):void
+    public static function getMenu($cat_parent_id = 0): void
     {
         echo '<div class="navbar navbar-expand-'. rex_config::get('d2u_helper', 'include_menu_show') .' navbar-light">';
 
@@ -88,7 +88,7 @@ class d2u_mobile_navi_mega_menu
                     echo '<div class="dropdown-menu megamenu" aria-labelledby="dropdown'. $category->getId() .'">';
                     echo '<div class="row">';
                     $lev1_icon = '';
-                    if ((string) $category->getValue('cat_d2u_helper_icon') !== '') {
+                    if ('' !== (string) $category->getValue('cat_d2u_helper_icon')) {
                         $lev1_icon_media = rex_media::get((string) $category->getValue('cat_d2u_helper_icon'));
                         if ($lev1_icon_media instanceof rex_media) {
                             $lev1_icon = '<img src="'. $lev1_icon_media->getUrl() .'" alt="'. $category->getName() .'" title="'. $category->getName() .'" class="megamenu_lev1_icon"> ';
@@ -101,7 +101,7 @@ class d2u_mobile_navi_mega_menu
                         if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($lev2_start_article)) {
                             echo '<div class="col-sm-6 col-lg-4 megamenu_itemlist">';
                             $lev2_icon = '';
-                            if ($lev2->getValue('cat_d2u_helper_icon') !== '') {
+                            if ('' !== $lev2->getValue('cat_d2u_helper_icon')) {
                                 $lev2_icon_media = rex_media::get((string) $lev2->getValue('cat_d2u_helper_icon'));
                                 if ($lev2_icon_media instanceof rex_media) {
                                     $lev2_icon = '<img src="'. $lev2_icon_media->getUrl() .'" alt="'. $lev2->getName() .'" title="'. $lev2->getName() .'" class="megamenu_lev2_icon"> ';

@@ -14,7 +14,7 @@ if (!function_exists('getSubcategories')) {
      * @param int $level_number number of level to be able to count level depth
      * @param int $max_number_subcategories maximum level depth
      */
-    function getSubcategories(rex_category $category, $level_number, $max_number_subcategories):void
+    function getSubcategories(rex_category $category, $level_number, $max_number_subcategories): void
     {
         ++$level_number;
         echo '<ul class="sub-categories-list">';

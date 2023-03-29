@@ -71,7 +71,7 @@ $yform->setFormData(trim($form_data));
 $yform->setObjectparams('csrf_protection', false);
 $yform->setObjectparams('Error-occured', \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
 $yform->setObjectparams('form_action', rex_getUrl(rex_article::getCurrentId()));
-$yform->setObjectparams('form_name', 'd2u_helper_module_11_1_'. rand(1, 100));
+$yform->setObjectparams('form_name', 'd2u_helper_module_11_1_'. random_int(1, 100));
 $yform->setObjectparams('real_field_names', true);
 
 // action - showtext

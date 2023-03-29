@@ -89,7 +89,7 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
                         echo '</a>';
                     }
                 }
-                if ($text_1 !== '') { /** @phpstan-ignore-line */
+                if ('' !== $text_1) { /** @phpstan-ignore-line */
                     echo d2u_addon_frontend_helper::prepareEditorField($text_1);
                 }
 
@@ -100,7 +100,7 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
                     echo $html_picture;
                 }
 
-                if ($show_text_2 && $text_2 !== '') { /** @phpstan-ignore-line */
+                if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
                     $id = random_int(0, getrandmax());
                     echo '<div class="col-12">';
                     echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';

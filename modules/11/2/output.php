@@ -52,9 +52,9 @@ if (rex::isBackend()) {
     echo '<h3 class="helper-11-2-title">'. $name .'</h3>';
     if ('' !== $phone || '' !== $street || '' !== $city) { /** @phpstan-ignore-line */
         echo '<p class="helper-11-2-teaser">'
-            .($street !== '' ? $street .'<br>' : '') /** @phpstan-ignore-line */
-            .($city !== '' ? $city .'<br>' : '') /** @phpstan-ignore-line */
-            .($phone !== '' ? '<span class="fa-icon fa-phone footer-icon"></span>'. $phone : '') .'<br>' /** @phpstan-ignore-line */
+            .('' !== $street ? $street .'<br>' : '') /** @phpstan-ignore-line */
+            .('' !== $city ? $city .'<br>' : '') /** @phpstan-ignore-line */
+            .('' !== $phone ? '<span class="fa-icon fa-phone footer-icon"></span>'. $phone : '') .'<br>' /** @phpstan-ignore-line */
             .'</p>';
     }
     if ('' !== $email) { /** @phpstan-ignore-line */

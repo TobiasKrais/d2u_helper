@@ -1,4 +1,5 @@
 <?php
+
 $cols_sm = 0 === (int) 'REX_VALUE[20]' ? 12 : (int) 'REX_VALUE[20]'; /** @phpstan-ignore-line */
 $cols_md = 0 === (int) 'REX_VALUE[19]' ? 6 : (int) 'REX_VALUE[19]'; /** @phpstan-ignore-line */
 $cols_lg = 0 === (int) 'REX_VALUE[18]' ? 4 : (int) 'REX_VALUE[18]'; /** @phpstan-ignore-line */
@@ -46,7 +47,7 @@ foreach ($documents as $document) {
             $filesize = round(filesize(rex_path::media() .'/'. $document) / 1024 ** 2, 2);
         }
         $filetype = strtoupper(pathinfo(rex_path::media($document), PATHINFO_EXTENSION));
-        $title = $rex_document->getValue('med_title_'. rex_clang::getCurrentId()) !== '' ? $rex_document->getValue('med_title_'. rex_clang::getCurrentId()) : ($rex_document->getTitle()  !== '' ? $rex_document->getTitle() : $document);
+        $title = '' !== $rex_document->getValue('med_title_'. rex_clang::getCurrentId()) ? $rex_document->getValue('med_title_'. rex_clang::getCurrentId()) : ('' !== $rex_document->getTitle() ? $rex_document->getTitle() : $document);
 
         // Check permissions
         $has_permission = true;

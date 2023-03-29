@@ -12,9 +12,7 @@ class D2UTemplateManager
      */
     public const TEMPLATE_FOLDER = 'templates/';
 
-    /** 
-     * @var array<D2UTemplate> Array with D2U templates 
-     */
+    /** @var array<D2UTemplate> Array with D2U templates */
     public array $d2u_templates = [];
 
     /**
@@ -23,9 +21,7 @@ class D2UTemplateManager
      */
     public string $template_folder = '';
 
-    /** 
-     * @var rex_addon_interface Redaxo Addon template belongs to 
-     */
+    /** @var rex_addon_interface Redaxo Addon template belongs to */
     private rex_addon_interface $template_addon;
 
     /**
@@ -38,7 +34,7 @@ class D2UTemplateManager
      */
     public function __construct($d2u_templates, $template_folder = '', $addon_key = 'd2u_helper')
     {
-        $template_folder = $template_folder !== '' ? $template_folder : self::TEMPLATE_FOLDER;
+        $template_folder = '' !== $template_folder ? $template_folder : self::TEMPLATE_FOLDER;
         $this->template_addon = rex_addon::get($addon_key);
         $this->template_folder = $this->template_addon->getPath($template_folder);
         // Path during addon update
@@ -57,7 +53,7 @@ class D2UTemplateManager
     /**
      * Perform pending template updates.
      */
-    public function autoupdate():void
+    public function autoupdate(): void
     {
         foreach ($this->d2u_templates as $template) {
             // Only check autoupdate, not if update is needed. That would not work during addon update
@@ -74,7 +70,7 @@ class D2UTemplateManager
      * @param string $function Possible values: autoupdate
      * @param int $paired_template_id Redaxo template ID
      */
-    public function doActions($d2u_template_id, $function, $paired_template_id):void
+    public function doActions($d2u_template_id, $function, $paired_template_id): void
     {
         // Form actions
         for ($i = 0; $i < count($this->d2u_templates); ++$i) {
@@ -224,7 +220,7 @@ class D2UTemplateManager
     /**
      * Prints list that offers template managing options.
      */
-    public function showManagerList():void
+    public function showManagerList(): void
     {
         echo '<form action="'. rex_url::currentBackendPage() .'" method="post">';
         echo '<section class="rex-page-section">';

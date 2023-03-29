@@ -10,7 +10,7 @@ preg_match(
     $matches,
 );
 $youtube_id = isset($matches[1]) ? trim($matches[1]) : '';
-if (0 === strlen($youtube_id) && (str_contains('REX_VALUE[1]', 'youtu.be/') || str_contains('REX_VALUE[1]', '/embed/'))) {
+if ('' === $youtube_id && (str_contains('REX_VALUE[1]', 'youtu.be/') || str_contains('REX_VALUE[1]', '/embed/'))) {
     $youtube_id = trim(substr('REX_VALUE[1]', (int) strrpos('REX_VALUE[1]', '/') + 1));
 }
 $youtube_url = 'https://www.youtube-nocookie.com/embed/'. $youtube_id .'?autoplay=1';
@@ -24,7 +24,7 @@ if ('' !== $youtube_id) {
     // Copy preview image
     if (!is_dir(rex_path::addonCache('d2u_helper')) || !file_exists(rex_path::addonCache('d2u_helper', $previewimage_target_filename))) {
         if (!is_dir(rex_path::addonCache('d2u_helper'))) {
-            mkdir(rex_path::addonCache('d2u_helper'), 0755, true);
+            mkdir(rex_path::addonCache('d2u_helper'), 0o755, true);
         }
         copy($youtube_previewimage_url, rex_path::addonCache('d2u_helper', $previewimage_target_filename));
     }

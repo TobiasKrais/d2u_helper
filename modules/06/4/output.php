@@ -14,7 +14,7 @@ echo '</div>';
 
 // Load player JS only once
 if (!function_exists('loadJsPlyr')) {
-    function loadJsPlyr():void
+    function loadJsPlyr(): void
     {
         echo '<script src="'. rex_url::base('assets/addons/plyr/vendor/plyr/dist/plyr.min.js') .'"></script>';
     }

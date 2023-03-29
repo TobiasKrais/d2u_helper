@@ -1,7 +1,7 @@
 <?php
 
 // Set Session
-if (rex_session('d2u_helper_translation') === '') {
+if ('' === rex_session('d2u_helper_translation')) {
     $default_settings = ['clang_id' => rex_clang::getStartId(), 'filter' => 'update'];
     rex_request::setSession('d2u_helper_translation', $default_settings);
 }
@@ -71,7 +71,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($continents) > 0) {
                         echo '<ul>';
                         foreach ($continents as $continent) {
-                            if ($continent->name !== '') {
+                            if ('' !== $continent->name) {
                                 $continent = new \D2U_Address\Continent($continent->continent_id, rex_config::get('d2u_helper', 'default_lang'));
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_address/continent', ['entry_id' => $continent->continent_id, 'func' => 'edit']) .'">'. $continent->name .'</a></li>';
@@ -91,7 +91,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($countries) > 0) {
                         echo '<ul>';
                         foreach ($countries as $country) {
-                            if ($country->name !== '') {
+                            if ('' !== $country->name) {
                                 $country = new \D2U_Address\Country($country->country_id, rex_config::get('d2u_helper', 'default_lang'));
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_address/country', ['entry_id' => $country->country_id, 'func' => 'edit']) .'">'. $country->name .'</a></li>';
@@ -843,7 +843,7 @@ if (1 === count(rex_clang::getAll())) {
                                 if ('' !== $current_news->name) {
                                     foreach (rex_clang::getAllIds() as $clang_id) {
                                         $current_news = new \D2U_News\News($current_news->news_id, $clang_id);
-                                        if ($current_news->name !== '') {
+                                        if ('' !== $current_news->name) {
                                             break;
                                         }
                                     }

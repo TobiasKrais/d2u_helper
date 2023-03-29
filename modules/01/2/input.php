@@ -66,7 +66,7 @@
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
-				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[5]" value="true"<?php if ('REX_VALUE[5]' === 'true') { /** @phpstan-ignore-line */ 
+				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[5]" value="true"<?php if ('REX_VALUE[5]' === 'true') { /** @phpstan-ignore-line */
                 echo ' checked="checked"';
                 } ?>>
 			</dt>
@@ -245,10 +245,10 @@
 		<select name="REX_INPUT_VALUE[4]" class="form-control">
 			<?php
                 $picture_position = 'REX_VALUE[4]';
-                echo '<option value="top"'. ('top' === $picture_position ? ' selected="selected"' : '') .'>Oberhalb vom Text</option>'; /** @phpstan-ignore-line */ 
-                echo '<option value="left"'. ('left' === $picture_position ? ' selected="selected"' : '') .'>Links vom Text</option>'; /** @phpstan-ignore-line */ 
-                echo '<option value="right"'. ('right' === $picture_position ? ' selected="selected"' : '') .'>Rechts vom Text</option>'; /** @phpstan-ignore-line */ 
-                echo '<option value="bottom"'. ('bottom' === $picture_position ? ' selected="selected"' : '') .'>Unterhalb vom Text</option>'; /** @phpstan-ignore-line */ 
+                echo '<option value="top"'. ('top' === $picture_position ? ' selected="selected"' : '') .'>Oberhalb vom Text</option>'; /** @phpstan-ignore-line */
+                echo '<option value="left"'. ('left' === $picture_position ? ' selected="selected"' : '') .'>Links vom Text</option>'; /** @phpstan-ignore-line */
+                echo '<option value="right"'. ('right' === $picture_position ? ' selected="selected"' : '') .'>Rechts vom Text</option>'; /** @phpstan-ignore-line */
+                echo '<option value="bottom"'. ('bottom' === $picture_position ? ' selected="selected"' : '') .'>Unterhalb vom Text</option>'; /** @phpstan-ignore-line */
             ?>
 		</select>
 	</div>
@@ -260,7 +260,7 @@
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
-				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[9]" value="true"<?php if ('REX_VALUE[9]' === 'true') { /** @phpstan-ignore-line */ 
+				<input class="form-control d2u_helper_toggle" type="checkbox" name="REX_INPUT_VALUE[9]" value="true"<?php if ('REX_VALUE[9]' === 'true') { /** @phpstan-ignore-line */
                 echo ' checked="checked"';
                 } ?>>
 			</dt>

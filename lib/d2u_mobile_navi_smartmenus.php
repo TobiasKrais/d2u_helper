@@ -122,7 +122,7 @@ class d2u_mobile_navi_smartmenus
      * Returns Mobile Responsive MultiLevel submenu.
      * @param rex_category $rex_category Redaxo category
      */
-    private static function getSubmenu($rex_category):void
+    private static function getSubmenu($rex_category): void
     {
         echo '<li'. (rex_article::getCurrentId() === $rex_category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. $rex_category->getName() .'">'. $rex_category->getName() .'</a>'. PHP_EOL;
         echo '<ul>'. PHP_EOL;

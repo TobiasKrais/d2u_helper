@@ -71,7 +71,7 @@ class d2u_addon_frontend_helper
     private static function compressCSS($css)
     {
         $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
-        if($css === null) {
+        if (null === $css) {
             return '';
         }
         $css = str_replace(["\r\n", "\r", "\n", "\t", '  ', '    ', '    '], '', $css);
@@ -222,7 +222,7 @@ class d2u_addon_frontend_helper
         if (file_exists(rex_path::addonCache('d2u_helper', 'modules.css'))) {
             // Read from cache
             $contents = file_get_contents(rex_path::addonCache('d2u_helper', 'modules.css'));
-            return $contents !== false ? $contents : '';
+            return false !== $contents ? $contents : '';
         }
 
         // Generate contents
@@ -240,7 +240,7 @@ class d2u_addon_frontend_helper
 
         // Write to cache
         if (!is_dir(rex_path::addonCache('d2u_helper'))) {
-            mkdir(rex_path::addonCache('d2u_helper'), 0755, true);
+            mkdir(rex_path::addonCache('d2u_helper'), 0o755, true);
         }
         file_put_contents(rex_path::addonCache('d2u_helper', 'modules.css'), self::prepareCSS($css));
 
@@ -257,7 +257,7 @@ class d2u_addon_frontend_helper
         if (file_exists(rex_path::addonCache('d2u_helper', 'modules.js'))) {
             // Read from cache
             $contents = file_get_contents(rex_path::addonCache('d2u_helper', 'modules.js'));
-            return $contents !== false ? $contents : '';
+            return false !== $contents ? $contents : '';
         }
 
         $installed_modules = D2UModuleManager::getModulePairs();
@@ -274,7 +274,7 @@ class d2u_addon_frontend_helper
 
         // Write to cache
         if (!is_dir(rex_path::addonCache('d2u_helper'))) {
-            mkdir(rex_path::addonCache('d2u_helper'), 0755, true);
+            mkdir(rex_path::addonCache('d2u_helper'), 0o755, true);
         }
         file_put_contents(rex_path::addonCache('d2u_helper', 'modules.js'), $js);
 

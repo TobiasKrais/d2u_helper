@@ -116,7 +116,7 @@
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[1]" class="form-control">
 		<?php
-		$values = ['success' => 'Erfolg', 'danger' => 'Gefahr', 'warning' => 'Warnung', 'info' => 'Info', 'primary' => 'Primär', 'secondary' => 'Sekundär', 'light' => 'Hell', 'dark' => 'Dunkel'];
+        $values = ['success' => 'Erfolg', 'danger' => 'Gefahr', 'warning' => 'Warnung', 'info' => 'Info', 'primary' => 'Primär', 'secondary' => 'Sekundär', 'light' => 'Hell', 'dark' => 'Dunkel'];
         foreach ($values as $key => $value) {
             echo '<option value="'. $key .'" ';
             if ('REX_VALUE[1]' === $key) { /** @phpstan-ignore-line */

@@ -26,7 +26,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
         $yform->setObjectparams('Error-occured', \Sprog\Wildcard::get('d2u_helper_module_form_validate_title'));
         $yform->setObjectparams('form_action', rex_getUrl());
         $yform->setObjectparams('form_anchor', 'search-field');
-        $yform->setObjectparams('form_name', 'd2u_helper_module_14_1_'. rand(1, 100));
+        $yform->setObjectparams('form_name', 'd2u_helper_module_14_1_'. random_int(1, 100));
         $yform->setObjectparams('form_showformafterupdate', true);
         $yform->setObjectparams('real_field_names', true);
         $yform->setObjectparams('submit_btn_show', false);
@@ -48,7 +48,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 ?>
 		<form class="search_it-form" id="search_it-form1" action="<?= rex_getUrl() ?>#search-results" method="get">
 			<div class="search_it-flex">
-				<?= '<input type="text" id="search_it_search" name="search" value="'. ($request !== '' ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" autofocus />';
+				<?= '<input type="text" id="search_it_search" name="search" value="'. ('' !== $request ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" autofocus />';
                 ?>
 				<button class="search_it-button" type="submit">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M23.354 22.646l-5-5-.012-.007a8.532 8.532 0 10-.703.703l.007.012 5 5a.5.5 0 00.707-.707zM12 19.5a7.5 7.5 0 117.5-7.5 7.508 7.508 0 01-7.5 7.5z"></path></svg>
@@ -61,7 +61,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 </section>
 
 <?php
-if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yform->getObjectparams('warning'))) || !rex_addon::get('yform_spam_protection')->isAvailable()) && $request !== '') { // Wenn ein Suchbegriff eingegeben wurde
+if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yform->getObjectparams('warning'))) || !rex_addon::get('yform_spam_protection')->isAvailable()) && '' !== $request) { // Wenn ein Suchbegriff eingegeben wurde
     $server = rtrim(rex::getServer(), '/');
 
     echo '<section class="search_it-hits">';
@@ -70,7 +70,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
     $search_it = new search_it(rex_clang::getCurrentId());
     $search_it->setLimit($start, $limit);
     $search_it->setOrder(["field(texttype, 'url', 'article', 'file')" => 'ASC'], true);
-    $result = $search_it->search($request !== false ? $request : '');
+    $result = $search_it->search(false !== $request ? $request : '');
 
     echo '<a name="search-results"></a>';
     echo '<h2 class="search_it-headline">'. $tag_open .'d2u_helper_module_14_search_results'. $tag_close .'</h2>';
@@ -135,7 +135,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                         $hit_link = (!str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . $hit_link_unproved : $hit_link_unproved);
                         echo '<li class="search_it-result search_it-article">';
                         echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. $url_info['title'] .'</a></span><br>';
-                        $image = $url_info['image'] !== '' ? '<span class="search_it-previewimage"><img src="'. $hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
+                        $image = '' !== $url_info['image'] ? '<span class="search_it-previewimage"><img src="'. $hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
                         echo $image . '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
                         echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. urldecode(!str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]) : rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')])) .'</a></span>';
                         echo '</li>';
@@ -172,7 +172,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                         if ($has_permission) {
                             $hit_link = $server . rex_url::media($media->getFileName());
                             echo '<li class="search_it-result search_it-image search_it-flex">';
-                            echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. ($media->getTitle() !== '' ? $media->getTitle() : $media->getFileName()) .'</a></span><br>';
+                            echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. ('' !== $media->getTitle() ? $media->getTitle() : $media->getFileName()) .'</a></span><br>';
                             $image = 'image' === substr($media->getType(), 0, 5) ? '<span class="search_it-previewimage"><img src="'. $server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $media->getFileName() .'"></span>' : '';
                             echo $image . ($hit['highlightedtext'] ? '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>' : '');
                             echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. $hit_link .'</a></span>';
@@ -197,7 +197,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
         // Similarity search
         $search_it_sim = new search_it(rex_clang::getCurrentId());
         $search_it_sim->setLimit(0, 1);
-        if ($activate_similarity_search && rex_config::get('search_it', 'similarwordsmode', 0) > 0 && $result['simwordsnewsearch'] !== '') { /** @phpstan-ignore-line */
+        if ($activate_similarity_search && rex_config::get('search_it', 'similarwordsmode', 0) > 0 && '' !== $result['simwordsnewsearch']) { /** @phpstan-ignore-line */
             $simwords_out = '<p>'. $tag_open .'d2u_helper_module_14_search_similarity'. $tag_close .':<strong><ul>';
             $sim_counter = 0;
             foreach (explode(' ', trim($result['simwordsnewsearch'])) as $new_search_word) {

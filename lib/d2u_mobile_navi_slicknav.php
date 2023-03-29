@@ -85,7 +85,7 @@ class d2u_mobile_navi_slicknav
      * Returns slicknav submenu.
      * @param rex_category $rex_category Redaxo category
      */
-    private static function getSubmenu($rex_category):void
+    private static function getSubmenu($rex_category): void
     {
         echo '<li><a href="'. $rex_category->getUrl() .'" title="'. $rex_category->getName() .'">'. $rex_category->getName() .'</a>';
         echo '<ul>';
