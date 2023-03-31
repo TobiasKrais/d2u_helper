@@ -3,7 +3,7 @@
 	<div class="panel-body">
 		<p>1.10.4-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 03-3 "360° Bild" hinzugefügt.</li>
 		</ul>
 		<p>1.10.3</p>
 		<ul>

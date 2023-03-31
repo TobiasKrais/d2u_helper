@@ -214,6 +214,9 @@ if (class_exists('D2UModuleManager')) {
     $modules[] = new D2UModule('03-2',
         'Bildergalerie Ekko Lightbox',
         11);
+    $modules[] = new D2UModule('03-3',
+        '360° Bild',
+        1);
     $modules[] = new D2UModule('04-1',
         'Google Maps Karte',
         13);
