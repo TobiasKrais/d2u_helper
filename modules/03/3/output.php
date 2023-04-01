@@ -33,7 +33,7 @@ if (!function_exists('includePhotoSphereViewerJS')) {
     <div id="viewer_<?= $viewer_id ?>" style="height: 75vh;"></div>
 
     <script>
-        const viewer = new PhotoSphereViewer.Viewer({
+        const viewer_<?= $viewer_id ?> = new PhotoSphereViewer.Viewer({
             container: document.querySelector('#viewer_<?= $viewer_id ?>'),
             panorama: '<?= rex_url::media($picture) ?>',
             navbar: [

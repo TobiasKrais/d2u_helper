@@ -182,7 +182,7 @@ article input:invalid, article textarea:invalid {
 	padding: 0;
 }
 .nav-link.active {
-	background-color: transparent !important;
+	background-color: transparent;
 }
 .comparison-header, unit {
 	padding: 0 15px;

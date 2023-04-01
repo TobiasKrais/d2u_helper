@@ -5,7 +5,7 @@ $cols_md = 0 === (int) 'REX_VALUE[19]' ? 12 : (int) 'REX_VALUE[19]'; /** @phpsta
 $cols_lg = 0 === (int) 'REX_VALUE[18]' ? 12 : (int) 'REX_VALUE[18]'; /** @phpstan-ignore-line */
 $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @phpstan-ignore-line */
 
-echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
+echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .' d2u_helper_module_11_1">';
 
 $ask_address = 'REX_VALUE[2]' === 'true' ? true : false; /** @phpstan-ignore-line */
 $show_gdpr_hint = 'REX_VALUE[3]' == 'true' ? true : false; /** @phpstan-ignore-line */

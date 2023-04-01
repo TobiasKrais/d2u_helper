@@ -233,7 +233,7 @@ a .box b {
 	padding: 0;
 }
 .nav-link.active {
-	background-color: transparent !important;
+	background-color: transparent;
 }
 .nav, .nav-pills {
 	padding-top: 1em;
@@ -254,7 +254,7 @@ a.active div.active-navi-pill {
     width: 30px;
 }
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: subhead_color_font !important;
+    color: subhead_color_font;
 }
 .download-list li {
 	background-color: navi_color_hover_font !important;

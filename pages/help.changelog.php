@@ -1,9 +1,11 @@
 <div class="panel panel-edit">
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.10.4-DEV</p>
+		<p>1.11.0-DEV</p>
 		<ul>
+			<li>CTA Box Fragment wird nicht mehr mit ausgedruckt.</li>
 			<li>Modul 03-3 "360° Bild" hinzugefügt.</li>
+			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)" Bestimmte Styles auf dieses Modul beschränkt.</li>
 		</ul>
 		<p>1.10.3</p>
 		<ul>

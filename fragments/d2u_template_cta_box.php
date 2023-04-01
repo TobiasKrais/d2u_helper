@@ -5,7 +5,7 @@ if ($show_cta_box) {
     $d2u_helper = rex_addon::get('d2u_helper');
 
 ?>
-<div id="cta_icon_box">
+<div id="cta_icon_box" class="d-print-none">
 	<div id="cta_icon_box_content">
 		<ul>
 		<?php
@@ -37,7 +37,7 @@ if ($show_cta_box) {
 		</ul>
 	</div>
 </div>
-<div id="cta_box">
+<div id="cta_box" class="d-print-none">
 	<div id="cta_box_content">
 		<ul>
 		<?php
