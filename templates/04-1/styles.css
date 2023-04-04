@@ -253,7 +253,10 @@ a.active div.active-navi-pill {
     margin: 0 auto;
     width: 30px;
 }
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.subhead-nav .nav-pills .nav-link.active, .subhead-nav .nav-pills .show > .nav-link {
+    background-color: transparent;
+}
+.subhead-nav .nav-pills .nav-link.active, .subhead-nav .nav-pills .show > .nav-link {
     color: subhead_color_font;
 }
 .download-list li {
