@@ -14,7 +14,7 @@ page:
         help:
             icon: rex-icon rex-icon-help
             title: 'translate:d2u_helper_help'
-            itemclass: pull-right
+            itemClass: pull-right
             subpages:
                 readme: { title: 'translate:d2u_helper_help_chapter_readme' }
                 update: { title: 'translate:d2u_helper_help_chapter_update' }
