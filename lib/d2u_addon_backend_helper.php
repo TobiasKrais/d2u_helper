@@ -535,7 +535,7 @@ class d2u_addon_backend_helper
             $selected = '';
             if (is_array($selected_values) && in_array($key, $selected_values, true)) {
                 $selected = ' selected="selected"';
-            } elseif ($key === $selected_values) {
+            } elseif (!is_array($selected_values) && $key === $selected_values) {
                 $selected = ' selected="selected"';
             }
             echo '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';

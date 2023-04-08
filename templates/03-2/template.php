@@ -1,4 +1,7 @@
 <?php
+
+use D2U_Immo\Contact;
+
     $d2u_helper = rex_addon::get('d2u_helper');
     $d2u_immo = rex_addon::get('d2u_immo');
     $sprog = rex_addon::get('sprog');
@@ -151,12 +154,14 @@
 
                                     } elseif ($data_row instanceof \D2U_Immo\Property) {
                                         $property = $data_row;
-                                        echo '<div class="col-12 contact-advertising">';
-                                        echo '<p>'. $property->contact->firstname .' '. $property->contact->lastname .'<br />';
-                                        echo $property->contact->street .' '. $property->contact->house_number .'<br />';
-                                        echo $property->contact->zip_code .' '. $property->contact->city .'<br />';
-                                        echo $tag_open .'d2u_immo_form_phone'. $tag_close .' '. $property->contact->phone .'</p>';
-                                        echo '</div>';
+                                        if ($property->contact instanceof Contact) {
+                                            echo '<div class="col-12 contact-advertising">';
+                                            echo '<p>'. $property->contact->firstname .' '. $property->contact->lastname .'<br />';
+                                            echo $property->contact->street .' '. $property->contact->house_number .'<br />';
+                                            echo $property->contact->zip_code .' '. $property->contact->city .'<br />';
+                                            echo $tag_open .'d2u_immo_form_phone'. $tag_close .' '. $property->contact->phone .'</p>';
+                                            echo '</div>';
+                                        }
 
                                         echo '<div class="col-12 print-border-h">';
                                         echo '<h1>'. $property->name .'</h1>';

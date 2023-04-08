@@ -96,7 +96,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                 // article hits
                 $article_hit = rex_article::get($hit['fid']);
                 // Check article permission if YCom is used
-                if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($article_hit))) {
+                if (false === rex_addon::get('ycom')->isAvailable() || (rex_ycom_auth::articleIsPermitted($article_hit))) {
                     // get yrewrite article domain
                     $hit_server = $server;
                     if (rex_addon::get('yrewrite')->isAvailable()) {
