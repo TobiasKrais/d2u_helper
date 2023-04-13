@@ -1,9 +1,24 @@
 <div class="panel panel-edit">
+	<header class="panel-heading"><div class="panel-title">Lizenzen</div></header>
+	<div class="panel-body">
+		<ul>
+			<li><a href="https://getbootstrap.com/docs/4.6/getting-started/download/" target="_blank">Bootstrap (4.6.2)</a>:https://opensource.org/licenses/MIT <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+			<li><a href="https://github.com/ashleydw/lightbox" target="_blank">Bootstrap (Ekko) Lightbox (5.4.0-rc2)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+			<li><a href="https://leafletjs.com" target="_blank">Leaflet (1.7.1)</a>: BSD</li>
+			<li>Megamenu: unbekannt</li>
+			<li><a href="https://photo-sphere-viewer.js.org/" target="_blank">PhotoSphereViewer (5.1.4)</a> mit Three.js: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+			<li><a href="https://www.codrops.com" target="_blank">Responsive MultiLevelMenu (1.0.1)</a> mit <a href="http://modernizr.com/" target="_blank">Modernizr</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+			<li><a href="https://github.com/ComputerWolf/SlickNav" target="_blank">Slicknav (1.0.10)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+			<li><a href="https://www.smartmenus.org/" target="_blank">Smartmenus (1.2.1)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+		</ul>
+	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
 		<p>1.11.0-DEV</p>
 		<ul>
 			<li>CTA Box Fragment wird nicht mehr mit ausgedruckt.</li>
+			<li>Vendor Update <a href="https://www.smartmenus.org/" target="_blank">Smartmenus</a> von Version 1.1.1 auf 1.2.1.</li>
+			<li>Vendor Update <a href="https://getbootstrap.com/docs/4.6/getting-started/download/" target="_blank">Bootstrap</a> 4.6.2 Upgrade.</li>
 			<li>Modul 03-3 "360° Bild" hinzugefügt.</li>
 			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)" Bestimmte Styles auf dieses Modul beschränkt.</li>
 		</ul>
