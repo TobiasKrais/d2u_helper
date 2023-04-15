@@ -51,7 +51,7 @@ if (!\rex::isBackend()) {
  */
 function appendToPageD2UHelperFiles(rex_extension_point $ep): void
 {
-    $VERSION_BOOTSTRAP = '4.6.1';
+    $VERSION_BOOTSTRAP = '4.6.2';
     $addon = rex_addon::get('d2u_helper');
 
     // If insertion should be prevented, detect class "prevent_d2u_helper_styles"
