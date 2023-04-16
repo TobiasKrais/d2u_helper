@@ -113,6 +113,15 @@ class d2u_addon_backend_helper
         if (rex_addon::get('redactor2')->isAvailable()) {
             $options_editor['redactor2'] = rex_i18n::msg('redactor2_title');
         }
+        
+        if (rex_addon::get('tinymce')->isAvailable()) {
+            $tinymce_profiles = \TinyMCE\Handler\TinyMCEDatabaseHandler::getAllProfiles();
+            if (is_array($tinymce_profiles)) {
+                foreach ($tinymce_profiles as $profile_infos) {
+                    $options_editor['tinymce_'. $profile_infos['name']] = rex_i18n::msg('tinymce_title') .' - '. $profile_infos['name'];
+                }
+            }
+        }
         if (rex_addon::get('tinymce4')->isAvailable()) {
             $options_editor['tinymce4'] = 'TinyMCE 4';
         }
@@ -142,6 +151,17 @@ class d2u_addon_backend_helper
             if (is_array($tinymce5_profiles)) {
                 foreach ($tinymce5_profiles as $profile_infos) {
                     if (rex_config::get('d2u_helper', 'editor') === 'tinymce5_'. $profile_infos['name']) {
+                        $wysiwyg_class = ' tiny5-editor" data-profile="'. $profile_infos['name'];
+                        break;
+                    }
+                }
+            }
+        } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'tinymce') && rex_addon::get('tinymce') instanceof rex_addon && rex_addon::get('tinymce')->isAvailable()) {
+            $wysiwyg_class = ' tiny-editor" data-profile="default';
+            $tinymce_profiles = \TinyMCE\Handler\TinyMCEDatabaseHandler::getAllProfiles();
+            if (is_array($tinymce_profiles)) {
+                foreach ($tinymce_profiles as $profile_infos) {
+                    if (rex_config::get('d2u_helper', 'editor') === 'tinymce_'. $profile_infos['name']) {
                         $wysiwyg_class = ' tiny5-editor" data-profile="'. $profile_infos['name'];
                         break;
                     }
