@@ -96,7 +96,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                 // article hits
                 $article_hit = rex_article::get($hit['fid']);
                 // Check article permission if YCom is used
-                if (false === rex_addon::get('ycom')->isAvailable() || (rex_ycom_auth::articleIsPermitted($article_hit))) {
+                if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($article_hit)) {
                     // get yrewrite article domain
                     $hit_server = $server;
                     if (rex_addon::get('yrewrite')->isAvailable()) {
@@ -120,7 +120,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                 if ($url_sql->getRows() > 0) {
                     $article_hit = rex_article::get((int) $url_sql->getValue('article_id'));
                     // Check article permission if YCom is used
-                    if (false === rex_addon::get('ycom')->isAvailable() || (rex_addon::get('ycom')->isAvailable() && rex_ycom_auth::articleIsPermitted($article_hit))) {
+                    if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($article_hit)) {
                         $url_info = json_decode((string) $url_sql->getValue('seo'), true);
                         $url_profile = \Url\Profile::get((int) $url_sql->getValue('profile_id'));
 
@@ -133,12 +133,14 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
 
                         $hit_link_unproved = rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id'), 'search_highlighter' => $request]);
                         $hit_link = (!str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . $hit_link_unproved : $hit_link_unproved);
-                        echo '<li class="search_it-result search_it-article">';
-                        echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. $url_info['title'] .'</a></span><br>';
-                        $image = '' !== $url_info['image'] ? '<span class="search_it-previewimage"><img src="'. $hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
-                        echo $image . '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
-                        echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. urldecode(!str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]) : rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')])) .'</a></span>';
-                        echo '</li>';
+                        if (is_array($url_info)) {
+                            echo '<li class="search_it-result search_it-article">';
+                            echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. $url_info['title'] .'</a></span><br>';
+                            $image = '' !== $url_info['image'] ? '<span class="search_it-previewimage"><img src="'. $hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
+                            echo $image . '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
+                            echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. urldecode(!str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]) : rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')])) .'</a></span>';
+                            echo '</li>';
+                        }
                     }
                 }
             } elseif ('file' === $hit['type']) {

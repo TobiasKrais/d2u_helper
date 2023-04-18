@@ -245,7 +245,7 @@ class D2UModuleManager
 
     /**
      * Get paired module ids.
-     * @return array<int, array<string, string>> Paired module ids. Key is Redaxo module id, value is
+     * @return array<int, array<string,string>> Paired module ids. Key is Redaxo module id, value is
      * D2U module id.
      */
     public static function getModulePairs()

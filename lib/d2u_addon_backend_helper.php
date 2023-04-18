@@ -113,7 +113,7 @@ class d2u_addon_backend_helper
         if (rex_addon::get('redactor2')->isAvailable()) {
             $options_editor['redactor2'] = rex_i18n::msg('redactor2_title');
         }
-        
+
         if (rex_addon::get('tinymce')->isAvailable()) {
             $tinymce_profiles = \TinyMCE\Handler\TinyMCEDatabaseHandler::getAllProfiles();
             if (is_array($tinymce_profiles)) {
@@ -126,10 +126,12 @@ class d2u_addon_backend_helper
             $options_editor['tinymce4'] = 'TinyMCE 4';
         }
         if (rex_addon::get('tinymce5')->isAvailable()) {
-            $tinymce5_profiles = \TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles();
+            $tinymce5_profiles = \TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles(); /** @phpstan-ignore-line */
             if (is_array($tinymce5_profiles)) {
                 foreach ($tinymce5_profiles as $profile_infos) {
-                    $options_editor['tinymce5_'. $profile_infos['name']] = rex_i18n::msg('tinymce5_title') .' - '. $profile_infos['name'];
+                    if (is_array($profile_infos)) {
+                        $options_editor['tinymce5_'. $profile_infos['name']] = rex_i18n::msg('tinymce5_title') .' - '. $profile_infos['name'];
+                    }
                 }
             }
         }
@@ -147,10 +149,10 @@ class d2u_addon_backend_helper
             $wysiwyg_class = ' tinyMCEEditor';
         } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'tinymce5') && rex_addon::get('tinymce5') instanceof rex_addon && rex_addon::get('tinymce5')->isAvailable()) {
             $wysiwyg_class = ' tiny5-editor" data-profile="default';
-            $tinymce5_profiles = \TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles();
+            $tinymce5_profiles = \TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles(); /** @phpstan-ignore-line */
             if (is_array($tinymce5_profiles)) {
                 foreach ($tinymce5_profiles as $profile_infos) {
-                    if (rex_config::get('d2u_helper', 'editor') === 'tinymce5_'. $profile_infos['name']) {
+                    if (is_array($profile_infos) && rex_config::get('d2u_helper', 'editor') === 'tinymce5_'. $profile_infos['name']) {
                         $wysiwyg_class = ' tiny5-editor" data-profile="'. $profile_infos['name'];
                         break;
                     }
@@ -412,7 +414,7 @@ class d2u_addon_backend_helper
             }
         }
         echo '</select>';
-        echo '<input type="hidden" name="REX_INPUT_LINKLIST[' . $fieldnumber . ']" id="REX_LINKLIST_' . $fieldnumber . '" value="' . (is_array($article_ids) ? implode(',', $article_ids) : $article_ids) . '">';
+        echo '<input type="hidden" name="REX_INPUT_LINKLIST[' . $fieldnumber . ']" id="REX_LINKLIST_' . $fieldnumber . '" value="' . implode(',', $article_ids) . '">';
         echo '<span class="input-group-addon"><div class="btn-group-vertical">';
         if (!$readonly) {
             echo self::getLinkPositionButtons($fieldnumber);
@@ -553,9 +555,7 @@ class d2u_addon_backend_helper
         }
         foreach ($values as $key => $value) {
             $selected = '';
-            if (is_array($selected_values) && in_array($key, $selected_values, true)) {
-                $selected = ' selected="selected"';
-            } elseif (!is_array($selected_values) && $key === $selected_values) {
+            if (in_array($key, $selected_values, true)) {
                 $selected = ' selected="selected"';
             }
             echo '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';

@@ -44,14 +44,14 @@ if ('' !== $youtube_id) {
 			<p><?= \Sprog\Wildcard::get('d2u_helper_module_06_gdpr_hint') ?></p>
 		</div>
 		<iframe width="1600" height="900" src="" id="player-<?= $youtube_id ?>" frameborder="0" webkitAllowFullScreen moziallowfullscreen allowfullscreen
-				style="background: url(<?= rex_media_manager::getUrl('d2u_helper_module_06-1_preview', $previewimage_target_filename) ?>) center; background-size: cover;"></iframe>
+				style="background: url(<?= rex_media_manager::getUrl('d2u_helper_module_06-1_preview', $previewimage_target_filename) ?>) center; background-size: contain;"></iframe>
 	</div>
 <?php
     if ($show_title) { /** @phpstan-ignore-line */
         $video_info_raw = file_get_contents($youtube_videoinfo_url);
         if (false !== $video_info_raw) {
             $video_info = json_decode($video_info_raw);
-            echo '<h2>'. $video_info->title .'</h2>';
+            echo '<h2>'. $video_info->title .'</h2>'; /** @phpstan-ignore-line */
         }
         echo '</div>';
     }

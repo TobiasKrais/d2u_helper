@@ -174,7 +174,7 @@ class D2UTemplate
         $this->rex_addon = $template_addon;
         if ($this->rex_addon->hasConfig('template_'. $this->d2u_template_id)) {
             $config = $this->rex_addon->getConfig('template_'. $this->d2u_template_id);
-            if (array_key_exists((int) $config['rex_template_id'], D2UTemplateManager::getRexTemplates())) {
+            if (is_array($config) && array_key_exists((int) $config['rex_template_id'], D2UTemplateManager::getRexTemplates())) {
                 // Get paired template id
                 $this->rex_template_id = (int) $config['rex_template_id'];
                 // Get Autoupdate settings

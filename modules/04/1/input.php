@@ -83,7 +83,7 @@ if ('' === (string) rex_config::get('d2u_helper', 'maps_key', '')) {
 <?php
 } else {
 ?>
-	<script src="https://maps.googleapis.com/maps/api/js?key=<?= rex_config::get('d2u_helper', 'maps_key', '') ?>"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=<?= (string) rex_config::get('d2u_helper', 'maps_key', '') ?>"></script>
 	<script>
 		function geocode() {
 			if($("input[name='REX_INPUT_VALUE[1]']").val() === "") {

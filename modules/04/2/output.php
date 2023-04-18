@@ -21,7 +21,7 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
             }
 ?>
 	<script>
-		Geolocation.default.positionColor = '<?= rex_config::get('d2u_helper', 'article_color_h') ?>';
+		Geolocation.default.positionColor = '<?= (string) rex_config::get('d2u_helper', 'article_color_h') ?>';
 
 		// adjust zoom level
 		Geolocation.Tools.Center = class extends Geolocation.Tools.Template{

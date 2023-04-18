@@ -165,7 +165,7 @@ class D2UTemplateManager
      * Get paired template ids.
      * @param string $addon_key Redaxo addon key for filtering pairs. If missing,
      * pairs of all D2U addons are searched.
-     * @return array<int, array<string, string>> Paired template ids. Key is Redaxo template id, value is
+     * @return array<int, array<string,string>> Paired template ids. Key is Redaxo template id, value is
      * an array width D2U template id (named "d2u_id") and addon key (named "addon_key").
      */
     private static function getTemplatePairs($addon_key = '')
