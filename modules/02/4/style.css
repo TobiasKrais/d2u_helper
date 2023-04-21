@@ -1,0 +1,38 @@
+@font-face{
+	font-family:'FontAwesome';
+	font-display: swap;
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?v=4.7.0");
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff2?v=4.7.0") format('woff2'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff?v=4.7.0") format('woff'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
+}
+
+.d2u_helper_mod_02_4_content {
+	height: 100%;
+	left: 0;
+	padding: 45px;
+	position: absolute;
+	overflow: scroll;
+	top: 0;
+	width: 100%;
+}
+.d2u_helper_mod_02_4_content .col-sm-6 h3 {
+	padding-bottom: 15px;
+}
+.d2u_helper_mod_02_4_content button {
+	background-color: article_color_h;
+	border: 1px solid article_color_h;
+	color: article_color_bg;
+	max-width: 350px;
+	padding: 5px 15px;
+	width: 100%;
+}
+.d2u_helper_mod_02_4_content .arrow_right:before {
+	content: "\f105";
+	float: right;
+	font-family: FontAwesome;
+	padding-left: 15px;
+}
+

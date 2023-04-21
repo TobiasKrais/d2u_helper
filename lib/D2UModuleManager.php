@@ -161,6 +161,9 @@ class D2UModuleManager
         $modules[] = new D2UModule('02-3',
             'Überschrift mit Untertitel und Textfeld',
             7);
+        $modules[] = new D2UModule('02-4',
+            'Überschrift mit Hintergrundbild und 2 Buttons',
+            1);
         $modules[] = new D2UModule('03-1',
             'Bild',
             12);
