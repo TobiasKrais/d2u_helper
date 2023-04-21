@@ -19,14 +19,14 @@
 						<div class="col-12">
 							<?php
                                 if ('' !== rex_config::get('d2u_helper', 'template_header_pic', '')) {
-                                    $header_image_filename = rex_config::get('d2u_helper', 'template_header_pic');
+                                    $header_image_filename = (string) rex_config::get('d2u_helper', 'template_header_pic');
                                     $header_image = rex_media::get($header_image_filename);
                                     if ($header_image instanceof rex_media) {
-                                        echo '<img src="'. ('' !== rex_config::get('d2u_helper', 'template_header_media_manager_type', '') ? rex_media_manager::getUrl(rex_config::get('d2u_helper', 'template_header_media_manager_type', ''), $header_image_filename) : rex_url::media($header_image_filename)) .'" alt="'. $header_image->getTitle() .'" id="header-image">';
+                                        echo '<img src="'. ('' !== rex_config::get('d2u_helper', 'template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) rex_config::get('d2u_helper', 'template_header_media_manager_type', ''), $header_image_filename) : rex_url::media($header_image_filename)) .'" alt="'. $header_image->getTitle() .'" id="header-image">';
                                     }
                                 }
                                 if ('' !== rex_config::get('d2u_helper', 'template_logo', '')) {
-                                    $media_logo = rex_media::get(rex_config::get('d2u_helper', 'template_logo'));
+                                    $media_logo = rex_media::get((string) rex_config::get('d2u_helper', 'template_logo'));
                                     if ($media_logo instanceof rex_media) {
                                         echo '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
                                         echo '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-top">';
@@ -99,7 +99,7 @@
 						<div class="col-12 col-sm-4 col-lg-2" id="footer-right">
 							<?php
                                 if ('' !== rex_config::get('d2u_helper', 'template_logo', '')) {
-                                    $media_logo = rex_media::get(rex_config::get('d2u_helper', 'template_logo'));
+                                    $media_logo = rex_media::get((string) rex_config::get('d2u_helper', 'template_logo'));
                                     if ($media_logo instanceof rex_media) {
                                         echo '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
                                         echo '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-footer">';

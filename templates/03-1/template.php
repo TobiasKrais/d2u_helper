@@ -31,17 +31,17 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
                         if (!$d2u_helper->hasConfig('template_header_pic') || '' === $d2u_helper->getConfig('template_header_pic')) {
                             echo "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
                         } else {
-                            $header_image = $d2u_helper->getConfig('template_header_pic');
+                            $header_image = (string) $d2u_helper->getConfig('template_header_pic');
                             if ($this->hasValue('art_file') && '' !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
                                 $header_image = $this->getValue('art_file'); /** @phpstan-ignore-line */
                             }
                             $media_header_pic = rex_media::get($header_image);
                             if ($media_header_pic instanceof rex_media) {
-                                echo '<img src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" class="d-print-none">';
+                                echo '<img src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" class="d-print-none">';
                             }
                         }
                         if ($d2u_helper->hasConfig('template_print_header_pic') || '' !== $d2u_helper->getConfig('template_print_header_pic')) {
-                            echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_print_header_pic')) .'" alt="" class="d-none d-print-block">';
+                            echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_print_header_pic')) .'" alt="" class="d-none d-print-block">';
                         }
                     ?>
 				</div>
@@ -110,7 +110,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 			<?php
                 echo '<div class="col-12 d-none d-print-block">';
                 if ($d2u_helper->hasConfig('template_print_footer_pic') || '' !== $d2u_helper->getConfig('template_print_footer_pic')) {
-                    echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_print_footer_pic')) .'" alt="">';
+                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_print_footer_pic')) .'" alt="">';
                 }
                 echo '</div>';
             ?>

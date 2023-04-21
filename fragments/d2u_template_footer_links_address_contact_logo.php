@@ -62,7 +62,7 @@
         echo '<div class="col-12">&nbsp;</div>';
 
         // Logo footer
-        $media_logo_footer = rex_media::get('' !== (string) $d2u_helper->getConfig('footer_logo', '') ? (string) ($d2u_helper->getConfig('template_logo')) : '');
+        $media_logo_footer = rex_media::get('' !== (string) $d2u_helper->getConfig('footer_logo', '') ? (string) ((string) $d2u_helper->getConfig('template_logo')) : '');
         if ($media_logo_footer instanceof rex_media) {
             echo '<div class="col-12 col-md-4 offset-md-4 footer-logo-col">';
             echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">'

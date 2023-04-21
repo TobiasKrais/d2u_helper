@@ -64,9 +64,9 @@
 						<?php
                             if ('' !== $d2u_helper->getConfig('template_logo', '')) {
                                 echo '<a href="'. (\rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer()) .'">';
-                                $media_logo = rex_media::get($d2u_helper->getConfig('template_logo'));
+                                $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
                                 if ($media_logo instanceof rex_media) {
-                                    echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+                                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
                                 }
                                 echo '</a>';
                             }
@@ -80,9 +80,9 @@
                                 if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '<a href="'. $d2u_helper->getConfig('template_logo_2_link', '') .'">';
                                 }
-                                $media_logo = rex_media::get($d2u_helper->getConfig('template_logo_2'));
+                                $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo_2'));
                                 if ($media_logo instanceof rex_media) {
-                                    echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+                                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
                                 }
                                 if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '</a>';
@@ -101,7 +101,7 @@
                     $titelbild = rex_media::get($header_image);
                     if ($titelbild instanceof rex_media) {
                         $header_pic_style = 'background: url('.
-                                ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .') center center; background-size: cover;';
+                                ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .') center center; background-size: cover;';
                     }
                 ?>
 				<div class="col-12 col-xl-8" style="<?= $header_pic_style ?>">
@@ -113,9 +113,9 @@
                                 if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '<a href="'. $d2u_helper->getConfig('template_logo_2_link', '') .'">';
                                 }
-                                $media_logo = rex_media::get($d2u_helper->getConfig('template_logo_2'));
+                                $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo_2'));
                                 if ($media_logo instanceof rex_media) {
-                                    echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+                                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
                                 }
                                 if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '</a>';
@@ -194,7 +194,7 @@
 				<div class="d-none d-xl-block col-xl-2" id="teaser-inner-frame">
 					<?php
                         if ('' !== $d2u_helper->getConfig('template_05_1_info_text', '')) {
-                            echo $d2u_helper->getConfig('template_05_1_info_text');
+                            echo (string) $d2u_helper->getConfig('template_05_1_info_text');
                         }
                     ?>
 				</div>

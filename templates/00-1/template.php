@@ -112,12 +112,12 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 			print "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
 		}
 		else {
-			$header_image = $d2u_helper->getConfig("template_header_pic");
+			$header_image = (string) $d2u_helper->getConfig("template_header_pic");
 			if($this->hasValue("art_file") && '' !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
-				$header_image = $this->getValue("art_file"); /** @phpstan-ignore-line */
+				$header_image = (string) $this->getValue("art_file"); /** @phpstan-ignore-line */
 			}
 			if($header_image !== '') {
-				$header_css = 'style="background-image: url('. ($d2u_helper->getConfig('template_header_media_manager_type', '') !== '' ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .')"';
+				$header_css = 'style="background-image: url('. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .')"';
 			}
 			else {
 				$header_css = 'style="height: 100px"';
@@ -133,9 +133,9 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 				<div class="col-12">
 					<a href="<?php echo rex_getUrl(rex_article::getSiteStartArticleId()); ?>">
 						<?php
-						$media_logo = rex_media::get($d2u_helper->getConfig("template_logo"));
+						$media_logo = rex_media::get((string) $d2u_helper->getConfig("template_logo"));
 						if($media_logo instanceof rex_media) {
-							print '<img src="'. rex_url::media($d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+							print '<img src="'. rex_url::media((string) $d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
 						}
 						?>
 					</a>

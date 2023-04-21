@@ -111,9 +111,9 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                     if ('' !== $d2u_helper->getConfig('template_logo', '')) {
                         echo '<div class="col-12">';
                         echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-                        $media_logo = rex_media::get($d2u_helper->getConfig('template_logo'));
+                        $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
                         if ($media_logo instanceof rex_media) {
-                            echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+                            echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
                         }
                         echo '</a>';
                         echo '</div>';
@@ -273,7 +273,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 						<div class="row">
 							<?php
                                 // News / Teaser
-                                $news_category = new \D2U_News\Category(rex_config::get('d2u_helper', 'template_news_category'), rex_clang::getCurrentId());
+                                $news_category = new \D2U_News\Category((int) rex_config::get('d2u_helper', 'template_news_category'), rex_clang::getCurrentId());
                                 $news = [];
                                 if ($news_category->category_id > 0) {
                                     $news = $news_category->getNews(true);

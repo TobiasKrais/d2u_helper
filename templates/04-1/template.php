@@ -105,7 +105,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 	<a name="top"></a>
 	<?php
         // Logo
-        $slogan_text = ($current_article instanceof rex_article && '' !== $current_article->getValue('art_slogan')) ? $current_article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId(), '');
+        $slogan_text = ($current_article instanceof rex_article && '' !== $current_article->getValue('art_slogan')) ? (string) $current_article->getValue('art_slogan') : (string) $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId(), '');
         if ('' !== $d2u_helper->getConfig('template_logo', '') || ('top' === $d2u_helper->getConfig('template_slogan_position', 'slider') && '' !== $slogan_text)) {
             echo '<section id="logo-container">';
             echo '<div class="container">';
@@ -116,9 +116,9 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
             }
             if ('' !== $d2u_helper->getConfig('template_logo', '')) {
                 echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-                $media_logo = rex_media::get($d2u_helper->getConfig('template_logo'));
+                $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
                 if ($media_logo instanceof rex_media) {
-                    echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
                 }
                 echo '</a>';
             }

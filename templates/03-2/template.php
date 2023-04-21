@@ -38,8 +38,8 @@ use D2U_Immo\Contact;
 				<div class="col-12">
 					<?php
                         if ($d2u_helper->hasConfig('template_03_2_header_pic') || '' !== $d2u_helper->getConfig('template_03_2_header_pic')) {
-                            $header_image = $d2u_helper->getConfig('template_03_2_header_pic');
-                            echo '<img src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl($d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="">';
+                            $header_image = (string) $d2u_helper->getConfig('template_03_2_header_pic');
+                            echo '<img src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="">';
                         } else {
                             echo "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
                         }
@@ -365,7 +365,7 @@ use D2U_Immo\Contact;
 				<div class="col-12">
 					<?php
                         if ($d2u_helper->hasConfig('template_03_2_footer_pic') || '' !== $d2u_helper->getConfig('template_03_2_footer_pic')) {
-                            echo '<img src="'. rex_url::media($d2u_helper->getConfig('template_03_2_footer_pic')) .'" alt="">';
+                            echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_03_2_footer_pic')) .'" alt="">';
                         } else {
                             echo "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
                         }
