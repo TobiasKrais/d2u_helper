@@ -28,8 +28,8 @@
   text-decoration: none;
 }
 .sm-simple a.current {
-  background: navi_color_font;
-  color: #fff;
+  background: navi_color_hover_font;
+  color: navi_color_hover_bg;
 }
 .sm-simple a.disabled {
   color: #cccccc;

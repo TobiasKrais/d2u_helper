@@ -23,13 +23,12 @@
 
 /* YForm input field styles */
 #fragment-search {
-	border: 1px solid #aaa;
 	max-width: 100%;
 	position: relative;
 }
 #fragment-search input {
-	border: none;
-	color: #aaa;
+	border: 1px solid navi_color_font;
+	color: navi_color_font;
 	font-size: 16px;
 	height: 25px;
 	padding: 2px 30px 2px 5px;
