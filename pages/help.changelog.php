@@ -1,5 +1,5 @@
 <div class="panel panel-edit">
-	<header class="panel-heading"><div class="panel-title">Lizenzen</div></header>
+	<header class="panel-heading"><div class="panel-title">Vendor Lizenzen</div></header>
 	<div class="panel-body">
 		<ul>
 			<li><a href="https://getbootstrap.com/docs/4.6/getting-started/download/" target="_blank">Bootstrap (4.6.2)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
@@ -14,9 +14,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.12.0-DEV</p>
+		<p>1.12.0</p>
 		<ul>
 			<li>Kompatibel mit TinyMCE Addon (Version 6).</li>
+			<li>Modul 02-2 "Überschrift mit Klapptext": Icons verbessert.</li>
 			<li>Modul 02-4 "Überschrift mit Hintergrundbild und 2 Buttons" hinzugefügt.</li>
 			<li>Modul 02-5 "Inhaltsverzeichnis der Überschriften" hinzugefügt. Dieses Modul liest alle Überschriften aus der Seite aus und fügt ein verlinktes Inhaltverzeichnis zu den Überschriften ein.</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Cache Pfadrechte waren für PHP kleiner Version 8.1 fehlerhaft.</li>

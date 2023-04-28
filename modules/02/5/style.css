@@ -20,9 +20,10 @@
 .fa-icon {
 	font-family: FontAwesome;
 }
-.h_toggle {
+#d2u_helper_toc .h_toggle {
 	float: right;
-	padding-left:1em;
+	padding-left: 15px;
+	padding-right: 0;
 }
 .icon_down::before {
 	content: "\f078";
