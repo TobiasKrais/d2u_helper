@@ -1,5 +1,5 @@
 package: d2u_helper
-version: '1.12.0'
+version: '1.12.1'
 author: Tobias Krais
 supportpage: http://github.com/tobiaskrais/d2u_helper
 
@@ -21,7 +21,7 @@ page:
                 changelog: { title: 'translate:d2u_helper_help_chapter_changelog' }
 
 requires:
-    php: '>=7.4'
+    php: '>=8.1'
     redaxo: '>=5.10.0'
 
 conflicts:
