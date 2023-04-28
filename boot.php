@@ -51,7 +51,7 @@ if (rex::isBackend()) {
 }
 
 /**
- * Adds table of contents on pages
+ * Adds table of contents on pages.
  * @param rex_extension_point<string> $ep Redaxo extension point
  */
 function addD2UHelperTOC(rex_extension_point $ep): void
@@ -61,7 +61,7 @@ function addD2UHelperTOC(rex_extension_point $ep): void
     // table of contents
     $toc_html = '<p onClick="toggle_toc()"><span class="fa-icon icon_toc"></span>'. \Sprog\Wildcard::get('d2u_helper_toc') .'<span class="fa-icon h_toggle icon_right" id="toc_arrow"></span></p>'. PHP_EOL;
     $toc_html .= '<ol id="toc_list"><li>';
-    
+
     // load code in a DOM document
     $dom = new DOMDocument();
     $dom->loadHTML($content);
@@ -81,20 +81,17 @@ function addD2UHelperTOC(rex_extension_point $ep): void
         foreach ($headings as $heading) {
             $level = (int) $heading->tagName[1] < $highest_level ? $highest_level : (int) $heading->tagName[1];
 
-            if(0 === $last_level) {
+            if (0 === $last_level) {
                 $highest_level = $level;
-            }
-            else if ($last_level < $level) {
+            } elseif ($last_level < $level) {
                 $toc_html .= '<ol><li>';
-            }
-            else if ($last_level > $level) {
+            } elseif ($last_level > $level) {
                 while ($last_level > $level) {
                     $toc_html .= '</li></ol>';
-                    $last_level--;
+                    --$last_level;
                 }
                 $toc_html .= '</li>'. PHP_EOL .'<li>';
-            }
-            else {
+            } else {
                 $toc_html .= '</li>'. PHP_EOL .'<li>';
             }
             $last_level = $level < $highest_level ? $highest_level : $level;
@@ -109,7 +106,7 @@ function addD2UHelperTOC(rex_extension_point $ep): void
         }
         while ($last_level >= $highest_level) {
             $toc_html .= '</li></ol>';
-            $last_level--;
+            --$last_level;
         }
 
         // Element gefunden
@@ -325,7 +322,7 @@ function sendD2UHelperCSS(): void
         $css .= d2u_mobile_navi_slicknav::getAutoCSS();
     } elseif ('smartmenu' === (string) $d2u_helper->getConfig('include_menu')) {
         $css .= d2u_mobile_navi_smartmenus::getAutoCSS();
-    }    
+    }
 
     echo d2u_addon_frontend_helper::prepareCSS($css);
     exit;
