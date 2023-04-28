@@ -6,7 +6,7 @@
         $rex_articles = rex_article::getRootArticles(true);
         echo '<div class="row">';
         echo '<div class="col-12">';
-        echo '<div id="footer-address">';
+        echo '<div class="footer-address">';
         echo '<div class="footer-title">'. \Sprog\Wildcard::get('d2u_helper_module_14_search_template_links') .'</div>';
         foreach ($rex_articles as $rex_article) {
             echo '<a href="'. $rex_article->getUrl() .'"><span class="fa-icon fa-link footer-icon"></span>'. $rex_article->getName() .'</a><br>';
@@ -20,7 +20,7 @@
         echo '</div>';
 
         echo '<div class="col-12 col-md-4">';
-        echo '<div id="footer-address">';
+        echo '<div class="footer-address">';
         echo '<div class="footer-title">'. \Sprog\Wildcard::get('d2u_helper_module_14_search_template_address') .'</div>';
         if ('' !== (string) $d2u_helper->getConfig('footer_text_company', '')) {
             echo '<span class="fa-icon fa-user footer-icon"></span>'. $d2u_helper->getConfig('footer_text_company') .'<br>';
@@ -39,7 +39,7 @@
         echo '</div>';
 
         echo '<div class="col-12 col-md-4">';
-        echo '<div id="footer-address">';
+        echo '<div class="footer-address">';
         echo '<div class="footer-title">'. \Sprog\Wildcard::get('d2u_helper_module_14_search_template_contact') .'</div>';
         if ('' !== (string) $d2u_helper->getConfig('footer_text_phone', '')) {
             echo '<span class="fa-icon fa-phone footer-icon"></span><a href="tel:'. $d2u_helper->getConfig('footer_text_phone') .'">'. $d2u_helper->getConfig('footer_text_phone') .'</a><br>';

@@ -64,7 +64,9 @@ function addD2UHelperTOC(rex_extension_point $ep): void
 
     // load code in a DOM document
     $dom = new DOMDocument();
+    libxml_use_internal_errors(true);
     $dom->loadHTML($content);
+    libxml_clear_errors();
 
     $xpath = new DOMXPath($dom);
 
@@ -73,7 +75,7 @@ function addD2UHelperTOC(rex_extension_point $ep): void
     // is module
     if ($toc_element->length > 0) {
         // find all headings in article
-        $headings = $xpath->query('//article//*[self::h2 or self::h3 or self::h4 or self::h5 or self::h6][1]');
+        $headings = $xpath->query('//article//h2 | //article//h3 | //article//h4 | //article//h5 | //article//h6');
 
         $last_level = 0;
         $highest_level = 2;
