@@ -211,6 +211,9 @@ if (class_exists('D2UModuleManager')) {
     $modules[] = new D2UModule('02-4',
         'Überschrift mit Hintergrundbild und 2 Buttons',
         1);
+    $modules[] = new D2UModule('02-5',
+        'Inhaltsverzeichnis der Überschriften',
+        1);
     $modules[] = new D2UModule('03-1',
         'Bild',
         12);
@@ -234,7 +237,7 @@ if (class_exists('D2UModuleManager')) {
         5);
     $modules[] = new D2UModule('06-1',
         'YouTube Video einbinden',
-        14);
+        15);
     $modules[] = new D2UModule('06-2',
         'IFrame einbinden',
         5);

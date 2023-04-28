@@ -12,7 +12,11 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
     // rex_view::addJsFile($addon->getAssetsUrl('js/script.js'), [rex_view::JS_IMMUTABLE => true]);
 }
 
-if (!\rex::isBackend()) {
+if (rex::isBackend()) {
+    rex_extension::register('ART_PRE_DELETED', 'rex_d2u_helper_article_is_in_use');
+    rex_extension::register('CLANG_DELETED', 'rex_d2u_helper_clang_deleted');
+    rex_extension::register('MEDIA_IS_IN_USE', 'rex_d2u_helper_media_is_in_use');
+} else {
     rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
         // If CSS or JS is requested
         if ('helper.css' === rex_request('d2u_helper', 'string')) {
@@ -33,16 +37,91 @@ if (!\rex::isBackend()) {
     // Only frontend call
     rex_extension::register('OUTPUT_FILTER', 'appendToPageD2UHelperFiles');
 
+    // Replace privacy policy and impress links, esp. after sprog calls OUTPUT_FILTER
     if (rex_config::get('d2u_helper', 'article_id_privacy_policy', 0) > 0 || rex_config::get('d2u_helper', 'article_id_impress', 0) > 0) {
-        // Try to replace as last one, esp. after sprog calls OUTPUT_FILTER
         rex_extension::register('PACKAGES_INCLUDED', static function () {
             rex_extension::register('OUTPUT_FILTER', 'replace_privacy_policy_links');
         }, rex_extension::LATE);
     }
-} else {
-    rex_extension::register('ART_PRE_DELETED', 'rex_d2u_helper_article_is_in_use');
-    rex_extension::register('CLANG_DELETED', 'rex_d2u_helper_clang_deleted');
-    rex_extension::register('MEDIA_IS_IN_USE', 'rex_d2u_helper_media_is_in_use');
+
+    // show table of contents
+    rex_extension::register('PACKAGES_INCLUDED', static function () {
+        rex_extension::register('OUTPUT_FILTER', 'addD2UHelperTOC');
+    });
+}
+
+/**
+ * Adds table of contents on pages
+ * @param rex_extension_point<string> $ep Redaxo extension point
+ */
+function addD2UHelperTOC(rex_extension_point $ep): void
+{
+    $content = $ep->getSubject();
+
+    // table of contents
+    $toc_html = '<p onClick="toggle_toc()"><span class="fa-icon icon_toc"></span>'. \Sprog\Wildcard::get('d2u_helper_toc') .'<span class="fa-icon h_toggle icon_right" id="toc_arrow"></span></p>'. PHP_EOL;
+    $toc_html .= '<ol id="toc_list"><li>';
+    
+    // load code in a DOM document
+    $dom = new DOMDocument();
+    $dom->loadHTML($content);
+
+    $xpath = new DOMXPath($dom);
+
+    $toc_element = $xpath->query('//div[@id="d2u_helper_toc"]');
+
+    // is module
+    if ($toc_element->length > 0) {
+        // find all headings in article
+        $headings = $xpath->query('//article//*[self::h2 or self::h3 or self::h4 or self::h5 or self::h6][1]');
+
+        $last_level = 0;
+        $highest_level = 2;
+        // add ids to headings
+        foreach ($headings as $heading) {
+            $level = (int) $heading->tagName[1] < $highest_level ? $highest_level : (int) $heading->tagName[1];
+
+            if(0 === $last_level) {
+                $highest_level = $level;
+            }
+            else if ($last_level < $level) {
+                $toc_html .= '<ol><li>';
+            }
+            else if ($last_level > $level) {
+                while ($last_level > $level) {
+                    $toc_html .= '</li></ol>';
+                    $last_level--;
+                }
+                $toc_html .= '</li>'. PHP_EOL .'<li>';
+            }
+            else {
+                $toc_html .= '</li>'. PHP_EOL .'<li>';
+            }
+            $last_level = $level < $highest_level ? $highest_level : $level;
+
+            $id = 'heading-' . uniqid();
+            $anchor_node = $dom->createElement('a');
+            $anchor_node->setAttribute('name', $id);
+            $anchor_node->setAttribute('class', 'd2u_helper_toc_anchor');
+            $heading->insertBefore($anchor_node, $heading->firstChild);
+
+            $toc_html .= '<a href="#' . $id . '">' . $heading->nodeValue . '</a>';
+        }
+        while ($last_level >= $highest_level) {
+            $toc_html .= '</li></ol>';
+            $last_level--;
+        }
+
+        // Element gefunden
+        $toc_node = $dom->createDocumentFragment();
+        $toc_node->appendXML($toc_html);
+        $toc_element->item(0)->appendChild($toc_node);
+
+        // update content
+        $content = $dom->saveHTML();
+    }
+
+    $ep->setSubject($content);
 }
 
 /**
@@ -239,16 +318,16 @@ function sendD2UHelperCSS(): void
 
     // Include menu CSS
     if ('megamenu' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_mega_menu::getAutoCSS());
+        $css .= d2u_mobile_navi_mega_menu::getAutoCSS();
     } elseif ('multilevel' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi::getAutoCSS());
+        $css .= d2u_mobile_navi::getAutoCSS();
     } elseif ('slicknav' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_slicknav::getAutoCSS());
+        $css .= d2u_mobile_navi_slicknav::getAutoCSS();
     } elseif ('smartmenu' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= d2u_addon_frontend_helper::prepareCSS(d2u_mobile_navi_smartmenus::getAutoCSS());
-    }
+        $css .= d2u_mobile_navi_smartmenus::getAutoCSS();
+    }    
 
-    echo $css;
+    echo d2u_addon_frontend_helper::prepareCSS($css);
     exit;
 }
 

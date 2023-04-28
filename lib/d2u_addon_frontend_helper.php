@@ -240,7 +240,7 @@ class d2u_addon_frontend_helper
 
         // Write to cache
         if (!is_dir(rex_path::addonCache('d2u_helper'))) {
-            mkdir(rex_path::addonCache('d2u_helper'), 0o755, true);
+            mkdir(rex_path::addonCache('d2u_helper'), 0755, true);
         }
         file_put_contents(rex_path::addonCache('d2u_helper', 'modules.css'), self::prepareCSS($css));
 
@@ -274,7 +274,7 @@ class d2u_addon_frontend_helper
 
         // Write to cache
         if (!is_dir(rex_path::addonCache('d2u_helper'))) {
-            mkdir(rex_path::addonCache('d2u_helper'), 0o755, true);
+            mkdir(rex_path::addonCache('d2u_helper'), 0755, true);
         }
         file_put_contents(rex_path::addonCache('d2u_helper', 'modules.js'), $js);
 

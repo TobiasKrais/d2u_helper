@@ -18,6 +18,8 @@
 		<ul>
 			<li>Kompatibel mit TinyMCE Addon (Version 6).</li>
 			<li>Modul 02-4 "Überschrift mit Hintergrundbild und 2 Buttons" hinzugefügt.</li>
+			<li>Modul 02-5 "Inhaltsverzeichnis der Überschriften" hinzugefügt. Dieses Modul liest alle Überschriften aus der Seite aus und fügt ein verlinktes Inhaltverzeichnis zu den Überschriften ein.</li>
+			<li>Modul 06-1 "YouTube Video einbinden": Cache Pfadrechte waren für PHP kleiner Version 8.1 fehlerhaft.</li>
 		</ul>
 		<p>1.11.0</p>
 		<ul>

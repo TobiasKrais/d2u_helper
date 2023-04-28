@@ -18,8 +18,8 @@
 .icon_down::before {
 	content: "\f078";
 }
-.icon_up::before {
-	content: "\f077";
+.icon_right::before {
+	content: "\f054";
 }
 .toggle_spacer {
 	margin-bottom: 2em;

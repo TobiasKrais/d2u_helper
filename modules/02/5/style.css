@@ -1,0 +1,74 @@
+@font-face{
+	font-family:'FontAwesome';
+	font-display: swap;
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?v=4.7.0");
+	src:url("./assets/addons/be_style/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format('embedded-opentype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff2?v=4.7.0") format('woff2'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.woff?v=4.7.0") format('woff'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.ttf?v=4.7.0") format('truetype'),
+		url("./assets/addons/be_style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format('svg');
+}
+
+#d2u_helper_toc {
+	border: 1px solid article_color_h;
+	margin-bottom: 15px;
+	padding: 15px;
+}
+#d2u_helper_toc p {
+	margin-bottom: 0;
+}
+.fa-icon {
+	font-family: FontAwesome;
+}
+.h_toggle {
+	float: right;
+	padding-left:1em;
+}
+.icon_down::before {
+	content: "\f078";
+}
+.icon_toc::before {
+	content: "\f0cb";
+	padding-right: 10px;
+}
+.icon_right::before {
+	content: "\f054";
+}
+.toggle_spacer {
+	margin-bottom: 2em;
+}
+#toc_list {
+	display: none;
+    padding-left: 0;
+    padding-top: 1em;
+}
+#toc_list, #toc_list ol {
+    counter-reset: item;
+    list-style-type: none;
+}
+#toc_list > li {
+    counter-increment: item;
+    margin-bottom: 10px;
+}
+#toc_list > li:before {
+    content: counters(item, ".") ". ";
+}
+#toc_list > li ol {
+    counter-reset: subitem;
+    padding-left: 1.2em;
+}
+#toc_list > li ol > li ol {
+    padding-left: 2em;
+}
+#toc_list > li ol > li {
+    counter-increment: subitem;
+}
+#toc_list > li ol > li:before {
+    content: counters(item, ".") "." counters(subitem, ".") " ";
+}
+.d2u_helper_toc_anchor {
+    display: block;
+    position: relative;
+    top: -100px;
+    visibility: hidden;
+}

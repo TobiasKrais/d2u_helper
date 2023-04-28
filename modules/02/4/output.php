@@ -26,7 +26,7 @@ $rex_article_2 = rex_article::get($article_id_2);
             echo '<div class="col-6">';
             echo '<'. $heading_type .'>'. $heading .'</'. $heading_type .'>';
             echo '</div>';
-            if($rex_article_1 instanceof rex_article) {
+            if ($rex_article_1 instanceof rex_article) {
                 echo '<div class="col-12">&nbsp;</div>';
                 echo '<div class="col-12">';
                 echo '<a href="'. $rex_article_1->getUrl() .'" title="'. $rex_article_1->getName() .'">'
@@ -34,7 +34,7 @@ $rex_article_2 = rex_article::get($article_id_2);
                 .'<span class="arrow_right"></span></button></a>';
                 echo '</div>';
             }
-            if($rex_article_2 instanceof rex_article) {
+            if ($rex_article_2 instanceof rex_article) {
                 echo '<div class="col-12">&nbsp;</div>';
                 echo '<div class="col-12">';
                 echo '<a href="'. $rex_article_2->getUrl() .'" title="'. $rex_article_2->getName() .'">'
@@ -42,7 +42,6 @@ $rex_article_2 = rex_article::get($article_id_2);
                 .'<span class="arrow_right"></span></button></a>';
                 echo '</div>';
             }
-            echo '</div>';
             echo '</div>';
             echo '</div>';
         ?>

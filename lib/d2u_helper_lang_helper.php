@@ -84,6 +84,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
         'd2u_helper_modules_show_less' => 'Show less',
         'd2u_helper_modules_show_more' => 'Show more',
         'd2u_helper_template_cta_box' => 'We would be happy to advice you!',
+        'd2u_helper_toc' => 'Table of contents',
     ];
 
     /**
@@ -162,6 +163,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
         'd2u_helper_modules_show_less' => 'Laat minder zien',
         'd2u_helper_modules_show_more' => 'Toon meer',
         'd2u_helper_template_cta_box' => 'Wij adviseren u graag!',
+        'd2u_helper_toc' => 'Inhoudsopgave',
     ];
 
     /**
@@ -243,6 +245,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
         'd2u_helper_modules_show_less' => 'Montre moins',
         'd2u_helper_modules_show_more' => 'Montre plus',
         'd2u_helper_template_cta_box' => 'Nous serions heureux de vous conseiller!',
+        'd2u_helper_toc' => 'Table des matières',
     ];
 
     /**
@@ -324,6 +327,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
         'd2u_helper_modules_show_less' => 'Weniger anzeigen',
         'd2u_helper_modules_show_more' => 'Mehr anzeigen',
         'd2u_helper_template_cta_box' => 'Wir beraten Sie gern!',
+        'd2u_helper_toc' => 'Inhaltsverzeichnis',
     ];
 
     /**
@@ -405,6 +409,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
         'd2u_helper_modules_show_less' => 'Muestra menos',
         'd2u_helper_modules_show_more' => 'Mostrar más',
         'd2u_helper_template_cta_box' => '¡Estaremos encantados de asesorate!',
+        'd2u_helper_toc' => 'Tabla de contenido',
     ];
 
     /**
@@ -486,6 +491,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
         'd2u_helper_modules_show_less' => 'Показывай меньше',
         'd2u_helper_modules_show_more' => 'Показать больше',
         'd2u_helper_template_cta_box' => 'Будем рады проконсультировать вас!',
+        'd2u_helper_toc' => 'Оглавление',
     ];
 
     /**
@@ -567,6 +573,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
         'd2u_helper_modules_show_less' => '显示较少',
         'd2u_helper_modules_show_more' => '展示更多',
         'd2u_helper_template_cta_box' => '我们很乐意为您提供建议！',
+        'd2u_helper_toc' => '目录',
     ];
 
     /**
