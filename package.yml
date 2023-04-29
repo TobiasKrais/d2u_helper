@@ -21,7 +21,7 @@ page:
                 changelog: { title: 'translate:d2u_helper_help_chapter_changelog' }
 
 requires:
-    php: '>=8.1'
+    php: '>=8.0'
     redaxo: '>=5.10.0'
 
 conflicts:

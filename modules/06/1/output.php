@@ -24,7 +24,7 @@ if ('' !== $youtube_id) {
     // Copy preview image
     if (!is_dir(rex_path::addonCache('d2u_helper')) || !file_exists(rex_path::addonCache('d2u_helper', $previewimage_target_filename))) {
         if (!is_dir(rex_path::addonCache('d2u_helper'))) {
-            mkdir(rex_path::addonCache('d2u_helper'), 0o755, true);
+            rex_dir::create(rex_path::addonCache('d2u_helper'));
         }
         copy($youtube_previewimage_url, rex_path::addonCache('d2u_helper', $previewimage_target_filename));
     }
