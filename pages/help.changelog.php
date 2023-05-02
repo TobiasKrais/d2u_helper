@@ -16,7 +16,7 @@
 	<div class="panel-body">
 		<p>1.12.1-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift": Bildbreite wurde im Backend nicht wie ausgewählt angezeigt.</li>
 		</ul>
 		<p>1.12.0</p>
 		<ul>

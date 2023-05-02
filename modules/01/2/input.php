@@ -225,7 +225,7 @@
         foreach ($values as $key => $value) {
             echo '<option value="'. $key .'" ';
 
-            if ('REX_VALUE[6]' === $key) { /** @phpstan-ignore-line */
+            if ((int) 'REX_VALUE[6]' === $key) { /** @phpstan-ignore-line */
                 echo 'selected="selected" ';
             }
             echo '>'. $value .'</option>';

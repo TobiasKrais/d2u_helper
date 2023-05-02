@@ -195,7 +195,7 @@ if (class_exists('D2UModuleManager')) {
         12);
     $modules[] = new D2UModule('01-2',
         'Texteditor mit Bild und Fettschrift',
-        14);
+        15);
     $modules[] = new D2UModule('01-3',
         'Texteditor in Alertbox',
         1);
