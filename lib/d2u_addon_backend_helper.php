@@ -378,8 +378,8 @@ class d2u_addon_backend_helper
         echo '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
         echo '<dd><div class="input-group">';
         $article = rex_article::get($article_id, $clang_id);
-        $article_name = $article instanceof rex_article ? $article->getValue('name') : '';
-        echo '<input class="form-control" type="text" name="REX_LINK_NAME[' . $fieldname . ']" value="' . $article_name . ' ['. $article_id .']" id="REX_LINK_' . $fieldname . '_NAME" readonly="readonly">';
+        $article_name = $article instanceof rex_article ? $article->getValue('name') .'['. $article_id .']' : '';
+        echo '<input class="form-control" type="text" name="REX_LINK_NAME[' . $fieldname . ']" value="' . $article_name .'" id="REX_LINK_' . $fieldname . '_NAME" readonly="readonly">';
         echo '<input type="hidden" name="REX_INPUT_LINK[' . $fieldname . ']" id="REX_LINK_' . $fieldname . '" value="' . $article_id . '">';
         echo '<span class="input-group-btn">';
         if (!$readonly) {
