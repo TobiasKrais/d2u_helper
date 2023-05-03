@@ -172,7 +172,7 @@ class D2UModuleManager
             12);
         $modules[] = new D2UModule('03-2',
             'Bildergalerie Ekko Lightbox',
-            11);
+            12);
         $modules[] = new D2UModule('03-3',
             '360° Bild',
             1);

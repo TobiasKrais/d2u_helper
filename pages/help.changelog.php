@@ -17,6 +17,7 @@
 		<p>1.12.1-DEV</p>
 		<ul>
 			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift": Bildbreite wurde im Backend nicht wie ausgewählt angezeigt.</li>
+			<li>Modul 03-2 "Bildergalerie Ekko Lightbox": Bildbreite wurde im Backend nicht wie ausgewählt angezeigt.</li>
 		</ul>
 		<p>1.12.0</p>
 		<ul>
