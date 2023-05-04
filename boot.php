@@ -58,7 +58,8 @@ function addD2UHelperTOC(rex_extension_point $ep): void
 {
     $content = $ep->getSubject();
 
-    if('' !== $content) {
+    // is string not empty an can it be HTML
+    if(false !== strpos($content, '<')) {
         // table of contents
         $toc_html = '<p onClick="toggle_toc()"><span class="fa-icon icon_toc"></span>'. \Sprog\Wildcard::get('d2u_helper_toc') .'<span class="fa-icon h_toggle icon_right" id="toc_arrow"></span></p>'. PHP_EOL;
         $toc_html .= '<ol id="toc_list"><li>';
