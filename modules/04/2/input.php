@@ -51,11 +51,11 @@
 
 	// Hide on document load
 	$(document).ready(function() {
-		offset_changer($("select[name='REX_INPUT_VALUE[18]']").val());
+		offset_changer($("select[name='REX_INPUT_VALUE[20]']").val());
 	});
 
 	// Hide on selection change
-	$("select[name='REX_INPUT_VALUE[18]']").on('change', function(e) {
+	$("select[name='REX_INPUT_VALUE[20]']").on('change', function(e) {
 		offset_changer($(this).val());
 	});
 </script>

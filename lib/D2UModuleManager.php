@@ -181,7 +181,7 @@ class D2UModuleManager
             13);
         $modules[] = new D2UModule('04-2',
             'OpenStreetMap Karte',
-            4);
+            5);
         $modules[] = new D2UModule('05-1',
             'Artikelweiterleitung',
             14);
@@ -214,7 +214,7 @@ class D2UModuleManager
             9);
         $modules[] = new D2UModule('11-1',
             'YForm Kontaktformular (DSGVO kompatibel)',
-            11);
+            12);
         $modules[] = new D2UModule('11-2',
             'Box mit Kontaktinformationen',
             2);
