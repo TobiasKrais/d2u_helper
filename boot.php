@@ -58,72 +58,76 @@ function addD2UHelperTOC(rex_extension_point $ep): void
 {
     $content = $ep->getSubject();
 
-    // table of contents
-    $toc_html = '<p onClick="toggle_toc()"><span class="fa-icon icon_toc"></span>'. \Sprog\Wildcard::get('d2u_helper_toc') .'<span class="fa-icon h_toggle icon_right" id="toc_arrow"></span></p>'. PHP_EOL;
-    $toc_html .= '<ol id="toc_list"><li>';
+    if('' !== $content) {
+        // table of contents
+        $toc_html = '<p onClick="toggle_toc()"><span class="fa-icon icon_toc"></span>'. \Sprog\Wildcard::get('d2u_helper_toc') .'<span class="fa-icon h_toggle icon_right" id="toc_arrow"></span></p>'. PHP_EOL;
+        $toc_html .= '<ol id="toc_list"><li>';
 
-    // load code in a DOM document
-    $dom = new DOMDocument();
-    @$dom->loadHTML($content);
+        // load code in a DOM document
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        @$dom->loadHTML($content);
+        libxml_clear_errors();
 
-    $xpath = new DOMXPath($dom);
+        $xpath = new DOMXPath($dom);
 
-    $toc_element = $xpath->query('//div[@id="d2u_helper_toc"]');
+        $toc_element = $xpath->query('//div[@id="d2u_helper_toc"]');
 
-    // is module
-    if ($toc_element instanceof DOMNodeList && $toc_element->length > 0) {
-        // find all headings in article
-        $headings = $xpath->query('//article//h2 | //article//h3 | //article//h4 | //article//h5 | //article//h6');
+        // is module
+        if ($toc_element instanceof DOMNodeList && $toc_element->length > 0) {
+            // find all headings in article
+            $headings = $xpath->query('//article//h2 | //article//h3 | //article//h4 | //article//h5 | //article//h6');
 
-        $last_level = 0;
-        $highest_level = 2;
-        // add ids to headings
-        if ($headings instanceof DOMNodeList) {
-            foreach ($headings as $heading) {
-                $level = (int) $heading->tagName[1] < $highest_level ? $highest_level : (int) $heading->tagName[1];
+            $last_level = 0;
+            $highest_level = 2;
+            // add ids to headings
+            if ($headings instanceof DOMNodeList) {
+                foreach ($headings as $heading) {
+                    $level = (int) $heading->nodeName[1] < $highest_level ? $highest_level : (int) $heading->nodeName[1];
 
-                if (0 === $last_level) {
-                    $highest_level = $level;
-                } elseif ($last_level < $level) {
-                    $toc_html .= '<ol><li>';
-                } elseif ($last_level > $level) {
-                    while ($last_level > $level) {
-                        $toc_html .= '</li></ol>';
-                        --$last_level;
+                    if (0 === $last_level) {
+                        $highest_level = $level;
+                    } elseif ($last_level < $level) {
+                        $toc_html .= '<ol><li>';
+                    } elseif ($last_level > $level) {
+                        while ($last_level > $level) {
+                            $toc_html .= '</li></ol>';
+                            --$last_level;
+                        }
+                        $toc_html .= '</li>'. PHP_EOL .'<li>';
+                    } else {
+                        $toc_html .= '</li>'. PHP_EOL .'<li>';
                     }
-                    $toc_html .= '</li>'. PHP_EOL .'<li>';
-                } else {
-                    $toc_html .= '</li>'. PHP_EOL .'<li>';
+                    $last_level = $level < $highest_level ? $highest_level : $level;
+
+                    $id = 'heading-' . uniqid();
+                    $anchor_node = $dom->createElement('a');
+                    $anchor_node->setAttribute('name', $id);
+                    $anchor_node->setAttribute('class', 'd2u_helper_toc_anchor');
+                    $heading->insertBefore($anchor_node, $heading->firstChild);
+
+                    $toc_html .= '<a href="#' . $id . '">' . $heading->nodeValue . '</a>';
                 }
-                $last_level = $level < $highest_level ? $highest_level : $level;
-
-                $id = 'heading-' . uniqid();
-                $anchor_node = $dom->createElement('a');
-                $anchor_node->setAttribute('name', $id);
-                $anchor_node->setAttribute('class', 'd2u_helper_toc_anchor');
-                $heading->insertBefore($anchor_node, $heading->firstChild);
-
-                $toc_html .= '<a href="#' . $id . '">' . $heading->nodeValue . '</a>';
+                while ($last_level >= $highest_level) {
+                    $toc_html .= '</li></ol>';
+                    --$last_level;
+                }
             }
-            while ($last_level >= $highest_level) {
-                $toc_html .= '</li></ol>';
-                --$last_level;
+
+            // Element gefunden
+            $toc_node = $dom->createDocumentFragment();
+            $toc_node->appendXML($toc_html);
+            if ($toc_element->item(0) instanceof DOMNode) {
+                $toc_element->item(0)->appendChild($toc_node);
             }
-        }
 
-        // Element gefunden
-        $toc_node = $dom->createDocumentFragment();
-        $toc_node->appendXML($toc_html);
-        if ($toc_element->item(0) instanceof DOMNode) {
-            $toc_element->item(0)->appendChild($toc_node);
+            // update content
+            $content = $dom->saveHTML();
         }
-
-        // update content
-        $content = $dom->saveHTML();
-    }
-    
-    if (false !== $content) {
-        $ep->setSubject($content);
+        
+        if (false !== $content) {
+            $ep->setSubject($content);
+        }
     }
 }
 
