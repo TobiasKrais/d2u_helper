@@ -14,8 +14,9 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.12.1-DEV</p>
+		<p>1.12.1</p>
 		<ul>
+			<li>Bugfix: Fehler beim Aufruf von Nicht-HTML-Seiten behoben.</li>
 			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift": Bildbreite wurde im Backend nicht wie ausgewählt angezeigt.</li>
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox": Bildbreite wurde im Backend nicht wie ausgewählt angezeigt.</li>
 		</ul>
