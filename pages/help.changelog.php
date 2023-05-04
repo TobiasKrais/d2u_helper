@@ -14,6 +14,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.12.2-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.12.1</p>
 		<ul>
 			<li>Bugfix: Fehler beim Aufruf von Nicht-HTML-Seiten behoben.</li>
