@@ -45,9 +45,11 @@ if (rex::isBackend()) {
     }
 
     // show table of contents
-    rex_extension::register('PACKAGES_INCLUDED', static function () {
-        rex_extension::register('OUTPUT_FILTER', 'addD2UHelperTOC');
-    });
+    if (rex_addon::get('sprog')->isAvailable()) {
+        rex_extension::register('PACKAGES_INCLUDED', static function () {
+            rex_extension::register('OUTPUT_FILTER', 'addD2UHelperTOC');
+        });
+    }
 }
 
 /**

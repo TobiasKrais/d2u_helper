@@ -14,8 +14,9 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.12.2-DEV</p>
+		<p>1.12.2</p>
 		<ul>
+			<li>Bugfix: Wenn das Sprog Addon nicht installiert war, wurde ein Fehler angezeigt.</li>
 			<li>Bugfix: Fehler in der Logoanzeige des Footer Fragments Links, Adresse, Kontakt und Logo behoben.</li>
 			<li>Modul 04-2 "OpenStreetMap Karte": Eingabefeld zum Zentrieren der Ausgabe wird optional ausgeblendet.</li>
 			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)": Eingabefeld zum Zentrieren der Ausgabe wird optional ausgeblendet.</li>
