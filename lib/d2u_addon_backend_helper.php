@@ -619,6 +619,25 @@ class d2u_addon_backend_helper
     }
 
     /**
+     * Get mediapool new filename by old filename.
+     * @param string $old_filename Old media filename before import into mediapool
+     * @return string filename used in mediapool, if not found, empty string is returned
+     */
+    public static function getMediapoolFilename($old_filename)
+    {
+        $query = 'SELECT filename FROM `'. \rex::getTablePrefix() .'media` '
+            . "WHERE originalname = '". $old_filename ."'";
+        $result = \rex_sql::factory();
+        $result->setQuery($query);
+
+        if ($result->getRows() > 0) {
+            return (string) $result->getValue('filename');
+        }
+
+        return '';
+    }
+
+    /**
      * Updates url addon scheme article id.
      * @param string $table_name Table/view name (version 1.x) or namespace (version 2.x) used for url scheme. Parameter is used as identifier.
      * @param int $article_id Redaxo article id

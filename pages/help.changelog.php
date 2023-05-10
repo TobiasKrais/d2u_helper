@@ -14,6 +14,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.12.3-DEV</p>
+		<ul>
+			<li>Methode d2u_addon_backend_helper::getMediapoolFilename() aus dem d2u_jobs Addon ausgelagert.</li>
+		</ul>
 		<p>1.12.2</p>
 		<ul>
 			<li>Bugfix: Wenn das Sprog Addon nicht installiert war, wurde ein Fehler angezeigt.</li>
