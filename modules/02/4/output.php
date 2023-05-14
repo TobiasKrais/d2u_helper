@@ -20,17 +20,18 @@ $rex_article_2 = rex_article::get($article_id_2);
             if ($rex_picture instanceof rex_media) {
                 echo '<img src="'. rex_url::media($picture) .'">';
             }
-            echo '<div class="d2u_helper_mod_02_4_content d-flex align-items-center">';
+            echo '<div class="d2u_helper_mod_02_4_content d-flex align-items-center">'. PHP_EOL;
 
-            echo '<div class="row">';
+            echo '<div class="row">'. PHP_EOL;
+
             echo '<div class="col-6">';
             echo '<'. $heading_type .'>'. $heading .'</'. $heading_type .'>';
-            echo '</div>';
+            echo '</div>'. PHP_EOL;
             if ($rex_article_1 instanceof rex_article) {
                 echo '<div class="col-12">&nbsp;</div>';
                 echo '<div class="col-12">';
                 echo '<a href="'. $rex_article_1->getUrl() .'" title="'. $rex_article_1->getName() .'">'
-                .'<button >'. $rex_article_1->getName()
+                .'<button>'. $rex_article_1->getName()
                 .'<span class="arrow_right"></span></button></a>';
                 echo '</div>';
             }
@@ -38,12 +39,13 @@ $rex_article_2 = rex_article::get($article_id_2);
                 echo '<div class="col-12">&nbsp;</div>';
                 echo '<div class="col-12">';
                 echo '<a href="'. $rex_article_2->getUrl() .'" title="'. $rex_article_2->getName() .'">'
-                .'<button >'. $rex_article_2->getName()
+                .'<button>'. $rex_article_2->getName()
                 .'<span class="arrow_right"></span></button></a>';
                 echo '</div>';
             }
-            echo '</div>';
-            echo '</div>';
+            echo '</div>'. PHP_EOL;
+
+            echo '</div>'. PHP_EOL;
         ?>
     </div>
 </div>
