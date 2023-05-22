@@ -214,7 +214,7 @@ class D2UModuleManager
             9);
         $modules[] = new D2UModule('11-1',
             'YForm Kontaktformular (DSGVO kompatibel)',
-            12);
+            13);
         $modules[] = new D2UModule('11-2',
             'Box mit Kontaktinformationen',
             2);
@@ -226,7 +226,7 @@ class D2UModuleManager
             4);
         $modules[] = new D2UModule('14-1',
             'Search It Suchmodul',
-            5);
+            6);
         $modules[] = new D2UModule('15-1',
             'Kategorie mit Liste der Unterkategorien',
             3);
