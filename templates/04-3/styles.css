@@ -235,14 +235,6 @@ article input:invalid, article textarea:invalid {
 .comparison-header, unit {
 	padding: 0 15px;
 }
-a.active div.active-navi-pill {
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-top: 3px solid transparent;
-	border-bottom: 12px white solid;
-    margin: 0 auto;
-    width: 30px;
-}
 /* D2U Courses Addon */
 #cart_symbol {
 	background-color: article_color_h;
