@@ -6,8 +6,9 @@
         $fragment = new rex_fragment();
         // <head></head>
         echo $fragment->parse('d2u_template_head.php');
+
+        echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '06-1', 'd2u_helper' => 'template.css']) .'">';
     ?>
-	<link rel="stylesheet" href="/index.php?template_id=06-1&amp;d2u_helper=template.css">
 </head>
 
 <body id="body">

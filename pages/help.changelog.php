@@ -17,6 +17,7 @@
 		<p>1.12.3-DEV</p>
 		<ul>
 			<li>Methode d2u_addon_backend_helper::getMediapoolFilename() aus dem d2u_jobs Addon ausgelagert.</li>
+			<li>Templates dieses Addons funktionieren jetzt auch mit Redaxo Installationen in Unterverzeichnissen.</li>
 			<li>Modul 11-1 "YForm Kontaktformular (DSGVO kompatibel)": Fehler im Spamschutz und CSRF Schutz behoben.</li>
 			<li>Modul 14-1 "Search It Suchmodul": Fehler im Spamschutz und CSRF Schutz behoben.</li>
 		</ul>

@@ -12,9 +12,9 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
         $fragment = new rex_fragment();
         // <head></head>
         echo $fragment->parse('d2u_template_head.php');
-    ?>
 
-	<link rel="stylesheet" href="/index.php?template_id=03-1&amp;d2u_helper=template.css">
+        echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '03-1', 'd2u_helper' => 'template.css']) .'">';
+    ?>
 	<style>
 		.desktop-navi {
 			width: <?= 100 / count(rex_category::getRootCategories(true))?>% !important;

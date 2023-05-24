@@ -163,12 +163,12 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep): void
 
     // Consider module css or menu css
     if (((bool) $addon->getConfig('include_module', false) && '' !== d2u_addon_frontend_helper::getModulesCSS()) || 'none' !== (string) $addon->getConfig('include_menu')) {
-        $insert_head .= '<link rel="stylesheet" type="text/css" href="/index.php?d2u_helper=helper.css" />' . PHP_EOL;
+        $insert_head .= '<link rel="stylesheet" type="text/css" href="'. rex_url::frontendController(['d2u_helper' => 'helper.css']) .'" />' . PHP_EOL;
     }
 
     // Menu stuff in header
     if ('none' !== (string) $addon->getConfig('include_menu')) {
-        $insert_head .= '<script src="/index.php?position=head&amp;d2u_helper=helper.js"></script>' . PHP_EOL;
+        $insert_head .= '<script src="'. rex_url::frontendController(['position' => 'head', 'd2u_helper' => 'helper.js']) .'"></script>' . PHP_EOL;
     }
 
     $ep->setSubject(str_replace('</head>', $insert_head .'</head>', $ep->getSubject()));
@@ -180,7 +180,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep): void
 
     // Module stuff in body
     if ((bool) $addon->getConfig('include_module', false) && '' !== d2u_addon_frontend_helper::getModulesJS()) {
-        $insert_body .= '<script src="/index.php?position=body&amp;d2u_helper=helper.js"></script>' . PHP_EOL;
+        $insert_body .= '<script src="'. rex_url::frontendController(['position' => 'body', 'd2u_helper' => 'helper.js']) .'"></script>' . PHP_EOL;
     }
     $ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
