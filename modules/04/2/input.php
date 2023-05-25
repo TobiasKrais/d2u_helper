@@ -130,7 +130,8 @@
 	</div>
 </div>
 <?php
-if (rex_addon::get('geolocation')->isAvailable()) {
+$geolocation = rex_addon::get('geolocation');
+if ($geolocation->isAvailable()) {
 ?>
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
@@ -141,10 +142,20 @@ if (rex_addon::get('geolocation')->isAvailable()) {
 		<select name="REX_INPUT_VALUE[9]" id="mapset-select" class="form-control">
             <option value="">(Standardkarte)</option>
             <?php
-                $mapsets = \Geolocation\mapset::query()
-                    ->orderBy('title')
-                    ->findValues('title', 'id');
-                foreach ($mapsets as $k => $v) {
+				$mapsets = [];
+				if(rex_version::compare('2.0.0', $geolocation->getVersion(), '<=')) {
+					// Geolocation 2.x
+                	$mapsets = \FriendsOfRedaxo\Geolocation\Mapset::query()
+                    	->orderBy('title')
+                    	->findValues('title', 'id');
+				}
+				else {
+					// Geolocation 1.x
+					$mapsets = \Geolocation\mapset::query()
+                    	->orderBy('title')
+                    	->findValues('title', 'id');
+				}
+               	foreach ($mapsets as $k => $v) {
                     echo '<option value="'. $k .'"'. ($k === (int) 'REX_VALUE[9]' ? ' selected="selected"' : '') .'>'. $v .'</option>';
                 }
             ?>

@@ -1,5 +1,5 @@
 #map_canvas {
-	background-image: url('/assets/addons/d2u_helper/modules/04-1/map-dummy.jpg');
+	background-image: url('./assets/addons/d2u_helper/modules/04-1/map-dummy.jpg');
 	background-position: center;
 }
 

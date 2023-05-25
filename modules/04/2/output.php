@@ -14,10 +14,18 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
 
     $map_id = random_int(0, getrandmax());
 
-    if (rex_addon::get('geolocation')->isAvailable()) {
+	$geolocation = rex_addon::get('geolocation');
+    if ($geolocation->isAvailable()) {
         try {
             if (rex::isFrontend()) {
-                \Geolocation\tools::echoAssetTags();
+				if(rex_version::compare('2.0.0', $geolocation->getVersion(), '<=')) {
+					// Geolocation 2.x
+                	\FriendsOfRedaxo\Geolocation\Tools::echoAssetTags();
+				}
+				else {
+					// Geolocation 1.x
+					\Geolocation\tools::echoAssetTags();
+				}
             }
 ?>
 	<script>
@@ -96,13 +104,27 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
 
         $mapsetId = (int) 'REX_VALUE[9]';
 
-        echo \Geolocation\mapset::take($mapsetId)
-            ->attributes('id', (string) $mapsetId)
-            ->attributes('style', 'height: '. $height . $height_unit .';width:100%;')
-            ->dataset('center', [[$latitude, $longitude], $maps_zoom])
-            ->dataset('position', [$latitude, $longitude])
-            ->dataset('infobox', [[$latitude, $longitude], $infotext])
-            ->parse();
+		if(rex_version::compare('2.0.0', $geolocation->getVersion(), '<=')) {
+			// Geolocation 2.x
+			echo \FriendsOfRedaxo\Geolocation\Mapset::take($mapsetId)
+				->attributes('id', (string) $mapsetId)
+				->attributes('style', 'height: '. $height . $height_unit .';width:100%;')
+				->dataset('center', [[$latitude, $longitude], $maps_zoom])
+				->dataset('position', [$latitude, $longitude])
+				->dataset('infobox', [[$latitude, $longitude], $infotext])
+				->parse();
+		}
+		else {
+			// Geolocation 1.x
+			echo \Geolocation\mapset::take($mapsetId)
+				->attributes('id', (string) $mapsetId)
+				->attributes('style', 'height: '. $height . $height_unit .';width:100%;')
+				->dataset('center', [[$latitude, $longitude], $maps_zoom])
+				->dataset('position', [$latitude, $longitude])
+				->dataset('infobox', [[$latitude, $longitude], $infotext])
+				->parse();
+		}
+
     } elseif (rex_addon::get('osmproxy')->isAvailable()) {
         $popup_js = '' !== $infotext ? ".bindPopup('". addslashes(strtr($infotext, $substitute)) ."').openPopup()" : ''; /** @phpstan-ignore-line */
 
