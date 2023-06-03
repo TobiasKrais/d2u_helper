@@ -16,7 +16,8 @@
 	<div class="panel-body">
 		<p>1.12.4-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 00-1 "Umbruch ganze Breite": Ausgabe der optionalen CSS Klasse im Backend war inkorrekt.</li>
+			<li>Templates sind jetzt mit Consent Manager Addon Version > 4 kompatibel.</li>
 		</ul>
 		<p>1.12.3</p>
 		<ul>

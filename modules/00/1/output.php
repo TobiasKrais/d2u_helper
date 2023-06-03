@@ -15,7 +15,7 @@ if (\rex::isBackend()) {
     if ($container_new && $compatible_template) { /** @phpstan-ignore-line */
         echo 'Neuen Container beginnen: '. ($container_new ? 'Ja' : 'Nein') .'<br>';
         echo 'Neuen Container Fluid setzen (komplette Bildschirmbreite): '. ($container_fluid ? 'Ja' : 'Nein') .'<br>'; /** @phpstan-ignore-line */
-        echo 'CSS Klasse des neuen Containers: REX_VALUE[3]';
+        echo 'CSS Klasse des neuen Containers: REX_VALUE[4]';
     }
 } else {
     if ($container_new && $compatible_template) { /** @phpstan-ignore-line */

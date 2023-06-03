@@ -114,7 +114,7 @@ class D2UTemplate
             $template_css .= false !== $css ? $css : '';
         }
         // Consent manager CSS
-        if (rex_addon::get('consent_manager')->isAvailable() && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'))) {
+        if (rex_addon::get('consent_manager')->isAvailable() && rex_version::compare('4.0.0', rex_addon::get('consent_manager')->getVersion(), '>=') && file_exists(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'))) {
             $css = file_get_contents(rex_path::addonAssets('d2u_helper', 'template/header/d2u_template_consent_manager.css'));
             $template_css .= false !== $css ? $css : '';
         }
