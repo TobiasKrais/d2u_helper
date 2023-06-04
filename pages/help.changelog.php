@@ -14,7 +14,7 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.12.4-DEV</p>
+		<p>1.12.4</p>
 		<ul>
 			<li>Modul 00-1 "Umbruch ganze Breite": Ausgabe der optionalen CSS Klasse im Backend war inkorrekt.</li>
 			<li>Templates sind jetzt mit Consent Manager Addon Version > 4 kompatibel.</li>
