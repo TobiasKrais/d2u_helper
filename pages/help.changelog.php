@@ -14,6 +14,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.12.5-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.12.4</p>
 		<ul>
 			<li>Modul 00-1 "Umbruch ganze Breite": Ausgabe der optionalen CSS Klasse im Backend war inkorrekt.</li>
