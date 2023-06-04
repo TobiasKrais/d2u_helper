@@ -340,7 +340,7 @@ if (class_exists('D2UTemplateManager')) {
         16);
     $d2u_templates[] = new D2UTemplate('05-1',
         'Double Logo Template',
-        14);
+        15);
     $d2u_templates[] = new D2UTemplate('06-1',
         'Paper Sheet Template',
         8);

@@ -95,8 +95,9 @@
 				<?php
                     $header_pic_style = '';
                     // Vorschaubild berechnen
-                    $header_image = rex_config::get('d2u_helper', 'template_header_pic', '');
-                    if ($this->hasValue('art_file') && '' !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
+                    $header_image = (string) rex_config::get('d2u_helper', 'template_header_pic', '');
+
+                    if ($this->hasValue('art_file') && null !== $this->getValue('art_file') && '' !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
                         $header_image = $this->getValue('art_file'); /** @phpstan-ignore-line */
                     }
                     $titelbild = rex_media::get($header_image);

@@ -18,6 +18,7 @@
 		<ul>
 			<li>Modul 00-1 "Umbruch ganze Breite": Ausgabe der optionalen CSS Klasse im Backend war inkorrekt.</li>
 			<li>Templates sind jetzt mit Consent Manager Addon Version > 4 kompatibel.</li>
+			<li>Template 05-1 "Double Logo Template": Fehlerbehebung bei der Anzeige des Headerbildes.</li>
 		</ul>
 		<p>1.12.3</p>
 		<ul>
