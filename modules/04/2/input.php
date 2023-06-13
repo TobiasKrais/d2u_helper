@@ -89,18 +89,18 @@
 <div class="row"><div class="col-xs-12">&nbsp;</div></div>
 <div class="row">
 	<div class="col-xs-4">
-		Zoom-Faktor:
+		Zoomstufe:
 	</div>
 	<div class="col-xs-8">
 		<select name="REX_INPUT_VALUE[3]" class="form-control">
 			<?php
             foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18] as $value) {
-                echo '<option value="'.$value.'" ';
+                echo '<option value="'. $value .'" ';
 
                 if ((int) 'REX_VALUE[3]' === $value) { /** @phpstan-ignore-line */
                     echo 'selected="selected" ';
                 }
-                echo '>'.$value.'</option>';
+                echo '>'. $value .'</option>';
             }
             ?>
 		</select>
