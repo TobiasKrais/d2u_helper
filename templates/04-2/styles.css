@@ -188,7 +188,6 @@ article input:invalid, article textarea:invalid {
 }
 /* D2U Courses Addon */
 #cart_symbol {
-	background-color: article_color_h;
 	float: right;
 	position: relative;
 	width: 65px;
