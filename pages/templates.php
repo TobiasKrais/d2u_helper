@@ -39,7 +39,6 @@ $d2u_template_manager->showManagerList();
 <ul>
 	<li><b>00-1	Big Header Template</b><br>
 		Template eignet sich für das D2U Maschinen und D2U Veranstaltungen Addon, funktioniert aber auch ohne diese Addons.<br>
-		<a href="https://www.aberer-automobile.de/" target="_blank">Aberer Automobile - Ihr Renault und Dacia Partner in Lörrach</a><br>
 		<a href="https://www.justjazz.net/" target="_blank">Just Jazz</a><br>
 	</li>
 	<li><b>01-1	Side Picture Template</b><br>
@@ -66,7 +65,6 @@ $d2u_template_manager->showManagerList();
 	<li><b>04-2 Header Slider Template</b><br>
 		Template eignet sich für das D2U Maschinen und D2U Veranstaltungen Addon, funktioniert aber auch ohne diese Addons.<br>
 		<a href="https://www.inotec-gmbh.com/" target="_blank">Inotec GmbH - Wir machen Ihre Baustelle leichter!</a><br>
-		<a href="https://sit-connect.de/" target="_blank">SIT Fassadenplanung - Visionen von Gebäudehüllen sind unser Metier</a><br>
 	</li>
 	<li><b>04-3 Header Slider Template with news column</b><br>
 		Template eignet sich für das D2U Maschinen und D2U Veranstaltungen Addon, funktioniert aber auch ohne diese Addons. Für die News Spalte wird das D2U News Addon vorausgesetzt.<br>
@@ -78,8 +76,5 @@ $d2u_template_manager->showManagerList();
 	</li>
 	<li><b>06-1	Paper Sheet Template</b><br>
 		<a href="https://egh-hauingen.de/" target="_blank">Elektrizitäts-Genossenschaft Hauingen e.G.</a><br>
-	</li>
-	<li><b>99-1	Feed Generator</b><br>
-		<a href="https://gewert-consulting.de/feed/" target="_blank">Gewert Consulting Blog Feed</a><br>
 	</li>
 </ul>
