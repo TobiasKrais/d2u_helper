@@ -316,7 +316,7 @@ if (class_exists('D2UTemplateManager')) {
     $d2u_templates = [];
     $d2u_templates[] = new D2UTemplate('00-1',
         'Big Header Template',
-        21);
+        22);
     $d2u_templates[] = new D2UTemplate('01-1',
         'Side Picture Template',
         13);

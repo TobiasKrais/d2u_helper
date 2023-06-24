@@ -114,7 +114,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		}
 		else {
 			$header_image = (string) $d2u_helper->getConfig("template_header_pic");
-			if($this->hasValue("art_file") && '' !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
+			if($this->hasValue("art_file") && '' !== (string) $this->getValue('art_file')) { /** @phpstan-ignore-line */
 				$header_image = (string) $this->getValue("art_file"); /** @phpstan-ignore-line */
 			}
 			if($header_image !== '') {

@@ -16,7 +16,7 @@
 	<div class="panel-body">
 		<p>1.12.5-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Template 00-1 "Big Header Template": Fehler bei Darstellung des Headerbildes behoben.</li>
 		</ul>
 		<p>1.12.4</p>
 		<ul>
