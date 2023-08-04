@@ -18,5 +18,4 @@
                 echo consent_manager_frontend::getFragment(false, 'consent_manager_box_cssjs.php');
             }
         }
-
     ?>
