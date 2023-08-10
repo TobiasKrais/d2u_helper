@@ -132,10 +132,10 @@
 	<div class="col-xs-12">&nbsp;</div>
 </div>
 <div class="row">
-	<div class="col-xs-4">
-		Bilder:
-	</div>
-	<div class="col-xs-8">
-		REX_MEDIALIST[id="1" types="jpg,png,webp" widget="1"]
+	<div class="col-xs-12">
+		<?php
+			$pics = explode(',', 'REX_MEDIALIST[1]');
+			d2u_addon_backend_helper::form_imagelistfield('d2u_helper_pictures', 1, is_array($pics) ? $pics : []);
+		?>
 	</div>
 </div>

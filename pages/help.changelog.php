@@ -15,10 +15,11 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.12.5</p>
+		<p>1.13.0</p>
 		<ul>
-			<li>Template 00-1 "Big Header Template": Fehler bei Darstellung des Headerbildes behoben.</li>
 			<li>Funktion d2u_addon_backend_helper::form_imagelistfield() hinzugefügt. Dieses und andere D2U Addons verwenden künftig dieses Feld um Bilderlistenfelder im Stil von MForm darzustellen.</li>
+			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" nutzt neue Bilderliste Funktion.</li>
+			<li>Template 00-1 "Big Header Template": Fehler bei Darstellung des Headerbildes behoben.</li>
 		</ul>
 		<p>1.12.4</p>
 		<ul>
