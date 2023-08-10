@@ -6,6 +6,7 @@
 			<li><a href="https://github.com/ashleydw/lightbox" target="_blank">Bootstrap (Ekko) Lightbox (5.4.0-rc2)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
 			<li><a href="https://leafletjs.com" target="_blank">Leaflet (1.7.1)</a>: BSD</li>
 			<li><a href="https://codepen.io/JakubHonisek/pen/xXaYqg" target="_blank">Megamenu</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+			<li><a href="https://github.com/FriendsOfREDAXO/mform/tree/master" target="_blank">MForm</a>: <a href="https://github.com/FriendsOfREDAXO/mform/blob/master/LICENSE" target="_blank">MIT</a></li>
 			<li><a href="https://photo-sphere-viewer.js.org/" target="_blank">PhotoSphereViewer (5.1.4)</a> mit Three.js: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
 			<li><a href="https://www.codrops.com" target="_blank">Responsive MultiLevelMenu (1.0.1)</a> mit <a href="http://modernizr.com/" target="_blank">Modernizr</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
 			<li><a href="https://github.com/ComputerWolf/SlickNav" target="_blank">Slicknav (1.0.10)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
@@ -14,9 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>1.12.5-DEV</p>
+		<p>1.12.5</p>
 		<ul>
 			<li>Template 00-1 "Big Header Template": Fehler bei Darstellung des Headerbildes behoben.</li>
+			<li>Funktion d2u_addon_backend_helper::form_imagelistfield() hinzugefügt. Dieses und andere D2U Addons verwenden künftig dieses Feld um Bilderlistenfelder im Stil von MForm darzustellen.</li>
 		</ul>
 		<p>1.12.4</p>
 		<ul>

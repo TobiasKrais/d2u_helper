@@ -5,11 +5,13 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
     rex_perm::register('d2u_helper[]', rex_i18n::msg('d2u_helper_rights_all'));
     rex_perm::register('d2u_helper[settings]', rex_i18n::msg('d2u_helper_rights_settings'), rex_perm::OPTIONS);
 
-    $d2u_helper = rex_addon::get('d2u_helper');
-    if ($d2u_helper instanceof rex_addon) {
-        rex_view::addCssFile($d2u_helper->getAssetsUrl('d2u_helper_backend.css'));
+    rex_view::addCssFile(rex_url::addonAssets('d2u_helper', 'd2u_helper_backend.css'));
+    if(!rex_addon::get('mform')->isAvailable()) {
+        rex_view::addCssFile(rex_url::addonAssets('d2u_helper', 'mform_imglist.css'));
+        rex_extension::register('PACKAGES_INCLUDED', static function () {
+            rex_view::addJsFile(rex_url::addonAssets('d2u_helper', 'mform_imglist.js'));
+        });
     }
-    // rex_view::addJsFile($addon->getAssetsUrl('js/script.js'), [rex_view::JS_IMMUTABLE => true]);
 }
 
 if (rex::isBackend()) {

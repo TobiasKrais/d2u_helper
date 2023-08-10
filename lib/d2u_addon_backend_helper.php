@@ -462,57 +462,54 @@ class d2u_addon_backend_helper
      * @param string[] $values field values
      * @param bool $readonly true if field should have readonly attribute
      */
+    public static function form_imagelistfield($message_id, $fieldnumber, $values, $readonly = false): void
+    {
+        echo '<dl class="rex-form-group form-group" id="MEDIALIST_'. $fieldnumber .'">';
+        echo '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
+        echo '<dd>';
+        echo '<div class="rex-js-widget custom-imglist rex-js-widget-imglist" data-params="&args[types]=gif,jpg,jpeg,png,svg,tif,tiff,webp" data-widget-id="'. $fieldnumber .'">';
+        echo '<div class="input-group">';
+        echo '<ul class="form-control thumbnail-list ui-sortable" id="REX_IMGLIST_'. $fieldnumber .'">';
+        for($i = 0; $i < count($values); $i++) {
+            echo '<li data-key="'. $i .'" value="'. $values[$i] .'" data-value="'. $values[$i] .'">';
+            echo '<img class="thumbnail" src="'. rex_media_manager::getUrl('rex_medialistbutton_preview', $values[$i]).'" title="'. $values[$i] .'"></img>';
+            echo '</li>';
+        }
+        echo '</ul>';
+        echo '<select class="form-control" id="REX_MEDIALIST_SELECT_'. $fieldnumber .'" name="REX_MEDIALIST_SELECT['. $fieldnumber .']" size="10">';
+        for($i = 0; $i < count($values); $i++) {
+            echo '<option data-key="'. $i .'" value="'. $values[$i] .'" >'. $values[$i] .'</option>';
+        }
+        echo '</select>';
+        echo '<input id="REX_MEDIALIST_'. $fieldnumber .'" name="REX_INPUT_MEDIALIST['. $fieldnumber .']" type="hidden" value="'. implode(',', $values).'"></input>';
+        if (!$readonly) {
+            echo '<span class="input-group-addon">';
+            echo '<div class="btn-group-vertical">';
+            echo '<a class="btn btn-popup open" href="#" title="'. rex_i18n::msg('var_media_open') .'"><i class="rex-icon rex-icon-open-mediapool"></i></a>';
+            echo '<a class="btn btn-popup add" href="#" title="' . rex_i18n::msg('var_media_new') . '"><i class="rex-icon rex-icon-add-media"></i></a>';
+            echo '<a class="btn btn-popup delete" href="#" title="' . rex_i18n::msg('var_media_remove') . '"><i class="rex-icon rex-icon-delete-media"></i></a>';
+            echo '<a class="btn btn-popup view" href="#" title="' . rex_i18n::msg('var_media_view') . '"><i class="rex-icon rex-icon-view-media"></i></a>';
+            echo '</div>';
+            echo '</span>';
+        }
+        echo '</div>';
+        echo '</dd>';
+        echo '</dl>';
+    }
+
+    /**
+     * Prints a row with an medialist input field.
+     * @param string $message_id rex_i18n message id for the label text
+     * @param int $fieldnumber input field name (without REX_MEDIALIST_SELECT part)
+     * @param string[] $values field values
+     * @param bool $readonly true if field should have readonly attribute
+     */
     public static function form_medialistfield($message_id, $fieldnumber, $values, $readonly = false): void
     {
-        /*
-                $wdgtClass = ' rex-js-widget-imglist rex-js-widget-preview rex-js-widget-tooltip';
-                if (rex_addon::get('media_manager')->isAvailable()) {
-                    $wdgtClass .= ' rex-js-widget-preview-media-manager';
-                }
-
-                $thumbnails = '';
-                $options = '';
-                if (is_array($values)) {
-                    foreach ($values as $key => $file) {
-                        if ($file != '') {
-
-                            $url = rex_url::backendController(['rex_media_type' => 'rex_medialistbutton_preview', 'rex_media_file' => $file]);
-                            if (pathinfo($file, PATHINFO_EXTENSION) === 'svg') {
-                                $url = rex_url::media($file);
-                            }
-                            $thumbnails .= '<li data-key="' . $key . '" value="' . $file . '" data-value="' . $file . '"><img class="thumbnail" src="' . $url . '" /></li>';
-
-                            $options .= '<option data-key="' . $key . '" value="' . $file . '">' . $file . '</option>';
-                        }
-                    }
-                }
-
-                $disabled = ' disabled';
-                if (rex::getUser()->getComplexPerm('media')->hasMediaPerm()) {
-                    $disabled = '';
-                }
-
-                $id = str_replace(array('][', '[', ']'), '', $fieldnumber);
-
-                $e = [];
-                $e['before'] = '<div class="rex-js-widget custom-imglist ' . $wdgtClass . '" data-widget-id="' . $id . '">';
-                $e['field'] = '<ul class="form-control thumbnail-list" id="REX_IMGLIST_' . $id . '">' . $thumbnails . '</ul><select class="form-control" name="REX_MEDIALIST_SELECT[' . $id . ']" id="REX_MEDIALIST_SELECT_' . $id . '" size="10">' . $options . '</select><input type="hidden" name="' . $name . '" id="REX_MEDIALIST_' . $id . '" value="' . $value . '" />';
-                $e['functionButtons'] = ($readonly ? '' : '
-                        <a href="#" class="btn btn-popup open" title="' . rex_i18n::msg('var_media_open') . '"' . $disabled . '><i class="rex-icon rex-icon-open-mediapool"></i></a>
-                        <a href="#" class="btn btn-popup add" title="' . rex_i18n::msg('var_media_new') . '"' . $disabled . '><i class="rex-icon rex-icon-add-media"></i></a>
-                        <a href="#" class="btn btn-popup delete" title="' . rex_i18n::msg('var_media_remove') . '"' . $disabled . '><i class="rex-icon rex-icon-delete-media"></i></a>
-                        <a href="#" class="btn btn-popup view" title="' . rex_i18n::msg('var_media_view') . '"' . $disabled . '><i class="rex-icon rex-icon-view-media"></i></a>');
-                $e['after'] = '<div class="rex-js-media-preview"></div></div>';
-
-                $fragment = new rex_fragment();
-                $fragment->setVar('elements', [$e], false);
-                print $fragment->parse('core/form/widget_list.php');
-        */
-
         echo '<dl class="rex-form-group form-group" id="MEDIALIST_'. $fieldnumber .'">';
         echo '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
         echo '<dd><div class="input-group">';
-        echo '<select class="form-control" name="REX_MEDIALIST_SELECT[' . $fieldnumber . ']" id="REX_MEDIALIST_SELECT_' . $fieldnumber . '" size="10" style="margin: 0">';
+        echo '<select class="form-control" name="REX_MEDIALIST_SELECT[' . $fieldnumber . ']" id="REX_MEDIALIST_SELECT_' . $fieldnumber . '" size="7" style="margin: 0">';
         foreach ($values as $value) {
             echo '<option value="' . $value . '">' . $value . '</option>';
         }
