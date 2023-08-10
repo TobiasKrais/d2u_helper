@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>1.13.1-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>1.13.0</p>
 		<ul>
 			<li>Funktion d2u_addon_backend_helper::form_imagelistfield() hinzugefügt. Dieses und andere D2U Addons verwenden künftig dieses Feld um Bilderlistenfelder im Stil von MForm darzustellen.</li>
