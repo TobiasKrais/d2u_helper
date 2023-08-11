@@ -8,6 +8,7 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
     rex_view::addCssFile(rex_url::addonAssets('d2u_helper', 'd2u_helper_backend.css'));
     if(!rex_addon::get('mform')->isAvailable()) {
         rex_view::addCssFile(rex_url::addonAssets('d2u_helper', 'mform_imglist.css'));
+        // load JS after mediapool JS to overwrite some of its functions
         rex_extension::register('PACKAGES_INCLUDED', static function () {
             rex_view::addJsFile(rex_url::addonAssets('d2u_helper', 'mform_imglist.js'));
         });
