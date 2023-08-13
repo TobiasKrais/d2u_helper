@@ -25,7 +25,7 @@ abstract class ACronJob
     {
         if (rex_addon::get('cronjob')->isAvailable() && self::isInstalled()) {
             $query = 'UPDATE `'. rex::getTablePrefix() .'cronjob` SET '
-                .'status = 1, '
+                .'`status` = 1, '
                 ."nexttime = '". date('Y-m-d H:i:s', strtotime('+1 min')) ."' "
                 ."WHERE `name` = '". $this->name ."'";
             $sql = rex_sql::factory();
