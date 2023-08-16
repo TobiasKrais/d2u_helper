@@ -179,7 +179,7 @@ foreach ($sql->getArray() as $result) {
         $sql_module = rex_sql::factory();
         $sql_module->setQuery('UPDATE `'. rex::getTablePrefix() .'module` '
             . "SET `key` = '". str_replace('module_', 'd2u_', (string) $result['key'])."', attributes = '". json_encode(['autoupdate' => $attributes['autoupdate'], 'addon_key' => $result['namespace']]) ."'"
-            . 'where id = '. $attributes['rex_module_id']);
+            . 'WHERE id = '. $attributes['rex_module_id']);
     }
 }
 $sql->setQuery('DELETE FROM `'. rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
