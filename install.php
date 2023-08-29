@@ -219,7 +219,7 @@ if (class_exists('D2UModuleManager')) {
         12);
     $modules[] = new D2UModule('03-2',
         'Bildergalerie Ekko Lightbox',
-        13);
+        14);
     $modules[] = new D2UModule('03-3',
         '360° Bild',
         1);

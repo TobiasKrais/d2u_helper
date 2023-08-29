@@ -17,7 +17,7 @@
 	<div class="panel-body">
 		<p>1.13.1-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" Bugfix: leeres Bild wenn gar kein Bild vorhanden war.</li>
 		</ul>
 		<p>1.13.0</p>
 		<ul>
