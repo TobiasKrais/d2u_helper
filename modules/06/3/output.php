@@ -22,7 +22,7 @@ if ($media_video instanceof rex_media) {
         echo '"@context": "https://schema.org",'. PHP_EOL;
         echo '"@type": "VideoObject",'. PHP_EOL;
         echo '"name": "'. $media_video->getTitle() .'",'. PHP_EOL;
-        echo '"description": "'. ('' !== $description ? $description : $media_video->getTitle()) .'",'. PHP_EOL; /** @phpstan-ignore-line */
+        echo '"description": '. json_encode('' !== $description ? $description : $media_video->getTitle(), JSON_UNESCAPED_UNICODE) .','. PHP_EOL; /** @phpstan-ignore-line */
         echo '"thumbnailUrl": [ "'. $server . $media_preview->getUrl() .'" ],'. PHP_EOL;
         echo '"uploadDate": "'. date('c', $media_video->getUpdateDate()) .'",'. PHP_EOL;
         echo '"contentUrl": "'. $server . $media_video->getUrl() .'"'. PHP_EOL;
