@@ -319,13 +319,13 @@ if (class_exists('D2UTemplateManager')) {
         22);
     $d2u_templates[] = new D2UTemplate('01-1',
         'Side Picture Template',
-        13);
+        14);
     $d2u_templates[] = new D2UTemplate('02-1',
         'Header Pic Template',
-        16);
+        17);
     $d2u_templates[] = new D2UTemplate('03-1',
         'Immo Template - 2 Columns',
-        15);
+        16);
     $d2u_templates[] = new D2UTemplate('03-2',
         'Immo Window Advertising Template',
         12);

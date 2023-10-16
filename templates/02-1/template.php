@@ -56,7 +56,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
 					<?php
                         if ($d2u_helper->hasConfig('template_header_pic') && '' !== $d2u_helper->getConfig('template_header_pic')) {
                             $header_image = (string) $d2u_helper->getConfig('template_header_pic');
-                            if ($this->hasValue('art_file') && '' !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
+                            if ($this->hasValue('art_file') && '' !== $this->getValue('art_file') && null !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
                                 $header_image = $this->getValue('art_file'); /** @phpstan-ignore-line */
                             }
                             $media_header_pic = rex_media::get($header_image);

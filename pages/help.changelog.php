@@ -19,6 +19,7 @@
 		<ul>
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" Bugfix: leeres Bild wenn gar kein Bild vorhanden war.</li>
 			<li>Modul 06-3 "Video mit Plyr einbinden": Bugfix: Einfaches ' wurde nicht korrekt kodiert.</li>
+			<li>Template 01-1, 02-1 und 03-1: Bugfix, falls Artikel Headerbild nicht einen leeren string sondern null zurückgibt.</li>
 		</ul>
 		<p>1.13.0</p>
 		<ul>
