@@ -5,7 +5,15 @@
 			https://github.com/TobiasKrais/d2u_helper</a>.</p>
 		<p></p>
 	</div>
-
+	
+	<header class="panel-heading"><div class="panel-title">Ersetzungen</div></header>
+	<div class="panel-body">
+		<p>Das Addon nimmt 2 Ersetzungen vor:</p>
+		<ul>
+			<li>+++LINK_PRIVACY_POLICY+++ wird mit dem Link zur Datenschutzerklärung ersetzt.</li>
+			<li>+++LINK_IMPRESS+++ wird mit dem Link zum Impressum ersetzt.</li>
+		</ul>
+	</div>
 	<header class="panel-heading"><div class="panel-title">Smartmenu Menu in eigenes Template einbinden</div></header>
 	<div class="panel-body">
 		<p>Beispielseite für Menü:
