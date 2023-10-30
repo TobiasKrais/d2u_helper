@@ -177,7 +177,7 @@ class d2u_addon_backend_helper
             if (is_array($cke5_profiles)) {
                 foreach ($cke5_profiles as $cke5_profile) {
                     if (is_array($cke5_profile) && array_key_exists('name', $cke5_profile) && rex_config::get('d2u_helper', 'editor') === 'cke5-editor_'. $cke5_profile['name']) {
-                        $wysiwyg_class = ' cke5-editor" data-profile="'. $cke5_profile['name'] .'" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang(); /** @phpstan-ignore-line */
+                        $wysiwyg_class = ' cke5-editor" data-profile="'. $cke5_profile['name'] .'" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang() .'" data-content-lang="'. \Cke5\Utils\Cke5Lang::getUserLang(); /** @phpstan-ignore-line */
                         break;
                     }
                 }
