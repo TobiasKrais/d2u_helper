@@ -18,6 +18,7 @@
 		<p>1.13.1-DEV</p>
 		<ul>
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" Bugfix: leeres Bild wenn gar kein Bild vorhanden war.</li>
+			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch Youtube Shorts URLs.</li>
 			<li>Modul 06-3 "Video mit Plyr einbinden": Bugfix: Einfaches ' wurde nicht korrekt kodiert.</li>
 			<li>Template 01-1, 02-1 und 03-1: Bugfix, falls Artikel Headerbild nicht einen leeren string sondern null zurückgibt.</li>
 		</ul>

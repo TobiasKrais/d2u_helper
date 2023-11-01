@@ -10,7 +10,7 @@ preg_match(
     $matches,
 );
 $youtube_id = isset($matches[1]) ? trim($matches[1]) : '';
-if ('' === $youtube_id && (str_contains('REX_VALUE[1]', 'youtu.be/') || str_contains('REX_VALUE[1]', '/embed/'))) {
+if ('' === $youtube_id && (str_contains('REX_VALUE[1]', 'youtu.be/') || str_contains('REX_VALUE[1]', '/embed/') || str_contains('REX_VALUE[1]', '/shorts/'))) {
     $youtube_id = trim(substr('REX_VALUE[1]', (int) strrpos('REX_VALUE[1]', '/') + 1));
 }
 $youtube_url = 'https://www.youtube-nocookie.com/embed/'. $youtube_id .'?autoplay=1';
