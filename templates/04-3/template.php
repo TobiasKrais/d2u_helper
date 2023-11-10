@@ -1,5 +1,8 @@
 <?php
 // Get placeholder wildcard tags
+
+use D2U_Courses\Course;
+
 $sprog = rex_addon::get('sprog');
 $tag_open = $sprog->getConfig('wildcard_open_tag');
 $tag_close = $sprog->getConfig('wildcard_close_tag');
@@ -142,7 +145,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 		<div class="container subhead">
 			<div class="row">
 				<?php
-                    $show_cart = (rex_addon::get('d2u_courses')->isAvailable() && rex_config::get('d2u_courses', 'article_id_shopping_cart', 0) > 0) ? true : false;
+                    $show_cart = (rex_addon::get('d2u_courses')->isAvailable() && rex_config::get('d2u_courses', 'article_id_shopping_cart', 0) > 0 && method_exists(Course::class, 'existCoursesForCart') && Course::existCoursesForCart()) ? true : false;
                     if ((bool) $d2u_helper->getConfig('show_breadcrumbs', false) || $show_cart) {
                         // Breadcrumbs
                         if ($d2u_helper->hasConfig('show_breadcrumbs') && (bool) $d2u_helper->getConfig('show_breadcrumbs')) {

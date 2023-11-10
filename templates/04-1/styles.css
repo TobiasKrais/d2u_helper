@@ -97,7 +97,9 @@ nav {
 /* Subhead and Breadcrumbs */
 #breadcrumbs {
 	background-color: subhead_color_bg;
-	padding-top: 0.25em;
+}
+#breadcrumbs-inner {
+	padding: 15px 0;
 }
 .subhead a {
 	color: subhead_color_font;
