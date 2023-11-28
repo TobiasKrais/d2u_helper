@@ -47,7 +47,13 @@ foreach ($documents as $document) {
             $filesize = round(filesize(rex_path::media() .'/'. $document) / 1024 ** 2, 2);
         }
         $filetype = strtoupper(pathinfo(rex_path::media($document), PATHINFO_EXTENSION));
-        $title = '' !== $rex_document->getValue('med_title_'. rex_clang::getCurrentId()) ? $rex_document->getValue('med_title_'. rex_clang::getCurrentId()) : ('' !== $rex_document->getTitle() ? $rex_document->getTitle() : $document);
+        $title = $document;
+        if (null !== $rex_document->getValue('med_title_'. rex_clang::getCurrentId()) && '' !== $rex_document->getValue('med_title_'. rex_clang::getCurrentId())) {
+            $title = $rex_document->getValue('med_title_'. rex_clang::getCurrentId());
+        }
+        else if (null !== $rex_document->getTitle() && '' !== $rex_document->getTitle()) {
+            $title = $rex_document->getTitle();
+        }
 
         // Check permissions
         $has_permission = true;
@@ -55,10 +61,11 @@ foreach ($documents as $document) {
             $has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create('', $document));
         }
         if ($has_permission) {
-            echo '<div class="element '. $downloads_cols .'">';
+            echo '<div class="'. $downloads_cols .'">';
+            echo '<div class="element">';
             echo '<a href="'. rex_url::media($document) .'" target="_blank">';
             if ($show_preview_pictures && !str_contains($rex_document->getType(), 'video') && 'application/octet-stream' !== $rex_document->getType()) { /** @phpstan-ignore-line */
-                echo '<img src="'. rex_media_manager::getUrl('d2u_helper_module_d2u_10-3', $rex_document->getFileName()) .'" class="uk-padding-small uk-padding-remove-horizontal uk-padding-remove-top"><br>';
+                echo '<img src="'. rex_media_manager::getUrl('d2u_helper_module_d2u_10-3', $rex_document->getFileName()) .'"><br>';
             }
 
             if (!$show_preview_pictures) { /** @phpstan-ignore-line */
@@ -68,7 +75,9 @@ foreach ($documents as $document) {
                     echo '<span class="icon file"></span>&nbsp;&nbsp;';
                 }
             }
-            echo $title .' <span>('. $filetype .($filesize > 0 ? ', '. $filesize .' MB' : '').')</span></a></div>';
+            echo $title .'<br><span>('. $filetype . ($filesize > 0 ? ', '. $filesize .' MB' : '') .')</span></a>';
+            echo '</div>';
+            echo '</div>';
         }
     }
 }

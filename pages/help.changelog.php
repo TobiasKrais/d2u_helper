@@ -20,6 +20,7 @@
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" Bugfix: leeres Bild wenn gar kein Bild vorhanden war.</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch Youtube Shorts URLs.</li>
 			<li>Modul 06-3 "Video mit Plyr einbinden": Bugfix: Einfaches ' wurde nicht korrekt kodiert.</li>
+			<li>Modul 10-3 "Box mit Downloads": Fehlerhafte Darstellung korrigiert.</li>
 			<li>Template 01-1, 02-1 und 03-1: Bugfix, falls Artikel Headerbild nicht einen leeren string sondern null zurückgibt.</li>
 			<li>Template 04-1, 04-2 und 04-3: Cart für D2U Veranstaltungen Addon wird nur angezeigt, wenn auch Veranstaltungen vorhanden sind die gebucht werden können.</li>
 		</ul>

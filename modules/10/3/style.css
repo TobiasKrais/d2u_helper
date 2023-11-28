@@ -3,8 +3,9 @@
 	padding: 0;
 }
 .download-list .element, .download-list-pics .element {
+	background: article_color_box;
 	margin-bottom: 1em;
-	padding: 0.5em 1em;
+	padding: 1em;
 }
 
 .download-list-pics {
