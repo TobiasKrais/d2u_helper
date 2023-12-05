@@ -250,10 +250,11 @@ article input:invalid, article textarea:invalid {
 	background-color: subhead_color_font;
 	border-radius: 20px;
 	color: subhead_color_bg;
-	height: 25px;
+	font-size: 0.8em;
+	height: 20px;
 	position: absolute;
 	right: 0;
-	min-width: 25px;
+	min-width: 20px;
 	text-align: center;
-	top: 0;
+	top: 5px;
 }
