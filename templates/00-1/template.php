@@ -109,10 +109,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 <body>
 	<?php
 		$header_css = "";
-		if(!$d2u_helper->hasConfig("template_header_pic") || !$d2u_helper->hasConfig("template_logo")) {
-			print "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
-		}
-		else {
+		if($d2u_helper->hasConfig("template_header_pic")) {
 			$header_image = (string) $d2u_helper->getConfig("template_header_pic");
 			if($this->hasValue("art_file") && '' !== (string) $this->getValue('art_file')) { /** @phpstan-ignore-line */
 				$header_image = (string) $this->getValue("art_file"); /** @phpstan-ignore-line */

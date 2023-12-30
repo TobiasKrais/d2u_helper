@@ -59,10 +59,6 @@ $d2u_helper = rex_addon::get("d2u_helper");
 			<div class="row">
 				<div class="col-12 col-md-6">
 					<?php
-						if(!$d2u_helper->hasConfig("template_header_pic") || $d2u_helper->getConfig("template_header_pic") === "") {
-							print "<p style='font: 2em red bold;'>WARNING: Template settings are not complete.</p>";
-						}
-						
 						$header_image = (string) $d2u_helper->getConfig("template_header_pic");
 						if($this->hasValue("art_file") && '' !== $this->getValue('art_file') && null !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
 							$header_image = $this->getValue("art_file"); /** @phpstan-ignore-line */
