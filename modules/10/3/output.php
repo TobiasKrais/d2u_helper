@@ -37,7 +37,7 @@ if ('' !== $ueberschrift) { /** @phpstan-ignore-line */
     echo '<h2>'. $ueberschrift .'</h2>';
 }
 echo '<div class="download-list'. ($show_preview_pictures ? '-pics' : '') .'">'; /** @phpstan-ignore-line */
-echo '<div class="row">';
+echo '<div class="row d-flex">';
 
 foreach ($documents as $document) {
     $rex_document = rex_media::get($document);
@@ -61,22 +61,21 @@ foreach ($documents as $document) {
             $has_permission = rex_ycom_media_auth::checkPerm(rex_media_manager::create('', $document));
         }
         if ($has_permission) {
-            echo '<div class="'. $downloads_cols .'">';
-            echo '<div class="element">';
-            echo '<a href="'. rex_url::media($document) .'" target="_blank">';
+            echo '<div class="'. $downloads_cols .' flex-fill d-flex">';
+            echo '<a href="'. rex_url::media($document) .'" target="_blank" class="element flex-fill">';
             if ($show_preview_pictures && !str_contains($rex_document->getType(), 'video') && 'application/octet-stream' !== $rex_document->getType()) { /** @phpstan-ignore-line */
                 echo '<img src="'. rex_media_manager::getUrl('d2u_helper_module_d2u_10-3', $rex_document->getFileName()) .'"><br>';
             }
 
             if (!$show_preview_pictures) { /** @phpstan-ignore-line */
-                if ('pdf' === $filetype) {
+                if ('pdf' === strtolower($filetype)) {
                     echo '<span class="icon pdf"></span>&nbsp;&nbsp;';
                 } else {
                     echo '<span class="icon file"></span>&nbsp;&nbsp;';
                 }
             }
-            echo $title .'<br><span>('. $filetype . ($filesize > 0 ? ', '. $filesize .' MB' : '') .')</span></a>';
-            echo '</div>';
+            echo $title .'<br><span>('. $filetype . ($filesize > 0 ? ', '. $filesize .' MB' : '') .')</span>';
+            echo '</a>';
             echo '</div>';
         }
     }
