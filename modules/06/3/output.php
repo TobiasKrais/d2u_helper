@@ -6,13 +6,14 @@ $cols_lg = 0 === (int) 'REX_VALUE[18]' ? 12 : (int) 'REX_VALUE[18]'; /** @phpsta
 $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @phpstan-ignore-line */
 
 $description = 'REX_VALUE[1]';
+$autoplay = 'REX_VALUE[2]' === 'true' ? true : false; /** @phpstan-ignore-line */
 $filename_video = 'REX_MEDIA[1]';
 $media_video = rex_media::get($filename_video);
 $filename_preview = 'REX_MEDIA[2]';
 $media_preview = rex_media::get($filename_preview);
 if ($media_video instanceof rex_media) {
     echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .' plyr-container">';
-    $plyr_media = rex_plyr::outputMedia($filename_video, 'play-large,play,progress,current-time,duration,restart,volume,mute,pip,fullscreen', $media_preview instanceof rex_media ? $media_preview->getUrl() : null);
+    $plyr_media = rex_plyr::outputMedia($filename_video, 'play-large,play,progress,current-time,duration,restart,volume,mute,pip,fullscreen'. ($autoplay ? ',autoplay' : ''), $media_preview instanceof rex_media ? $media_preview->getUrl() : null);
     echo $plyr_media;
 
     if ($media_preview instanceof rex_media) {
