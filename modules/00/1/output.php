@@ -14,14 +14,16 @@ if (\rex::isBackend()) {
     echo 'Umbruch '. ($line ? 'mit' : 'ohne') .' Linie'; /** @phpstan-ignore-line */
     if ($container_new && $compatible_template) { /** @phpstan-ignore-line */
         echo 'Neuen Container beginnen: '. ($container_new ? 'Ja' : 'Nein') .'<br>';
-        echo 'Neuen Container Fluid setzen (komplette Bildschirmbreite): '. ($container_fluid ? 'Ja' : 'Nein') .'<br>'; /** @phpstan-ignore-line */
-        echo 'CSS Klasse des neuen Containers: REX_VALUE[4]';
+        if($container_new) {
+            echo 'Neuen Container Fluid setzen (komplette Bildschirmbreite): '. ($container_fluid ? 'Ja' : 'Nein') .'<br>'; /** @phpstan-ignore-line */
+            echo 'CSS Klasse des neuen Containers: REX_VALUE[4]';
+        }
     }
 } else {
     if ($container_new && $compatible_template) { /** @phpstan-ignore-line */
         echo '</div>';
         echo '</div>';
-        echo '<div class="container'. ('true' === $container_fluid ? '-fluid' : '') . ('REX_VALUE[4]' !== '' ? ' REX_VALUE[4]' : '') .'">'; /** @phpstan-ignore-line */
+        echo '<div class="container'. ($container_new && $container_fluid ? '-fluid' : '') . ('REX_VALUE[4]' !== '' ? ' REX_VALUE[4]' : '') .'">'; /** @phpstan-ignore-line */
         echo '<div class="row">';
     }
 

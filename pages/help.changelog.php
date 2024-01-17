@@ -17,9 +17,10 @@
 	<div class="panel-body">
 		<p>1.13.1-DEV</p>
 		<ul>
+			<li>Modul 00-1 "Umbruch ganze Breite" Bugfix: Option Fluid Container wurde nicht korrekt ausgewertet.</li>
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" Bugfix: leeres Bild wenn gar kein Bild vorhanden war.</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch Youtube Shorts URLs.</li>
-			<li>Modul 06-3 "Video mit Plyr einbinden": Bugfix: Einfaches ' wurde nicht korrekt kodiert.</li>
+			<li>Modul 06-3 "Video mit Plyr einbinden": Bugfix: Einfaches ' wurde nicht korrekt kodiert. Und neue Option für Autoplay hinzugefügt.</li>
 			<li>Modul 10-3 "Box mit Downloads": Fehlerhafte Darstellung korrigiert.</li>
 			<li>Template 00-1, 01-1, 03-1 und 03-2: Ausgabe, dass Einstellungen fehlen im Frontend entfernt.</li>
 			<li>Template 01-1, 02-1 und 03-1: Bugfix, falls Artikel Headerbild nicht einen leeren string sondern null zurückgibt.</li>
