@@ -1,6 +1,7 @@
 d2u_helper_meta_title = D2U Helper
 d2u_helper_meta_modules = Modulverwaltung
 d2u_helper_meta_templates = Templateverwaltung
+d2u_helper_meta_translations = Übersetzungshilfe
 
 d2u_helper_rex_article_cannot_delete = Artikel kann nicht gelöscht werden, da er noch in folgenden Addons verwendet wird:
 
@@ -197,3 +198,16 @@ d2u_helper_templates_pair_unlinked = Paarung aufgehoben. Template bleibt unabhä
 d2u_helper_templates_paired_rex_template = Zugeordnetes Redaxo Template
 
 d2u_helper_gdpr_warning = Damit dieses Addon EU DSGVO konform funktioniert, muss in den Einstellungen des D2U Helper Addons der Artikel für die Datenschutzerklärung hinterlegt werden.
+
+d2u_helper_translations_apply = Anwenden
+d2u_helper_translations_description = Die Übersetzungshilfe bietet eine Liste von Übersetzungen die in D2U Addons fehlen oder aktualisiert werden sollen.
+d2u_helper_translations_filter = Filter
+d2u_helper_translations_filter_select = Anzeige von ...
+d2u_helper_translations_filter_missing = ... fehlenden Übersetzungen
+d2u_helper_translations_filter_update = ... zu aktualisierenden Übersetzungen
+d2u_helper_translations_language = Anzuzeigende Sprache
+d2u_helper_translations_none = Es ist nur eine Sprache angelegt. Eine Übersetzungshilfe ist nicht nötig.
+d2u_helper_translations_uptodate_missing = Es fehlen keine Übersetzungen.
+d2u_helper_translations_uptodate_update = Alle vorhandenen Übersetzungen sind aktuell.
+
+d2u_helper_translations_rights = D2U Helper Addon: Übersetzungshilfe Plugin

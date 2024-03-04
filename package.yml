@@ -1,5 +1,5 @@
 package: d2u_helper
-version: '1.13.1'
+version: '1.14.0'
 author: Tobias Krais
 supportpage: http://github.com/tobiaskrais/d2u_helper
 
@@ -10,6 +10,7 @@ page:
     subpages:
         modules: { title: 'translate:d2u_helper_meta_modules', icon: rex-icon rex-icon-module, perm: 'd2u_helper[settings]' }
         templates: { title: 'translate:d2u_helper_meta_templates', icon: rex-icon rex-icon-template, perm: 'd2u_helper[settings]' }
+        translation_helper: { title: 'translate:d2u_helper_meta_translations', icon: rex-icon rex-icon-language, perm: 'd2u_helper[translation_helper]' }
         settings: { title: 'translate:d2u_helper_settings', icon: rex-icon rex-icon-system, perm: 'd2u_helper[settings]' }
         help:
             icon: rex-icon rex-icon-help

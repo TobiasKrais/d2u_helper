@@ -4,6 +4,7 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
     // Correct name of rights
     rex_perm::register('d2u_helper[]', rex_i18n::msg('d2u_helper_rights_all'));
     rex_perm::register('d2u_helper[settings]', rex_i18n::msg('d2u_helper_rights_settings'), rex_perm::OPTIONS);
+    rex_perm::register('d2u_helper[translation_helper]', rex_i18n::msg('d2u_helper_translations_rights'), rex_perm::OPTIONS);
 
     rex_view::addCssFile(rex_url::addonAssets('d2u_helper', 'd2u_helper_backend.css'));
     if(!rex_addon::get('mform')->isAvailable()) {
@@ -12,6 +13,13 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
         rex_extension::register('PACKAGES_INCLUDED', static function () {
             rex_view::addJsFile(rex_url::addonAssets('d2u_helper', 'mform_imglist.js'));
         });
+    }
+
+    // translation helper
+    if (1 === rex_clang::count()) {
+        $page = $this->getProperty('page');
+        unset($page['subpages']['translation_helper']);
+        $this->setProperty('page', $page);
     }
 }
 
