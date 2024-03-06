@@ -32,19 +32,11 @@
 					<li><code>D2UModule</code> wird zu <code>FriendsOfRedaxo\D2UHelper\Module</code>.</li>
 					<li><code>D2UModuleManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ModuleManager</code>.</li>
 					<li><code>D2UTemplate</code> wird zu <code>FriendsOfRedaxo\D2UHelper\Template</code>.</li>
-					<li><code>D2UTemplateManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\TemplateManager</code>.</li>
-					
+					<li><code>D2UTemplateManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\TemplateManager</code>.</li>	
 				</ul>
 			</li>
-			<li>Module unterstützen nicht mehr Geolocation < 2.</li>
-			<li>Modul 00-1 "Umbruch ganze Breite" Bugfix: Option Fluid Container wurde nicht korrekt ausgewertet.</li>
-			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" Bugfix: leeres Bild wenn gar kein Bild vorhanden war.</li>
-			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch Youtube Shorts URLs.</li>
-			<li>Modul 06-3 "Video mit Plyr einbinden": Bugfix: Einfaches ' wurde nicht korrekt kodiert. Und neue Option für Autoplay hinzugefügt.</li>
-			<li>Modul 10-3 "Box mit Downloads": Fehlerhafte Darstellung korrigiert.</li>
-			<li>Template 00-1, 01-1, 03-1 und 03-2: Ausgabe, dass Einstellungen fehlen im Frontend entfernt.</li>
-			<li>Template 01-1, 02-1 und 03-1: Bugfix, falls Artikel Headerbild nicht einen leeren string sondern null zurückgibt.</li>
-			<li>Template 04-1, 04-2 und 04-3: Cart für D2U Veranstaltungen Addon wird nur angezeigt, wenn auch Veranstaltungen vorhanden sind die gebucht werden können.</li>
+			<li>Module unterstützen nicht mehr Geolocation < 2.x.</li>
+			<li>Templates unterstützen nicht mehr Consent-Manager < 4.x.</li>
 		</ul>
 		<p>1.14.0-DEV</p>
 		<ul>
@@ -63,8 +55,7 @@
 					<li><code>D2UModule</code> wird zu <code>FriendsOfRedaxo\D2UHelper\Module</code>.</li>
 					<li><code>D2UModuleManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ModuleManager</code>.</li>
 					<li><code>D2UTemplate</code> wird zu <code>FriendsOfRedaxo\D2UHelper\Template</code>.</li>
-					<li><code>D2UTemplateManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\TemplateManager</code>.</li>
-					
+					<li><code>D2UTemplateManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\TemplateManager</code>.</li>			
 				</ul>
 			</li>
 			<li>Vorbereitung auf R6: translation_helper Plugin in Hauptaddon integriert.</li>
