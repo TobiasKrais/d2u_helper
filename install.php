@@ -185,99 +185,99 @@ foreach ($sql->getArray() as $result) {
 $sql->setQuery('DELETE FROM `'. rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
 
 // Update modules
-if (class_exists('D2UModuleManager')) {
+if (class_exists('\FriendsOfRedaxo\D2UHelper\ModuleManager')) {
     $modules = [];
-    $modules[] = new D2UModule('00-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('00-1',
         'Umbruch ganze Breite',
         9);
-    $modules[] = new D2UModule('01-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('01-1',
         'Texteditor',
-        12);
-    $modules[] = new D2UModule('01-2',
+        13);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('01-2',
         'Texteditor mit Bild und Fettschrift',
-        15);
-    $modules[] = new D2UModule('01-3',
+        16);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('01-3',
         'Texteditor in Alertbox',
-        1);
-    $modules[] = new D2UModule('02-1',
+        2);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('02-1',
         'Überschrift',
         11);
-    $modules[] = new D2UModule('02-2',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('02-2',
         'Überschrift mit Klapptext',
-        5);
-    $modules[] = new D2UModule('02-3',
+        6);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('02-3',
         'Überschrift mit Untertitel und Textfeld',
-        7);
-    $modules[] = new D2UModule('02-4',
+        8);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('02-4',
         'Überschrift mit Hintergrundbild und 2 Buttons',
         1);
-    $modules[] = new D2UModule('02-5',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('02-5',
         'Inhaltsverzeichnis der Überschriften',
         1);
-    $modules[] = new D2UModule('03-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('03-1',
         'Bild',
         12);
-    $modules[] = new D2UModule('03-2',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('03-2',
         'Bildergalerie Ekko Lightbox',
-        14);
-    $modules[] = new D2UModule('03-3',
+        15);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('03-3',
         '360° Bild',
         1);
-    $modules[] = new D2UModule('04-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('04-1',
         'Google Maps Karte',
         13);
-    $modules[] = new D2UModule('04-2',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('04-2',
         'OpenStreetMap Karte',
         6);
-    $modules[] = new D2UModule('05-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('05-1',
         'Artikelweiterleitung',
         14);
-    $modules[] = new D2UModule('05-2',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('05-2',
         'Artikel aus anderer Sprache übernehmen',
         5);
-    $modules[] = new D2UModule('06-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('06-1',
         'YouTube Video einbinden',
         16);
-    $modules[] = new D2UModule('06-2',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('06-2',
         'IFrame einbinden',
         5);
-    $modules[] = new D2UModule('06-3',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('06-3',
         'Video mit Plyr einbinden',
         4);
-    $modules[] = new D2UModule('06-4',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('06-4',
         'Videoliste mit Plyr einbinden',
         2);
-    $modules[] = new D2UModule('07-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('07-1',
         'JavaScript einbinden',
         2);
-    $modules[] = new D2UModule('10-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('10-1',
         'Box mit Bild und Ueberschrift',
         4);
-    $modules[] = new D2UModule('10-2',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('10-2',
         'Box mit Bild und Text',
-        4);
-    $modules[] = new D2UModule('10-3',
+        5);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('10-3',
         'Box mit Downloads',
         10);
-    $modules[] = new D2UModule('11-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('11-1',
         'YForm Kontaktformular (DSGVO kompatibel)',
-        13);
-    $modules[] = new D2UModule('11-2',
+        14);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('11-2',
         'Box mit Kontaktinformationen',
         2);
-    $modules[] = new D2UModule('12-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('12-1',
         'Feeds Stream Galerie',
-        4);
-    $modules[] = new D2UModule('13-1',
+        5);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('13-1',
         'Lauftext',
-        4);
-    $modules[] = new D2UModule('14-1',
+        5);
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('14-1',
         'Search It Suchmodul',
         6);
-    $modules[] = new D2UModule('15-1',
+    $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('15-1',
         'Kategorie mit Liste der Unterkategorien',
         3);
-    $d2u_module_manager = new D2UModuleManager($modules);
+    $d2u_module_manager = new \FriendsOfRedaxo\D2UHelper\ModuleManager($modules);
     $d2u_module_manager->autoupdate();
 }
 /*
@@ -296,13 +296,13 @@ if (rex_version::compare($d2u_helper->getVersion(), '1.5.4', '<')) {
         $result->setQuery('UPDATE ' . \rex::getTablePrefix() . 'config SET `key` = REPLACE(`key`, "template_04_2_header_slider_pics", "template_04_header_slider_pics") WHERE `namespace` = "d2u_helper";');
         $result->setQuery('UPDATE ' . \rex::getTablePrefix() . 'template SET `name` = REPLACE(`name`, "02-2 Header Slider Template", "04-2 Header Slider Template");');
         // Force template update
-        if (class_exists('D2UTemplate')) {
+        if (class_exists('\FriendsOfRedaxo\D2UHelper\Template')) {
             ob_start();
             $d2u_templates = [];
-            $d2u_templates[] = new D2UTemplate('04-2',
+            $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('04-2',
                 'Header Slider Template',
                 5);
-            $d2u_template_manager = new D2UTemplateManager($d2u_templates);
+            $d2u_template_manager = new \FriendsOfRedaxo\D2UHelper\TemplateManager($d2u_templates);
             $template_02_2 = rex_config::get('d2u_helper', 'template_02-2');
             if (is_array($template_02_2) && array_key_exists('rex_template_id', $template_02_2)) {
                 $d2u_template_manager->doActions('04-2', '', (int) $template_02_2['rex_template_id']);
@@ -312,39 +312,39 @@ if (rex_version::compare($d2u_helper->getVersion(), '1.5.4', '<')) {
         }
     }
 }
-if (class_exists('D2UTemplateManager')) {
+if (class_exists('\FriendsOfRedaxo\D2UHelper\TemplateManager')) {
     $d2u_templates = [];
-    $d2u_templates[] = new D2UTemplate('00-1',
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('00-1',
         'Big Header Template',
-        23);
-    $d2u_templates[] = new D2UTemplate('01-1',
+        24);
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('01-1',
         'Side Picture Template',
-        15);
-    $d2u_templates[] = new D2UTemplate('02-1',
-        'Header Pic Template',
-        17);
-    $d2u_templates[] = new D2UTemplate('03-1',
-        'Immo Template - 2 Columns',
-        17);
-    $d2u_templates[] = new D2UTemplate('03-2',
-        'Immo Window Advertising Template',
-        13);
-    $d2u_templates[] = new D2UTemplate('04-1',
-        'Header Slider Template with Slogan',
         16);
-    $d2u_templates[] = new D2UTemplate('04-2',
-        'Header Slider Template',
-        22);
-    $d2u_templates[] = new D2UTemplate('04-3',
-        'Header Slider Template with news column',
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('02-1',
+        'Header Pic Template',
+        18);
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('03-1',
+        'Immo Template - 2 Columns',
+        18);
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('03-2',
+        'Immo Window Advertising Template',
+        14);
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('04-1',
+        'Header Slider Template with Slogan',
         17);
-    $d2u_templates[] = new D2UTemplate('05-1',
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('04-2',
+        'Header Slider Template',
+        23);
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('04-3',
+        'Header Slider Template with news column',
+        18);
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('05-1',
         'Double Logo Template',
-        15);
-    $d2u_templates[] = new D2UTemplate('06-1',
+        16);
+    $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('06-1',
         'Paper Sheet Template',
-        8);
-    $d2u_template_manager = new D2UTemplateManager($d2u_templates);
+        9);
+    $d2u_template_manager = new \FriendsOfRedaxo\D2UHelper\TemplateManager($d2u_templates);
     $d2u_template_manager->autoupdate();
 
     if (rex_version::compare($d2u_helper->getVersion(), '1.8.0', '<')) {
@@ -394,11 +394,11 @@ if (class_exists('D2UTemplateManager')) {
  */
 if ('true' === $d2u_helper->getConfig('lang_replacements_install', 'false')) {
 
-    if (!class_exists('d2u_helper_lang_helper')) {
+    if (!class_exists('\FriendsOfRedaxo\D2UHelper\LangHelper')) {
         // Load class in case addon is deactivated
-        require_once 'lib/d2u_helper_lang_helper.php';
+        require_once 'lib/LangHelper.php';
     }
-    d2u_helper_lang_helper::factory()->install();
+    \FriendsOfRedaxo\D2UHelper\LangHelper::factory()->install();
 
     // Update to 1.8.8
     if (rex_version::compare($d2u_helper->getVersion(), '1.8.8', '<')) {

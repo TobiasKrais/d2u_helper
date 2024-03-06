@@ -1,10 +1,21 @@
 <?php
+namespace FriendsOfRedaxo\D2UHelper;
+
+use rex_addon;
+use rex_article;
+use rex_clang;
+use rex_config;
+use rex_i18n;
+use rex_media_manager;
+use rex_sql;
+use rex_version;
+
 /**
  * @api
  * Offers methods for Redaxo backend forms, used by addons published by
  * www.design-to-use.de.
  */
-class d2u_addon_backend_helper
+class BackendHelper
 {
     /**
      * Create a HTML String with Redaxo Media Buttons for managing the element
@@ -85,7 +96,7 @@ class d2u_addon_backend_helper
     {
         $options_editor = [];
         if (rex_addon::get('ckeditor')->isAvailable()) {
-            if (method_exists(rex_ckeditor::class, 'getProfiles')) { /** @phpstan-ignore-line */
+            if (method_exists(\rex_ckeditor::class, 'getProfiles')) { /** @phpstan-ignore-line */
                 $ckeditor_profiles = \rex_ckeditor::getProfiles(); /** @phpstan-ignore-line */
                 if (is_array($ckeditor_profiles)) {
                     foreach ($ckeditor_profiles as $cke_profile_name) {
@@ -184,7 +195,7 @@ class d2u_addon_backend_helper
             }
         } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'ckeditor') && rex_addon::get('ckeditor')->isAvailable()) {
             $wysiwyg_class = ' ckeditor" data-ckeditor-profile="standard';
-            if (method_exists(rex_ckeditor::class, 'getProfiles')) { /** @phpstan-ignore-line */
+            if (method_exists(\rex_ckeditor::class, 'getProfiles')) { /** @phpstan-ignore-line */
                 $ckeditor_profiles = \rex_ckeditor::getProfiles(); /** @phpstan-ignore-line */
                 if (is_array($ckeditor_profiles)) {
                     foreach ($ckeditor_profiles as $cke_profile_name) {

@@ -1,13 +1,26 @@
 <?php
 
-use Url\Url;
+namespace FriendsOfRedaxo\D2UHelper;
+
+use rex_addon;
+use rex_article;
+use rex_category;
+use rex_clang;
+use rex_config;
+use rex_dir;
+use rex_extension;
+use rex_extension_point;
+use rex_finder;
+use rex_path;
+use rex_version;
+use rex_yrewrite_seo;
 
 /**
  * @api
  * Offers methods for Redaxo frontend. Mostly for Addons published by
  * www.design-to-use.de.
  */
-class d2u_addon_frontend_helper
+class FrontendHelper
 {
     /** @var int Parameter id from URL addon */
     private static int $url_id = 0;
@@ -107,17 +120,27 @@ class d2u_addon_frontend_helper
      */
     public static function getAlternateURLs()
     {
+        /**
+         * Extension point for translation list.
+         * @param array $subject List of alternate URLs
+         * @param int $params['url_namespace'] Namespace des URL Addons
+         * @param int $params['url_id'] ID des URL Addons
+         * @return array List of addons and their pages with translation status. Example:
+         * [
+         *      'redaxo_clang_id' => 'alternative url'
+         * ]
+         */
+//      $alternate_URLs = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_ALTERNATE_URLS_LIST', params: ['url_namespace' => self::getUrlNamespace(), 'url_id' => self::getUrlId()]));
         $alternate_URLs = [];
-        if (rex_addon::get('d2u_courses')->isAvailable() && count(d2u_courses_frontend_helper::getAlternateURLs()) > 0) {
-            $alternate_URLs = d2u_courses_frontend_helper::getAlternateURLs();
-        } elseif (rex_addon::get('d2u_immo')->isAvailable() && count(d2u_immo_frontend_helper::getAlternateURLs()) > 0) {
-            $alternate_URLs = d2u_immo_frontend_helper::getAlternateURLs();
-        } elseif (rex_addon::get('d2u_jobs')->isAvailable() && count(d2u_jobs_frontend_helper::getAlternateURLs()) > 0) {
-            $alternate_URLs = d2u_jobs_frontend_helper::getAlternateURLs();
-        } elseif (rex_addon::get('d2u_machinery')->isAvailable() && count(d2u_machinery_frontend_helper::getAlternateURLs()) > 0) {
-            $alternate_URLs = d2u_machinery_frontend_helper::getAlternateURLs();
-        } elseif (rex_addon::get('d2u_references')->isAvailable() && count(d2u_references_frontend_helper::getAlternateURLs()) > 0) {
-            $alternate_URLs = d2u_references_frontend_helper::getAlternateURLs();
+        /** @deprecated remove other addons in version 2, use EP instead */
+        if (rex_addon::get('d2u_immo')->isAvailable() && count(\d2u_immo_frontend_helper::getAlternateURLs()) > 0) {
+            $alternate_URLs = \d2u_immo_frontend_helper::getAlternateURLs();
+        } elseif (rex_addon::get('d2u_jobs')->isAvailable() && count(\d2u_jobs_frontend_helper::getAlternateURLs()) > 0) {
+            $alternate_URLs = \d2u_jobs_frontend_helper::getAlternateURLs();
+        } elseif (rex_addon::get('d2u_machinery')->isAvailable() && count(\d2u_machinery_frontend_helper::getAlternateURLs()) > 0) {
+            $alternate_URLs = \d2u_machinery_frontend_helper::getAlternateURLs();
+        } elseif (rex_addon::get('d2u_references')->isAvailable() && count(\d2u_references_frontend_helper::getAlternateURLs()) > 0) {
+            $alternate_URLs = \d2u_references_frontend_helper::getAlternateURLs();
         } else {
             foreach (rex_clang::getAllIds(true) as $clang_id) {
                 $article = rex_article::getCurrent($clang_id);
@@ -162,33 +185,53 @@ class d2u_addon_frontend_helper
                 $breadcrumb_start_only = false;
             }
         }
+
+        /**
+         * Extension point for breadcrumbs.
+         * @param array $subject List of breadcrumbs in html format. The <a> tags are included.
+         * @param int $params['url_namespace'] Namespace des URL Addons
+         * @param int $params['url_id'] ID des URL Addons
+         * @return array List of addons and their pages with translation status. Example:
+         * [
+         *      'redaxo_clang_id' => 'alternative url'
+         * ]
+         */
+        $ep_breadcrumbs = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_BREADCRUMB_LIST', params: ['url_namespace' => self::getUrlNamespace(), 'url_id' => self::getUrlId()]));
+        if(is_array($ep_breadcrumbs)) {
+            foreach ($ep_breadcrumbs as $ep_breadcrumb) {
+                $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $ep_breadcrumb;
+                $breadcrumb_start_only = false;
+            }
+        }
+
+        /** @deprecated remove other addons in version 2, use EP instead */
         // Addons
         if (rex_addon::get('d2u_courses')->isAvailable()) {
-            foreach (d2u_courses_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+            foreach (\d2u_courses_frontend_helper::getBreadcrumbs() as $breadcrumb) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
                 $breadcrumb_start_only = false;
             }
         }
         if (rex_addon::get('d2u_immo')->isAvailable()) {
-            foreach (d2u_immo_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+            foreach (\d2u_immo_frontend_helper::getBreadcrumbs() as $breadcrumb) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
                 $breadcrumb_start_only = false;
             }
         }
         if (rex_addon::get('d2u_jobs')->isAvailable()) {
-            foreach (d2u_jobs_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+            foreach (\d2u_jobs_frontend_helper::getBreadcrumbs() as $breadcrumb) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
                 $breadcrumb_start_only = false;
             }
         }
         if (rex_addon::get('d2u_machinery')->isAvailable()) {
-            foreach (d2u_machinery_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+            foreach (\d2u_machinery_frontend_helper::getBreadcrumbs() as $breadcrumb) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
                 $breadcrumb_start_only = false;
             }
         }
         if (rex_addon::get('d2u_references')->isAvailable()) {
-            foreach (d2u_references_frontend_helper::getBreadcrumbs() as $breadcrumb) {
+            foreach (\d2u_references_frontend_helper::getBreadcrumbs() as $breadcrumb) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
                 $breadcrumb_start_only = false;
             }
@@ -226,12 +269,12 @@ class d2u_addon_frontend_helper
         }
 
         // Generate contents
-        $installed_modules = D2UModuleManager::getModulePairs();
+        $installed_modules = ModuleManager::getModulePairs();
 
         $css = '';
         foreach ($installed_modules as $installed_module) {
             if ('' !== $installed_module['addon_key']) {
-                $module_css_file = rex_path::addon($installed_module['addon_key'], D2UModuleManager::MODULE_FOLDER . str_replace('-', '/', $installed_module['d2u_id']) .'/'. D2UModule::MODULE_CSS_FILE);
+                $module_css_file = rex_path::addon($installed_module['addon_key'], ModuleManager::MODULE_FOLDER . str_replace('-', '/', $installed_module['d2u_id']) .'/'. Module::MODULE_CSS_FILE);
                 if (file_exists($module_css_file)) {
                     $css .= file_get_contents($module_css_file);
                 }
@@ -260,12 +303,12 @@ class d2u_addon_frontend_helper
             return false !== $contents ? $contents : '';
         }
 
-        $installed_modules = D2UModuleManager::getModulePairs();
+        $installed_modules = ModuleManager::getModulePairs();
 
         $js = '';
         foreach ($installed_modules as $installed_module) {
             if ('' !== $installed_module['addon_key']) {
-                $module_js_file = rex_path::addon($installed_module['addon_key'], D2UModuleManager::MODULE_FOLDER . str_replace('-', '/', $installed_module['d2u_id']) .'/'. D2UModule::MODULE_JS_FILE);
+                $module_js_file = rex_path::addon($installed_module['addon_key'], ModuleManager::MODULE_FOLDER . str_replace('-', '/', $installed_module['d2u_id']) .'/'. Module::MODULE_JS_FILE);
                 if (file_exists($module_js_file)) {
                     $js .= file_get_contents($module_js_file);
                 }
@@ -339,9 +382,9 @@ class d2u_addon_frontend_helper
     public static function prepareEditorField($html)
     {
         if ('markitup' === rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-            $html = markitup::parseOutput('markdown', $html);
+            $html = \markitup::parseOutput('markdown', $html);
         } elseif ('markitup_textile' === rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-            $html = markitup::parseOutput('textile', $html);
+            $html = \markitup::parseOutput('textile', $html);
         }
 
         // Convert redaxo://123 to URL

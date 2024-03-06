@@ -1,10 +1,20 @@
 <?php
+
+namespace FriendsOfRedaxo\D2UHelper;
+
+use rex_addon;
+use rex_article;
+use rex_category;
+use rex_config;
+use rex_media;
+use rex_ycom_auth;
+
 /**
  * Class for Smartmenus Menu (https://codepen.io/JakubHonisek/pen/xXaYqg).
  *
  * @author Tobias Krais
  */
-class d2u_mobile_navi_mega_menu
+class FrontendNavigationMegaMenu
 {
     /**
      * Get combined CSS styles for menu.

@@ -18,7 +18,6 @@ page:
             itemClass: pull-right
             subpages:
                 readme: { title: 'translate:d2u_helper_help_chapter_readme' }
-                update: { title: 'translate:d2u_helper_help_chapter_update' }
                 changelog: { title: 'translate:d2u_helper_help_chapter_changelog' }
 
 requires:

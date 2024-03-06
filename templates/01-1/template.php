@@ -76,7 +76,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 							if($d2u_helper->hasConfig("show_breadcrumbs") && (bool) $d2u_helper->getConfig("show_breadcrumbs")) {
 								print '<div class="col-12">';
 								print '<div id="breadcrumbs">';
-								print d2u_addon_frontend_helper::getBreadcrumbs();
+								print FriendsOfRedaxo\D2UHelper\FrontendHelper::getBreadcrumbs();
 								print '</div>';
 								print '</div>';
 							}

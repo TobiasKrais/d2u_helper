@@ -1,6 +1,6 @@
 <?php
 
-namespace D2U_Helper;
+namespace FriendsOfRedaxo\D2UHelper;
 
 use rex;
 use rex_addon;

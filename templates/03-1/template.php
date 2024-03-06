@@ -61,7 +61,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
                         if ($d2u_helper->hasConfig('show_breadcrumbs') && (bool) $d2u_helper->getConfig('show_breadcrumbs')) {
                             echo '<div class="col-12 d-print-none">';
                             echo '<div id="breadcrumbs">';
-                            echo d2u_addon_frontend_helper::getBreadcrumbs();
+                            echo FriendsOfRedaxo\D2UHelper\FrontendHelper::getBreadcrumbs();
                             echo '</div>';
                             echo '</div>';
                         }

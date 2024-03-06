@@ -64,7 +64,7 @@
 								<nav>
 									<?php
                                         if (rex_addon::get('d2u_helper')->isAvailable()) {
-                                            d2u_mobile_navi_smartmenus::getMenu();
+                                            \FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu::getMenu();
                                         }
                                     ?>
 								</nav>

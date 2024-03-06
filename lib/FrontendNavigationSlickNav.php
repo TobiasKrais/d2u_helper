@@ -1,11 +1,19 @@
 <?php
 
+namespace FriendsOfRedaxo\D2UHelper;
+
+use rex_addon;
+use rex_article;
+use rex_category;
+use rex_config;
+use rex_ycom_auth;
+
 /**
  * Class for SlickNav menu (HTTPS://GITHUB.COM/COMPUTERWOLF/SLICKNAV).
  *
  * @author Tobias Krais
  */
-class d2u_mobile_navi_slicknav
+class FrontendNavigationSlickNav
 {
     /**
      * Get combined CSS styles for menu.

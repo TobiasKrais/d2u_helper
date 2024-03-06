@@ -43,13 +43,13 @@ if (1 === count(rex_clang::getAll())) {
                     if (!in_array($target_clang_id, array_keys($lang_options))) {
                         $target_clang_id = array_keys($lang_options)[0];
                     }
-                    d2u_addon_backend_helper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [$target_clang_id]);
+                    \FriendsOfRedaxo\D2UHelper\BackendHelper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [$target_clang_id]);
 
                     $filter_options = [
                         'update' => rex_i18n::msg('d2u_helper_translations_filter_update'),
                         'missing' => rex_i18n::msg('d2u_helper_translations_filter_missing'),
                     ];
-                    d2u_addon_backend_helper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [$filter_type]);
+                    \FriendsOfRedaxo\D2UHelper\BackendHelper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [$filter_type]);
                 ?>
 			</div>
 			<footer class="panel-footer">
@@ -978,12 +978,12 @@ if (1 === count(rex_clang::getAll())) {
 
     /**
      * Extension point for translation list.
-     * @param array $translation_list List of addons and their pages with translation status
+     * @param array $subject List of addons and their pages with translation status
      * @param array $params Parameters
      * @param int $params['source_clang_id'] Source clang id
      * @param int $params['target_clang_id'] Target clang id
      * @param string $params['filter_type'] Filter type
-     * @return array $translation_list List of addons and their pages with translation status. Example:
+     * @return array List of addons and their pages with translation status. Example:
      * [
      *      [
      *          'addon_name' => 'addon name',
@@ -996,7 +996,7 @@ if (1 === count(rex_clang::getAll())) {
      *      ]
      * ]
      */
-    $translation_list = rex_extension::registerPoint(new rex_extension_point('D2U_HELPER_TRANSLATION_LIST', [], ['source_clang_id' => $source_clang_id, 'target_clang_id' => $target_clang_id, 'filter_type' => $filter_type]));
+    $translation_list = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_TRANSLATION_LIST', params: ['source_clang_id' => $source_clang_id, 'target_clang_id' => $target_clang_id, 'filter_type' => $filter_type]));
 /*
     // Translation list, TODO: uncomment starting from Version 2.0
     if (count($translation_list) > 0) {
@@ -1021,7 +1021,7 @@ if (1 === count(rex_clang::getAll())) {
     }
 */
 
-    echo d2u_addon_backend_helper::getCSS();
-    echo d2u_addon_backend_helper::getJS();
-    echo d2u_addon_backend_helper::getJSOpenAll();
+    echo \FriendsOfRedaxo\D2UHelper\BackendHelper::getCSS();
+    echo \FriendsOfRedaxo\D2UHelper\BackendHelper::getJS();
+    echo \FriendsOfRedaxo\D2UHelper\BackendHelper::getJSOpenAll();
 }

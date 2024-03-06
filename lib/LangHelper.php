@@ -1,9 +1,15 @@
 <?php
+
+namespace FriendsOfRedaxo\D2UHelper;
+
+use rex_clang;
+use rex_config;
+
 /**
  * @api
  * Offers helper functions for language issues.
  */
-class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
+class LangHelper extends ALangHelper
 {
     /**
      * @var array<string,string> Array with english replacements. Key is the wildcard,
@@ -578,7 +584,7 @@ class d2u_helper_lang_helper extends \D2U_Helper\ALangHelper
 
     /**
      * Factory method.
-     * @return d2u_helper_lang_helper Object
+     * @return LangHelper Object
      */
     public static function factory()
     {

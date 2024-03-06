@@ -12,7 +12,7 @@ $text_2 = 'REX_VALUE[id=3 output="html"]';
 echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
 if ('' !== $text_1) { /** @phpstan-ignore-line */
     echo '<div class="wysiwyg_content">';
-    echo d2u_addon_frontend_helper::prepareEditorField($text_1);
+    echo FriendsOfRedaxo\D2UHelper\FrontendHelper::prepareEditorField($text_1);
     echo '</div>';
 }
 if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
@@ -20,7 +20,7 @@ if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
     echo '<div class="wysiwyg_content">';
     echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
     echo '<div id="second_text_'. $id .'" class="hide-text">';
-    echo d2u_addon_frontend_helper::prepareEditorField($text_2);
+    echo FriendsOfRedaxo\D2UHelper\FrontendHelper::prepareEditorField($text_2);
     echo '</div>';
     echo '</div>';
 

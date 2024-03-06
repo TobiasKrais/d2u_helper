@@ -23,8 +23,8 @@ $industry_sector = false;
 $machine = false;
 $used_machine = false;
 
-$url_namespace = d2u_addon_frontend_helper::getUrlNamespace();
-$url_id = d2u_addon_frontend_helper::getUrlId();
+$url_namespace = FriendsOfRedaxo\D2UHelper\FrontendHelper::getUrlNamespace();
+$url_id = FriendsOfRedaxo\D2UHelper\FrontendHelper::getUrlId();
 
 if(rex_addon::get('d2u_machinery')->isAvailable()) {
 	if(filter_input(INPUT_GET, 'machine_id', FILTER_VALIDATE_INT, ['options' => ['default'=> 0]]) > 0 || $url_namespace === "machine_id") {
@@ -155,7 +155,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 					// Breadcrumbs
 					if($d2u_helper->hasConfig("show_breadcrumbs") && '' !== $d2u_helper->getConfig("show_breadcrumbs")) {
 						print '<div class="col-12 d-print-none">';
-						print d2u_addon_frontend_helper::getBreadcrumbs();
+						print FriendsOfRedaxo\D2UHelper\FrontendHelper::getBreadcrumbs();
 						print '</div>';
 					}
 				?>

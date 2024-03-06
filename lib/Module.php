@@ -1,12 +1,18 @@
 <?php
 
+namespace FriendsOfRedaxo\D2UHelper;
+
+use rex;
+use rex_addon_interface;
+use rex_sql;
+
 /**
  * @api
  * Class managing modules published by www.design-to-use.de
  *
  * @author Tobias Krais
  */
-class D2UModule
+class Module
 {
     /**
      * CSS file name for modules.
@@ -72,7 +78,7 @@ class D2UModule
     {
         $this->d2u_module_id = $d2u_module_id;
         $d2u_module_id_explode = explode('-', $this->d2u_module_id);
-        $this->module_folder = D2UModuleManager::MODULE_FOLDER . $d2u_module_id_explode[0].'/'. $d2u_module_id_explode[1] .'/';
+        $this->module_folder = ModuleManager::MODULE_FOLDER . $d2u_module_id_explode[0].'/'. $d2u_module_id_explode[1] .'/';
         $this->name = $name;
         $this->revision = $revision;
     }
@@ -220,7 +226,7 @@ class D2UModule
         $this->setAttributes();
 
         // Delete addon cache for new styles could have been added
-        d2u_addon_frontend_helper::deleteCache();
+        FrontendHelper::deleteCache();
 
         return true;
     }

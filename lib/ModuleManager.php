@@ -1,19 +1,29 @@
 <?php
 
+namespace FriendsOfRedaxo\D2UHelper;
+
+use rex_addon;
+use rex_addon_interface;
+use rex_i18n;
+use rex_select;
+use rex_sql;
+use rex_url;
+use rex_view;
+
 /**
  * @api
  * Class managing modules published by www.design-to-use.de
  *
  * @author Tobias Krais
  */
-class D2UModuleManager
+class ModuleManager
 {
     /**
      * Folder where modules can be found.
      */
     public const MODULE_FOLDER = 'modules/';
 
-    /** @var array<D2UModule> Array with D2U modules */
+    /** @var array<Module> Array with D2U modules */
     public array $d2u_modules = [];
 
     /**
@@ -28,9 +38,9 @@ class D2UModuleManager
     /**
      * Constructor. Sets values. The path that is constructed is during addon
      * update the path of the new addon folder. Otherwise the normal addon path.
-     * @param array<D2UModule> $d2u_modules Array with D2U modules
+     * @param array<Module> $d2u_modules Array with D2U modules
      * @param string $module_folder Folder, in which modules can be found.
-     * Trailing slash must be included. Default is D2UModuleManager::MODULE_FOLDER.
+     * Trailing slash must be included. Default is ModuleManager::MODULE_FOLDER.
      * @param string $addon_key Redaxo Addon name module belongs to, default "d2u_helper"
      */
     public function __construct($d2u_modules, $module_folder = '', $addon_key = 'd2u_helper')
@@ -135,99 +145,99 @@ class D2UModuleManager
 
     /**
      * Get modules offered by D2U Helper addon.
-     * @return D2UModule[] Modules offered by D2U Helper addon
+     * @return Module[] Modules offered by D2U Helper addon
      */
     public static function getModules()
     {
         $modules = [];
-        $modules[] = new D2UModule('00-1',
+        $modules[] = new Module('00-1',
             'Umbruch ganze Breite',
             9);
-        $modules[] = new D2UModule('01-1',
+        $modules[] = new Module('01-1',
             'Texteditor',
-            12);
-        $modules[] = new D2UModule('01-2',
+            13);
+        $modules[] = new Module('01-2',
             'Texteditor mit Bild und Fettschrift',
-            15);
-        $modules[] = new D2UModule('01-3',
+            16);
+        $modules[] = new Module('01-3',
             'Texteditor in Alertbox',
-            1);
-        $modules[] = new D2UModule('02-1',
+            2);
+        $modules[] = new Module('02-1',
             'Überschrift',
             11);
-        $modules[] = new D2UModule('02-2',
+        $modules[] = new Module('02-2',
             'Überschrift mit Klapptext',
-            5);
-        $modules[] = new D2UModule('02-3',
+            6);
+        $modules[] = new Module('02-3',
             'Überschrift mit Untertitel und Textfeld',
-            7);
-        $modules[] = new D2UModule('02-4',
+            8);
+        $modules[] = new Module('02-4',
             'Überschrift mit Hintergrundbild und 2 Buttons',
             1);
-        $modules[] = new D2UModule('02-5',
+        $modules[] = new Module('02-5',
             'Inhaltsverzeichnis der Überschriften',
             1);
-        $modules[] = new D2UModule('03-1',
+        $modules[] = new Module('03-1',
             'Bild',
             12);
-        $modules[] = new D2UModule('03-2',
+        $modules[] = new Module('03-2',
             'Bildergalerie Ekko Lightbox',
-            14);
-        $modules[] = new D2UModule('03-3',
+            15);
+        $modules[] = new Module('03-3',
             '360° Bild',
             1);
-        $modules[] = new D2UModule('04-1',
+        $modules[] = new Module('04-1',
             'Google Maps Karte',
             13);
-        $modules[] = new D2UModule('04-2',
+        $modules[] = new Module('04-2',
             'OpenStreetMap Karte',
             6);
-        $modules[] = new D2UModule('05-1',
+        $modules[] = new Module('05-1',
             'Artikelweiterleitung',
             14);
-        $modules[] = new D2UModule('05-2',
+        $modules[] = new Module('05-2',
             'Artikel aus anderer Sprache übernehmen',
             5);
-        $modules[] = new D2UModule('06-1',
+        $modules[] = new Module('06-1',
             'YouTube Video einbinden',
             16);
-        $modules[] = new D2UModule('06-2',
+        $modules[] = new Module('06-2',
             'IFrame einbinden',
             5);
-        $modules[] = new D2UModule('06-3',
+        $modules[] = new Module('06-3',
             'Video mit Plyr einbinden',
             4);
-        $modules[] = new D2UModule('06-4',
+        $modules[] = new Module('06-4',
             'Videoliste mit Plyr einbinden',
             2);
-        $modules[] = new D2UModule('07-1',
+        $modules[] = new Module('07-1',
             'JavaScript einbinden',
             2);
-        $modules[] = new D2UModule('10-1',
+        $modules[] = new Module('10-1',
             'Box mit Bild und Ueberschrift',
             4);
-        $modules[] = new D2UModule('10-2',
+        $modules[] = new Module('10-2',
             'Box mit Bild und Text',
-            4);
-        $modules[] = new D2UModule('10-3',
+            5);
+        $modules[] = new Module('10-3',
             'Box mit Downloads',
             10);
-        $modules[] = new D2UModule('11-1',
+        $modules[] = new Module('11-1',
             'YForm Kontaktformular (DSGVO kompatibel)',
-            13);
-        $modules[] = new D2UModule('11-2',
+            14);
+        $modules[] = new Module('11-2',
             'Box mit Kontaktinformationen',
             2);
-        $modules[] = new D2UModule('12-1',
+        $modules[] = new Module('12-1',
             'Feeds Stream Galerie',
-            4);
-        $modules[] = new D2UModule('13-1',
+            5);
+        $modules[] = new Module('13-1',
             'Lauftext',
-            4);
-        $modules[] = new D2UModule('14-1',
+            5);
+        $modules[] = new Module('14-1',
             'Search It Suchmodul',
             6);
-        $modules[] = new D2UModule('15-1',
+        $modules[] = new Module('15-1',
             'Kategorie mit Liste der Unterkategorien',
             3);
         // 20-x reserved for D2U Addresss

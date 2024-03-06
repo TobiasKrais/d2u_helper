@@ -1,10 +1,19 @@
 <?php
+
+namespace FriendsOfRedaxo\D2UHelper;
+
+use rex_addon;
+use rex_article;
+use rex_category;
+use rex_config;
+use rex_ycom_auth;
+
 /**
  * Class for Smartmenus Menu (https://www.smartmenus.org/).
  *
  * @author Tobias Krais
  */
-class d2u_mobile_navi_smartmenus
+class FrontendNavigationSmartmenu
 {
     /**
      * Get combined CSS styles for menu.
@@ -90,7 +99,7 @@ class d2u_mobile_navi_smartmenus
                     echo '<ul>'. PHP_EOL;
                     // Mit Untermenü
                     if ($has_machine_submenu) {
-                        d2u_machinery_frontend_helper::getD2UMachinerySmartmenuSubmenu();
+                        \d2u_machinery_frontend_helper::getD2UMachinerySmartmenuSubmenu();
                     }
                     foreach ($category->getChildren(true) as $lev2) {
                         if (0 === count($lev2->getChildren(true))) {
@@ -128,7 +137,7 @@ class d2u_mobile_navi_smartmenus
         echo '<li><a href="'. $rex_category->getUrl() .'" title="'. $rex_category->getName() .'"'. (rex_article::getCurrentId() === $rex_category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'>'. $rex_category->getName() .'</a>'. PHP_EOL;
         echo '<ul>'. PHP_EOL;
         if (rex_addon::get('d2u_machinery')->isAvailable() && 'show' === (string) rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && (int) rex_config::get('d2u_machinery', 'article_id', 0) === $rex_category->getId()) {
-            d2u_machinery_frontend_helper::getD2UMachinerySmartmenuSubmenu();
+            \d2u_machinery_frontend_helper::getD2UMachinerySmartmenuSubmenu();
         }
         foreach ($rex_category->getChildren(true) as $rex_subcategory) {
             // Check permissions if YCom ist installed

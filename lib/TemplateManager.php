@@ -1,18 +1,30 @@
 <?php
+
+namespace FriendsOfRedaxo\D2UHelper;
+
+use rex_addon;
+use rex_addon_interface;
+use rex_config;
+use rex_i18n;
+use rex_select;
+use rex_sql;
+use rex_url;
+use rex_view;
+
 /**
  * @api
  * Class managing templates published by www.design-to-use.de.
  *
  * @author Tobias Krais
  */
-class D2UTemplateManager
+class TemplateManager
 {
     /**
      * Folder where templates can be found.
      */
     public const TEMPLATE_FOLDER = 'templates/';
 
-    /** @var array<D2UTemplate> Array with D2U templates */
+    /** @var array<\FriendsOfRedaxo\D2UHelper\Template> Array with D2U templates */
     public array $d2u_templates = [];
 
     /**
@@ -27,9 +39,9 @@ class D2UTemplateManager
     /**
      * Constructor. Sets values. The path that is constructed is during addon
      * update the path of the new addon folder. Otherwise the normal addon path.
-     * @param array<D2UTemplate> $d2u_templates Array with D2U templates
+     * @param array<\FriendsOfRedaxo\D2UHelper\Template> $d2u_templates Array with D2U templates
      * @param string $template_folder Folder, in which templates can be found.
-     * Trailing slash must be included. Default is D2UTemplateManager::TEMPLATE_FOLDER.
+     * Trailing slash must be included. Default is \FriendsOfRedaxo\D2UHelper\TemplateManager::TEMPLATE_FOLDER.
      * @param string $addon_key Redaxo Addon name template belongs to, default "d2u_helper"
      */
     public function __construct($d2u_templates, $template_folder = '', $addon_key = 'd2u_helper')
@@ -108,48 +120,48 @@ class D2UTemplateManager
 
     /**
      * Get templates offered by D2U Helper addon.
-     * @return D2UTemplate[] Templates offered by D2U Helper addon
+     * @return \FriendsOfRedaxo\D2UHelper\Template[] Templates offered by D2U Helper addon
      */
     public static function getD2UHelperTemplates()
     {
         $d2u_templates = [];
-        $d2u_templates[] = new D2UTemplate('00-1',
+        $d2u_templates[] = new Template('00-1',
             'Big Header Template',
-            23);
-        $d2u_templates[] = new D2UTemplate('01-1',
+            24);
+        $d2u_templates[] = new Template('01-1',
             'Side Picture Template',
-            15);
-        $d2u_templates[] = new D2UTemplate('02-1',
-            'Header Pic Template',
-            17);
-        $d2u_templates[] = new D2UTemplate('03-1',
-            'Immo Template - 2 Columns',
-            17);
-        $d2u_templates[] = new D2UTemplate('03-2',
-            'Immo Window Advertising Template',
-            13);
-        $d2u_templates[] = new D2UTemplate('04-1',
-            'Header Slider Template with Slogan',
             16);
-        $d2u_templates[] = new D2UTemplate('04-2',
-            'Header Slider Template',
-            22);
-        $d2u_templates[] = new D2UTemplate('04-3',
-            'Header Slider Template with news column',
+        $d2u_templates[] = new Template('02-1',
+            'Header Pic Template',
+            18);
+        $d2u_templates[] = new Template('03-1',
+            'Immo Template - 2 Columns',
+            18);
+        $d2u_templates[] = new Template('03-2',
+            'Immo Window Advertising Template',
+            14);
+        $d2u_templates[] = new Template('04-1',
+            'Header Slider Template with Slogan',
             17);
-        $d2u_templates[] = new D2UTemplate('05-1',
+        $d2u_templates[] = new Template('04-2',
+            'Header Slider Template',
+            23);
+        $d2u_templates[] = new Template('04-3',
+            'Header Slider Template with news column',
+            18);
+        $d2u_templates[] = new Template('05-1',
             'Double Logo Template',
-            15);
-        $d2u_templates[] = new D2UTemplate('06-1',
+            16);
+        $d2u_templates[] = new Template('06-1',
             'Paper Sheet Template',
-            8);
+            9);
         return $d2u_templates;
     }
 
     /**
      * Get initialized template by ID.
      * @param string $template_id D2U template ID
-     * @return D2UTemplate|bool Requested template object, in case template was not found: false
+     * @return \FriendsOfRedaxo\D2UHelper\Template|bool Requested template object, in case template was not found: false
      */
     public function getTemplate($template_id)
     {

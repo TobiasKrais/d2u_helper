@@ -1,6 +1,6 @@
 <?php
 
-namespace D2U_Helper;
+namespace FriendsOfRedaxo\D2UHelper;
 
 /**
  * Support for D2U Translation Helper.

@@ -13,12 +13,12 @@
                         echo '<div class="navi">';
                         if (rex_addon::get('d2u_helper')->isAvailable()) {
                             if ('smartmenu' === rex_config::get('d2u_helper', 'include_menu')) {
-                                d2u_mobile_navi_smartmenus::getMenu();
+                                \FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu::getMenu();
                             } elseif ('multilevel' === rex_config::get('d2u_helper', 'include_menu')) {
-                                d2u_mobile_navi::getResponsiveMultiLevelMobileMenu();
-                                d2u_mobile_navi::getResponsiveMultiLevelDesktopMenu();
+                                \FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel::getResponsiveMultiLevelMobileMenu();
+                                \FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel::getResponsiveMultiLevelDesktopMenu();
                             } elseif ('megamenu' === rex_config::get('d2u_helper', 'include_menu')) {
-                                d2u_mobile_navi_mega_menu::getMenu();
+                                \FriendsOfRedaxo\D2UHelper\FrontendNavigationMegaMenu::getMenu();
                             }
                         }
                         echo '</div>';
