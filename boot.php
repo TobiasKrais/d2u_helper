@@ -27,9 +27,9 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
 }
 
 if (rex::isBackend()) {
-    rex_extension::register('ART_PRE_DELETED', 'rex_d2u_helper_article_is_in_use');
-    rex_extension::register('CLANG_DELETED', 'rex_d2u_helper_clang_deleted');
-    rex_extension::register('MEDIA_IS_IN_USE', 'rex_d2u_helper_media_is_in_use');
+    rex_extension::register('ART_PRE_DELETED', rex_d2u_helper_article_is_in_use(...));
+    rex_extension::register('CLANG_DELETED', rex_d2u_helper_clang_deleted(...));
+    rex_extension::register('MEDIA_IS_IN_USE', rex_d2u_helper_media_is_in_use(...));
 } else {
     rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
         // If CSS or JS is requested
@@ -49,39 +49,39 @@ if (rex::isBackend()) {
     });
 
     // Only frontend call
-    rex_extension::register('OUTPUT_FILTER', 'appendToPageD2UHelperFiles');
+    rex_extension::register('OUTPUT_FILTER', appendToPageD2UHelperFiles(...));
 
     // Replace privacy policy and impress links, esp. after sprog calls OUTPUT_FILTER
     if (rex_config::get('d2u_helper', 'article_id_privacy_policy', 0) > 0 || rex_config::get('d2u_helper', 'article_id_impress', 0) > 0) {
         rex_extension::register('PACKAGES_INCLUDED', static function () {
-            rex_extension::register('OUTPUT_FILTER', 'replace_privacy_policy_links');
+            rex_extension::register('OUTPUT_FILTER', replace_privacy_policy_links(...));
         }, rex_extension::LATE);
     }
 
     // show table of contents
     if (rex_addon::get('sprog')->isAvailable()) {
         rex_extension::register('PACKAGES_INCLUDED', static function () {
-            rex_extension::register('OUTPUT_FILTER', 'addD2UHelperTOC');
+            rex_extension::register('OUTPUT_FILTER', addD2UHelperTOC(...));
         });
     }
 }
 
 rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
     /** @deprecated starting with version 2, class alias will be removed */
-    class_alias('FriendsOfRedaxo\D2UHelper\ACronJob', 'D2U_Helper\ACronJob');
-    class_alias('FriendsOfRedaxo\D2UHelper\ALangHelper', 'D2U_Helper\ALangHelper');
-    class_alias('FriendsOfRedaxo\D2UHelper\BackendHelper', 'd2u_addon_backend_helper');
-    class_alias('FriendsOfRedaxo\D2UHelper\FrontendHelper', 'd2u_addon_frontend_helper');
-    class_alias('FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel', 'd2u_mobile_navi');
-    class_alias('FriendsOfRedaxo\D2UHelper\FrontendNavigationMegaMenu', 'd2u_mobile_navi_mega_menu');
-    class_alias('FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav', 'd2u_mobile_navi_slicknav');
-    class_alias('FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu', 'd2u_mobile_navi_smartmenus');
-    class_alias('FriendsOfRedaxo\D2UHelper\ITranslationHelper', 'D2U_Helper\ITranslationHelper');
-    class_alias('FriendsOfRedaxo\D2UHelper\LangHelper', 'd2u_helper_lang_helper');
-    class_alias('FriendsOfRedaxo\D2UHelper\Module', 'D2UModule');
-    class_alias('FriendsOfRedaxo\D2UHelper\ModuleManager', 'D2UModuleManager');
-    class_alias('FriendsOfRedaxo\D2UHelper\Template', 'D2UTemplate');
-    class_alias('FriendsOfRedaxo\D2UHelper\TemplateManager', 'D2UTemplateManager');
+    class_alias(FriendsOfRedaxo\D2UHelper\ACronJob::class, D2U_Helper\ACronJob::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\ALangHelper::class, D2U_Helper\ALangHelper::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\BackendHelper::class, d2u_addon_backend_helper::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\FrontendHelper::class, d2u_addon_frontend_helper::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel::class, d2u_mobile_navi::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\FrontendNavigationMegaMenu::class, d2u_mobile_navi_mega_menu::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav::class, d2u_mobile_navi_slicknav::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu::class, d2u_mobile_navi_smartmenus::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\ITranslationHelper::class, D2U_Helper\ITranslationHelper::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\LangHelper::class, d2u_helper_lang_helper::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\Module::class, D2UModule::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\ModuleManager::class, D2UModuleManager::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\Template::class, D2UTemplate::class);
+    class_alias(FriendsOfRedaxo\D2UHelper\TemplateManager::class, D2UTemplateManager::class);
 });
 
 /**

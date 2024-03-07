@@ -96,7 +96,7 @@ class BackendHelper
     {
         $options_editor = [];
         if (rex_addon::get('ckeditor')->isAvailable()) {
-            if (method_exists(\rex_ckeditor::class, 'getProfiles')) { /** @phpstan-ignore-line */
+            if (is_callable(\rex_ckeditor::getProfiles(...))) { /** @phpstan-ignore-line */
                 $ckeditor_profiles = \rex_ckeditor::getProfiles(); /** @phpstan-ignore-line */
                 if (is_array($ckeditor_profiles)) {
                     foreach ($ckeditor_profiles as $cke_profile_name) {
@@ -195,7 +195,7 @@ class BackendHelper
             }
         } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'ckeditor') && rex_addon::get('ckeditor')->isAvailable()) {
             $wysiwyg_class = ' ckeditor" data-ckeditor-profile="standard';
-            if (method_exists(\rex_ckeditor::class, 'getProfiles')) { /** @phpstan-ignore-line */
+            if (is_callable(\rex_ckeditor::getProfiles(...))) { /** @phpstan-ignore-line */
                 $ckeditor_profiles = \rex_ckeditor::getProfiles(); /** @phpstan-ignore-line */
                 if (is_array($ckeditor_profiles)) {
                     foreach ($ckeditor_profiles as $cke_profile_name) {

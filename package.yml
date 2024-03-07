@@ -1,7 +1,7 @@
 package: d2u_helper
 version: '1.14.0'
-author: Tobias Krais
-supportpage: http://github.com/tobiaskrais/d2u_helper
+author: Friends Of REDAXO
+supportpage: http://github.com/FriendsOfREDAXO/d2u_helper
 
 page:
     title: 'translate:d2u_helper_meta_title'

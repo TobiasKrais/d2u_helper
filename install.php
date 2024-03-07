@@ -185,7 +185,7 @@ foreach ($sql->getArray() as $result) {
 $sql->setQuery('DELETE FROM `'. rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
 
 // Update modules
-if (class_exists('\FriendsOfRedaxo\D2UHelper\ModuleManager')) {
+if (class_exists(FriendsOfRedaxo\D2UHelper\ModuleManager::class)) {
     $modules = [];
     $modules[] = new \FriendsOfRedaxo\D2UHelper\Module('00-1',
         'Umbruch ganze Breite',
@@ -296,7 +296,7 @@ if (rex_version::compare($d2u_helper->getVersion(), '1.5.4', '<')) {
         $result->setQuery('UPDATE ' . \rex::getTablePrefix() . 'config SET `key` = REPLACE(`key`, "template_04_2_header_slider_pics", "template_04_header_slider_pics") WHERE `namespace` = "d2u_helper";');
         $result->setQuery('UPDATE ' . \rex::getTablePrefix() . 'template SET `name` = REPLACE(`name`, "02-2 Header Slider Template", "04-2 Header Slider Template");');
         // Force template update
-        if (class_exists('\FriendsOfRedaxo\D2UHelper\Template')) {
+        if (class_exists(\FriendsOfRedaxo\D2UHelper\Template::class)) {
             ob_start();
             $d2u_templates = [];
             $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('04-2',
@@ -312,7 +312,7 @@ if (rex_version::compare($d2u_helper->getVersion(), '1.5.4', '<')) {
         }
     }
 }
-if (class_exists('\FriendsOfRedaxo\D2UHelper\TemplateManager')) {
+if (class_exists(\FriendsOfRedaxo\D2UHelper\TemplateManager::class)) {
     $d2u_templates = [];
     $d2u_templates[] = new \FriendsOfRedaxo\D2UHelper\Template('00-1',
         'Big Header Template',
@@ -394,7 +394,7 @@ if (class_exists('\FriendsOfRedaxo\D2UHelper\TemplateManager')) {
  */
 if ('true' === $d2u_helper->getConfig('lang_replacements_install', 'false')) {
 
-    if (!class_exists('\FriendsOfRedaxo\D2UHelper\LangHelper')) {
+    if (!class_exists(\FriendsOfRedaxo\D2UHelper\LangHelper::class)) {
         // Load class in case addon is deactivated
         require_once 'lib/LangHelper.php';
     }
