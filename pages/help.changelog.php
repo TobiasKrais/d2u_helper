@@ -59,6 +59,7 @@
 				</ul>
 			</li>
 			<li>Vorbereitung auf R6: translation_helper Plugin in Hauptaddon integriert.</li>
+			<li>Übergabe des Addons an FriendsOfRedaxo.</li>
 			<li>Modul 00-1 "Umbruch ganze Breite" Bugfix: Option Fluid Container wurde nicht korrekt ausgewertet.</li>
 			<li>Modul 03-2 "Bildergalerie Ekko Lightbox" Bugfix: leeres Bild wenn gar kein Bild vorhanden war.</li>
 			<li>Modul 06-1 "YouTube Video einbinden": Unterstützt jetzt auch Youtube Shorts URLs.</li>
