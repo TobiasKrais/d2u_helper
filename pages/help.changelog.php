@@ -38,7 +38,7 @@
 			<li>Module unterstützen nicht mehr Geolocation < 2.x.</li>
 			<li>Templates unterstützen nicht mehr Consent-Manager < 4.x.</li>
 		</ul>
-		<p>1.14.0-DEV</p>
+		<p>1.14.0</p>
 		<ul>
 			<li>Vorbereitung auf R6: Folgende Klassen werden ab Version 2 dieses Addons umbenannt. Schon jetzt stehen die neuen Klassen für die Übergangszeit zur Verfügung:
 				<ul>
