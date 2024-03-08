@@ -18,7 +18,7 @@
         $show_screen_size = 'screen == "lg" ||  screen == "xl"';
         $menu_icon_min_width = '';
         if ($d2u_helper->isAvailable()) {
-            \FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav::getMobileMenu();
+            \TobiasKrais\D2UHelper\FrontendNavigationSlickNav::getMobileMenu();
 
             $include_menu_show = (string) $d2u_helper->getConfig('include_menu_show', 'md');
             if ('xs' === $include_menu_show) {
@@ -179,7 +179,7 @@
                             // Breadcrumbs
                             if ((bool) $d2u_helper->getConfig('show_breadcrumbs', 'false')) {
                                 echo '<div class="col-12 d-print-none" id="breadcrumbs">';
-                                echo FriendsOfRedaxo\D2UHelper\FrontendHelper::getBreadcrumbs();
+                                echo TobiasKrais\D2UHelper\FrontendHelper::getBreadcrumbs();
                                 echo '</div>';
                             }
 

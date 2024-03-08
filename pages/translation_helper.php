@@ -43,13 +43,13 @@ if (1 === count(rex_clang::getAll())) {
                     if (!in_array($target_clang_id, array_keys($lang_options))) {
                         $target_clang_id = array_keys($lang_options)[0];
                     }
-                    \FriendsOfRedaxo\D2UHelper\BackendHelper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [$target_clang_id]);
+                    \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [$target_clang_id]);
 
                     $filter_options = [
                         'update' => rex_i18n::msg('d2u_helper_translations_filter_update'),
                         'missing' => rex_i18n::msg('d2u_helper_translations_filter_missing'),
                     ];
-                    \FriendsOfRedaxo\D2UHelper\BackendHelper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [$filter_type]);
+                    \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [$filter_type]);
                 ?>
 			</div>
 			<footer class="panel-footer">
@@ -76,7 +76,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($continents) > 0) {
                         echo '<ul>';
                         foreach ($continents as $continent) {
-                            if ('' !== $continent->name) {
+                            if ('' === $continent->name) {
                                 $continent = new \D2U_Address\Continent($continent->continent_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_address/continent', ['entry_id' => $continent->continent_id, 'func' => 'edit']) .'">'. $continent->name .'</a></li>';
@@ -96,7 +96,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($countries) > 0) {
                         echo '<ul>';
                         foreach ($countries as $country) {
-                            if ('' !== $country->name) {
+                            if ('' === $country->name) {
                                 $country = new \D2U_Address\Country($country->country_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_address/country', ['entry_id' => $country->country_id, 'func' => 'edit']) .'">'. $country->name .'</a></li>';
@@ -126,7 +126,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($history_events) > 0) {
                         echo '<ul>';
                         foreach ($history_events as $history_event) {
-                            if ('' !== $history_event->name) {
+                            if ('' === $history_event->name) {
                                 $history_event = new \D2U_History\History($history_event->history_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_history/history', ['entry_id' => $history_event->history_id, 'func' => 'edit']) .'">'. $history_event->name .'</a></li>';
@@ -157,7 +157,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($categories) > 0) {
                         echo '<ul>';
                         foreach ($categories as $category) {
-                            if ('' !== $category->name) {
+                            if ('' === $category->name) {
                                 $category = new \D2U_Immo\Category($category->category_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_immo/category', ['entry_id' => $category->category_id, 'func' => 'edit']) .'">'. $category->name .'</a></li>';
@@ -177,7 +177,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($properties) > 0) {
                         echo '<ul>';
                         foreach ($properties as $property) {
-                            if ('' !== $property->name) {
+                            if ('' === $property->name) {
                                 $property = new \D2U_Immo\Property($property->property_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_immo/property', ['entry_id' => $property->property_id, 'func' => 'edit']) .'">'. $property->name .'</a></li>';
@@ -201,7 +201,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($ads) > 0) {
                         echo '<ul>';
                         foreach ($ads as $ad) {
-                            if ('' !== $ad->title) {
+                            if ('' === $ad->title) {
                                 $ad = new \D2U_Immo\Advertisement($ad->ad_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_immo/window_advertising/advertisement', ['entry_id' => $ad->ad_id, 'func' => 'edit']) .'">'. $ad->title .'</a></li>';
@@ -235,7 +235,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($categories) > 0) {
                         echo '<ul>';
                         foreach ($categories as $category) {
-                            if ('' !== $category->name) {
+                            if ('' === $category->name) {
                                 $category = new \D2U_Jobs\Category($category->category_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_jobs/category', ['entry_id' => $category->category_id, 'func' => 'edit']) .'">'. $category->name .'</a></li>';
@@ -255,7 +255,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($jobs) > 0) {
                         echo '<ul>';
                         foreach ($jobs as $job) {
-                            if ('' !== $job->name) {
+                            if ('' === $job->name) {
                                 foreach (rex_clang::getAllIds() as $clang_id) {
                                     $temp_job = new \D2U_Jobs\Job($job->job_id, $clang_id);
                                     if ('' !== $temp_job->name) {
@@ -291,7 +291,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($linkboxes) > 0) {
                         echo '<ul>';
                         foreach ($linkboxes as $linkbox) {
-                            if ('' !== $linkbox->title) {
+                            if ('' === $linkbox->title) {
                                 $linkbox = new \D2U_Linkbox\Linkbox($linkbox->box_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_linkbox/linkbox', ['entry_id' => $linkbox->box_id, 'func' => 'edit']) .'">'. $linkbox->title .'</a></li>';
@@ -322,7 +322,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($categories) > 0) {
                         echo '<ul>';
                         foreach ($categories as $category) {
-                            if ('' !== $category->name) {
+                            if ('' === $category->name) {
                                 $category = new Category($category->category_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/category', ['entry_id' => $category->category_id, 'func' => 'edit']) .'">'. $category->name .'</a></li>';
@@ -342,7 +342,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($machines) > 0) {
                         echo '<ul>';
                         foreach ($machines as $machine) {
-                            if ('' !== $machine->name) {
+                            if ('' === $machine->name) {
                                 $machine = new Machine($machine->machine_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine', ['entry_id' => $machine->machine_id, 'func' => 'edit']) .'">'. $machine->name .'</a></li>';
@@ -367,7 +367,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($equipments) > 0) {
                         echo '<ul>';
                         foreach ($equipments as $equipment) {
-                            if ('' !== $equipment->name) {
+                            if ('' === $equipment->name) {
                                 $equipment = new Equipment($equipment->equipment_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/equipment/equipment', ['entry_id' => $equipment->equipment_id, 'func' => 'edit']) .'">'. $equipment->name .'</a></li>';
@@ -387,7 +387,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($equipment_groups) > 0) {
                         echo '<ul>';
                         foreach ($equipment_groups as $equipment_group) {
-                            if ('' !== $equipment_group->name) {
+                            if ('' === $equipment_group->name) {
                                 $equipment_group = new EquipmentGroup($equipment_group->group_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/equipment/equipment_group', ['entry_id' => $equipment_group->group_id, 'func' => 'edit']) .'">'. $equipment_group->name .'</a></li>';
@@ -412,7 +412,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($industry_sectors) > 0) {
                         echo '<ul>';
                         foreach ($industry_sectors as $industry_sector) {
-                            if ('' !== $industry_sector->name) {
+                            if ('' === $industry_sector->name) {
                                 $industry_sector = new IndustrySector($industry_sector->industry_sector_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/industry_sectors', ['entry_id' => $industry_sector->industry_sector_id, 'func' => 'edit']) .'">'. $industry_sector->name .'</a></li>';
@@ -437,7 +437,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($certificates) > 0) {
                         echo '<ul>';
                         foreach ($certificates as $certificate) {
-                            if ('' !== $certificate->name) {
+                            if ('' === $certificate->name) {
                                 $certificate = new Certificate($certificate->certificate_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_certificates_extension', ['entry_id' => $certificate->certificate_id, 'func' => 'edit']) .'">'. $certificate->name .'</a></li>';
@@ -462,7 +462,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($features) > 0) {
                         echo '<ul>';
                         foreach ($features as $feature) {
-                            if ('' !== $feature->name) {
+                            if ('' === $feature->name) {
                                 $feature = new Feature($feature->feature_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_features_extension', ['entry_id' => $feature->feature_id, 'func' => 'edit']) .'">'. $feature->name .'</a></li>';
@@ -487,7 +487,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($options) > 0) {
                         echo '<ul>';
                         foreach ($options as $option) {
-                            if ('' !== $option->name) {
+                            if ('' === $option->name) {
                                 $option = new Option($option->option_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_options_extension', ['entry_id' => $option->option_id, 'func' => 'edit']) .'">'. $option->name .'</a></li>';
@@ -519,7 +519,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($automations) > 0) {
                         echo '<ul>';
                         foreach ($automations as $automation) {
-                            if ('' !== $automation->name) {
+                            if ('' === $automation->name) {
                                 $automation = new Automation($automation->automation_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_steel_processing_extension/automation', ['entry_id' => $automation->automation_id, 'func' => 'edit']) .'">'. $automation->name .'</a></li>';
@@ -539,7 +539,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($materials) > 0) {
                         echo '<ul>';
                         foreach ($materials as $material) {
-                            if ('' !== $material->name) {
+                            if ('' === $material->name) {
                                 $material = new Material($material->material_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_steel_processing_extension/material', ['entry_id' => $material->material_id, 'func' => 'edit']) .'">'. $material->name .'</a></li>';
@@ -559,7 +559,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($procedures) > 0) {
                         echo '<ul>';
                         foreach ($procedures as $procedure) {
-                            if ('' !== $procedure->name) {
+                            if ('' === $procedure->name) {
                                 $procedure = new Procedure($procedure->procedure_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_steel_processing_extension/procedure', ['entry_id' => $procedure->procedure_id, 'func' => 'edit']) .'">'. $procedure->name .'</a></li>';
@@ -579,7 +579,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($processes) > 0) {
                         echo '<ul>';
                         foreach ($processes as $process) {
-                            if ('' !== $process->name) {
+                            if ('' === $process->name) {
                                 $process = new Process($process->process_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_steel_processing_extension/process', ['entry_id' => $process->process_id, 'func' => 'edit']) .'">'. $process->name .'</a></li>';
@@ -599,7 +599,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($profiles) > 0) {
                         echo '<ul>';
                         foreach ($profiles as $profile) {
-                            if ('' !== $profile->name) {
+                            if ('' === $profile->name) {
                                 $profile = new Profile($profile->profile_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_steel_processing_extension/profile', ['entry_id' => $profile->profile_id, 'func' => 'edit']) .'">'. $profile->name .'</a></li>';
@@ -619,7 +619,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($supplies) > 0) {
                         echo '<ul>';
                         foreach ($supplies as $supply) {
-                            if ('' !== $supply->name) {
+                            if ('' === $supply->name) {
                                 $supply = new Supply($supply->supply_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_steel_processing_extension/supply', ['entry_id' => $supply->supply_id, 'func' => 'edit']) .'">'. $supply->name .'</a></li>';
@@ -639,7 +639,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($tools) > 0) {
                         echo '<ul>';
                         foreach ($tools as $tool) {
-                            if ('' !== $tool->name) {
+                            if ('' === $tool->name) {
                                 $tool = new Tool($tool->tool_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_steel_processing_extension/tool', ['entry_id' => $tool->tool_id, 'func' => 'edit']) .'">'. $tool->name .'</a></li>';
@@ -659,7 +659,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($weldings) > 0) {
                         echo '<ul>';
                         foreach ($weldings as $welding) {
-                            if ('' !== $welding->name) {
+                            if ('' === $welding->name) {
                                 $welding = new Welding($welding->welding_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_steel_processing_extension/welding', ['entry_id' => $welding->welding_id, 'func' => 'edit']) .'">'. $welding->name .'</a></li>';
@@ -684,7 +684,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($usage_areas) > 0) {
                         echo '<ul>';
                         foreach ($usage_areas as $usage_area) {
-                            if ('' !== $usage_area->name) {
+                            if ('' === $usage_area->name) {
                                 $usage_area = new UsageArea($usage_area->usage_area_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/machine_usage_area_extension', ['entry_id' => $usage_area->usage_area_id, 'func' => 'edit']) .'">'. $usage_area->name .'</a></li>';
@@ -709,7 +709,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($production_lines) > 0) {
                         echo '<ul>';
                         foreach ($production_lines as $production_line) {
-                            if ('' !== $production_line->name) {
+                            if ('' === $production_line->name) {
                                 $production_line = new ProductionLine($production_line->production_line_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/production_lines', ['entry_id' => $production_line->production_line_id, 'func' => 'edit']) .'">'. $production_line->name .'</a></li>';
@@ -734,7 +734,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($service_options) > 0) {
                         echo '<ul>';
                         foreach ($service_options as $service_option) {
-                            if ('' !== $service_option->name) {
+                            if ('' === $service_option->name) {
                                 $service_option = new ServiceOption($service_option->service_option_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/service_option', ['entry_id' => $service_option->service_option_id, 'func' => 'edit']) .'">'. $service_option->name .'</a></li>';
@@ -759,7 +759,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($used_machines) > 0) {
                         echo '<ul>';
                         foreach ($used_machines as $used_machine) {
-                            if ('' !== $used_machine->name) {
+                            if ('' === $used_machine->name) {
                                 $used_machine = new UsedMachine($used_machine->used_machine_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_machinery/used_machines', ['entry_id' => $used_machine->used_machine_id, 'func' => 'edit']) .'">'. $used_machine->name .'</a></li>';
@@ -792,7 +792,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($staff_members) > 0) {
                         echo '<ul>';
                         foreach ($staff_members as $staff_member) {
-                            if ('' !== $staff_member->name) {
+                            if ('' === $staff_member->name) {
                                 $staff_member = new Staff($staff_member->staff_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_staff/staff', ['entry_id' => $staff_member->staff_id, 'func' => 'edit']) .'">'. $staff_member->name .'</a></li>';
@@ -823,7 +823,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($news_categories) > 0) {
                         echo '<ul>';
                         foreach ($news_categories as $current_news_category) {
-                            if ('' !== $current_news_category->name) {
+                            if ('' === $current_news_category->name) {
                                 $current_news_category = new \D2U_News\Category($current_news_category->category_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_news/news', ['entry_id' => $current_news_category->category_id, 'func' => 'edit']) .'">'. $current_news_category->name .'</a></li>';
@@ -843,12 +843,12 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($news) > 0) {
                         echo '<ul>';
                         foreach ($news as $current_news) {
-                            if ('' !== $current_news->name) {
+                            if ('' === $current_news->name) {
                                 $current_news = new \D2U_News\News($current_news->news_id, $source_clang_id);
-                                if ('' !== $current_news->name) {
+                                if ('' === $current_news->name) {
                                     foreach (rex_clang::getAllIds() as $clang_id) {
                                         $current_news = new \D2U_News\News($current_news->news_id, $clang_id);
-                                        if ('' !== $current_news->name) {
+                                        if ('' === $current_news->name) {
                                             break;
                                         }
                                     }
@@ -875,7 +875,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($news_types) > 0) {
                         echo '<ul>';
                         foreach ($news_types as $news_type) {
-                            if ('' !== $news_type->name) {
+                            if ('' === $news_type->name) {
                                 $news_type = new \D2U_News\Type($news_type->type_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_news/news_types', ['entry_id' => $news_type->type_id, 'func' => 'edit']) .'">'. $news_type->name .'</a></li>';
@@ -909,7 +909,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($references) > 0) {
                         echo '<ul>';
                         foreach ($references as $reference) {
-                            if ('' !== $reference->name) {
+                            if ('' === $reference->name) {
                                 $reference = new Reference($reference->reference_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_references/reference', ['entry_id' => $reference->reference_id, 'func' => 'edit']) .'">'. $reference->name .'</a></li>';
@@ -929,7 +929,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($tags) > 0) {
                         echo '<ul>';
                         foreach ($tags as $tag) {
-                            if ('' !== $tag->name) {
+                            if ('' === $tag->name) {
                                 $tag = new Tag($tag->tag_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_references/tag', ['entry_id' => $tag->tag_id, 'func' => 'edit']) .'">'. $tag->name .'</a></li>';
@@ -959,7 +959,7 @@ if (1 === count(rex_clang::getAll())) {
                     if (count($videos) > 0) {
                         echo '<ul>';
                         foreach ($videos as $video) {
-                            if ('' !== $video->name) {
+                            if ('' === $video->name) {
                                 $video = new Video($video->video_id, $source_clang_id);
                             }
                             echo '<li><a href="'. rex_url::backendPage('d2u_videos/videos', ['entry_id' => $video->video_id, 'func' => 'edit']) .'">'. $video->name .'</a></li>';
@@ -1021,7 +1021,7 @@ if (1 === count(rex_clang::getAll())) {
     }
 */
 
-    echo \FriendsOfRedaxo\D2UHelper\BackendHelper::getCSS();
-    echo \FriendsOfRedaxo\D2UHelper\BackendHelper::getJS();
-    echo \FriendsOfRedaxo\D2UHelper\BackendHelper::getJSOpenAll();
+    echo \TobiasKrais\D2UHelper\BackendHelper::getCSS();
+    echo \TobiasKrais\D2UHelper\BackendHelper::getJS();
+    echo \TobiasKrais\D2UHelper\BackendHelper::getJSOpenAll();
 }

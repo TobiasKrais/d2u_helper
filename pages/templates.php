@@ -1,7 +1,7 @@
 <?php
-$d2u_template_manager = new \FriendsOfRedaxo\D2UHelper\TemplateManager(\FriendsOfRedaxo\D2UHelper\TemplateManager::getD2UHelperTemplates());
+$d2u_template_manager = new \TobiasKrais\D2UHelper\TemplateManager(\TobiasKrais\D2UHelper\TemplateManager::getD2UHelperTemplates());
 
-// \FriendsOfRedaxo\D2UHelper\TemplateManager actions
+// \TobiasKrais\D2UHelper\TemplateManager actions
 $d2u_template_id = rex_request('d2u_template_id', 'string');
 $paired_template = (int) rex_request('pair_'. $d2u_template_id, 'int');
 $function = rex_request('function', 'string');
@@ -9,7 +9,7 @@ if ('' !== $d2u_template_id) {
     $d2u_template_manager->doActions($d2u_template_id, $function, $paired_template);
 }
 
-// \FriendsOfRedaxo\D2UHelper\TemplateManager show list
+// \TobiasKrais\D2UHelper\TemplateManager show list
 $d2u_template_manager->showManagerList();
 ?>
 <h2>FAQ</h2>

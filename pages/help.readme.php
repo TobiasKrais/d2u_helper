@@ -24,7 +24,7 @@
             highlight_string("<div class='navi'>
 	<?php
 		if(rex_addon::get('d2u_helper')->isAvailable()) {
-			\FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu::getMenu();
+			\TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::getMenu();
 		}
 	?>
 </div>");
@@ -40,8 +40,8 @@
             highlight_string("<div class='navi'>
 	<?php
 		if(rex_addon::get('d2u_helper')->isAvailable()) {
-			\FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel::getResponsiveMultiLevelMobileMenu(); // Mobiles Menü
-			\FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel::getResponsiveMultiLevelDesktopMenu(); // Desktop Menü
+			\TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getResponsiveMultiLevelMobileMenu(); // Mobiles Menü
+			\TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getResponsiveMultiLevelDesktopMenu(); // Desktop Menü
 		}
 	?>
 </div>");
@@ -59,7 +59,7 @@
             highlight_string("<div class='navi'>
 	<?php
 		if(rex_addon::get('d2u_helper')->isAvailable()) {
-			\FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav::getMobileMenu(); // Mobiles Menü
+			\TobiasKrais\D2UHelper\FrontendNavigationSlickNav::getMobileMenu(); // Mobiles Menü
 		}
 	?>
 	<navi>
@@ -91,7 +91,7 @@
 	<?php
 		\$show_screen_size = \"screen == 'lg' ||  screen == 'xl'\";
 		if(rex_addon::get('d2u_helper')->isAvailable()) {
-			\FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav::getMobileMenu();
+			\TobiasKrais\D2UHelper\FrontendNavigationSlickNav::getMobileMenu();
 
 			\$include_menu_show = rex_config::get('d2u_helper', 'include_menu_show', 'md');
 			if(\$include_menu_show == 'xs') {

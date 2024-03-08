@@ -64,7 +64,7 @@
 								<nav>
 									<?php
                                         if (rex_addon::get('d2u_helper')->isAvailable()) {
-                                            \FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu::getMenu();
+                                            \TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::getMenu();
                                         }
                                     ?>
 								</nav>

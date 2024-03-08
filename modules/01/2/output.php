@@ -90,7 +90,7 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
                     }
                 }
                 if ('' !== $text_1) { /** @phpstan-ignore-line */
-                    echo FriendsOfRedaxo\D2UHelper\FrontendHelper::prepareEditorField($text_1);
+                    echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($text_1);
                 }
 
                 echo '</div>';
@@ -105,7 +105,7 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
                     echo '<div class="col-12">';
                     echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
                     echo '<div id="second_text_'. $id .'" class="hide-text">';
-                    echo FriendsOfRedaxo\D2UHelper\FrontendHelper::prepareEditorField($text_2);
+                    echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($text_2);
                     echo '</div>';
                     echo '</div>';
 

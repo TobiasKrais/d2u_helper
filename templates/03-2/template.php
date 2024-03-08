@@ -144,7 +144,7 @@ use D2U_Immo\Contact;
                                         } else {
                                             echo '<div class="col-12">';
                                         }
-                                        echo FriendsOfRedaxo\D2UHelper\FrontendHelper::prepareEditorField($advertisement->description);
+                                        echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($advertisement->description);
 
                                         echo '</div>';
 

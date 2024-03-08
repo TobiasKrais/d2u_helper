@@ -135,7 +135,7 @@
 	<div class="col-xs-12">
 		<?php
 			$pics = null !== 'REX_MEDIALIST[1]' && '' !== 'REX_MEDIALIST[1]' ? explode(',', 'REX_MEDIALIST[1]') : [];
-			\FriendsOfRedaxo\D2UHelper\BackendHelper::form_imagelistfield('d2u_helper_pictures', 1, is_array($pics) ? $pics : []);
+			\TobiasKrais\D2UHelper\BackendHelper::form_imagelistfield('d2u_helper_pictures', 1, is_array($pics) ? $pics : []);
 		?>
 	</div>
 </div>

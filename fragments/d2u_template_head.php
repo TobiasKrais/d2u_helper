@@ -1,7 +1,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
-        echo FriendsOfRedaxo\D2UHelper\FrontendHelper::getMetaTags();
+        echo TobiasKrais\D2UHelper\FrontendHelper::getMetaTags();
         if (file_exists(rex_path::media('favicon.ico'))) {
             echo '	<link rel="apple-touch-icon" href="'. rex_url::media('favicon.ico') .'">'. PHP_EOL;
             echo '	<link rel="icon" href="'. rex_url::media('favicon.ico') .'">'. PHP_EOL;

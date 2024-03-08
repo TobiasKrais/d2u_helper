@@ -26,8 +26,8 @@ $industry_sector = false;
 $machine = false;
 $used_machine = false;
 
-$url_namespace = FriendsOfRedaxo\D2UHelper\FrontendHelper::getUrlNamespace();
-$url_id = FriendsOfRedaxo\D2UHelper\FrontendHelper::getUrlId();
+$url_namespace = TobiasKrais\D2UHelper\FrontendHelper::getUrlNamespace();
+$url_id = TobiasKrais\D2UHelper\FrontendHelper::getUrlId();
 
 if (rex_addon::get('d2u_machinery')->isAvailable()) {
     if (filter_input(INPUT_GET, 'machine_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'machine_id' === $url_namespace) {
@@ -155,7 +155,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                                 echo '<div class="col-12 d-print-none">';
                             }
                             echo '<div id="breadcrumbs-inner"><small>';
-                            echo FriendsOfRedaxo\D2UHelper\FrontendHelper::getBreadcrumbs();
+                            echo TobiasKrais\D2UHelper\FrontendHelper::getBreadcrumbs();
                             echo '</small></div>';
                             echo '</div>';
                         }
@@ -319,7 +319,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                                             // Text
                                             if ('' !== $nachricht->teaser) {
                                                 echo '<div class="news">';
-                                                echo FriendsOfRedaxo\D2UHelper\FrontendHelper::prepareEditorField($nachricht->teaser);
+                                                echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($nachricht->teaser);
                                                 echo '</div>';
                                             }
 

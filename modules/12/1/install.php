@@ -33,7 +33,7 @@ for ($i = 0; $i < $sql->getRows(); ++$i) {
 $sql->setQuery('DELETE FROM '. \rex::getTablePrefix() ."media_manager_type WHERE name LIKE 'd2u_helper_yfeed%'");
 
 if ('install/packages/update' !== rex_be_controller::getCurrentPage()) {
-    if (false === \FriendsOfRedaxo\D2UHelper\Module::isModuleIDInstalled('03-2')) {
+    if (false === \TobiasKrais\D2UHelper\Module::isModuleIDInstalled('03-2')) {
         echo rex_view::warning(rex_i18n::msg('d2u_helper_modules_install_module_03_2'));
     }
 }

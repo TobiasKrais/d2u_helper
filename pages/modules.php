@@ -1,7 +1,7 @@
 <?php
-$d2u_module_manager = new \FriendsOfRedaxo\D2UHelper\ModuleManager(\FriendsOfRedaxo\D2UHelper\ModuleManager::getModules());
+$d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager(\TobiasKrais\D2UHelper\ModuleManager::getModules());
 
-// \FriendsOfRedaxo\D2UHelper\ModuleManager actions
+// \TobiasKrais\D2UHelper\ModuleManager actions
 $d2u_module_id = rex_request('d2u_module_id', 'string');
 $paired_module = (int) rex_request('pair_'. $d2u_module_id, 'int');
 $function = rex_request('function', 'string');
@@ -9,7 +9,7 @@ if ('' !== $d2u_module_id) {
     $d2u_module_manager->doActions($d2u_module_id, $function, $paired_module);
 }
 
-// \FriendsOfRedaxo\D2UHelper\ModuleManager show list
+// \TobiasKrais\D2UHelper\ModuleManager show list
 $d2u_module_manager->showManagerList();
 ?>
 <h2>FAQ</h2>

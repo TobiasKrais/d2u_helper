@@ -1,6 +1,6 @@
 <?php
 
-namespace FriendsOfRedaxo\D2UHelper;
+namespace TobiasKrais\D2UHelper;
 
 use rex_addon;
 use rex_addon_interface;
@@ -24,7 +24,7 @@ class TemplateManager
      */
     public const TEMPLATE_FOLDER = 'templates/';
 
-    /** @var array<\FriendsOfRedaxo\D2UHelper\Template> Array with D2U templates */
+    /** @var array<\TobiasKrais\D2UHelper\Template> Array with D2U templates */
     public array $d2u_templates = [];
 
     /**
@@ -39,9 +39,9 @@ class TemplateManager
     /**
      * Constructor. Sets values. The path that is constructed is during addon
      * update the path of the new addon folder. Otherwise the normal addon path.
-     * @param array<\FriendsOfRedaxo\D2UHelper\Template> $d2u_templates Array with D2U templates
+     * @param array<\TobiasKrais\D2UHelper\Template> $d2u_templates Array with D2U templates
      * @param string $template_folder Folder, in which templates can be found.
-     * Trailing slash must be included. Default is \FriendsOfRedaxo\D2UHelper\TemplateManager::TEMPLATE_FOLDER.
+     * Trailing slash must be included. Default is \TobiasKrais\D2UHelper\TemplateManager::TEMPLATE_FOLDER.
      * @param string $addon_key Redaxo Addon name template belongs to, default "d2u_helper"
      */
     public function __construct($d2u_templates, $template_folder = '', $addon_key = 'd2u_helper')
@@ -120,7 +120,7 @@ class TemplateManager
 
     /**
      * Get templates offered by D2U Helper addon.
-     * @return \FriendsOfRedaxo\D2UHelper\Template[] Templates offered by D2U Helper addon
+     * @return \TobiasKrais\D2UHelper\Template[] Templates offered by D2U Helper addon
      */
     public static function getD2UHelperTemplates()
     {
@@ -161,7 +161,7 @@ class TemplateManager
     /**
      * Get initialized template by ID.
      * @param string $template_id D2U template ID
-     * @return \FriendsOfRedaxo\D2UHelper\Template|bool Requested template object, in case template was not found: false
+     * @return \TobiasKrais\D2UHelper\Template|bool Requested template object, in case template was not found: false
      */
     public function getTemplate($template_id)
     {

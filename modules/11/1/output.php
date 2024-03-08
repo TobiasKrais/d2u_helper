@@ -39,7 +39,7 @@ if (rex_addon::get('yform_spam_protection')->isAvailable()) {
     ]);
     $yform->setValidateField('customfunction', [
         'validate_timer',
-        'FriendsOfRedaxo\D2UHelper\FrontendHelper::yform_validate_timer',
+        'TobiasKrais\D2UHelper\FrontendHelper::yform_validate_timer',
         '5',
         \Sprog\Wildcard::get('d2u_helper_module_form_validate_spambots'),
     ]);

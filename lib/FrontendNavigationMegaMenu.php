@@ -1,6 +1,6 @@
 <?php
 
-namespace FriendsOfRedaxo\D2UHelper;
+namespace TobiasKrais\D2UHelper;
 
 use rex_addon;
 use rex_article;

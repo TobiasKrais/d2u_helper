@@ -22,9 +22,9 @@ rex_metainfo_delete_field('cat_d2u_helper_icon');
 rex_metainfo_delete_field('clang_icon');
 
 // Delete language replacements
-if (!class_exists(\FriendsOfRedaxo\D2UHelper\LangHelper::class)) {
+if (!class_exists(\TobiasKrais\D2UHelper\LangHelper::class)) {
     // Load class in case addon is deactivated
     require_once 'lib/ALangHelper.php';
     require_once 'lib/LangHelper.php';
 }
-\FriendsOfRedaxo\D2UHelper\LangHelper::factory()->uninstall();
+\TobiasKrais\D2UHelper\LangHelper::factory()->uninstall();

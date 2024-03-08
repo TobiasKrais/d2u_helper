@@ -150,6 +150,6 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		<textarea name="REX_INPUT_VALUE[4]" class="form-control <?= \FriendsOfRedaxo\D2UHelper\BackendHelper::getWYSIWYGEditorClass() ?>" style="height: 300px">REX_VALUE[4]</textarea>
+		<textarea name="REX_INPUT_VALUE[4]" class="form-control <?= \TobiasKrais\D2UHelper\BackendHelper::getWYSIWYGEditorClass() ?>" style="height: 300px">REX_VALUE[4]</textarea>
 	</div>
 </div>

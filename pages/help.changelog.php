@@ -19,20 +19,20 @@
 		<ul>
 			<li>Folgende Klassen werden ab Version 2 dieses Addons umbenannt. Ab Version 1.14.0 stehen die neuen Klassen für eine Übergangszeit zur Verfügung:
 				<ul>
-					<li><code>D2U_Helper\ACronJob</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ACronJob</code>.</li>
-					<li><code>D2U_Helper\ALangHelper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ALangHelper</code>.</li>
-					<li><code>D2U_Helper\ITranslationHelper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ITranslationHelper</code>.</li>
-					<li><code>d2u_addon_backend_helper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\BackendHelper</code>.</li>
-					<li><code>d2u_addon_frontend_helper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendHelper</code>.</li>
-					<li><code>d2u_helper_lang_helper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\LangHelper</code>.</li>
-					<li><code>d2u_mobile_navi</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel</code>.</li>
-					<li><code>d2u_mobile_navi_mega_menu</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendNavigationMegaMenu</code>.</li>
-					<li><code>d2u_mobile_navi_slicknav</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav</code>.</li>
-					<li><code>d2u_mobile_navi_smartmenus</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu</code>.</li>
-					<li><code>D2UModule</code> wird zu <code>FriendsOfRedaxo\D2UHelper\Module</code>.</li>
-					<li><code>D2UModuleManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ModuleManager</code>.</li>
-					<li><code>D2UTemplate</code> wird zu <code>FriendsOfRedaxo\D2UHelper\Template</code>.</li>
-					<li><code>D2UTemplateManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\TemplateManager</code>.</li>	
+					<li><code>D2U_Helper\ACronJob</code> wird zu <code>TobiasKrais\D2UHelper\ACronJob</code>.</li>
+					<li><code>D2U_Helper\ALangHelper</code> wird zu <code>TobiasKrais\D2UHelper\ALangHelper</code>.</li>
+					<li><code>D2U_Helper\ITranslationHelper</code> wird zu <code>TobiasKrais\D2UHelper\ITranslationHelper</code>.</li>
+					<li><code>d2u_addon_backend_helper</code> wird zu <code>TobiasKrais\D2UHelper\BackendHelper</code>.</li>
+					<li><code>d2u_addon_frontend_helper</code> wird zu <code>TobiasKrais\D2UHelper\FrontendHelper</code>.</li>
+					<li><code>d2u_helper_lang_helper</code> wird zu <code>TobiasKrais\D2UHelper\LangHelper</code>.</li>
+					<li><code>d2u_mobile_navi</code> wird zu <code>TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel</code>.</li>
+					<li><code>d2u_mobile_navi_mega_menu</code> wird zu <code>TobiasKrais\D2UHelper\FrontendNavigationMegaMenu</code>.</li>
+					<li><code>d2u_mobile_navi_slicknav</code> wird zu <code>TobiasKrais\D2UHelper\FrontendNavigationSlickNav</code>.</li>
+					<li><code>d2u_mobile_navi_smartmenus</code> wird zu <code>TobiasKrais\D2UHelper\FrontendNavigationSmartmenu</code>.</li>
+					<li><code>D2UModule</code> wird zu <code>TobiasKrais\D2UHelper\Module</code>.</li>
+					<li><code>D2UModuleManager</code> wird zu <code>TobiasKrais\D2UHelper\ModuleManager</code>.</li>
+					<li><code>D2UTemplate</code> wird zu <code>TobiasKrais\D2UHelper\Template</code>.</li>
+					<li><code>D2UTemplateManager</code> wird zu <code>TobiasKrais\D2UHelper\TemplateManager</code>.</li>	
 				</ul>
 			</li>
 			<li>Module unterstützen nicht mehr Geolocation < 2.x.</li>
@@ -42,20 +42,20 @@
 		<ul>
 			<li>Vorbereitung auf R6: Folgende Klassen werden ab Version 2 dieses Addons umbenannt. Schon jetzt stehen die neuen Klassen für die Übergangszeit zur Verfügung:
 				<ul>
-					<li><code>D2U_Helper\ACronJob</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ACronJob</code>.</li>
-					<li><code>D2U_Helper\ALangHelper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ALangHelper</code>.</li>
-					<li><code>D2U_Helper\ITranslationHelper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ITranslationHelper</code>.</li>
-					<li><code>d2u_addon_backend_helper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\BackendHelper</code>.</li>
-					<li><code>d2u_addon_frontend_helper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendHelper</code>.</li>
-					<li><code>d2u_helper_lang_helper</code> wird zu <code>FriendsOfRedaxo\D2UHelper\LangHelper</code>.</li>
-					<li><code>d2u_mobile_navi</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel</code>.</li>
-					<li><code>d2u_mobile_navi_mega_menu</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendNavigationMegaMenu</code>.</li>
-					<li><code>d2u_mobile_navi_slicknav</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav</code>.</li>
-					<li><code>d2u_mobile_navi_smartmenus</code> wird zu <code>FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu</code>.</li>
-					<li><code>D2UModule</code> wird zu <code>FriendsOfRedaxo\D2UHelper\Module</code>.</li>
-					<li><code>D2UModuleManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\ModuleManager</code>.</li>
-					<li><code>D2UTemplate</code> wird zu <code>FriendsOfRedaxo\D2UHelper\Template</code>.</li>
-					<li><code>D2UTemplateManager</code> wird zu <code>FriendsOfRedaxo\D2UHelper\TemplateManager</code>.</li>			
+					<li><code>D2U_Helper\ACronJob</code> wird zu <code>TobiasKrais\D2UHelper\ACronJob</code>.</li>
+					<li><code>D2U_Helper\ALangHelper</code> wird zu <code>TobiasKrais\D2UHelper\ALangHelper</code>.</li>
+					<li><code>D2U_Helper\ITranslationHelper</code> wird zu <code>TobiasKrais\D2UHelper\ITranslationHelper</code>.</li>
+					<li><code>d2u_addon_backend_helper</code> wird zu <code>TobiasKrais\D2UHelper\BackendHelper</code>.</li>
+					<li><code>d2u_addon_frontend_helper</code> wird zu <code>TobiasKrais\D2UHelper\FrontendHelper</code>.</li>
+					<li><code>d2u_helper_lang_helper</code> wird zu <code>TobiasKrais\D2UHelper\LangHelper</code>.</li>
+					<li><code>d2u_mobile_navi</code> wird zu <code>TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel</code>.</li>
+					<li><code>d2u_mobile_navi_mega_menu</code> wird zu <code>TobiasKrais\D2UHelper\FrontendNavigationMegaMenu</code>.</li>
+					<li><code>d2u_mobile_navi_slicknav</code> wird zu <code>TobiasKrais\D2UHelper\FrontendNavigationSlickNav</code>.</li>
+					<li><code>d2u_mobile_navi_smartmenus</code> wird zu <code>TobiasKrais\D2UHelper\FrontendNavigationSmartmenu</code>.</li>
+					<li><code>D2UModule</code> wird zu <code>TobiasKrais\D2UHelper\Module</code>.</li>
+					<li><code>D2UModuleManager</code> wird zu <code>TobiasKrais\D2UHelper\ModuleManager</code>.</li>
+					<li><code>D2UTemplate</code> wird zu <code>TobiasKrais\D2UHelper\Template</code>.</li>
+					<li><code>D2UTemplateManager</code> wird zu <code>TobiasKrais\D2UHelper\TemplateManager</code>.</li>			
 				</ul>
 			</li>
 			<li>Vorbereitung auf R6: translation_helper Plugin in Hauptaddon integriert.</li>

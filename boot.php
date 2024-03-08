@@ -1,7 +1,7 @@
 <?php
 
-use FriendsOfRedaxo\D2UHelper\FrontendHelper;
-use FriendsOfRedaxo\D2UHelper\FrontendNavigationMegaMenu;
+use TobiasKrais\D2UHelper\FrontendHelper;
+use TobiasKrais\D2UHelper\FrontendNavigationMegaMenu;
 
 if (\rex::isBackend() && is_object(\rex::getUser())) {
     // Correct name of rights
@@ -68,20 +68,20 @@ if (rex::isBackend()) {
 
 rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
     /** @deprecated starting with version 2, class alias will be removed */
-    class_alias(FriendsOfRedaxo\D2UHelper\ACronJob::class, D2U_Helper\ACronJob::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\ALangHelper::class, D2U_Helper\ALangHelper::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\BackendHelper::class, d2u_addon_backend_helper::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\FrontendHelper::class, d2u_addon_frontend_helper::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel::class, d2u_mobile_navi::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\FrontendNavigationMegaMenu::class, d2u_mobile_navi_mega_menu::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav::class, d2u_mobile_navi_slicknav::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu::class, d2u_mobile_navi_smartmenus::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\ITranslationHelper::class, D2U_Helper\ITranslationHelper::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\LangHelper::class, d2u_helper_lang_helper::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\Module::class, D2UModule::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\ModuleManager::class, D2UModuleManager::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\Template::class, D2UTemplate::class);
-    class_alias(FriendsOfRedaxo\D2UHelper\TemplateManager::class, D2UTemplateManager::class);
+    class_alias(TobiasKrais\D2UHelper\ACronJob::class, D2U_Helper\ACronJob::class);
+    class_alias(TobiasKrais\D2UHelper\ALangHelper::class, D2U_Helper\ALangHelper::class);
+    class_alias(TobiasKrais\D2UHelper\BackendHelper::class, d2u_addon_backend_helper::class);
+    class_alias(TobiasKrais\D2UHelper\FrontendHelper::class, d2u_addon_frontend_helper::class);
+    class_alias(TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::class, d2u_mobile_navi::class);
+    class_alias(TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::class, d2u_mobile_navi_mega_menu::class);
+    class_alias(TobiasKrais\D2UHelper\FrontendNavigationSlickNav::class, d2u_mobile_navi_slicknav::class);
+    class_alias(TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::class, d2u_mobile_navi_smartmenus::class);
+    class_alias(TobiasKrais\D2UHelper\ITranslationHelper::class, D2U_Helper\ITranslationHelper::class);
+    class_alias(TobiasKrais\D2UHelper\LangHelper::class, d2u_helper_lang_helper::class);
+    class_alias(TobiasKrais\D2UHelper\Module::class, D2UModule::class);
+    class_alias(TobiasKrais\D2UHelper\ModuleManager::class, D2UModuleManager::class);
+    class_alias(TobiasKrais\D2UHelper\Template::class, D2UTemplate::class);
+    class_alias(TobiasKrais\D2UHelper\TemplateManager::class, D2UTemplateManager::class);
 });
 
 /**
@@ -360,13 +360,13 @@ function sendD2UHelperCSS(): void
 
     // Include menu CSS
     if ('megamenu' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= \FriendsOfRedaxo\D2UHelper\FrontendNavigationMegaMenu::getAutoCSS();
+        $css .= \TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::getAutoCSS();
     } elseif ('multilevel' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= \FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel::getAutoCSS();
+        $css .= \TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getAutoCSS();
     } elseif ('slicknav' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= \FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav::getAutoCSS();
+        $css .= \TobiasKrais\D2UHelper\FrontendNavigationSlickNav::getAutoCSS();
     } elseif ('smartmenu' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= \FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu::getAutoCSS();
+        $css .= \TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::getAutoCSS();
     }
 
     echo FrontendHelper::prepareCSS($css);
@@ -385,24 +385,24 @@ function sendD2UHelperJS($position = 'head'): void
     if ('body' === $position) {
         // Module JS
         if ((bool) $d2u_helper->getConfig('include_module', false)) {
-            $js .= \FriendsOfRedaxo\D2UHelper\FrontendHelper::getModulesJS();
+            $js .= \TobiasKrais\D2UHelper\FrontendHelper::getModulesJS();
         }
     } elseif ('head' === $position) {
         // MultiLevel menu JS
         if ('multilevel' === (string) $d2u_helper->getConfig('include_menu')) {
-            $js .= \FriendsOfRedaxo\D2UHelper\FrontendNavigationResponsiveMultiLevel::getAutoJS();
+            $js .= \TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getAutoJS();
         }
         // Slicknav menu JS
         if ('slicknav' === (string) $d2u_helper->getConfig('include_menu')) {
-            $js .= \FriendsOfRedaxo\D2UHelper\FrontendNavigationSlickNav::getAutoJS();
+            $js .= \TobiasKrais\D2UHelper\FrontendNavigationSlickNav::getAutoJS();
         }
         // Smartmenu menu JS
         if ('smartmenu' === (string) $d2u_helper->getConfig('include_menu')) {
-            $js .= \FriendsOfRedaxo\D2UHelper\FrontendNavigationSmartmenu::getAutoJS();
+            $js .= \TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::getAutoJS();
         }
         // Mega menu JS
         if ('megamenu' === (string) $d2u_helper->getConfig('include_menu')) {
-            $js .= \FriendsOfRedaxo\D2UHelper\FrontendNavigationMegaMenu::getAutoJS();
+            $js .= \TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::getAutoJS();
         }
     }
     echo $js;
@@ -424,7 +424,7 @@ function sendD2UHelperCustomCSS(): void
     }
 
     // Apply template settings and compress
-    echo \FriendsOfRedaxo\D2UHelper\FrontendHelper::prepareCSS($css);
+    echo \TobiasKrais\D2UHelper\FrontendHelper::prepareCSS($css);
 
     exit;
 }
@@ -440,9 +440,9 @@ function sendD2UHelperTemplateCSS($d2u_template_id = ''): void
     $css = '';
     // Template CSS
     if ('' !== $d2u_template_id) {
-        $template_manager = new \FriendsOfRedaxo\D2UHelper\TemplateManager(\FriendsOfRedaxo\D2UHelper\TemplateManager::getD2UHelperTemplates());
+        $template_manager = new \TobiasKrais\D2UHelper\TemplateManager(\TobiasKrais\D2UHelper\TemplateManager::getD2UHelperTemplates());
         $current_template = $template_manager->getTemplate($d2u_template_id);
-        if ($current_template instanceof \FriendsOfRedaxo\D2UHelper\Template) {
+        if ($current_template instanceof \TobiasKrais\D2UHelper\Template) {
             $css .= $current_template->getCSS();
         }
     }
@@ -454,7 +454,7 @@ function sendD2UHelperTemplateCSS($d2u_template_id = ''): void
     }
 
     // Apply template settings and compress
-    echo \FriendsOfRedaxo\D2UHelper\FrontendHelper::prepareCSS($css);
+    echo \TobiasKrais\D2UHelper\FrontendHelper::prepareCSS($css);
 
     exit;
 }
