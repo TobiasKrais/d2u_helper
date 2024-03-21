@@ -185,10 +185,101 @@ foreach ($sql->getArray() as $result) {
 $sql->setQuery('DELETE FROM `'. rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
 
 // Update modules
-include __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'ModuleManager.php';
-$d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager(\TobiasKrais\D2UHelper\ModuleManager::getModules(), '', 'd2u_helper');
-$d2u_module_manager->autoupdate();
-
+if (class_exists(TobiasKrais\D2UHelper\ModuleManager::class)) {
+    $modules = [];
+    $modules[] = new \TobiasKrais\D2UHelper\Module('00-1',
+        'Umbruch ganze Breite',
+        9);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('01-1',
+        'Texteditor',
+        13);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('01-2',
+        'Texteditor mit Bild und Fettschrift',
+        16);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('01-3',
+        'Texteditor in Alertbox',
+        2);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('02-1',
+        'Überschrift',
+        11);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('02-2',
+        'Überschrift mit Klapptext',
+        6);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('02-3',
+        'Überschrift mit Untertitel und Textfeld',
+        8);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('02-4',
+        'Überschrift mit Hintergrundbild und 2 Buttons',
+        1);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('02-5',
+        'Inhaltsverzeichnis der Überschriften',
+        1);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('03-1',
+        'Bild',
+        12);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('03-2',
+        'Bildergalerie Ekko Lightbox',
+        15);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('03-3',
+        '360° Bild',
+        1);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('04-1',
+        'Google Maps Karte',
+        13);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('04-2',
+        'OpenStreetMap Karte',
+        6);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('05-1',
+        'Artikelweiterleitung',
+        14);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('05-2',
+        'Artikel aus anderer Sprache übernehmen',
+        5);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('06-1',
+        'YouTube Video einbinden',
+        16);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('06-2',
+        'IFrame einbinden',
+        5);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('06-3',
+        'Video mit Plyr einbinden',
+        4);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('06-4',
+        'Videoliste mit Plyr einbinden',
+        2);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('07-1',
+        'JavaScript einbinden',
+        2);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('10-1',
+        'Box mit Bild und Ueberschrift',
+        4);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('10-2',
+        'Box mit Bild und Text',
+        5);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('10-3',
+        'Box mit Downloads',
+        10);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('11-1',
+        'YForm Kontaktformular (DSGVO kompatibel)',
+        14);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('11-2',
+        'Box mit Kontaktinformationen',
+        2);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('12-1',
+        'Feeds Stream Galerie',
+        5);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('13-1',
+        'Lauftext',
+        5);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('14-1',
+        'Search It Suchmodul',
+        6);
+    $modules[] = new \TobiasKrais\D2UHelper\Module('15-1',
+        'Kategorie mit Liste der Unterkategorien',
+        3);
+    $d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager($modules);
+    $d2u_module_manager->autoupdate();
+}
 /*
  *  END update modules
  */
@@ -196,8 +287,6 @@ $d2u_module_manager->autoupdate();
 /*
  *  START update templates
  */
-include __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'TemplateManager.php';
-
 if (rex_version::compare($d2u_helper->getVersion(), '1.5.4', '<')) {
     // Rename template 02-2 to 04-2
     if (rex_config::has('d2u_helper', 'template_02-2')) {
@@ -224,47 +313,79 @@ if (rex_version::compare($d2u_helper->getVersion(), '1.5.4', '<')) {
     }
 }
 
-$d2u_template_manager = new \TobiasKrais\D2UHelper\TemplateManager(\TobiasKrais\D2UHelper\TemplateManager::getRexTemplates(), '', 'd2u_helper');
-$d2u_template_manager->autoupdate();
+if (class_exists(\TobiasKrais\D2UHelper\TemplateManager::class)) {
+    $d2u_templates = [];
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('00-1',
+        'Big Header Template',
+        24);
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('01-1',
+        'Side Picture Template',
+        16);
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('02-1',
+        'Header Pic Template',
+        18);
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('03-1',
+        'Immo Template - 2 Columns',
+        18);
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('03-2',
+        'Immo Window Advertising Template',
+        14);
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('04-1',
+        'Header Slider Template with Slogan',
+        17);
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('04-2',
+        'Header Slider Template',
+        23);
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('04-3',
+        'Header Slider Template with news column',
+        18);
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('05-1',
+        'Double Logo Template',
+        16);
+    $d2u_templates[] = new \TobiasKrais\D2UHelper\Template('06-1',
+        'Paper Sheet Template',
+        9);
+    $d2u_template_manager = new \TobiasKrais\D2UHelper\TemplateManager($d2u_templates);
+    $d2u_template_manager->autoupdate();
 
-if (rex_version::compare($d2u_helper->getVersion(), '1.8.0', '<')) {
-    if (!$d2u_helper->hasConfig('footer_color_font')) {
-        $d2u_helper->setConfig('footer_color_font', '#ffffff');
+    if (rex_version::compare($d2u_helper->getVersion(), '1.8.0', '<')) {
+        if (!$d2u_helper->hasConfig('footer_color_font')) {
+            $d2u_helper->setConfig('footer_color_font', '#ffffff');
+            foreach ($d2u_templates as $d2u_template) {
+                if ('05-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
+                    $d2u_helper->setConfig('footer_color_font', $d2u_helper->getConfig('navi_color_bg'));
+                } elseif ('06-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
+                    $d2u_helper->setConfig('footer_color_font', '#777777');
+                }
+            }
+        }
+        // set footer type
         foreach ($d2u_templates as $d2u_template) {
-            if ('05-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
-                $d2u_helper->setConfig('footer_color_font', $d2u_helper->getConfig('navi_color_bg'));
-            } elseif ('06-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
-                $d2u_helper->setConfig('footer_color_font', '#777777');
+            if (('00-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) ||
+                ('01-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) ||
+                ('04-3' === $d2u_template->getD2UId() && $d2u_template->isInstalled())) {
+                $d2u_helper->setConfig('footer_type', 'box');
+            } elseif ('02-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled() ||
+                '03-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
+                $d2u_helper->setConfig('footer_type', 'links_text');
+            } elseif ('04-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
+                $d2u_helper->setConfig('footer_type', 'links_logo_address');
+            } elseif ('04-2' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
+                $d2u_helper->setConfig('footer_type', 'box_logo');
+            } elseif ('05-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
+                $d2u_helper->setConfig('footer_type', 'text');
             }
         }
     }
-    // set footer type
-    foreach ($d2u_templates as $d2u_template) {
-        if (('00-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) ||
-            ('01-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) ||
-            ('04-3' === $d2u_template->getD2UId() && $d2u_template->isInstalled())) {
-            $d2u_helper->setConfig('footer_type', 'box');
-        } elseif ('02-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled() ||
-            '03-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
-            $d2u_helper->setConfig('footer_type', 'links_text');
-        } elseif ('04-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
-            $d2u_helper->setConfig('footer_type', 'links_logo_address');
-        } elseif ('04-2' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
-            $d2u_helper->setConfig('footer_type', 'box_logo');
-        } elseif ('05-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
-            $d2u_helper->setConfig('footer_type', 'text');
+    if (rex_version::compare($d2u_helper->getVersion(), '1.8.8', '<')) {
+        // set footer type
+        foreach ($d2u_templates as $d2u_template) {
+            if ('05-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
+                $d2u_helper->setConfig('template_header_media_manager_type', 'titelbild');
+            }
         }
     }
 }
-if (rex_version::compare($d2u_helper->getVersion(), '1.8.8', '<')) {
-    // set footer type
-    foreach ($d2u_templates as $d2u_template) {
-        if ('05-1' === $d2u_template->getD2UId() && $d2u_template->isInstalled()) {
-            $d2u_helper->setConfig('template_header_media_manager_type', 'titelbild');
-        }
-    }
-}
-
 /*
  *  END update templates
  */
