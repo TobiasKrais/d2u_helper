@@ -407,7 +407,7 @@ if ('true' === $d2u_helper->getConfig('lang_replacements_install', 'false')) {
  */
 
 // old plugin translation_helper still exists ? -> delete
-$plugins = __DIR__ . '/plugins';
-if (file_exists($plugins)) {
-    rex_dir::delete($plugins);
+$plugin_path = rex_path::addon('d2u_helper', 'plugins');
+if (file_exists($plugin_path)) {
+    rex_dir::delete($plugin_path);
 }
