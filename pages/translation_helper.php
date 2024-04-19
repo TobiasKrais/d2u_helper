@@ -62,56 +62,6 @@ if (1 === count(rex_clang::getAll())) {
 		</div>
 	</form>
 <?php
-    if (rex_addon::get('d2u_address')->isAvailable()) {
-        $continents = D2U_Address\Continent::getTranslationHelperObjects($target_clang_id, $filter_type);
-        $countries = D2U_Address\Country::getTranslationHelperObjects($target_clang_id, $filter_type);
-?>
-	<div class="panel panel-edit">
-		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_address') ?></div></header>
-		<div class="panel-body">
-			<fieldset>
-				<legend><small><i class="rex-icon fa-globe"></i></small> <?= rex_i18n::msg('d2u_address_continents') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($continents) > 0) {
-                        echo '<ul>';
-                        foreach ($continents as $continent) {
-                            if ('' === $continent->name) {
-                                $continent = new \D2U_Address\Continent($continent->continent_id, $source_clang_id);
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_address/continent', ['entry_id' => $continent->continent_id, 'func' => 'edit']) .'">'. $continent->name .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-			<br>
-			<fieldset>
-				<legend><small><i class="rex-icon fa-flag"></i></small> <?= rex_i18n::msg('d2u_address_countries') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($countries) > 0) {
-                        echo '<ul>';
-                        foreach ($countries as $country) {
-                            if ('' === $country->name) {
-                                $country = new \D2U_Address\Country($country->country_id, $source_clang_id);
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_address/country', ['entry_id' => $country->country_id, 'func' => 'edit']) .'">'. $country->name .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-		</div>
-	</div>
-<?php
-    }
 
     if (rex_addon::get('d2u_history')->isAvailable()) {
         $history_events = D2U_History\History::getTranslationHelperObjects($target_clang_id, $filter_type);
@@ -278,37 +228,7 @@ if (1 === count(rex_clang::getAll())) {
 <?php
     }
 
-    if (rex_addon::get('d2u_linkbox')->isAvailable()) {
-        $linkboxes = \D2U_Linkbox\Linkbox::getTranslationHelperObjects($target_clang_id, $filter_type);
-?>
-	<div class="panel panel-edit">
-		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_linkbox') ?></div></header>
-		<div class="panel-body">
-			<fieldset>
-				<legend><small><i class="rex-icon fa-window-maximize"></i></small> <?= rex_i18n::msg('d2u_linkbox_linkbox') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($linkboxes) > 0) {
-                        echo '<ul>';
-                        foreach ($linkboxes as $linkbox) {
-                            if ('' === $linkbox->title) {
-                                $linkbox = new \D2U_Linkbox\Linkbox($linkbox->box_id, $source_clang_id);
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_linkbox/linkbox', ['entry_id' => $linkbox->box_id, 'func' => 'edit']) .'">'. $linkbox->title .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-		</div>
-	</div>
-<?php
-    }
-
-        if (rex_addon::get('d2u_machinery')->isAvailable()) {
+    if (rex_addon::get('d2u_machinery')->isAvailable()) {
         $categories = Category::getTranslationHelperObjects($target_clang_id, $filter_type);
         $machines = Machine::getTranslationHelperObjects($target_clang_id, $filter_type);
 ?>
@@ -779,36 +699,6 @@ if (1 === count(rex_clang::getAll())) {
 <?php
     }
 
-    if (rex_addon::get('d2u_staff')->isAvailable()) {
-        $staff_members = Staff::getTranslationHelperObjects($target_clang_id, $filter_type);
-?>
-	<div class="panel panel-edit">
-		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_staff') ?></div></header>
-		<div class="panel-body">
-			<fieldset>
-				<legend><small><i class="rex-icon fa-user-circle"></i></small> <?= rex_i18n::msg('d2u_staff_staff') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($staff_members) > 0) {
-                        echo '<ul>';
-                        foreach ($staff_members as $staff_member) {
-                            if ('' === $staff_member->name) {
-                                $staff_member = new Staff($staff_member->staff_id, $source_clang_id);
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_staff/staff', ['entry_id' => $staff_member->staff_id, 'func' => 'edit']) .'">'. $staff_member->name .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-		</div>
-	</div>
-<?php
-    }
-
     if (rex_addon::get('d2u_news')->isAvailable()) {
         $news = \D2U_News\News::getTranslationHelperObjects($target_clang_id, $filter_type);
         $news_categories = \D2U_News\Category::getTranslationHelperObjects($target_clang_id, $filter_type);
@@ -895,87 +785,6 @@ if (1 === count(rex_clang::getAll())) {
 <?php
     }
 
-    if (rex_addon::get('d2u_references')->isAvailable()) {
-        $references = Reference::getTranslationHelperObjects($target_clang_id, $filter_type);
-        $tags = Tag::getTranslationHelperObjects($target_clang_id, $filter_type);
-?>
-	<div class="panel panel-edit">
-		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_references') ?></div></header>
-		<div class="panel-body">
-			<fieldset>
-				<legend><small><i class="rex-icon fa-thumbs-o-up"></i></small> <?= rex_i18n::msg('d2u_references_references') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($references) > 0) {
-                        echo '<ul>';
-                        foreach ($references as $reference) {
-                            if ('' === $reference->name) {
-                                $reference = new Reference($reference->reference_id, $source_clang_id);
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_references/reference', ['entry_id' => $reference->reference_id, 'func' => 'edit']) .'">'. $reference->name .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-			<br>
-			<fieldset>
-				<legend><small><i class="rex-icon fa-tags"></i></small> <?= rex_i18n::msg('d2u_references_tags') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($tags) > 0) {
-                        echo '<ul>';
-                        foreach ($tags as $tag) {
-                            if ('' === $tag->name) {
-                                $tag = new Tag($tag->tag_id, $source_clang_id);
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_references/tag', ['entry_id' => $tag->tag_id, 'func' => 'edit']) .'">'. $tag->name .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-		</div>
-	</div>
-<?php
-    }
-
-    if (rex_addon::get('d2u_videos')->isAvailable()) {
-        $videos = Video::getTranslationHelperObjects($target_clang_id, $filter_type);
-?>
-	<div class="panel panel-edit">
-		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_videos') ?></div></header>
-		<div class="panel-body">
-			<fieldset>
-				<legend><small><i class="rex-icon fa-video-camera"></i></small> <?= rex_i18n::msg('d2u_videos') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($videos) > 0) {
-                        echo '<ul>';
-                        foreach ($videos as $video) {
-                            if ('' === $video->name) {
-                                $video = new Video($video->video_id, $source_clang_id);
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_videos/videos', ['entry_id' => $video->video_id, 'func' => 'edit']) .'">'. $video->name .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-		</div>
-	</div>
-<?php
-    }
-
     /**
      * Extension point for translation list.
      * @param array $subject List of addons and their pages with translation status
@@ -997,9 +806,9 @@ if (1 === count(rex_clang::getAll())) {
      * ]
      */
     $translation_list = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_TRANSLATION_LIST', params: ['source_clang_id' => $source_clang_id, 'target_clang_id' => $target_clang_id, 'filter_type' => $filter_type]));
-/*
+
     // Translation list, TODO: uncomment starting from Version 2.0
-    if (count($translation_list) > 0) {
+    if (is_array($translation_list) && count($translation_list) > 0) {
         foreach ($translation_list as $translation_list_item) {
             if (count($translation_list_item['pages']) > 0) {
                 echo '<div class="panel panel-edit">';
@@ -1019,7 +828,6 @@ if (1 === count(rex_clang::getAll())) {
     else {
         echo 'update' === $filter_type ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
     }
-*/
 
     echo \TobiasKrais\D2UHelper\BackendHelper::getCSS();
     echo \TobiasKrais\D2UHelper\BackendHelper::getJS();

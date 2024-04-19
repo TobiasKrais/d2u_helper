@@ -13,13 +13,7 @@ echo '<REX_VALUE[2] onClick="toggle_view_'. $id .'()" class="REX_VALUE[2]">REX_V
 
 echo '<div class="wysiwyg_content" id="'. $id .'_text">';
 if ('REX_VALUE[id=3 isset=3]' !== '') { /** @phpstan-ignore-line */
-    if ('markitup' === (string) rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-        echo markitup::parseOutput('markdown', 'REX_VALUE[id=3 output="html"]');
-    } elseif ('markitup_textile' === (string) rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-        echo markitup::parseOutput('textile', 'REX_VALUE[id=3 output="html"]');
-    } else {
-        echo 'REX_VALUE[id=3 output=html]';
-    }
+    echo 'REX_VALUE[id=3 output=html]';
 }
 echo '</div>';
 

@@ -15,9 +15,9 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>Vorankündigung für eine kommende Version 2:</p>
+		<p>2.0.0-DEV</p>
 		<ul>
-			<li>Folgende Klassen werden ab Version 2 dieses Addons umbenannt. Ab Version 1.14.0 stehen die neuen Klassen für eine Übergangszeit zur Verfügung:
+			<li>Folgende Klassen werden ab dieser umbenannt und die alten Klassennamen stehen nicht mehr zur Verfügung:
 				<ul>
 					<li><code>D2U_Helper\ACronJob</code> wird zu <code>TobiasKrais\D2UHelper\ACronJob</code>.</li>
 					<li><code>D2U_Helper\ALangHelper</code> wird zu <code>TobiasKrais\D2UHelper\ALangHelper</code>.</li>
@@ -35,8 +35,16 @@
 					<li><code>D2UTemplateManager</code> wird zu <code>TobiasKrais\D2UHelper\TemplateManager</code>.</li>	
 				</ul>
 			</li>
-			<li>Module unterstützen nicht mehr Geolocation < 2.x.</li>
-			<li>Templates unterstützen nicht mehr Consent-Manager < 4.x.</li>
+			<li>Module unterstützen nur noch Geolocation > 2.0.</li>
+			<li>Templates unterstützen nur noch Consent-Manager > 4.0</li>
+			<li>Lieblingseditoren in den Einstellungen und Modulen des Addons angepasst:
+				<ul>
+					<li>MarkItUp Addon als Option im Lieblingseditor entfernt. Module 01-1, 02-2, 02-2, 02-3 und 10-2 wurden entsprechend angepasst.</li>
+					<li>TinyMCE 4 und TinyMCE 5 Addon als Option im Lieblingseditor entfernt. Bitte statt dessen das TinyMCE Addon verwenden.</li>
+					<li>CKEditor Addon als Option im Lieblingseditor entfernt. Bitte statt dessen das CKE5 Addon verwenden.</li>
+					<li>Redactor 2 Addon als Option im Lieblingseditor entfernt. Bitte statt dessen das Redactor Addon verwenden.</li>
+				</ul>
+			</li>
 		</ul>
 		<p>1.14.0</p>
 		<ul>

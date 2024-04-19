@@ -46,20 +46,14 @@ if (rex_version::compare($d2u_helper->getVersion(), '1.8.8', '<')) {
  */
 // Standard settings that cannot be set in package.yml
 if (!$d2u_helper->hasConfig('editor')) {
-    if (rex_addon::get('tinymce4')->isAvailable()) {
-        $d2u_helper->setConfig('editor', 'tinymce4');
-    } elseif (rex_addon::get('redactor2')->isAvailable()) {
-        $d2u_helper->setConfig('editor', 'redactor2');
-    } elseif (rex_addon::get('ckeditor')->isAvailable()) {
-        $d2u_helper->setConfig('editor', 'ckeditor');
-    } elseif (rex_addon::get('markitup')->isAvailable()) {
-        $d2u_helper->setConfig('editor', 'markitup');
-    } else {
-        $d2u_helper->setConfig('editor', 'tinymce5_default');
+    if (rex_addon::get('cke5')->isAvailable()) {
+        $d2u_helper->setConfig('editor', 'cke5-editor_default');
     }
-} else {
-    if (rex_addon::get('tinymce5')->isAvailable() && 'tinymce5' === $d2u_helper->getConfig('editor')) {
-        $d2u_helper->setConfig('editor', 'tinymce5_default');
+    elseif (rex_addon::get('redactor')->isAvailable()) {
+        $d2u_helper->setConfig('editor', 'redactor-editor--full');
+    }
+    else {
+        $d2u_helper->setConfig('editor', 'tinymce_default1');
     }
 }
 if (!$d2u_helper->hasConfig('default_lang')) {
@@ -192,10 +186,10 @@ if (class_exists(TobiasKrais\D2UHelper\ModuleManager::class)) {
         9);
     $modules[] = new \TobiasKrais\D2UHelper\Module('01-1',
         'Texteditor',
-        13);
+        14);
     $modules[] = new \TobiasKrais\D2UHelper\Module('01-2',
         'Texteditor mit Bild und Fettschrift',
-        16);
+        17);
     $modules[] = new \TobiasKrais\D2UHelper\Module('01-3',
         'Texteditor in Alertbox',
         2);
@@ -204,10 +198,10 @@ if (class_exists(TobiasKrais\D2UHelper\ModuleManager::class)) {
         11);
     $modules[] = new \TobiasKrais\D2UHelper\Module('02-2',
         'Überschrift mit Klapptext',
-        6);
+        7);
     $modules[] = new \TobiasKrais\D2UHelper\Module('02-3',
         'Überschrift mit Untertitel und Textfeld',
-        8);
+        9);
     $modules[] = new \TobiasKrais\D2UHelper\Module('02-4',
         'Überschrift mit Hintergrundbild und 2 Buttons',
         1);
@@ -255,7 +249,7 @@ if (class_exists(TobiasKrais\D2UHelper\ModuleManager::class)) {
         4);
     $modules[] = new \TobiasKrais\D2UHelper\Module('10-2',
         'Box mit Bild und Text',
-        5);
+        6);
     $modules[] = new \TobiasKrais\D2UHelper\Module('10-3',
         'Box mit Downloads',
         10);

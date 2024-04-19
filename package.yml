@@ -1,5 +1,5 @@
 package: d2u_helper
-version: '1.14.0'
+version: '2.0.0'
 author: Tobias Krais
 supportpage: http://github.com/TobiasKrais/d2u_helper
 
@@ -26,6 +26,12 @@ requires:
 
 conflicts:
     packages:
+        d2u_address: '<1.5.0'
+        d2u_guestbook: '<2.0.0'
+        d2u_linkbox: '<1.5.0'
+        d2u_references: '<1.1.0'
+        d2u_staff: '<1.2.2'
+        d2u_videos: '<1.2.0'
         url: '<2.1.0'
         yrewrite: '<2.9.0'
     

@@ -13,13 +13,7 @@
                 }
             }
             if ('REX_VALUE[id=1 isset=1]' !== '') { /** @phpstan-ignore-line */
-                if ('markitup' === (string) rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-                    echo markitup::parseOutput('markdown', 'REX_VALUE[id=1 output="html"]');
-                } elseif ('markitup_textile' === (string) rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-                    echo markitup::parseOutput('textile', 'REX_VALUE[id=1 output="html"]');
-                } else {
-                    echo 'REX_VALUE[id=1 output=html]';
-                }
+                echo 'REX_VALUE[id=1 output=html]';
             }
         ?>
 	</div>
