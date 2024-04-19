@@ -13,10 +13,5 @@
                 echo consent_manager_frontend::getFragment(false, false, 'consent_manager_box_cssjs.php');
 //                echo '<link rel="stylesheet" href="'. template_asset_url('theme/css/meincss.min.css') .'">';
             }
-            else {
-                // Geolocation 3.x
-                // @deprecated in version 2
-                echo consent_manager_frontend::getFragment(false, 'consent_manager_box_cssjs.php');
-            }
         }
     ?>

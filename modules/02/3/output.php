@@ -20,13 +20,7 @@ if ('' !== strip_tags($text)) { /** @phpstan-ignore-line */
     echo '<div class="col-12'. ($show_text_side ? ' col-md-6' : '') .'">'; /** @phpstan-ignore-line */
     echo '<div class="helper-02-3-text">';
     if ('REX_VALUE[id=4 isset=4]' !== '') { /** @phpstan-ignore-line */
-        if ('markitup' === (string) rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-            echo markitup::parseOutput('markdown', $text);
-        } elseif ('markitup_textile' === (string) rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-            echo markitup::parseOutput('textile', $text);
-        } else {
-            echo $text;
-        }
+        echo $text;
     }
     echo '</div>';
     echo '</div>';

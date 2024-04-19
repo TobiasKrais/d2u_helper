@@ -95,18 +95,6 @@ class BackendHelper
     public static function getWYSIWYGEditors()
     {
         $options_editor = [];
-        if (rex_addon::get('ckeditor')->isAvailable()) {
-            if (is_callable(\rex_ckeditor::getProfiles(...))) { /** @phpstan-ignore-line */
-                $ckeditor_profiles = \rex_ckeditor::getProfiles(); /** @phpstan-ignore-line */
-                if (is_array($ckeditor_profiles)) {
-                    foreach ($ckeditor_profiles as $cke_profile_name) {
-                        $options_editor['ckeditor_'. $cke_profile_name] = rex_i18n::msg('ckeditor_title') .' - '. $cke_profile_name;
-                    }
-                }
-            } else {
-                $options_editor['ckeditor'] = rex_i18n::msg('ckeditor_title');
-            }
-        }
         if (rex_addon::get('cke5')->isAvailable()) {
             $cke5_profiles = \Cke5\Creator\Cke5ProfilesApi::getAllProfiles();  /** @phpstan-ignore-line */
             if (is_array($cke5_profiles)) {
@@ -117,32 +105,18 @@ class BackendHelper
                 }
             }
         }
-        if (rex_addon::get('markitup')->isAvailable()) {
-            $options_editor['markitup'] = rex_i18n::msg('markitup_title');
-            $options_editor['markitup_textile'] = rex_i18n::msg('markitup_title') .' - Textile';
+        if (rex_addon::get('redactor')->isAvailable()) {
+            $result = rex_sql::factory();
+            $result->setQuery('SELECT `id`, `name` FROM `'. \rex::getTable('redactor_profile') .'` ORDER BY `name` ASC');
+            foreach ($result as $profile) {
+                $options_editor['redactor-editor--'. $profile->getValue('name')] = rex_i18n::msg('redactor_title') .' - '. $profile->getValue('name');
+            }
         }
-        if (rex_addon::get('redactor2')->isAvailable()) {
-            $options_editor['redactor2'] = rex_i18n::msg('redactor2_title');
-        }
-
         if (rex_addon::get('tinymce')->isAvailable()) {
-            $tinymce_profiles = \TinyMCE\Handler\TinyMCEDatabaseHandler::getAllProfiles();
+            $tinymce_profiles = \FriendsOfRedaxo\TinyMCE\Handler\Database::getAllProfiles();
             if (is_array($tinymce_profiles)) {
                 foreach ($tinymce_profiles as $profile_infos) {
                     $options_editor['tinymce_'. $profile_infos['name']] = rex_i18n::msg('tinymce_title') .' - '. $profile_infos['name'];
-                }
-            }
-        }
-        if (rex_addon::get('tinymce4')->isAvailable()) {
-            $options_editor['tinymce4'] = 'TinyMCE 4';
-        }
-        if (rex_addon::get('tinymce5')->isAvailable()) {
-            $tinymce5_profiles = \TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles(); /** @phpstan-ignore-line */
-            if (is_array($tinymce5_profiles)) {
-                foreach ($tinymce5_profiles as $profile_infos) {
-                    if (is_array($profile_infos)) {
-                        $options_editor['tinymce5_'. $profile_infos['name']] = rex_i18n::msg('tinymce5_title') .' - '. $profile_infos['name'];
-                    }
                 }
             }
         }
@@ -156,32 +130,19 @@ class BackendHelper
     public static function getWYSIWYGEditorClass()
     {
         $wysiwyg_class = '';
-        if ('tinymce4' === (string) rex_config::get('d2u_helper', 'editor') && rex_addon::get('tinymce4') instanceof rex_addon && rex_addon::get('tinymce4')->isAvailable()) {
-            $wysiwyg_class = ' tinyMCEEditor';
-        } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'tinymce5') && rex_addon::get('tinymce5') instanceof rex_addon && rex_addon::get('tinymce5')->isAvailable()) {
-            $wysiwyg_class = ' tiny5-editor" data-profile="default';
-            $tinymce5_profiles = \TinyMCE5\Handler\TinyMCE5DatabaseHandler::getAllProfiles(); /** @phpstan-ignore-line */
-            if (is_array($tinymce5_profiles)) {
-                foreach ($tinymce5_profiles as $profile_infos) {
-                    if (is_array($profile_infos) && rex_config::get('d2u_helper', 'editor') === 'tinymce5_'. $profile_infos['name']) {
-                        $wysiwyg_class = ' tiny5-editor" data-profile="'. $profile_infos['name'];
-                        break;
-                    }
-                }
-            }
-        } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'tinymce') && rex_addon::get('tinymce') instanceof rex_addon && rex_addon::get('tinymce')->isAvailable()) {
+        if (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'tinymce') && rex_addon::get('tinymce') instanceof rex_addon && rex_addon::get('tinymce')->isAvailable()) {
             $wysiwyg_class = ' tiny-editor" data-profile="default';
-            $tinymce_profiles = \TinyMCE\Handler\TinyMCEDatabaseHandler::getAllProfiles();
+            $tinymce_profiles = \FriendsOfRedaxo\TinyMCE\Handler\Database::getAllProfiles();
             if (is_array($tinymce_profiles)) {
                 foreach ($tinymce_profiles as $profile_infos) {
                     if (rex_config::get('d2u_helper', 'editor') === 'tinymce_'. $profile_infos['name']) {
-                        $wysiwyg_class = ' tiny5-editor" data-profile="'. $profile_infos['name'];
+                        $wysiwyg_class = ' tiny-editor" data-profile="'. $profile_infos['name'];
                         break;
                     }
                 }
             }
-        } elseif ('redactor2' === rex_config::get('d2u_helper', 'editor') && rex_addon::get('redactor2')->isAvailable()) {
-            $wysiwyg_class = ' redactorEditor2-full';
+        } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'redactor-editor--') && rex_addon::get('redactor')->isAvailable()) {
+            $wysiwyg_class = ' '. rex_config::get('d2u_helper', 'editor');
         } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'cke5-editor') && rex_addon::get('cke5')->isAvailable()) {
             $wysiwyg_class = ' cke5-editor" data-lang="'. \Cke5\Utils\Cke5Lang::getUserLang(); /** @phpstan-ignore-line */
             $cke5_profiles = \Cke5\Creator\Cke5ProfilesApi::getAllProfiles();  /** @phpstan-ignore-line */
@@ -193,23 +154,6 @@ class BackendHelper
                     }
                 }
             }
-        } elseif (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'ckeditor') && rex_addon::get('ckeditor')->isAvailable()) {
-            $wysiwyg_class = ' ckeditor" data-ckeditor-profile="standard';
-            if (is_callable(\rex_ckeditor::getProfiles(...))) { /** @phpstan-ignore-line */
-                $ckeditor_profiles = \rex_ckeditor::getProfiles(); /** @phpstan-ignore-line */
-                if (is_array($ckeditor_profiles)) {
-                    foreach ($ckeditor_profiles as $cke_profile_name) {
-                        if (rex_config::get('d2u_helper', 'editor') === 'ckeditor_'. $cke_profile_name) {
-                            $wysiwyg_class = ' ckeditor" data-ckeditor-profile="'. $cke_profile_name;
-                            break;
-                        }
-                    }
-                }
-            }
-        } elseif ('markitup' === rex_config::get('d2u_helper', 'editor') && rex_addon::get('markitup')->isAvailable()) {
-            $wysiwyg_class .= ' markitupEditor-markdown_full';
-        } elseif ('markitup_textile' === rex_config::get('d2u_helper', 'editor') && rex_addon::get('markitup')->isAvailable()) {
-            $wysiwyg_class .= ' markitupEditor-textile_full';
         }
 
         return $wysiwyg_class;

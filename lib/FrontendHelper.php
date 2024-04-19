@@ -381,12 +381,6 @@ class FrontendHelper
      */
     public static function prepareEditorField($html)
     {
-        if ('markitup' === rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-            $html = \markitup::parseOutput('markdown', $html);
-        } elseif ('markitup_textile' === rex_config::get('d2u_helper', 'editor', '') && rex_addon::get('markitup')->isAvailable()) {
-            $html = \markitup::parseOutput('textile', $html);
-        }
-
         // Convert redaxo://123 to URL
         $final_html = preg_replace_callback(
             '@redaxo://(\d+)(?:-(\d+))?/?@i',

@@ -155,10 +155,10 @@ class ModuleManager
             9);
         $modules[] = new Module('01-1',
             'Texteditor',
-            13);
+            14);
         $modules[] = new Module('01-2',
             'Texteditor mit Bild und Fettschrift',
-            16);
+            17);
         $modules[] = new Module('01-3',
             'Texteditor in Alertbox',
             2);
@@ -167,10 +167,10 @@ class ModuleManager
             11);
         $modules[] = new Module('02-2',
             'Überschrift mit Klapptext',
-            6);
+            7);
         $modules[] = new Module('02-3',
             'Überschrift mit Untertitel und Textfeld',
-            8);
+            9);
         $modules[] = new Module('02-4',
             'Überschrift mit Hintergrundbild und 2 Buttons',
             1);
@@ -218,7 +218,7 @@ class ModuleManager
             4);
         $modules[] = new Module('10-2',
             'Box mit Bild und Text',
-            5);
+            6);
         $modules[] = new Module('10-3',
             'Box mit Downloads',
             10);
