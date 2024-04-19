@@ -406,7 +406,6 @@ if ('true' === $d2u_helper->getConfig('lang_replacements_install', 'false')) {
  *  END update translations
  */
 
-
 // old plugin translation_helper still exists ? -> delete
 $plugins = __DIR__ . '/plugins';
 if (file_exists($plugins)) {
