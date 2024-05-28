@@ -2,7 +2,7 @@
 
 Dieses Redaxo Addon bietet verschiedene Helferchen für Redaxo und andere Addon. D2U ist eine Kurzform von "Design to (2) Use", der Domain des Addonautors. Dieses Addon bietet Backend und Frontend Klassen, Übersetzungen fürs Redaxo Backend und das Sprog Addon und anderes, was in weiteren Addons des Autos genutzt wird. Darüber hinaus bietet das Addon einen einfache Möglichkeit eine Webseite mit Redaxo einzurichten, die ganz besonders für Redaxo Einsteiger interessant ist.
 
-Die Frontend Klasse `FrontendHelper` bietet die Methode `getAlternateURLs()`. Diese stellt alternative URLs in anderen Sprachen zur aktuellen URL zur Verfügung. Um andere Addons in diese Methode mit einzubinden, gibt es ab Version 2 dieses Addons den Extension Point `D2U_HELPER_ALTERNATE_URLS_LIST` nutzen. Dieser übergibt 2 Parameter: `url_namespace` beinhaltet den Namespace des URL Addons. `url_id` beinhaltet die ID des Datensatzes des URL Addons.
+Die Frontend Klasse `FrontendHelper` bietet die Methode `getAlternateURLs()`. Diese stellt alternative URLs in anderen Sprachen zur aktuellen URL zur Verfügung. Um andere Addons in diese Methode mit einzubinden, gibt es ab Version 2 dieses Addons den Extension Point `D2U_HELPER_ALTERNATE_URLS` nutzen. Dieser übergibt 2 Parameter: `url_namespace` beinhaltet den Namespace des URL Addons. `url_id` beinhaltet die ID des Datensatzes des URL Addons.
 Der Rückgabearray, der zu dem bestehenden Array hinzugefügt werden muss, sieht wie folgt aus:
 
 ```php
@@ -11,7 +11,7 @@ Der Rückgabearray, der zu dem bestehenden Array hinzugefügt werden muss, sieht
 ];
 ```
 
-Eine weitere Methoder der Frontend Klasse `FrontendHelper` ist `getBreadcrumbs()`. Diese stellt die Breadcrumbs als HTML String zur Verfügung. Um andere Addons in diese Methode mit einzubinden, gibt es ab Version 2 dieses Addons den Extension Point `D2U_HELPER_BREADCRUMB_LIST` nutzen. Dieser übergibt 2 Parameter: `url_namespace` beinhaltet den Namespace des URL Addons. `url_id` beinhaltet die ID des Datensatzes des URL Addons.
+Eine weitere Methoder der Frontend Klasse `FrontendHelper` ist `getBreadcrumbs()`. Diese stellt die Breadcrumbs als HTML String zur Verfügung. Um andere Addons in diese Methode mit einzubinden, gibt es ab Version 2 dieses Addons den Extension Point `D2U_HELPER_BREADCRUMBS` nutzen. Dieser übergibt 2 Parameter: `url_namespace` beinhaltet den Namespace des URL Addons. `url_id` beinhaltet die ID des Datensatzes des URL Addons.
 Der Rückgabearray, der zu dem bestehenden Array hinzugefügt werden muss, sieht wie folgt aus:
 
 ```php

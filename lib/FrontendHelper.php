@@ -130,17 +130,15 @@ class FrontendHelper
          *      'redaxo_clang_id' => 'alternative url'
          * ]
          */
-//      $alternate_URLs = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_ALTERNATE_URLS_LIST', params: ['url_namespace' => self::getUrlNamespace(), 'url_id' => self::getUrlId()]));
-        $alternate_URLs = [];
+        $alternate_URLs = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_ALTERNATE_URLS', params: ['url_namespace' => self::getUrlNamespace(), 'url_id' => self::getUrlId()]));
+        if (is_array($alternate_URLs) && count($alternate_URLs) > 0) {
+            return $alternate_URLs;
+        }
         /** @deprecated remove other addons in version 2, use EP instead */
         if (rex_addon::get('d2u_immo')->isAvailable() && count(\d2u_immo_frontend_helper::getAlternateURLs()) > 0) {
             $alternate_URLs = \d2u_immo_frontend_helper::getAlternateURLs();
-        } elseif (rex_addon::get('d2u_jobs')->isAvailable() && count(\d2u_jobs_frontend_helper::getAlternateURLs()) > 0) {
-            $alternate_URLs = \d2u_jobs_frontend_helper::getAlternateURLs();
         } elseif (rex_addon::get('d2u_machinery')->isAvailable() && count(\d2u_machinery_frontend_helper::getAlternateURLs()) > 0) {
             $alternate_URLs = \d2u_machinery_frontend_helper::getAlternateURLs();
-        } elseif (rex_addon::get('d2u_references')->isAvailable() && count(\d2u_references_frontend_helper::getAlternateURLs()) > 0) {
-            $alternate_URLs = \d2u_references_frontend_helper::getAlternateURLs();
         } else {
             foreach (rex_clang::getAllIds(true) as $clang_id) {
                 $article = rex_article::getCurrent($clang_id);
@@ -149,6 +147,7 @@ class FrontendHelper
                 }
             }
         }
+
         return $alternate_URLs;
     }
 
@@ -196,7 +195,7 @@ class FrontendHelper
          *      'redaxo_clang_id' => 'alternative url'
          * ]
          */
-        $ep_breadcrumbs = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_BREADCRUMB_LIST', params: ['url_namespace' => self::getUrlNamespace(), 'url_id' => self::getUrlId()]));
+        $ep_breadcrumbs = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_BREADCRUMBS', params: ['url_namespace' => self::getUrlNamespace(), 'url_id' => self::getUrlId()]));
         if(is_array($ep_breadcrumbs)) {
             foreach ($ep_breadcrumbs as $ep_breadcrumb) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $ep_breadcrumb;
@@ -218,20 +217,8 @@ class FrontendHelper
                 $breadcrumb_start_only = false;
             }
         }
-        if (rex_addon::get('d2u_jobs')->isAvailable()) {
-            foreach (\d2u_jobs_frontend_helper::getBreadcrumbs() as $breadcrumb) {
-                $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-                $breadcrumb_start_only = false;
-            }
-        }
         if (rex_addon::get('d2u_machinery')->isAvailable()) {
             foreach (\d2u_machinery_frontend_helper::getBreadcrumbs() as $breadcrumb) {
-                $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-                $breadcrumb_start_only = false;
-            }
-        }
-        if (rex_addon::get('d2u_references')->isAvailable()) {
-            foreach (\d2u_references_frontend_helper::getBreadcrumbs() as $breadcrumb) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
                 $breadcrumb_start_only = false;
             }

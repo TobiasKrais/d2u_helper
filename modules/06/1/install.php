@@ -10,7 +10,7 @@ $sql = rex_sql::factory();
 
 // insert module specific media manager type
 $sql->setQuery('SELECT * FROM '. \rex::getTablePrefix() ."media_manager_type WHERE name = 'd2u_helper_module_06-1_preview'");
-if (0 === (int) $sql->getRows()) {
+if (0 === $sql->getRows()) {
     $sql->setQuery('INSERT INTO '. \rex::getTablePrefix() ."media_manager_type (`status`, `name`, `description`) VALUES
 		(0, 'd2u_helper_module_06-1_preview', 'D2U Helper Modul 06-1: Vorschaubild des Youtube Videos');");
     $last_id = $sql->getLastId();

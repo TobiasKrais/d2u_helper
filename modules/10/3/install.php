@@ -2,7 +2,7 @@
 
 $sql = rex_sql::factory();
 $sql->setQuery('SELECT * FROM '. \rex::getTablePrefix() ."media_manager_type WHERE name = 'd2u_helper_module_d2u_10-3'");
-if (0 === (int) $sql->getRows()) {
+if (0 === $sql->getRows()) {
     $sql->setQuery('INSERT INTO '. \rex::getTablePrefix() ."media_manager_type (`status`, `name`, `description`) VALUES
 		(0, 'd2u_helper_module_d2u_10-3', 'Vorschaubilder für Dateien im Modul Box mit Downloads (d2u_10-3)');");
     $last_id = $sql->getLastId();

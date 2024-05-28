@@ -171,63 +171,6 @@ if (1 === count(rex_clang::getAll())) {
 <?php
     }
 
-    if (rex_addon::get('d2u_jobs')->isAvailable()) {
-        $categories = D2U_Jobs\Category::getTranslationHelperObjects($target_clang_id, $filter_type);
-        $jobs = D2U_Jobs\Job::getTranslationHelperObjects($target_clang_id, $filter_type);
-?>
-	<div class="panel panel-edit">
-		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_jobs') ?></div></header>
-		<div class="panel-body">
-			<fieldset>
-				<legend><small><i class="rex-icon rex-icon-open-category"></i></small> <?= rex_i18n::msg('d2u_helper_category') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($categories) > 0) {
-                        echo '<ul>';
-                        foreach ($categories as $category) {
-                            if ('' === $category->name) {
-                                $category = new \D2U_Jobs\Category($category->category_id, $source_clang_id);
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_jobs/category', ['entry_id' => $category->category_id, 'func' => 'edit']) .'">'. $category->name .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-			<br>
-			<fieldset>
-				<legend><small><i class="rex-icon fa-users"></i></small> <?= rex_i18n::msg('d2u_jobs_jobs') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($jobs) > 0) {
-                        echo '<ul>';
-                        foreach ($jobs as $job) {
-                            if ('' === $job->name) {
-                                foreach (rex_clang::getAllIds() as $clang_id) {
-                                    $temp_job = new \D2U_Jobs\Job($job->job_id, $clang_id);
-                                    if ('' !== $temp_job->name) {
-                                        $job = $temp_job;
-                                        break;
-                                    }
-                                }
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_jobs/jobs', ['entry_id' => $job->job_id, 'func' => 'edit']) .'">'. $job->name .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-		</div>
-	</div>
-<?php
-    }
-
     if (rex_addon::get('d2u_machinery')->isAvailable()) {
         $categories = Category::getTranslationHelperObjects($target_clang_id, $filter_type);
         $machines = Machine::getTranslationHelperObjects($target_clang_id, $filter_type);
@@ -807,7 +750,6 @@ if (1 === count(rex_clang::getAll())) {
      */
     $translation_list = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_TRANSLATION_LIST', params: ['source_clang_id' => $source_clang_id, 'target_clang_id' => $target_clang_id, 'filter_type' => $filter_type]));
 
-    // Translation list, TODO: uncomment starting from Version 2.0
     if (is_array($translation_list) && count($translation_list) > 0) {
         foreach ($translation_list as $translation_list_item) {
             if (count($translation_list_item['pages']) > 0) {
