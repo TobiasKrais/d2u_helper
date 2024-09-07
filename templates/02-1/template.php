@@ -76,30 +76,32 @@ $d2u_helper = rex_addon::get('d2u_helper');
         }
     ?>
 	<article>
-		<div class="container">
-			<div class="row">
-				<?php
-                    // Breadcrumbs
-                    if ($d2u_helper->hasConfig('show_breadcrumbs') && (bool) $d2u_helper->getConfig('show_breadcrumbs')) {
-                        echo '<div class="col-12">';
-                        echo '<div id="breadcrumbs">';
-                        echo TobiasKrais\D2UHelper\FrontendHelper::getBreadcrumbs();
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                    if (rex_article::getCurrent() instanceof rex_article && $d2u_helper->hasConfig('subhead_include_articlename') && (bool) $d2u_helper->getConfig('subhead_include_articlename')) {
-                        echo '<div class="col-12">';
-                        echo '<h1 class="subhead">'. rex_article::getCurrent()->getName() .'</h1>';
-                        echo '</div>';
-                    } elseif ($d2u_helper->hasConfig('show_breadcrumbs') && (bool) $d2u_helper->getConfig('show_breadcrumbs')) {
-                        // If not title, but breadcrumbs: dhow empty row
-                        echo '<div class="col-12 abstand"></div>';
-                    }
-                    // Content follows
-                    echo $this->getArticle(); /** @phpstan-ignore-line */
-                ?>
-			</div>
-		</div>
+        <div class="container-wrapper">
+            <div class="container">
+                <div class="row">
+                    <?php
+                        // Breadcrumbs
+                        if ($d2u_helper->hasConfig('show_breadcrumbs') && (bool) $d2u_helper->getConfig('show_breadcrumbs')) {
+                            echo '<div class="col-12">';
+                            echo '<div id="breadcrumbs">';
+                            echo TobiasKrais\D2UHelper\FrontendHelper::getBreadcrumbs();
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                        if (rex_article::getCurrent() instanceof rex_article && $d2u_helper->hasConfig('subhead_include_articlename') && (bool) $d2u_helper->getConfig('subhead_include_articlename')) {
+                            echo '<div class="col-12">';
+                            echo '<h1 class="subhead">'. rex_article::getCurrent()->getName() .'</h1>';
+                            echo '</div>';
+                        } elseif ($d2u_helper->hasConfig('show_breadcrumbs') && (bool) $d2u_helper->getConfig('show_breadcrumbs')) {
+                            // If not title, but breadcrumbs: dhow empty row
+                            echo '<div class="col-12 abstand"></div>';
+                        }
+                        // Content follows
+                        echo $this->getArticle(); /** @phpstan-ignore-line */
+                    ?>
+                </div>
+            </div>
+        </div>
 	</article>
 	<div class="container">
 		<div class="row abstand">

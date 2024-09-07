@@ -152,7 +152,7 @@ class ModuleManager
         $modules = [];
         $modules[] = new Module('00-1',
             'Umbruch ganze Breite',
-            9);
+            10);
         $modules[] = new Module('01-1',
             'Texteditor',
             14);

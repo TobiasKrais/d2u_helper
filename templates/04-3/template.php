@@ -260,85 +260,87 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 		</div>
 	</section>
 	<article>
-		<div class="container">
-			<div class="row">
-				<?php
-                    if (rex_addon::get('d2u_news')->isAvailable()) {
-                ?>
-					<div class="col-12 col-md-8 col-lg-9">
-						<div class="row" id="content">
-							<?php
-                                // Content follows
-                                echo $this->getArticle(); /** @phpstan-ignore-line */
-                            ?>
-						</div>
-					</div>
-					<div class="col-12 col-md-4 col-lg-3">
-						<div class="row">
-							<?php
-                                // News / Teaser
-                                $news_category = new \D2U_News\Category((int) rex_config::get('d2u_helper', 'template_news_category'), rex_clang::getCurrentId());
-                                $news = [];
-                                if ($news_category->category_id > 0) {
-                                    $news = $news_category->getNews(true);
-                                } else {
-                                    $news = \D2U_News\News::getAll(rex_clang::getCurrentId(), 5, true);
-                                }
+        <div class="container-wrapper">
+            <div class="container">
+                <div class="row">
+                    <?php
+                        if (rex_addon::get('d2u_news')->isAvailable()) {
+                    ?>
+                        <div class="col-12 col-md-8 col-lg-9">
+                            <div class="row" id="content">
+                                <?php
+                                    // Content follows
+                                    echo $this->getArticle(); /** @phpstan-ignore-line */
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <div class="row">
+                                <?php
+                                    // News / Teaser
+                                    $news_category = new \D2U_News\Category((int) rex_config::get('d2u_helper', 'template_news_category'), rex_clang::getCurrentId());
+                                    $news = [];
+                                    if ($news_category->category_id > 0) {
+                                        $news = $news_category->getNews(true);
+                                    } else {
+                                        $news = \D2U_News\News::getAll(rex_clang::getCurrentId(), 5, true);
+                                    }
 
-                                if (count($news) > 0) {
-                                    foreach ($news as $nachricht) {
-                                        if (!$nachricht->hide_this_lang) {
-                                            echo '<div class="col-12 col-sm-6 col-md-12">';
-                                            echo '<div class="newsbox">';
-                                            // Heading
-                                            if ('' !== trim($nachricht->name)) {
-                                                echo '<div class="newshead">';
-                                                if ('' !== $nachricht->getUrl()) {
-                                                    echo '<a href="'. $nachricht->getUrl() .'">';
+                                    if (count($news) > 0) {
+                                        foreach ($news as $nachricht) {
+                                            if (!$nachricht->hide_this_lang) {
+                                                echo '<div class="col-12 col-sm-6 col-md-12">';
+                                                echo '<div class="newsbox">';
+                                                // Heading
+                                                if ('' !== trim($nachricht->name)) {
+                                                    echo '<div class="newshead">';
+                                                    if ('' !== $nachricht->getUrl()) {
+                                                        echo '<a href="'. $nachricht->getUrl() .'">';
+                                                    }
+                                                    echo $nachricht->name;
+                                                    if ('' !== $nachricht->getUrl()) {
+                                                        echo '</a>';
+                                                    }
+                                                    echo '</div>';
                                                 }
-                                                echo $nachricht->name;
-                                                if ('' !== $nachricht->getUrl()) {
-                                                    echo '</a>';
+
+                                                // Picture
+                                                if ('' !== $nachricht->picture) {
+                                                    echo '<div class="newspic">';
+                                                    if ('' !== $nachricht->getUrl()) {
+                                                        echo '<a href="'. $nachricht->getUrl() .'">';
+                                                    }
+                                                    echo '<img src="index.php?rex_media_type=news_preview&rex_media_file='. $nachricht->picture .'" alt="'. $nachricht->name .'" class="listpic">';
+                                                    if ('' !== $nachricht->getUrl()) {
+                                                        echo '</a>';
+                                                    }
+                                                    echo '</div>';
                                                 }
+
+                                                // Text
+                                                if ('' !== $nachricht->teaser) {
+                                                    echo '<div class="news">';
+                                                    echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($nachricht->teaser);
+                                                    echo '</div>';
+                                                }
+
+                                                echo '</div>';
                                                 echo '</div>';
                                             }
-
-                                            // Picture
-                                            if ('' !== $nachricht->picture) {
-                                                echo '<div class="newspic">';
-                                                if ('' !== $nachricht->getUrl()) {
-                                                    echo '<a href="'. $nachricht->getUrl() .'">';
-                                                }
-                                                echo '<img src="index.php?rex_media_type=news_preview&rex_media_file='. $nachricht->picture .'" alt="'. $nachricht->name .'" class="listpic">';
-                                                if ('' !== $nachricht->getUrl()) {
-                                                    echo '</a>';
-                                                }
-                                                echo '</div>';
-                                            }
-
-                                            // Text
-                                            if ('' !== $nachricht->teaser) {
-                                                echo '<div class="news">';
-                                                echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($nachricht->teaser);
-                                                echo '</div>';
-                                            }
-
-                                            echo '</div>';
-                                            echo '</div>';
                                         }
                                     }
-                                }
-                            ?>
-						</div>
-					</div>
-				<?php
-                    } else {
-                        // Content follows
-                        echo $this->getArticle(); /** @phpstan-ignore-line */
-                    }
-                ?>
-			</div>
-		</div>
+                                ?>
+                            </div>
+                        </div>
+                    <?php
+                        } else {
+                            // Content follows
+                            echo $this->getArticle(); /** @phpstan-ignore-line */
+                        }
+                    ?>
+                </div>
+            </div>
+        </div>
 	</article>
 	<footer class="d-print-none">
 		<div class="container footer">

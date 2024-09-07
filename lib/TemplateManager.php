@@ -127,13 +127,13 @@ class TemplateManager
         $d2u_templates = [];
         $d2u_templates[] = new Template('00-1',
             'Big Header Template',
-            24);
+            25);
         $d2u_templates[] = new Template('01-1',
             'Side Picture Template',
             16);
         $d2u_templates[] = new Template('02-1',
             'Header Pic Template',
-            18);
+            19);
         $d2u_templates[] = new Template('03-1',
             'Immo Template - 2 Columns',
             18);
@@ -142,13 +142,13 @@ class TemplateManager
             14);
         $d2u_templates[] = new Template('04-1',
             'Header Slider Template with Slogan',
-            17);
+            18);
         $d2u_templates[] = new Template('04-2',
             'Header Slider Template',
-            23);
+            24);
         $d2u_templates[] = new Template('04-3',
             'Header Slider Template with news column',
-            18);
+            19);
         $d2u_templates[] = new Template('05-1',
             'Double Logo Template',
             16);

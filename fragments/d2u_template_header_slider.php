@@ -1,7 +1,14 @@
 <?php
     $d2u_helper = rex_addon::get('d2u_helper');
+    $article = rex_article::getCurrent();
 
     $slider_pics_unfiltered = preg_grep('/^\s*$/s', explode(',', (string) $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
+    // get slider pics in case art_slider_pics is set
+    $art_slider_pics_unfiltered = preg_grep('/^\s*$/s', explode(',', (string) $article->getValue('art_slider_pics')), PREG_GREP_INVERT);
+    if (count($art_slider_pics_unfiltered) > 0) {
+        $slider_pics_unfiltered = $art_slider_pics_unfiltered;
+    }
+
     $slider_pics = is_array($slider_pics_unfiltered) ? $slider_pics_unfiltered : [];
     if (count($slider_pics) > 0) {
 ?>
@@ -84,7 +91,6 @@
                                 echo '<img class="d-block w-100"'. $srcset .'  src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type'), $slider_pics[$k]) : rex_url::media($slider_pics[$k]))
                                     .'" alt="'. $rex_media_slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .' width="'. $slider_pic->getWidth() .'px"  height="'. $slider_pic->getHeight() .'px">';
                                 // Slogan
-                                $article = rex_article::getCurrent();
                                 $slogan_text = (string) ($article instanceof rex_article && '' !== $article->getValue('art_slogan') ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId()));
                                 $slogan = '<span class="slogan-text-row">'. str_replace('<br>', '</span><span class="slogan-text-row">', nl2br($slogan_text, false)) .'</span>';
                                 if ('' !== $slogan_text && 'slider' === $d2u_helper->getConfig('template_slogan_position', 'slider')) {

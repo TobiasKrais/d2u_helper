@@ -257,14 +257,16 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 		</div>
 	</section>
 	<article>
-		<div class="container">
-			<div class="row">
-				<?php
-                    // Content follows
-                    echo $this->getArticle(); /** @phpstan-ignore-line */
-                ?>
-			</div>
-		</div>
+        <div class="container-wrapper">
+            <div class="container">
+                <div class="row">
+                    <?php
+                        // Content follows
+                        echo $this->getArticle(); /** @phpstan-ignore-line */
+                    ?>
+                </div>
+            </div>
+        </div>
 	</article>
 	<footer class="d-print-none">
 		<div class="container footer">

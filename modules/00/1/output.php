@@ -23,7 +23,9 @@ if (\rex::isBackend()) {
     if ($container_new && $compatible_template) { /** @phpstan-ignore-line */
         echo '</div>';
         echo '</div>';
-        echo '<div class="container'. ($container_new && $container_fluid ? '-fluid' : '') . ('REX_VALUE[4]' !== '' ? ' REX_VALUE[4]' : '') .'">'; /** @phpstan-ignore-line */
+        echo '</div>';
+        echo '<div class="container-wrapper'. ('REX_VALUE[4]' !== '' ? ' REX_VALUE[4]' : '') .'">'; /** @phpstan-ignore-line */
+        echo '<div class="container'. ($container_new && $container_fluid ? '-fluid' : '') .'">';
         echo '<div class="row">';
     }
 
