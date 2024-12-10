@@ -5,7 +5,7 @@
 	<div class="col-xs-8">
 		<?php
 
-use D2U_Courses\Category;
+use TobiasKrais\D2UCourses\Category;
 
         $select_link = new rex_select();
         $select_link->setName('REX_INPUT_VALUE[1]');
@@ -179,7 +179,7 @@ if (rex_addon::get('d2u_courses')->isAvailable()) {
         $select_link->setSize(1);
         $select_link->setAttribute('class', 'form-control');
 
-        $categories = \D2U_Courses\Category::getAll(true);
+        $categories = \TobiasKrais\D2UCourses\Category::getAll(true);
         foreach ($categories as $category) {
             $select_link->addOption(($category->parent_category instanceof Category ? ($category->parent_category->parent_category instanceof Category ? $category->parent_category->parent_category->name .' → ' : ''). $category->parent_category->name .' → ' : ''). $category->name, $category->category_id);
         }

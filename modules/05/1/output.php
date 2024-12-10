@@ -81,7 +81,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
     if (rex_addon::get('d2u_courses')->isAvailable()) {
         $category_id = (int) 'REX_VALUE[6]';
         if ($category_id > 0) { /** @phpstan-ignore-line */
-            $category = new \D2U_Courses\Category($category_id);
+            $category = new \TobiasKrais\D2UCourses\Category($category_id);
             if (\rex::isBackend()) {
                 echo "Weiterleitung zu D2U Veranstaltungen - Kategorie <a href='". $category->getUrl(true) ."'>". $category->name .'</a>';
             } else {

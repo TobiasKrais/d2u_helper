@@ -1,7 +1,7 @@
 <?php
 // Get placeholder wildcard tags
 
-use D2U_Courses\Course;
+use TobiasKrais\D2UCourses\Course;
 
 $sprog = rex_addon::get('sprog');
 $tag_open = $sprog->getConfig('wildcard_open_tag');
@@ -166,8 +166,8 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                             echo '<a href="'. rex_getUrl((int) rex_config::get('d2u_courses', 'article_id_shopping_cart')) .'" class="cart_link">';
                             echo '<div id="cart_symbol" class="desktop-inner">';
                             echo '<img src="'. rex_url::addonAssets('d2u_courses', 'cart_only.png') .'" alt="'. $cart_article->getName() .'">';
-                            if (count(\D2U_Courses\Cart::getCourseIDs()) > 0) {
-                                echo '<div id="cart_info">'. count(\D2U_Courses\Cart::getCourseIDs()) .'</div>';
+                            if (count(\TobiasKrais\D2UCourses\Cart::getCourseIDs()) > 0) {
+                                echo '<div id="cart_info">'. count(\TobiasKrais\D2UCourses\Cart::getCourseIDs()) .'</div>';
                             }
                             echo '</div>';
                             echo '</a>';
