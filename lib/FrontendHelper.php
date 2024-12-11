@@ -205,12 +205,6 @@ class FrontendHelper
 
         /** @deprecated remove other addons in version 2, use EP instead */
         // Addons
-        if (rex_addon::get('d2u_courses')->isAvailable()) {
-            foreach (\TobiasKrais\D2UCourses\FrontendHelper::getBreadcrumbs() as $breadcrumb) {
-                $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-                $breadcrumb_start_only = false;
-            }
-        }
         if (rex_addon::get('d2u_immo')->isAvailable()) {
             foreach (\d2u_immo_frontend_helper::getBreadcrumbs() as $breadcrumb) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
