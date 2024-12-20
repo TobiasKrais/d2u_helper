@@ -48,6 +48,8 @@
 			<li>Modul 00-1 "Umbruch ganze Breite" Bugfix: Zuweisung einer eigenen Klasse wurde nicht korrekt ausgewertet.</li>
 			<li>Modul 05-1 "Artikelweiterleitung" Anpassungen an D2U Courses Addon Version > 3.5 vorgenommen.</li>
 			<li>Templates 00-1, 02-1, 03-1 und 04-x: Korrektur um Zusammenhang mit Änderung im Modul 00-1.</li>
+			<li>Facebook Icon aus Template Konfiguration entfernt. Statt dessen wird das Icon aus dem Font Awesome 6 verwendet.</li>
+			<li>Links zu Google, Instagram und Linkedin in Template Konfiguration hinzugefügt.</li>
 			<li>Wechsel der Icons in Modulen und Templates auf Font Aweseome 6.</li>
 		</ul>
 		<p>1.14.0</p>

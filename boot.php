@@ -1,7 +1,6 @@
 <?php
 
 use TobiasKrais\D2UHelper\FrontendHelper;
-use TobiasKrais\D2UHelper\FrontendNavigationMegaMenu;
 
 if (\rex::isBackend() && is_object(\rex::getUser())) {
     // Correct name of rights
@@ -65,24 +64,6 @@ if (rex::isBackend()) {
         });
     }
 }
-
-rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
-    /** @deprecated starting with version 2, class alias will be removed */
-    class_alias(TobiasKrais\D2UHelper\ACronJob::class, D2U_Helper\ACronJob::class);
-    class_alias(TobiasKrais\D2UHelper\ALangHelper::class, D2U_Helper\ALangHelper::class);
-    class_alias(TobiasKrais\D2UHelper\BackendHelper::class, d2u_addon_backend_helper::class);
-    class_alias(TobiasKrais\D2UHelper\FrontendHelper::class, d2u_addon_frontend_helper::class);
-    class_alias(TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::class, d2u_mobile_navi::class);
-    class_alias(TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::class, d2u_mobile_navi_mega_menu::class);
-    class_alias(TobiasKrais\D2UHelper\FrontendNavigationSlickNav::class, d2u_mobile_navi_slicknav::class);
-    class_alias(TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::class, d2u_mobile_navi_smartmenus::class);
-    class_alias(TobiasKrais\D2UHelper\ITranslationHelper::class, D2U_Helper\ITranslationHelper::class);
-    class_alias(TobiasKrais\D2UHelper\LangHelper::class, d2u_helper_lang_helper::class);
-    class_alias(TobiasKrais\D2UHelper\Module::class, D2UModule::class);
-    class_alias(TobiasKrais\D2UHelper\ModuleManager::class, D2UModuleManager::class);
-    class_alias(TobiasKrais\D2UHelper\Template::class, D2UTemplate::class);
-    class_alias(TobiasKrais\D2UHelper\TemplateManager::class, D2UTemplateManager::class);
-});
 
 /**
  * Adds table of contents on pages.

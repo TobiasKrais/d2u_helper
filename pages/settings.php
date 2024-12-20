@@ -21,7 +21,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
     $settings['template_logo_2'] = $input_media['template_logo_2'] ?? '';
     $settings['template_print_header_pic'] = $input_media['template_print_header_pic'] ?? '';
     $settings['template_print_footer_pic'] = $input_media['template_print_footer_pic'] ?? '';
-    $settings['footer_facebook_icon'] = $input_media['footer_facebook_icon'] ?? '';
     $settings['footer_logo'] = $input_media['footer_logo'] ?? '';
     $settings['header_lang_icon'] = $input_media['header_lang_icon'] ?? '';
     $settings['template_03_2_header_pic'] = $input_media['template_03_2_header_pic'] ?? '';
@@ -232,7 +231,9 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                         \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_text_fax', 'settings[footer_text_fax]', (string) rex_config::get('d2u_helper', 'footer_text_fax'), false, false);
                         \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_text_email', 'settings[footer_text_email]', (string) rex_config::get('d2u_helper', 'footer_text_email'), false, false);
                         \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_facebook_link', 'settings[footer_facebook_link]', (string) rex_config::get('d2u_helper', 'footer_facebook_link'), false, false);
-                        \TobiasKrais\D2UHelper\BackendHelper::form_mediafield('d2u_helper_settings_footer_facebook_icon', 'footer_facebook_icon', (string) rex_config::get('d2u_helper', 'footer_facebook_icon'));
+                        \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_google_link', 'settings[footer_google_link]', (string) rex_config::get('d2u_helper', 'footer_google_link'), false, false);
+                        \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_instagram_link', 'settings[footer_instagram_link]', (string) rex_config::get('d2u_helper', 'footer_instagram_link'), false, false);
+                        \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_linkedin_link', 'settings[footer_linkedin_link]', (string) rex_config::get('d2u_helper', 'footer_linkedin_link'), false, false);
                         \TobiasKrais\D2UHelper\BackendHelper::form_mediafield('d2u_helper_settings_footer_logo', 'footer_logo', (string) rex_config::get('d2u_helper', 'footer_logo'));
                         \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_text', 'settings[footer_text]', (string) rex_config::get('d2u_helper', 'footer_text'), false, false, 'text');
                     ?>
@@ -252,8 +253,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 									$("dl[id='settings[footer_text_mobile]']").hide();
 									$("dl[id='settings[footer_text_fax]']").hide();
 									$("dl[id='settings[footer_text_email]']").hide();
-									$("dl[id='MEDIA_footer_facebook_icon']").hide();
-									$("dl[id='settings[footer_facebook_link]']").hide();
 								}
 								$("dl[id='settings[footer_text]']").hide();
 								$("dl[id='MEDIA_footer_logo']").hide();
@@ -272,8 +271,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 									$("dl[id='settings[footer_text_fax]']").hide();
 									$("dl[id='settings[footer_text_email]']").hide();
 								}
-								$("dl[id='MEDIA_footer_facebook_icon']").show();
-								$("dl[id='settings[footer_facebook_link]']").show();
 								$("dl[id='settings[footer_text]']").hide();
 								$("dl[id='MEDIA_footer_logo']").show();
 							}
@@ -290,8 +287,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 								$("dl[id='settings[footer_text_fax]']").show();
 								$("dl[id='settings[footer_text_email]']").show();
 								$("dl[id='settings[footer_text]']").hide();
-								$("dl[id='MEDIA_footer_facebook_icon']").hide();
-								$("dl[id='settings[footer_facebook_link]']").show();
 								$("dl[id='MEDIA_footer_logo']").show();
 							}
 							else if (selection === "links_logo_address") {
@@ -307,8 +302,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 								$("dl[id='settings[footer_text_fax]']").show();
 								$("dl[id='settings[footer_text_email]']").show();
 								$("dl[id='settings[footer_text]']").hide();
-								$("dl[id='MEDIA_footer_facebook_icon']").hide();
-								$("dl[id='settings[footer_facebook_link]']").show();
 								$("dl[id='MEDIA_footer_logo']").show();
 							}
 							else if (selection === "links_text") {
@@ -324,8 +317,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 									$("dl[id='settings[footer_text_mobile]']").hide();
 									$("dl[id='settings[footer_text_fax]']").hide();
 									$("dl[id='settings[footer_text_email]']").hide();
-									$("dl[id='MEDIA_footer_facebook_icon']").hide();
-									$("dl[id='settings[footer_facebook_link]']").hide();
 								}
 								$("dl[id='settings[footer_text]']").show();
 								$("dl[id='MEDIA_footer_logo']").hide();
@@ -343,8 +334,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 									$("dl[id='settings[footer_text_mobile]']").hide();
 									$("dl[id='settings[footer_text_fax]']").hide();
 									$("dl[id='settings[footer_text_email]']").hide();
-									$("dl[id='MEDIA_footer_facebook_icon']").hide();
-									$("dl[id='settings[footer_facebook_link]']").hide();
 								}
 								$("dl[id='settings[footer_text]']").show();
 								$("dl[id='MEDIA_footer_logo']").hide();

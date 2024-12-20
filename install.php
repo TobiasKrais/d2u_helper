@@ -157,6 +157,11 @@ if ($d2u_helper->hasConfig('include_menu_smartmenu')) {
 if ('true' === $d2u_helper->getConfig('include_menu', 'true')) {
     $d2u_helper->setConfig('include_menu', 'none');
 }
+// Update settings to 2.0.0
+if ($d2u_helper->hasConfig('footer_facebook_icon')) {
+    $d2u_helper->removeConfig('footer_facebook_icon');
+}
+
 /*
  *  END managing settings
  */

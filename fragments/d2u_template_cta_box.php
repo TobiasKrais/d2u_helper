@@ -30,6 +30,18 @@ if ($show_cta_box) {
             if ('' !== (string) $d2u_helper->getConfig('footer_facebook_link', '')) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-facebook footer-icon"></span></li>';
             }
+            // Google link
+            if ('' !== (string) $d2u_helper->getConfig('footer_google_link', '')) {
+                echo '<li><span class="cta_box_toggler fa-icon fa-google footer-icon"></span></li>';
+            }
+            // Instagram link
+            if ('' !== (string) $d2u_helper->getConfig('footer_instagram_link', '')) {
+                echo '<li><span class="cta_box_toggler fa-icon fa-instagram footer-icon"></span></li>';
+            }
+            // LinkedIn link
+            if ('' !== (string) $d2u_helper->getConfig('footer_linkedin_link', '')) {
+                echo '<li><span class="cta_box_toggler fa-icon fa-linkedin footer-icon"></span></li>';
+            }
             if ('' !== (string) $d2u_helper->getConfig('footer_text_email', '')) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-envelope footer-icon"></span></li>';
             }
@@ -61,6 +73,18 @@ if ($show_cta_box) {
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_facebook_link', '')) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-facebook footer-icon"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank">Facebook</a></span></li>';
+            }
+            // Google link
+            if ('' !== (string) $d2u_helper->getConfig('footer_google_link', '')) {
+                echo '<li><span class="cta_box_toggler fa-icon fa-google footer-icon"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_google_link') .'" target="_blank">Google</a></span></li>';
+            }
+            // Instagram link
+            if ('' !== (string) $d2u_helper->getConfig('footer_instagram_link', '')) {
+                echo '<li><span class="cta_box_toggler fa-icon fa-instagram footer-icon"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_instagram_link') .'" target="_blank">Instagram</a></span></li>';
+            }
+            // LinkedIn link
+            if ('' !== (string) $d2u_helper->getConfig('footer_linkedin_link', '')) {
+                echo '<li><span class="cta_box_toggler fa-icon fa-linkedin footer-icon"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_linkedin_link') .'" target="_blank">LinkedIn</a></span></li>';
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_text_email', '')) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-envelope footer-icon"></span>'

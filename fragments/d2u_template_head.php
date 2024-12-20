@@ -14,5 +14,5 @@
 //                echo '<link rel="stylesheet" href="'. template_asset_url('theme/css/meincss.min.css') .'">';
             }
         }
-        // Fontawesome
-        echo '<link href="/assets/addons/d2u_helper/FontAwesome/css/all.min.css" rel="stylesheet" type="text/css" media="all"/>';
+        // FontAwesome
+        echo '<link href="'. rex_url::addonAssets('d2u_helper', 'FontAwesome/css/all.min.css') .'" rel="stylesheet" type="text/css" media="all">'. PHP_EOL;
