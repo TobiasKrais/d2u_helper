@@ -47,7 +47,7 @@
             echo '<span class="fa-icon fa-phone footer-icon"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_phone') .'">'. $d2u_helper->getConfig('footer_text_phone') .'</a><br>';
         }
         if ('' !== (string) $d2u_helper->getConfig('footer_text_mobile', '')) {
-            echo '<span class="fa-icon fa-mobile footer-icon"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_mobile') .'">'. $d2u_helper->getConfig('footer_text_mobile') .'</a><br>';
+            echo '<span class="fa-icon fa-mobile-alt footer-icon"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_mobile') .'">'. $d2u_helper->getConfig('footer_text_mobile') .'</a><br>';
         }
         if ('' !== (string) $d2u_helper->getConfig('footer_text_fax', '')) {
             echo '<span class="fa-icon fa-fax footer-icon"></span> '. $d2u_helper->getConfig('footer_text_fax') .'<br>';

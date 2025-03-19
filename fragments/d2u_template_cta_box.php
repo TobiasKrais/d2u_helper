@@ -14,7 +14,7 @@ if ($show_cta_box) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-phone footer-icon"></span></li>';
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_text_mobile', '')) {
-                echo '<li><span class="cta_box_toggler fa-icon fa-mobile footer-icon"></span></li>';
+                echo '<li><span class="cta_box_toggler fa-icon fa-mobile-alt footer-icon"></span></li>';
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_text_fax', '')) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-fax footer-icon"></span></li>';
@@ -58,7 +58,7 @@ if ($show_cta_box) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-phone footer-icon"></span><span class="cta_box_content"><a href="tel:'. $d2u_helper->getConfig('footer_text_phone') .'">'. $d2u_helper->getConfig('footer_text_phone') .'</a></span></li>';
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_text_mobile', '')) {
-                echo '<li><span class="cta_box_toggler fa-icon fa-mobile footer-icon"></span><span class="cta_box_content"><a href="tel:'. $d2u_helper->getConfig('footer_text_mobile') .'">'. $d2u_helper->getConfig('footer_text_mobile') .'</a></span></li>';
+                echo '<li><span class="cta_box_toggler fa-icon fa-mobile-alt footer-icon"></span><span class="cta_box_content"><a href="tel:'. $d2u_helper->getConfig('footer_text_mobile') .'">'. $d2u_helper->getConfig('footer_text_mobile') .'</a></span></li>';
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_text_fax', '')) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-fax footer-icon"></span><span class="cta_box_content">'. $d2u_helper->getConfig('footer_text_fax') .'</span></li>';
