@@ -23,6 +23,12 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
         unset($page['subpages']['translation_helper']);
         $this->setProperty('page', $page);
     }
+
+    // change list of allowed mime types for mediapool
+    rex_mediapool::setAllowedMimeTypes([
+        ...rex_mediapool::getAllowedMimeTypes(),
+        'css' => ['text/plain'],
+    ]);
 }
 
 if (rex::isBackend()) {
