@@ -47,6 +47,7 @@
 			</li>
 			<li>Modul 00-1 "Umbruch ganze Breite" Bugfix: Zuweisung einer eigenen Klasse wurde nicht korrekt ausgewertet.</li>
 			<li>Modul 05-1 "Artikelweiterleitung" Anpassungen an D2U Courses Addon Version > 3.5 vorgenommen.</li>
+			<li>Modul 06-1 "YouTube Video einbinden": Barrierefreiheit verbessert.</li>
 			<li>Templates 00-1, 02-1, 03-1 und 04-x: Korrektur um Zusammenhang mit Änderung im Modul 00-1.</li>
 			<li>Templates 00-1, 01-1, 02-1, 03-1, 04-x und 05-1: Verbesserungen in Bezug auf Barrierefreiheit.</li>
 			<li>Facebook Icon aus Template Konfiguration entfernt. Statt dessen wird das Icon aus dem Font Awesome 6 verwendet.</li>

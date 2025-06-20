@@ -162,7 +162,7 @@ class FrontendHelper
         $breadcrumb_start_only = true;
         $breadcrumbs = '';
         if ($startarticle instanceof rex_article) {
-            $breadcrumbs = '<a href="' . $startarticle->getUrl() . '"><span class="fa-icon fa-home"></span></a>';
+            $breadcrumbs = '<a href="' . $startarticle->getUrl() . '" title="'. $startarticle->getName() .'"><span class="fa-icon fa-home"></span></a>';
         }
         $current_article = rex_article::getCurrent();
         if ($current_article instanceof rex_article) {
