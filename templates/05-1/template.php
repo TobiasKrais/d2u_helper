@@ -67,7 +67,7 @@
                                 echo '<a href="'. (\rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer()) .'">';
                                 $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
                                 if ($media_logo instanceof rex_media) {
-                                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+                                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" id="logo">';
                                 }
                                 echo '</a>';
                             }

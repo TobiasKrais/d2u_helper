@@ -122,7 +122,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                 echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
                 $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
                 if ($media_logo instanceof rex_media) {
-                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" id="logo">';
                 }
                 echo '</a>';
             }
@@ -270,7 +270,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 	</article>
 	<footer class="d-print-none">
 		<div class="container footer">
-			<a href="#top" id="jump-top"></a>
+			<a href="#top" id="jump-top" title="<?= \Sprog\Wildcard::get('d2u_helper_template_jump_top'); ?>"></a>
 			<?= $fragment->parse('d2u_template_footer.php');
             ?>
 		</div>

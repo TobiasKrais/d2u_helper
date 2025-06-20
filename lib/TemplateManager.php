@@ -130,7 +130,7 @@ class TemplateManager
             25);
         $d2u_templates[] = new Template('01-1',
             'Side Picture Template',
-            16);
+            17);
         $d2u_templates[] = new Template('02-1',
             'Header Pic Template',
             19);
@@ -151,7 +151,7 @@ class TemplateManager
             19);
         $d2u_templates[] = new Template('05-1',
             'Double Logo Template',
-            16);
+            17);
         $d2u_templates[] = new Template('06-1',
             'Paper Sheet Template',
             9);

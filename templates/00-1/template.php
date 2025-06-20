@@ -133,7 +133,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 						<?php
 						$media_logo = rex_media::get((string) $d2u_helper->getConfig("template_logo"));
 						if($media_logo instanceof rex_media) {
-							print '<img src="'. rex_url::media((string) $d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+							print '<img src="'. rex_url::media((string) $d2u_helper->getConfig("template_logo")) .'" alt="'. $media_logo->getTitle() .'" id="logo">';
 						}
 						?>
 					</a>

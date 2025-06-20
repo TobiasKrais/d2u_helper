@@ -35,7 +35,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
                             }
                             $media_header_pic = rex_media::get($header_image);
                             if ($media_header_pic instanceof rex_media) {
-                                echo '<img src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" class="d-print-none">';
+                                echo '<img src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .'" alt="'. $media_header_pic->getTitle() .'" class="d-print-none">';
                             }
                         }
                         if ($d2u_helper->hasConfig('template_print_header_pic') || '' !== $d2u_helper->getConfig('template_print_header_pic')) {
