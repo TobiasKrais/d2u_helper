@@ -28,6 +28,7 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
     rex_mediapool::setAllowedMimeTypes([
         ...rex_mediapool::getAllowedMimeTypes(),
         'css' => ['text/plain'],
+        'ico' => ['image/vnd.microsoft.icon'],
     ]);
 }
 
