@@ -133,18 +133,14 @@ class FrontendHelper
         if (is_array($alternate_URLs) && count($alternate_URLs) > 0) {
             return $alternate_URLs;
         }
-        /** @deprecated remove other addons in version 2, use EP instead */
-        if (rex_addon::get('d2u_machinery')->isAvailable() && count(\d2u_machinery_frontend_helper::getAlternateURLs()) > 0) {
-            $alternate_URLs = \d2u_machinery_frontend_helper::getAlternateURLs();
-        } else {
-            foreach (rex_clang::getAllIds(true) as $clang_id) {
-                $article = rex_article::getCurrent($clang_id);
-                if ($article instanceof rex_article && $article->isOnline()) {
-                    $alternate_URLs[$clang_id] = $article->getUrl();
-                }
+
+        // no alternate URLs from addons, so return Redaxo articles
+        foreach (rex_clang::getAllIds(true) as $clang_id) {
+            $article = rex_article::getCurrent($clang_id);
+            if ($article instanceof rex_article && $article->isOnline()) {
+                $alternate_URLs[$clang_id] = $article->getUrl();
             }
         }
-
         return $alternate_URLs;
     }
 
@@ -200,15 +196,6 @@ class FrontendHelper
             }
         }
 
-        /** @deprecated remove other addons in version 2, use EP instead */
-        // Addons
-
-        if (rex_addon::get('d2u_machinery')->isAvailable()) {
-            foreach (\d2u_machinery_frontend_helper::getBreadcrumbs() as $breadcrumb) {
-                $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-                $breadcrumb_start_only = false;
-            }
-        }
         return $breadcrumb_start_only ? '' : $breadcrumbs;
     }
 

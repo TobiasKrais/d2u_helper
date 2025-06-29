@@ -122,7 +122,7 @@ class FrontendNavigationResponsiveMultiLevel
                     }
                     echo '<li><a href="'. $category->getUrl() .'" title="'. $cat_name .'">'. $cat_name .'</a></li>';
                     if ($has_machine_submenu) {
-                        \d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
+                        \TobiasKrais\D2UMachinery\FrontendHelper::getD2UMachineryResponsiveMultiLevelSubmenu();
                     }
                     foreach ($category->getChildren(true) as $lev2) {
                         if (0 === count($lev2->getChildren(true))) {
@@ -220,7 +220,7 @@ class FrontendNavigationResponsiveMultiLevel
         $cat_name = (bool) rex_config::get('d2u_helper', 'submenu_use_articlename', false) && $rex_category_article instanceof rex_article ? $rex_category_article->getName() : strtoupper($rex_category->getName());
         echo '<li><a href="'. $rex_category->getUrl() .'" title="'. $cat_name .'">'. $cat_name .'</a></li>';
         if (rex_addon::get('d2u_machinery')->isAvailable() && 'show' === (string) rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && (int) rex_config::get('d2u_machinery', 'article_id', 0) === $rex_category->getId()) {
-            \d2u_machinery_frontend_helper::getD2UMachineryResponsiveMultiLevelSubmenu();
+            \TobiasKrais\D2UMachinery\FrontendHelper::getD2UMachineryResponsiveMultiLevelSubmenu();
         }
         foreach ($rex_category->getChildren(true) as $rex_subcategory) {
             // Check permissions if YCom ist installed

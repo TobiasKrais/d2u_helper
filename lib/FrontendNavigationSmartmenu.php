@@ -103,7 +103,7 @@ class FrontendNavigationSmartmenu
                     echo '<ul>'. PHP_EOL;
                     // Mit Untermenü
                     if ($has_machine_submenu) {
-                        \d2u_machinery_frontend_helper::getD2UMachinerySmartmenuSubmenu();
+                        \TobiasKrais\D2UMachinery\FrontendHelper::getD2UMachinerySmartmenuSubmenu();
                     }
                     foreach ($category->getChildren(true) as $lev2) {
                         if (0 === count($lev2->getChildren(true))) {
@@ -141,7 +141,7 @@ class FrontendNavigationSmartmenu
         echo '<li><a href="'. $rex_category->getUrl() .'" '. (rex_article::getCurrentId() === $rex_category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'>'. $rex_category->getName() .'</a>'. PHP_EOL;
         echo '<ul>'. PHP_EOL;
         if (rex_addon::get('d2u_machinery')->isAvailable() && 'show' === (string) rex_config::get('d2u_machinery', 'show_categories_navi', 'hide') && (int) rex_config::get('d2u_machinery', 'article_id', 0) === $rex_category->getId()) {
-            \d2u_machinery_frontend_helper::getD2UMachinerySmartmenuSubmenu();
+            \TobiasKrais\D2UMachinery\FrontendHelper::getD2UMachinerySmartmenuSubmenu();
         }
         foreach ($rex_category->getChildren(true) as $rex_subcategory) {
             // Check permissions if YCom ist installed
