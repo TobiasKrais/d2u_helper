@@ -6,7 +6,6 @@ use rex_addon;
 use rex_article;
 use rex_category;
 use rex_clang;
-use rex_config;
 use rex_dir;
 use rex_extension;
 use rex_extension_point;
@@ -135,9 +134,7 @@ class FrontendHelper
             return $alternate_URLs;
         }
         /** @deprecated remove other addons in version 2, use EP instead */
-        if (rex_addon::get('d2u_immo')->isAvailable() && count(\d2u_immo_frontend_helper::getAlternateURLs()) > 0) {
-            $alternate_URLs = \d2u_immo_frontend_helper::getAlternateURLs();
-        } elseif (rex_addon::get('d2u_machinery')->isAvailable() && count(\d2u_machinery_frontend_helper::getAlternateURLs()) > 0) {
+        if (rex_addon::get('d2u_machinery')->isAvailable() && count(\d2u_machinery_frontend_helper::getAlternateURLs()) > 0) {
             $alternate_URLs = \d2u_machinery_frontend_helper::getAlternateURLs();
         } else {
             foreach (rex_clang::getAllIds(true) as $clang_id) {
@@ -205,12 +202,7 @@ class FrontendHelper
 
         /** @deprecated remove other addons in version 2, use EP instead */
         // Addons
-        if (rex_addon::get('d2u_immo')->isAvailable()) {
-            foreach (\d2u_immo_frontend_helper::getBreadcrumbs() as $breadcrumb) {
-                $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
-                $breadcrumb_start_only = false;
-            }
-        }
+
         if (rex_addon::get('d2u_machinery')->isAvailable()) {
             foreach (\d2u_machinery_frontend_helper::getBreadcrumbs() as $breadcrumb) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $breadcrumb;
