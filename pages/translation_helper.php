@@ -63,36 +63,6 @@ if (1 === count(rex_clang::getAll())) {
 	</form>
 <?php
 
-    if (rex_addon::get('d2u_history')->isAvailable()) {
-        $history_events = D2U_History\History::getTranslationHelperObjects($target_clang_id, $filter_type);
-?>
-	<div class="panel panel-edit">
-		<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_history') ?></div></header>
-		<div class="panel-body">
-			<fieldset>
-				<legend><small><i class="rex-icon fa-flag"></i></small> <?= rex_i18n::msg('d2u_history_events') ?></legend>
-				<div class="panel-body-wrapper slide">
-				<?php
-                    if (count($history_events) > 0) {
-                        echo '<ul>';
-                        foreach ($history_events as $history_event) {
-                            if ('' === $history_event->name) {
-                                $history_event = new \D2U_History\History($history_event->history_id, $source_clang_id);
-                            }
-                            echo '<li><a href="'. rex_url::backendPage('d2u_history/history', ['entry_id' => $history_event->history_id, 'func' => 'edit']) .'">'. $history_event->name .'</a></li>';
-                        }
-                        echo '</ul>';
-                    } else {
-                        echo is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) && 'update' === rex_session('d2u_helper_translation')['filter'] ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
-                    }
-                ?>
-				</div>
-			</fieldset>
-		</div>
-	</div>
-<?php
-    }
-
     if (rex_addon::get('d2u_news')->isAvailable()) {
         $news = \D2U_News\News::getTranslationHelperObjects($target_clang_id, $filter_type);
         $news_categories = \D2U_News\Category::getTranslationHelperObjects($target_clang_id, $filter_type);

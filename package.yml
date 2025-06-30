@@ -29,6 +29,7 @@ conflicts:
         d2u_address: '<1.5.0'
         d2u_courses: '<3.5.0'
         d2u_guestbook: '<2.0.0'
+        d2u_history: '<1.0.2'
         d2u_immo: '<1.3.1'
         d2u_jobs: '<1.3.0'
         d2u_linkbox: '<1.5.0'
