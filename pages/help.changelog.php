@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.0.1</p>
+		<ul>
+			<li>Anpassungen an YForm 5.x</li>
+		</ul>
 		<p>2.0.0</p>
 		<ul>
 			<li>Folgende Klassen werden ab dieser umbenannt und die alten Klassennamen stehen nicht mehr zur Verfügung:

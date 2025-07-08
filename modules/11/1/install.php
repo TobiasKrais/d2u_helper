@@ -5,7 +5,7 @@ if (!rex_addon::get('sprog')->isAvailable()) {
     echo rex_view::error(rex_i18n::msg('d2u_helper_modules_error_sprog'));
     $return = false;
 }
-if (!rex_addon::get('yform')->isAvailable() || !rex_plugin::get('yform', 'email')->isAvailable()) {
+if (!rex_addon::get('yform')->isAvailable()) {
     echo rex_view::error(rex_i18n::msg('d2u_helper_modules_error_yform'));
     $return = false;
 } else {
