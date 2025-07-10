@@ -60,3 +60,30 @@
 	position: relative;
 	width: 35px;
 }
+
+.youtube-gdpr-hint-mobile {
+	background-color: rgba(50,50,50,0.9);
+	color: white;
+	padding: 15px;
+	text-align: center;
+	margin-top: 15px;
+	display: none;
+	width: 100%;
+	box-sizing: border-box;
+	overflow-wrap: break-word;
+}
+
+/* Media Query for small screen */
+@media (max-width: 767px) {
+	.youtubeWrapper {
+		margin-bottom: 15px; /* normal padding */
+	}
+	
+	.youtube-gdpr-hint-overlay {
+		display: none; /* hide the overlay on small screens */
+	}
+	
+	.youtube-gdpr-hint-mobile {
+		display: block; /* show the mobile hint */
+	}
+}
