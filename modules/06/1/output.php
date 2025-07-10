@@ -33,36 +33,27 @@ if ('' !== $youtube_id) {
     if ($show_title) { /** @phpstan-ignore-line */
         echo '<div class="same-height youtubeTitleWrapper">';
     }
-?>
-	<div id="youtubeWrapper-<?= $youtube_id ?>" class="youtubeWrapper">
-		<div class="youtube-play-button" id="youtube-play-button-<?= $youtube_id ?>">
-			<button type="button" id="play-<?= $youtube_id ?>">
-                <span class="d-none"><?= \Sprog\Wildcard::get('d2u_helper_module_06_play') ?></span>
-				<svg aria-hidden="true" focusable="false" viewBox="0 0 18 18"><path d="M15.562 8.1L3.87.225c-.818-.562-1.87 0-1.87.9v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z"></path></svg>
-			</button>
-		</div>
-		<div class="youtube-gdpr-hint" id="youtube-gdpr-hint-<?= $youtube_id ?>">
-			<p><?= \Sprog\Wildcard::get('d2u_helper_module_06_gdpr_hint') ?></p>
-		</div>
-		<iframe width="1600" height="900" src="" id="player-<?= $youtube_id ?>" frameborder="0" webkitAllowFullScreen moziallowfullscreen allowfullscreen
-				style="background: url(<?= rex_media_manager::getUrl('d2u_helper_module_06-1_preview', $previewimage_target_filename) ?>) center; background-size: contain;"></iframe>
-	</div>
-<?php
-    if ($show_title) { /** @phpstan-ignore-line */
-        $video_info_raw = file_get_contents($youtube_videoinfo_url);
-        if (false !== $video_info_raw) {
-            $video_info = json_decode($video_info_raw);
-            echo '<h2>'. $video_info->title .'</h2>'; /** @phpstan-ignore-line */
-        }
+        echo '<div id="youtubeWrapper-'. $youtube_id .'" class="youtubeWrapper">';
+            echo '<div class="youtube-click-overlay" id="youtube-click-overlay-'. $youtube_id .'" data-youtube-id="'. $youtube_id .'"></div>';
+            echo '<div class="youtube-play-button" id="youtube-play-button-'. $youtube_id .'">';
+                echo '<button type="button" id="play-'. $youtube_id .'">';
+                    echo '<span class="d-none">'. \Sprog\Wildcard::get('d2u_helper_module_06_play') .'</span>';
+                    echo '<svg aria-hidden="true" focusable="false" viewBox="0 0 18 18"><path d="M15.562 8.1L3.87.225c-.818-.562-1.87 0-1.87.9v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z"></path></svg>';
+                echo '</button>';
+            echo '</div>';
+            echo '<div class="youtube-gdpr-hint" id="youtube-gdpr-hint-'. $youtube_id .'">';
+                echo '<p>'. \Sprog\Wildcard::get('d2u_helper_module_06_gdpr_hint') .'</p>';
+            echo '</div>';
+            echo '<iframe width="1600" height="900" src="" id="player-'. $youtube_id .'" frameborder="0" webkitAllowFullScreen moziallowfullscreen allowfullscreen style="background: url('. rex_media_manager::getUrl('d2u_helper_module_06-1_preview', $previewimage_target_filename) .') center; background-size: contain;"></iframe>';
         echo '</div>';
-    }
-?>
-	<script>
-		document.getElementById('play-<?= $youtube_id ?>').addEventListener('click', function() {
-			loadYoutubeVideo('<?= $youtube_url ?>', '<?= $youtube_id ?>') ;
-		});
-	</script>
-<?php
+        if ($show_title) { /** @phpstan-ignore-line */
+            $video_info_raw = file_get_contents($youtube_videoinfo_url);
+            if (false !== $video_info_raw) {
+                $video_info = json_decode($video_info_raw);
+                echo '<h2>'. $video_info->title .'</h2>'; /** @phpstan-ignore-line */
+            }
+            echo '</div>';
+        }
     echo '</div>';
 } else {
     if (rex::isBackend()) {

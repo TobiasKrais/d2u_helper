@@ -20,6 +20,15 @@
 	top: 0;
 	width: 100%;
 }
+.youtube-click-overlay {
+	cursor: pointer;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+}
 .youtube-gdpr-hint {
 	background-color: rgba(50,50,50,0.9);
 	bottom: 0;
@@ -27,7 +36,7 @@
 	padding: 15px;
 	position: absolute;
 	text-align: center;
-	z-index: 2;
+	z-index: 11;
 }
 .youtube-play-button {
 	color: white;

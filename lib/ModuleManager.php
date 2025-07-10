@@ -200,7 +200,7 @@ class ModuleManager
             5);
         $modules[] = new Module('06-1',
             'YouTube Video einbinden',
-            17);
+            18);
         $modules[] = new Module('06-2',
             'IFrame einbinden',
             5);
