@@ -29,7 +29,7 @@ if ('' !== $youtube_id) {
         copy($youtube_previewimage_url, rex_path::addonCache('d2u_helper', $previewimage_target_filename));
     }
 
-    echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
+    echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .' mb-2">';
     if ($show_title) { /** @phpstan-ignore-line */
         echo '<div class="same-height youtubeTitleWrapper">';
     }
@@ -41,14 +41,7 @@ if ('' !== $youtube_id) {
                     echo '<svg aria-hidden="true" focusable="false" viewBox="0 0 18 18"><path d="M15.562 8.1L3.87.225c-.818-.562-1.87 0-1.87.9v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z"></path></svg>';
                 echo '</button>';
             echo '</div>';
-            echo '<div class="youtube-gdpr-hint youtube-gdpr-hint-overlay" id="youtube-gdpr-hint-'. $youtube_id .'">';
-                echo '<p>'. \Sprog\Wildcard::get('d2u_helper_module_06_gdpr_hint') .'</p>';
-            echo '</div>';
             echo '<iframe width="1600" height="900" src="" id="player-'. $youtube_id .'" frameborder="0" webkitAllowFullScreen moziallowfullscreen allowfullscreen style="background: url('. rex_media_manager::getUrl('d2u_helper_module_06-1_preview', $previewimage_target_filename) .') center; background-size: contain;"></iframe>';
-        echo '</div>';
-        // GDPR-Hint für mobile Geräte außerhalb des Wrappers
-        echo '<div class="youtube-gdpr-hint youtube-gdpr-hint-mobile" id="youtube-gdpr-hint-mobile-'. $youtube_id .'">';
-            echo '<p>'. \Sprog\Wildcard::get('d2u_helper_module_06_gdpr_hint') .'</p>';
         echo '</div>';
         if ($show_title) { /** @phpstan-ignore-line */
             $video_info_raw = file_get_contents($youtube_videoinfo_url);
@@ -58,6 +51,9 @@ if ('' !== $youtube_id) {
             }
             echo '</div>';
         }
+        echo '<div class="youtube-gdpr-hint youtube-gdpr-hint-overlay" id="youtube-gdpr-hint-'. $youtube_id .'">';
+            echo '<p>'. \Sprog\Wildcard::get('d2u_helper_module_06_gdpr_hint') .'</p>';
+        echo '</div>';
     echo '</div>';
 } else {
     if (rex::isBackend()) {

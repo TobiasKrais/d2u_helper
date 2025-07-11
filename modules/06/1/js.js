@@ -1,13 +1,12 @@
 function loadYoutubeVideo(youtube_id, youtube_url) {
-	document.getElementById('player-' + youtube_id).src = youtube_url;
+	iframe = document.getElementById('player-' + youtube_id);
+	if (iframe) {
+		iframe.allow = 'autoplay; encrypted-media';
+		iframe.allowFullscreen = true;
+		iframe.src = youtube_url;
+	}
 	document.getElementById('youtube-play-button-' + youtube_id).outerHTML = '';
 	document.getElementById('youtube-gdpr-hint-' + youtube_id).outerHTML = '';
-	// Entferne auch den mobilen GDPR-Hint
-	var mobileHint = document.getElementById('youtube-gdpr-hint-mobile-' + youtube_id);
-	if (mobileHint) {
-		mobileHint.outerHTML = '';
-	}
-	// remove overlay
 	document.getElementById('youtube-click-overlay-' + youtube_id).outerHTML = '';
 }
 

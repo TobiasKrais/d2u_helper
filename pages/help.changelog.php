@@ -17,7 +17,7 @@
 	<div class="panel-body">
 		<p>2.0.1</p>
 		<ul>
-			<li>Modul 06-1 "YouTube Video einbinden": Gesamtes Bild kann nun zum abspielen angeklickt werden.</li>
+			<li>Modul 06-1 "YouTube Video einbinden": Gesamtes Bild kann nun zum abspielen angeklickt werden und Autoplay nach Klick für Chrome aktiviert.</li>
 			<li>Anpassungen an YForm 5.x</li>
 		</ul>
 		<p>2.0.0</p>
