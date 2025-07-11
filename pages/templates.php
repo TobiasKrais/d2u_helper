@@ -75,6 +75,5 @@ $d2u_template_manager->showManagerList();
 		<a href="https://kita-ideenreich.de/" target="_blank">KiTa Ideenreich - Die Roche Kindertagesstätte</a><br>
 	</li>
 	<li><b>06-1	Paper Sheet Template</b><br>
-		<a href="https://egh-hauingen.de/" target="_blank">Elektrizitäts-Genossenschaft Hauingen e.G.</a><br>
 	</li>
 </ul>
