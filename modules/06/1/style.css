@@ -30,8 +30,9 @@
 }
 .youtube-gdpr-hint {
 	background-color: rgba(50,50,50,0.9);
-	bottom: 0;
 	color: white;
+	margin: 0 auto;
+	max-width: 600px;
 	padding: 15px;
 	text-align: center;
 }
