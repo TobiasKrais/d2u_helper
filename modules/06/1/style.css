@@ -6,7 +6,6 @@
 }
 .youtubeWrapper {
 	height: 0;
-	margin-bottom: 15px;
 	position: relative;
 	padding-bottom: 56.25%;
 	padding-top: 25px;
@@ -32,7 +31,6 @@
 	background-color: rgba(50,50,50,0.9);
 	color: white;
 	margin: 0 auto;
-	max-width: 600px;
 	padding: 15px;
 	text-align: center;
 }
