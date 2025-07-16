@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.0.2-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.0.1</p>
 		<ul>
 			<li>Modul 06-1 "YouTube Video einbinden": Gesamtes Bild kann nun zum Abspielen angeklickt werden und Autoplay nach Klick für Chrome aktiviert.</li>
