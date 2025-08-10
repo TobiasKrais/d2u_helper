@@ -64,7 +64,7 @@
                     if (1 === count($slider_pics)) {
                         $srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[0]) .' 2000w"' : '';
                         echo '<img'. $srcset .' src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[0]) : rex_url::media($slider_pics[0]))
-                            .'" alt="" style="max-width:100%;">';
+                            .'" alt="" class="header-slider-pic'. ((bool) rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width') ? ' header-slider-pic-full-width' : '') .'">';
                     } else {
                         // Slider
                         echo '<div id="headerCarousel" class="carousel carousel-fade slide carousel-sync" data-ride="carousel" data-pause="false">';

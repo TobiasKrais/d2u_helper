@@ -142,13 +142,13 @@ class TemplateManager
             14);
         $d2u_templates[] = new Template('04-1',
             'Header Slider Template with Slogan',
-            18);
+            19);
         $d2u_templates[] = new Template('04-2',
             'Header Slider Template',
-            24);
+            25);
         $d2u_templates[] = new Template('04-3',
             'Header Slider Template with news column',
-            19);
+            20);
         $d2u_templates[] = new Template('05-1',
             'Double Logo Template',
             17);

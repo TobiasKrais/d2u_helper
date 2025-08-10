@@ -25,7 +25,13 @@ img {
 .abstand {
 	margin-bottom: 1em;
 }
-	
+/* Header */
+.header-slider-pic {
+	max-width: 100%;
+}
+.header-slider-pic-full-width {
+	width: 100%;
+}
 /* Navi */
 nav {
 	background-color: navi_color_bg;

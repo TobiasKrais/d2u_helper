@@ -18,6 +18,7 @@
 		<p>2.0.2-DEV</p>
 		<ul>
 			<li>Bugfix: Checkbox Template Einstellungn für Breite des Sliders wird jetzt korrekt angezeigt.</li>
+			<li>Bugfix: Version beim Laden des Logos in Templates 04-x hinzugefügt.</li>
 		</ul>
 		<p>2.0.1</p>
 		<ul>

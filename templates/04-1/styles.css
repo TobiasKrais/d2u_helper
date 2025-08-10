@@ -26,6 +26,12 @@ img {
 	margin-bottom: 1em;
 }
 /* Header */
+.header-slider-pic {
+	max-width: 100%;
+}
+.header-slider-pic-full-width {
+	width: 100%;
+}
 #slogan-top {
 	color: article_color_h;
 	float: left;

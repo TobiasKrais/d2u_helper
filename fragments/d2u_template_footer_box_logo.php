@@ -81,7 +81,7 @@
             // Logo
             if ($media_logo_footer instanceof rex_media) {
                 echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-                echo '<img src="'. rex_url::media($media_logo_footer->getFileName()) .'" alt="'. $media_logo_footer->getTitle() .'" title="'. $media_logo_footer->getTitle() .'" id="logo-footer" loading="lazy">';
+                echo '<img src="'. rex_url::media($media_logo_footer->getFileName()) .'?v='. $media_logo_footer->getUpdateDate() .'" alt="'. $media_logo_footer->getTitle() .'" title="'. $media_logo_footer->getTitle() .'" id="logo-footer" loading="lazy">';
                 echo '</a>';
             }
 
