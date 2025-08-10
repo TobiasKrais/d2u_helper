@@ -17,7 +17,7 @@
 	<div class="panel-body">
 		<p>2.0.2-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Bugfix: Checkbox Template Einstellungn für Breite des Sliders wird jetzt korrekt angezeigt.</li>
 		</ul>
 		<p>2.0.1</p>
 		<ul>

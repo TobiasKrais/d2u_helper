@@ -387,7 +387,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                                     \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_template_03_2_time_show_ad', 'settings[template_03_2_time_show_ad]', (string) rex_config::get('d2u_helper', 'template_03_2_time_show_ad'), false, false, 'number');
                                 }
                                 if ('04-1' === $d2u_template->getD2UId() || '04-2' === $d2u_template->getD2UId() || '04-3' === $d2u_template->getD2UId()) {
-                                    \TobiasKrais\D2UHelper\BackendHelper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'full', 'full' === rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width'));
+                                    \TobiasKrais\D2UHelper\BackendHelper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'true', (bool) rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width'));
                                     // Language specific settings
                                     foreach (rex_clang::getAll() as $rex_clang) {
                                         echo '<div style="margin-bottom: 1em;">';

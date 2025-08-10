@@ -37,6 +37,11 @@ if (0 === $sql->getRows()) {
 if (rex_version::compare($d2u_helper->getVersion(), '1.8.8', '<')) {
     $sql->setQuery('UPDATE '. \rex::getTablePrefix() ."media_manager_type SET status = 0 WHERE name LIKE 'd2u_helper_%'");
 }
+// Update to 2.0.2
+if (rex_version::compare($d2u_helper->getVersion(), '2.0.2', '<')) {
+    $sql->setQuery('UPDATE '. \rex::getTablePrefix() .'rex_config SET `key` = "true" WHERE `key` = "template_04_header_slider_pics_full_width" AND value = "full" AND namespace = "d2u_helper"');
+}
+
 /*
  *  END managing media manager types
  */
