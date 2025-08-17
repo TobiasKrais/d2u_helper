@@ -15,11 +15,12 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.0.2-DEV</p>
+		<p>2.0.2</p>
 		<ul>
-			<li>Bugfix: Checkbox Template Einstellungn für Breite des Sliders wird jetzt korrekt angezeigt.</li>
+			<li>Bugfix: Checkbox Template Einstellungen für Breite des Sliders wird jetzt korrekt angezeigt.</li>
 			<li>Bugfix: Version beim Laden des Logos in Templates 04-x hinzugefügt.</li>
 			<li>Bugfix: Module und Templates wurden beim Update nicht korrekt aktualisiert.</li>
+			<li>Bugfix: waren mehrere Templates vom Typ 04-x installiert, wurden die Einstellungen mehrfach angezeigt.</li>
 			<li>Template Footer: Link zum Youtube Profil hinzugefügt und Barrierefreiheit verbessert.</li>
 		</ul>
 		<p>2.0.1</p>

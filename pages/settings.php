@@ -364,6 +364,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 					<?php
                         // Template specific part
                         $d2u_templates = \TobiasKrais\D2UHelper\TemplateManager::getD2UHelperTemplates();
+                        $template_04_slider_options_shown = false;
                         foreach ($d2u_templates as $d2u_template) {
                             $d2u_template->initRedaxoContext(rex_addon::get('d2u_helper'), 'templates/');
                             $d2u_template_ids_for_settings = ['02-1', '03-1', '03-2', '04-1', '04-2', '04-3', '05-1'];
@@ -387,7 +388,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                                     \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_template_03_2_margin_top', 'settings[template_03_2_margin_top]', (string) rex_config::get('d2u_helper', 'template_03_2_margin_top'), false, false, 'number');
                                     \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_template_03_2_time_show_ad', 'settings[template_03_2_time_show_ad]', (string) rex_config::get('d2u_helper', 'template_03_2_time_show_ad'), false, false, 'number');
                                 }
-                                if ('04-1' === $d2u_template->getD2UId() || '04-2' === $d2u_template->getD2UId() || '04-3' === $d2u_template->getD2UId()) {
+                                if (!$template_04_slider_options_shown && ('04-1' === $d2u_template->getD2UId() || '04-2' === $d2u_template->getD2UId() || '04-3' === $d2u_template->getD2UId())) {
                                     \TobiasKrais\D2UHelper\BackendHelper::form_checkbox('d2u_helper_settings_template_04_slider_pics_width', 'settings[template_04_header_slider_pics_full_width]', 'true', (bool) rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width'));
                                     // Language specific settings
                                     foreach (rex_clang::getAll() as $rex_clang) {
@@ -409,6 +410,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                                         }
                                         echo '</div>';
                                     }
+                                    $template_04_slider_options_shown = true;
                                 }
                                 if ('04-3' === $d2u_template->getD2UId() && rex_addon::get('d2u_news')->isAvailable()) {
                                     $news_categories = \D2U_News\Category::getAll(rex_clang::getCurrentId());
