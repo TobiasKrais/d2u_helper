@@ -234,6 +234,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                         \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_google_link', 'settings[footer_google_link]', (string) rex_config::get('d2u_helper', 'footer_google_link'), false, false);
                         \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_instagram_link', 'settings[footer_instagram_link]', (string) rex_config::get('d2u_helper', 'footer_instagram_link'), false, false);
                         \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_linkedin_link', 'settings[footer_linkedin_link]', (string) rex_config::get('d2u_helper', 'footer_linkedin_link'), false, false);
+                        \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_youtube_link', 'settings[footer_youtube_link]', (string) rex_config::get('d2u_helper', 'footer_youtube_link'), false, false);
                         \TobiasKrais\D2UHelper\BackendHelper::form_mediafield('d2u_helper_settings_footer_logo', 'footer_logo', (string) rex_config::get('d2u_helper', 'footer_logo'));
                         \TobiasKrais\D2UHelper\BackendHelper::form_input('d2u_helper_settings_footer_text', 'settings[footer_text]', (string) rex_config::get('d2u_helper', 'footer_text'), false, false, 'text');
                     ?>

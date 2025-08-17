@@ -8,30 +8,37 @@
         $social_footer = '';
         // Facebook
         if ('' !== (string) $d2u_helper->getConfig('footer_facebook_link', '')) {
-            $social_footer = '<a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank">'
+            $social_footer = '<a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'">'
                 // fontawesome facebook icon
                 .'<span class="fa-icon fa-2x fa-facebook pr-2"></span>'
                 .'</a>';
         }
         // Google
         if ('' !== (string) $d2u_helper->getConfig('footer_google_link', '')) {
-            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_google_link') .'" target="_blank">'
+            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_google_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_google') .'">'
                 // fontawesome google icon
                 .'<span class="fa-icon fa-2x fa-google pr-2"></span>'
                 .'</a>';
         }
         // Instagram
         if ('' !== (string) $d2u_helper->getConfig('footer_instagram_link', '')) {
-            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_instagram_link') .'" target="_blank">'
+            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_instagram_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_instagram') .'">'
                 // fontawesome instagram icon
                 .'<span class="fa-icon fa-2x fa-instagram pr-2"></span>'
                 .'</a>';
         }
         // LinkedIn
         if ('' !== (string) $d2u_helper->getConfig('footer_linkedin_link', '')) {
-            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_linkedin_link') .'" target="_blank">'
+            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_linkedin_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_linkedin') .'">'
                 // fontawesome linkedin icon
                 .'<span class="fa-icon fa-2x fa-linkedin pr-2"></span>'
+                .'</a>';
+        }
+        // Youtube
+        if ('' !== (string) $d2u_helper->getConfig('footer_youtube_link', '')) {
+            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_youtube_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'">'
+                // fontawesome youtube icon
+                .'<span class="fa-icon fa-2x fa-youtube pr-2"></span>'
                 .'</a>';
         }
 
@@ -64,7 +71,7 @@
 
             if ($media_logo_footer instanceof rex_media && '' !== $social_footer) {
                 echo '<div class="row">';
-                echo '<div class="col-12 col-lg-6 facebook-logo-div">';
+                echo '<div class="col-12 facebook-logo-div mb-3">';
             }
 
             // Facebook Logo
@@ -74,8 +81,7 @@
 
             if ($media_logo_footer instanceof rex_media && '' !== $social_footer) {
                 echo '</div>';
-                echo '<div class="d-block d-lg-none col-lg-6">&nbsp;</div>';
-                echo '<div class="col-12 col-lg-6">';
+                echo '<div class="col-12">';
             }
 
             // Logo

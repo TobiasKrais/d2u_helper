@@ -44,31 +44,35 @@
         }
         echo '<br>';
         if ('' !== (string) $d2u_helper->getConfig('footer_text_phone', '')) {
-            echo '<span class="fa-icon fa-phone footer-icon"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_phone') .'">'. $d2u_helper->getConfig('footer_text_phone') .'</a><br>';
+            echo '<span class="fa-icon fa-phone footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_phone') .'">'. $d2u_helper->getConfig('footer_text_phone') .'</a><br>';
         }
         if ('' !== (string) $d2u_helper->getConfig('footer_text_mobile', '')) {
-            echo '<span class="fa-icon fa-mobile-alt footer-icon"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_mobile') .'">'. $d2u_helper->getConfig('footer_text_mobile') .'</a><br>';
+            echo '<span class="fa-icon fa-mobile-alt footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span> <a href="tel:'. $d2u_helper->getConfig('footer_text_mobile') .'">'. $d2u_helper->getConfig('footer_text_mobile') .'</a><br>';
         }
         if ('' !== (string) $d2u_helper->getConfig('footer_text_fax', '')) {
             echo '<span class="fa-icon fa-fax footer-icon"></span> '. $d2u_helper->getConfig('footer_text_fax') .'<br>';
         }
         if ('' !== (string) $d2u_helper->getConfig('footer_text_email', '')) {
-            echo '<span class="fa-icon fa-envelope footer-icon"></span> <a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
+            echo '<span class="fa-icon fa-envelope footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_email') .'"></span> <a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
         }
         if ('' !== (string) $d2u_helper->getConfig('footer_facebook_link', '')) {
-            echo '<span class="fa-icon fa-facebook footer-icon"></span> <a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank">Facebook</a><br>';
+            echo '<span class="fa-icon fa-facebook footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'"></span> <a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank">'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'</a><br>';
         }
         // google link
         if ('' !== (string) $d2u_helper->getConfig('footer_google_link', '')) {
-            echo '<span class="fa-icon fa-google footer-icon"></span> <a href="'. $d2u_helper->getConfig('footer_google_link') .'" target="_blank">Google</a><br>';
+            echo '<span class="fa-icon fa-google footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_google') .'"></span> <a href="'. $d2u_helper->getConfig('footer_google_link') .'" target="_blank">'. \Sprog\Wildcard::get('d2u_helper_social_google') .'</a><br>';
         }
         // instagram link
         if ('' !== (string) $d2u_helper->getConfig('footer_instagram_link', '')) {
-            echo '<span class="fa-icon fa-instagram footer-icon"></span> <a href="'. $d2u_helper->getConfig('footer_instagram_link') .'" target="_blank">Instagram</a><br>';
+            echo '<span class="fa-icon fa-instagram footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_instagram') .'"></span> <a href="'. $d2u_helper->getConfig('footer_instagram_link') .'" target="_blank">'. \Sprog\Wildcard::get('d2u_helper_social_instagram') .'</a><br>';
         }
         // linkedin link
         if ('' !== (string) $d2u_helper->getConfig('footer_linkedin_link', '')) {
-            echo '<span class="fa-icon fa-linkedin footer-icon"></span> <a href="'. $d2u_helper->getConfig('footer_linkedin_link') .'" target="_blank">LinkedIn</a><br>';
+            echo '<span class="fa-icon fa-linkedin footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_linkedin') .'"></span> <a href="'. $d2u_helper->getConfig('footer_linkedin_link') .'" target="_blank">'. \Sprog\Wildcard::get('d2u_helper_social_linkedin') .'</a><br>';
+        }
+        // youtube link
+        if ('' !== (string) $d2u_helper->getConfig('footer_youtube_link', '')) {
+            echo '<span class="fa-icon fa-youtube footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'"></span> <a href="'. $d2u_helper->getConfig('footer_youtube_link') .'" target="_blank">'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'</a><br>';
         }
         echo '</p>';
         echo '</div>';
