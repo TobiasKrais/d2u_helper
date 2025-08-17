@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.0.3-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.0.2</p>
 		<ul>
 			<li>Bugfix: Checkbox Template Einstellungen für Breite des Sliders wird jetzt korrekt angezeigt.</li>
