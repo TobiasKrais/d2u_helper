@@ -50,6 +50,10 @@
                 if ('' !== (string) $d2u_helper->getConfig('footer_text_fax', '')) {
                     echo '<span class="fa-icon fa-fax footer-icon"></span>'. $d2u_helper->getConfig('footer_text_fax') .'<br>';
                 }
+                // email link
+                if ('' !== (string) $d2u_helper->getConfig('footer_text_email', '')) {
+                    echo '<span class="fa-icon fa-envelope footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_settings_footer_text_email') .'"></span><a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
+                }
                 // facebook link
                 if ('' !== (string) $d2u_helper->getConfig('footer_facebook_link', '')) {
                     echo '<span class="fa-icon fa-facebook footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'"></span><a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank">'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'</a><br>';
@@ -69,10 +73,6 @@
                 // youtube link
                 if ('' !== (string) $d2u_helper->getConfig('footer_youtube_link', '')) {
                     echo '<span class="fa-icon fa-youtube footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'"></span><a href="'. $d2u_helper->getConfig('footer_youtube_link') .'" target="_blank">'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'</a><br>';
-                }
-                // email link
-                if ('' !== (string) $d2u_helper->getConfig('footer_text_email', '')) {
-                    echo '<span class="fa-icon fa-envelope footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_settings_footer_text_email') .'"></span><a href="mailto:'. $d2u_helper->getConfig('footer_text_email') .'">'. $d2u_helper->getConfig('footer_text_email') .'</a><br>';
                 }
             echo '</div>';
         echo '</div>';
