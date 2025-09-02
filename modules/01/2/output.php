@@ -24,6 +24,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
 $text_1 = 'REX_VALUE[id=2 output="html"]';
 $show_text_2 = 'REX_VALUE[10]' === 'true' ? true : false; /** @phpstan-ignore-line */
 $text_2 = 'REX_VALUE[id=11 output="html"]';
+$picture_center = 'REX_VALUE[12]' === 'true' ? true : false; /** @phpstan-ignore-line */
 
 // Picture
 $picture = 'REX_MEDIA[1]';
@@ -35,6 +36,7 @@ $container_classes = 'col-12 col-lg-'. $cols . $offset_lg;
 if ('left' === $picture_position) { /** @phpstan-ignore-line */
     $container_classes = 'col-12 col-lg-'. $cols . $offset_lg;
 }
+
 ?>
 <div class="<?= $container_classes ?> abstand">
 	<div class="<?= $same_height ?>module-box wysiwyg_content">
@@ -75,9 +77,10 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
 
                 // Heading and Text
                 if ('left' === $picture_position || 'right' === $picture_position) { /** @phpstan-ignore-line */
-                    echo '<div class="col-12 col-sm-'. (2 === $picture_cols ? 8 : 6) .' col-md-'. (12 - $picture_cols) .'">'; /** @phpstan-ignore-line */
+                    echo '<div class="col-12 col-sm-'. (2 === $picture_cols ? 8 : 6) .' col-md-'. (12 - $picture_cols)  /** @phpstan-ignore-line */
+                        . ($picture_center ? ' d-flex flex-column justify-content-center' : '') .'">';
                 } else {
-                    echo '<div class="col-12">';
+                    echo '<div class="col-12'. ($picture_center ? ' d-flex flex-column justify-content-center' : '') .'">';
                 }
 
                 if ('' !== $heading) { /** @phpstan-ignore-line */

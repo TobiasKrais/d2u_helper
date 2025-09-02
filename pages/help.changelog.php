@@ -17,7 +17,7 @@
 	<div class="panel-body">
 		<p>2.0.3-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift": Text lässt sich jetzt vertikal mittig am Bild ausrichten.</li>
 		</ul>
 		<p>2.0.2</p>
 		<ul>

@@ -158,7 +158,7 @@ class ModuleManager
             14);
         $modules[] = new Module('01-2',
             'Texteditor mit Bild und Fettschrift',
-            17);
+            18);
         $modules[] = new Module('01-3',
             'Texteditor in Alertbox',
             2);
