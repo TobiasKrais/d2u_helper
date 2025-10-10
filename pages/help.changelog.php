@@ -18,6 +18,7 @@
 		<p>2.0.3-DEV</p>
 		<ul>
 			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift": Text lässt sich jetzt vertikal mittig am Bild ausrichten.</li>
+			<li>Minimale Redaxo Version auf 5.19.0 angehoben, da seit Version 2.0.0 eine neue Funktion daraus verwendet wird.</li>
 		</ul>
 		<p>2.0.2</p>
 		<ul>
