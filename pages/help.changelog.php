@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.0.3-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.0.3</p>
 		<ul>
 			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift": Text lässt sich jetzt vertikal mittig am Bild ausrichten.</li>
