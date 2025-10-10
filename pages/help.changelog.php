@@ -15,10 +15,11 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.0.3-DEV</p>
+		<p>2.0.3</p>
 		<ul>
 			<li>Modul 01-2 "Texteditor mit Bild und Fettschrift": Text lässt sich jetzt vertikal mittig am Bild ausrichten.</li>
 			<li>Minimale Redaxo Version auf 5.19.0 angehoben, da seit Version 2.0.0 eine neue Funktion daraus verwendet wird.</li>
+			<li>Fehler beim Update von Version < 1.14 behoben.</li>
 		</ul>
 		<p>2.0.2</p>
 		<ul>

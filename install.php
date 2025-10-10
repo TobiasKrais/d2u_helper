@@ -92,6 +92,7 @@ foreach ($sql->getArray() as $result) {
 $sql->setQuery('DELETE FROM `'. rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
 
 // Update modules
+include __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'Module.php';
 include __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'ModuleManager.php';
 $d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager(\TobiasKrais\D2UHelper\ModuleManager::getModules());
 $d2u_module_manager->autoupdate();
