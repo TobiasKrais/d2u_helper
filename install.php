@@ -98,12 +98,16 @@ if (!class_exists(\TobiasKrais\D2UHelper\FrontendHelper::class)) {
 if(!class_exists(\TobiasKrais\D2UHelper\Module::class)) {
     require_once __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'Module.php';
 }
-require_once __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'ModuleManager.php';
+if(!class_exists(\TobiasKrais\D2UHelper\ModuleManager::class)) {
+    require_once __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'ModuleManager.php';
+}
 $d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager(\TobiasKrais\D2UHelper\ModuleManager::getModules());
 $d2u_module_manager->autoupdate();
 
 // update templates
-include __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'TemplateManager.php';
+if(!class_exists(\TobiasKrais\D2UHelper\TemplateManager::class)) {
+    require_once __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'TemplateManager.php';
+}
 $d2u_template_manager = new \TobiasKrais\D2UHelper\TemplateManager(\TobiasKrais\D2UHelper\TemplateManager::getD2UHelperTemplates());
 $d2u_template_manager->autoupdate();
 
