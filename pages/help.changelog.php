@@ -15,9 +15,9 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.0.4-DEV</p>
+		<p>2.0.4</p>
 		<ul>
-			<li>...</li>
+			<li>Kompatibilität mit Consent Manager 5.x</li>
 		</ul>
 		<p>2.0.3</p>
 		<ul>

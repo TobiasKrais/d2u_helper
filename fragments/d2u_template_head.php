@@ -8,7 +8,11 @@
         }
         $consent_manager_addon = rex_addon::get('consent_manager');
         if ($consent_manager_addon->isAvailable()) {
-            if(rex_version::compare('4.0.0', $consent_manager_addon->getVersion(), '<=')) {
+            if(rex_version::compare('5.0.0', $consent_manager_addon->getVersion(), '<=')) {
+                // Consent Manager 5.x
+                echo FriendsOfRedaxo\ConsentManager\Frontend::getFragment(0, 0, 'ConsentManager/box_cssjs.php'); 
+            }            
+            else if(rex_version::compare('4.0.0', $consent_manager_addon->getVersion(), '<=')) {
                 // Consent Manager 4.x
                 echo consent_manager_frontend::getFragment(false, false, 'consent_manager_box_cssjs.php');
 //                echo '<link rel="stylesheet" href="'. template_asset_url('theme/css/meincss.min.css') .'">';
