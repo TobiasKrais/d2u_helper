@@ -160,7 +160,6 @@ function addD2UHelperTOC(rex_extension_point $ep): void
  */
 function appendToPageD2UHelperFiles(rex_extension_point $ep): void
 {
-    $VERSION_BOOTSTRAP = '4.6.2';
     $addon = rex_addon::get('d2u_helper');
 
     // If insertion should be prevented, detect class "prevent_d2u_helper_styles"
@@ -171,16 +170,6 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep): void
     $insert_head = '';
     $insert_body = '';
     // Vor dem </head> einfügen
-    if ((bool) $addon->getConfig('include_jquery', false)) {
-        // JQuery
-        $file = 'jquery.min.js';
-        $insert_head .= '<script src="'. rex_url::coreAssets($file) .'?buster='. filemtime(rex_path::coreAssets($file)) .'"></script>' . PHP_EOL;
-    }
-    if ((bool) $addon->getConfig('include_bootstrap4', false)) {
-        // Bootstrap CSS
-        $insert_head .= '<link rel="stylesheet" type="text/css" href="'.  $addon->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v='. $VERSION_BOOTSTRAP .'" />' . PHP_EOL;
-    }
-
     // Consider module css or menu css
     if (((bool) $addon->getConfig('include_module', false) && '' !== FrontendHelper::getModulesCSS()) || 'none' !== (string) $addon->getConfig('include_menu')) {
         $insert_head .= '<link rel="stylesheet" type="text/css" href="'. rex_url::frontendController(['d2u_helper' => 'helper.css']) .'" />' . PHP_EOL;
@@ -194,10 +183,6 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep): void
     $ep->setSubject(str_replace('</head>', $insert_head .'</head>', $ep->getSubject()));
 
     // Vor dem </body> einfügen
-    if ((bool) $addon->getConfig('include_bootstrap4', false)) {
-        $insert_body .= '<script src="'. $addon->getAssetsUrl('bootstrap4/bootstrap.bundle.min.js') .'?v='. $VERSION_BOOTSTRAP .'"></script>' . PHP_EOL;
-    }
-
     // Module stuff in body
     if ((bool) $addon->getConfig('include_module', false) && '' !== FrontendHelper::getModulesJS()) {
         $insert_body .= '<script src="'. rex_url::frontendController(['position' => 'body', 'd2u_helper' => 'helper.js']) .'"></script>' . PHP_EOL;

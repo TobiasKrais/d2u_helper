@@ -127,34 +127,34 @@ class TemplateManager
         $d2u_templates = [];
         $d2u_templates[] = new Template('00-1',
             'Big Header Template',
-            25);
+            26);
         $d2u_templates[] = new Template('01-1',
             'Side Picture Template',
-            17);
+            18);
         $d2u_templates[] = new Template('02-1',
             'Header Pic Template',
-            19);
+            20);
         $d2u_templates[] = new Template('03-1',
             'Immo Template - 2 Columns',
-            18);
+            19);
         $d2u_templates[] = new Template('03-2',
             'Immo Window Advertising Template',
-            14);
+            15);
         $d2u_templates[] = new Template('04-1',
             'Header Slider Template with Slogan',
-            19);
+            20);
         $d2u_templates[] = new Template('04-2',
             'Header Slider Template',
-            25);
+            26);
         $d2u_templates[] = new Template('04-3',
             'Header Slider Template with news column',
-            20);
+            21);
         $d2u_templates[] = new Template('05-1',
             'Double Logo Template',
-            17);
+            18);
         $d2u_templates[] = new Template('06-1',
             'Paper Sheet Template',
-            9);
+            10);
         return $d2u_templates;
     }
 

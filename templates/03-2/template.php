@@ -22,6 +22,10 @@ use D2U_Immo\Contact;
         echo $fragment->parse('d2u_template_head.php');
 
 		echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '03-2', 'd2u_helper' => 'template.css']) .'">';
+
+		$jquery_file = 'jquery.min.js';
+		echo '<script src="'. rex_url::coreAssets($jquery_file) .'?buster='. filemtime(rex_path::coreAssets($jquery_file)) .'"></script>';
+		echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.6.2" />';
     ?>
 	<meta http-equiv="refresh" content="10800; URL=<?= rex_getUrl() ?>">
 </head>
@@ -371,5 +375,6 @@ use D2U_Immo\Contact;
 			</div>
 		</footer>
 	</div>
+	<script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.bundle.min.js') ?>?v=4.6.2"></script>
 </body>
 </html>

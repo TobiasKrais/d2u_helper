@@ -70,6 +70,14 @@ if (!$d2u_helper->hasConfig('default_lang')) {
 if ($d2u_helper->hasConfig('footer_facebook_icon')) {
     $d2u_helper->removeConfig('footer_facebook_icon');
 }
+
+// Update settings to 2.1.0: jQuery and Bootstrap are now included directly in templates
+if ($d2u_helper->hasConfig('include_jquery')) {
+    $d2u_helper->removeConfig('include_jquery');
+}
+if ($d2u_helper->hasConfig('include_bootstrap4')) {
+    $d2u_helper->removeConfig('include_bootstrap4');
+}
 /*
  *  END managing settings
  */

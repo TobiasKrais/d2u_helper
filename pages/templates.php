@@ -29,8 +29,6 @@ $d2u_template_manager->showManagerList();
 		Einfach ausprobieren.</li>
 	<li><b>Welche Einstellungen müssen im Addon für die Templates vorgenommen werden?</b><br>
 		Für das "99-1 Feed Generator" Template sind keine Einstellungen nötig.
-		Für alle anderen Addons gilt:
-		Die Optionen zum Einbinden von JQuery und Bootstrap müssen aktiviert werden.
 		Für das "05-1 Double Logo Template" muss die Option SlickNav Menü aktiviert
 		werden. Für alle anderen Templates muss die Option Smartmenu Menü aktiviert
 		werden.</li>

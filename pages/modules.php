@@ -13,10 +13,10 @@ if ('' !== $d2u_module_id) {
 $d2u_module_manager->showManagerList();
 ?>
 <h2>FAQ</h2>
-<p>Alle Module von D2U mit HTML Ausgabe verwenden Bootstrap 4. Für ein optimales
-	Ergebnis sollte in den Einstellungen die Einbindung der aktuellen
-	Bootstrap / JQuery Dateien aktiviert werden. Ebenfalls sollte die CSS / JS
-	der installierten Module automatisch eingebunden werden. Einige Module
+<p>Alle Module von D2U mit HTML Ausgabe verwenden Bootstrap 4 und teilweise auch JQuery.
+	Die Option zum automatischen Einbinden von CSS / JS der installierten Module kann in
+	den Einstellungen aktiviert werden. Einige Module benötigen die CSS / JS Dateien zwingend,
+	damit sie korrekt funktionieren. Einige Module
 	funktionieren auch ohne Bootstrap, andere - wie Ekko Lightbox - nicht.</p>
 <ul>
 	<li><b>Warum funktioniert mein Modul nicht korrekt?</b><br>

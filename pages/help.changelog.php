@@ -15,6 +15,12 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.1.0-DEV</p>
+		<ul>
+			<li>jQuery und Bootstrap 4 CSS/JS werden jetzt direkt in den Templates eingebunden und nicht mehr über die Addon-Einstellungen gesteuert.</li>
+			<li>Einstellungen "jQuery einbinden" und "Bootstrap einbinden" entfernt.</li>
+			<li>Agents.md Datei hinzugefügt.</li>
+		</ul>
 		<p>2.0.4</p>
 		<ul>
 			<li>Kompatibilität mit Consent Manager 5.x</li>

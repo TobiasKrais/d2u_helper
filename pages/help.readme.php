@@ -6,6 +6,14 @@
 		<p></p>
 	</div>
 	
+	<header class="panel-heading"><div class="panel-title">FAQs</div></header>
+	<div class="panel-body">
+		<p><strong>Frage: In den Einstellungen habe ich das automatische Einfügen von
+				Bootstrap und JQuery aktiviert und möchte dies aber für ein
+				Template verhindern. Wie?</strong></p>
+		<p>Füge im Template im body Tag die Klasse "prevent_d2u_helper_styles" hinzu.
+				Dazu muss mindestens D2U Helper Version 1.5.0 installiert sein.</p>
+	</div>
 	<header class="panel-heading"><div class="panel-title">Ersetzungen</div></header>
 	<div class="panel-body">
 		<p>Das Addon nimmt 2 Ersetzungen vor:</p>

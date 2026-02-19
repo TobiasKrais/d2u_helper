@@ -33,8 +33,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 
     // Checkbox also needs special treatment if empty
     $settings['check_media_template'] = array_key_exists('check_media_template', $settings);
-    $settings['include_bootstrap4'] = array_key_exists('include_bootstrap4', $settings);
-    $settings['include_jquery'] = array_key_exists('include_jquery', $settings);
     $settings['include_module'] = array_key_exists('include_module', $settings);
     $settings['lang_replacements_install'] = array_key_exists('lang_replacements_install', $settings);
     $settings['lang_wildcard_overwrite'] = array_key_exists('lang_wildcard_overwrite', $settings) ? 'true' : 'false';
@@ -147,8 +145,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
 				<legend><small><i class="rex-icon rex-icon-system"></i></small> <?= rex_i18n::msg('d2u_helper_settings_templates') ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
-                        \TobiasKrais\D2UHelper\BackendHelper::form_checkbox('d2u_helper_settings_include_jquery', 'settings[include_jquery]', 'true', (bool) rex_config::get('d2u_helper', 'include_jquery'));
-                        \TobiasKrais\D2UHelper\BackendHelper::form_checkbox('d2u_helper_settings_include_bootstrap', 'settings[include_bootstrap4]', 'true', (bool) rex_config::get('d2u_helper', 'include_bootstrap4'));
                         \TobiasKrais\D2UHelper\BackendHelper::form_checkbox('d2u_helper_settings_include_module', 'settings[include_module]', 'true', (bool) rex_config::get('d2u_helper', 'include_module'));
                         \TobiasKrais\D2UHelper\BackendHelper::form_infotext('d2u_helper_settings_include_prevent', 'prevent_include_info');
                         \TobiasKrais\D2UHelper\BackendHelper::form_mediafield('d2u_helper_settings_custom_css', 'custom_css', (string) rex_config::get('d2u_helper', 'custom_css'));

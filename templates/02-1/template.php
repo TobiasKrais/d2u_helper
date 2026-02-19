@@ -19,6 +19,10 @@ $d2u_helper = rex_addon::get('d2u_helper');
         echo $fragment->parse('d2u_template_head.php');
 
         echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '02-1', 'd2u_helper' => 'template.css']) .'">';
+
+        $jquery_file = 'jquery.min.js';
+        echo '<script src="'. rex_url::coreAssets($jquery_file) .'?buster='. filemtime(rex_path::coreAssets($jquery_file)) .'"></script>';
+        echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.6.2" />';
     ?>
 </head>
 
@@ -115,5 +119,6 @@ $d2u_helper = rex_addon::get('d2u_helper');
 	</div>
 	<?= $fragment->parse('d2u_template_cta_box.php');
     ?>
+	<script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.bundle.min.js') ?>?v=4.6.2"></script>
 </body>
 </html>
