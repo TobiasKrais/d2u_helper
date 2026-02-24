@@ -198,6 +198,7 @@ d2u_helper_templates_d2u_template_name = D2U Template Name
 d2u_helper_templates_install_d2u_immo_window_advertising = Das Addon d2u_immo und dessen Plugin window_advertising werden für dieses Template benötigt.
 d2u_helper_templates_install_d2u_news = Das Addon D2U News wird für dieses Template benötigt.
 d2u_helper_templates_install_metainfo = Das Addon Metainfo wird für dieses Template benötigt.
+d2u_helper_templates_install_sprog = Das Addon Sprog wird für dieses Template benötigt.
 d2u_helper_templates_install_yrewrite = Das Addon YRewrite wird für dieses Template benötigt.
 d2u_helper_templates_installed = Template installiert
 d2u_helper_templates_pair_new = Neues Redaxo Template anlegen

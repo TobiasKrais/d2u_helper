@@ -10,6 +10,11 @@ if (!rex_addon::get('yrewrite')->isAvailable()) {
     return false;
 }
 
+if (!rex_addon::get('sprog')->isAvailable()) {
+    echo rex_view::error(rex_i18n::msg('d2u_helper_templates_install_sprog'));
+    return false;
+}
+
 if (!rex_addon::get('d2u_news')->isAvailable()) {
     echo rex_view::warning(rex_i18n::msg('d2u_helper_templates_install_d2u_news'));
 }

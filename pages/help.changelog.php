@@ -39,6 +39,8 @@
 			<li>Templateverwaltung: Filter (Alle / BS4 kompatibel / BS5 kompatibel) oberhalb der Templateliste hinzugefügt.</li>
 			<li>Bugfix Templateverwaltung: Nach dem Aufheben einer Templatepaarung wird das entkoppelte Template jetzt korrekt im Zuordnungs-Dropdown angezeigt.</li>
 			<li>Neues Fragment d2u_template_darkmode.php: Dark Mode JavaScript (Flash-Prevention und Toggle-Logik) aus allen 8 BS5-Templates in ein zentrales Fragment mit Parameter "position" (head/body) ausgelagert.</li>
+			<li>Template install.php: Sprog Addon Verfügbarkeitsprüfung als Fehler in allen 17 Templates (außer Schaufenster) hinzugefügt.</li>
+			<li>Template install.php: Fehlende YRewrite Addon Verfügbarkeitsprüfung in Templates 05-1, 05-2 und 06-2 ergänzt.</li>
 			<li>Bootstrap 4 Module und Templates werden in Version 3 entfernt. Bitte rechtzeitig auf die BS5 Varianten wechseln.</li>
 		</ul>
 		<p>2.0.4</p>
