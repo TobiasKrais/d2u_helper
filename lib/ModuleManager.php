@@ -154,44 +154,83 @@ class ModuleManager
             'Umbruch ganze Breite',
             10);
         $modules[] = new Module('01-1',
-            'Texteditor',
+            'Texteditor (BS4)',
             14);
         $modules[] = new Module('01-2',
-            'Texteditor mit Bild und Fettschrift',
+            'Texteditor mit Bild und Fettschrift (BS4)',
             18);
         $modules[] = new Module('01-3',
-            'Texteditor in Alertbox',
+            'Texteditor in Alertbox (BS4)',
             2);
+        $modules[] = new Module('01-4',
+            'Texteditor (BS5)',
+            1);
+        $modules[] = new Module('01-5',
+            'Texteditor mit Bild und Fettschrift (BS5)',
+            1);
+        $modules[] = new Module('01-6',
+            'Texteditor in Alertbox (BS5)',
+            1);
         $modules[] = new Module('02-1',
-            'Überschrift',
+            'Überschrift (BS4)',
             11);
         $modules[] = new Module('02-2',
-            'Überschrift mit Klapptext',
+            'Überschrift mit Klapptext (BS4)',
             7);
         $modules[] = new Module('02-3',
-            'Überschrift mit Untertitel und Textfeld',
+            'Überschrift mit Untertitel und Textfeld (BS4)',
             9);
         $modules[] = new Module('02-4',
-            'Überschrift mit Hintergrundbild und 2 Buttons',
+            'Überschrift mit Hintergrundbild und 2 Buttons (BS4)',
             1);
         $modules[] = new Module('02-5',
-            'Inhaltsverzeichnis der Überschriften',
+            'Inhaltsverzeichnis der Überschriften (BS4)',
+            1);
+        $modules[] = new Module('02-6',
+            'Überschrift (BS5)',
+            1);
+        $modules[] = new Module('02-7',
+            'Überschrift mit Klapptext (BS5)',
+            1);
+        $modules[] = new Module('02-8',
+            'Überschrift mit Untertitel und Textfeld (BS5)',
+            1);
+        $modules[] = new Module('02-9',
+            'Überschrift mit Hintergrundbild und 2 Buttons (BS5)',
+            1);
+        $modules[] = new Module('02-10',
+            'Inhaltsverzeichnis der Überschriften (BS5)',
             1);
         $modules[] = new Module('03-1',
-            'Bild',
+            'Bild (BS4)',
             12);
         $modules[] = new Module('03-2',
-            'Bildergalerie Ekko Lightbox',
+            'Bildergalerie Ekko Lightbox (BS4)',
             15);
         $modules[] = new Module('03-3',
-            '360° Bild',
+            '360° Bild (BS4)',
+            1);
+        $modules[] = new Module('03-4',
+            'Bild (BS5)',
+            1);
+        $modules[] = new Module('03-5',
+            'Bildergalerie Lightbox (BS5)',
+            1);
+        $modules[] = new Module('03-6',
+            '360° Bild (BS5)',
             1);
         $modules[] = new Module('04-1',
-            'Google Maps Karte',
+            'Google Maps Karte (BS4)',
             13);
         $modules[] = new Module('04-2',
-            'OpenStreetMap Karte',
+            'OpenStreetMap Karte (BS4)',
             6);
+        $modules[] = new Module('04-3',
+            'Google Maps Karte (BS5)',
+            1);
+        $modules[] = new Module('04-4',
+            'OpenStreetMap Karte (BS5)',
+            1);
         $modules[] = new Module('05-1',
             'Artikelweiterleitung',
             15);
@@ -199,20 +238,32 @@ class ModuleManager
             'Artikel aus anderer Sprache übernehmen',
             5);
         $modules[] = new Module('06-1',
-            'YouTube Video einbinden',
+            'YouTube Video einbinden (BS4)',
             18);
         $modules[] = new Module('06-2',
-            'IFrame einbinden',
+            'IFrame einbinden (BS4)',
             5);
         $modules[] = new Module('06-3',
-            'Video mit Plyr einbinden',
+            'Video mit Plyr einbinden (BS4)',
             4);
         $modules[] = new Module('06-4',
-            'Videoliste mit Plyr einbinden',
+            'Videoliste mit Plyr einbinden (BS4)',
             2);
+        $modules[] = new Module('06-5',
+            'YouTube Video einbinden (BS5)',
+            1);
+        $modules[] = new Module('06-6',
+            'IFrame einbinden (BS5)',
+            1);
+        $modules[] = new Module('06-7',
+            'Video mit Plyr einbinden (BS5)',
+            1);
+        $modules[] = new Module('06-8',
+            'Videoliste mit Plyr einbinden (BS5)',
+            1);
         $modules[] = new Module('07-1',
             'JavaScript einbinden',
-            2);
+            3);
         $modules[] = new Module('10-1',
             'Box mit Bild und Ueberschrift',
             4);
@@ -220,17 +271,32 @@ class ModuleManager
             'Box mit Bild und Text',
             6);
         $modules[] = new Module('10-3',
-            'Box mit Downloads',
+            'Box mit Downloads (BS4)',
             10);
+        $modules[] = new Module('10-4',
+            'Box mit Downloads (BS5)',
+            1);
         $modules[] = new Module('11-1',
-            'YForm Kontaktformular (DSGVO kompatibel)',
+            'YForm Kontaktformular (DSGVO kompatibel) (BS4)',
             14);
         $modules[] = new Module('11-2',
-            'Box mit Kontaktinformationen',
+            'Box mit Kontaktinformationen (BS4)',
             2);
+        $modules[] = new Module('11-3',
+            'Kontakt-Sektion mit farbigem Hintergrund (BS5)',
+            1);
+        $modules[] = new Module('11-4',
+            'YForm Kontaktformular (DSGVO kompatibel) (BS5)',
+            1);
+        $modules[] = new Module('11-5',
+            'Box mit Kontaktinformationen (BS5)',
+            1);
         $modules[] = new Module('12-1',
-            'Feeds Stream Galerie',
+            'Feeds Stream Galerie (BS4)',
             5);
+        $modules[] = new Module('12-2',
+            'Feeds Stream Galerie (BS5)',
+            1);
         $modules[] = new Module('13-1',
             'Lauftext',
             5);
@@ -238,8 +304,11 @@ class ModuleManager
             'Search It Suchmodul',
             6);
         $modules[] = new Module('15-1',
-            'Kategorie mit Liste der Unterkategorien',
+            'Kategorie mit Liste der Unterkategorien (BS4)',
             3);
+        $modules[] = new Module('15-2',
+            'Kategorie mit Liste der Unterkategorien (BS5)',
+            1);
         // 20-x reserved for D2U Addresss
         // 21-x reserved for D2U History
         // 22-x reserved for D2U Staff
@@ -321,7 +390,15 @@ class ModuleManager
         echo '<div class="panel panel-default">';
         echo '<header class="panel-heading"><div class="panel-title">'. rex_i18n::msg('d2u_helper_meta_modules') .'</div></header>';
 
-        echo '<table class="table table-striped table-hover">';
+        echo '<div class="panel-body" style="padding: 10px 15px;">';
+        echo '<div class="btn-group" role="group">';
+        echo '<button type="button" class="btn btn-default active" data-filter="all">'. rex_i18n::msg('d2u_helper_modules_filter_all') .'</button>';
+        echo '<button type="button" class="btn btn-default" data-filter="bs4">'. rex_i18n::msg('d2u_helper_modules_filter_bs4') .'</button>';
+        echo '<button type="button" class="btn btn-default" data-filter="bs5">'. rex_i18n::msg('d2u_helper_modules_filter_bs5') .'</button>';
+        echo '</div>';
+        echo '</div>';
+
+        echo '<table class="table table-striped table-hover" id="d2u-module-table">';
 
         echo '<thead>';
         echo '<tr>';
@@ -341,7 +418,8 @@ class ModuleManager
         $unpaired_rex_modules = self::getRexModules(true);
         // Fix follows: directly after module installation, newly paired module is not detected as paired
         $installed_d2u_module_id = rex_request('d2u_module_id', 'string');
-        if ('' !== $installed_d2u_module_id) {
+        $current_function = rex_request('function', 'string');
+        if ('' !== $installed_d2u_module_id && 'unlink' !== $current_function) {
             foreach ($unpaired_rex_modules as $rex_id => $name) {
                 if (str_contains($name, $installed_d2u_module_id)) {
                     unset($unpaired_rex_modules[$rex_id]);
@@ -350,7 +428,13 @@ class ModuleManager
         }
 
         foreach ($this->d2u_modules as $module) {
-            echo '<tr>';
+            $compat = 'both';
+            if (str_contains($module->getName(), '(BS4)')) {
+                $compat = 'bs4';
+            } elseif (str_contains($module->getName(), '(BS5)')) {
+                $compat = 'bs5';
+            }
+            echo '<tr data-compat="'. $compat .'">';
             echo '<td>'. $module->getD2UId() .'</td>';
             echo '<td>'. $module->getName() .'</td>';
             echo '<td>'. $module->getRevision() .'</td>';
@@ -397,5 +481,25 @@ class ModuleManager
         echo '</div>';
         echo '</section>';
         echo '</form>';
+
+        echo '<script>
+jQuery(function($) {
+    $(".btn-group [data-filter]").on("click", function() {
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+        var filter = $(this).data("filter");
+        $("#d2u-module-table tbody tr").each(function() {
+            var compat = $(this).data("compat");
+            if (filter === "all") {
+                $(this).show();
+            } else if (filter === "bs4") {
+                $(this).toggle(compat === "bs4" || compat === "both");
+            } else if (filter === "bs5") {
+                $(this).toggle(compat === "bs5" || compat === "both");
+            }
+        });
+    });
+});
+</script>';
     }
 }

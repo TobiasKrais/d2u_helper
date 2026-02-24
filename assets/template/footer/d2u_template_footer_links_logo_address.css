@@ -1,21 +1,21 @@
 /* Footer links address contact logo CSS */
 footer {
-	background-color: footer_color_bg;
-	color: footer_color_font;
+	background-color: var(--footer-color-bg);
+	color: var(--footer-color-font);
 	padding: 1em;
 }
 footer a {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 }
 footer a:hover {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 	text-decoration: underline;
 }
 footer p {
     margin-bottom: 5px;
 }
 .footer-title {
-	border-bottom: 1px solid footer_color_box;
+	border-bottom: 1px solid var(--footer-color-box);
 	margin-bottom: 10px;
 }
 #logo-footer {
@@ -23,7 +23,7 @@ footer p {
 	padding-bottom: 1em;
 }
 #footer-address, #footer-address a {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 	line-height: 1.75rem;
 	margin-bottom: 1em;
 }

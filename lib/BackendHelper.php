@@ -317,6 +317,47 @@ class BackendHelper
     }
 
     /**
+     * Prints a row with two color input fields side by side (light and dark mode).
+     * @param string $message_id rex_i18n message id for the label text
+     * @param string $fieldname_light input field name for the light mode color
+     * @param string $value_light current value of the light mode color
+     * @param string $fieldname_dark input field name for the dark mode color
+     * @param string $value_dark current value of the dark mode color
+     */
+    public static function form_input_color_pair($message_id, $fieldname_light, $value_light, $fieldname_dark, $value_dark): void
+    {
+        $field_id_light = str_replace('[', '-', str_replace(']', '', $fieldname_light));
+        $field_id_dark = str_replace('[', '-', str_replace(']', '', $fieldname_dark));
+
+        echo '<dl class="rex-form-group form-group" id="'. $fieldname_light .'">';
+        echo '<dt>';
+        echo '<table class="d2u_helper_color_pair_table">';
+
+        // Light mode row
+        echo '<tr>';
+        echo '<td class="d2u_helper_color_pair_icon_cell"><i class="fa fa-sun-o"></i></td>';
+        echo '<td><input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
+            . 'value="' . str_replace('"', "'", (string) $value_light) . '" id="text-' . $field_id_light . '" onChange="document.getElementById(\'color-' . $field_id_light . '\').value = this.value"></td>';
+        echo '<td><input class="form-control d2u_helper_color" type="color" name="' . $fieldname_light . '" id="color-' . $field_id_light . '" value="' . str_replace('"', "'", (string) $value_light) . '"'
+            . ' onChange="document.getElementById(\'text-' . $field_id_light . '\').value = this.value" /></td>';
+        echo '</tr>';
+
+        // Dark mode row
+        echo '<tr>';
+        echo '<td class="d2u_helper_color_pair_icon_cell"><i class="fa fa-moon-o"></i></td>';
+        echo '<td><input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
+            . 'value="' . str_replace('"', "'", (string) $value_dark) . '" id="text-' . $field_id_dark . '" onChange="document.getElementById(\'color-' . $field_id_dark . '\').value = this.value"></td>';
+        echo '<td><input class="form-control d2u_helper_color" type="color" name="' . $fieldname_dark . '" id="color-' . $field_id_dark . '" value="' . str_replace('"', "'", (string) $value_dark) . '"'
+            . ' onChange="document.getElementById(\'text-' . $field_id_dark . '\').value = this.value" /></td>';
+        echo '</tr>';
+
+        echo '</table>';
+        echo '</dt>';
+        echo '<dd class="d2u_helper_color_desc"><label>' . rex_i18n::msg($message_id) . '</label><br><small>' . rex_i18n::msg('d2u_helper_settings_color_darkmode_info') . '</small></dd>';
+        echo '</dl>';
+    }
+
+    /**
      * Prints a row with an link map field.
      * @param string $message_id rex_i18n message id for the label text
      * @param string $fieldname input field name (without REX_LINK_NAME part)
@@ -393,12 +434,14 @@ class BackendHelper
      * @param bool $readonly true if field should have readonly attribute
      * @param string $filetypes for allowed filetypes
      * @param int $category_id for default media-category
+     * @param string $icon_html optional HTML icon prefix for the label (e.g. '<i class="fa fa-sun-o"></i>')
      */
-    public static function form_mediafield($message_id, $fieldname, $value, $readonly = false, $filetypes = '', $category_id = 0): void
+    public static function form_mediafield($message_id, $fieldname, $value, $readonly = false, $filetypes = '', $category_id = 0, $icon_html = ''): void
     {
         $filetypes = strtolower(str_replace(' ', '', $filetypes));
+        $label_prefix = '' !== $icon_html ? $icon_html . ' ' : '';
         echo '<dl class="rex-form-group form-group" id="MEDIA_'. $fieldname .'">';
-        echo '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
+        echo '<dt><label>' . $label_prefix . rex_i18n::msg($message_id) . '</label></dt>';
         echo '<dd><div class="input-group">';
         echo '<input class="form-control" type="text" name="REX_INPUT_MEDIA[' . $fieldname . ']" value="' . $value . '" id="REX_MEDIA_' . $fieldname . '" readonly="readonly">';
         echo '<span class="input-group-btn">';

@@ -1,0 +1,319 @@
+@font-face{
+	font-family:'FontAwesome';
+	font-display: swap;
+	src:url("./assets/addons/be_style/webfonts/fa-regular-400.woff2") format("woff2"),
+		url("./assets/addons/be_style/webfonts/fa-regular-400.ttf") format("truetype")
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+	-moz-hyphens: auto;
+	-o-hyphens: auto;
+	-ms-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+a, a:link, a:visited, a:hover
+	{text-decoration: none;}
+img {
+	border: 0px;
+	height: auto;
+	max-width: 100%;
+}
+.abstand
+	{margin: 1em 0;}
+
+header {
+	background-position: center;
+	background-size: cover;
+	height: 400px;
+	padding: 2em 0;
+}
+@media screen and (min-width: 1200px) {
+	header {
+		min-height: 390px;
+	}
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+	header {
+		min-height: 300px;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 991px)  {
+	header {
+		min-height: 250px;
+	}
+	#logo {
+		max-width: 80%;
+	}
+}
+@media screen and (max-width: 768px) {
+	header {
+		min-height: 150px;
+	}
+	#logo {
+		max-width: 60%;
+	}
+}
+
+#cart_symbol {
+	padding-right: 0px !important;
+}
+#cart_symbol img {
+	float: left;
+	height: 25px;
+	min-height: 25px;
+	min-width: 25px;
+	width: 25px;
+}
+#cart_symbol img {
+	position: relative;
+	z-index: 1;
+}
+#cart_info {
+	background-color: var(--subhead-color-font);
+	border-radius: 20px;
+	color: var(--subhead-color-bg);
+	font-size: 0.8em;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	min-width: 20px;
+	text-align: center;
+	top: 5px;
+}
+
+.subhead {
+	background-color: var(--subhead-color-bg);
+}
+.subhead a {
+	color: var(--subhead-color-font);
+}
+.subhead a:hover {
+	text-decoration: underline;
+}
+h1.subhead {
+	padding: 0.5em 0;
+}
+#breadcrumbs {
+	padding: 1em 0 0 0;
+}
+#breadcrumbs.subhead, #breadcrumbs.subhead a {
+	color: var(--subhead-color-font);
+}
+.fa-home, .fa-icon {
+	font-family: FontAwesome;
+}
+.fa-dropbox:before {
+	content: "\f16b";
+}
+.fa-envelope-o:before {
+	content: "\f003";
+}
+.fa-file-pdf-o:before {
+	color: #c60000;
+	content: "\f1c1";
+}
+.fa-home:before {
+	content: "\f015";
+}
+.fa-list-ul:before {
+	content: "\f0ca";
+}
+.fa-plus:before {
+	content: "\f067";
+}
+.nav-link span.fa-icon {
+	padding: 0 0.6em;
+}
+
+/* Navigation */
+nav {
+	background-color: color-mix(in srgb, var(--navi-color-bg) 85%, transparent);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border-bottom: solid 1px white;
+	position: sticky;
+	top: 0;
+	z-index: 1001;
+}
+nav a {
+	text-decoration: none !important;
+}
+nav .navbar {
+	padding: 0;
+}
+nav .navbar-nav .nav-link {
+	color: var(--navi-color-font);
+	font-weight: bold;
+	padding: 15px 20px;
+	text-decoration: none;
+}
+nav .navbar-nav .nav-link:hover,
+nav .navbar-nav .nav-link:focus {
+	color: var(--navi-color-hover-font) !important;
+	background-color: var(--navi-color-hover-bg);
+	cursor: pointer;
+}
+nav .navbar-nav .nav-link.active {
+	background: rgba(255, 255, 255, 0.25);
+}
+nav .navbar-toggler {
+	border: none;
+	color: var(--navi-color-font);
+	padding: 0.5rem;
+}
+nav .navbar-toggler:focus {
+	box-shadow: none;
+}
+nav .navbar-toggler-icon {
+	background: none;
+	background-color: var(--navi-color-font);
+	-webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center / contain;
+	mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center / contain;
+}
+nav .dropdown-menu {
+	background-color: var(--navi-color-font);
+	border: none;
+	border-radius: 0;
+}
+nav .dropdown-menu .dropdown-item {
+	color: var(--navi-color-hover-font);
+	padding: 0.5rem 1.25rem;
+}
+nav .dropdown-menu .dropdown-item:hover,
+nav .dropdown-menu .dropdown-item:focus,
+nav .dropdown-menu .dropdown-item.active {
+	color: var(--navi-color-font) !important;
+	background-color: var(--navi-color-bg);
+}
+@media screen and (max-width: 991px) {
+	nav .navbar-nav .nav-link:hover,
+	nav .navbar-nav .nav-link:focus,
+	nav .navbar-nav .nav-link.active {
+		background-color: var(--navi-color-hover-bg);
+		color: var(--navi-color-hover-font) !important;
+	}
+}
+
+article {
+	background-color: var(--article-color-bg);
+	font-family: 'Arial', sans-serif;
+	padding: 1em 0;
+}
+article a, article a:visited, article a:hover, #breadcrumbs a {
+	color: var(--article-color-h);
+}
+article a:hover {
+	text-decoration: underline;
+}
+article h1, article h2, article h3, article h4, article h5, article h6 {
+	color: var(--article-color-h);
+	margin-bottom: 1.5rem;
+	margin-top: 0;
+}
+article h1, article h2 {
+	font-weight: bold;
+}
+article input:invalid, article textarea:invalid {
+	background-color: var(--article-color-h10);
+}
+
+section {
+	font-family: 'Arial', sans-serif;
+}
+
+.btn-primary {
+	background-color: var(--article-color-h) !important;
+	border: none !important;
+}
+
+.footerbox a {
+	color: var(--footer-color-font);
+}
+
+/* Footer */
+.footer {
+	padding-top: 1.5em;
+	position: relative;
+}
+#jump-top {
+	background-color: var(--footer-color-box);
+	border-radius: 50%;
+	font-family: FontAwesome;
+	padding: 8px 15px;
+	position: absolute;
+	right: 15px;
+	top: -30px;
+	color: var(--footer-color-font);
+	text-decoration: none;
+}
+#jump-top:hover {
+	text-decoration: none;
+	opacity: 0.85;
+}
+#jump-top:before {
+	content: "\f106";
+}
+
+/* Machinery Addon */
+.box {
+	background-color: var(--article-color-h);
+	border: 1px solid var(--article-color-h);
+	text-align: center;
+}
+.box div {
+	color: white;
+	padding: 5px;
+}
+.box img {
+	max-width: 100%;
+}
+.nav li, .nav li.active {
+	padding: 0 1.5em 0 0;
+}
+.nav li a, .nav li.active a {
+	font-weight: bold;
+	padding: 0;
+}
+.nav-link.active {
+	background-color: transparent !important;
+}
+.comparison-header, unit {
+	padding: 0 15px;
+}
+
+/* Dark mode logo */
+.logo-light { display: inline; }
+.logo-dark { display: none; }
+[data-bs-theme="dark"] .logo-light { display: none; }
+[data-bs-theme="dark"] .logo-dark { display: inline; }
+
+/* Dark mode toggle */
+.btn-darkmode-toggle {
+	background: none;
+	border: none;
+	color: var(--navi-color-font);
+	cursor: pointer;
+	font-size: 1.25rem;
+	line-height: 1;
+}
+.btn-darkmode-toggle:hover {
+	opacity: 0.75;
+}
+.darkmode-icon-dark { display: none; }
+[data-bs-theme="dark"] .darkmode-icon-light { display: none; }
+[data-bs-theme="dark"] .darkmode-icon-dark { display: inline; }
+
+/* Print styles */
+@media print {
+	nav, footer, #jump-top, .d-print-none {
+		display: none !important;
+	}
+}
+
+/* Smooth color transitions for dark mode */
+body, nav, article, footer, #breadcrumbs, .box {
+	transition: background-color 0.3s ease, color 0.3s ease;
+}

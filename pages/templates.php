@@ -74,4 +74,8 @@ $d2u_template_manager->showManagerList();
 	</li>
 	<li><b>06-1	Paper Sheet Template</b><br>
 	</li>
+	<li><b>02-3	Header Pic Template 2026 (BS5)</b><br>
+		Modernes Bootstrap 5 Template mit Dark Mode Unterstützung. Kein jQuery erforderlich.<br>
+		<a href="https://www.coaching-spross.de/" target="_blank">Coaching Spross</a><br>
+	</li>
 </ul>

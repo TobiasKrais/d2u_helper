@@ -1,0 +1,4 @@
+/* Footer free text BS5 CSS */
+.footer-text {
+    color: var(--footer-color-font);
+}

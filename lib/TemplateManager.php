@@ -125,36 +125,65 @@ class TemplateManager
     public static function getD2UHelperTemplates()
     {
         $d2u_templates = [];
+        // Bootstrap 4 templates
         $d2u_templates[] = new Template('00-1',
-            'Big Header Template',
+            'Big Header Template (BS4)',
             26);
         $d2u_templates[] = new Template('01-1',
-            'Side Picture Template',
+            'Side Picture Template (BS4)',
             18);
         $d2u_templates[] = new Template('02-1',
-            'Header Pic Template',
+            'Header Pic Template (BS4)',
             20);
         $d2u_templates[] = new Template('03-1',
-            'Immo Template - 2 Columns',
+            'Immo Template - 2 Columns (BS4)',
             19);
         $d2u_templates[] = new Template('03-2',
-            'Immo Window Advertising Template',
+            'Immo Window Advertising Template (BS4)',
             15);
         $d2u_templates[] = new Template('04-1',
-            'Header Slider Template with Slogan',
+            'Header Slider Template with Slogan (BS4)',
             20);
         $d2u_templates[] = new Template('04-2',
-            'Header Slider Template',
+            'Header Slider Template (BS4)',
             26);
         $d2u_templates[] = new Template('04-3',
-            'Header Slider Template with news column',
+            'Header Slider Template with news column (BS4)',
             21);
         $d2u_templates[] = new Template('05-1',
-            'Double Logo Template',
+            'Double Logo Template (BS4)',
             18);
         $d2u_templates[] = new Template('06-1',
-            'Paper Sheet Template',
+            'Paper Sheet Template (BS4)',
             10);
+        // Bootstrap 5 templates
+        $d2u_templates[] = new Template('00-2',
+            'Big Header Template (BS5)',
+            1);
+        $d2u_templates[] = new Template('01-2',
+            'Side Picture Template (BS5)',
+            1);
+        $d2u_templates[] = new Template('02-2',
+            'Header Pic Template (BS5)',
+            1);
+        $d2u_templates[] = new Template('03-3',
+            'Immo Template - 2 Columns (BS5)',
+            1);
+        $d2u_templates[] = new Template('03-4',
+            'Immo Window Advertising Template (BS5)',
+            1);
+        $d2u_templates[] = new Template('04-4',
+            'Header Slider Template (BS5)',
+            2);
+        $d2u_templates[] = new Template('05-2',
+            'Double Logo Template (BS5)',
+            1);
+        $d2u_templates[] = new Template('06-2',
+            'Paper Sheet Template (BS5)',
+            1);
+        $d2u_templates[] = new Template('02-3',
+            'Header Pic Template 2026 (BS5)',
+            2);
         return $d2u_templates;
     }
 
@@ -239,7 +268,15 @@ class TemplateManager
         echo '<div class="panel panel-default">';
         echo '<header class="panel-heading"><div class="panel-title">'. rex_i18n::msg('d2u_helper_meta_templates') .'</div></header>';
 
-        echo '<table class="table table-striped table-hover">';
+        echo '<div class="panel-body" style="padding: 10px 15px;">';
+        echo '<div class="btn-group" role="group">';
+        echo '<button type="button" class="btn btn-default active" data-filter="all">'. rex_i18n::msg('d2u_helper_modules_filter_all') .'</button>';
+        echo '<button type="button" class="btn btn-default" data-filter="bs4">'. rex_i18n::msg('d2u_helper_modules_filter_bs4') .'</button>';
+        echo '<button type="button" class="btn btn-default" data-filter="bs5">'. rex_i18n::msg('d2u_helper_modules_filter_bs5') .'</button>';
+        echo '</div>';
+        echo '</div>';
+
+        echo '<table class="table table-striped table-hover" id="d2u-template-table">';
 
         echo '<thead>';
         echo '<tr>';
@@ -257,9 +294,25 @@ class TemplateManager
         // Redaxo templates
         $rex_templates = self::getRexTemplates();
         $unpaired_rex_templates = self::getRexTemplates(true);
+        // Fix: directly after template installation, newly paired template is not detected as paired
+        $installed_d2u_template_id = rex_request('d2u_template_id', 'string');
+        $current_function = rex_request('function', 'string');
+        if ('' !== $installed_d2u_template_id && 'unlink' !== $current_function) {
+            foreach ($unpaired_rex_templates as $rex_id => $name) {
+                if (str_contains($name, $installed_d2u_template_id)) {
+                    unset($unpaired_rex_templates[$rex_id]);
+                }
+            }
+        }
 
         foreach ($this->d2u_templates as $template) {
-            echo '<tr>';
+            $compat = 'both';
+            if (str_contains($template->getName(), '(BS4)')) {
+                $compat = 'bs4';
+            } elseif (str_contains($template->getName(), '(BS5)') || str_starts_with($template->getName(), 'Bootstrap 5')) {
+                $compat = 'bs5';
+            }
+            echo '<tr data-compat="'. $compat .'">';
             echo '<td>'. $template->getD2UId() .'</td>';
             echo '<td>'. $template->getName() .'</td>';
             echo '<td>'. $template->getRevision() .'</td>';
@@ -306,5 +359,25 @@ class TemplateManager
         echo '</div>';
         echo '</section>';
         echo '</form>';
+
+        echo '<script>
+jQuery(function($) {
+    $(".btn-group [data-filter]").on("click", function() {
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+        var filter = $(this).data("filter");
+        $("#d2u-template-table tbody tr").each(function() {
+            var compat = $(this).data("compat");
+            if (filter === "all") {
+                $(this).show();
+            } else if (filter === "bs4") {
+                $(this).toggle(compat === "bs4" || compat === "both");
+            } else if (filter === "bs5") {
+                $(this).toggle(compat === "bs5" || compat === "both");
+            }
+        });
+    });
+});
+</script>';
     }
 }

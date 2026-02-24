@@ -14,40 +14,40 @@ html {
   scroll-behavior: smooth;
 }
 body {
-	background: linear-gradient(to right, navi_color_bg 50%, navi_color_hover_bg 50%);
+	background: linear-gradient(to right, var(--navi-color-bg) 50%, var(--navi-color-hover-bg) 50%);
 	font-family: Arial, sans-serif;
 	hyphens: auto;
 }
 article h1, article h2, article h3, article h4, article h5, article h6 {
-	color: article_color_h;
+	color: var(--article-color-h);
 	text-align: left;
 }
 article input:invalid, article textarea:invalid {
-	background-color: article_color_h10;
+	background-color: var(--article-color-h10);
 }
 a, a:link, a:visited {
-	color: article_color_h;
+	color: var(--article-color-h);
 	text-decoration: none;
 }
 a:hover {
 	text-decoration: underline;
 }
 button.btn {
-	background-color: navi_color_bg;
+	background-color: var(--navi-color-bg);
 	border: none;
-	color: navi_color_font;
+	color: var(--navi-color-font);
 }
 img {
 	max-width: 100%;
 }
 hr {
-	color: article_color_h;
+	color: var(--article-color-h);
 	height: 1px;
 	width: 100%;
 }
 
 header, #article-content {
-	background-color: article_color_bg;
+	background-color: var(--article-color-bg);
 }
 
 #breadcrumbs {
@@ -74,7 +74,7 @@ header, #article-content {
 	border-radius: 0 !important;
 }
 .slicknav_menu .slicknav_icon-bar {
-	background-color: navi_color_font !important;
+	background-color: var(--navi-color-font) !important;
 	box-shadow: none !important;
 }
 .slicknav_btn {
@@ -96,7 +96,7 @@ header, #article-content {
 }
 
 #footer {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 	font-size: 14px;
 	text-align: center;
 	margin: 1em auto;
@@ -109,9 +109,9 @@ header, #article-content {
 
 /* Teaser */
 #teaser-inner-frame {
-	background-color: navi_color_hover_bg;
-	color: navi_color_hover_font;
+	background-color: var(--navi-color-hover-bg);
+	color: var(--navi-color-hover-font);
 }
 #teaser-inner-frame a, #teaser-inner-frame ul, #teaser-inner-frame p {
-	color: navi_color_bg;
+	color: var(--navi-color-bg);
 }

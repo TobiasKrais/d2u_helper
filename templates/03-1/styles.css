@@ -43,10 +43,10 @@ header {
 }
 
 .subhead {
-	background-color: subhead_color_bg;
+	background-color: var(--subhead-color-bg);
 }
 .subhead a {
-	color: subhead_color_font;
+	color: var(--subhead-color-font);
 }
 .subhead a:hover {
 	text-decoration: underline;
@@ -55,7 +55,7 @@ h1.subhead {
 	padding: 0.5em 0;
 }
 #breadcrumbs.subhead, #breadcrumbs.subhead a {
-	color: subhead_color_font;
+	color: var(--subhead-color-font);
 }
 .fa-home {
 	font-family: FontAwesome;
@@ -65,7 +65,7 @@ h1.subhead {
 }
 
 .navigation {
-	background-color: navi_color_bg;
+	background-color: var(--navi-color-bg);
 	border-bottom: solid 1px white;
 }
 nav {
@@ -83,11 +83,11 @@ nav a {
 	padding: 15px 20px;
 }
 .desktop-navi:hover div.desktop-inner, .desktop-navi div:hover, .desktop-navi a:hover {
-	color: navi_color_hover_font !important;
+	color: var(--navi-color-hover-font) !important;
 	cursor: pointer;
 }
 .desktop-navi:hover {
-	background-color: navi_color_hover_bg !important;
+	background-color: var(--navi-color-hover-bg) !important;
 }
 .desktop-navi a:hover {
 	text-decoration: none;
@@ -104,11 +104,11 @@ nav a {
 }
 
 article {
-	background-color: article_color_bg;
+	background-color: var(--article-color-bg);
 	padding: 1em 0;
 }
 article a, article a:visited, article a:hover, article a:focus, #breadcrumbs a {
-	color: article_color_h;
+	color: var(--article-color-h);
 }
 article a:hover {
 	text-decoration: underline;
@@ -122,8 +122,8 @@ article img {
 	max-width: 100%;
 }
 article fieldset {
-	background-color: article_color_box;
-	border: 1px solid navi_color_bg;
+	background-color: var(--article-color-box);
+	border: 1px solid var(--navi-color-bg);
 	padding: 1em;
 }
 article legend {
@@ -132,7 +132,7 @@ article legend {
 	width: auto;
 }
 article .infobox {
-	border: 1px solid navi_color_bg;
+	border: 1px solid var(--navi-color-bg);
 	margin-bottom: 1em;
 	width: 100%;
 }
@@ -140,8 +140,8 @@ article .infobox-content {
 	padding: 0.5em;
 }
 article .infobox-header {
-	background-color: navi_color_bg;
-	color: navi_color_font;
+	background-color: var(--navi-color-bg);
+	color: var(--navi-color-font);
 	padding: 0.25em 0.75em;
 	text-align: center;
 }
@@ -155,23 +155,23 @@ article .infobox .right img {
 	padding-bottom: 5px;
 }
 article input:invalid, article textarea:invalid {
-	background-color: article_color_h10;
+	background-color: var(--article-color-h10);
 }
 
 footer {
-	background-color: footer_color_bg;
+	background-color: var(--footer-color-bg);
 	color: white;
 	padding: 10px 20px 9px 20px;
 }
 footer a {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 }
 footer a:hover {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 	text-decoration: underline;
 }
 .footerbox {
-	background-color: footer_color_box;
+	background-color: var(--footer-color-box);
 	float: left;
 	margin-right: 1em;
 	padding: 5px 10px;
@@ -209,6 +209,6 @@ figure figcaption {
     margin-bottom: 1rem;
 }
 .btn-primary {
-	background-color: article_color_h !important;
+	background-color: var(--article-color-h) !important;
 	border: none !important;
 }

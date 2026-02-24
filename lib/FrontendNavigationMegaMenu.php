@@ -138,4 +138,68 @@ class FrontendNavigationMegaMenu
 
         echo '</div>';
     }
+
+    /**
+     * Returns only the menu <li> items for Bootstrap 5 templates.
+     * Does not output the outer navbar wrapper, so the BS5 nav fragment
+     * can control the overall structure.
+     * @param int $cat_parent_id redaxo category ID, by default root categories are returned
+     */
+    public static function getMenuItemsBS5($cat_parent_id = 0): void
+    {
+        foreach (self::getCategories($cat_parent_id) as $category) {
+            // Check permissions if YCom is installed
+            $category_start_article = $category->getStartArticle();
+            if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($category_start_article)) {
+                $is_active = rex_article::getCurrentId() === $category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($category->getId(), rex_article::getCurrent()->getPathAsArray(), true));
+
+                if (0 === count($category->getChildren(true))) {
+                    // Without submenu
+                    echo '<li class="nav-item">';
+                    echo '<a class="nav-link' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '">' . $category->getName() . '</a>';
+                    echo '</li>';
+                } else {
+                    // With submenu (megamenu dropdown)
+                    echo '<li class="nav-item dropdown megamenu-li">';
+                    echo '<a class="nav-link dropdown-toggle' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '" id="dropdown' . $category->getId() . '" data-bs-toggle="dropdown" aria-expanded="false">' . $category->getName() . '</a>';
+
+                    echo '<div class="dropdown-menu megamenu" aria-labelledby="dropdown' . $category->getId() . '">';
+                    echo '<div class="row">';
+                    $lev1_icon = '';
+                    if ('' !== (string) $category->getValue('cat_d2u_helper_icon')) {
+                        $lev1_icon_media = rex_media::get((string) $category->getValue('cat_d2u_helper_icon'));
+                        if ($lev1_icon_media instanceof rex_media) {
+                            $lev1_icon = '<img src="' . $lev1_icon_media->getUrl() . '" alt="' . $category->getName() . '" title="' . $category->getName() . '" class="megamenu_lev1_icon"> ';
+                        }
+                    }
+                    echo '<div class="col-12"><h4><a href="' . $category->getUrl() . '" title="' . $category->getName() . '">' . $lev1_icon . $category->getName() . '</a></h4></div>';
+
+                    foreach ($category->getChildren(true) as $lev2) {
+                        $lev2_start_article = $lev2->getStartArticle();
+                        if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($lev2_start_article)) {
+                            echo '<div class="col-sm-6 col-lg-4 megamenu_itemlist">';
+                            $lev2_icon = '';
+                            if ('' !== $lev2->getValue('cat_d2u_helper_icon')) {
+                                $lev2_icon_media = rex_media::get((string) $lev2->getValue('cat_d2u_helper_icon'));
+                                if ($lev2_icon_media instanceof rex_media) {
+                                    $lev2_icon = '<img src="' . $lev2_icon_media->getUrl() . '" alt="' . $lev2->getName() . '" title="' . $lev2->getName() . '" class="megamenu_lev2_icon"> ';
+                                }
+                            }
+                            echo '<div class="megamenu_itemlist_header"><b><a href="' . $lev2->getUrl() . '" title="' . $lev2->getName() . '">' . $lev2_icon . $lev2->getName() . '</a></b></div>';
+                            foreach ($lev2->getChildren(true) as $lev3) {
+                                $lev3_start_article = $lev3->getStartArticle();
+                                if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($lev3_start_article)) {
+                                    echo '<a class="dropdown-item' . (rex_article::getCurrentId() === $lev3->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev3->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' active' : '') . '" href="' . $lev3->getUrl() . '" title="' . $lev3->getName() . '">' . $lev3->getName() . '</a>';
+                                }
+                            }
+                            echo '</div>';
+                        }
+                    }
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</li>';
+                }
+            }
+        }
+    }
 }

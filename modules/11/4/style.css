@@ -1,0 +1,27 @@
+.d2u_helper_module_11_1 button[type="submit"],
+.d2u_helper_module_11_1 .btn {
+	background-color: var(--article-color-h);
+	border: 1px solid var(--article-color-h);
+	color: var(--article-color-bg);
+}
+input:invalid, textarea:invalid {
+    background-color: #fff2f4;
+}
+input:focus, textarea:focus {
+    border-left: 5px solid var(--article-color-h);
+}
+.d2u_helper_module_11_1 input, .d2u_helper_module_11_1 select, .d2u_helper_module_11_1 textarea {
+    background-color: white;
+    border: 1px solid var(--article-color-h);
+    width: 100%;
+}
+.checkbox label, .form-check label {
+	padding-left: 2em;
+	text-indent: -2em;
+}
+input[type=checkbox] {
+	width: 1.75em;
+}
+.hide-validation {
+	display: none;
+}

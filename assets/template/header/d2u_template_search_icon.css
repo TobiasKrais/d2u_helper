@@ -15,7 +15,7 @@
 	height: 25px;
 }
 #search_icon svg {
-	color: navi_color_font;
+	color: var(--navi-color-font);
 	height: 25px;
 	margin: 0 0 3px 0;
 	width: 25px;
@@ -27,8 +27,8 @@
 	position: relative;
 }
 #fragment-search input {
-	border: 1px solid navi_color_font;
-	color: navi_color_font;
+	border: 1px solid var(--navi-color-font);
+	color: var(--navi-color-font);
 	font-size: 16px;
 	height: 25px;
 	padding: 2px 30px 2px 5px;

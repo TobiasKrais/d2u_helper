@@ -17,4 +17,6 @@ if ('box' === $footer_type) {
     echo $fragment->parse('d2u_template_footer_links_text.php');
 } elseif ('text' === $footer_type) {
     echo $fragment->parse('d2u_template_footer_text.php');
+} elseif (str_starts_with($footer_type, 'bs5_')) {
+    echo $fragment->parse('d2u_template_bs5_footer.php');
 }

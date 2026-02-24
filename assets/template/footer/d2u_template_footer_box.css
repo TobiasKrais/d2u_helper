@@ -1,17 +1,17 @@
 /* Footer Box CSS */
 footer {
-	background-color: footer_color_bg;
+	background-color: var(--footer-color-bg);
 	padding: 1em 1em 0 1em;
 }
 footer a {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 }
 footer a:hover {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 	text-decoration: underline;
 }
 .footerbox {
-	background-color: footer_color_box;
+	background-color: var(--footer-color-box);
 	margin-bottom: 1em;
 	padding: 5px 1em;
 }

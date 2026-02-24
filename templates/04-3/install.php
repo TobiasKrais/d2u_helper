@@ -16,3 +16,8 @@ if (!rex_addon::get('d2u_news')->isAvailable()) {
 
 // Add clang_icon as Metainfo
 rex_metainfo_add_field('translate:d2u_helper_icon', 'clang_icon', 1, '', rex_metainfo_table_manager::FIELD_REX_MEDIA_WIDGET, '', 'types="gif,jpg,png,webp,svg" preview="1"');
+
+// Enable news column for existing installations (one-time migration)
+if (!rex_addon::get('d2u_helper')->hasConfig('template_show_news_column')) {
+    rex_addon::get('d2u_helper')->setConfig('template_show_news_column', true);
+}

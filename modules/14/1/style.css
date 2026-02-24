@@ -14,7 +14,7 @@
 	border-radius: 0;
 }
 .search_it_yform_button {
-	background-color: article_color_h;
+	background-color: var(--article-color-h);
 	border: none;
 	color: white;
 	height: 50px;
@@ -29,20 +29,20 @@
 	padding-bottom: 2em;
 }
 .search_it-search input {
-	border: 1px solid article_color_h;
+	border: 1px solid var(--article-color-h);
 	height: 50px;
 	padding: .5rem;
 	width: 100%;
 }
 .search_it-button {
-	background-color: article_color_h;
+	background-color: var(--article-color-h);
 	border: none;
 	position: absolute;
 	right: 0;
 	top: 0;
 }
 .search_it-button svg {
-	color: article_color_bg;
+	color: var(--article-color-bg);
 	height: 50px;
 	margin: 0 5px;
 	width: 25px;
@@ -54,7 +54,7 @@
 	margin: 0.75em 0 0.75em 0;
 }
 .search_it-result {
-	background-color: article_color_box;
+	background-color: var(--article-color-box);
 	padding: 15px;
 }
 .search_it-results {
@@ -99,15 +99,15 @@
 	margin: 0.5em 0;	
 }
 .search_it-hits .pagination li {
-	background-color: article_color_box;
+	background-color: var(--article-color-box);
 	height: 2em;
 	margin: 0 0.5em 0.5em 0;
 	text-align: center;
 	width: 2.5em;
 }
 .search_it-hits .pagination li.current, .search_it-hits .pagination li:hover, .search_it-hits .pagination a:hover {
-	background-color: article_color_h;
-	color: article_color_bg;
+	background-color: var(--article-color-h);
+	color: var(--article-color-bg);
 	text-decoration: none;
 	transition: background-color 300ms ease-out;
 }
@@ -125,8 +125,8 @@
 
 /* Autocomplete */
 .ac_results {
-    background-color: article_color_box;
-    border: 1px solid article_color_h;
+    background-color: var(--article-color-box);
+    border: 1px solid var(--article-color-h);
     display: none;
     list-style: outside none none;
     margin: -1px 0 0;
@@ -156,13 +156,13 @@ body > .ac_results:last-child {
 }
 
 .ac_over {
-    background-color: article_color_h;
-    color: article_color_bg !important;
+    background-color: var(--article-color-h);
+    color: var(--article-color-bg) !important;
     cursor: pointer;
 }
 
 .ac_over .ac_match {
-    color: article_color_bg !important;
+    color: var(--article-color-bg) !important;
 }
 
 .ac_match {

@@ -72,7 +72,7 @@ header {
 }
 .slogan-text-row {
 	padding: 0.16em;
-	background-color: article_color_hdd;
+	background-color: var(--article-color-h)dd;
 }
 .slogan-text-row:after {
 	content: "\A";

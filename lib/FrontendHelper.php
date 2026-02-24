@@ -28,6 +28,70 @@ class FrontendHelper
     private static string $url_namespace = '';
 
     /**
+     * Generate CSS custom properties (:root block) from addon settings.
+     * @return string CSS :root block with custom properties
+     */
+    public static function generateCSSVariables()
+    {
+        $d2u_helper = rex_addon::get('d2u_helper');
+
+        $colors = ['navi_color_bg', 'navi_color_font', 'navi_color_hover_bg', 'navi_color_hover_font',
+            'subhead_color_bg', 'subhead_color_font',
+            'article_color_bg', 'article_color_h', 'article_color_box',
+            'footer_color_bg', 'footer_color_box', 'footer_color_font'];
+
+        // Light mode variables (:root)
+        $vars = [];
+        foreach ($colors as $color) {
+            if ($d2u_helper->hasConfig($color)) {
+                $css_var_name = str_replace('_', '-', $color);
+                $vars[] = '    --' . $css_var_name . ': ' . (string) $d2u_helper->getConfig($color) . ';';
+            }
+        }
+
+        // Generate 10% alpha variant of article_color_h (append hex alpha 1A ≈ 10%)
+        if ($d2u_helper->hasConfig('article_color_h')) {
+            $vars[] = '    --article-color-h10: ' . (string) $d2u_helper->getConfig('article_color_h') . '1A;';
+        }
+
+        // Generate 85% alpha variant of navi_color_font (append hex alpha D9 ≈ 85%)
+        if ($d2u_helper->hasConfig('navi_color_font')) {
+            $vars[] = '    --navi-color-fontD9: ' . (string) $d2u_helper->getConfig('navi_color_font') . 'D9;';
+        }
+
+        $css = '';
+        if (count($vars) > 0) {
+            $css .= ":root {\n" . implode("\n", $vars) . "\n}\n";
+        }
+
+        // Dark mode variables ([data-bs-theme="dark"])
+        $dark_vars = [];
+        foreach ($colors as $color) {
+            $dark_key = 'dark_' . $color;
+            if ($d2u_helper->hasConfig($dark_key) && '' !== (string) $d2u_helper->getConfig($dark_key)) {
+                $css_var_name = str_replace('_', '-', $color);
+                $dark_vars[] = '    --' . $css_var_name . ': ' . (string) $d2u_helper->getConfig($dark_key) . ';';
+            }
+        }
+
+        // Generate dark mode alpha variants
+        $dark_article_h = 'dark_article_color_h';
+        if ($d2u_helper->hasConfig($dark_article_h) && '' !== (string) $d2u_helper->getConfig($dark_article_h)) {
+            $dark_vars[] = '    --article-color-h10: ' . (string) $d2u_helper->getConfig($dark_article_h) . '1A;';
+        }
+        $dark_navi_font = 'dark_navi_color_font';
+        if ($d2u_helper->hasConfig($dark_navi_font) && '' !== (string) $d2u_helper->getConfig($dark_navi_font)) {
+            $dark_vars[] = '    --navi-color-fontD9: ' . (string) $d2u_helper->getConfig($dark_navi_font) . 'D9;';
+        }
+
+        if (count($dark_vars) > 0) {
+            $css .= "[data-bs-theme=\"dark\"] {\n" . implode("\n", $dark_vars) . "\n}\n";
+        }
+
+        return $css;
+    }
+
+    /**
      * Apply colors from settings.
      * @param string $css CSS string
      * @return string replaced CSS

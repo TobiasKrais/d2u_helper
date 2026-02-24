@@ -77,23 +77,23 @@ if ($show_cta_box) {
                 }
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_facebook_link', '')) {
-                echo '<li><span class="cta_box_toggler fa-icon fa-facebook footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_facebook') .'></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_facebook') .'</a></span></li>';
+                echo '<li><span class="cta_box_toggler fa-icon fa-facebook footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_facebook') .'"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_facebook') .'</a></span></li>';
             }
             // Google link
             if ('' !== (string) $d2u_helper->getConfig('footer_google_link', '')) {
-                echo '<li><span class="cta_box_toggler fa-icon fa-google footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_google') .'></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_google_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_google') .'</a></span></li>';
+                echo '<li><span class="cta_box_toggler fa-icon fa-google footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_google') .'"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_google_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_google') .'</a></span></li>';
             }
             // Instagram link
             if ('' !== (string) $d2u_helper->getConfig('footer_instagram_link', '')) {
-                echo '<li><span class="cta_box_toggler fa-icon fa-instagram footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_instagram') .'></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_instagram_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_instagram') .'</a></span></li>';
+                echo '<li><span class="cta_box_toggler fa-icon fa-instagram footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_instagram') .'"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_instagram_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_instagram') .'</a></span></li>';
             }
             // LinkedIn link
             if ('' !== (string) $d2u_helper->getConfig('footer_linkedin_link', '')) {
-                echo '<li><span class="cta_box_toggler fa-icon fa-linkedin footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_linkedin') .'></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_linkedin_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_linkedin') .'</a></span></li>';
+                echo '<li><span class="cta_box_toggler fa-icon fa-linkedin footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_linkedin') .'"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_linkedin_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_linkedin') .'</a></span></li>';
             }
             // Youtube link
             if ('' !== (string) $d2u_helper->getConfig('footer_youtube_link')) {
-                echo '<li><span class="cta_box_toggler fa-icon fa-youtube footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_youtube') .'></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_youtube_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_youtube') .'</a></span></li>';
+                echo '<li><span class="cta_box_toggler fa-icon fa-youtube footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_social_youtube') .'"></span><span class="cta_box_content"><a href="'. $d2u_helper->getConfig('footer_youtube_link') .'" target="_blank">'. Sprog\Wildcard::get('d2u_helper_social_youtube') .'</a></span></li>';
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_text_email', '')) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-envelope footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_module_form_email') .'"></span>'
@@ -105,15 +105,56 @@ if ($show_cta_box) {
 </div>
 
 <script>
-	// On change
-	$('.cta_box_toggler').on('click', function() {
-		if($('#cta_box_content').is(':hidden')) {
-			$('#cta_box_content').animate( { width: 'toggle' }, 1000);
-		}
-		else {
-			$('#cta_box_content').animate( { width: 'toggle' }, 1000);
-		}
-	});
+	// CTA box toggle functionality (works with and without jQuery)
+	(function() {
+		var togglers = document.querySelectorAll('.cta_box_toggler');
+		var ctaBoxContent = document.getElementById('cta_box_content');
+		if (!ctaBoxContent || togglers.length === 0) return;
+
+		togglers.forEach(function(toggler) {
+			toggler.addEventListener('click', function() {
+				if (ctaBoxContent.style.display === 'none' || ctaBoxContent.style.display === '') {
+					// Measure target width first with element visible at auto width
+					ctaBoxContent.style.overflow = 'hidden';
+					ctaBoxContent.style.width = 'auto';
+					ctaBoxContent.style.display = 'block';
+					var targetWidth = ctaBoxContent.scrollWidth;
+					ctaBoxContent.style.width = '0';
+					var start = null;
+					function expand(timestamp) {
+						if (!start) start = timestamp;
+						var progress = Math.min((timestamp - start) / 500, 1);
+						ctaBoxContent.style.width = (targetWidth * progress) + 'px';
+						if (progress < 1) {
+							requestAnimationFrame(expand);
+						} else {
+							ctaBoxContent.style.width = '';
+							ctaBoxContent.style.overflow = '';
+						}
+					}
+					requestAnimationFrame(expand);
+				} else {
+					var currentWidth = ctaBoxContent.offsetWidth;
+					ctaBoxContent.style.overflow = 'hidden';
+					ctaBoxContent.style.width = currentWidth + 'px';
+					var start2 = null;
+					function collapse(timestamp) {
+						if (!start2) start2 = timestamp;
+						var progress = Math.min((timestamp - start2) / 500, 1);
+						ctaBoxContent.style.width = (currentWidth * (1 - progress)) + 'px';
+						if (progress < 1) {
+							requestAnimationFrame(collapse);
+						} else {
+							ctaBoxContent.style.display = 'none';
+							ctaBoxContent.style.width = '';
+							ctaBoxContent.style.overflow = '';
+						}
+					}
+					requestAnimationFrame(collapse);
+				}
+			});
+		});
+	})();
 </script>
 <?php
 }

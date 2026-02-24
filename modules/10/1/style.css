@@ -1,5 +1,5 @@
 .module-box {
-	background: article_color_box;
+	background: var(--article-color-box);
 	padding: 0.5em;
 }
 .module-box-pic {

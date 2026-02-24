@@ -18,17 +18,17 @@
     position: unset;
 }
 #navbar .nav-item {
-	background: navi_color_bg;
+	background: var(--navi-color-bg);
 	font-size: 16px;
 }
 #navbar .nav-item:hover, #navbar .nav-item.dropdown.megamenu-li.show, #navbar .dropdown-item:active {
-	background: navi_color_hover_bg;
+	background: var(--navi-color-hover-bg);
 }
 #navbar .nav-item a {
-	color: navi_color_font;
+	color: var(--navi-color-font);
 }
 #navbar .nav-item:hover a, #navbar .nav-item.dropdown.megamenu-li.show, #navbar .show a {
-	color: navi_color_hover_font;
+	color: var(--navi-color-hover-font);
 }
 #navbar .nav-item.dropdown.megamenu-li.show .dropdown-menu.megamenu.show {
 	color: #333333;

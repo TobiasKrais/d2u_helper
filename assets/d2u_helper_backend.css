@@ -42,11 +42,36 @@ input[type=text].d2u_helper_color_text {
 }
 input[type=color].d2u_helper_color {
 	height: 36px;
-	margin-right: 10px;
 	width: 50px;
 }
 dd.d2u_helper_color_desc {
 	padding-top: 14px;
+}
+.d2u_helper_color_pair_table {
+    border-radius: 5px;
+	border-spacing: 4px 2px;
+}
+.d2u_helper_color_pair_table input[type=color].d2u_helper_color {
+	float: none;
+	height: 30px;
+	width: 40px;
+	margin: 0;
+    margin-right: 5px;
+}
+.d2u_helper_color_pair_table input[type=text].d2u_helper_color_text {
+	float: none;
+	width: 90px;
+	height: 30px;
+	padding: 2px 6px;
+	font-size: 0.9em;
+}
+.d2u_helper_color_pair_icon_cell {
+	text-align: center;
+	vertical-align: middle;
+	width: 2.5em;
+	min-width: 2.5em;
+	font-size: 1.2em;
+	padding: 2px 10px 2px 4px;
 }
 @media screen and (max-width: 991px) {
 	input[type=color].d2u_helper_color {
@@ -54,7 +79,6 @@ dd.d2u_helper_color_desc {
 	}
 	input[type=text].d2u_helper_color_text {
 		float: left;
-		margin-right: 10px;
 	}
 }
 @media screen and (min-width: 992px) {

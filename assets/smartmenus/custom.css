@@ -21,15 +21,15 @@
   padding: 13px 20px;
   /* make room for the toggle button (sub indicator) */
   padding-right: 58px;
-  color: navi_color_font;
+  color: var(--navi-color-font);
   font-size: 16px;
   font-weight: normal;
   line-height: 17px;
   text-decoration: none;
 }
 .sm-simple a.current {
-  background-color: navi_color_hover_bg;
-  color: navi_color_hover_font;
+  background-color: var(--navi-color-hover-bg);
+  color: var(--navi-color-hover-font);
 }
 .sm-simple a.disabled {
   color: #cccccc;
@@ -133,17 +133,17 @@
     padding: 15px 20px;
   }
   .sm-simple a, .sm-simple a:focus, .sm-simple a:active {
-    color: navi_color_font;
+    color: var(--navi-color-font);
   }
   .sm-simple a:hover, .sm-simple a.highlighted, .sm-simple a.current {
-    color: navi_color_hover_font;
+    color: var(--navi-color-hover-font);
   }
   .sm-simple a:hover, .sm-simple a:focus, .sm-simple a:active, .sm-simple a.highlighted, .sm-simple a.current {
-    background-color: navi_color_hover_bg;
+    background-color: var(--navi-color-hover-bg);
   }
   .sm-simple a.current {
-    background-color: navi_color_hover_bg;
-    color: navi_color_hover_font;
+    background-color: var(--navi-color-hover-bg);
+    color: var(--navi-color-hover-font);
   }
   .sm-simple a.disabled {
     background: #fff;
@@ -171,7 +171,7 @@
     border-left: 0;
   }
   .sm-simple ul {
-    background-color: navi_color_bg;
+    background-color: var(--navi-color-bg);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
   .sm-simple ul a {
@@ -274,7 +274,7 @@
   left: 15px;
   height: 3px;
   width: 24px;
-  background-color: navi_color_font;
+  background-color: var(--navi-color-font);
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
 }

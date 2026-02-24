@@ -1,0 +1,22 @@
+/* Footer links with free text BS5 CSS */
+footer {
+    background-color: var(--footer-color-bg);
+    color: var(--footer-color-font);
+    padding: 10px 20px 9px 20px;
+}
+footer a {
+    color: var(--footer-color-font);
+}
+footer a:hover {
+    color: var(--footer-color-font);
+    text-decoration: underline;
+}
+.footerbox {
+    background-color: var(--footer-color-box);
+    padding: 0.25em 0.5em;
+}
+@media screen and (max-width: 767px) {
+    footer h2 {
+        font-size: 1.5em;
+    }
+}

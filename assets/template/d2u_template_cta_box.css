@@ -8,7 +8,7 @@
 	z-index: 1002;
 }
 #cta_box_content, #cta_icon_box_content {
-	background-color: article_color_box;
+	background-color: var(--article-color-box);
 }
 .cta_box_content {
 	line-height: 50px;
@@ -31,8 +31,8 @@
 	white-space: nowrap;
 }
 .cta_box_toggler {
-	background-color: article_color_h;
-	color: article_color_bg;
+	background-color: var(--article-color-h);
+	color: var(--article-color-bg);
 	display: inline-block;
 	height: 50px;
 	margin: 0;
@@ -49,7 +49,7 @@
 	width: 4em;
 }
 #cta_box_content a, #cta_box_content a:visited, #cta_box_content a:hover {
-	color: article_color_h;
+	color: var(--article-color-h);
 }
 .fa-icon {
 	font-family: FontAwesome;

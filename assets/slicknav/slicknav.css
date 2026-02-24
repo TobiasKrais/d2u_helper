@@ -78,15 +78,15 @@
 .slicknav_menu {
   font-size: 16px;
   box-sizing: border-box;
-  background: navi_color_bg;
+  background: var(--navi-color-bg);
   padding: 5px; }
   .slicknav_menu * {
     box-sizing: border-box; }
   .slicknav_menu .slicknav_menutxt {
-    color: navi_color_font;
+    color: var(--navi-color-font);
     font-weight: bold;}
   .slicknav_menu .slicknav_icon-bar {
-    background-color: navi_color_bg; }
+    background-color: var(--navi-color-bg); }
 
 .slicknav_btn {
   margin: 5px 5px 6px;
@@ -94,10 +94,10 @@
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  background-color: navi_color_hover_font; }
+  background-color: var(--navi-color-hover-font); }
 
 .slicknav_nav {
-  color: navi_color_font;
+  color: var(--navi-color-font);
   margin: 0;
   padding: 0;
   font-size: 0.875em;
@@ -115,19 +115,19 @@
       -webkit-border-radius: 6px;
       -moz-border-radius: 6px;
       border-radius: 6px;
-      background: navi_color_hover_bg;
-      color: navi_color_hover_font; }
+      background: var(--navi-color-hover-bg);
+      color: var(--navi-color-hover-font); }
   .slicknav_nav a {
     padding: 5px 10px;
     margin: 2px 5px;
     text-decoration: none;
-    color: navi_color_font; }
+    color: var(--navi-color-font); }
     .slicknav_nav a:hover, .current a {
       -webkit-border-radius: 6px;
       -moz-border-radius: 6px;
       border-radius: 6px;
-      background: navi_color_hover_bg;
-      color: navi_color_hover_font !important; }
+      background: var(--navi-color-hover-bg);
+      color: var(--navi-color-hover-font) !important; }
   .slicknav_nav .slicknav_txtnode {
     margin-left: 15px; }
   .slicknav_nav .slicknav_item a {
@@ -138,7 +138,7 @@
     margin: 0; }
 
 .slicknav_brand {
-  color: navi_color_font;
+  color: var(--navi-color-font);
   font-size: 18px;
   line-height: 30px;
   padding: 7px 12px;

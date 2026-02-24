@@ -334,6 +334,8 @@ function sendD2UHelperCSS(): void
     // Include menu CSS
     if ('megamenu' === (string) $d2u_helper->getConfig('include_menu')) {
         $css .= \TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::getAutoCSS();
+    } elseif ('bs5' === (string) $d2u_helper->getConfig('include_menu')) {
+        $css .= \TobiasKrais\D2UHelper\FrontendNavigationBS5::getAutoCSS();
     } elseif ('multilevel' === (string) $d2u_helper->getConfig('include_menu')) {
         $css .= \TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getAutoCSS();
     } elseif ('slicknav' === (string) $d2u_helper->getConfig('include_menu')) {
@@ -377,6 +379,10 @@ function sendD2UHelperJS($position = 'head'): void
         if ('megamenu' === (string) $d2u_helper->getConfig('include_menu')) {
             $js .= \TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::getAutoJS();
         }
+        // BS5 menu JS
+        if ('bs5' === (string) $d2u_helper->getConfig('include_menu')) {
+            $js .= \TobiasKrais\D2UHelper\FrontendNavigationBS5::getAutoJS();
+        }
     }
     echo $js;
     exit;
@@ -411,6 +417,10 @@ function sendD2UHelperTemplateCSS($d2u_template_id = ''): void
 {
     header('Content-type: text/css');
     $css = '';
+
+    // Prepend CSS custom properties (:root block)
+    $css .= FrontendHelper::generateCSSVariables();
+
     // Template CSS
     if ('' !== $d2u_template_id) {
         $template_manager = new \TobiasKrais\D2UHelper\TemplateManager(\TobiasKrais\D2UHelper\TemplateManager::getD2UHelperTemplates());

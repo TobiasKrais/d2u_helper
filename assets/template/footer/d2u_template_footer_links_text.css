@@ -1,18 +1,18 @@
 /* Footer links with free text CSS */
 footer {
-	background-color: footer_color_bg;
-	color: footer_color_font;
+	background-color: var(--footer-color-bg);
+	color: var(--footer-color-font);
 	padding: 10px 20px 9px 20px;
 }
 footer a {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 }
 footer a:hover {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 	text-decoration: underline;
 }
 .footerbox {
-	background-color: footer_color_box;
+	background-color: var(--footer-color-box);
 	float: left;
 	margin: 0 1em 1em 0;
 	padding: 0.25em 0.5em 0.25em 0;

@@ -1,0 +1,27 @@
+/* Footer links logo address BS5 CSS */
+footer {
+    background-color: var(--footer-color-bg);
+    color: var(--footer-color-font);
+    padding: 1em;
+}
+footer a {
+    color: var(--footer-color-font);
+}
+footer a:hover {
+    color: var(--footer-color-font);
+    text-decoration: underline;
+}
+footer p {
+    margin-bottom: 5px;
+}
+.footer-title {
+    border-bottom: 1px solid var(--footer-color-box);
+    margin-bottom: 10px;
+}
+#logo-footer {
+    padding-bottom: 1em;
+}
+.footer-icon {
+    display: inline-block;
+    width: 1.5em;
+}

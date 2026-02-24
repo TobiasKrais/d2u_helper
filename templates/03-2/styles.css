@@ -29,11 +29,11 @@ header {
 }
 
 article {
-	background-color: article_color_bg;
+	background-color: var(--article-color-bg);
 	padding: 1em 0;
 }
 article a, article a:visited, article a:hover, article a:focus, #breadcrumbs a {
-	color: article_color_h;
+	color: var(--article-color-h);
 }
 article a:hover {
 	text-decoration: underline;

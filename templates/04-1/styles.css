@@ -33,7 +33,7 @@ img {
 	width: 100%;
 }
 #slogan-top {
-	color: article_color_h;
+	color: var(--article-color-h);
 	float: left;
 	font-weight: bold;
 	font-size: 1.6em;
@@ -51,7 +51,7 @@ img {
 }
 /* Navi */
 nav {
-	background-color: navi_color_bg;
+	background-color: var(--navi-color-bg);
 	font-size: 1.15em;
 	padding: 5px 0;
 	position: sticky;
@@ -68,27 +68,27 @@ nav {
 	padding: 1em 1.75em 1em 0;
 }
 .desktop-navi:hover div.desktop-inner, .desktop-navi div:hover, .desktop-navi a:hover {
-	color: navi_color_hover_font !important;
+	color: var(--navi-color-hover-font) !important;
 	cursor: pointer;
 }
 .desktop-navi:hover {
-	background-color: navi_color_hover_bg !important;
+	background-color: var(--navi-color-hover-bg) !important;
 }
 .desktop-navi.current, .dl-menu li.current, .dl-menu li:hover {
 	background: rgba(255, 255, 255, 0.25);
 }
 .desktop-navi.current, .desktop-navi:hover {
-	border-bottom-color: navi_color_hover_bg !important;
+	border-bottom-color: var(--navi-color-hover-bg) !important;
 }
 .dl-menuwrapper .dl-menu.dl-menuopen, .dl-menuwrapper li .dl-submenu {
-	background-color: navi_color_fontD9;
+	background-color: var(--navi-color-fontD9);
 	font-size: 1em;
 }
 .dl-menuwrapper li a, .dl-menuwrapper div a, ul.dl-menu a, .dl-menuwrapper li.dl-back::after, .dl-subview .dl-subviewopen .dl-submenu li a {
-	color: navi_color_bg !important;
+	color: var(--navi-color-bg) !important;
 }
 .dl-menu li:hover a, .dl-subviewopen .dl-submenu li:hover a {
-	color: navi_color_hover_font !important;
+	color: var(--navi-color-hover-font) !important;
 }
 #logo {
 	margin: 1em 0;
@@ -98,19 +98,19 @@ nav {
 
 /* Subhead and Breadcrumbs */
 #breadcrumbs {
-	background-color: subhead_color_bg;
+	background-color: var(--subhead-color-bg);
 }
 #breadcrumbs-inner {
 	padding: 15px 0;
 }
 .subhead a {
-	color: subhead_color_font;
+	color: var(--subhead-color-font);
 }
 .subhead a:hover {
 	text-decoration: underline;
 }
 h1.subhead {
-	color: subhead_color_font;
+	color: var(--subhead-color-font);
 	font-size: 2em;
 	font-weight: bold;
 	margin-bottom: 0;
@@ -122,7 +122,7 @@ h1.subhead {
 	}
 }
 .subhead, .subhead a, .subhead a:hover {
-	color: subhead_color_font;
+	color: var(--subhead-color-font);
 }
 .fa-icon {
 	font-family: FontAwesome;
@@ -145,17 +145,17 @@ h1.subhead {
 }
 
 article {
-	background-color: article_color_bg;
+	background-color: var(--article-color-bg);
 	padding: 1em 0 2em 0;
 }
 article a, article a:visited, article a:hover {
-	color: article_color_h;
+	color: var(--article-color-h);
 }
 article a:hover {
 	text-decoration: underline;
 }
 article h1, article h2, article h3, article h4, article h5, article h6 {
-	color: article_color_h;
+	color: var(--article-color-h);
 	margin-top: 0;
 }
 article h1, article h2 {
@@ -180,10 +180,10 @@ article .form-group {
 	margin-bottom: 0.5rem;
 }
 article strong, article b {
-	color: article_color_h;
+	color: var(--article-color-h);
 }
 article input:invalid, article textarea:invalid {
-	background-color: article_color_h10;
+	background-color: var(--article-color-h10);
 }
 
 .footer {
@@ -191,7 +191,7 @@ article input:invalid, article textarea:invalid {
 	position: relative;
 }
 #jump-top {
-	background-color: footer_color_box;
+	background-color: var(--footer-color-box);
 	border-radius: 50%;
 	font-family: FontAwesome;
 	padding: 8px 15px;
@@ -207,7 +207,7 @@ article input:invalid, article textarea:invalid {
 }
 
 .btn-primary {
-	background-color: article_color_h !important;
+	background-color: var(--article-color-h) !important;
 	border: none !important;
 }
 
@@ -216,11 +216,11 @@ a .box b {
 	color: white;
 }
 .box {
-	background-color: article_color_h;
+	background-color: var(--article-color-h);
 	text-align: center;
 }
 .box div {
-	background-color: article_color_hB3;
+	background-color: var(--article-color-h)B3;
 	bottom: 0;
 	color: white;
 	font-weight: bold;
@@ -240,7 +240,7 @@ a .box b {
 }
 .nav, .nav-pills {
 	padding-top: 1em;
-	border-bottom: 1px solid navi_color_hover_font;
+	border-bottom: 1px solid var(--navi-color-hover-font);
 }
 .comparison-header, unit {
 	padding: 0 15px;
@@ -249,10 +249,10 @@ a .box b {
     background-color: transparent;
 }
 .subhead-nav .nav-pills .nav-link.active, .subhead-nav .nav-pills .show > .nav-link {
-    color: subhead_color_font;
+    color: var(--subhead-color-font);
 }
 .download-list li {
-	background-color: navi_color_hover_font !important;
+	background-color: var(--navi-color-hover-font) !important;
 }
 .download-list li .file::before {
 	color: white !important;
@@ -272,9 +272,9 @@ a .box b {
 	z-index: 1;
 }
 #cart_info {
-	background-color: subhead_color_font;
+	background-color: var(--subhead-color-font);
 	border-radius: 20px;
-	color: subhead_color_bg;
+	color: var(--subhead-color-bg);
 	font-size: 0.8em;
 	height: 20px;
 	position: absolute;

@@ -1,9 +1,4 @@
 <?php
-// Get placeholder wildcard tags
-$sprog = rex_addon::get("sprog");
-$tag_open = $sprog->getConfig('wildcard_open_tag');
-$tag_close = $sprog->getConfig('wildcard_close_tag');
-
 // SEO stuff
 $current_domain = \rex::getServer();
 if (rex_addon::get('yrewrite')->isAvailable()) {

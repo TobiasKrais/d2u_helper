@@ -33,17 +33,15 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 
         echo $yform->getForm();
 
-        if (rex_plugin::get('search_it', 'autocomplete')->isAvailable()) {
-            echo '<script>'. PHP_EOL;
-            echo 'jQuery(document).ready(function() {'. PHP_EOL;
-            echo 'jQuery(function() {'. PHP_EOL;
-            echo 'jQuery(\'input[name="search"]\').suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),'. PHP_EOL;
-            echo '{ onSelect: function(event, ui) { $("#formular").submit(); return false; }'. PHP_EOL;
-            echo '});'. PHP_EOL;
-            echo '});'. PHP_EOL;
-            echo '});'. PHP_EOL;
-            echo '</script>'. PHP_EOL;
-        }
+        echo '<script>'. PHP_EOL;
+        echo 'jQuery(document).ready(function() {'. PHP_EOL;
+        echo 'jQuery(function() {'. PHP_EOL;
+        echo 'jQuery(\'input[name="search"]\').suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),'. PHP_EOL;
+        echo '{ onSelect: function(event, ui) { $("#formular").submit(); return false; }'. PHP_EOL;
+        echo '});'. PHP_EOL;
+        echo '});'. PHP_EOL;
+        echo '});'. PHP_EOL;
+        echo '</script>'. PHP_EOL;
     } else {
 ?>
 		<form class="search_it-form" id="search_it-form1" action="<?= rex_getUrl() ?>#search-results" method="get">

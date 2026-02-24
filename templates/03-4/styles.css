@@ -1,0 +1,91 @@
+html {
+  scroll-behavior: smooth;
+}
+body, input {
+	font-family: 'Arial', sans-serif !important;
+	color: #3c3c3c;
+}
+
+body {
+	-moz-hyphens: auto;
+	-o-hyphens: auto;
+	-ms-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+a, a:link, a:visited, a:hover, a:focus
+	{text-decoration: none;}
+img {
+	border: 0px;
+	height: auto;
+	max-width: 100%;
+}
+.abstand {
+	margin: 1em 0;
+}
+
+header {
+	padding: 0;
+}
+
+article {
+	background-color: var(--article-color-bg);
+	padding: 1em 0;
+}
+article a, article a:visited, article a:hover, article a:focus, #breadcrumbs a {
+	color: var(--article-color-h);
+}
+article a:hover {
+	text-decoration: underline;
+}
+article h1     {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+article h2     { font-size: 1.3rem; }
+article h3     { font-size: 1.25rem;}
+article h4, h5 { font-size: 1.1rem;}
+article h6     { font-size: 1rem;}
+article img {
+	max-width: 100%;
+}
+
+/* D2U Immo Addon */
+.nolink {
+	color: #3c3c3c;
+}
+
+.energy-scale-container {
+	height: 35px;
+	margin-top: 10px;
+	position: relative;
+}
+.energy-scale {
+	min-width: 400px;
+}
+
+.reserved {
+	position: relative;
+}
+.reserved span {
+    background-color: white;
+    bottom: 0px;
+    color: red;
+	font-weight: bold;
+    left: 0px;
+    opacity: 0.75;
+    padding: 0.5em 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.expose .reserved span {
+	padding-bottom: 1.5em;
+}
+
+.col-6 ul {
+	margin-bottom: 0;
+}
+#immo_advertising {
+	min-height: 600px;
+}

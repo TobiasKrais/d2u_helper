@@ -23,17 +23,15 @@ if (rex_addon::get('search_it')->isAvailable() && $article_id_search > 0 && $art
 
         echo $yform->getForm();
 
-        if (rex_plugin::get('search_it', 'autocomplete')->isAvailable()) {
-            echo '<script>';
-            echo 'jQuery(document).ready(function() {';
-            echo 'jQuery(function() {';
-            echo 'jQuery(\'input[name="search"]\').suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),';
-            echo '{ onSelect: function(event, ui) { $("#formular").submit(); return false; }';
-            echo '});';
-            echo '});';
-            echo '});';
-            echo '</script>';
-        }
+        echo '<script>';
+        echo 'jQuery(document).ready(function() {';
+        echo 'jQuery(function() {';
+        echo 'jQuery(\'input[name="search"]\').suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),';
+        echo '{ onSelect: function(event, ui) { $("#formular").submit(); return false; }';
+        echo '});';
+        echo '});';
+        echo '});';
+        echo '</script>';
 
         echo '</div>';
     } else {

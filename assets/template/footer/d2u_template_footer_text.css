@@ -1,4 +1,4 @@
 /* Footer free text CSS */
 .footer-text {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 }

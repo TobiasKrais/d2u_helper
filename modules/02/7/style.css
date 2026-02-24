@@ -1,0 +1,24 @@
+@font-face{
+	font-family:'FontAwesome';
+	font-display: swap;
+	src:url("./assets/addons/be_style/webfonts/fa-regular-400.woff2") format("woff2"),
+		url("./assets/addons/be_style/webfonts/fa-regular-400.ttf") format("truetype")
+}
+.fa-icon {
+	font-family: FontAwesome;
+}
+.h_toggle {
+	float: right;
+	font-size: 1rem;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.icon_down::before {
+	content: "\f078";
+}
+.icon_right::before {
+	content: "\f054";
+}
+.toggle_spacer {
+	margin-bottom: 2em;
+}

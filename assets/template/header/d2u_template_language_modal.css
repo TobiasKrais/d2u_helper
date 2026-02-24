@@ -24,7 +24,7 @@
 #lang_chooser_button {
 	background: transparent;
 	border: none;
-	color: navi_color_font;
+	color: var(--navi-color-font);
 	float: right;
 	font-size: 16px;
 	min-width: 90px;
@@ -32,7 +32,7 @@
 	padding-top: 10px;
 }
 #lang_chooser_button svg, #lang_chooser_button img {
-	color: navi_color_font;
+	color: var(--navi-color-font);
 	width: 25px;
 	height: 25px;
 }

@@ -3,5 +3,5 @@
 	padding-bottom: 1em;
 }
 .line {
-    border-top: 1px article_color_h solid;
+    border-top: 1px var(--article-color-h) solid;
 }

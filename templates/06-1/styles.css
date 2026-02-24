@@ -23,7 +23,7 @@ html {
 	color: #4e4e4e;
 }
 #paper-sheet {
-	background-color: article_color_bg;
+	background-color: var(--article-color-bg);
 	box-shadow: 5px 5px 10px #4e4e4e;
 	margin: 15px 0;
 	padding: 0.5em 1.5em;
@@ -56,17 +56,17 @@ header {
 	display: none !important;
 }
 #main-menu a {
-	background-color: navi_color_bg;
+	background-color: var(--navi-color-bg);
 }
 #main-menu .current > a, #main-menu a:hover {
-	background-color: navi_color_hover_bg;
+	background-color: var(--navi-color-hover-bg);
 }
 #main-menu .main {
 	float: none !important;
 }
 
 article a, article a:hover, article a:focus, article a:visited, footer a, footer a:hover, footer a:focus, footer a:visited {
-	color: footer_color_font;
+	color: var(--footer-color-font);
 	text-decoration: underline;
 }
 article .gallery-pic-box {
@@ -90,15 +90,15 @@ article h5, article h5 {
 }
 article .btn-primary, article .btn-primary:hover {
 	border: none;
-	background-color: navi_color_hover_bg;
-	color: navi_color_hover_font;
+	background-color: var(--navi-color-hover-bg);
+	color: var(--navi-color-hover-font);
 }
 article input:invalid, article textarea:invalid {
-	background-color: article_color_h10;
+	background-color: var(--article-color-h10);
 }
 
 footer {
-	border-top: 1px solid footer_color_font;
+	border-top: 1px solid var(--footer-color-font);
 	font-size: 0.75em;
 	margin-top: 2em;
 	padding: 1em 0;

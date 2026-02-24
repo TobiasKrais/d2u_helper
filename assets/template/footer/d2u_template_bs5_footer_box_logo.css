@@ -1,0 +1,20 @@
+/* Footer Box + Logo BS5 CSS */
+footer {
+    background-color: var(--footer-color-bg);
+    padding: 1em;
+}
+footer a {
+    color: var(--footer-color-font);
+}
+footer a:hover {
+    color: var(--footer-color-font);
+    text-decoration: underline;
+}
+.footerbox {
+    background-color: var(--footer-color-box);
+    margin-bottom: 1em;
+    padding: 5px 1em;
+}
+#logo-footer {
+    max-width: 100%;
+}

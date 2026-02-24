@@ -1,0 +1,276 @@
+body, input {
+	font-family: 'Arial', sans-serif !important;
+	color: #3c3c3c;
+}
+
+@font-face{
+	font-family:'FontAwesome';
+	font-display: swap;
+	src:url("./assets/addons/be_style/webfonts/fa-regular-400.woff2") format("woff2"),
+		url("./assets/addons/be_style/webfonts/fa-regular-400.ttf") format("truetype")
+}
+@media print {
+	body .container {
+		margin-left: 0px;
+		margin-right: 0px;
+		width: 180mm !important;
+		max-width: 180mm !important;
+	}
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+	-moz-hyphens: auto;
+	-o-hyphens: auto;
+	-ms-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+a, a:link, a:visited, a:hover, a:focus
+	{text-decoration: none;}
+img {
+	border: 0px;
+	height: auto;
+	max-width: 100%;
+}
+.abstand {
+	margin: 1em 0;
+}
+
+header {
+	padding: 0;
+}
+
+.subhead {
+	background-color: var(--subhead-color-bg);
+}
+.subhead a {
+	color: var(--subhead-color-font);
+}
+.subhead a:hover {
+	text-decoration: underline;
+}
+h1.subhead {
+	padding: 0.5em 0;
+}
+#breadcrumbs.subhead, #breadcrumbs.subhead a {
+	color: var(--subhead-color-font);
+}
+.fa-home {
+	font-family: FontAwesome;
+}
+.fa-home:before {
+	content: "\f015";
+}
+
+/* Navigation */
+nav {
+	background-color: color-mix(in srgb, var(--navi-color-bg) 85%, transparent);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	position: sticky;
+	top: 0;
+	z-index: 1001;
+}
+nav a {
+	text-decoration: none;
+}
+nav .navbar {
+	padding: 0;
+}
+nav .navbar-nav .nav-link {
+	color: var(--navi-color-font);
+	padding: 15px 20px;
+	text-decoration: none;
+}
+nav .navbar-nav .nav-link:hover,
+nav .navbar-nav .nav-link:focus {
+	color: var(--navi-color-hover-font) !important;
+	background-color: var(--navi-color-hover-bg);
+	cursor: pointer;
+}
+nav .navbar-nav .nav-link.active {
+	background: rgba(255, 255, 255, 0.25);
+}
+nav .navbar-toggler {
+	border: none;
+	color: var(--navi-color-font);
+	padding: 0.5rem;
+}
+nav .navbar-toggler:focus {
+	box-shadow: none;
+}
+nav .navbar-toggler-icon {
+	background: none;
+	background-color: var(--navi-color-font);
+	-webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center / contain;
+	mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center / contain;
+}
+nav .dropdown-menu {
+	background-color: var(--navi-color-font);
+	border: none;
+	border-radius: 0;
+}
+nav .dropdown-menu .dropdown-item {
+	color: var(--navi-color-hover-font);
+	padding: 0.5rem 1.25rem;
+}
+nav .dropdown-menu .dropdown-item:hover,
+nav .dropdown-menu .dropdown-item:focus,
+nav .dropdown-menu .dropdown-item.active {
+	color: var(--navi-color-font) !important;
+	background-color: var(--navi-color-bg);
+}
+@media screen and (max-width: 991px) {
+	nav .navbar-nav .nav-link:hover,
+	nav .navbar-nav .nav-link:focus,
+	nav .navbar-nav .nav-link.active {
+		background-color: var(--navi-color-hover-bg);
+		color: var(--navi-color-hover-font) !important;
+	}
+}
+
+article {
+	background-color: var(--article-color-bg);
+	padding: 1em 0;
+}
+article a, article a:visited, article a:hover, article a:focus, #breadcrumbs a {
+	color: var(--article-color-h);
+}
+article a:hover {
+	text-decoration: underline;
+}
+article h1     { font-size: 1.5rem; }
+article h2     { font-size: 1.3rem; }
+article h3     { font-size: 1.25rem;}
+article h4, h5 { font-size: 1.1rem;}
+article h6     { font-size: 1rem;}
+article img {
+	max-width: 100%;
+}
+article fieldset {
+	background-color: var(--article-color-box);
+	border: 1px solid var(--navi-color-bg);
+	padding: 1em;
+}
+article legend {
+	font-size: 1.25 rem;
+	font-weight: bold;
+	width: auto;
+}
+article .infobox {
+	border: 1px solid var(--navi-color-bg);
+	margin-bottom: 1em;
+	width: 100%;
+}
+article .infobox-content {
+	padding: 0.5em;
+}
+article .infobox-header {
+	background-color: var(--navi-color-bg);
+	color: var(--navi-color-font);
+	padding: 0.25em 0.75em;
+	text-align: center;
+}
+article .infobox .contactpic {
+	padding-bottom: 0.75em;
+}
+article .infobox .right {
+	float: right;
+}
+article .infobox .right img {
+	padding-bottom: 5px;
+}
+article input:invalid, article textarea:invalid {
+	background-color: var(--article-color-h10);
+}
+
+/* Footer */
+.footer {
+	padding-top: 1.5em;
+	position: relative;
+}
+#jump-top {
+	background-color: var(--footer-color-box);
+	border-radius: 50%;
+	font-family: FontAwesome;
+	padding: 8px 15px;
+	position: absolute;
+	right: 15px;
+	top: -30px;
+	color: var(--footer-color-font);
+	text-decoration: none;
+}
+#jump-top:hover {
+	text-decoration: none;
+	opacity: 0.85;
+}
+#jump-top:before {
+	content: "\f106";
+}
+
+figure {
+  float: left;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+figure img {
+  border-radius: 3px 3px 0 0;
+}
+figure figcaption {
+  padding: 2px 4px 2px 4px;
+  background-color: #636363;
+  color: #cccccc;
+  border-radius: 0 0 3px 3px;
+}
+
+/* YForm */
+.input-group-addon {
+	min-width: 150px;
+	padding: 0px !important;
+}
+.input-group-addon img {
+	height: 100%;
+}
+.formcheckbox {
+    margin-bottom: 1rem;
+}
+.btn-primary {
+	background-color: var(--article-color-h) !important;
+	border: none !important;
+}
+
+/* Dark mode logo */
+.logo-light { display: inline; }
+.logo-dark { display: none; }
+[data-bs-theme="dark"] .logo-light { display: none; }
+[data-bs-theme="dark"] .logo-dark { display: inline; }
+
+/* Dark mode toggle */
+.btn-darkmode-toggle {
+	background: none;
+	border: none;
+	color: var(--navi-color-font);
+	cursor: pointer;
+	font-size: 1.25rem;
+	line-height: 1;
+}
+.btn-darkmode-toggle:hover {
+	opacity: 0.75;
+}
+.darkmode-icon-dark { display: none; }
+[data-bs-theme="dark"] .darkmode-icon-light { display: none; }
+[data-bs-theme="dark"] .darkmode-icon-dark { display: inline; }
+
+/* Print styles */
+@media print {
+	nav, .footer, #jump-top, .d-print-none {
+		display: none !important;
+	}
+}
+
+/* Smooth color transitions for dark mode */
+body, nav, article, footer, #breadcrumbs {
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
