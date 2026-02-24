@@ -38,6 +38,7 @@
 			<li>BS5 Header Slider Templates zusammengeführt: Die drei BS5-Varianten 04-4, 04-5 und 04-6 wurden in ein einziges Template 04-4 zusammengeführt. Features (Slogan, konfigurierbare Nav-Position, News-Spalte) werden automatisch erkannt und bei Bedarf angezeigt.</li>
 			<li>Templateverwaltung: Filter (Alle / BS4 kompatibel / BS5 kompatibel) oberhalb der Templateliste hinzugefügt.</li>
 			<li>Bugfix Templateverwaltung: Nach dem Aufheben einer Templatepaarung wird das entkoppelte Template jetzt korrekt im Zuordnungs-Dropdown angezeigt.</li>
+			<li>Neues Fragment d2u_template_darkmode.php: Dark Mode JavaScript (Flash-Prevention und Toggle-Logik) aus allen 8 BS5-Templates in ein zentrales Fragment mit Parameter "position" (head/body) ausgelagert.</li>
 			<li>Bootstrap 4 Module und Templates werden in Version 3 entfernt. Bitte rechtzeitig auf die BS5 Varianten wechseln.</li>
 		</ul>
 		<p>2.0.4</p>

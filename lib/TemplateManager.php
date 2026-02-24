@@ -166,6 +166,9 @@ class TemplateManager
         $d2u_templates[] = new Template('02-2',
             'Header Pic Template (BS5)',
             1);
+        $d2u_templates[] = new Template('02-3',
+            'Header Pic Template 2026 (BS5)',
+            1);
         $d2u_templates[] = new Template('03-3',
             'Immo Template - 2 Columns (BS5)',
             1);
@@ -174,16 +177,13 @@ class TemplateManager
             1);
         $d2u_templates[] = new Template('04-4',
             'Header Slider Template (BS5)',
-            2);
+            1);
         $d2u_templates[] = new Template('05-2',
             'Double Logo Template (BS5)',
             1);
         $d2u_templates[] = new Template('06-2',
             'Paper Sheet Template (BS5)',
             1);
-        $d2u_templates[] = new Template('02-3',
-            'Header Pic Template 2026 (BS5)',
-            2);
         return $d2u_templates;
     }
 
@@ -304,6 +304,11 @@ class TemplateManager
                 }
             }
         }
+
+        // Sort templates by D2U ID
+        usort($this->d2u_templates, static function (Template $a, Template $b): int {
+            return strnatcmp($a->getD2UId(), $b->getD2UId());
+        });
 
         foreach ($this->d2u_templates as $template) {
             $compat = 'both';

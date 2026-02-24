@@ -224,6 +224,7 @@ Reusable template parts in `fragments/`:
 | `d2u_template_footer.php` | Footer (delegates to selected footer type) |
 | `d2u_template_footer_*.php` | Footer variants (box, box_logo, links_address, etc.) |
 | `d2u_template_cta_box.php` | Call-to-action box |
+| `d2u_template_darkmode.php` | BS5 dark mode JS: `position=head` outputs flash-prevention script (localStorage + prefers-color-scheme detection), `position=body` outputs toggle click handler + system preference listener. Used by all BS5 templates except 03-4 (Schaufenster). |
 | `d2u_template_language_*.php` | BS4 language selector (icon + modal, uses `data-toggle`/`data-dismiss`) |
 | `d2u_template_search_icon.php` | Search icon integration |
 

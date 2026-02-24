@@ -25,17 +25,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
         // Bootstrap 5 CSS (no jQuery needed)
         echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap5/css/bootstrap.min.css') .'" />';
     ?>
-	<script>
-		// Apply dark mode preference before page renders to prevent flash
-		(function() {
-			var stored = localStorage.getItem('d2u_theme');
-			if (stored) {
-				document.documentElement.setAttribute('data-bs-theme', stored);
-			} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				document.documentElement.setAttribute('data-bs-theme', 'dark');
-			}
-		})();
-	</script>
+	<?php $fragment = new rex_fragment(); $fragment->setVar('position', 'head'); echo $fragment->parse('d2u_template_darkmode.php'); ?>
 </head>
 
 <body>
@@ -193,26 +183,6 @@ $d2u_helper = rex_addon::get('d2u_helper');
 	</article>
 	<?= $fragment->parse('d2u_template_cta_box.php') ?>
 	<script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
-	<script>
-		// Dark mode toggle functionality
-		(function() {
-			var toggle = document.getElementById('darkModeToggle');
-			if (!toggle) return;
-
-			toggle.addEventListener('click', function() {
-				var current = document.documentElement.getAttribute('data-bs-theme');
-				var next = current === 'dark' ? 'light' : 'dark';
-				document.documentElement.setAttribute('data-bs-theme', next);
-				localStorage.setItem('d2u_theme', next);
-			});
-
-			// Listen for system preference changes when no manual override
-			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-				if (!localStorage.getItem('d2u_theme')) {
-					document.documentElement.setAttribute('data-bs-theme', e.matches ? 'dark' : 'light');
-				}
-			});
-		})();
-	</script>
+	<?php $fragment = new rex_fragment(); $fragment->setVar('position', 'body'); echo $fragment->parse('d2u_template_darkmode.php'); ?>
 </body>
 </html>
