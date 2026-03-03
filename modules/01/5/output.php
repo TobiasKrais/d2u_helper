@@ -39,7 +39,7 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
 
 ?>
 <div class="<?= $container_classes ?> abstand">
-	<div class="<?= $same_height ?>module-box wysiwyg_content">
+	<div class="<?= $same_height ?> wysiwyg_content">
 		<div class="row">
 			<?php
                 // Picture

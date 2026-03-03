@@ -5,6 +5,7 @@ namespace TobiasKrais\D2UHelper;
 use rex_addon;
 use rex_addon_interface;
 use rex_i18n;
+use rex_request;
 use rex_select;
 use rex_sql;
 use rex_url;
@@ -309,10 +310,16 @@ class ModuleManager
         $modules[] = new Module('15-2',
             'Kategorie mit Liste der Unterkategorien (BS5)',
             1);
+        $modules[] = new Module('16-1',
+            'Link als Button (BS4)',
+            1);
+        $modules[] = new Module('16-2',
+            'Link als Button (BS5)',
+            1);
         // 20-x reserved for D2U Addresss
         // 21-x reserved for D2U History
         // 22-x reserved for D2U Staff
-        // 23-x reserved for D2U Jobs
+        // 23-x reserved for Jobs
         // 24-x reserved for D2U Linkbox
         // 25-x reserved for D2U Partner
         // 26-x reserved for D2U Courses
@@ -380,21 +387,32 @@ class ModuleManager
      */
     public function showManagerList(): void
     {
+        // Persist filter selection in session (shared between modules and templates)
+        $filter_from_request = rex_request('d2u_filter', 'string', '');
+        if ('' !== $filter_from_request && in_array($filter_from_request, ['all', 'bs4', 'bs5'], true)) {
+            rex_request::setSession('d2u_manager_filter', $filter_from_request);
+        }
+        $active_filter = is_string(rex_session('d2u_manager_filter')) ? (string) rex_session('d2u_manager_filter') : 'all';
+        if (!in_array($active_filter, ['all', 'bs4', 'bs5'], true)) {
+            $active_filter = 'all';
+        }
+
         $url_params = [];
         // Compatibility for MultiNewsletter installation site
         if ('' !== filter_input(INPUT_GET, 'chapter')) {
             $url_params['chapter'] = (string) filter_input(INPUT_GET, 'chapter');
         }
         echo '<form action="'. rex_url::currentBackendPage($url_params) .'" method="post">';
+        echo '<input type="hidden" name="d2u_filter" id="d2u-module-filter" value="'. rex_escape($active_filter) .'">';
         echo '<section class="rex-page-section">';
         echo '<div class="panel panel-default">';
         echo '<header class="panel-heading"><div class="panel-title">'. rex_i18n::msg('d2u_helper_meta_modules') .'</div></header>';
 
         echo '<div class="panel-body" style="padding: 10px 15px;">';
         echo '<div class="btn-group" role="group">';
-        echo '<button type="button" class="btn btn-default active" data-filter="all">'. rex_i18n::msg('d2u_helper_modules_filter_all') .'</button>';
-        echo '<button type="button" class="btn btn-default" data-filter="bs4">'. rex_i18n::msg('d2u_helper_modules_filter_bs4') .'</button>';
-        echo '<button type="button" class="btn btn-default" data-filter="bs5">'. rex_i18n::msg('d2u_helper_modules_filter_bs5') .'</button>';
+        echo '<button type="button" class="btn btn-default'. ('all' === $active_filter ? ' active' : '') .'" data-filter="all">'. rex_i18n::msg('d2u_helper_modules_filter_all') .'</button>';
+        echo '<button type="button" class="btn btn-default'. ('bs4' === $active_filter ? ' active' : '') .'" data-filter="bs4">'. rex_i18n::msg('d2u_helper_modules_filter_bs4') .'</button>';
+        echo '<button type="button" class="btn btn-default'. ('bs5' === $active_filter ? ' active' : '') .'" data-filter="bs5">'. rex_i18n::msg('d2u_helper_modules_filter_bs5') .'</button>';
         echo '</div>';
         echo '</div>';
 
@@ -449,7 +467,7 @@ class ModuleManager
                 $modules_select->setSelected(0);
                 echo $modules_select->get();
             } else {
-                echo '<a href="'. rex_url::currentBackendPage(['function' => 'unlink', 'd2u_module_id' => $module->getD2UId()]) .'" title="'. rex_i18n::msg('d2u_helper_modules_pair_unlink') .'"><i class="rex-icon fa-chain-broken"></i> ';
+                echo '<a href="'. rex_url::currentBackendPage(['function' => 'unlink', 'd2u_module_id' => $module->getD2UId(), 'd2u_filter' => $active_filter]) .'" title="'. rex_i18n::msg('d2u_helper_modules_pair_unlink') .'"><i class="rex-icon fa-chain-broken"></i> ';
                 echo $rex_modules[$module->getRedaxoId()];
                 echo '</a>';
             }
@@ -457,7 +475,7 @@ class ModuleManager
             // Autoupdate
             echo '<td>';
             if ($module->isInstalled()) {
-                echo '<a href="'. rex_url::currentBackendPage(['function' => 'autoupdate', 'd2u_module_id' => $module->getD2UId()]) .'">'
+                echo '<a href="'. rex_url::currentBackendPage(['function' => 'autoupdate', 'd2u_module_id' => $module->getD2UId(), 'd2u_filter' => $active_filter]) .'">'
                     . '<i class="rex-icon '. ($module->isAutoupdateActivated() ? 'rex-icon-package-is-activated' : 'rex-icon-package-not-activated') .'"></i> '
                     . ($module->isAutoupdateActivated() ? rex_i18n::msg('package_deactivate') : rex_i18n::msg('package_activate')) .' </a>';
             }
@@ -484,10 +502,33 @@ class ModuleManager
 
         echo '<script>
 jQuery(function($) {
+    // Apply saved filter on page load
+    var activeFilter = $("#d2u-module-filter").val();
+    if (activeFilter && activeFilter !== "all") {
+        $("#d2u-module-table tbody tr").each(function() {
+            var compat = $(this).data("compat");
+            if (activeFilter === "bs4") {
+                $(this).toggle(compat === "bs4" || compat === "both");
+            } else if (activeFilter === "bs5") {
+                $(this).toggle(compat === "bs5" || compat === "both");
+            }
+        });
+    }
+
     $(".btn-group [data-filter]").on("click", function() {
         $(this).siblings().removeClass("active");
         $(this).addClass("active");
         var filter = $(this).data("filter");
+
+        // Update hidden input for form submissions
+        $("#d2u-module-filter").val(filter);
+
+        // Update GET links to include filter
+        $("#d2u-module-table a[href]").each(function() {
+            var href = $(this).attr("href").replace(/[&?]d2u_filter=[^&]*/g, "");
+            $(this).attr("href", href + "&d2u_filter=" + filter);
+        });
+
         $("#d2u-module-table tbody tr").each(function() {
             var compat = $(this).data("compat");
             if (filter === "all") {
