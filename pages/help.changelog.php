@@ -22,6 +22,7 @@
 			<li>Neue getMenuItemsBS5() Methode in FrontendNavigationMegaMenu für Bootstrap 5 kompatible Menü-Ausgabe.</li>
 			<li>Neues Modul 11-3 "Kontakt-Sektion mit farbigem Hintergrund (BS5)": Kontaktbereich mit farbigem Hintergrund, Telefon, E-Mail und Kontaktformular-Link.</li>
 			<li>Neue Module 16-1 "Link als Button (BS4)" und 16-2 "Link als Button (BS5)" hinzugefügt: Link als Bootstrap Button (primary/secondary) mit Text sowie Linkziel (extern, Redaxo Artikel oder Medienpool-Datei).</li>
+			<li>Neues Modul 17-1 "Google Places Bewertungen (BS5)": Zeigt Google Places Bewertungen als Bootstrap 5 Cards mit Sternebewertung an. Benötigt das Google Places Addon.</li>
 			<li>Modul 16-1 "Kundenstimmen Carousel (BS5)" in das d2u_references Addon verschoben (jetzt Modul 50-5).</li>
 			<li>jQuery und Bootstrap 4 CSS/JS werden jetzt direkt in den Templates eingebunden und nicht mehr über die Addon-Einstellungen gesteuert.</li>
 			<li>Einstellungen "jQuery einbinden" und "Bootstrap einbinden" entfernt.</li>

@@ -1,0 +1,18 @@
+.btn-primary, .btn-primary:visited {
+    background-color: var(--article-color-h) !important;
+    border: none !important;
+    color: #fff !important;
+}
+.btn-primary:hover {
+    color: #fff !important;
+    opacity: 0.9;
+}
+.btn-secondary, .btn-secondary:visited {
+    background-color: transparent !important;
+    border: 2px solid var(--article-color-h) !important;
+    color: var(--article-color-h) !important;
+}
+.btn-secondary:hover {
+    background-color: var(--article-color-h) !important;
+    color: #fff !important;
+}

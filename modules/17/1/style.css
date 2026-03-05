@@ -1,0 +1,40 @@
+.googleplaces-section h2 {
+    color: var(--article-color-h);
+}
+#googleplacesCarousel .carousel-item {
+    transition: transform 1.2s ease-in-out;
+}
+.googleplaces-indicators {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.googleplaces-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.googleplaces-indicators button.active {
+    background-color: var(--article-color-h);
+}
+.googleplaces-quote {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.googleplaces-text {
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: inherit;
+}
+.googleplaces-author {
+    font-weight: 600;
+    color: var(--article-color-h);
+    margin-top: 0.75rem;
+}

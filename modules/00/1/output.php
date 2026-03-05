@@ -8,7 +8,7 @@ $compatible_template = false;
 $current_article = rex_article::getCurrent();
 if ($current_article instanceof rex_article) {
     $current_template = new rex_template($current_article->getTemplateId());
-    $compatible_template = in_array(str_replace('d2u_', '', null !== $current_template->getKey() ? $current_template->getKey() : ''), ['00-1', '02-1', '04-1', '04-2'], true);
+    $compatible_template = in_array(str_replace('d2u_', '', null !== $current_template->getKey() ? $current_template->getKey() : ''), ['00-1', '00-2', '02-1', '02-2', '02-3', '04-1', '04-2', '04-3', '04-4'], true);
 }
 if (\rex::isBackend()) {
     echo 'Umbruch '. ($line ? 'mit' : 'ohne') .' Linie'; /** @phpstan-ignore-line */
