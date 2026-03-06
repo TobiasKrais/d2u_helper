@@ -2,6 +2,7 @@
 
 namespace TobiasKrais\D2UHelper;
 
+use rex;
 use rex_addon;
 use rex_article;
 use rex_category;
@@ -10,7 +11,10 @@ use rex_dir;
 use rex_extension;
 use rex_extension_point;
 use rex_finder;
+use rex_media_manager;
 use rex_path;
+use rex_sql;
+use rex_url;
 use rex_version;
 use rex_yrewrite_seo;
 
@@ -430,6 +434,57 @@ class FrontendHelper
             return true;
         }
         return false;
+    }
 
+    /**
+     * Responsive srcset widths to check for corresponding Media Manager types.
+     * If a Media Manager type exists with the base name plus one of these suffixes
+     * (e.g. "header_480"), it will be included in the srcset attribute.
+     * @var int[]
+     */
+    private static array $responsiveWidths = [480, 768, 1200, 1920];
+
+    /**
+     * Get responsive image srcset and sizes attributes for a header image.
+     * Checks if Media Manager types with size suffixes (_480, _768, _1200, _1920)
+     * exist in the database and builds the srcset string accordingly.
+     *
+     * @api
+     * @param string $mediaManagerType Base Media Manager type name
+     * @param string $filename Image filename
+     * @param string $sizes CSS sizes attribute value (default: "100vw")
+     * @return array{src: string, srcset_attr: string, sizes_attr: string} Array with src URL, srcset attribute string and sizes attribute string
+     */
+    public static function getResponsiveImageAttributes(string $mediaManagerType, string $filename, string $sizes = '100vw'): array
+    {
+        $result = [
+            'src' => '' !== $mediaManagerType ? rex_media_manager::getUrl($mediaManagerType, $filename) : rex_url::media($filename),
+            'srcset_attr' => '',
+            'sizes_attr' => '',
+        ];
+
+        if ('' === $mediaManagerType || '' === $filename) {
+            return $result;
+        }
+
+        // Check which responsive Media Manager types exist
+        $srcset_parts = [];
+        $sql = rex_sql::factory();
+        foreach (self::$responsiveWidths as $width) {
+            $responsive_type = $mediaManagerType . '_' . $width;
+            $sql->setQuery('SELECT id FROM ' . rex::getTablePrefix() . 'media_manager_type WHERE name = :name', ['name' => $responsive_type]);
+            if ($sql->getRows() > 0) {
+                $srcset_parts[] = rex_media_manager::getUrl($responsive_type, $filename) . ' ' . $width . 'w';
+            }
+        }
+
+        if (count($srcset_parts) > 0) {
+            // Add the base type as largest fallback in srcset
+            $srcset_parts[] = $result['src'] . ' 2560w';
+            $result['srcset_attr'] = ' srcset="' . implode(', ', $srcset_parts) . '"';
+            $result['sizes_attr'] = ' sizes="' . $sizes . '"';
+        }
+
+        return $result;
     }
 }

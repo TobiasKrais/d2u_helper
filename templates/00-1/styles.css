@@ -25,10 +25,24 @@ img {
 	{margin: 1em 0;}
 	
 header {
-	background-position: center;
-	background-size: cover;
+	position: relative;
+	overflow: hidden;
 	height: 400px;
 	padding: 2em 0;
+}
+header .header-bg-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	z-index: 0;
+}
+header .container {
+	position: relative;
+	z-index: 1;
 }
 @media screen and (min-width: 1200px) {
 	header {

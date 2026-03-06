@@ -15,17 +15,7 @@
 <header>
 	<?php
         $d2u_helper = rex_addon::get('d2u_helper');
-
-        $media_manager_webp_exists = false;
-        $media_manager_webp_type_name = '';
-        if ('' !== $d2u_helper->getConfig('template_header_media_manager_type')) {
-            $sql = rex_sql::factory();
-            $sql->setQuery('SELECT * FROM '. rex::getTablePrefix() .'media_manager_type WHERE name = "'. $d2u_helper->getConfig('template_header_media_manager_type', '') .'_webp"');
-            if ($sql->getRows() > 0) {
-                $media_manager_webp_exists = true;
-                $media_manager_webp_type_name = $d2u_helper->getConfig('template_header_media_manager_type') .'_webp';
-            }
-        }
+        $media_manager_type = (string) $d2u_helper->getConfig('template_header_media_manager_type', '');
 
         if (false === $d2u_helper->getConfig('template_04_header_slider_pics_full_width', false)) {
             // START Only if slider background slider is shown
@@ -33,8 +23,8 @@
 	<div id="background">
 		<?php
             if (1 === count($slider_pics)) {
-                $srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[0]) .' 2000w"' : '';
-                echo '<img'. $srcset .' src="'. rex_url::media($slider_pics[0]) .'" alt="" id="background-single-image">';
+                $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[0]);
+                echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="" id="background-single-image">';
             } else {
                 // Slider
                 echo '<div id="headerCarouselbg" class="carousel carousel-fade slide carousel-sync" data-pause="false">';
@@ -45,9 +35,9 @@
                     $rex_media_slider_pic = rex_media::get($slider_pics[$i]);
                     if ($rex_media_slider_pic instanceof rex_media) {
                         echo '<div class="carousel-item'. (0 === $i ? ' active' : '') .'">';
-                        $srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[$i]) .' 2000w"' : '';
-                        echo '<img class="d-block w-100"'. $srcset .' src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[$i]) : rex_url::media($slider_pics[$i]))
-                            .'" alt="'. $rex_media_slider_pic->getTitle() .'"'. ($i > 0 ? ' loading="lazy"' : '') .'>';
+                        $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[$i]);
+                        echo '<img class="d-block w-100" src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr']
+                            .' alt="'. $rex_media_slider_pic->getTitle() .'"'. ($i > 0 ? ' loading="lazy"' : '') .'>';
                         echo '</div>';
                     }
                 }
@@ -62,9 +52,9 @@
 				<?php
         }  // END Only if slider background slider is shown
                     if (1 === count($slider_pics)) {
-                        $srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[0]) .' 2000w"' : '';
-                        echo '<img'. $srcset .' src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[0]) : rex_url::media($slider_pics[0]))
-                            .'" alt="" class="header-slider-pic'. ((bool) rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width') ? ' header-slider-pic-full-width' : '') .'">';
+                        $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[0]);
+                        echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr']
+                            .' alt="" class="header-slider-pic'. ((bool) rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width') ? ' header-slider-pic-full-width' : '') .'">';
                     } else {
                         // Slider
                         echo '<div id="headerCarousel" class="carousel carousel-fade slide carousel-sync" data-ride="carousel" data-pause="false">';
@@ -87,9 +77,9 @@
                                 $ratio = (int) $slider_pic->getWidth() / (int) $slider_pic->getHeight();
                                 $min_height = (int) $slider_pic->getHeight() < 250 ? (int) ($slider_pic->getHeight()) : 250;
                                 $ratio_min_style = ' style="min-height: '. $min_height .'px; min-width:'. round($min_height * $ratio).'px;"';
-                                $srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[$k]) .' 2000w"' : '';
-                                echo '<img class="d-block w-100"'. $srcset .'  src="'. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type'), $slider_pics[$k]) : rex_url::media($slider_pics[$k]))
-                                    .'" alt="'. $rex_media_slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .' width="'. $slider_pic->getWidth() .'px"  height="'. $slider_pic->getHeight() .'px">';
+                                $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[$k]);
+                                echo '<img class="d-block w-100" src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr']
+                                    .' alt="'. $rex_media_slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .' width="'. $slider_pic->getWidth() .'px"  height="'. $slider_pic->getHeight() .'px">';
                                 // Slogan
                                 $slogan_text = (string) ($article instanceof rex_article && '' !== $article->getValue('art_slogan') ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId()));
                                 $slogan = '<span class="slogan-text-row">'. str_replace('<br>', '</span><span class="slogan-text-row">', nl2br($slogan_text, false)) .'</span>';

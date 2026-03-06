@@ -108,13 +108,15 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 <body>
 	<?php
 		$header_css = "";
+		$header_img_tag = "";
 		if($d2u_helper->hasConfig("template_header_pic")) {
 			$header_image = (string) $d2u_helper->getConfig("template_header_pic");
 			if($this->hasValue("art_file") && '' !== (string) $this->getValue('art_file')) { /** @phpstan-ignore-line */
 				$header_image = (string) $this->getValue("art_file"); /** @phpstan-ignore-line */
 			}
 			if($header_image !== '') {
-				$header_css = 'style="background-image: url('. ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .')"';
+				$responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image);
+				$header_img_tag = '<img class="header-bg-img" src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="">';
 			}
 			else {
 				$header_css = 'style="height: 100px"';
@@ -122,6 +124,7 @@ if(rex_addon::get('d2u_machinery')->isAvailable()) {
 		}
 	?>
 	<header <?php echo $header_css; ?>>
+		<?php echo $header_img_tag; ?>
 		<?php
 			if($d2u_helper->hasConfig("template_logo") && $d2u_helper->getConfig('template_logo') !== '') {
 		?>

@@ -50,7 +50,7 @@ $url_id = TobiasKrais\D2UHelper\FrontendHelper::getUrlId();
 	<header<?= $has_header_image ? ' class="has-image"' : '' ?>>
 		<?php if ($has_header_image && isset($media_header_pic) && $media_header_pic instanceof rex_media) { ?>
 		<div class="header-image">
-			<img src="<?= '' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image) ?>" alt="<?= $media_header_pic->getTitle() ?>" title="<?= $media_header_pic->getTitle() ?>" id="header">
+			<img src="<?= '' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image) ?>"<?php $responsive_02_3 = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image); echo $responsive_02_3['srcset_attr'] . $responsive_02_3['sizes_attr']; ?> alt="<?= $media_header_pic->getTitle() ?>" title="<?= $media_header_pic->getTitle() ?>" id="header">
 		</div>
 		<?php } ?>
 		<div class="header-overlay">

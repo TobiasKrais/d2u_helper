@@ -44,6 +44,7 @@
 			<li>Template install.php: Sprog Addon Verfügbarkeitsprüfung als Fehler in allen 17 Templates (außer Schaufenster) hinzugefügt.</li>
 			<li>Template install.php: Fehlende YRewrite Addon Verfügbarkeitsprüfung in Templates 05-1, 05-2 und 06-2 ergänzt.</li>
 			<li>Bootstrap 4 Module und Templates werden in Version 3 entfernt. Bitte rechtzeitig auf die BS5 Varianten wechseln.</li>
+			<li>Responsive Srcset für Header-Bilder: Neue Methode FrontendHelper::getResponsiveImageAttributes() prüft ob Media Manager Typen mit Größen-Suffixen (_480, _768, _1200, _1920) existieren und gibt automatisch srcset und sizes Attribute aus. Angewendet auf alle Templates mit Header-Bildern (00-1, 00-2, 01-1, 01-2, 02-1, 02-2, 02-3, 03-1, 03-2, 03-3, 03-4, 06-1, 06-2) sowie auf die Slider-Fragmente (04-x). Templates 00-1 und 00-2 von background-image auf img mit object-fit: cover umgestellt. Bisheriger _webp Media Manager Typ wird nicht mehr benötigt.</li>
 		</ul>
 		<p>2.0.4</p>
 		<ul>

@@ -13,26 +13,15 @@
 
     $slider_pics = is_array($slider_pics_unfiltered) ? $slider_pics_unfiltered : [];
     if (count($slider_pics) > 0) {
-        $media_manager_webp_exists = false;
-        $media_manager_webp_type_name = '';
-        if ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '')) {
-            $sql = rex_sql::factory();
-            $sql->setQuery('SELECT * FROM '. rex::getTablePrefix() .'media_manager_type WHERE name = "'. $d2u_helper->getConfig('template_header_media_manager_type', '') .'_webp"');
-            if ($sql->getRows() > 0) {
-                $media_manager_webp_exists = true;
-                $media_manager_webp_type_name = $d2u_helper->getConfig('template_header_media_manager_type') .'_webp';
-            }
-        }
-
+        $media_manager_type = (string) $d2u_helper->getConfig('template_header_media_manager_type', '');
         $is_full_width = (bool) $d2u_helper->getConfig('template_04_header_slider_pics_full_width', false);
 ?>
 <header>
 	<?php
         if (1 === count($slider_pics)) {
             // Single image
-            $srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[0]) .' 2000w"' : '';
-            $src = '' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $slider_pics[0]) : rex_url::media($slider_pics[0]);
-            echo '<img'. $srcset .' src="'. $src .'" alt="" class="header-slider-pic'. ($is_full_width ? ' header-slider-pic-full-width' : '') .'">';
+            $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[0]);
+            echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="" class="header-slider-pic'. ($is_full_width ? ' header-slider-pic-full-width' : '') .'">';
 
             // Slogan
             $slogan_text = (string) ($article instanceof rex_article && '' !== $article->getValue('art_slogan') ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId()));
@@ -57,9 +46,8 @@
                 $rex_media_slider_pic = rex_media::get($slider_pics[$k]);
                 if ($rex_media_slider_pic instanceof rex_media) {
                     echo '<div class="carousel-item'. (0 === $k ? ' active' : '') .'">';
-                    $srcset = $media_manager_webp_exists ? ' srcset="'. rex_media_manager::getUrl($media_manager_webp_type_name, $slider_pics[$k]) .' 2000w"' : '';
-                    $src = '' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type'), $slider_pics[$k]) : rex_url::media($slider_pics[$k]);
-                    echo '<img class="d-block w-100"'. $srcset .' src="'. $src .'" alt="'. $rex_media_slider_pic->getTitle() .'"'. ($k > 0 ? ' loading="lazy"' : '') .'>';
+                    $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[$k]);
+                    echo '<img class="d-block w-100" src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="'. $rex_media_slider_pic->getTitle() .'"'. ($k > 0 ? ' loading="lazy"' : '') .'>';
 
                     // Slogan
                     $slogan_text = (string) ($article instanceof rex_article && '' !== $article->getValue('art_slogan') ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId()));
