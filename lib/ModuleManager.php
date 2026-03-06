@@ -155,37 +155,37 @@ class ModuleManager
             'Umbruch ganze Breite',
             10);
         $modules[] = new Module('01-1',
-            'Texteditor (BS4)',
+            'Texteditor (BS4, deprecated)',
             14);
         $modules[] = new Module('01-2',
-            'Texteditor mit Bild und Fettschrift (BS4)',
+            'Texteditor mit Bild und Überschrift (BS4, deprecated)',
             18);
         $modules[] = new Module('01-3',
-            'Texteditor in Alertbox (BS4)',
+            'Texteditor in Alertbox (BS4, deprecated)',
             2);
         $modules[] = new Module('01-4',
             'Texteditor (BS5)',
             1);
         $modules[] = new Module('01-5',
-            'Texteditor mit Bild und Fettschrift (BS5)',
+            'Texteditor mit Bild und Überschrift (BS5)',
             1);
         $modules[] = new Module('01-6',
             'Texteditor in Alertbox (BS5)',
             1);
         $modules[] = new Module('02-1',
-            'Überschrift (BS4)',
+            'Überschrift (BS4, deprecated)',
             11);
         $modules[] = new Module('02-2',
-            'Überschrift mit Klapptext (BS4)',
+            'Überschrift mit Klapptext (BS4, deprecated)',
             7);
         $modules[] = new Module('02-3',
-            'Überschrift mit Untertitel und Textfeld (BS4)',
+            'Überschrift mit Untertitel und Textfeld (BS4, deprecated)',
             9);
         $modules[] = new Module('02-4',
-            'Überschrift mit Hintergrundbild und 2 Buttons (BS4)',
+            'Überschrift mit Hintergrundbild und 2 Buttons (BS4, deprecated)',
             1);
         $modules[] = new Module('02-5',
-            'Inhaltsverzeichnis der Überschriften (BS4)',
+            'Inhaltsverzeichnis der Überschriften (BS4, deprecated)',
             1);
         $modules[] = new Module('02-6',
             'Überschrift (BS5)',
@@ -203,13 +203,13 @@ class ModuleManager
             'Inhaltsverzeichnis der Überschriften (BS5)',
             1);
         $modules[] = new Module('03-1',
-            'Bild (BS4)',
+            'Bild (BS4, deprecated)',
             12);
         $modules[] = new Module('03-2',
-            'Bildergalerie Ekko Lightbox (BS4)',
+            'Bildergalerie Ekko Lightbox (BS4, deprecated)',
             15);
         $modules[] = new Module('03-3',
-            '360° Bild (BS4)',
+            '360° Bild (BS4, deprecated)',
             1);
         $modules[] = new Module('03-4',
             'Bild (BS5)',
@@ -221,10 +221,10 @@ class ModuleManager
             '360° Bild (BS5)',
             1);
         $modules[] = new Module('04-1',
-            'Google Maps Karte (BS4)',
+            'Google Maps Karte (BS4, deprecated)',
             13);
         $modules[] = new Module('04-2',
-            'OpenStreetMap Karte (BS4)',
+            'OpenStreetMap Karte (BS4, deprecated)',
             6);
         $modules[] = new Module('04-3',
             'Google Maps Karte (BS5)',
@@ -239,16 +239,16 @@ class ModuleManager
             'Artikel aus anderer Sprache übernehmen',
             5);
         $modules[] = new Module('06-1',
-            'YouTube Video einbinden (BS4)',
+            'YouTube Video einbinden (BS4, deprecated)',
             18);
         $modules[] = new Module('06-2',
-            'IFrame einbinden (BS4)',
+            'IFrame einbinden (BS4, deprecated)',
             5);
         $modules[] = new Module('06-3',
-            'Video mit Plyr einbinden (BS4)',
+            'Video mit Plyr einbinden (BS4, deprecated)',
             4);
         $modules[] = new Module('06-4',
-            'Videoliste mit Plyr einbinden (BS4)',
+            'Videoliste mit Plyr einbinden (BS4, deprecated)',
             2);
         $modules[] = new Module('06-5',
             'YouTube Video einbinden (BS5)',
@@ -272,16 +272,16 @@ class ModuleManager
             'Box mit Bild und Text',
             6);
         $modules[] = new Module('10-3',
-            'Box mit Downloads (BS4)',
+            'Box mit Downloads (BS4, deprecated)',
             10);
         $modules[] = new Module('10-4',
             'Box mit Downloads (BS5)',
             1);
         $modules[] = new Module('11-1',
-            'YForm Kontaktformular (DSGVO kompatibel) (BS4)',
+            'YForm Kontaktformular (DSGVO kompatibel) (BS4, deprecated)',
             14);
         $modules[] = new Module('11-2',
-            'Box mit Kontaktinformationen (BS4)',
+            'Box mit Kontaktinformationen (BS4, deprecated)',
             2);
         $modules[] = new Module('11-3',
             'Kontakt-Sektion mit farbigem Hintergrund (BS5)',
@@ -293,7 +293,7 @@ class ModuleManager
             'Box mit Kontaktinformationen (BS5)',
             1);
         $modules[] = new Module('12-1',
-            'Feeds Stream Galerie (BS4)',
+            'Feeds Stream Galerie (BS4, deprecated)',
             5);
         $modules[] = new Module('12-2',
             'Feeds Stream Galerie (BS5)',
@@ -305,13 +305,13 @@ class ModuleManager
             'Search It Suchmodul',
             6);
         $modules[] = new Module('15-1',
-            'Kategorie mit Liste der Unterkategorien (BS4)',
+            'Kategorie mit Liste der Unterkategorien (BS4, deprecated)',
             3);
         $modules[] = new Module('15-2',
             'Kategorie mit Liste der Unterkategorien (BS5)',
             1);
         $modules[] = new Module('16-1',
-            'Link als Button (BS4)',
+            'Link als Button (BS4, deprecated)',
             1);
         $modules[] = new Module('16-2',
             'Link als Button (BS5)',
