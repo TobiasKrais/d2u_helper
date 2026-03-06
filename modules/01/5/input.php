@@ -81,10 +81,25 @@
 </div>
 <div class="row">
 	<div class="col-xs-4">
-		&Uuml;berschrift (Fettschrift, optional):<br />
+		&Uuml;berschrift (optional):
 	</div>
-	<div class="col-xs-8">
+	<div class="col-xs-6">
 		<input type="text" class="form-control" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" />
+	</div>
+	<div class="col-xs-2">
+		<select name="REX_INPUT_VALUE[13]" class="form-control">
+		<?php
+		$heading_type_value = 'REX_VALUE[13]';
+		foreach (['b' => 'Fettschrift', 'h1' => 'h1', 'h2' => 'h2', 'h3' => 'h3', 'h4' => 'h4', 'h5' => 'h5', 'h6' => 'h6'] as $key => $value) {
+			echo '<option value="'. $key .'" ';
+
+			if ($heading_type_value === $key || ('' === $heading_type_value && 'b' === $key)) { /** @phpstan-ignore-line */
+				echo 'selected="selected" ';
+			}
+			echo '>'. $value .'</option>';
+		}
+		?>
+		</select>
 	</div>
 </div>
 <div class="row">
@@ -338,5 +353,24 @@
 	// Hide on selection change
 	$("input[name='REX_INPUT_VALUE[10]']").on('change', function(e) {
 		container_changer();
+	});
+
+	function picture_width_changer() {
+		var position = $("select[name='REX_INPUT_VALUE[4]']").val();
+		if (position === "top" || position === "bottom") {
+			$("select[name='REX_INPUT_VALUE[6]']").parent().parent().slideUp();
+		} else {
+			$("select[name='REX_INPUT_VALUE[6]']").parent().parent().slideDown();
+		}
+	}
+
+	// Hide image width on document load
+	$(document).ready(function() {
+		picture_width_changer();
+	});
+
+	// Hide image width on selection change
+	$("select[name='REX_INPUT_VALUE[4]']").on('change', function(e) {
+		picture_width_changer();
 	});
 </script>

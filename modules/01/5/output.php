@@ -4,6 +4,8 @@ $cols = 0 === (int) 'REX_VALUE[20]' ? 8 : (int) 'REX_VALUE[20]'; /** @phpstan-ig
 $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' me-lg-auto ms-lg-auto ' : ''; /** @phpstan-ignore-line */
 
 $heading = 'REX_VALUE[1]';
+$heading_type = 'REX_VALUE[13]';
+if ('' === $heading_type) { $heading_type = 'b'; } /** @phpstan-ignore-line */
 $same_height = 'REX_VALUE[5]' === 'true' ? 'same-height ' : ''; /** @phpstan-ignore-line */
 $show_title = ('REX_VALUE[9]' === 'true'); /** @phpstan-ignore-line */
 
@@ -87,7 +89,10 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
                     if ('' !== $link_url) { /** @phpstan-ignore-line */
                         echo '<a href="'. $link_url .'">';
                     }
-                    echo '<b>'. $heading .'</b><br>';
+                    echo '<'. $heading_type .'>'. $heading .'</'. $heading_type .'>';
+                    if ('b' === $heading_type) {
+                        echo '<br>';
+                    }
                     if ('' !== $link_url) { /** @phpstan-ignore-line */
                         echo '</a>';
                     }
