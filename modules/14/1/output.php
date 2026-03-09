@@ -36,7 +36,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
         echo '<script>'. PHP_EOL;
         echo 'jQuery(document).ready(function() {'. PHP_EOL;
         echo 'jQuery(function() {'. PHP_EOL;
-        echo 'jQuery(\'input[name="search"]\').suggest("index.php?rex-api-call=search_it_autocomplete_getSimilarWords&rnd=" + Math.random(),'. PHP_EOL;
+        echo 'jQuery(\'input[name="search"]\').suggest("index.php?rex-api-call=search_it_autocomplete&rnd=" + Math.random(),'. PHP_EOL;
         echo '{ onSelect: function(event, ui) { $("#formular").submit(); return false; }'. PHP_EOL;
         echo '});'. PHP_EOL;
         echo '});'. PHP_EOL;
@@ -61,11 +61,12 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 <?php
 if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yform->getObjectparams('warning'))) || !rex_addon::get('yform_spam_protection')->isAvailable()) && '' !== $request) { // Wenn ein Suchbegriff eingegeben wurde
     $server = rtrim(rex::getServer(), '/');
+    $search_it_class = class_exists('FriendsOfRedaxo\\SearchIt\\SearchIt') ? 'FriendsOfRedaxo\\SearchIt\\SearchIt' : 'search_it';
 
     echo '<section class="search_it-hits">';
 
     // Init search and execute (only search articles and urls in current language)
-    $search_it = new search_it(rex_clang::getCurrentId());
+    $search_it = new $search_it_class(rex_clang::getCurrentId());
     $search_it->setLimit($start, $limit);
     $search_it->setOrder(["field(texttype, 'url', 'article', 'file')" => 'ASC'], true);
     $result = $search_it->search(false !== $request ? $request : '');
@@ -195,7 +196,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
 
         $activate_similarity_search = 'REX_VALUE[2]' === 'true' ? true : false; /** @phpstan-ignore-line */
         // Similarity search
-        $search_it_sim = new search_it(rex_clang::getCurrentId());
+        $search_it_sim = new $search_it_class(rex_clang::getCurrentId());
         $search_it_sim->setLimit(0, 1);
         if ($activate_similarity_search && rex_config::get('search_it', 'similarwordsmode', 0) > 0 && '' !== $result['simwordsnewsearch']) { /** @phpstan-ignore-line */
             $simwords_out = '<p>'. $tag_open .'d2u_helper_module_14_search_similarity'. $tag_close .':<strong><ul>';

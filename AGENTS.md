@@ -46,6 +46,10 @@ d2u_helper/
 - **Frontend labels:** Use `Sprog\Wildcard::get()` backed by `LangHelper`, not `rex_i18n::msg()`
 - **Backend labels:** Use `rex_i18n::msg()` with keys from `lang/` files
 
+## AGENTS.md Maintenance
+
+- When new project insights are gained during work and they are relevant to agent guidance, workflows, conventions, architecture, or known pitfalls, update this AGENTS.md accordingly.
+
 ## Key Classes
 
 | Class | Description |
