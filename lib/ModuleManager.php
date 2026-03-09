@@ -245,10 +245,10 @@ class ModuleManager
             'IFrame einbinden (BS4, deprecated)',
             5);
         $modules[] = new Module('06-3',
-            'Video mit Plyr einbinden (BS4, deprecated)',
+            'Video mit Plyr oder Vidstack einbinden (BS4, deprecated)',
             4);
         $modules[] = new Module('06-4',
-            'Videoliste mit Plyr einbinden (BS4, deprecated)',
+            'Videoliste mit Plyr oder Vidstack einbinden (BS4, deprecated)',
             2);
         $modules[] = new Module('06-5',
             'YouTube Video einbinden (BS5)',

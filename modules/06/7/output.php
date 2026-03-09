@@ -36,12 +36,16 @@ if (!function_exists('d2uHelperRenderVidstackPlayer')) {
     {
         $video_class = 'FriendsOfRedaxo\\VidStack\\Video';
         $video = new $video_class($filename, $title, d2uHelperGetVidstackLang());
+        $is_audio = $video_class::isAudio($filename);
         $attributes = [
             'crossorigin' => '',
-            'playsinline' => true,
             'controls' => true,
             'preload' => 'metadata',
         ];
+
+        if (!$is_audio) {
+            $attributes['playsinline'] = true;
+        }
 
         if ($autoplay) {
             $attributes['autoplay'] = true;
@@ -49,7 +53,13 @@ if (!function_exists('d2uHelperRenderVidstackPlayer')) {
 
         $video->setAttributes($attributes);
 
-        return $video->generate();
+        $player = $video->generate();
+
+        if ($is_audio) {
+            return '<div class="d2u-helper-vidstack-audio-player">'. $player .'</div>';
+        }
+
+        return $player;
     }
 }
 

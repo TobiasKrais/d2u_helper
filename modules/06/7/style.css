@@ -6,9 +6,18 @@
     display: block;
 }
 
+.d2u-helper-vidstack-audio-player {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.5rem;
+    display: block;
+    padding: 0.75rem;
+}
+
 .d2u-helper-vidstack-stack media-player,
 .d2u-helper-vidstack-stack .audio-container,
 .d2u-helper-vidstack-stack .video-container {
+    display: block;
     max-width: 100%;
     width: 100%;
 }

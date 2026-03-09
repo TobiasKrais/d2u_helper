@@ -108,11 +108,33 @@
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
 </div>
+<?php
+$use_vidstack = rex_addon::get('vidstack')->isAvailable();
+$use_plyr = !$use_vidstack && rex_addon::get('plyr')->isAvailable();
+?>
+<div class="row">
+	<div class="col-xs-12">
+		<small>
+			<?php
+            if ($use_vidstack) {
+                echo 'Aktive Ausgabe: Vidstack-Playlist.';
+            } elseif ($use_plyr) {
+                echo 'Aktive Ausgabe: Plyr-Playlist.';
+            } else {
+                echo 'Es ist weder Vidstack noch Plyr installiert.';
+            }
+            ?>
+		</small>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
 <div class="row">
 	<div class="col-xs-4">
 		Video- / Audiodateien:
 	</div>
 	<div class="col-xs-8">
-		REX_MEDIALIST[id="1" type="mp3,mp4" widget="1"]
+		REX_MEDIALIST[id="1" type="mp3,mp4,m4v,webm,ogg,ogv,mov" widget="1"]
 	</div>
 </div>

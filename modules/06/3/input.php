@@ -108,14 +108,37 @@
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
 </div>
+<?php
+$use_vidstack = rex_addon::get('vidstack')->isAvailable();
+$use_plyr = !$use_vidstack && rex_addon::get('plyr')->isAvailable();
+?>
+<div class="row">
+	<div class="col-xs-12">
+		<small>
+			<?php
+            if ($use_vidstack) {
+                echo 'Aktive Ausgabe: Vidstack.';
+            } elseif ($use_plyr) {
+                echo 'Aktive Ausgabe: Plyr.';
+            } else {
+                echo 'Es ist weder Vidstack noch Plyr installiert.';
+            }
+            ?>
+		</small>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">&nbsp;</div>
+</div>
 <div class="row">
 	<div class="col-xs-4">
 		Video- / Audiodatei:
 	</div>
 	<div class="col-xs-8">
-		REX_MEDIA[id="1" types="mp3,mp4,m4v" widget="1"]
+		REX_MEDIA[id="1" types="mp3,mp4,m4v,webm,ogg,ogv,mov" widget="1"]
 	</div>
 </div>
+<?php if ($use_plyr) { ?>
 <div class="row">
 	<div class="col-xs-12"><div style="border-top: 1px darkgrey solid; margin: 1em 0;"></div></div>
 </div>
@@ -127,18 +150,22 @@
 		REX_MEDIA[id="2" types="jpg,webp" widget="2"]
 	</div>
 	<div class="col-xs-12">
-		<small>(Ohne Vorschaubild werden keine Daten für die Suchmaschine ausgegeben.)</small>
+		<small>(Nur für Plyr-Ausgabe. Vidstack benötigt kein Vorschaubild.)</small>
 	</div>
 </div>
 <div class="row">
 	<div class="col-xs-12">&nbsp;</div>
 </div>
+<?php } ?>
 <div class="row">
 	<div class="col-xs-4">
 		Beschreibung für Videosuchmaschinen
 	</div>
 	<div class="col-xs-8">
 		<input type="text" name="REX_INPUT_VALUE[1]" value="REX_VALUE[1]" class="form-control"/>
+	</div>
+	<div class="col-xs-12">
+		<small>(Bei Vidstack für Videos auch ohne Vorschaubild nutzbar.)</small>
 	</div>
 </div>
 <div class="row">
