@@ -324,9 +324,9 @@ class TemplateManager
 
         foreach ($this->d2u_templates as $template) {
             $compat = 'both';
-            if (str_contains($template->getName(), '(BS4)')) {
+            if (str_contains($template->getName(), 'BS4')) {
                 $compat = 'bs4';
-            } elseif (str_contains($template->getName(), '(BS5)') || str_starts_with($template->getName(), 'Bootstrap 5')) {
+            } elseif (str_contains($template->getName(), 'BS5') || str_starts_with($template->getName(), 'Bootstrap 5')) {
                 $compat = 'bs5';
             }
             echo '<tr data-compat="'. $compat .'">';

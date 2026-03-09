@@ -257,10 +257,10 @@ class ModuleManager
             'IFrame einbinden (BS5)',
             1);
         $modules[] = new Module('06-7',
-            'Video mit Plyr einbinden (BS5)',
+            'Video mit Vidstack einbinden (BS5)',
             1);
         $modules[] = new Module('06-8',
-            'Videoliste mit Plyr einbinden (BS5)',
+            'Videoliste mit Vidstack einbinden (BS5)',
             1);
         $modules[] = new Module('07-1',
             'JavaScript einbinden',
@@ -450,9 +450,9 @@ class ModuleManager
 
         foreach ($this->d2u_modules as $module) {
             $compat = 'both';
-            if (str_contains($module->getName(), '(BS4)')) {
+            if (str_contains($module->getName(), 'BS4')) {
                 $compat = 'bs4';
-            } elseif (str_contains($module->getName(), '(BS5)')) {
+            } elseif (str_contains($module->getName(), 'BS5')) {
                 $compat = 'bs5';
             }
             echo '<tr data-compat="'. $compat .'">';

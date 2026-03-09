@@ -70,7 +70,7 @@
 		Auf größeren Bildschirmen zentrieren?
 	</div>
 	<div class="col-xs-8">
-		<select name="REX_INPUT_VALUE[17]"  class="form-control">
+		<select name="REX_INPUT_VALUE[17]" class="form-control">
 		<?php
         $values_offset = [0 => 'Nicht zentrieren.', 1 => 'Zentrieren, wenn freie Breite von anderem Inhalt nicht genutzt wird'];
         foreach ($values_offset as $key => $value) {
@@ -95,12 +95,10 @@
 		}
 	}
 
-	// Hide on document load
 	$(document).ready(function() {
 		offset_changer($("select[name='REX_INPUT_VALUE[18]']").val());
 	});
 
-	// Hide on selection change
 	$("select[name='REX_INPUT_VALUE[18]']").on('change', function(e) {
 		offset_changer($(this).val());
 	});
@@ -113,6 +111,6 @@
 		Video- / Audiodateien:
 	</div>
 	<div class="col-xs-8">
-		REX_MEDIALIST[id="1" type="mp3,mp4" widget="1"]
+		REX_MEDIALIST[id="1" type="mp3,mp4,m4v,webm,ogg,ogv,mov" widget="1"]
 	</div>
 </div>

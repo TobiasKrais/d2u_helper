@@ -17,6 +17,7 @@
 	<div class="panel-body">
 		<p>2.1.0-DEV</p>
 		<ul>
+			<li>Module 06-7 und 06-8: Bootstrap-5 Videomodule von Plyr auf Vidstack umgestellt. Modul 06-7 bleibt das Einzelvideo-Modul mit Suchmaschinenbeschreibung, Modul 06-8 die separate Video- / Audioliste.</li>
 			<li>Neues Template 02-3 "Header Pic Template 2026 (BS5)" hinzugefügt: Basiert auf Bootstrap 5, benötigt kein jQuery.</li>
 			<li>Neue Bootstrap 5 Fragmente: d2u_template_bs5_nav.php (Navigation mit Einstellungs-Unterstützung für Menütyp, Breakpoint, Suche, Sprachwahl und Dark Mode Toggle), d2u_template_bs5_header_slider.php (Header Slider).</li>
 			<li>Neue getMenuItemsBS5() Methode in FrontendNavigationMegaMenu für Bootstrap 5 kompatible Menü-Ausgabe.</li>
@@ -35,6 +36,7 @@
 			<li>Modul 12-2 "Feeds Stream Galerie (BS5)": Ekko Lightbox durch Vanilla JS Lightbox ersetzt.</li>
 			<li>Modulverwaltung: Filter (Alle / BS4 kompatibel / BS5 kompatibel) oberhalb der Modulliste hinzugefügt.</li>
 			<li>Bugfix Modulverwaltung: Nach dem Aufheben einer Modulpaarung wird das entkoppelte Modul jetzt korrekt im Zuordnungs-Dropdown angezeigt.</li>
+			<li>Bugfix Template 02-3: art_file Metainfo wird jetzt bei der Installation registriert (fehlte bisher). Templates 06-1 und 06-2 registrieren art_file nicht mehr (wird dort nicht verwendet).</li>
 			<li>Anpassungen an Search It >= 6.14.5: Autocomplete-Support in Suchformularen nicht mehr vom Plugin abhängig, da das Addon die Funktionalität übernimmt.</li>
 			<li>Bootstrap 5 Templatevarianten: Für alle 10 BS4-Templates wurden BS5-kompatible Varianten erstellt (kein jQuery, BS5 Utility-Klassen, Dark Mode, CSS Custom Properties). BS4-Templates erhalten den Hinweis "(BS4)" im Namen, BS5-Templates "(BS5)". Neue Templates: 00-2, 01-2, 02-2, 03-3, 03-4, 04-4, 05-2, 06-2.</li>
 			<li>BS5 Header Slider Templates zusammengeführt: Die drei BS5-Varianten 04-4, 04-5 und 04-6 wurden in ein einziges Template 04-4 zusammengeführt. Features (Slogan, konfigurierbare Nav-Position, News-Spalte) werden automatisch erkannt und bei Bedarf angezeigt.</li>
