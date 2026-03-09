@@ -14,7 +14,7 @@ page:
         settings: { title: 'translate:d2u_helper_settings', icon: rex-icon rex-icon-system, perm: 'd2u_helper[settings]' }
         help:
             icon: rex-icon rex-icon-help
-            title: 'translate:d2u_helper_help'
+            title: ''
             itemClass: pull-right
             subpages:
                 readme: { title: 'translate:d2u_helper_help_chapter_readme' }
