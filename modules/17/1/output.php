@@ -12,8 +12,13 @@ if ($place === null) {
     return;
 }
 
-$reviewCollection = Review::findFilter($place->getId(), $limit, 0, 0, 'publishdate', 'DESC', Review::STATUS_VISIBLE);
+$reviewCollection = Review::findFilter($place->getId(), -1, 0, 0, 'publishdate', 'DESC', Review::STATUS_VISIBLE);
 $reviews = array_filter($reviewCollection->toArray(), static fn (Review $review) => '' !== trim($review->getText()));
+
+if (count($reviews) > $limit) {
+	shuffle($reviews);
+	$reviews = array_slice($reviews, 0, $limit);
+}
 
 if (count($reviews) > 0) {
 ?>
