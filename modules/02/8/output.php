@@ -11,7 +11,7 @@ echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $
 echo '<div class="row">';
 
 echo '<div class="col-12'. ($show_text_side ? ' col-md-6' : '') .'">'; /** @phpstan-ignore-line */
-echo '<REX_VALUE[2] class="REX_VALUE[2] helper-02-3-title">REX_VALUE[1]</REX_VALUE[2]>';
+echo '<REX_VALUE[2] class="helper-02-3-title">REX_VALUE[1]</REX_VALUE[2]>';
 echo '<p class="helper-02-3-subtitle">REX_VALUE[id=3 output=html]</p>';
 echo '</div>';
 

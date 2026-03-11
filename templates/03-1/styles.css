@@ -113,10 +113,13 @@ article a, article a:visited, article a:hover, article a:focus, #breadcrumbs a {
 article a:hover {
 	text-decoration: underline;
 }
+article h1, article h2, article h3, article h4, article h5, article h6 {
+	color: var(--article-color-h);
+}
 article h1     { font-size: 1.5rem; }
 article h2     { font-size: 1.3rem; }
 article h3     { font-size: 1.25rem;}
-article h4, h5 { font-size: 1.1rem;}
+article h4, article h5 { font-size: 1.1rem;}
 article h6     { font-size: 1rem;}
 article img {
 	max-width: 100%;

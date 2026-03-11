@@ -263,6 +263,7 @@ nav .dropdown-menu .dropdown-item.active {
     text-decoration: underline;
 }
 h1.subhead {
+    color: var(--subhead-color-font);
     font-size: 2em;
     padding: 0.25em 0;
 }

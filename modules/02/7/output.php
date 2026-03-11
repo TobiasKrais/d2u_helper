@@ -9,7 +9,7 @@ $id = random_int(0, getrandmax());
 
 echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .' toggle_spacer">';
 
-echo '<REX_VALUE[2] onClick="toggle_view_'. $id .'()" class="REX_VALUE[2]">REX_VALUE[1]<span class="fa-icon h_toggle icon_down" id="'. $id .'_arrow"></span></REX_VALUE[2]>';
+echo '<REX_VALUE[2] onClick="toggle_view_'. $id .'()">REX_VALUE[1]<span class="fa-icon h_toggle icon_down" id="'. $id .'_arrow"></span></REX_VALUE[2]>';
 
 echo '<div class="wysiwyg_content" id="'. $id .'_text">';
 if ('REX_VALUE[id=3 isset=3]' !== '') { /** @phpstan-ignore-line */
