@@ -27,8 +27,7 @@
                                     $header_image_filename = (string) rex_config::get('d2u_helper', 'template_header_pic');
                                     $header_image = rex_media::get($header_image_filename);
                                     if ($header_image instanceof rex_media) {
-                                        $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes((string) rex_config::get('d2u_helper', 'template_header_media_manager_type', ''), $header_image_filename);
-                                        echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="'. $header_image->getTitle() .'" id="header-image">';
+                                        echo TobiasKrais\D2UHelper\FrontendHelper::getHeaderPictureTag($header_image_filename, $header_image->getTitle(), '', 'id="header-image"');
                                     }
                                 }
                                 if ('' !== rex_config::get('d2u_helper', 'template_logo', '')) {

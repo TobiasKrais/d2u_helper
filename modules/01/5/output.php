@@ -26,13 +26,13 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
 $text_1 = 'REX_VALUE[id=2 output="html"]';
 $show_text_2 = 'REX_VALUE[10]' === 'true' ? true : false; /** @phpstan-ignore-line */
 $text_2 = 'REX_VALUE[id=11 output="html"]';
-$picture_center = 'REX_VALUE[12]' === 'true' ? true : false; /** @phpstan-ignore-line */
 
 // Picture
 $picture = 'REX_MEDIA[1]';
 $picture_cols = 'REX_VALUE[6]' === '' ? 4 : (int) 'REX_VALUE[6]'; /** @phpstan-ignore-line */
 $picture_type = 'REX_VALUE[3]';
 $picture_position = 'REX_VALUE[4]';
+$picture_center = ('REX_VALUE[12]' === 'true') && ('left' === $picture_position || 'right' === $picture_position); /** @phpstan-ignore-line */
 
 $container_classes = 'col-12 col-lg-'. $cols . $offset_lg;
 if ('left' === $picture_position) { /** @phpstan-ignore-line */

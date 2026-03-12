@@ -173,6 +173,8 @@ Each template (`templates/XX-X/template.php`) follows this pattern:
 2. **`<body>`**: Template-specific HTML with fragments for navigation, header, footer
 3. **Before `</body>`**: Bootstrap JS, optional inline scripts (match-height), CTA box fragment
 
+Templates with a regular header image support breakpoint-specific header art direction via a `<picture>` element. The addon settings can provide separate Media Manager types for mobile (`template_header_media_manager_type_mobile`), tablet (`template_header_media_manager_type_tablet`), and desktop (`template_header_media_manager_type_desktop`). The general `template_header_media_manager_type` is used as the XXL variant from 1400px upward and as fallback for empty breakpoint fields. Background-image based header templates are excluded.
+
 Templates include jQuery and Bootstrap directly:
 
 ```php

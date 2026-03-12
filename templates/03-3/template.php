@@ -35,8 +35,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
                             }
                             $media_header_pic = rex_media::get($header_image);
                             if ($media_header_pic instanceof rex_media) {
-                                $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image);
-                                echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="'. $media_header_pic->getTitle() .'" class="d-print-none">';
+                                echo TobiasKrais\D2UHelper\FrontendHelper::getHeaderPictureTag($header_image, $media_header_pic->getTitle(), '', 'class="d-print-none"');
                             }
                         }
                         if ($d2u_helper->hasConfig('template_print_header_pic') || '' !== $d2u_helper->getConfig('template_print_header_pic')) {

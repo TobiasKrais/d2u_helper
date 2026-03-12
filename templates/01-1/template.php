@@ -64,8 +64,7 @@ $d2u_helper = rex_addon::get("d2u_helper");
 						}
 						$media_header_pic = rex_media::get($header_image);
 						if($media_header_pic instanceof rex_media) {
-							$responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image);
-							print '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="'. $media_header_pic->getTitle() .'" title="'. $media_header_pic->getTitle() .'" id="logo">';
+							print TobiasKrais\D2UHelper\FrontendHelper::getHeaderPictureTag($header_image, $media_header_pic->getTitle(), $media_header_pic->getTitle(), 'id="logo"');
 						}
 					?>
 				</div>

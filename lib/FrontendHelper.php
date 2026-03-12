@@ -487,4 +487,62 @@ class FrontendHelper
 
         return $result;
     }
+
+    /**
+     * Get breakpoint-specific header image URLs for art direction.
+     *
+    * Uses separate Media Manager types for mobile, tablet and desktop if
+    * configured. The general header media manager type is used for the largest
+    * breakpoint above desktop and as fallback for empty breakpoint fields.
+     *
+     * @api
+     * @return array{mobile: string, tablet: string, desktop: string, xl: string}
+     */
+    public static function getHeaderImageUrls(string $filename): array
+    {
+        $d2u_helper = rex_addon::get('d2u_helper');
+        $default_header_media_manager_type = (string) $d2u_helper->getConfig('template_header_media_manager_type', '');
+        $desktop_header_media_manager_type = (string) $d2u_helper->getConfig('template_header_media_manager_type_desktop', '');
+        if ('' === $desktop_header_media_manager_type) {
+            $desktop_header_media_manager_type = $default_header_media_manager_type;
+        }
+        $tablet_header_media_manager_type = (string) $d2u_helper->getConfig('template_header_media_manager_type_tablet', '');
+        if ('' === $tablet_header_media_manager_type) {
+            $tablet_header_media_manager_type = $desktop_header_media_manager_type;
+        }
+        $mobile_header_media_manager_type = (string) $d2u_helper->getConfig('template_header_media_manager_type_mobile', '');
+        if ('' === $mobile_header_media_manager_type) {
+            $mobile_header_media_manager_type = $tablet_header_media_manager_type;
+        }
+
+        return [
+            'mobile' => '' !== $mobile_header_media_manager_type ? rex_media_manager::getUrl($mobile_header_media_manager_type, $filename) : rex_url::media($filename),
+            'tablet' => '' !== $tablet_header_media_manager_type ? rex_media_manager::getUrl($tablet_header_media_manager_type, $filename) : rex_url::media($filename),
+            'desktop' => '' !== $desktop_header_media_manager_type ? rex_media_manager::getUrl($desktop_header_media_manager_type, $filename) : rex_url::media($filename),
+            'xxl' => '' !== $default_header_media_manager_type ? rex_media_manager::getUrl($default_header_media_manager_type, $filename) : rex_url::media($filename),
+        ];
+    }
+
+    /**
+     * Render a breakpoint-specific header picture element.
+     *
+     * @api
+     */
+    public static function getHeaderPictureTag(string $filename, string $alt = '', string $title = '', string $imgAttributes = ''): string
+    {
+        if ('' === $filename) {
+            return '';
+        }
+
+        $urls = self::getHeaderImageUrls($filename);
+        $title_attr = '' !== $title ? ' title="'. rex_escape($title) .'"' : '';
+        $img_attributes = '' !== trim($imgAttributes) ? ' '. trim($imgAttributes) : '';
+
+        return '<picture>'
+            . '<source media="(max-width: 767.98px)" srcset="'. rex_escape($urls['mobile']) .'">'
+            . '<source media="(max-width: 1199.98px)" srcset="'. rex_escape($urls['tablet']) .'">'
+            . '<source media="(max-width: 1399.98px)" srcset="'. rex_escape($urls['desktop']) .'">'
+            . '<img src="'. rex_escape($urls['xxl']) .'" alt="'. rex_escape($alt) .'"'. $title_attr . $img_attributes . '>'
+            . '</picture>';
+    }
 }

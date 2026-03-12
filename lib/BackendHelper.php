@@ -532,11 +532,15 @@ class BackendHelper
      * @param int $size Size of the select field (parameter is no more used)
      * @param bool $multiple true if multiple selections are allowed
      * @param bool $readonly true if field should have readonly attribute
+     * @param string $icon_html optional HTML icon prefix for the label
+     * @param string $description_text optional description rendered below the label
      */
-    public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size = 1, $multiple = false, $readonly = false): void
+    public static function form_select($message_id, $fieldname, $values, $selected_values = [], $size = 1, $multiple = false, $readonly = false, $icon_html = '', $description_text = ''): void
     {
+        $label_prefix = '' !== $icon_html ? $icon_html . ' ' : '';
+        $description = '' !== $description_text ? '<br><small>' . rex_escape($description_text) . '</small>' : '';
         echo '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
-        echo '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
+        echo '<dt><label>' . $label_prefix . rex_i18n::msg($message_id) . $description . '</label></dt>';
         echo '<dd>';
         $multiple_attr = $multiple ? ' multiple="multiple"' : '';
         if ($readonly) {

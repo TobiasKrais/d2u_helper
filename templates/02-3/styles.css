@@ -26,6 +26,9 @@ img {
 header {
     position: relative;
 }
+.header-image picture {
+    display: block;
+}
 .header-image img {
     width: 100%;
     display: block;

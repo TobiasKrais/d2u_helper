@@ -295,7 +295,7 @@
 	<div class="col-xs-12">&nbsp;<div style="border-top: 1px darkgrey solid; margin-bottom: 1em;"></div></div>
 </div>
 
-<div class="row">
+<div class="row" id="picture-center-option">
 	<div class="col-xs-12">
 		<dl class="rex-form-group form-group">
 			<dt>
@@ -372,5 +372,24 @@
 	// Hide image width on selection change
 	$("select[name='REX_INPUT_VALUE[4]']").on('change', function(e) {
 		picture_width_changer();
+	});
+
+	function picture_center_changer() {
+		var position = $("select[name='REX_INPUT_VALUE[4]']").val();
+		if (position === "left" || position === "right") {
+			$("#picture-center-option").slideDown();
+		} else {
+			$("#picture-center-option").slideUp();
+		}
+	}
+
+	// Hide vertical centering option on document load
+	$(document).ready(function() {
+		picture_center_changer();
+	});
+
+	// Hide vertical centering option on selection change
+	$("select[name='REX_INPUT_VALUE[4]']").on('change', function(e) {
+		picture_center_changer();
 	});
 </script>

@@ -61,6 +61,15 @@ if (!$d2u_helper->hasConfig('default_lang')) {
     $d2u_helper->setConfig('default_lang', rex_clang::getStartId());
 }
 
+$general_header_media_manager_type = (string) $d2u_helper->getConfig('template_header_media_manager_type', '');
+if ('' !== $general_header_media_manager_type) {
+    foreach (['template_header_media_manager_type_mobile', 'template_header_media_manager_type_tablet', 'template_header_media_manager_type_desktop'] as $config_key) {
+        if (!$d2u_helper->hasConfig($config_key) || '' === (string) $d2u_helper->getConfig($config_key, '')) {
+            $d2u_helper->setConfig($config_key, $general_header_media_manager_type);
+        }
+    }
+}
+
 // Set default lang
 if (!$d2u_helper->hasConfig('default_lang')) {
     $d2u_helper->setConfig('default_lang', rex_clang::getStartId());

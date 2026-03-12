@@ -41,8 +41,7 @@ use D2U_Immo\Contact;
 					<?php
                         if ($d2u_helper->hasConfig('template_03_2_header_pic') || '' !== $d2u_helper->getConfig('template_03_2_header_pic')) {
                             $header_image = (string) $d2u_helper->getConfig('template_03_2_header_pic');
-                            $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image);
-                            echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="">';
+                            echo TobiasKrais\D2UHelper\FrontendHelper::getHeaderPictureTag($header_image);
                         }
                     ?>
 				</div>

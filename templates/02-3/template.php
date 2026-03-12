@@ -36,6 +36,7 @@ $url_id = TobiasKrais\D2UHelper\FrontendHelper::getUrlId();
 	<?php
         $has_header_image = false;
         $header_image = '';
+        $header_picture_tag = '';
         if ($d2u_helper->hasConfig('template_header_pic') && '' !== $d2u_helper->getConfig('template_header_pic')) {
             $header_image = (string) $d2u_helper->getConfig('template_header_pic');
             if ($this->hasValue('art_file') && '' !== $this->getValue('art_file') && null !== $this->getValue('art_file')) { /** @phpstan-ignore-line */
@@ -44,13 +45,14 @@ $url_id = TobiasKrais\D2UHelper\FrontendHelper::getUrlId();
             $media_header_pic = rex_media::get($header_image);
             if ($media_header_pic instanceof rex_media) {
                 $has_header_image = true;
+                $header_picture_tag = TobiasKrais\D2UHelper\FrontendHelper::getHeaderPictureTag($header_image, $media_header_pic->getTitle(), $media_header_pic->getTitle(), 'id="header"');
             }
         }
     ?>
 	<header<?= $has_header_image ? ' class="has-image"' : '' ?>>
-		<?php if ($has_header_image && isset($media_header_pic) && $media_header_pic instanceof rex_media) { ?>
+		<?php if ($has_header_image && '' !== $header_picture_tag) { ?>
 		<div class="header-image">
-			<img src="<?= '' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image) ?>"<?php $responsive_02_3 = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image); echo $responsive_02_3['srcset_attr'] . $responsive_02_3['sizes_attr']; ?> alt="<?= $media_header_pic->getTitle() ?>" title="<?= $media_header_pic->getTitle() ?>" id="header">
+			<?= $header_picture_tag ?>
 		</div>
 		<?php } ?>
 		<div class="header-overlay">
