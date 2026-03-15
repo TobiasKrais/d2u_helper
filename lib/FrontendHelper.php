@@ -538,7 +538,7 @@ class FrontendHelper
         $title_attr = '' !== $title ? ' title="'. rex_escape($title) .'"' : '';
         $img_attributes = '' !== trim($imgAttributes) ? ' '. trim($imgAttributes) : '';
 
-        return '<picture>'
+        return '<picture class="d-print-none">'
             . '<source media="(max-width: 767.98px)" srcset="'. rex_escape($urls['mobile']) .'">'
             . '<source media="(max-width: 1199.98px)" srcset="'. rex_escape($urls['tablet']) .'">'
             . '<source media="(max-width: 1399.98px)" srcset="'. rex_escape($urls['desktop']) .'">'
