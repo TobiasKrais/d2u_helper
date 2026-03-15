@@ -3,6 +3,7 @@
 namespace TobiasKrais\D2UHelper;
 
 use rex;
+use rex_addon;
 use rex_addon_interface;
 use rex_sql;
 
@@ -155,6 +156,34 @@ class Module
     }
 
     /**
+     * Check whether module installation requires Sprog.
+     */
+    public function requiresSprog(): bool
+    {
+        foreach ([self::MODULE_INPUT, self::MODULE_OUTPUT, self::MODULE_INSTALL] as $file) {
+            $path = $this->module_folder . $file;
+            if (!file_exists($path)) {
+                continue;
+            }
+
+            $content = file_get_contents($path);
+            if (false !== $content && str_contains($content, 'Sprog\\Wildcard::get(')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Check whether module installation prerequisites are met.
+     */
+    public function canBeInstalled(): bool
+    {
+        return !$this->requiresSprog() || rex_addon::get('sprog')->isAvailable();
+    }
+
+    /**
      * Get Redaxo module Id.
      * @return int Redaxo Module Id
      */
@@ -195,6 +224,10 @@ class Module
      */
     public function install($rex_module_id = 0)
     {
+        if (!$this->canBeInstalled()) {
+            return false;
+        }
+
         if (file_exists($this->module_folder . self::MODULE_INSTALL)) {
             $success = include $this->module_folder . self::MODULE_INSTALL;
             if (!$success) {

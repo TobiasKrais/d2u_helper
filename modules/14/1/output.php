@@ -5,10 +5,6 @@ $limit = 'REX_VALUE[1]' !== '' ? (int) 'REX_VALUE[1]' : 10; /** @phpstan-ignore-
 $media_manager_type = 'REX_VALUE[3]' !== '' ? 'REX_VALUE[3]' : 'rex_mediapool_preview'; /** @phpstan-ignore-line */
 $start = rex_request('start', 'int', 0);
 
-// Get placeholder wildcard tags
-$sprog = rex_addon::get('sprog');
-$tag_open = $sprog->getConfig('wildcard_open_tag');
-$tag_close = $sprog->getConfig('wildcard_close_tag');
 ?>
 
 <section class="search_it-search">
@@ -19,7 +15,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 
         $form_data = 'text|search||||{"placeholder":"'. \Sprog\Wildcard::get('d2u_helper_module_14_enter_search_term') .'"}
 				html|button||<button class="search_it_yform_button" type="submit"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M23.354 22.646l-5-5-.012-.007a8.532 8.532 0 10-.703.703l.007.012 5 5a.5.5 0 00.707-.707zM12 19.5a7.5 7.5 0 117.5-7.5 7.508 7.508 0 01-7.5 7.5z"></path></svg></button>
-				spam_protection|honeypot|Bitte nicht ausfüllen|'. $tag_open .'d2u_helper_module_14_validate_spam_detected'. $tag_close .'|0'. PHP_EOL;
+				spam_protection|honeypot|Bitte nicht ausfüllen|'. \Sprog\Wildcard::get('d2u_helper_module_14_validate_spam_detected') .'|0'. PHP_EOL;
         $yform->setFormData(trim($form_data));
 
         $yform->setObjectparams('csrf_protection', false);
@@ -46,7 +42,7 @@ $tag_close = $sprog->getConfig('wildcard_close_tag');
 ?>
 		<form class="search_it-form" id="search_it-form1" action="<?= rex_getUrl() ?>#search-results" method="get">
 			<div class="search_it-flex">
-				<?= '<input type="text" id="search_it_search" name="search" value="'. ('' !== $request ? rex_escape($request) : '') .'" placeholder="'. $tag_open .'d2u_helper_module_14_enter_search_term'. $tag_close .'" autofocus />';
+				<?= '<input type="text" id="search_it_search" name="search" value="'. ('' !== $request ? rex_escape($request) : '') .'" placeholder="'. \Sprog\Wildcard::get('d2u_helper_module_14_enter_search_term') .'" autofocus />';
                 ?>
 				<button class="search_it-button" type="submit">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><path fill="currentColor" d="M23.354 22.646l-5-5-.012-.007a8.532 8.532 0 10-.703.703l.007.012 5 5a.5.5 0 00.707-.707zM12 19.5a7.5 7.5 0 117.5-7.5 7.508 7.508 0 01-7.5 7.5z"></path></svg>
@@ -72,7 +68,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
     $result = $search_it->search(false !== $request ? $request : '');
 
     echo '<a name="search-results"></a>';
-    echo '<h2 class="search_it-headline">'. $tag_open .'d2u_helper_module_14_search_results'. $tag_close .'</h2>';
+    echo '<h2 class="search_it-headline">'. \Sprog\Wildcard::get('d2u_helper_module_14_search_results') .'</h2>';
     if ((int) $result['count'] > 0) {
         // Pagination
         $pagination = '';
@@ -192,14 +188,14 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
         // Pagination
         echo $pagination;
     } elseif ($result['count'] > 0) {
-        echo '<p class="search_it-zero">'. $tag_open .'d2u_helper_module_14_search_results_none'. $tag_close .'</p>';
+        echo '<p class="search_it-zero">'. \Sprog\Wildcard::get('d2u_helper_module_14_search_results_none') .'</p>';
 
         $activate_similarity_search = 'REX_VALUE[2]' === 'true' ? true : false; /** @phpstan-ignore-line */
         // Similarity search
         $search_it_sim = new $search_it_class(rex_clang::getCurrentId());
         $search_it_sim->setLimit(0, 1);
         if ($activate_similarity_search && rex_config::get('search_it', 'similarwordsmode', 0) > 0 && '' !== $result['simwordsnewsearch']) { /** @phpstan-ignore-line */
-            $simwords_out = '<p>'. $tag_open .'d2u_helper_module_14_search_similarity'. $tag_close .':<strong><ul>';
+            $simwords_out = '<p>'. \Sprog\Wildcard::get('d2u_helper_module_14_search_similarity') .':<strong><ul>';
             $sim_counter = 0;
             foreach (explode(' ', trim($result['simwordsnewsearch'])) as $new_search_word) {
                 $result_simwords = $search_it_sim->search(trim($new_search_word));

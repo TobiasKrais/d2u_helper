@@ -25,9 +25,6 @@ if ($cols_lg >= 8) { /** @phpstan-ignore-line */
 
 echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
 
-$sprog = rex_addon::get('sprog');
-$tag_open = $sprog->getConfig('wildcard_open_tag');
-$tag_close = $sprog->getConfig('wildcard_close_tag');
 
 $documents = explode(',', 'REX_MEDIALIST[1]');
 $ueberschrift = 'REX_VALUE[1]';

@@ -43,6 +43,7 @@
 				<ul>
 					<li>Bootstrap 5 Templatevarianten: Für alle 10 BS4-Templates wurden BS5-kompatible Varianten erstellt (kein jQuery, BS5 Utility-Klassen, Dark Mode, CSS Custom Properties). BS4-Templates erhalten den Hinweis "(BS4)" im Namen, BS5-Templates "(BS5)". Neue Templates: 00-2, 01-2, 02-2, 02-3, 03-3, 03-4, 04-4, 05-2, 06-2.</li>
 					<li>Neues Template 02-3 "Header Pic Template 2026 (BS5)" hinzugefügt: Basiert auf Bootstrap 5, benötigt kein jQuery.</li>
+					<li>Template 03-3 "Immo Template - 2 Columns (BS5)": Bootstrap-5-Navigation vollständig integriert und gestylt, inklusive Logo-Leiste, Utility-Navigation, Suche, Sprachwahl und Dark-Mode-Toggle.</li>
 					<li>Bildbasierte Header-Templates unterstützen jetzt echte Art Direction für Headerbilder: Über separate Media Manager Typen für Mobile, Tablet und Desktop werden je Breakpoint unterschiedliche Bildausschnitte per picture-Element ausgeliefert. Ab 1400px wird der allgemeine Headerbild-Typ als XXL-Stufe verwendet. Leere Breakpoint-Felder fallen ebenfalls darauf zurück. Ausgenommen sind reine Background-Image-Templates.</li>
 					<li>BS5 Header Slider Templates zusammengeführt: Die drei BS5-Varianten 04-4, 04-5 und 04-6 wurden in ein einziges Template 04-4 zusammengeführt. Features (Slogan, konfigurierbare Nav-Position, News-Spalte) werden automatisch erkannt und bei Bedarf angezeigt.</li>
 					<li>Bugfix Template 02-3: art_file Metainfo wird jetzt bei der Installation registriert (fehlte bisher). Templates 06-1 und 06-2 registrieren art_file nicht mehr, weil es dort nicht verwendet wird.</li>
@@ -53,6 +54,7 @@
 				<ul>
 					<li>Neue Bootstrap 5 Fragmente: d2u_template_bs5_nav.php mit Einstellungs-Unterstützung für Menütyp, Breakpoint, Suche, Sprachwahl und Dark Mode Toggle sowie d2u_template_bs5_header_slider.php für den Header Slider.</li>
 					<li>Neue Methode getMenuItemsBS5() in FrontendNavigationMegaMenu für Bootstrap-5-kompatible Menü-Ausgabe hinzugefügt.</li>
+					<li>Bootstrap-5-Navigation: Kategorien mit Unterpunkten geben jetzt die Elternseite zusätzlich als ersten Dropdown-Eintrag aus. In der Hauptebene bleibt der Kategoriename erhalten, im zusätzlichen Dropdown-Eintrag greift bei Bedarf die bestehende Einstellung zur Anzeige des Startartikelnamens.</li>
 					<li>Neues Fragment d2u_template_darkmode.php: Dark Mode JavaScript (Flash-Prevention und Toggle-Logik) aus allen 8 BS5-Templates in ein zentrales Fragment mit Parameter "position" (head/body) ausgelagert.</li>
 				</ul>
 			</li>
@@ -60,6 +62,7 @@
 				<ul>
 					<li>jQuery sowie Bootstrap-4 CSS/JS werden jetzt direkt in den Templates eingebunden und nicht mehr über die Addon-Einstellungen gesteuert.</li>
 					<li>Die Einstellungen "jQuery einbinden" und "Bootstrap einbinden" wurden entfernt.</li>
+					<li>BS5-Navigations-Hoverzustände in den Templates 00-2, 01-2, 02-2, 03-3, 04-4, 05-2 und 06-2 vereinheitlicht: Die Hintergrundfarbe des Hover-/Focus-Zustands überschreibt Bootstrap jetzt konsistent per !important.</li>
 					<li>CSS Custom Properties (:root Variablen): Alle Templates, Module und Asset-CSS-Dateien auf CSS Variablen (var(--name)) umgestellt. FrontendHelper::generateCSSVariables() generiert den :root Block. Alte Platzhalter in externen Addons funktionieren weiterhin über applySettingsToCSS().</li>
 					<li>Dark Mode Unterstützung für Bootstrap 5 Templates und Module: Neue Dark Mode Farbfelder in den Einstellungen neben den bisherigen Farben (Light ☀ / Dark ☽). Dark-Mode-Farben werden als [data-bs-theme="dark"] CSS Block ausgegeben. Toggle-Button in der BS5 Navigation mit localStorage Speicherung und prefers-color-scheme Auto-Detection.</li>
 				</ul>

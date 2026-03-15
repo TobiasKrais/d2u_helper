@@ -167,7 +167,7 @@ nav .navbar-nav .nav-link {
 nav .navbar-nav .nav-link:hover,
 nav .navbar-nav .nav-link:focus {
 	color: var(--navi-color-hover-font) !important;
-	background-color: var(--navi-color-hover-bg);
+	background-color: var(--navi-color-hover-bg) !important;
 	cursor: pointer;
 }
 nav .navbar-nav .nav-link.active {

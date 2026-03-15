@@ -70,7 +70,7 @@ class TemplateManager
     {
         foreach ($this->d2u_templates as $template) {
             // Only check autoupdate, not if update is needed. That would not work during addon update
-            if ($template->isAutoupdateActivated()) {
+            if ($template->isAutoupdateActivated() && $template->canBeInstalled()) {
                 $template->install();
             }
         }
@@ -94,6 +94,10 @@ class TemplateManager
                         $template->disableAutoupdate();
                         echo rex_view::success($template->getD2UId() .' '. $template->getName() .': '. rex_i18n::msg('d2u_helper_autoupdate_deactivated'));
                     } else {
+                        if (!$template->canBeInstalled()) {
+                            echo rex_view::warning($template->getD2UId() .' '. $template->getName() .': Sprog addon is required for installation.');
+                            break;
+                        }
                         $template->activateAutoupdate();
                         echo rex_view::success($template->getD2UId() .' '. $template->getName() .': '. rex_i18n::msg('d2u_helper_autoupdate_activated'));
                     }
@@ -102,6 +106,10 @@ class TemplateManager
                     $this->d2u_templates[$i] = $template;
                     echo rex_view::success($template->getD2UId() .' '. $template->getName() .': '. rex_i18n::msg('d2u_helper_templates_pair_unlinked'));
                 } else {
+                    if (!$template->canBeInstalled()) {
+                        echo rex_view::warning($template->getD2UId() .' '. $template->getName() .': Sprog addon is required for installation.');
+                        break;
+                    }
                     $success = $template->install($paired_template_id);
                     if ($success && array_key_exists($template->getRedaxoId(), self::getRexTemplates())) {
                         echo rex_view::success($template->getD2UId() .' '. $template->getName() .': '. rex_i18n::msg('d2u_helper_templates_installed'));
@@ -185,6 +193,9 @@ class TemplateManager
         $d2u_templates[] = new Template('06-2',
             'Paper Sheet Template (BS5)',
             1);
+        foreach ($d2u_templates as $d2u_template) {
+            $d2u_template->requireSprog();
+        }
         return $d2u_templates;
     }
 

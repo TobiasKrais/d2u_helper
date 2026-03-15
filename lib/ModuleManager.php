@@ -69,7 +69,7 @@ class ModuleManager
     {
         foreach ($this->d2u_modules as $module) {
             // Only check autoupdate, not if needed. That would not work during addon update
-            if ($module->isAutoupdateActivated()) {
+            if ($module->isAutoupdateActivated() && $module->canBeInstalled()) {
                 $module->install();
             }
         }
@@ -93,6 +93,10 @@ class ModuleManager
                         $module->disableAutoupdate();
                         echo rex_view::success($module->getD2UId() .' '. $module->getName() .': '. rex_i18n::msg('d2u_helper_autoupdate_deactivated'));
                     } else {
+                        if (!$module->canBeInstalled()) {
+                            echo rex_view::warning($module->getD2UId() .' '. $module->getName() .': Sprog addon is required for installation.');
+                            break;
+                        }
                         $module->activateAutoupdate();
                         echo rex_view::success($module->getD2UId() .' '. $module->getName() .': '. rex_i18n::msg('d2u_helper_autoupdate_activated'));
                     }
@@ -101,6 +105,10 @@ class ModuleManager
                     $this->d2u_modules[$i] = $module;
                     echo rex_view::success($module->getD2UId() .' '. $module->getName() .': '. rex_i18n::msg('d2u_helper_modules_pair_unlinked'));
                 } else {
+                    if (!$module->canBeInstalled()) {
+                        echo rex_view::warning($module->getD2UId() .' '. $module->getName() .': Sprog addon is required for installation.');
+                        break;
+                    }
                     $success = $module->install($paired_module_id);
                     if ($success && array_key_exists($module->getRedaxoId(), self::getRexModules())) {
                         rex_delete_cache();

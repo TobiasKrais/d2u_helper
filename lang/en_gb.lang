@@ -146,7 +146,7 @@ d2u_helper_settings_header_media_type_tablet_info = 768px to 1199px
 d2u_helper_settings_header_media_type_desktop = Desktop
 d2u_helper_settings_header_media_type_desktop_info = 1200px to 1399px
 d2u_helper_settings_include_menu = Select navigation for template and include JS / CSS automatically
-d2u_helper_settings_include_menu_bs5 = Bootstrap 5 navigation (compatible with template 07-1+)
+d2u_helper_settings_include_menu_bs5 = Bootstrap 5 navigation (compatible with templates 00-2, 01-2, 02-2, 02-3, 03-3, 04-4, 05-2 and 06-2)
 d2u_helper_settings_include_menu_megamenu =  Mega Menu navigation (compatible with templates 00-1, 01-1, 02-1, 03-1 and 04-x)
 d2u_helper_settings_include_menu_multilevel = Responsive MultiLevel navigation (compatible with templates 00-1, 01-1, 02-1, 03-1 and 04-x)
 d2u_helper_settings_include_menu_none =  None
@@ -203,7 +203,7 @@ d2u_helper_settings_width_lg = Computer screens
 d2u_helper_settings_width_xl = Large computer screens
 
 d2u_helper_templates_d2u_template_name = D2U template name
-d2u_helper_templates_install_d2u_immo_window_advertising = Addon d2u_immo and its plugin window_advertising are needed for this template.
+d2u_helper_templates_install_d2u_immo = Addon D2U Immobilien is needed for this template.
 d2u_helper_templates_install_d2u_news = D2U News addon is needed for this addon.
 d2u_helper_templates_install_metainfo = Metainfo addon is needed for this addon.
 d2u_helper_templates_install_sprog = Sprog addon is needed for this template.

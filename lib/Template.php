@@ -49,6 +49,9 @@ class Template
     /** @var int Template version number */
     private int $revision = 0;
 
+    /** @var bool true if template requires Sprog */
+    private bool $requires_sprog = false;
+
     /** @var int Redaxo Template ID */
     private int $rex_template_id = 0;
 
@@ -165,6 +168,41 @@ class Template
     }
 
     /**
+     * Mark template as requiring Sprog.
+     */
+    public function requireSprog(): self
+    {
+        $this->requires_sprog = true;
+        return $this;
+    }
+
+    /**
+     * Check whether template installation requires Sprog.
+     */
+    public function requiresSprog(): bool
+    {
+        if ($this->requires_sprog) {
+            return true;
+        }
+
+        $path = $this->template_folder . self::TEMPLATE_FILE;
+        if (!file_exists($path)) {
+            return false;
+        }
+
+        $content = file_get_contents($path);
+        return false !== $content && str_contains($content, 'Sprog\\Wildcard::get(');
+    }
+
+    /**
+     * Check whether template installation prerequisites are met.
+     */
+    public function canBeInstalled(): bool
+    {
+        return !$this->requiresSprog() || rex_addon::get('sprog')->isAvailable();
+    }
+
+    /**
      * Get Redaxo template Id.
      * @return int Redaxo Template Id
      */
@@ -206,6 +244,10 @@ class Template
      */
     public function install($rex_template_id = 0)
     {
+        if (!$this->canBeInstalled()) {
+            return false;
+        }
+
         if (file_exists($this->template_folder . self::TEMPLATE_INSTALL)) {
             $success = include $this->template_folder . self::TEMPLATE_INSTALL;
             if (!$success) {

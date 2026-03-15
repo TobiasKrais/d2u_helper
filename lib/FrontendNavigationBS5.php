@@ -68,19 +68,22 @@ class FrontendNavigationBS5
             if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($category_start_article)) {
                 $is_active = rex_article::getCurrentId() === $category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($category->getId(), rex_article::getCurrent()->getPathAsArray(), true));
                 $children = $category->getChildren(true);
+                $category_name = $category->getName();
+                $category_submenu_name = $use_articlename && $category_start_article instanceof rex_article ? $category_start_article->getName() : $category->getName();
 
                 if (0 === count($children)) {
                     // Without submenu
                     echo '<li class="nav-item">';
-                    echo '<a class="nav-link' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '">' . $category->getName() . '</a>';
+                    echo '<a class="nav-link' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '">' . $category_name . '</a>';
                     echo '</li>';
                 } else {
                     // With submenu (dropdown)
                     echo '<li class="nav-item dropdown">';
                     echo '<a class="nav-link dropdown-toggle' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '" role="button" data-bs-toggle="dropdown" aria-expanded="false">';
-                    echo $category->getName();
+                    echo $category_name;
                     echo '</a>';
                     echo '<ul class="dropdown-menu">';
+                    echo '<li><a class="dropdown-item' . (rex_article::getCurrentId() === $category_start_article?->getId() ? ' active' : '') . '" href="' . $category->getUrl() . '">' . $category_submenu_name . '</a></li>';
                     foreach ($children as $child) {
                         $child_start_article = $child->getStartArticle();
                         if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($child_start_article)) {

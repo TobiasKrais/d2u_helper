@@ -129,7 +129,7 @@ article img {
 }
 article fieldset {
 	background-color: var(--article-color-box);
-	border: 1px solid var(--navi-color-bg);
+	border: 1px solid var(--article-color-h);
 	padding: 1em;
 }
 article legend {

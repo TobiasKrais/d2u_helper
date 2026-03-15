@@ -126,7 +126,7 @@ article img {
 }
 article fieldset {
 	background-color: var(--article-color-box);
-	border: 1px solid var(--navi-color-bg);
+	border: 1px solid var(--naarticlevi-color-h);
 	padding: 1em;
 }
 article legend {
@@ -135,7 +135,7 @@ article legend {
 	width: auto;
 }
 article .infobox {
-	border: 1px solid var(--navi-color-bg);
+	border: 1px solid var(--article-color-h);
 	margin-bottom: 1em;
 	width: 100%;
 }
@@ -143,7 +143,7 @@ article .infobox-content {
 	padding: 0.5em;
 }
 article .infobox-header {
-	background-color: var(--navi-color-bg);
+	background-color: var(--article-color-h);
 	color: var(--navi-color-font);
 	padding: 0.25em 0.75em;
 	text-align: center;

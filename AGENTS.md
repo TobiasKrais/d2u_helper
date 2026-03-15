@@ -187,6 +187,11 @@ echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper
 <script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.bundle.min.js') ?>?v=4.6.2"></script>
 ```
 
+### Sprog Requirement For Installation
+
+- Modules that call `Sprog\Wildcard::get()` must not be installed or auto-updated unless the `sprog` addon is available.
+- D2U Helper templates should be treated as Sprog-dependent during installation because they render fragments that use frontend wildcards.
+
 #### Template Versioning
 
 Each template has a revision number defined in `lib/TemplateManager.php` inside the `getD2UHelperTemplates()` method. When a template is changed:
