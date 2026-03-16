@@ -3,7 +3,7 @@ html {
 }
 body, input {
 	font-family: 'Arial', sans-serif !important;
-	color: #3c3c3c;
+	color: var(--bs-body-color);
 }
 
 body {
@@ -53,38 +53,3 @@ article img {
 	max-width: 100%;
 }
 
-/* D2U Immo Addon */
-.energy-scale-container {
-	height: 35px;
-	margin-top: 10px;
-	position: relative;
-}
-.energy-scale {
-	min-width: 400px;
-}
-
-.reserved {
-	position: relative;
-}
-.reserved span {
-    background-color: white;
-    bottom: 0px;
-    color: red;
-	font-weight: bold;
-    left: 0px;
-    opacity: 0.75;
-    padding: 0.5em 0;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-}
-.expose .reserved span {
-	padding-bottom: 1.5em;
-}
-
-.col-6 ul {
-	margin-bottom: 0;
-}
-#immo_advertising {
-	min-height: 600px;
-}

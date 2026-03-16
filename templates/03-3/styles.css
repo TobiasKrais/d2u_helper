@@ -1,6 +1,6 @@
 body, input {
 	font-family: 'Arial', sans-serif !important;
-	color: #3c3c3c;
+	color: var(--bs-body-color);
 }
 
 @font-face{
@@ -141,7 +141,7 @@ nav .navbar-nav .dropdown-toggle.active {
 	cursor: pointer;
 }
 nav .navbar-nav .nav-link.active {
-	background: rgba(255, 255, 255, 0.25);
+	background: color-mix(in srgb, var(--navi-color-font) 25%, transparent);
 }
 nav .navbar-nav .dropdown-toggle::after {
 	margin-left: 0.45rem;
@@ -346,7 +346,7 @@ article input:invalid, article textarea:invalid {
 
 figure {
   float: left;
-  border: 1px solid #cccccc;
+	border: 1px solid color-mix(in srgb, var(--bs-body-color) 20%, transparent);
   border-radius: 5px;
 }
 figure img {
@@ -354,8 +354,8 @@ figure img {
 }
 figure figcaption {
   padding: 2px 4px 2px 4px;
-  background-color: #636363;
-  color: #cccccc;
+	background-color: color-mix(in srgb, var(--bs-body-color) 70%, transparent);
+	color: var(--bs-body-bg);
   border-radius: 0 0 3px 3px;
 }
 

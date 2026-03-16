@@ -15,17 +15,19 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.1.0-DEV</p>
+		<p>2.1.0</p>
 		<ul>
 			<li>Wichtige Hinweise
 				<ul>
 					<li>Mit der geplanten Version 3 werden alle Bootstrap-4-Module und -Templates entfernt. Bitte rechtzeitig auf die BS5-Varianten wechseln. Alle reinen BS4 Module und Templates tragen deshalb den Hinweis "deprecated".</li>
 					<li>Mit der geplanten Version 3 wird nur noch Consent Manager 5.x unterstützt. Consent Manager 4.x wird dann nicht mehr unterstützt.</li>
+					<li>Mit der geplanten Version 3 werden alle Module, die Plyr für die Videoausgabe verwenden, auf Vidstack umgestellt. Bitte rechtzeitig wechseln, da der Support aus den Modulen entfernt wird.</li>
+					<li>Mit der geplanten Version 3 wird applySettingsToCSS() entfernt.</li>
 				</ul>
 			</li>
 			<li>Module
 				<ul>
-					<li>Bootstrap 5 Modulvarianten: Für alle BS4-spezifischen Module wurden BS5-kompatible Varianten erstellt (kein jQuery, BS5 Utility-Klassen). BS4-Module erhalten den Hinweis "(BS4)" im Namen, BS5-Module "(BS5)". Neue Module: 01-4, 01-5, 01-6, 02-6, 02-7, 02-8, 02-9, 02-10, 03-4, 03-5, 03-6, 04-3, 04-4, 06-5, 06-6, 06-7, 06-8, 10-4, 11-4, 11-5, 12-2, 15-2.</li>
+					<li>Bootstrap 5 Modulvarianten: Für alle BS4-spezifischen Module wurden BS5-kompatible Varianten erstellt (kein jQuery, BS5 Utility-Klassen). BS4-Module erhalten den Hinweis "(BS4, deprecated)" im Namen, BS5-Module "(BS5)". Neue Module: 01-4, 01-5, 01-6, 02-6, 02-7, 02-8, 02-9, 02-10, 03-4, 03-5, 03-6, 04-3, 04-4, 06-5, 06-6, 06-7, 06-8, 10-4, 11-4, 11-5, 12-2, 15-2.</li>
 					<li>Module 01-2 und 01-5 "Texteditor mit Bild und Überschrift": Überschrift kann jetzt als Fettschrift (Standard) oder als h1-h6 Überschrift ausgegeben werden. Modul umbenannt von "Fettschrift" zu "Überschrift".</li>
 					<li>Module 01-2 und 01-5: Bildbreite wird im Backend ausgeblendet, wenn das Bild oberhalb oder unterhalb des Textes positioniert wird (Breite greift nur bei links/rechts).</li>
 					<li>Modul 03-5 "Bildergalerie Lightbox (BS5)": Ekko Lightbox durch eigenständige Vanilla JS Lightbox ersetzt (Tastaturnavigation, Galerie-Support).</li>
@@ -36,45 +38,24 @@
 					<li>Modul 12-2 "Feeds Stream Galerie (BS5)": Ekko Lightbox durch Vanilla JS Lightbox ersetzt.</li>
 					<li>Neue Module 16-1 "Link als Button (BS4)" und 16-2 "Link als Button (BS5)": Link als Bootstrap Button (primary/secondary) mit Text sowie Linkziel (extern, Redaxo Artikel oder Medienpool-Datei).</li>
 					<li>Neues Modul 17-1 "Google Places Bewertungen (BS5)": Zeigt Google Places Bewertungen als Bootstrap 5 Cards mit Sternebewertung an. Benötigt das Google Places Addon.</li>
-					<li>Das Modul "Kundenstimmen Carousel (BS5)" wurde in das d2u_references Addon verschoben und ist dort jetzt als Modul 50-5 verfügbar.</li>
 				</ul>
 			</li>
 			<li>Templates
 				<ul>
-					<li>Bootstrap 5 Templatevarianten: Für alle 10 BS4-Templates wurden BS5-kompatible Varianten erstellt (kein jQuery, BS5 Utility-Klassen, Dark Mode, CSS Custom Properties). BS4-Templates erhalten den Hinweis "(BS4)" im Namen, BS5-Templates "(BS5)". Neue Templates: 00-2, 01-2, 02-2, 02-3, 03-3, 03-4, 04-4, 05-2, 06-2.</li>
+					<li>Bootstrap 5 Templatevarianten: Für alle 10 BS4-Templates wurden BS5-kompatible Varianten erstellt (kein jQuery, BS5 Utility-Klassen, Dark Mode, CSS Custom Properties). BS4-Templates erhalten den Hinweis "(BS4, deprecated)" im Namen, BS5-Templates "(BS5)". Neue Templates: 00-2, 01-2, 02-2, 02-3, 03-3, 03-4, 04-4, 05-2, 06-2.</li>
 					<li>Neues Template 02-3 "Header Pic Template 2026 (BS5)" hinzugefügt: Basiert auf Bootstrap 5, benötigt kein jQuery.</li>
 					<li>Template 03-3 "Immo Template - 2 Columns (BS5)": Bootstrap-5-Navigation vollständig integriert und gestylt, inklusive Logo-Leiste, Utility-Navigation, Suche, Sprachwahl und Dark-Mode-Toggle.</li>
 					<li>Bildbasierte Header-Templates unterstützen jetzt echte Art Direction für Headerbilder: Über separate Media Manager Typen für Mobile, Tablet und Desktop werden je Breakpoint unterschiedliche Bildausschnitte per picture-Element ausgeliefert. Ab 1400px wird der allgemeine Headerbild-Typ als XXL-Stufe verwendet. Leere Breakpoint-Felder fallen ebenfalls darauf zurück. Ausgenommen sind reine Background-Image-Templates.</li>
 					<li>BS5 Header Slider Templates zusammengeführt: Die drei BS5-Varianten 04-4, 04-5 und 04-6 wurden in ein einziges Template 04-4 zusammengeführt. Features (Slogan, konfigurierbare Nav-Position, News-Spalte) werden automatisch erkannt und bei Bedarf angezeigt.</li>
 					<li>Bugfix Template 02-3: art_file Metainfo wird jetzt bei der Installation registriert (fehlte bisher). Templates 06-1 und 06-2 registrieren art_file nicht mehr, weil es dort nicht verwendet wird.</li>
-					<li>Responsive Srcset für Header-Bilder: Neue Methode FrontendHelper::getResponsiveImageAttributes() prüft, ob Media Manager Typen mit Größen-Suffixen (_480, _768, _1200, _1920) existieren und gibt automatisch srcset- und sizes-Attribute aus. Angewendet auf alle Templates mit Header-Bildern 00-1, 00-2, 01-1, 01-2, 02-1, 02-2, 02-3, 03-1, 03-2, 03-3, 03-4, 06-1 und 06-2 sowie auf die Slider-Fragmente 04-x. Templates 00-1 und 00-2 wurden dafür von background-image auf img mit object-fit: cover umgestellt. Der bisherige _webp Media Manager Typ wird nicht mehr benötigt.</li>
 				</ul>
 			</li>
-			<li>Fragmente und Navigation
-				<ul>
-					<li>Neue Bootstrap 5 Fragmente: d2u_template_bs5_nav.php mit Einstellungs-Unterstützung für Menütyp, Breakpoint, Suche, Sprachwahl und Dark Mode Toggle sowie d2u_template_bs5_header_slider.php für den Header Slider.</li>
-					<li>Neue Methode getMenuItemsBS5() in FrontendNavigationMegaMenu für Bootstrap-5-kompatible Menü-Ausgabe hinzugefügt.</li>
-					<li>Bootstrap-5-Navigation: Kategorien mit Unterpunkten geben jetzt die Elternseite zusätzlich als ersten Dropdown-Eintrag aus. In der Hauptebene bleibt der Kategoriename erhalten, im zusätzlichen Dropdown-Eintrag greift bei Bedarf die bestehende Einstellung zur Anzeige des Startartikelnamens.</li>
-					<li>Neues Fragment d2u_template_darkmode.php: Dark Mode JavaScript (Flash-Prevention und Toggle-Logik) aus allen 8 BS5-Templates in ein zentrales Fragment mit Parameter "position" (head/body) ausgelagert.</li>
-				</ul>
-			</li>
-			<li>Design und Frontend-Basis
+			<li>Einstellungen
 				<ul>
 					<li>jQuery sowie Bootstrap-4 CSS/JS werden jetzt direkt in den Templates eingebunden und nicht mehr über die Addon-Einstellungen gesteuert.</li>
 					<li>Die Einstellungen "jQuery einbinden" und "Bootstrap einbinden" wurden entfernt.</li>
-					<li>BS5-Navigations-Hoverzustände in den Templates 00-2, 01-2, 02-2, 03-3, 04-4, 05-2 und 06-2 vereinheitlicht: Die Hintergrundfarbe des Hover-/Focus-Zustands überschreibt Bootstrap jetzt konsistent per !important.</li>
 					<li>CSS Custom Properties (:root Variablen): Alle Templates, Module und Asset-CSS-Dateien auf CSS Variablen (var(--name)) umgestellt. FrontendHelper::generateCSSVariables() generiert den :root Block. Alte Platzhalter in externen Addons funktionieren weiterhin über applySettingsToCSS().</li>
 					<li>Dark Mode Unterstützung für Bootstrap 5 Templates und Module: Neue Dark Mode Farbfelder in den Einstellungen neben den bisherigen Farben (Light ☀ / Dark ☽). Dark-Mode-Farben werden als [data-bs-theme="dark"] CSS Block ausgegeben. Toggle-Button in der BS5 Navigation mit localStorage Speicherung und prefers-color-scheme Auto-Detection.</li>
-				</ul>
-			</li>
-			<li>Verwaltung und Installation
-				<ul>
-					<li>Modulverwaltung: Filter (Alle / BS4 kompatibel / BS5 kompatibel) oberhalb der Modulliste hinzugefügt.</li>
-					<li>Bugfix Modulverwaltung: Nach dem Aufheben einer Modulpaarung wird das entkoppelte Modul jetzt korrekt im Zuordnungs-Dropdown angezeigt.</li>
-					<li>Templateverwaltung: Filter (Alle / BS4 kompatibel / BS5 kompatibel) oberhalb der Templateliste hinzugefügt.</li>
-					<li>Bugfix Templateverwaltung: Nach dem Aufheben einer Templatepaarung wird das entkoppelte Template jetzt korrekt im Zuordnungs-Dropdown angezeigt.</li>
-					<li>Template install.php: Sprog Addon Verfügbarkeitsprüfung als Fehler in allen 17 Templates außer Schaufenster hinzugefügt.</li>
-					<li>Template install.php: Fehlende YRewrite Addon Verfügbarkeitsprüfung in Templates 05-1, 05-2 und 06-2 ergänzt.</li>
 				</ul>
 			</li>
 			<li>Kompatibilität und Integrationen
