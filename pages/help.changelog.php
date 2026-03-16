@@ -17,7 +17,8 @@
 	<div class="panel-body">
 		<p>2.1.1-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Bugfix Template 04-4: Das Logo wird bei Navigation unterhalb des Header-Sliders nicht mehr doppelt oberhalb und unterhalb des Headerbildes ausgegeben.</li>
+			<li>Bugfix Footer: .footer-title verwendet fuer die Trennlinie jetzt die konfigurierte Footer-Schriftfarbe statt footer-color-box.</li>
 		</ul>
 		<p>2.1.0</p>
 		<ul>

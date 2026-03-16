@@ -1,6 +1,7 @@
 /* Footer links address contact logo BS5 CSS */
 footer {
     background-color: var(--footer-color-bg);
+    color: var(--footer-color-font);
     padding: 1em;
 }
 footer a {
@@ -14,7 +15,7 @@ footer p {
     margin-bottom: 5px;
 }
 .footer-title {
-    border-bottom: 1px solid var(--footer-color-box);
+    border-bottom: 1px solid var(--footer-color-font);
     margin-bottom: 10px;
 }
 #logo-footer {

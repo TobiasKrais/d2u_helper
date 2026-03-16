@@ -106,9 +106,10 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 <body>
 	<a id="top"></a>
 	<?php
+    $show_top_logo = 'bottom' === $d2u_helper->getConfig('template_navi_pos', 'top');
         // Logo and optional slogan
         $slogan_text = ($current_article instanceof rex_article && '' !== $current_article->getValue('art_slogan')) ? (string) $current_article->getValue('art_slogan') : (string) $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId(), '');
-        if ('' !== $d2u_helper->getConfig('template_logo', '') || ('top' === $d2u_helper->getConfig('template_slogan_position', 'slider') && '' !== $slogan_text)) {
+    if ($show_top_logo && ('' !== $d2u_helper->getConfig('template_logo', '') || ('top' === $d2u_helper->getConfig('template_slogan_position', 'slider') && '' !== $slogan_text))) {
             echo '<section id="logo-container">';
             echo '<div class="container">';
             echo '<div class="row">';
@@ -120,7 +121,18 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                 echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
                 $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
                 if ($media_logo instanceof rex_media) {
+                    echo '<span class="logo-light">';
                     echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'?v='. $media_logo->getUpdateDate() .'" alt="'. $media_logo->getTitle() .'" id="logo">';
+                    echo '</span>';
+                    $dark_logo = (string) $d2u_helper->getConfig('template_logo_dark', '');
+                    if ('' !== $dark_logo) {
+                        $media_logo_dark = rex_media::get($dark_logo);
+                        if ($media_logo_dark instanceof rex_media) {
+                            echo '<span class="logo-dark">';
+                            echo '<img src="'. rex_url::media($dark_logo) .'?v='. $media_logo_dark->getUpdateDate() .'" alt="'. $media_logo_dark->getTitle() .'" id="logo-dark">';
+                            echo '</span>';
+                        }
+                    }
                 }
                 echo '</a>';
             }
@@ -133,6 +145,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
         // Navigation position: configurable via template_navi_pos (top or bottom of slider)
         if ($d2u_helper->isAvailable() && 'top' === $d2u_helper->getConfig('template_navi_pos', 'top')) {
             // Navigation (Bootstrap 5 version)
+            $fragment->setVar('show_logo_bar', true, false);
             echo $fragment->parse('d2u_template_bs5_nav.php');
         }
 
@@ -142,6 +155,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
         // Navigation, if configured on bottom
         if ($d2u_helper->isAvailable() && 'bottom' === $d2u_helper->getConfig('template_navi_pos', 'top')) {
             // Navigation (Bootstrap 5 version)
+            $fragment->setVar('show_logo_bar', false, false);
             echo $fragment->parse('d2u_template_bs5_nav.php');
         }
     ?>

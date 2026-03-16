@@ -2,6 +2,7 @@
     $fragment = new rex_fragment();
     $d2u_helper = rex_addon::get('d2u_helper');
     $clangs = rex_clang::getAll(true);
+    $menu_type = (string) rex_config::get('d2u_helper', 'include_menu', 'none');
 ?>
 <nav class="d-print-none<?= 'top' === $d2u_helper->getConfig('template_navi_pos', 'bottom') ? ' top' : '' ?>">
 	<div class="container">
@@ -12,12 +13,10 @@
                         // Navi
                         echo '<div class="navi">';
                         if (rex_addon::get('d2u_helper')->isAvailable()) {
-                            if ('smartmenu' === rex_config::get('d2u_helper', 'include_menu')) {
-                                \TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::getMenu();
-                            } elseif ('multilevel' === rex_config::get('d2u_helper', 'include_menu')) {
+                            if ('multilevel' === $menu_type) {
                                 \TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getResponsiveMultiLevelMobileMenu();
                                 \TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getResponsiveMultiLevelDesktopMenu();
-                            } elseif ('megamenu' === rex_config::get('d2u_helper', 'include_menu')) {
+                            } elseif ('megamenu' === $menu_type) {
                                 \TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::getMenu();
                             }
                         }

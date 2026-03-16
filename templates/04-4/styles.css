@@ -123,6 +123,21 @@ nav .dropdown-menu .dropdown-item.active {
 	max-width: 100%;
 	width: 250px;
 }
+#logo-dark {
+	margin: 1em 0;
+	max-width: 100%;
+	width: 250px;
+}
+
+.logo-dark {
+	display: none;
+}
+[data-bs-theme="dark"] .logo-light {
+	display: none;
+}
+[data-bs-theme="dark"] .logo-dark {
+	display: inline;
+}
 
 /* Subhead and Breadcrumbs */
 #breadcrumbs {

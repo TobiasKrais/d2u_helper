@@ -29,7 +29,7 @@ $d2u_template_manager->showManagerList();
 		Einfach ausprobieren.</li>
 	<li><b>Welche Einstellungen müssen im Addon für die Templates vorgenommen werden?</b><br>
 		Für das "99-1 Feed Generator" Template sind keine Einstellungen nötig.
-		Für BS4 Templates muss die gewünschte Navigation (SmartMenu, SlickNav, MegaMenu oder MultiLevelMenu) aktiviert werden.
+		Für BS4 Templates muss die gewünschte Navigation (SlickNav, MegaMenu oder MultiLevelMenu) aktiviert werden.
 		Für BS5 Templates muss die Option BS5 Navigation aktiviert werden.</li>
 </ul>
 <h2>Beispielseiten</h2>

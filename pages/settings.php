@@ -3,6 +3,13 @@
 if ('save' === filter_input(INPUT_POST, 'btn_save')) {
     $settings = rex_post('settings', 'array', []);
 
+    $allowed_menu_options = ['none', 'bs5', 'megamenu', 'multilevel', 'slicknav'];
+    if (!array_key_exists('include_menu', $settings) || !in_array((string) $settings['include_menu'], $allowed_menu_options, true)) {
+        $settings['include_menu'] = in_array((string) rex_config::get('d2u_helper', 'include_menu', 'none'), $allowed_menu_options, true)
+            ? (string) rex_config::get('d2u_helper', 'include_menu', 'none')
+            : 'none';
+    }
+
     // Linkmap Link needs special treatment
     $link_ids = filter_input_array(INPUT_POST, ['REX_INPUT_LINK' => ['filter' => FILTER_VALIDATE_INT, 'flags' => FILTER_REQUIRE_ARRAY]]);
     $settings['article_id_privacy_policy'] = is_array($link_ids['REX_INPUT_LINK']) ? $link_ids['REX_INPUT_LINK'][1] : 0;
@@ -112,9 +119,12 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                             'megamenu' => rex_i18n::msg('d2u_helper_settings_include_menu_megamenu'),
                             'multilevel' => rex_i18n::msg('d2u_helper_settings_include_menu_multilevel'),
                             'slicknav' => rex_i18n::msg('d2u_helper_settings_include_menu_slicknav'),
-                            'smartmenu' => rex_i18n::msg('d2u_helper_settings_include_menu_smartmenu'),
                         ];
-                        \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_helper_settings_include_menu', 'settings[include_menu]', $menu_options, [(string) rex_config::get('d2u_helper', 'include_menu')]);
+                        $selected_menu = (string) rex_config::get('d2u_helper', 'include_menu', 'none');
+                        if (!array_key_exists($selected_menu, $menu_options)) {
+                            $selected_menu = 'none';
+                        }
+                        \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_helper_settings_include_menu', 'settings[include_menu]', $menu_options, [$selected_menu]);
                         $width_options = [
                             'xs' => rex_i18n::msg('d2u_helper_settings_width_xs'),
                             'sm' => rex_i18n::msg('d2u_helper_settings_width_sm'),
@@ -125,23 +135,6 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                         \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_helper_settings_menu_show', 'settings[include_menu_show]', $width_options, [(string) rex_config::get('d2u_helper', 'include_menu_show')]);
                         \TobiasKrais\D2UHelper\BackendHelper::form_checkbox('d2u_helper_settings_submenu_use_articlename', 'settings[submenu_use_articlename]', 'true', (bool) rex_config::get('d2u_helper', 'submenu_use_articlename'));
                     ?>
-					<script>
-						function changeSubmenuUseArticlename() {
-							if($('input[name="settings\\[include_menu_smartmenu\\]"]').is(':checked')) {
-								$('#settings\\[submenu_use_articlename\\]').hide();
-							}
-							else {
-								$('#settings\\[submenu_use_articlename\\]').fadeIn();
-							}
-						}
-
-						// On init
-						changeSubmenuUseArticlename();
-						// On change
-						$('input[name="settings\\[include_menu_smartmenu\\]"]').on('change', function() {
-							changeSubmenuUseArticlename();
-						});
-					</script>
 				</div>
 			</fieldset>
 			<fieldset>

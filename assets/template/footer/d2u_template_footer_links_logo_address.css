@@ -15,7 +15,7 @@ footer p {
     margin-bottom: 5px;
 }
 .footer-title {
-	border-bottom: 1px solid var(--footer-color-box);
+	border-bottom: 1px solid var(--footer-color-font);
 	margin-bottom: 10px;
 }
 #logo-footer {

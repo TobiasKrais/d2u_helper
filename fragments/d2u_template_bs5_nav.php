@@ -2,6 +2,7 @@
     $d2u_helper = rex_addon::get('d2u_helper');
     $menu_type = (string) rex_config::get('d2u_helper', 'include_menu', 'none');
     $menu_breakpoint = (string) rex_config::get('d2u_helper', 'include_menu_show', 'lg');
+    $show_logo_bar = (bool) $this->getVar('show_logo_bar', true);
 
     // Get logo
     $logo_html = '';
@@ -27,10 +28,11 @@
         $contact_article = rex_article::get((int) $d2u_helper->getConfig('article_id_contact'));
     }
 ?>
-<?php if ('' !== $logo_html) { ?>
+<?php if (($show_logo_bar && '' !== $logo_html) || $contact_article instanceof rex_article || (rex_addon::get('search_it')->isAvailable() && (int) rex_config::get('d2u_helper', 'article_id_search', 0) > 0 && (int) rex_config::get('d2u_helper', 'article_id_search', 0) !== rex_article::getCurrentId())) { ?>
 <div id="logo-container" class="d-print-none">
 	<div class="container">
 		<div class="d-flex justify-content-between align-items-center">
+            <?php if ($show_logo_bar && '' !== $logo_html) { ?>
 			<a href="<?= rex_getUrl(rex_article::getSiteStartArticleId()) ?>">
 				<?php if ('' !== $logo_dark_html) { ?>
 				<span class="logo-light"><?= $logo_html ?></span>
@@ -39,6 +41,9 @@
 				<?= $logo_html ?>
 				<?php } ?>
 			</a>
+            <?php } else { ?>
+            <div></div>
+            <?php } ?>
 			<div class="d-flex align-items-center">
 				<?php
                     // Search icon in logo bar
