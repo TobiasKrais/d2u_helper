@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.1.1-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.1.0</p>
 		<ul>
 			<li>Wichtige Hinweise
