@@ -18,6 +18,32 @@
 ?>
 <header>
 	<?php
+        if (!$is_full_width) {
+            echo '<div id="background">';
+            if (1 === count($slider_pics)) {
+                $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[0]);
+                echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="" id="background-single-image">';
+            } else {
+                echo '<div id="headerCarouselbg" class="carousel carousel-fade slide" data-bs-interval="false">';
+                echo '<div class="carousel-inner">';
+                for ($index = 0; $index < count($slider_pics); ++$index) {
+                    $background_media = rex_media::get($slider_pics[$index]);
+                    if ($background_media instanceof rex_media) {
+                        echo '<div class="carousel-item'. (0 === $index ? ' active' : '') .'">';
+                        $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[$index]);
+                        echo '<img class="d-block w-100" src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="'. $background_media->getTitle() .'"'. ($index > 0 ? ' loading="lazy"' : '') .'>';
+                        echo '</div>';
+                    }
+                }
+                echo '</div>';
+                echo '</div>';
+            }
+            echo '</div>';
+            echo '<div class="container">';
+            echo '<div class="row d-print-none">';
+            echo '<div class="col-12">';
+        }
+
         if (1 === count($slider_pics)) {
             // Single image
             $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[0]);
@@ -61,16 +87,38 @@
             echo '</div>';
 
             // Controls
-            echo '<button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev">';
-            echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
-            echo '<span class="visually-hidden">Previous</span>';
-            echo '</button>';
-            echo '<button class="carousel-control-next" type="button" data-bs-target="#headerCarousel" data-bs-slide="next">';
-            echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
-            echo '<span class="visually-hidden">Next</span>';
-            echo '</button>';
+            if ($is_full_width) {
+                echo '<button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev">';
+                echo '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+                echo '<span class="visually-hidden">Previous</span>';
+                echo '</button>';
+                echo '<button class="carousel-control-next" type="button" data-bs-target="#headerCarousel" data-bs-slide="next">';
+                echo '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+                echo '<span class="visually-hidden">Next</span>';
+                echo '</button>';
+            }
 
             echo '</div>';
+        }
+
+        if (!$is_full_width) {
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+
+            if (count($slider_pics) > 1) {
+                echo '<script>';
+                echo 'document.addEventListener("DOMContentLoaded", function () {';
+                echo 'const headerCarousel = document.getElementById("headerCarousel");';
+                echo 'const backgroundCarousel = document.getElementById("headerCarouselbg");';
+                echo 'if (!headerCarousel || !backgroundCarousel || typeof bootstrap === "undefined") { return; }';
+                echo 'const backgroundInstance = bootstrap.Carousel.getOrCreateInstance(backgroundCarousel, { interval: false });';
+                echo 'headerCarousel.addEventListener("slide.bs.carousel", function (event) {';
+                echo 'if (typeof event.to === "number") { backgroundInstance.to(event.to); }';
+                echo '});';
+                echo '});';
+                echo '</script>';
+            }
         }
     ?>
 </header>
