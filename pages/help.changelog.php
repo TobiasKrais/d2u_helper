@@ -17,6 +17,9 @@
 	<div class="panel-body">
 		<p>2.1.1-DEV</p>
 		<ul>
+			<li>Bugfix Template 03-2: Immobilienanzeigen wurden nicht korrekt dargestellt</li>
+			<li>Bugfix Template 03-4: Immobilienanzeigen wurden nicht korrekt dargestellt</li>
+			<li>Kompatibilitaet d2u_immo angehoben: d2u_helper benoetigt fuer Immo-Schaufenster-Templates jetzt mindestens d2u_immo 1.4.0, da die integrierte Window-Advertising-Struktur und die neuen Klassen-Namespaces verwendet werden.</li>
 			<li>Bugfix Template 04-1: Fuer den Slogan wird bei leerem oder nur aus Leerzeichen bestehendem Artikelfeld wieder korrekt auf den in den Einstellungen hinterlegten Standard-Slogan zurueckgegriffen.</li>
 			<li>Bugfix Template 04-4: Logo-/Slogan-Ausgabe im Header und Slider ueberarbeitet; doppelte Logoausgabe bei Navigation unterhalb des Sliders behoben, rechte Logoaussrichtung bei Header-Slogan ergaenzt, Slider-Vollbreite korrigiert und Slogan-Ausgabe im Slider inklusive Fallback ohne Sliderbilder sowie verbessertem Styling und Zeilenverhalten berichtigt.</li>
 			<li>Bugfix Footer: .footer-title verwendet fuer die Trennlinie jetzt die konfigurierte Footer-Schriftfarbe statt footer-color-box.</li>

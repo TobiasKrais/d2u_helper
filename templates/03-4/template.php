@@ -1,6 +1,8 @@
 <?php
 
-use D2U_Immo\Contact;
+use TobiasKrais\D2UImmo\Advertisement;
+use TobiasKrais\D2UImmo\Contact;
+use TobiasKrais\D2UImmo\Property;
 
     $d2u_helper = rex_addon::get('d2u_helper');
     $d2u_immo = rex_addon::get('d2u_immo');
@@ -50,10 +52,13 @@ use D2U_Immo\Contact;
 	<?php
     $properties = [];
     $ads = [];
-    if (rex_plugin::get('d2u_immo', 'window_advertising')->isInstalled()) {
-        $properties = D2U_Immo\Property::getAllWindowAdvertisingProperties(rex_clang::getCurrentId());
-        $ads = D2U_Immo\Advertisement::getAll(rex_clang::getCurrentId(), true);
+    if ($d2u_immo->isAvailable()) {
+        $properties = Property::getAllWindowAdvertisingProperties(rex_clang::getCurrentId());
+        $ads = Advertisement::getAll(rex_clang::getCurrentId(), true);
     }
+    $properties = array_values($properties);
+    $ads = array_values($ads);
+
     // Mix - not merge - arrays
     $all_data = [];
 
@@ -105,6 +110,21 @@ use D2U_Immo\Contact;
             }
         }
     }
+
+    $isAdvertisement = static function (mixed $dataRow): bool {
+        return $dataRow instanceof Advertisement;
+    };
+    $isProperty = static function (mixed $dataRow): bool {
+        return $dataRow instanceof Property;
+    };
+    $isContact = static function (mixed $dataRow): bool {
+        return $dataRow instanceof Contact;
+    };
+
+    $all_data = array_values(array_filter(
+        $all_data,
+        static fn (mixed $dataRow): bool => $isAdvertisement($dataRow) || $isProperty($dataRow)
+    ));
     ?>
 	<article>
 		<div class="container">
@@ -122,10 +142,14 @@ use D2U_Immo\Contact;
 							<?php
                                 $active = true;
                                 foreach ($all_data as $data_row) {
+                                    if (!$isAdvertisement($data_row) && !$isProperty($data_row)) {
+                                        continue;
+                                    }
+
                                     echo '<div class="carousel-item'.  ($active ? ' active' : '') .'">';
                                     echo '<div class="row">';
                                     $active = false;
-                                    if ($data_row instanceof D2U_Immo\Advertisement) {
+                                    if ($isAdvertisement($data_row)) {
                                         $advertisement = $data_row;
                                         echo '<div class="col-12 contact-advertising"></div>';
                                         echo '<div class="col-12 print-border-h">';
@@ -151,9 +175,9 @@ use D2U_Immo\Contact;
                                         echo '</div>';
                                         echo '</div>';
 
-                                    } elseif ($data_row instanceof \D2U_Immo\Property) {
+                                    } elseif ($isProperty($data_row)) {
                                         $property = $data_row;
-                                        if ($property->contact instanceof Contact) {
+                                        if ($isContact($property->contact)) {
                                             echo '<div class="col-12 contact-advertising">';
                                             echo '<p>'. $property->contact->firstname .' '. $property->contact->lastname .'<br />';
                                             echo $property->contact->street .' '. $property->contact->house_number .'<br />';

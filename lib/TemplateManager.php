@@ -149,7 +149,7 @@ class TemplateManager
             19);
         $d2u_templates[] = new Template('03-2',
             'Immo Window Advertising Template (BS4, deprecated)',
-            15);
+            16);
         $d2u_templates[] = new Template('04-1',
             'Header Slider Template with Slogan (BS4, deprecated)',
             21);
@@ -183,7 +183,7 @@ class TemplateManager
             1);
         $d2u_templates[] = new Template('03-4',
             'Immo Window Advertising Template (BS5)',
-            1);
+            2);
         $d2u_templates[] = new Template('04-4',
             'Header Slider Template (BS5)',
             2);
