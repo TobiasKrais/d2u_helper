@@ -1,6 +1,7 @@
 <?php
     $d2u_helper = rex_addon::get('d2u_helper');
     $article = rex_article::getCurrent();
+    $article_slogan_text = $article instanceof rex_article ? trim((string) $article->getValue('art_slogan')) : '';
 
     $slider_pics_unfiltered = preg_grep('/^\s*$/s', explode(',', (string) $d2u_helper->getConfig('template_04_header_slider_pics_clang_'. rex_clang::getCurrentId())), PREG_GREP_INVERT);
     // get slider pics in case art_slider_pics is set
@@ -81,7 +82,7 @@
                                 echo '<img class="d-block w-100" src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr']
                                     .' alt="'. $rex_media_slider_pic->getTitle() .'"'. $ratio_min_style . ($k > 0 ? ' loading="lazy"' : '') .' width="'. $slider_pic->getWidth() .'px"  height="'. $slider_pic->getHeight() .'px">';
                                 // Slogan
-                                $slogan_text = (string) ($article instanceof rex_article && '' !== $article->getValue('art_slogan') ? $article->getValue('art_slogan') : $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId()));
+                                $slogan_text = '' !== $article_slogan_text ? $article_slogan_text : (string) $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId());
                                 $slogan = '<span class="slogan-text-row">'. str_replace('<br>', '</span><span class="slogan-text-row">', nl2br($slogan_text, false)) .'</span>';
                                 if ('' !== $slogan_text && 'slider' === $d2u_helper->getConfig('template_slogan_position', 'slider')) {
                                     echo '<div class="slogan"><div class="container"><span class="slogan-text">'. $slogan .'</span></div></div>';

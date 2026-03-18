@@ -108,17 +108,19 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 	<?php
     $show_top_logo = 'bottom' === $d2u_helper->getConfig('template_navi_pos', 'top');
         // Logo and optional slogan
-        $slogan_text = ($current_article instanceof rex_article && '' !== $current_article->getValue('art_slogan')) ? (string) $current_article->getValue('art_slogan') : (string) $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId(), '');
-    if ($show_top_logo && ('' !== $d2u_helper->getConfig('template_logo', '') || ('top' === $d2u_helper->getConfig('template_slogan_position', 'slider') && '' !== $slogan_text))) {
+        $article_slogan_text = $current_article instanceof rex_article ? trim((string) $current_article->getValue('art_slogan')) : '';
+        $slogan_text = '' !== $article_slogan_text ? $article_slogan_text : (string) $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId(), '');
+        $show_top_slogan = 'top' === $d2u_helper->getConfig('template_slogan_position', 'slider') && '' !== $slogan_text;
+    if (($show_top_logo && '' !== $d2u_helper->getConfig('template_logo', '')) || $show_top_slogan) {
             echo '<section id="logo-container">';
             echo '<div class="container">';
             echo '<div class="row">';
-            echo '<div class="col-12">';
-            if ('top' === $d2u_helper->getConfig('template_slogan_position', 'slider') && '' !== $slogan_text) {
+            echo '<div class="col-12'. ($show_top_slogan && $show_top_logo ? ' top-header-branding' : '') .'">';
+            if ($show_top_slogan) {
                 echo '<div id="slogan-top">'. nl2br($slogan_text, false) .'</div>';
             }
-            if ('' !== $d2u_helper->getConfig('template_logo', '')) {
-                echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
+            if ($show_top_logo && '' !== $d2u_helper->getConfig('template_logo', '')) {
+                echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'" class="top-header-logo">';
                 $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
                 if ($media_logo instanceof rex_media) {
                     echo '<span class="logo-light">';

@@ -152,7 +152,7 @@ class TemplateManager
             15);
         $d2u_templates[] = new Template('04-1',
             'Header Slider Template with Slogan (BS4, deprecated)',
-            20);
+            21);
         $d2u_templates[] = new Template('04-2',
             'Header Slider Template (BS4, deprecated)',
             26);
@@ -186,7 +186,7 @@ class TemplateManager
             1);
         $d2u_templates[] = new Template('04-4',
             'Header Slider Template (BS5)',
-            1);
+            2);
         $d2u_templates[] = new Template('05-2',
             'Double Logo Template (BS5)',
             1);

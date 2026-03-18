@@ -109,7 +109,8 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 	<a name="top"></a>
 	<?php
         // Logo
-        $slogan_text = ($current_article instanceof rex_article && '' !== $current_article->getValue('art_slogan')) ? (string) $current_article->getValue('art_slogan') : (string) $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId(), '');
+    $article_slogan_text = $current_article instanceof rex_article ? trim((string) $current_article->getValue('art_slogan')) : '';
+    $slogan_text = '' !== $article_slogan_text ? $article_slogan_text : (string) $d2u_helper->getConfig('template_04_1_slider_slogan_clang_'. rex_clang::getCurrentId(), '');
         if ('' !== $d2u_helper->getConfig('template_logo', '') || ('top' === $d2u_helper->getConfig('template_slogan_position', 'slider') && '' !== $slogan_text)) {
             echo '<section id="logo-container">';
             echo '<div class="container">';

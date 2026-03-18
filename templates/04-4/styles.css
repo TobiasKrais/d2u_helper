@@ -26,6 +26,9 @@ img {
 	margin-bottom: 1em;
 }
 /* Header */
+header {
+	position: relative;
+}
 .header-slider-pic {
 	max-width: 100%;
 }
@@ -39,6 +42,16 @@ img {
 	font-size: 1.6em;
 	padding-top: 0.75em;
 }
+.top-header-branding {
+	align-items: flex-start;
+	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+}
+.top-header-logo {
+	margin-left: auto;
+	text-align: right;
+}
 @media screen and (min-width: 768px) and (max-width: 959px) {
 	#slogan-top {
 		font-size: 1.25em;
@@ -48,6 +61,59 @@ img {
 	#slogan-top {
 		font-size: 1em;
 	}
+	.top-header-branding {
+		flex-direction: column;
+	}
+	.top-header-logo {
+		align-self: flex-end;
+		margin-left: 0;
+	}
+}
+.header-no-slider {
+	overflow: visible;
+}
+.header-no-slider .slogan {
+	position: static;
+}
+.slogan-no-slider {
+	padding: 2rem 0;
+}
+header .slogan {
+	left: var(--bs-gutter-x, 0.75rem);
+	width: calc(100% - (2 * var(--bs-gutter-x, 0.75rem)));
+	bottom: var(--bs-gutter-x, 0.75rem);
+}
+header .slogan .container {
+	margin: 0;
+	max-width: none;
+	overflow: visible;
+	padding: 0;
+	width: auto;
+}
+header .slogan .slogan-text {
+	display: inline-block;
+	padding: 0.2em 0.3em;
+	background-color: color-mix(in srgb, var(--article-color-h) 72%, transparent);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	hyphens: manual;
+	overflow-wrap: normal;
+	white-space: nowrap;
+	word-break: normal;
+}
+header .slogan .slogan-text-row {
+	display: block;
+	background-color: transparent;
+	hyphens: manual;
+	overflow-wrap: normal;
+	white-space: nowrap;
+	word-break: normal;
+}
+header .slogan .slogan-text-row:last-child {
+	padding-bottom: 0;
+}
+header .slogan .slogan-text-row:after {
+	content: none;
 }
 
 /* Navigation */
