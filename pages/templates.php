@@ -62,17 +62,17 @@ $d2u_template_manager->showManagerList();
 	</li>
 	<li><b>03-1 Immo Template - 2 Columns (BS4)</b><br>
 		Template eignet sich für das D2U Immo Addon, funktioniert aber auch ohne das Addon.<br>
-		<a href="https://www.immobiliengaiser.de/" target="_blank">Immobilien Gaiser</a><br>
 	</li>
 	<li><b>03-2 Immo Window Advertising Template (BS4)</b><br>
 		Template benötigt das D2U Immo Addon.<br>
-		<a href="https://www.immobiliengaiser.de/immobilien/schaufensteransicht/" target="_blank">Immobilien Gaiser - Schaufensterangebote</a><br>
 	</li>
 	<li><b>03-3 Immo Template - 2 Columns (BS5)</b><br>
 		Bootstrap 5 Variante von 03-1. Kein jQuery erforderlich.<br>
+		<a href="https://www.immobiliengaiser.de/" target="_blank">Immobilien Gaiser</a><br>
 	</li>
 	<li><b>03-4 Immo Window Advertising Template (BS5)</b><br>
 		Bootstrap 5 Variante von 03-2. Kein jQuery erforderlich.<br>
+		<a href="https://www.immobiliengaiser.de/immobilien/schaufensteransicht/" target="_blank">Immobilien Gaiser - Schaufensterangebote</a><br>
 	</li>
 	<li><b>04-1 Header Slider Template with Slogan (BS4)</b><br>
 		Template eignet sich für das D2U Maschinen und D2U Veranstaltungen Addon, funktioniert aber auch ohne diese Addons.<br>
