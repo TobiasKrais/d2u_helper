@@ -15,7 +15,7 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.1.1-DEV</p>
+		<p>2.1.1</p>
 		<ul>
 			<li>Bugfix Template 03-2: Immobilienanzeigen wurden nicht korrekt dargestellt</li>
 			<li>Bugfix Template 03-4: Immobilienanzeigen wurden nicht korrekt dargestellt</li>
