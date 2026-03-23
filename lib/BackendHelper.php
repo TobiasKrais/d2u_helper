@@ -323,11 +323,16 @@ class BackendHelper
      * @param string $value_light current value of the light mode color
      * @param string $fieldname_dark input field name for the dark mode color
      * @param string $value_dark current value of the dark mode color
+     * @param bool $allow_empty true if empty values should be preserved instead of forcing a color picker default
      */
-    public static function form_input_color_pair($message_id, $fieldname_light, $value_light, $fieldname_dark, $value_dark): void
+    public static function form_input_color_pair($message_id, $fieldname_light, $value_light, $fieldname_dark, $value_dark, bool $allow_empty = false): void
     {
         $field_id_light = str_replace('[', '-', str_replace(']', '', $fieldname_light));
         $field_id_dark = str_replace('[', '-', str_replace(']', '', $fieldname_dark));
+        $picker_value_light = '' !== (string) $value_light ? (string) $value_light : '#ffffff';
+        $picker_value_dark = '' !== (string) $value_dark ? (string) $value_dark : '#000000';
+        $fieldname_light_picker = $allow_empty ? '' : $fieldname_light;
+        $fieldname_dark_picker = $allow_empty ? '' : $fieldname_dark;
 
         echo '<dl class="rex-form-group form-group" id="'. $fieldname_light .'">';
         echo '<dt>';
@@ -336,18 +341,18 @@ class BackendHelper
         // Light mode row
         echo '<tr>';
         echo '<td class="d2u_helper_color_pair_icon_cell"><i class="fa fa-sun-o"></i></td>';
-        echo '<td><input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
+        echo '<td><input class="form-control d2u_helper_color_text" type="text"'. ($allow_empty ? ' name="'. $fieldname_light . '"' : '') .' pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
             . 'value="' . str_replace('"', "'", (string) $value_light) . '" id="text-' . $field_id_light . '" onChange="document.getElementById(\'color-' . $field_id_light . '\').value = this.value"></td>';
-        echo '<td><input class="form-control d2u_helper_color" type="color" name="' . $fieldname_light . '" id="color-' . $field_id_light . '" value="' . str_replace('"', "'", (string) $value_light) . '"'
+        echo '<td><input class="form-control d2u_helper_color" type="color"'. ('' !== $fieldname_light_picker ? ' name="' . $fieldname_light_picker . '"' : '') .' id="color-' . $field_id_light . '" value="' . str_replace('"', "'", $picker_value_light) . '"'
             . ' onChange="document.getElementById(\'text-' . $field_id_light . '\').value = this.value" /></td>';
         echo '</tr>';
 
         // Dark mode row
         echo '<tr>';
         echo '<td class="d2u_helper_color_pair_icon_cell"><i class="fa fa-moon-o"></i></td>';
-        echo '<td><input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
+        echo '<td><input class="form-control d2u_helper_color_text" type="text"'. ($allow_empty ? ' name="'. $fieldname_dark . '"' : '') .' pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
             . 'value="' . str_replace('"', "'", (string) $value_dark) . '" id="text-' . $field_id_dark . '" onChange="document.getElementById(\'color-' . $field_id_dark . '\').value = this.value"></td>';
-        echo '<td><input class="form-control d2u_helper_color" type="color" name="' . $fieldname_dark . '" id="color-' . $field_id_dark . '" value="' . str_replace('"', "'", (string) $value_dark) . '"'
+        echo '<td><input class="form-control d2u_helper_color" type="color"'. ('' !== $fieldname_dark_picker ? ' name="' . $fieldname_dark_picker . '"' : '') .' id="color-' . $field_id_dark . '" value="' . str_replace('"', "'", $picker_value_dark) . '"'
             . ' onChange="document.getElementById(\'text-' . $field_id_dark . '\').value = this.value" /></td>';
         echo '</tr>';
 
