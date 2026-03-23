@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.1.2</p>
+		<ul>
+			<li>Bugfix: Smartmenu wurde in den Einstellungen nicht mehr als Option für die Navigation angezeigt.</li>
+		</ul>
 		<p>2.1.1</p>
 		<ul>
 			<li>Bugfix Template 03-2: Immobilienanzeigen wurden nicht korrekt dargestellt</li>

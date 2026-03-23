@@ -3,7 +3,7 @@
 if ('save' === filter_input(INPUT_POST, 'btn_save')) {
     $settings = rex_post('settings', 'array', []);
 
-    $allowed_menu_options = ['none', 'bs5', 'megamenu', 'multilevel', 'slicknav'];
+    $allowed_menu_options = ['none', 'bs5', 'megamenu', 'multilevel', 'slicknav', 'smartmenu'];
     if (!array_key_exists('include_menu', $settings) || !in_array((string) $settings['include_menu'], $allowed_menu_options, true)) {
         $settings['include_menu'] = in_array((string) rex_config::get('d2u_helper', 'include_menu', 'none'), $allowed_menu_options, true)
             ? (string) rex_config::get('d2u_helper', 'include_menu', 'none')
@@ -119,6 +119,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                             'megamenu' => rex_i18n::msg('d2u_helper_settings_include_menu_megamenu'),
                             'multilevel' => rex_i18n::msg('d2u_helper_settings_include_menu_multilevel'),
                             'slicknav' => rex_i18n::msg('d2u_helper_settings_include_menu_slicknav'),
+                            'smartmenu' => rex_i18n::msg('d2u_helper_settings_include_menu_smartmenu'),
                         ];
                         $selected_menu = (string) rex_config::get('d2u_helper', 'include_menu', 'none');
                         if (!array_key_exists($selected_menu, $menu_options)) {

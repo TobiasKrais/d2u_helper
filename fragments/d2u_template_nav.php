@@ -18,6 +18,10 @@
                                 \TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getResponsiveMultiLevelDesktopMenu();
                             } elseif ('megamenu' === $menu_type) {
                                 \TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::getMenu();
+                            } elseif ('slicknav' === $menu_type) {
+                                \TobiasKrais\D2UHelper\FrontendNavigationSlickNav::getMobileMenu();
+                            } elseif ('smartmenu' === $menu_type) {
+                                \TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::getMenu();
                             }
                         }
                         echo '</div>';
