@@ -181,6 +181,23 @@ class FrontendHelper
     }
 
     /**
+     * Checks whether a d2u_machinery extension is active in the new addon-based structure.
+     */
+    public static function isD2UMachineryExtensionActive(string $extensionKey): bool
+    {
+        $d2uMachinery = rex_addon::get('d2u_machinery');
+        if (!$d2uMachinery->isAvailable()) {
+            return false;
+        }
+
+        if (!class_exists(\TobiasKrais\D2UMachinery\Extension::class)) {
+            return false;
+        }
+
+        return \TobiasKrais\D2UMachinery\Extension::isActive($extensionKey);
+    }
+
+    /**
      * Returns alternate URLs for Redaxo articles and D2U Addons. Key is Redaxo
      * language id, value is URL.
      * @return string[] alternate URLs

@@ -7,7 +7,6 @@ use rex_article;
 use rex_category;
 use rex_clang;
 use rex_config;
-use rex_media;
 use rex_ycom_auth;
 
 /**

@@ -45,6 +45,7 @@ d2u_helper/
 - **Comments:** English comments only
 - **Frontend labels:** Use `Sprog\Wildcard::get()` backed by `LangHelper`, not `rex_i18n::msg()`
 - **Backend labels:** Use `rex_i18n::msg()` with keys from `lang/` files
+- **d2u_machinery integration:** Check availability via `FrontendHelper::isD2UMachineryExtensionActive()`. The helper requires d2u_machinery >= 1.6.0 and checks only the addon extension state.
 
 ## AGENTS.md Maintenance
 

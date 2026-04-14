@@ -242,7 +242,7 @@ class ModuleManager
             1);
         $modules[] = new Module('05-1',
             'Artikelweiterleitung',
-            15);
+            16);
         $modules[] = new Module('05-2',
             'Artikel aus anderer Sprache übernehmen',
             5);

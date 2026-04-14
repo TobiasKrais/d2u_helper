@@ -6,6 +6,10 @@
 		<?php
 
 use TobiasKrais\D2UCourses\Category;
+use TobiasKrais\D2UImmo\Property;
+use TobiasKrais\D2UMachinery\IndustrySector;
+use TobiasKrais\D2UMachinery\Machine;
+use TobiasKrais\D2UMachinery\UsedMachine;
 
         $select_link = new rex_select();
         $select_link->setName('REX_INPUT_VALUE[1]');
@@ -19,10 +23,10 @@ use TobiasKrais\D2UCourses\Category;
         if (rex_addon::get('d2u_immo')->isAvailable()) {
             $select_link->addOption('D2U Immobilien Addon - Immobilie', 'd2u_immo_property');
         }
-        if (rex_plugin::get('d2u_machinery', 'industry_sectors')->isAvailable()) {
+		if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('industry_sectors')) {
             $select_link->addOption('D2U Maschinen Addon - Branche', 'd2u_machinery_industry_sector');
         }
-        if (rex_plugin::get('d2u_machinery', 'used_machines')->isAvailable()) {
+		if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('used_machines')) {
             $select_link->addOption('D2U Maschinen Addon - Gebrauchtmaschine', 'd2u_machinery_used_machine');
         }
         if (rex_addon::get('d2u_machinery')->isAvailable()) {
@@ -106,7 +110,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
     echo '</div>';
 }
 // Machinery Addon - Industry Sector
-if (rex_plugin::get('d2u_machinery', 'industry_sectors')->isAvailable()) {
+if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('industry_sectors')) {
     echo '<div class="row" id="d2u_machinery_industry_sector">';
     echo '<div class="col-xs-4">Zu welcher Branche soll weitergeleitet werden?</div>';
     echo '<div class="col-xs-8">';
@@ -127,7 +131,7 @@ if (rex_plugin::get('d2u_machinery', 'industry_sectors')->isAvailable()) {
     echo '</div>';
 }
 // Machinery Addon - Used machines
-if (rex_plugin::get('d2u_machinery', 'used_machines')->isAvailable()) {
+if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('used_machines')) {
     echo '<div class="row" id="d2u_machinery_used_machine">';
     echo '<div class="col-xs-4">Zu welcher Gebrauchtmaschine soll weitergeleitet werden?</div>';
     echo '<div class="col-xs-8">';
@@ -157,7 +161,7 @@ if (rex_addon::get('d2u_immo')->isAvailable()) {
         $select_link->setSize(1);
         $select_link->setAttribute('class', 'form-control');
 
-        $properties = \D2U_Immo\Property::getAll(rex_clang::getCurrentId(), '', true);
+		$properties = Property::getAll(rex_clang::getCurrentId(), '', true);
         foreach ($properties as $property) {
             $select_link->addOption($property->name, $property->property_id);
         }

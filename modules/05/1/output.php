@@ -1,5 +1,10 @@
 <?php
 
+use TobiasKrais\D2UImmo\Property;
+use TobiasKrais\D2UMachinery\IndustrySector;
+use TobiasKrais\D2UMachinery\Machine;
+use TobiasKrais\D2UMachinery\UsedMachine;
+
 $link_type = 'REX_VALUE[1]';
 $forward_url = '';
 
@@ -36,7 +41,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
         echo 'Das D2U Maschinen Addon muss installiert und aktiviert werden.';
     }
 } elseif ('d2u_machinery_industry_sector' === $link_type) { /** @phpstan-ignore-line */
-    if (rex_plugin::get('d2u_machinery', 'industry_sectors')->isAvailable()) {
+    if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('industry_sectors')) {
         $industry_sector_id = (int) 'REX_VALUE[4]';
         if ($industry_sector_id > 0) { /** @phpstan-ignore-line */
             $industry_sector = new IndustrySector($industry_sector_id, rex_clang::getCurrentId());
@@ -50,7 +55,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
         echo 'Das D2U Maschinen Addon - Branchen Plugin muss installiert und aktiviert werden.';
     }
 } elseif ('d2u_machinery_used_machine' === $link_type) { /** @phpstan-ignore-line */
-    if (rex_plugin::get('d2u_machinery', 'used_machines')->isAvailable()) {
+    if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('used_machines')) {
         $used_machine_id = (int) 'REX_VALUE[5]';
         if ($used_machine_id > 0) { /** @phpstan-ignore-line */
             $used_machine = new UsedMachine($used_machine_id, rex_clang::getCurrentId());
@@ -67,7 +72,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
     if (rex_addon::get('d2u_immo')->isAvailable()) {
         $property_id = (int) 'REX_VALUE[6]';
         if ($property_id > 0) { /** @phpstan-ignore-line */
-            $property = new \D2U_Immo\Property($property_id, rex_clang::getCurrentId());
+            $property = new Property($property_id, rex_clang::getCurrentId());
             if (\rex::isBackend()) {
                 echo "Weiterleitung zu D2U Immobilien - Immobilie <a href='". $property->getUrl(true) ."'>". $property->name .'</a>';
             } else {
