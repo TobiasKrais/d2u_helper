@@ -1,5 +1,7 @@
 <?php
 
+use TobiasKrais\D2UHelper\BackendHelper;
+
 // Set Session
 if ('' === rex_session('d2u_helper_translation')) {
     $default_settings = ['clang_id' => rex_clang::getStartId(), 'filter' => 'update'];
@@ -43,13 +45,13 @@ if (1 === count(rex_clang::getAll())) {
                     if (!in_array($target_clang_id, array_keys($lang_options))) {
                         $target_clang_id = array_keys($lang_options)[0];
                     }
-                    \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [$target_clang_id]);
+                    BackendHelper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [$target_clang_id]);
 
                     $filter_options = [
                         'update' => rex_i18n::msg('d2u_helper_translations_filter_update'),
                         'missing' => rex_i18n::msg('d2u_helper_translations_filter_missing'),
                     ];
-                    \TobiasKrais\D2UHelper\BackendHelper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [$filter_type]);
+                    BackendHelper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [$filter_type]);
                 ?>
 			</div>
 			<footer class="panel-footer">
@@ -105,7 +107,7 @@ if (1 === count(rex_clang::getAll())) {
         echo 'update' === $filter_type ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
     }
 
-    echo \TobiasKrais\D2UHelper\BackendHelper::getCSS();
-    echo \TobiasKrais\D2UHelper\BackendHelper::getJS();
-    echo \TobiasKrais\D2UHelper\BackendHelper::getJSOpenAll();
+    echo BackendHelper::getCSS();
+    echo BackendHelper::getJS();
+    echo BackendHelper::getJSOpenAll();
 }
