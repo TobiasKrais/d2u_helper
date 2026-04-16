@@ -26,6 +26,7 @@ $category = false;
 $industry_sector = false;
 $machine = false;
 $used_machine = false;
+$usedMachinesExtensionActive = \TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('used_machines');
 
 $url_namespace = TobiasKrais\D2UHelper\FrontendHelper::getUrlNamespace();
 $url_id = TobiasKrais\D2UHelper\FrontendHelper::getUrlId();
@@ -40,19 +41,19 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
         if ($machine_id > 0) {
             $machine = new Machine($machine_id, rex_clang::getCurrentId());
         }
-    } elseif (filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'category_id' === $url_namespace
-            || filter_input(INPUT_GET, 'used_rent_category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'used_rent_category_id' === $url_namespace
-            || filter_input(INPUT_GET, 'used_sale_category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'used_sale_category_id' === $url_namespace
+        } elseif (filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'category_id' === $url_namespace
+            || ($usedMachinesExtensionActive && (filter_input(INPUT_GET, 'used_rent_category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'used_rent_category_id' === $url_namespace
+            || filter_input(INPUT_GET, 'used_sale_category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'used_sale_category_id' === $url_namespace))
         ) {
 
         // Category for normal machines
         $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
         $offer_type = '';
-        if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('used_machines') && filter_input(INPUT_GET, 'used_rent_category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0) {
+        if ($usedMachinesExtensionActive && filter_input(INPUT_GET, 'used_rent_category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0) {
             // Category for used machines (rent)
             $category_id = filter_input(INPUT_GET, 'used_rent_category_id', FILTER_VALIDATE_INT);
             $offer_type = 'rent';
-        } elseif (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('used_machines') && filter_input(INPUT_GET, 'used_sale_category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0) {
+        } elseif ($usedMachinesExtensionActive && filter_input(INPUT_GET, 'used_sale_category_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0) {
             // Category for used machines (sale)
             $category_id = filter_input(INPUT_GET, 'used_sale_category_id', FILTER_VALIDATE_INT);
             $offer_type = 'sale';
@@ -79,8 +80,8 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
         if ($industry_sector_id > 0) {
             $industry_sector = new IndustrySector($industry_sector_id, rex_clang::getCurrentId());
         }
-    } elseif ((filter_input(INPUT_GET, 'used_rent_machine_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'used_rent_machine_id' === $url_namespace)
-            || (filter_input(INPUT_GET, 'used_sale_machine_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'used_sale_machine_id' === $url_namespace)) {
+        } elseif ($usedMachinesExtensionActive && ((filter_input(INPUT_GET, 'used_rent_machine_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'used_rent_machine_id' === $url_namespace)
+            || (filter_input(INPUT_GET, 'used_sale_machine_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 || 'used_sale_machine_id' === $url_namespace))) {
         $used_machine_id = filter_input(INPUT_GET, 'used_sale_machine_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0]]) > 0 ? filter_input(INPUT_GET, 'used_sale_machine_id', FILTER_VALIDATE_INT) : filter_input(INPUT_GET, 'used_rent_machine_id', FILTER_VALIDATE_INT);
         if (rex_addon::get('url')->isAvailable() && $url_id > 0) {
             $used_machine_id = $url_id;
@@ -183,7 +184,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                     $has_subhead = false;
                     if (false !== $machine || false !== $used_machine ||
                         (false !== $category && (count($category->getMachines()) > 0 || count($category->getUsedMachines()) > 0)) ||
-                        ($current_article instanceof rex_article && ($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_rent', 0) || $current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_sale', 0))) ||
+                        ($usedMachinesExtensionActive && $current_article instanceof rex_article && ($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_rent', 0) || $current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_sale', 0))) ||
                         ($d2u_helper->hasConfig('subhead_include_articlename') && true === (bool) $d2u_helper->getConfig('subhead_include_articlename'))) {
                         $has_subhead = true;
                     }
@@ -245,7 +246,7 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                         }
                         echo '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_request"><span class="fa-icon fa-envelope-o d-block d-lg-none" title="'. \Sprog\Wildcard::get('d2u_machinery_request') .'"></span><span class="d-none d-lg-block">'. \Sprog\Wildcard::get('d2u_machinery_request') .'</span><div class="active-navi-pill"></div></a></li>';
                         echo '</ul>';
-                    } elseif ($current_article instanceof rex_article && ($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_rent', 0) || $current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_sale', 0))) {
+                    } elseif ($usedMachinesExtensionActive && $current_article instanceof rex_article && ($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_rent', 0) || $current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_sale', 0))) {
                         echo '<h1 class="subhead">'. $current_article->getName() .'</h1>';
                         echo '<ul class="nav nav-pills">';
                         $class_active = ' active';

@@ -137,7 +137,7 @@ class TemplateManager
         // Bootstrap 4 templates
         $d2u_templates[] = new Template('00-1',
             'Big Header Template (BS4, deprecated)',
-            27);
+            28);
         $d2u_templates[] = new Template('01-1',
             'Side Picture Template (BS4, deprecated)',
             18);
@@ -152,13 +152,13 @@ class TemplateManager
             16);
         $d2u_templates[] = new Template('04-1',
             'Header Slider Template with Slogan (BS4, deprecated)',
-            22);
+            23);
         $d2u_templates[] = new Template('04-2',
             'Header Slider Template (BS4, deprecated)',
-            27);
+            28);
         $d2u_templates[] = new Template('04-3',
             'Header Slider Template with news column (BS4, deprecated)',
-            22);
+            23);
         $d2u_templates[] = new Template('05-1',
             'Double Logo Template (BS4, deprecated)',
             18);
@@ -168,7 +168,7 @@ class TemplateManager
         // Bootstrap 5 templates
         $d2u_templates[] = new Template('00-2',
             'Big Header Template (BS5)',
-            3);
+            4);
         $d2u_templates[] = new Template('01-2',
             'Side Picture Template (BS5)',
             1);
@@ -186,7 +186,7 @@ class TemplateManager
             2);
         $d2u_templates[] = new Template('04-4',
             'Header Slider Template (BS5)',
-            4);
+            5);
         $d2u_templates[] = new Template('05-2',
             'Double Logo Template (BS5)',
             1);

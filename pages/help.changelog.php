@@ -17,7 +17,7 @@
 	<div class="panel-body">
 		<p>2.1.4-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Bugfix Templates 00-1, 00-2, 04-1, 04-2, 04-3 und 04-4: Gebrauchtmaschinen-Subhead und Reiternavigation werden nur noch ausgegeben, wenn die d2u_machinery Erweiterung "used_machines" tatsaechlich aktiv ist.</li>
 		</ul>
 		<p>2.1.3</p>
 		<ul>
