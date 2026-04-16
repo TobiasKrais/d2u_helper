@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.1.4-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.1.3</p>
 		<ul>
 			<li>Kompatibilität d2u_machinery >=1.7.0 hergestellt; BS4-Templates enthalten den neuen Reiter "Ergaenzende Maschinen" und die BS5-Templates 00-2 / 04-4 geben keine d2u_machinery-Reiternavigation mehr selbst aus.</li>
