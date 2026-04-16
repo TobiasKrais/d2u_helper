@@ -111,22 +111,26 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
                 if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
                     $id = random_int(0, getrandmax());
                     echo '<div class="col-12">';
-                    echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
+                    echo '<button id="button_'. $id .'" class="text-toggler angle-down" type="button">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
                     echo '<div id="second_text_'. $id .'" class="hide-text">';
                     echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($text_2);
                     echo '</div>';
                     echo '</div>';
 
-                    echo '<script>';
-                    echo 'function toggle_text_'. $id .'() {'. PHP_EOL;
-                        echo '$("#second_text_'. $id .'").slideToggle();'. PHP_EOL;
-                        echo 'if($("#button_'. $id .'").hasClass("angle-down")) {';
-                            echo '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_less')) .'").removeClass("angle-down").addClass("angle-up").fadeIn(500); });';
-                        echo '}'. PHP_EOL;
-                        echo 'else {';
-                            echo '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_more')) .'").removeClass("angle-up").addClass("angle-down").fadeIn(500); });';
-                        echo '}'. PHP_EOL;
-                    echo '}'. PHP_EOL;
+                    echo '<script nonce="'. rex_response::getNonce() .'">';
+                    echo 'document.addEventListener("DOMContentLoaded", function () {'. PHP_EOL;
+                        echo 'var button = document.getElementById("button_'. $id .'");'. PHP_EOL;
+                        echo 'var text = document.getElementById("second_text_'. $id .'");'. PHP_EOL;
+                        echo 'if (!button || !text) { return; }'. PHP_EOL;
+                        echo 'var isOpen = false;'. PHP_EOL;
+                        echo 'button.addEventListener("click", function () {'. PHP_EOL;
+                            echo 'isOpen = !isOpen;'. PHP_EOL;
+                            echo 'text.style.display = isOpen ? "block" : "none";'. PHP_EOL;
+                            echo 'button.textContent = isOpen ? "'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_less')) .'" : "'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_more')) .'";'. PHP_EOL;
+                            echo 'button.classList.toggle("angle-down", !isOpen);'. PHP_EOL;
+                            echo 'button.classList.toggle("angle-up", isOpen);'. PHP_EOL;
+                        echo '});'. PHP_EOL;
+                    echo '});'. PHP_EOL;
                     echo '</script>';
                 }
             ?>

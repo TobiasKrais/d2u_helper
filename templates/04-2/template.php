@@ -192,6 +192,9 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                         if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('machine_features_extension') && count($machine->feature_ids) > 0) {
                             echo '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_features">'. \Sprog\Wildcard::get('d2u_machinery_features') .'<div class="active-navi-pill"></div></a></li>';
                         }
+                        if (count($machine->additional_machine_ids) > 0) {
+                            echo '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_additional_machines">'. \Sprog\Wildcard::get('d2u_machinery_additional_machines') .'<div class="active-navi-pill"></div></a></li>';
+                        }
                         if ('show' === $d2u_machinery->getConfig('show_techdata', 'hide') && count($machine->getTechnicalData()) > 0) {
                             echo '<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#tab_tech_data"><span class="fa-icon fa-list-ul d-block d-md-none" title="'. \Sprog\Wildcard::get('d2u_machinery_tech_data') .'"></span><span class="d-none d-md-block">'. \Sprog\Wildcard::get('d2u_machinery_tech_data') .'</span><div class="active-navi-pill"></div></a></li>';
                         }

@@ -40,23 +40,24 @@
 	</div>
 </div>
 <script>
-	function offset_changer(value) {
-		if (value === "12") {
-			$("select[name='REX_INPUT_VALUE[17]']").parent().parent().slideUp();
+	document.addEventListener('DOMContentLoaded', function () {
+		var widthSelect = document.querySelector("select[name='REX_INPUT_VALUE[20]']");
+		var offsetSelect = document.querySelector("select[name='REX_INPUT_VALUE[17]']");
+		if (!widthSelect || !offsetSelect) {
+			return;
 		}
-		else {
-			$("select[name='REX_INPUT_VALUE[17]']").parent().parent().slideDown();
+
+		var offsetRow = offsetSelect.closest('.row');
+		if (!offsetRow) {
+			return;
 		}
-	}
 
-	// Hide on document load
-	$(document).ready(function() {
-		offset_changer($("select[name='REX_INPUT_VALUE[20]']").val());
-	});
+		function updateOffsetVisibility() {
+			offsetRow.style.display = widthSelect.value === '12' ? 'none' : '';
+		}
 
-	// Hide on selection change
-	$("select[name='REX_INPUT_VALUE[20]']").on('change', function(e) {
-		offset_changer($(this).val());
+		updateOffsetVisibility();
+		widthSelect.addEventListener('change', updateOffsetVisibility);
 	});
 </script>
 <div class="row">
@@ -157,35 +158,23 @@
 	</div>
 </div>
 <script>
-	function changeType() {
-		if($('#selector').val() === "article") {
-			$('#article').show();
-			$('#link').hide();
-			$('#download').hide();
+	document.addEventListener('DOMContentLoaded', function () {
+		var selector = document.getElementById('selector');
+		var articleRow = document.getElementById('article');
+		var linkRow = document.getElementById('link');
+		var downloadRow = document.getElementById('download');
+		if (!selector || !articleRow || !linkRow || !downloadRow) {
+			return;
 		}
-		else if($('#selector').val() === "link") {
-			$('#article').hide();
-			$('#link').show();
-			$('#download').hide();
-		}
-		else if($('#selector').val() === "download") {
-			$('#article').hide();
-			$('#link').hide();
-			$('#download').show();
-		}
-		else {
-			$('#article').hide();
-			$('#link').hide();
-			$('#download').hide();
-		}
-	}
 
-	// On init
-	changeType();
+		function updateLinkTypeVisibility() {
+			articleRow.style.display = selector.value === 'article' ? '' : 'none';
+			linkRow.style.display = selector.value === 'link' ? '' : 'none';
+			downloadRow.style.display = selector.value === 'download' ? '' : 'none';
+		}
 
-	// On change
-	$('#selector').on('change', function() {
-		changeType();
+		updateLinkTypeVisibility();
+		selector.addEventListener('change', updateLinkTypeVisibility);
 	});
 </script>
 <div class="row">
@@ -336,41 +325,34 @@
 	</div>
 </div>
 <script>
-	function container_changer() {
-		if ($("input[name='REX_INPUT_VALUE[10]']").is(':checked')) {
-			$("textarea[name='REX_INPUT_VALUE[11]']").parent().parent().slideDown();
+	document.addEventListener('DOMContentLoaded', function () {
+		var expandableToggle = document.querySelector("input[name='REX_INPUT_VALUE[10]']");
+		var expandableText = document.querySelector("textarea[name='REX_INPUT_VALUE[11]']");
+		var picturePosition = document.querySelector("select[name='REX_INPUT_VALUE[4]']");
+		var pictureWidth = document.querySelector("select[name='REX_INPUT_VALUE[6]']");
+
+		if (expandableToggle && expandableText) {
+			var expandableRow = expandableText.closest('.row');
+			if (expandableRow) {
+				var updateExpandableVisibility = function () {
+					expandableRow.style.display = expandableToggle.checked ? '' : 'none';
+				};
+
+				updateExpandableVisibility();
+				expandableToggle.addEventListener('change', updateExpandableVisibility);
+			}
 		}
-		else {
-			$("textarea[name='REX_INPUT_VALUE[11]']").parent().parent().slideUp();
+
+		if (picturePosition && pictureWidth) {
+			var pictureWidthRow = pictureWidth.closest('.row');
+			if (pictureWidthRow) {
+				var updatePictureWidthVisibility = function () {
+					pictureWidthRow.style.display = picturePosition.value === 'top' || picturePosition.value === 'bottom' ? 'none' : '';
+				};
+
+				updatePictureWidthVisibility();
+				picturePosition.addEventListener('change', updatePictureWidthVisibility);
+			}
 		}
-	}
-
-	// Hide on document load
-	$(document).ready(function() {
-		container_changer();
-	});
-
-	// Hide on selection change
-	$("input[name='REX_INPUT_VALUE[10]']").on('change', function(e) {
-		container_changer();
-	});
-
-	function picture_width_changer() {
-		var position = $("select[name='REX_INPUT_VALUE[4]']").val();
-		if (position === "top" || position === "bottom") {
-			$("select[name='REX_INPUT_VALUE[6]']").parent().parent().slideUp();
-		} else {
-			$("select[name='REX_INPUT_VALUE[6]']").parent().parent().slideDown();
-		}
-	}
-
-	// Hide image width on document load
-	$(document).ready(function() {
-		picture_width_changer();
-	});
-
-	// Hide image width on selection change
-	$("select[name='REX_INPUT_VALUE[4]']").on('change', function(e) {
-		picture_width_changer();
 	});
 </script>

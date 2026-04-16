@@ -168,7 +168,7 @@ class TemplateManager
         // Bootstrap 5 templates
         $d2u_templates[] = new Template('00-2',
             'Big Header Template (BS5)',
-            2);
+            3);
         $d2u_templates[] = new Template('01-2',
             'Side Picture Template (BS5)',
             1);
@@ -186,7 +186,7 @@ class TemplateManager
             2);
         $d2u_templates[] = new Template('04-4',
             'Header Slider Template (BS5)',
-            3);
+            4);
         $d2u_templates[] = new Template('05-2',
             'Double Logo Template (BS5)',
             1);

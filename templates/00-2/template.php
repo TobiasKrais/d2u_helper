@@ -163,68 +163,12 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
 					<?php
                         if (false !== $machine) {
                             echo '<h1 class="subhead">'. ('' === $machine->lang_name ? $machine->name : $machine->lang_name) .'</h1>';
-                            echo '<ul class="nav nav-pills">';
-                            echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#tab_overview">'. \Sprog\Wildcard::get('d2u_machinery_overview') .'<div class="active-navi-pill"></div></a></li>';
-                            if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('machine_agitator_extension') && $machine->agitator_type_id > 0 && $machine->category instanceof Category && 'show' === $machine->category->show_agitators) {
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_agitator">'. \Sprog\Wildcard::get('d2u_machinery_agitator') .'<div class="active-navi-pill"></div></a></li>';
-                            }
-                            if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('machine_features_extension') && count($machine->feature_ids) > 0) {
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_features">'. \Sprog\Wildcard::get('d2u_machinery_features') .'<div class="active-navi-pill"></div></a></li>';
-                            }
-                            if ('show' === $d2u_machinery->getConfig('show_techdata', 'hide') && count($machine->getTechnicalData()) > 0) {
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_tech_data"><span class="fa-icon fa-list-ul d-block d-md-none" title="'. \Sprog\Wildcard::get('d2u_machinery_tech_data') .'"></span><span class="d-none d-md-block">'. \Sprog\Wildcard::get('d2u_machinery_tech_data') .'</span><div class="active-navi-pill"></div></a></li>';
-                            }
-                            if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('machine_usage_area_extension') && 'show' === $d2u_machinery->getConfig('show_machine_usage_areas', 'hide') && count($machine->usage_area_ids) > 0) {
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_usage_areas"><span class="fa-icon fa-codepen d-block d-md-none" title="'. \Sprog\Wildcard::get('d2u_machinery_usage_areas') .'"></span><span class="d-none d-md-block">'. \Sprog\Wildcard::get('d2u_machinery_usage_areas') .'</span><div class="active-navi-pill"></div></a></li>';
-                            }
-                            if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('machine_construction_equipment_extension')) {
-                                if (strlen($machine->delivery_set_basic) > 5 || strlen($machine->delivery_set_conversion) > 5 || strlen($machine->delivery_set_full) > 5) {
-                                    echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_delivery_set"><span class="fa-icon fa-dropbox d-block d-lg-none" title="'. \Sprog\Wildcard::get('d2u_machinery_construction_equipment_delivery_sets') .'"></span><span class="d-none d-lg-block">'. \Sprog\Wildcard::get('d2u_machinery_construction_equipment_delivery_sets') .'</span><div class="active-navi-pill"></div></a></li>';
-                                }
-                            }
-                            if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('service_options') && count($machine->service_option_ids) > 0) {
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_service_options">'. \Sprog\Wildcard::get('d2u_machinery_construction_equipment_service') .'<div class="active-navi-pill"></div></a></li>';
-                            }
-                            if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('equipment') && count($machine->equipment_ids) > 0) {
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_equipment"><span class="fa-icon fa-plus d-block d-lg-none" title="'. \Sprog\Wildcard::get('d2u_machinery_equipment') .'"></span><span class="d-none d-lg-block">'. \Sprog\Wildcard::get('d2u_machinery_equipment') .'</span><div class="active-navi-pill"></div></a></li>';
-                            }
-                            echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_request"><span class="fa-icon fa-envelope-o d-block d-lg-none" title="'. \Sprog\Wildcard::get('d2u_machinery_request') .'"></span><span class="d-none d-lg-block">'. \Sprog\Wildcard::get('d2u_machinery_request') .'</span><div class="active-navi-pill"></div></a></li>';
-                            echo '</ul>';
                         } elseif (false !== $category && (count($category->getMachines()) > 0 || count($category->getUsedMachines()) > 0)) {
                             echo '<h1 class="subhead">'. $category->name .'</h1>';
-                            if ((\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('machine_usage_area_extension') && 'show' === $d2u_machinery->getConfig('show_categories_usage_areas', 'hide'))
-                                || 'show' === $d2u_machinery->getConfig('show_techdata', 'hide')) {
-                                echo '<ul class="nav nav-pills">';
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#tab_overview">'. \Sprog\Wildcard::get('d2u_machinery_overview') .'<div class="active-navi-pill"></div></a></li>';
-                                if (\TobiasKrais\D2UHelper\FrontendHelper::isD2UMachineryExtensionActive('machine_usage_area_extension') && 'show' === $d2u_machinery->getConfig('show_categories_usage_areas', 'hide') && count($category->getUsageAreaMatrix()) > 0) {
-                                    echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_usage_areas">'. \Sprog\Wildcard::get('d2u_machinery_usage_areas') .'<div class="active-navi-pill"></div></a></li>';
-                                }
-                                if ('show' === $d2u_machinery->getConfig('show_techdata', 'hide')) {
-                                    echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_tech_data">'. \Sprog\Wildcard::get('d2u_machinery_tech_data') .'<div class="active-navi-pill"></div></a></li>';
-                                }
-                                echo '</ul>';
-                            }
                         } elseif (false !== $used_machine) {
                             echo '<h1 class="subhead">'. $used_machine->manufacturer .' '. $used_machine->name .'</h1>';
-                            echo '<ul class="nav nav-pills">';
-                            echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#tab_overview">'. \Sprog\Wildcard::get('d2u_machinery_overview') .'<div class="active-navi-pill"></div></a></li>';
-                            if ('lightbox' === rex_config::get('d2u_machinery', 'used_machines_pic_type', 'slider')) {
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_pics">'. \Sprog\Wildcard::get('d2u_machinery_pics') .'<div class="active-navi-pill"></div></a></li>';
-                            }
-                            echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#tab_request"><span class="fa-icon fa-envelope-o d-block d-lg-none" title="'. \Sprog\Wildcard::get('d2u_machinery_request') .'"></span><span class="d-none d-lg-block">'. \Sprog\Wildcard::get('d2u_machinery_request') .'</span><div class="active-navi-pill"></div></a></li>';
-                            echo '</ul>';
                         } elseif ($current_article instanceof rex_article && ($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_rent', 0) || $current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_sale', 0))) {
                             echo '<h1 class="subhead">'. $current_article->getName() .'</h1>';
-                            echo '<ul class="nav nav-pills">';
-                            $class_active = ' active';
-                            if ($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_sale')) {
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link'. $class_active .'" href="#tab_sale">'. \Sprog\Wildcard::get('d2u_machinery_used_machines_offers_sale') .'<div class="active-navi-pill"></div></a></li>';
-                                $class_active = '';
-                            }
-                            if ($current_article->getId() === (int) $d2u_machinery->getConfig('used_machine_article_id_rent')) {
-                                echo '<li class="nav-item"><a data-bs-toggle="tab" class="nav-link'. $class_active .'" href="#tab_rent">'. \Sprog\Wildcard::get('d2u_machinery_used_machines_offers_rent') .'<div class="active-navi-pill"></div></a></li>';
-                            }
-                            echo '</ul>';
                         } elseif ($current_article instanceof rex_article && $d2u_helper->hasConfig('subhead_include_articlename') && true === (bool) $d2u_helper->getConfig('subhead_include_articlename')) {
                             echo '<h1 class="subhead">'. $current_article->getName() .'</h1>';
                         }

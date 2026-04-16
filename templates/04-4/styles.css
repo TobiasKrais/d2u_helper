@@ -374,19 +374,6 @@ a .box b {
 .nav-link.active {
 	background-color: transparent;
 }
-.nav, .nav-pills {
-	padding-top: 1em;
-	border-bottom: 1px solid var(--navi-color-hover-font);
-}
-.comparison-header, unit {
-	padding: 0 15px;
-}
-.subhead-nav .nav-pills .nav-link.active, .subhead-nav .nav-pills .show > .nav-link {
-    background-color: transparent;
-}
-.subhead-nav .nav-pills .nav-link.active, .subhead-nav .nav-pills .show > .nav-link {
-    color: var(--subhead-color-font);
-}
 .download-list li {
 	background-color: var(--navi-color-hover-font) !important;
 }

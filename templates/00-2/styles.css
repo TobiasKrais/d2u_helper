@@ -284,20 +284,6 @@ section {
 .box img {
 	max-width: 100%;
 }
-.nav li, .nav li.active {
-	padding: 0 1.5em 0 0;
-}
-.nav li a, .nav li.active a {
-	font-weight: bold;
-	padding: 0;
-}
-.nav-link.active {
-	background-color: transparent !important;
-}
-.comparison-header, unit {
-	padding: 0 15px;
-}
-
 /* Dark mode logo */
 .logo-light { display: inline; }
 .logo-dark { display: none; }

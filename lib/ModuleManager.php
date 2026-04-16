@@ -167,7 +167,7 @@ class ModuleManager
             14);
         $modules[] = new Module('01-2',
             'Texteditor mit Bild und Überschrift (BS4, deprecated)',
-            18);
+            19);
         $modules[] = new Module('01-3',
             'Texteditor in Alertbox (BS4, deprecated)',
             2);
