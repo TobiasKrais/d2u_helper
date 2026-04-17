@@ -137,9 +137,8 @@ class BackendHelper
         }
 
         return '<a href="'. htmlspecialchars($url, ENT_QUOTES) .'" class="rex-link-expanded" target="_blank" rel="noopener noreferrer" '
-            .'title="'. rex_i18n::msg('d2u_helper_open_frontend') .'">'
-            .'<i class="rex-icon fa-external-link"></i> '
-            . rex_i18n::msg('d2u_helper_open_frontend')
+            .'title="'. rex_i18n::msg('d2u_helper_open_frontend') .'" aria-label="'. rex_i18n::msg('d2u_helper_open_frontend') .'">'
+            .'<i class="rex-icon fa-external-link"></i>'
             .'</a>';
     }
 
