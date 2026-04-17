@@ -186,21 +186,27 @@ nav .navbar-toggler-icon {
     mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center / contain;
 }
 nav .dropdown-menu {
-    background-color: var(--navi-color-font);
+    --bs-dropdown-bg: var(--navi-color-bg);
+    --bs-dropdown-link-color: var(--navi-color-font);
+    --bs-dropdown-link-hover-color: var(--navi-color-hover-font);
+    --bs-dropdown-link-hover-bg: var(--navi-color-hover-bg);
+    --bs-dropdown-link-active-color: var(--navi-color-hover-font);
+    --bs-dropdown-link-active-bg: var(--navi-color-hover-bg);
+    background-color: var(--navi-color-bg);
     --bs-dropdown-spacer: 0;
     border: none;
     border-radius: 0;
     margin-top: 0;
 }
 nav .dropdown-menu .dropdown-item {
-    color: var(--navi-color-hover-font);
+    color: var(--navi-color-font);
     padding: 0.5rem 1.25rem;
 }
 nav .dropdown-menu .dropdown-item:hover,
 nav .dropdown-menu .dropdown-item:focus,
 nav .dropdown-menu .dropdown-item.active {
-    color: var(--navi-color-font) !important;
-    background-color: var(--navi-color-bg);
+    color: var(--navi-color-hover-font) !important;
+    background-color: var(--navi-color-hover-bg);
 }
 @media screen and (max-width: 991px) {
     nav {

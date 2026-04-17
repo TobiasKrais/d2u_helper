@@ -17,7 +17,7 @@
 	<div class="panel-body">
 		<p>2.2.1-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Bugfix Templates 00-2, 01-2, 02-2, 02-3 und 03-3: Die BS5-Untermenüs übernehmen Hintergrund-, Schrift- sowie Hover-Farben jetzt wieder korrekt aus den Navigationseinstellungen.</li>
 		</ul>
 		<p>2.2.0</p>
 		<ul>
