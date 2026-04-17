@@ -15,9 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.2.1-DEV</p>
+		<p>2.2.1</p>
 		<ul>
 			<li>Bugfix Templates 00-2, 01-2, 02-2, 02-3 und 03-3: Die BS5-Untermenüs übernehmen Hintergrund-, Schrift- sowie Hover-Farben jetzt wieder korrekt aus den Navigationseinstellungen.</li>
+			<li>Neue Funktion BackendHelper::getFrontendLinkButton() hinzugefügt, um konsistent formatierte Frontend-Links mit externem Link-Icon zu generieren.</li>
 		</ul>
 		<p>2.2.0</p>
 		<ul>
