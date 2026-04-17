@@ -95,3 +95,41 @@ body:not(.rex-theme-light)  div.code {
 	border: solid 1px #dfe3e9;
 	padding: 15px;
 }
+
+.d2u-helper-priority-container {
+	display: inline-flex;
+	align-items: center;
+	border-radius: 4px;
+	line-height: 1;
+}
+
+.d2u-helper-priority-value {
+	padding: 6px 8px;
+	min-width: 30px;
+	text-align: center;
+}
+
+.d2u-helper-priority-controls {
+	display: flex;
+	flex-direction: column;
+}
+
+.d2u-helper-priority-btn {
+	display: block;
+	width: 20px;
+	height: 14px;
+	border: none;
+	text-decoration: none;
+	text-align: center;
+	line-height: 14px;
+	font-size: 10px;
+	transition: background-color 0.2s;
+}
+
+.d2u-helper-priority-btn:hover {
+	text-decoration: none;
+}
+
+.d2u-helper-priority-btn i {
+	font-size: 8px;
+}

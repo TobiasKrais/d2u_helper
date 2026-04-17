@@ -7,8 +7,10 @@ use rex_clang;
 use rex_config;
 use rex_i18n;
 use rex_media_manager;
+use rex_request;
 use rex_sql;
 use rex_version;
+use rex_url;
 
 /**
  * @api
@@ -86,6 +88,61 @@ class BackendHelper
         $js_onclick_bottom = "moveREXMedialist('" . $field_id . "', 'bottom');return false;";
         $fields .= '<a href="#" class="btn btn-popup" onclick="' . $js_onclick_bottom . '" title="' . rex_i18n::msg('var_medialist_move_bottom') . '"><i class="rex-icon rex-icon-bottom"></i></a>';
         return $fields;
+    }
+
+    /**
+     * Returns HTML controls for moving priority up and down in backend lists.
+     * @param int $entry_id Dataset id
+     * @param int $priority Current priority
+     * @param int $max_priority Highest visible priority in current list
+     * @param array<string, int|string> $page_params Additional page params to preserve current backend page context
+     * @return string HTML string with current priority and up/down controls
+     */
+    public static function getPriorityButtons(int $entry_id, int $priority, int $max_priority, array $page_params = []): string
+    {
+        $buttons = '<div class="d2u-helper-priority-container">';
+        $buttons .= '<span class="d2u-helper-priority-value">'. $priority .'</span>';
+        $buttons .= '<div class="d2u-helper-priority-controls">';
+
+        if ($priority > 1) {
+            $buttons .= '<a href="'. self::getCurrentBackendPage(array_merge($page_params, ['func' => 'priority_up', 'entry_id' => $entry_id]), ['func', 'entry_id', 'message', 'message_type']) .'" '
+                .'class="d2u-helper-priority-btn d2u-helper-priority-up" title="'. rex_i18n::msg('d2u_helper_priority_up') .'">'
+                .'<i class="rex-icon rex-icon-up"></i>'
+                .'</a>';
+        }
+
+        if ($priority < $max_priority) {
+            $buttons .= '<a href="'. self::getCurrentBackendPage(array_merge($page_params, ['func' => 'priority_down', 'entry_id' => $entry_id]), ['func', 'entry_id', 'message', 'message_type']) .'" '
+                .'class="d2u-helper-priority-btn d2u-helper-priority-down" title="'. rex_i18n::msg('d2u_helper_priority_down') .'">'
+                .'<i class="rex-icon rex-icon-down"></i>'
+                .'</a>';
+        }
+
+        $buttons .= '</div>';
+        $buttons .= '</div>';
+
+        return $buttons;
+    }
+
+    /**
+     * Returns the current backend page URL while preserving the current query parameters.
+     * @param array<string, int|string> $params Params that should override current query values
+     * @param string[] $removeParams Params that should always be removed from the current query first
+     * @return string Current backend page URL with preserved query parameters
+     */
+    public static function getCurrentBackendPage(array $params = [], array $removeParams = []): string
+    {
+        $queryString = rex_request::server('QUERY_STRING', 'string');
+        $currentParams = [];
+        if ('' !== $queryString) {
+            parse_str($queryString, $currentParams);
+        }
+
+        foreach ($removeParams as $removeParam) {
+            unset($currentParams[$removeParam]);
+        }
+
+        return rex_url::currentBackendPage(array_merge($currentParams, $params), false);
     }
 
     /**
