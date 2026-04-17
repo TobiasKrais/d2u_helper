@@ -11,7 +11,7 @@ Nur projektspezifische Regeln, die für KI-Arbeit relevant sind.
 
 ## Wichtige Projekthinweise
 
-- Backend-Translation-Keys müssen in allen Sprachdateien unter `lang/` synchron bleiben. Aktuell: `de_de`, `en_gb`, `nl_nl`.
+- Backend-Translation-Keys müssen in allen Sprachdateien unter `lang/` synchron bleiben.
 - Für `d2u_machinery`-Integrationen die Verfügbarkeit über `FrontendHelper::isD2UMachineryExtensionActive()` prüfen, nicht über alte Plugin-Checks.
 - In BS5-Templates und -Modulen Farbwerte über die d2u_helper CSS-Variablen lösen. Keine hartcodierten Dark-Mode-Overrides für Farben einführen, wenn bereits `var(...)` genutzt wird.
 - Wenn Module geändert werden, Changelog in `pages/help.changelog.php` prüfen oder aktualisieren und die Revisionsnummer in `lib/ModuleManager.php` nur einmal pro Release erhöhen.
