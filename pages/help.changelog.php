@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.2.1-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.2.0</p>
 		<ul>
 			<li>Neue gemeinsame Backend-Helfer und Styles für Prioritätssteuerungen in <code>rex_list</code>-Tabellen hinzugefügt, damit Addons Positionsänderungen konsistent per Hoch-/Runter-Buttons anbieten können.</li>
