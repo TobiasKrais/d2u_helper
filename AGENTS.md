@@ -16,6 +16,7 @@ Nur projektspezifische Regeln, die für KI-Arbeit relevant sind.
 - In BS5-Templates und -Modulen Farbwerte über die d2u_helper CSS-Variablen lösen. Keine hartcodierten Dark-Mode-Overrides für Farben einführen, wenn bereits `var(...)` genutzt wird.
 - Wenn Module geändert werden, Changelog in `pages/help.changelog.php` prüfen oder aktualisieren und die Revisionsnummer in `lib/ModuleManager.php` nur einmal pro Release erhöhen.
 - Wenn Templates geändert werden, Changelog in `pages/help.changelog.php` prüfen oder aktualisieren und die Revisionsnummer in `lib/TemplateManager.php` nur einmal pro Release erhöhen.
+- Versionshinweise für Module und Templates: Wenn die Zielversion im Changelog bereits `-DEV` trägt, innerhalb derselben Entwicklungsphase keine weitere Revisionsnummer für dasselbe Modul oder Template hochzählen. Erst mit der nächsten Release-Version wieder erneut erhöhen.
 - In Changelog-Dateien, AGENTS.md und README.md sind Umlaute erlaubt und müssen nicht auf ASCII umgeschrieben werden.
 
 ## Pflege
