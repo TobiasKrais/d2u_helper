@@ -15,7 +15,7 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.1.4</p>
+		<p>2.2.0</p>
 		<ul>
 			<li>Neue gemeinsame Backend-Helfer und Styles für Prioritätssteuerungen in <code>rex_list</code>-Tabellen hinzugefügt, damit Addons Positionsänderungen konsistent per Hoch-/Runter-Buttons anbieten können.</li>
 			<li>Bugfix Templates 00-1, 00-2, 04-1, 04-2, 04-3 und 04-4: Gebrauchtmaschinen-Subhead und Reiternavigation werden nur noch ausgegeben, wenn die d2u_machinery Erweiterung "used_machines" tatsächlich aktiv ist.</li>
