@@ -31,6 +31,7 @@ d2u_helper_install_error = Fout bij installeren
 d2u_helper_name = Naam
 d2u_helper_no_categories_found = Er zijn nog geen categorieën aangemaakt.
 d2u_helper_online_status = Online
+d2u_helper_open_frontend = Openen
 d2u_helper_picture = Afbeelding
 d2u_helper_pictures = Afbeeldingen
 d2u_helper_pictures_360 = 360°-afbeeldingen

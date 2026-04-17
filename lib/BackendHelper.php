@@ -125,6 +125,25 @@ class BackendHelper
     }
 
     /**
+     * Returns a backend action link for opening a frontend URL in a new tab.
+     * @param string $url Frontend URL
+     * @return string HTML string with external link action or empty string if URL is missing
+     */
+    public static function getFrontendLinkButton(string $url): string
+    {
+        $url = trim($url);
+        if ('' === $url) {
+            return '';
+        }
+
+        return '<a href="'. htmlspecialchars($url, ENT_QUOTES) .'" class="rex-link-expanded" target="_blank" rel="noopener noreferrer" '
+            .'title="'. rex_i18n::msg('d2u_helper_open_frontend') .'">'
+            .'<i class="rex-icon fa-external-link"></i> '
+            . rex_i18n::msg('d2u_helper_open_frontend')
+            .'</a>';
+    }
+
+    /**
      * Returns the current backend page URL while preserving the current query parameters.
      * @param array<string, int|string> $params Params that should override current query values
      * @param string[] $removeParams Params that should always be removed from the current query first
