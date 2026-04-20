@@ -17,7 +17,7 @@
 	<div class="panel-body">
 		<p>2.2.2-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Bugfix Templates 00-2, 01-2, 02-2, 02-3, 03-3, 04-4 und 05-2: Breadcrumb-Links der BS5-Templates verwenden jetzt wieder konsistent die konfigurierte Titel-/Breadcrumb-Schriftfarbe statt spaeter von Artikel- oder Navigations-Linkfarben ueberschrieben zu werden.</li>
 		</ul>
 		<p>2.2.1</p>
 		<ul>

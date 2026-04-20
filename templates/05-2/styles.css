@@ -55,6 +55,12 @@ header, #article-content {
 	padding-bottom: 1em;
 	padding-top: 10px;
 }
+#breadcrumbs, #breadcrumbs a {
+	color: var(--subhead-color-font);
+}
+#breadcrumbs a:hover {
+	text-decoration: underline;
+}
 
 /* BS5 Navigation */
 nav.navbar {

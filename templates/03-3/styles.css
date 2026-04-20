@@ -97,8 +97,11 @@ header {
 h1.subhead {
 	padding: 0.5em 0;
 }
-#breadcrumbs.subhead, #breadcrumbs.subhead a {
+#breadcrumbs, #breadcrumbs a {
 	color: var(--subhead-color-font);
+}
+#breadcrumbs a:hover {
+	text-decoration: underline;
 }
 .fa-home {
 	font-family: FontAwesome;
@@ -272,7 +275,7 @@ article {
 	background-color: var(--article-color-bg);
 	padding: 1em 0;
 }
-article a, article a:visited, article a:hover, article a:focus, #breadcrumbs a {
+article a, article a:visited, article a:hover, article a:focus {
 	color: var(--article-color-h);
 }
 article a:hover {

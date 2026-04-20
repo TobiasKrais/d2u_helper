@@ -53,8 +53,11 @@ h1.subhead {
 #breadcrumbs {
 	padding: 1em 0 0 0;
 }
-#breadcrumbs.subhead, #breadcrumbs.subhead a {
+#breadcrumbs, #breadcrumbs a {
 	color: var(--subhead-color-font);
+}
+#breadcrumbs a:hover {
+	text-decoration: underline;
 }
 .fa-home {
 	font-family: FontAwesome;
@@ -143,9 +146,6 @@ nav .dropdown-menu .dropdown-item.active {
 article {
 	background-color: var(--article-color-bg);
 	padding: 2em 0;
-}
-#breadcrumbs a {
-	color: var(--navi-color-bg);
 }
 article a, article a:hover, article a:visited {
 	color: var(--article-color-h);

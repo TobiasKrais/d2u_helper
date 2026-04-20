@@ -222,7 +222,7 @@ article {
 	font-family: 'Arial', sans-serif;
 	padding: 1em 0;
 }
-article a, article a:visited, article a:hover, #breadcrumbs a {
+article a, article a:visited, article a:hover {
 	color: var(--article-color-h);
 }
 article a:hover {

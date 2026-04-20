@@ -168,28 +168,28 @@ class TemplateManager
         // Bootstrap 5 templates
         $d2u_templates[] = new Template('00-2',
             'Big Header Template (BS5)',
-            5);
+            6);
         $d2u_templates[] = new Template('01-2',
             'Side Picture Template (BS5)',
-            2);
+            3);
         $d2u_templates[] = new Template('02-2',
             'Header Pic Template (BS5)',
-            2);
+            3);
         $d2u_templates[] = new Template('02-3',
             'Header Pic Template 2026 (BS5)',
-            2);
+            3);
         $d2u_templates[] = new Template('03-3',
             'Immo Template - 2 Columns (BS5)',
-            2);
+            3);
         $d2u_templates[] = new Template('03-4',
             'Immo Window Advertising Template (BS5)',
             2);
         $d2u_templates[] = new Template('04-4',
             'Header Slider Template (BS5)',
-            5);
+            6);
         $d2u_templates[] = new Template('05-2',
             'Double Logo Template (BS5)',
-            1);
+            2);
         $d2u_templates[] = new Template('06-2',
             'Paper Sheet Template (BS5)',
             1);

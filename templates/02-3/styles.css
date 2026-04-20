@@ -262,11 +262,17 @@ nav .dropdown-menu .dropdown-item.active {
 #breadcrumbs {
     background-color: var(--subhead-color-bg);
 }
+#breadcrumbs, #breadcrumbs a {
+    color: var(--subhead-color-font);
+}
 #breadcrumbs-inner {
     padding: 10px 0;
 }
 .subhead a {
     color: var(--subhead-color-font);
+}
+#breadcrumbs a:hover {
+    text-decoration: underline;
 }
 .subhead a:hover {
     text-decoration: underline;
