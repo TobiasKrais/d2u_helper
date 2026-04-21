@@ -414,7 +414,7 @@ if ('save' === filter_input(INPUT_POST, 'btn_save')) {
                                 }
                                 if (in_array($d2u_template->getD2UId(), ['04-3', '04-4'], true) && rex_addon::get('d2u_news')->isAvailable()) {
                                     BackendHelper::form_checkbox('d2u_helper_settings_template_show_news_column', 'settings[template_show_news_column]', 'true', (bool) rex_config::get('d2u_helper', 'template_show_news_column'));
-                                    $news_categories = \D2U_News\Category::getAll(rex_clang::getCurrentId());
+                                    $news_categories = \TobiasKrais\D2UNews\Category::getAll(rex_clang::getCurrentId());
                                     $news_options = [];
                                     foreach ($news_categories as $news_category) {
                                         $news_options[$news_category->category_id] = $news_category->name;

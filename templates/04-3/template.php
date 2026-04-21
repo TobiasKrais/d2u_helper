@@ -287,12 +287,12 @@ if (rex_addon::get('d2u_machinery')->isAvailable()) {
                             <div class="row">
                                 <?php
                                     // News / Teaser
-                                    $news_category = new \D2U_News\Category((int) rex_config::get('d2u_helper', 'template_news_category'), rex_clang::getCurrentId());
+                                    $news_category = new \TobiasKrais\D2UNews\Category((int) rex_config::get('d2u_helper', 'template_news_category'), rex_clang::getCurrentId());
                                     $news = [];
                                     if ($news_category->category_id > 0) {
                                         $news = $news_category->getNews(true);
                                     } else {
-                                        $news = \D2U_News\News::getAll(rex_clang::getCurrentId(), 5, true);
+                                        $news = \TobiasKrais\D2UNews\News::getAll(rex_clang::getCurrentId(), 5, true);
                                     }
 
                                     if (count($news) > 0) {
