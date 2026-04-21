@@ -68,7 +68,7 @@ d2u_helper_lang_slovak = Slowakisch
 d2u_helper_lang_spanish = Spanisch
 d2u_helper_lang_replacements = Sprachersetzungen
 d2u_helper_lang_replacements_install = Voreingestellte Sprachersetzungen aus folgender Sprache übernehmen:
-d2u_helper_lang_wildcard_overwrite = Eigene Übersetzungen beim Addonupdate mit Standardübersetzungen des Addon überschreiben. Dadurch werden Übersetzungen automatisch aktuell gehalten.
+d2u_helper_lang_wildcard_overwrite = Eigene Übersetzungen beim Add-on-Update mit Standardübersetzungen des Add-ons überschreiben. Dadurch werden Übersetzungen automatisch aktuell gehalten.
 
 d2u_helper_metainfo_headerpic = Headerbild
 
@@ -76,7 +76,7 @@ d2u_helper_modules_d2u_module_name = D2U Modulname
 d2u_helper_modules_filter_all = Alle
 d2u_helper_modules_filter_bs4 = BS4 kompatibel
 d2u_helper_modules_filter_bs5 = BS5 kompatibel
-d2u_helper_modules_error_gelocation = Fehler: dieses Modul benötigt das Geolocation Addon.
+d2u_helper_modules_error_gelocation = Fehler: dieses Modul benötigt das Geolocation-Addon.
 d2u_helper_modules_error_playr = Fehler: dieses Modul benötigt das Plyr Addon.
 d2u_helper_modules_error_plyr_or_vidstack = Fehler: dieses Modul benötigt das Plyr oder Vidstack Addon.
 d2u_helper_modules_error_vidstack = Fehler: dieses Modul benötigt das Vidstack Addon.
@@ -87,7 +87,7 @@ d2u_helper_modules_error_yform = Fehler: bitte installieren Sie das YForm Addon.
 d2u_helper_modules_error_yform_spam_protection = Fehler: dieses Modul benötigt das Addon "yform_spam_protection".
 d2u_helper_modules_installed = Modul installiert
 d2u_helper_modules_install_module_03_2 = Um die Lightbox Funktionalität automatisch laden zu können muss das Modul 03-2 aus dem D2U Helper Addon installiert sein.
-d2u_helper_modules_install_wysiwyg = Das Addon "TinyMCE", "Redactor" oder "CKe5" wird für dieses Modul benötigt.
+d2u_helper_modules_install_wysiwyg = Das Add-on "TinyMCE", "Redactor" oder "CKEditor 5" wird für dieses Modul benötigt.
 d2u_helper_modules_pair_new = Neues Redaxo Modul anlegen
 d2u_helper_modules_pair_unlink = Paarung aufheben
 d2u_helper_modules_pair_unlinked = Paarung aufgehoben. Modul bleibt unabhängig installiert.
