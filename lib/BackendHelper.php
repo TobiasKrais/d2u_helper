@@ -5,6 +5,7 @@ use rex_addon;
 use rex_article;
 use rex_clang;
 use rex_config;
+use rex_csrf_token;
 use rex_i18n;
 use rex_media_manager;
 use rex_request;
@@ -105,14 +106,14 @@ class BackendHelper
         $buttons .= '<div class="d2u-helper-priority-controls">';
 
         if ($priority > 1) {
-            $buttons .= '<a href="'. self::getCurrentBackendPage(array_merge($page_params, ['func' => 'priority_up', 'entry_id' => $entry_id]), ['func', 'entry_id', 'message', 'message_type']) .'" '
+            $buttons .= '<a href="'. self::getCurrentBackendPage(array_merge($page_params, ['func' => 'priority_up', 'entry_id' => $entry_id]), ['func', 'entry_id', 'message', 'message_type'], true) .'" '
                 .'class="d2u-helper-priority-btn d2u-helper-priority-up" title="'. rex_i18n::msg('d2u_helper_priority_up') .'">'
                 .'<i class="rex-icon rex-icon-up"></i>'
                 .'</a>';
         }
 
         if ($priority < $max_priority) {
-            $buttons .= '<a href="'. self::getCurrentBackendPage(array_merge($page_params, ['func' => 'priority_down', 'entry_id' => $entry_id]), ['func', 'entry_id', 'message', 'message_type']) .'" '
+            $buttons .= '<a href="'. self::getCurrentBackendPage(array_merge($page_params, ['func' => 'priority_down', 'entry_id' => $entry_id]), ['func', 'entry_id', 'message', 'message_type'], true) .'" '
                 .'class="d2u-helper-priority-btn d2u-helper-priority-down" title="'. rex_i18n::msg('d2u_helper_priority_down') .'">'
                 .'<i class="rex-icon rex-icon-down"></i>'
                 .'</a>';
@@ -143,12 +144,53 @@ class BackendHelper
     }
 
     /**
+     * Returns a stable CSRF token id for the current backend page.
+     * @param string $suffix Optional suffix for token separation on one page
+     * @return string CSRF token id
+     */
+    public static function getPageCsrfTokenId(string $suffix = ''): string
+    {
+        $page = rex_request('page', 'string');
+        if ('' === $page) {
+            $page = 'backend';
+        }
+
+        $tokenId = 'd2u_helper_'. str_replace(['/', '.'], '_', $page);
+        if ('' !== $suffix) {
+            $tokenId .= '_'. preg_replace('/[^a-z0-9_\-]/i', '_', $suffix);
+        }
+
+        return $tokenId;
+    }
+
+    /**
+     * Returns the CSRF token object for the current backend page.
+     * @param string $suffix Optional suffix for token separation on one page
+     * @return rex_csrf_token CSRF token instance
+     */
+    public static function getPageCsrfToken(string $suffix = ''): rex_csrf_token
+    {
+        return rex_csrf_token::factory(self::getPageCsrfTokenId($suffix));
+    }
+
+    /**
+     * Returns the hidden CSRF field for the current backend page.
+     * @param string $suffix Optional suffix for token separation on one page
+     * @return string Hidden input field markup
+     */
+    public static function getPageCsrfHiddenField(string $suffix = ''): string
+    {
+        return self::getPageCsrfToken($suffix)->getHiddenField();
+    }
+
+    /**
      * Returns the current backend page URL while preserving the current query parameters.
      * @param array<string, int|string> $params Params that should override current query values
      * @param string[] $removeParams Params that should always be removed from the current query first
+     * @param bool|string $addCsrfToken false for none, true for current page token, string for custom token id
      * @return string Current backend page URL with preserved query parameters
      */
-    public static function getCurrentBackendPage(array $params = [], array $removeParams = []): string
+    public static function getCurrentBackendPage(array $params = [], array $removeParams = [], bool|string $addCsrfToken = false): string
     {
         $queryString = rex_request::server('QUERY_STRING', 'string');
         $currentParams = [];
@@ -158,6 +200,11 @@ class BackendHelper
 
         foreach ($removeParams as $removeParam) {
             unset($currentParams[$removeParam]);
+        }
+
+        if (false !== $addCsrfToken) {
+            $tokenId = true === $addCsrfToken ? self::getPageCsrfTokenId() : $addCsrfToken;
+            $currentParams = array_merge($currentParams, rex_csrf_token::factory($tokenId)->getUrlParams());
         }
 
         return rex_url::currentBackendPage(array_merge($currentParams, $params), false);

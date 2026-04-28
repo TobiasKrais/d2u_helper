@@ -2,6 +2,18 @@
 
 use TobiasKrais\D2UHelper\BackendHelper;
 
+$csrfToken = BackendHelper::getPageCsrfToken();
+$invalidCsrf = false;
+if ((
+    'save' === filter_input(INPUT_POST, 'btn_save')
+    || 'Speichern' === rex_request::request('btn_save', 'string')
+    || 1 === (int) filter_input(INPUT_POST, 'btn_save')
+    || 1 === (int) filter_input(INPUT_POST, 'btn_apply')
+    || 1 === (int) filter_input(INPUT_POST, 'btn_delete', FILTER_VALIDATE_INT)
+) && !$csrfToken->isValid()) {
+    echo rex_view::error(rex_i18n::msg('csrf_token_invalid'));
+    $invalidCsrf = true;
+}
 // Set Session
 if ('' === rex_session('d2u_helper_translation')) {
     $default_settings = ['clang_id' => rex_clang::getStartId(), 'filter' => 'update'];
@@ -9,7 +21,7 @@ if ('' === rex_session('d2u_helper_translation')) {
 }
 
 // Save form in session
-if ('save' === filter_input(INPUT_POST, 'btn_save')) {
+if (!$invalidCsrf && 'save' === filter_input(INPUT_POST, 'btn_save')) {
     $settings = rex_post('settings', 'array', []);
     rex_request::setSession('d2u_helper_translation', $settings);
 }
@@ -27,7 +39,8 @@ if (1 === count(rex_clang::getAll())) {
     $target_clang_id = is_array(rex_session('d2u_helper_translation')) && array_key_exists('clang_id', rex_session('d2u_helper_translation')) ? (int) rex_session('d2u_helper_translation')['clang_id'] : rex_clang::getStartId();
     $filter_type = is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) ? (string) rex_session('d2u_helper_translation')['filter'] : 'update';
 ?>
-	<form action="<?= rex_url::currentBackendPage() ?>" method="post">
+	<form action="<?= BackendHelper::getCurrentBackendPage([], ['message', 'message_type']) ?>" method="post">
+		<?= $csrfToken->getHiddenField() ?>
 		<div class="panel panel-edit">
 			<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_helper_translations_filter') ?></div></header>
 			<div class="panel-body">
