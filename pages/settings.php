@@ -66,6 +66,21 @@ if (!$invalidCsrf && 'save' === filter_input(INPUT_POST, 'btn_save')) {
     $settings['template_04_header_slider_pics_full_width'] = array_key_exists('template_04_header_slider_pics_full_width', $settings);
     $settings['template_show_news_column'] = array_key_exists('template_show_news_column', $settings);
 
+    // Validate hex color values to prevent CSS injection. Invalid values are dropped (empty string).
+    $colorKeys = ['navi_color_bg', 'navi_color_font', 'navi_color_hover_bg', 'navi_color_hover_font',
+        'subhead_color_bg', 'subhead_color_font',
+        'article_color_bg', 'article_color_h', 'article_color_box',
+        'footer_color_bg', 'footer_color_box', 'footer_color_font'];
+    foreach ($colorKeys as $colorKey) {
+        if (array_key_exists($colorKey, $settings)) {
+            $settings[$colorKey] = \TobiasKrais\D2UHelper\BackendHelper::sanitizeHexColor($settings[$colorKey]);
+        }
+        $darkKey = 'dark_' . $colorKey;
+        if (array_key_exists($darkKey, $settings)) {
+            $settings[$darkKey] = \TobiasKrais\D2UHelper\BackendHelper::sanitizeHexColor($settings[$darkKey]);
+        }
+    }
+
     // Save settings
     if (rex_config::set('d2u_helper', $settings)) {
         // Install / update language replacements

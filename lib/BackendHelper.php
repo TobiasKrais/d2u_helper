@@ -144,6 +144,27 @@ class BackendHelper
     }
 
     /**
+     * Validates a hex color string.
+     * Accepts #RGB, #RRGGBB and #RRGGBBAA. Returns the lowercased hex string when valid,
+     * otherwise the supplied default value (defaults to empty string).
+     * @api
+     */
+    public static function sanitizeHexColor(mixed $value, string $default = ''): string
+    {
+        if (!is_string($value)) {
+            return $default;
+        }
+        $value = trim($value);
+        if ('' === $value) {
+            return $default;
+        }
+        if (1 !== preg_match('/^#(?:[a-fA-F0-9]{3}|[a-fA-F0-9]{6}|[a-fA-F0-9]{8})$/', $value)) {
+            return $default;
+        }
+        return strtolower($value);
+    }
+
+    /**
      * Returns a stable CSRF token id for the current backend page.
      * @param string $suffix Optional suffix for token separation on one page
      * @return string CSRF token id

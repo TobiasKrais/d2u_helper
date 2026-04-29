@@ -48,19 +48,29 @@ class FrontendHelper
         $vars = [];
         foreach ($colors as $color) {
             if ($d2u_helper->hasConfig($color)) {
+                $sanitized = BackendHelper::sanitizeHexColor((string) $d2u_helper->getConfig($color));
+                if ('' === $sanitized) {
+                    continue;
+                }
                 $css_var_name = str_replace('_', '-', $color);
-                $vars[] = '    --' . $css_var_name . ': ' . (string) $d2u_helper->getConfig($color) . ';';
+                $vars[] = '    --' . $css_var_name . ': ' . $sanitized . ';';
             }
         }
 
         // Generate 10% alpha variant of article_color_h (append hex alpha 1A ≈ 10%)
         if ($d2u_helper->hasConfig('article_color_h')) {
-            $vars[] = '    --article-color-h10: ' . (string) $d2u_helper->getConfig('article_color_h') . '1A;';
+            $sanitized = BackendHelper::sanitizeHexColor((string) $d2u_helper->getConfig('article_color_h'));
+            if ('' !== $sanitized) {
+                $vars[] = '    --article-color-h10: ' . $sanitized . '1A;';
+            }
         }
 
         // Generate 85% alpha variant of navi_color_font (append hex alpha D9 ≈ 85%)
         if ($d2u_helper->hasConfig('navi_color_font')) {
-            $vars[] = '    --navi-color-fontD9: ' . (string) $d2u_helper->getConfig('navi_color_font') . 'D9;';
+            $sanitized = BackendHelper::sanitizeHexColor((string) $d2u_helper->getConfig('navi_color_font'));
+            if ('' !== $sanitized) {
+                $vars[] = '    --navi-color-fontD9: ' . $sanitized . 'D9;';
+            }
         }
 
         $css = '';
@@ -73,19 +83,29 @@ class FrontendHelper
         foreach ($colors as $color) {
             $dark_key = 'dark_' . $color;
             if ($d2u_helper->hasConfig($dark_key) && '' !== (string) $d2u_helper->getConfig($dark_key)) {
+                $sanitized = BackendHelper::sanitizeHexColor((string) $d2u_helper->getConfig($dark_key));
+                if ('' === $sanitized) {
+                    continue;
+                }
                 $css_var_name = str_replace('_', '-', $color);
-                $dark_vars[] = '    --' . $css_var_name . ': ' . (string) $d2u_helper->getConfig($dark_key) . ';';
+                $dark_vars[] = '    --' . $css_var_name . ': ' . $sanitized . ';';
             }
         }
 
         // Generate dark mode alpha variants
         $dark_article_h = 'dark_article_color_h';
         if ($d2u_helper->hasConfig($dark_article_h) && '' !== (string) $d2u_helper->getConfig($dark_article_h)) {
-            $dark_vars[] = '    --article-color-h10: ' . (string) $d2u_helper->getConfig($dark_article_h) . '1A;';
+            $sanitized = BackendHelper::sanitizeHexColor((string) $d2u_helper->getConfig($dark_article_h));
+            if ('' !== $sanitized) {
+                $dark_vars[] = '    --article-color-h10: ' . $sanitized . '1A;';
+            }
         }
         $dark_navi_font = 'dark_navi_color_font';
         if ($d2u_helper->hasConfig($dark_navi_font) && '' !== (string) $d2u_helper->getConfig($dark_navi_font)) {
-            $dark_vars[] = '    --navi-color-fontD9: ' . (string) $d2u_helper->getConfig($dark_navi_font) . 'D9;';
+            $sanitized = BackendHelper::sanitizeHexColor((string) $d2u_helper->getConfig($dark_navi_font));
+            if ('' !== $sanitized) {
+                $dark_vars[] = '    --navi-color-fontD9: ' . $sanitized . 'D9;';
+            }
         }
 
         if (count($dark_vars) > 0) {
@@ -111,7 +131,11 @@ class FrontendHelper
             'footer_color_bg', 'footer_color_box', 'footer_color_font'];
         foreach ($colors as $color) {
             if ($d2u_helper->hasConfig($color)) {
-                $css = str_replace($color, (string) $d2u_helper->getConfig($color), $css);
+                $sanitized = BackendHelper::sanitizeHexColor((string) $d2u_helper->getConfig($color));
+                if ('' === $sanitized) {
+                    continue;
+                }
+                $css = str_replace($color, $sanitized, $css);
             }
         }
 
