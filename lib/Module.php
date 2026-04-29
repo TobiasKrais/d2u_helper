@@ -289,9 +289,9 @@ class Module
      */
     public static function isModuleIDInstalled($d2u_module_id)
     {
-        $query = 'SELECT * FROM ' . \rex::getTablePrefix() . 'module WHERE `key` = "d2u_'. $d2u_module_id .'"';
+        $query = 'SELECT * FROM ' . \rex::getTablePrefix() . 'module WHERE `key` = :key';
         $result = rex_sql::factory();
-        $result->setQuery($query);
+        $result->setQuery($query, ['key' => 'd2u_'. $d2u_module_id]);
         return $result->getRows() > 0 ? true : false;
     }
 

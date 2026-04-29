@@ -17,6 +17,8 @@
 	<div class="panel-body">
 		<p>2.2.2-DEV</p>
 		<ul>
+			<li>Security: Modul- und Template-Manager (<code>pages/modules.php</code>, <code>pages/templates.php</code>) validieren state-aendernde Aktionen jetzt ueber CSRF-Token; Action-Links und Formulare in <code>ModuleManager::showManagerList()</code> und <code>TemplateManager::showManagerList()</code> tragen das Token mit.</li>
+			<li>Security: SQL-Injection-Haertung mittels Parameter-Binding in <code>BackendHelper::getMediapoolFilename()</code>, <code>BackendHelper::update_url_scheme()</code>, <code>Module::isModuleIDInstalled()</code>, <code>TemplateManager::getTemplatePairs()</code>, der Suchergebnisausgabe in Modul 14-1 sowie der Media-In-Use-Pruefung in <code>boot.php</code>.</li>
 			<li>BackendHelper um gemeinsame CSRF-Helfer erweitert; D2U-Addons koennen damit Formular-Submits sowie mutierende Backend-Links konsistent mit Token absichern.</li>
 			<li>Bugfix Templates 00-2, 01-2, 02-2, 02-3, 03-3, 04-4 und 05-2: Breadcrumb-Links der BS5-Templates verwenden jetzt wieder konsistent die konfigurierte Titel-/Breadcrumb-Schriftfarbe statt spaeter von Artikel- oder Navigations-Linkfarben ueberschrieben zu werden.</li>
 			<li>Bugfix Templates 04-3 und 04-4 sowie Einstellungen: Die optionale News-Anbindung nutzt jetzt den neuen Namespace <code>TobiasKrais\D2UNews</code>; Paketkonflikte fuer d2u_news und d2u_courses wurden entsprechend angehoben.</li>

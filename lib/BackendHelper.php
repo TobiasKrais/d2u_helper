@@ -752,9 +752,9 @@ class BackendHelper
     public static function getMediapoolFilename($old_filename)
     {
         $query = 'SELECT filename FROM `'. \rex::getTablePrefix() .'media` '
-            . "WHERE originalname = '". $old_filename ."'";
+            . 'WHERE originalname = :name';
         $result = \rex_sql::factory();
-        $result->setQuery($query);
+        $result->setQuery($query, ['name' => $old_filename]);
 
         if ($result->getRows() > 0) {
             return (string) $result->getValue('filename');
@@ -772,13 +772,14 @@ class BackendHelper
     {
         if (rex_addon::get('url')->isAvailable() && rex_version::compare(\rex_addon::get('url')->getVersion(), '2.0', '>=')) {
             $sql = rex_sql::factory();
+            $likePattern = '%'. addcslashes($table_name, '\\%_');
             // url version 2.x
-            $query = 'UPDATE `'. \rex::getTablePrefix() .'url_generator_profile` SET `article_id` = '. $article_id .' '
-                ."WHERE `table_name` LIKE '%". $table_name ."'";
-            $sql->setQuery($query);
+            $query = 'UPDATE `'. \rex::getTablePrefix() .'url_generator_profile` SET `article_id` = :article_id '
+                .'WHERE `table_name` LIKE :pattern';
+            $sql->setQuery($query, ['article_id' => (int) $article_id, 'pattern' => $likePattern]);
             $query = 'SELECT namespace FROM  `'. \rex::getTablePrefix() .'url_generator_profile` '
-                ."WHERE `table_name` LIKE '%". $table_name ."'";
-            $sql->setQuery($query);
+                .'WHERE `table_name` LIKE :pattern';
+            $sql->setQuery($query, ['pattern' => $likePattern]);
             if ($sql->getRows() > 0) {
                 self::generateUrlCache((string) $sql->getValue('namespace'));
             }

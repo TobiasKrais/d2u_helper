@@ -414,6 +414,7 @@ class ModuleManager
             $url_params['chapter'] = (string) filter_input(INPUT_GET, 'chapter');
         }
         echo '<form action="'. rex_url::currentBackendPage($url_params) .'" method="post">';
+        echo BackendHelper::getPageCsrfHiddenField();
         echo '<input type="hidden" name="d2u_filter" id="d2u-module-filter" value="'. rex_escape($active_filter) .'">';
         echo '<section class="rex-page-section">';
         echo '<div class="panel panel-default">';
@@ -478,15 +479,15 @@ class ModuleManager
                 $modules_select->setSelected(0);
                 echo $modules_select->get();
             } else {
-                echo '<a href="'. rex_url::currentBackendPage(['function' => 'unlink', 'd2u_module_id' => $module->getD2UId(), 'd2u_filter' => $active_filter]) .'" title="'. rex_i18n::msg('d2u_helper_modules_pair_unlink') .'"><i class="rex-icon fa-chain-broken"></i> ';
-                echo $rex_modules[$module->getRedaxoId()];
+                echo '<a href="'. rex_url::currentBackendPage(array_merge(['function' => 'unlink', 'd2u_module_id' => $module->getD2UId(), 'd2u_filter' => $active_filter], BackendHelper::getPageCsrfToken()->getUrlParams())) .'" title="'. rex_i18n::msg('d2u_helper_modules_pair_unlink') .'"><i class="rex-icon fa-chain-broken"></i> ';
+                echo rex_escape($rex_modules[$module->getRedaxoId()]);
                 echo '</a>';
             }
             echo '</td>';
             // Autoupdate
             echo '<td>';
             if ($module->isInstalled()) {
-                echo '<a href="'. rex_url::currentBackendPage(['function' => 'autoupdate', 'd2u_module_id' => $module->getD2UId(), 'd2u_filter' => $active_filter]) .'">'
+                echo '<a href="'. rex_url::currentBackendPage(array_merge(['function' => 'autoupdate', 'd2u_module_id' => $module->getD2UId(), 'd2u_filter' => $active_filter], BackendHelper::getPageCsrfToken()->getUrlParams())) .'">'
                     . '<i class="rex-icon '. ($module->isAutoupdateActivated() ? 'rex-icon-package-is-activated' : 'rex-icon-package-not-activated') .'"></i> '
                     . ($module->isAutoupdateActivated() ? rex_i18n::msg('package_deactivate') : rex_i18n::msg('package_activate')) .' </a>';
             }

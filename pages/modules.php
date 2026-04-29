@@ -1,4 +1,7 @@
 <?php
+
+use TobiasKrais\D2UHelper\BackendHelper;
+
 $d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager(\TobiasKrais\D2UHelper\ModuleManager::getModules());
 
 // \TobiasKrais\D2UHelper\ModuleManager actions
@@ -6,7 +9,12 @@ $d2u_module_id = rex_request('d2u_module_id', 'string');
 $paired_module = rex_request('pair_'. $d2u_module_id, 'int');
 $function = rex_request('function', 'string');
 if ('' !== $d2u_module_id) {
-    $d2u_module_manager->doActions($d2u_module_id, $function, $paired_module);
+    // CSRF protection: validate token for any state-changing action
+    if (!BackendHelper::getPageCsrfToken()->isValid()) {
+        echo rex_view::error(rex_i18n::msg('csrf_token_invalid'));
+    } else {
+        $d2u_module_manager->doActions($d2u_module_id, $function, $paired_module);
+    }
 }
 
 // \TobiasKrais\D2UHelper\ModuleManager show list

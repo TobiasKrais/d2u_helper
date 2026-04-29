@@ -225,9 +225,13 @@ class TemplateManager
     {
         $paired_templates = [];
         $query_paired = 'SELECT * FROM `'. \rex::getTablePrefix() .'config` WHERE `key` LIKE "template_%"'
-            .('' === $addon_key ? '' : ' AND `namespace` = "'. $addon_key .'"');
+            .('' === $addon_key ? '' : ' AND `namespace` = :namespace');
         $result_paired = rex_sql::factory();
-        $result_paired->setQuery($query_paired);
+        if ('' === $addon_key) {
+            $result_paired->setQuery($query_paired);
+        } else {
+            $result_paired->setQuery($query_paired, ['namespace' => $addon_key]);
+        }
         for ($i = 0; $i < $result_paired->getRows(); ++$i) {
             $template_info = json_decode((string) $result_paired->getValue('value'), true);
             if (is_array($template_info) && array_key_exists('rex_template_id', $template_info)) {
@@ -286,6 +290,7 @@ class TemplateManager
         }
 
         echo '<form action="'. rex_url::currentBackendPage() .'" method="post">';
+        echo BackendHelper::getPageCsrfHiddenField();
         echo '<input type="hidden" name="d2u_filter" id="d2u-template-filter" value="'. rex_escape($active_filter) .'">';
         echo '<section class="rex-page-section">';
         echo '<div class="panel panel-default">';
@@ -355,8 +360,8 @@ class TemplateManager
                 $templates_select->setSelected(0);
                 echo $templates_select->get();
             } else {
-                echo '<a href="'. rex_url::currentBackendPage(['function' => 'unlink', 'd2u_template_id' => $template->getD2UId(), 'd2u_filter' => $active_filter]) .'" title="'. rex_i18n::msg('d2u_helper_modules_pair_unlink') .'"><i class="rex-icon fa-chain-broken"></i> ';
-                echo $rex_templates[$template->getRedaxoId()];
+                echo '<a href="'. rex_url::currentBackendPage(array_merge(['function' => 'unlink', 'd2u_template_id' => $template->getD2UId(), 'd2u_filter' => $active_filter], BackendHelper::getPageCsrfToken()->getUrlParams())) .'" title="'. rex_i18n::msg('d2u_helper_modules_pair_unlink') .'"><i class="rex-icon fa-chain-broken"></i> ';
+                echo rex_escape($rex_templates[$template->getRedaxoId()]);
                 echo '</a>';
             }
             echo '</td>';
@@ -365,7 +370,7 @@ class TemplateManager
             if ($template->isInstalled()) {
                 $message = $template->isAutoupdateActivated() ? rex_i18n::msg('package_deactivate') : rex_i18n::msg('package_activate');
                 $icon = $template->isAutoupdateActivated() ? 'rex-icon-package-is-activated' : 'rex-icon-package-not-activated';
-                echo '<a href="'. rex_url::currentBackendPage(['function' => 'autoupdate', 'd2u_template_id' => $template->getD2UId(), 'd2u_filter' => $active_filter]) .'"><i class="rex-icon '. $icon .'"></i> '. $message .' </a>';
+                echo '<a href="'. rex_url::currentBackendPage(array_merge(['function' => 'autoupdate', 'd2u_template_id' => $template->getD2UId(), 'd2u_filter' => $active_filter], BackendHelper::getPageCsrfToken()->getUrlParams())) .'"><i class="rex-icon '. $icon .'"></i> '. $message .' </a>';
             }
             echo '</td>';
             // Action

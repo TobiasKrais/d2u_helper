@@ -266,7 +266,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep)
 {
     $warning = $ep->getSubject();
     $params = $ep->getParams();
-    $filename = addslashes($params['filename']);
+    $filename = (string) ($params['filename'] ?? '');
 
     if ('' !== $filename) {
         // Settings

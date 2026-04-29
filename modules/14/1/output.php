@@ -109,7 +109,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
             } elseif ('url' === $hit['type']) {
                 // url hits
                 $url_sql = rex_sql::factory();
-                $url_sql->setQuery('SELECT * FROM '. rex::getTablePrefix() . \Url\UrlManagerSql::TABLE_NAME .' WHERE url_hash = "'. $hit['fid'] .'"');
+                $url_sql->setQuery('SELECT * FROM '. rex::getTablePrefix() . \Url\UrlManagerSql::TABLE_NAME .' WHERE url_hash = :hash', ['hash' => (string) $hit['fid']]);
 
                 // Check in case URL IDs changed
                 if ($url_sql->getRows() > 0) {
