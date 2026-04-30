@@ -356,7 +356,9 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep)
  */
 function sendD2UHelperCSS(): void
 {
-    header('Content-type: text/css');
+    header('Content-Type: text/css; charset=utf-8');
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: public, max-age=3600, must-revalidate');
     $d2u_helper = rex_addon::get('d2u_helper');
     $css = '';
     // Module CSS
@@ -387,7 +389,9 @@ function sendD2UHelperCSS(): void
  */
 function sendD2UHelperJS($position = 'head'): void
 {
-    header('Content-type: application/javascript');
+    header('Content-Type: application/javascript; charset=utf-8');
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: public, max-age=3600, must-revalidate');
     $d2u_helper = rex_addon::get('d2u_helper');
     $js = '';
     if ('body' === $position) {
@@ -426,7 +430,9 @@ function sendD2UHelperJS($position = 'head'): void
  */
 function sendD2UHelperCustomCSS(): void
 {
-    header('Content-type: text/css');
+    header('Content-Type: text/css; charset=utf-8');
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: public, max-age=3600, must-revalidate');
     $css = '';
 
     // Custom CSS
@@ -448,7 +454,9 @@ function sendD2UHelperCustomCSS(): void
  */
 function sendD2UHelperTemplateCSS($d2u_template_id = ''): void
 {
-    header('Content-type: text/css');
+    header('Content-Type: text/css; charset=utf-8');
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: public, max-age=3600, must-revalidate');
     $css = '';
 
     // Prepend CSS custom properties (:root block)
