@@ -21,7 +21,9 @@ if (!function_exists('getSubcategories')) {
         foreach ($category->getChildren(true) as $sub_category) {
             $subcategory_start_article = $sub_category->getStartArticle();
             if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($subcategory_start_article)) {
-                echo '<li><a href="'. $sub_category->getUrl() .'" title="'. $sub_category->getName() .'">'. $sub_category->getName() .'</a>';
+                $subUrl = (string) $sub_category->getUrl();
+                $subName = (string) $sub_category->getName();
+                echo '<li><a href="'. rex_escape($subUrl, 'html_attr') .'" title="'. rex_escape($subName, 'html_attr') .'">'. rex_escape($subName) .'</a>';
                 if ($level_number < $max_number_subcategories && count($sub_category->getChildren(true)) > 0) {
                     getSubcategories($sub_category, $level_number, $max_number_subcategories);
                 }
@@ -39,12 +41,14 @@ if ($article instanceof rex_article) {
     if (count($sub_categories) > 0) {
         $level_number = 1;
         echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
-        echo '<h1>'. ($top_category instanceof rex_category ? $top_category->getName() : rex::getServerName()) .'</h1>';
+        echo '<h1>'. rex_escape($top_category instanceof rex_category ? (string) $top_category->getName() : rex::getServerName()) .'</h1>';
         echo '<ul class="categories-list">';
         foreach ($sub_categories as $sub_category) {
             $subcategory_start_article = $sub_category->getStartArticle();
             if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($subcategory_start_article)) {
-                echo '<li><a href="'. $sub_category->getUrl() .'" title="'. $sub_category->getName() .'">'. $sub_category->getName() .'</a>';
+                $subUrl = (string) $sub_category->getUrl();
+                $subName = (string) $sub_category->getName();
+                echo '<li><a href="'. rex_escape($subUrl, 'html_attr') .'" title="'. rex_escape($subName, 'html_attr') .'">'. rex_escape($subName) .'</a>';
                 if ($level_number < $max_number_subcategories && count($sub_category->getChildren(true)) > 0) { /** @phpstan-ignore-line */
                     getSubcategories($sub_category, $level_number, $max_number_subcategories);
                 }

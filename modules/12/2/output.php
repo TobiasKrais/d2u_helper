@@ -24,14 +24,19 @@ if (rex_addon::get('feeds')->isAvailable()) {
     if ($stream instanceof rex_feeds_stream_abstract) {
         $items = $stream->getPreloadedItems(6);
         $lightbox_id = random_int(0, getrandmax());
+        $streamTitle = (string) $stream->getTitle();
 ?>
 <div class="col-12 col-sm-<?= $cols_sm ?> col-md-<?= $cols_md ?> col-lg-<?= $cols_lg . $offset_lg ?>">
 	<div class="row">
 		<?php
             foreach ($items as $item) {
-                $link_url = 'feed' === $link_type ? $item->getUrl() : 'index.php?rex_media_type=d2u_helper_yfeed_large&rex_media_file='. $item->getId() .'.feeds'; /** @phpstan-ignore-line */
-                echo '<a href="'. $link_url .'" data-d2u-gallery="gallery-'. $lightbox_id .'" class="'. $pics_cols .'" data-title="'. $stream->getTitle() .'" title="'. $stream->getTitle() .'" data-footer-url="'. $item->getUrl() .'" data-footer-text="'. $item->getTitle() .'" onclick="event.preventDefault(); d2uLightboxOpen(\'gallery-'. $lightbox_id .'\', this);">';
-                echo '<img src="index.php?rex_media_type='. ($pics_per_line > 2 ? 'd2u_helper_yfeed_small' : 'd2u_helper_yfeed_large') .'&rex_media_file='. $item->getId() .'.feeds" class="img-fluid gallery-pic-box" alt="'. implode(' ', array_slice(explode(' ', $item->getTitle()), 0, 5)) .'" title="'. implode(' ', array_slice(explode(' ', $item->getTitle()), 0, 5)) .'">'; /** @phpstan-ignore-line */
+                $link_url = 'feed' === $link_type ? (string) $item->getUrl() : 'index.php?rex_media_type=d2u_helper_yfeed_large&rex_media_file='. (int) $item->getId() .'.feeds'; /** @phpstan-ignore-line */
+                $itemTitle = (string) $item->getTitle();
+                $itemUrl = (string) $item->getUrl();
+                $altTitle = implode(' ', array_slice(explode(' ', $itemTitle), 0, 5));
+                $imgSrc = 'index.php?rex_media_type='. ($pics_per_line > 2 ? 'd2u_helper_yfeed_small' : 'd2u_helper_yfeed_large') .'&rex_media_file='. (int) $item->getId() .'.feeds';
+                echo '<a href="'. rex_escape($link_url, 'html_attr') .'" data-d2u-gallery="gallery-'. (int) $lightbox_id .'" class="'. rex_escape($pics_cols, 'html_attr') .'" data-title="'. rex_escape($streamTitle, 'html_attr') .'" title="'. rex_escape($streamTitle, 'html_attr') .'" data-footer-url="'. rex_escape($itemUrl, 'html_attr') .'" data-footer-text="'. rex_escape($itemTitle, 'html_attr') .'" onclick="event.preventDefault(); d2uLightboxOpen(\'gallery-'. (int) $lightbox_id .'\', this);">';
+                echo '<img src="'. rex_escape($imgSrc, 'html_attr') .'" class="img-fluid gallery-pic-box" alt="'. rex_escape($altTitle, 'html_attr') .'" title="'. rex_escape($altTitle, 'html_attr') .'">';
                 echo '</a>';
             }
         ?>

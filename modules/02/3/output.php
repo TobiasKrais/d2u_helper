@@ -11,7 +11,13 @@ echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $
 echo '<div class="row">';
 
 echo '<div class="col-12'. ($show_text_side ? ' col-md-6' : '') .'">'; /** @phpstan-ignore-line */
-echo '<REX_VALUE[2] class="helper-02-3-title">REX_VALUE[1]</REX_VALUE[2]>';
+
+// Whitelist HTML tag for headline (defense-in-depth, input is a select)
+$allowed_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'b', 'p'];
+$tag = in_array((string) 'REX_VALUE[2]', $allowed_tags, true) ? (string) 'REX_VALUE[2]' : 'h2'; /** @phpstan-ignore-line */
+$headline = (string) 'REX_VALUE[1]'; /** @phpstan-ignore-line */
+
+echo '<'. $tag .' class="helper-02-3-title">'. rex_escape($headline) .'</'. $tag .'>';
 echo '<p class="helper-02-3-subtitle">REX_VALUE[id=3 output=html]</p>';
 echo '</div>';
 

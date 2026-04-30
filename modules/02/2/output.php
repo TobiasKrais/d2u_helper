@@ -9,7 +9,12 @@ $id = random_int(0, getrandmax());
 
 echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .' toggle_spacer">';
 
-echo '<REX_VALUE[2] onClick="toggle_view_'. $id .'()">REX_VALUE[1]<span class="fa-icon h_toggle icon_down" id="'. $id .'_arrow"></span></REX_VALUE[2]>';
+// Whitelist HTML tag for headline (defense-in-depth, input is a select)
+$allowed_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'b', 'p'];
+$tag = in_array((string) 'REX_VALUE[2]', $allowed_tags, true) ? (string) 'REX_VALUE[2]' : 'h2'; /** @phpstan-ignore-line */
+$headline = (string) 'REX_VALUE[1]'; /** @phpstan-ignore-line */
+
+echo '<'. $tag .' onClick="toggle_view_'. $id .'()">'. rex_escape($headline) .'<span class="fa-icon h_toggle icon_down" id="'. $id .'_arrow"></span></'. $tag .'>';
 
 echo '<div class="wysiwyg_content" id="'. $id .'_text">';
 if ('REX_VALUE[id=3 isset=3]' !== '') { /** @phpstan-ignore-line */

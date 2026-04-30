@@ -182,31 +182,31 @@ class ModuleManager
             1);
         $modules[] = new Module('02-1',
             'Überschrift (BS4, deprecated)',
-            11);
+            12);
         $modules[] = new Module('02-2',
             'Überschrift mit Klapptext (BS4, deprecated)',
-            7);
+            8);
         $modules[] = new Module('02-3',
             'Überschrift mit Untertitel und Textfeld (BS4, deprecated)',
-            9);
+            10);
         $modules[] = new Module('02-4',
             'Überschrift mit Hintergrundbild und 2 Buttons (BS4, deprecated)',
-            1);
+            2);
         $modules[] = new Module('02-5',
             'Inhaltsverzeichnis der Überschriften (BS4, deprecated)',
             1);
         $modules[] = new Module('02-6',
             'Überschrift (BS5)',
-            1);
+            2);
         $modules[] = new Module('02-7',
             'Überschrift mit Klapptext (BS5)',
-            1);
+            2);
         $modules[] = new Module('02-8',
             'Überschrift mit Untertitel und Textfeld (BS5)',
-            1);
+            2);
         $modules[] = new Module('02-9',
             'Überschrift mit Hintergrundbild und 2 Buttons (BS5)',
-            1);
+            2);
         $modules[] = new Module('02-10',
             'Inhaltsverzeichnis der Überschriften (BS5)',
             1);
@@ -251,7 +251,7 @@ class ModuleManager
             18);
         $modules[] = new Module('06-2',
             'IFrame einbinden (BS4, deprecated)',
-            5);
+            6);
         $modules[] = new Module('06-3',
             'Video mit Plyr oder Vidstack einbinden (BS4, deprecated)',
             4);
@@ -263,7 +263,7 @@ class ModuleManager
             1);
         $modules[] = new Module('06-6',
             'IFrame einbinden (BS5)',
-            1);
+            2);
         $modules[] = new Module('06-7',
             'Video mit Vidstack einbinden (BS5)',
             1);
@@ -302,10 +302,10 @@ class ModuleManager
             1);
         $modules[] = new Module('12-1',
             'Feeds Stream Galerie (BS4, deprecated)',
-            5);
+            6);
         $modules[] = new Module('12-2',
             'Feeds Stream Galerie (BS5)',
-            1);
+            2);
         $modules[] = new Module('13-1',
             'Lauftext',
             6);
@@ -314,10 +314,10 @@ class ModuleManager
             7);
         $modules[] = new Module('15-1',
             'Kategorie mit Liste der Unterkategorien (BS4, deprecated)',
-            3);
+            4);
         $modules[] = new Module('15-2',
             'Kategorie mit Liste der Unterkategorien (BS5)',
-            1);
+            2);
         $modules[] = new Module('16-1',
             'Link als Button (BS4, deprecated)',
             1);

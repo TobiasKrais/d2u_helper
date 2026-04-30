@@ -5,7 +5,16 @@
 		url("./assets/addons/be_style/webfonts/fa-regular-400.ttf") format("truetype")
 }
 
-.d2u_helper_mod_02_4_content {
+.d2u_helper_mod_02_9_wrapper {
+	position: relative;
+}
+.d2u_helper_mod_02_9_wrapper > img {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+
+.d2u_helper_mod_02_9_content {
 	height: 100%;
 	left: 0;
 	padding: 45px;
@@ -14,34 +23,34 @@
 	width: 100%;
 }
 @media screen and (max-width: 767px) {
-	.d2u_helper_mod_02_4_content button {
+	.d2u_helper_mod_02_9_content button {
 		max-width: 250px;
 	}
-	.d2u_helper_mod_02_4_content h2 {
+	.d2u_helper_mod_02_9_content h2 {
 		font-size: 1.5rem;
 	}
 }
 @media screen and (min-width: 768px) {
-	.d2u_helper_mod_02_4_content button {
+	.d2u_helper_mod_02_9_content button {
 		max-width: 350px;
 	}
 }
 @media screen and (min-width: 1200px) {
-	.d2u_helper_mod_02_4_content {
+	.d2u_helper_mod_02_9_content {
 		padding-left: 100px;
 	}
 }
-.d2u_helper_mod_02_4_content .col-sm-6 h3 {
+.d2u_helper_mod_02_9_content .col-sm-6 h3 {
 	padding-bottom: 15px;
 }
-.d2u_helper_mod_02_4_content button {
+.d2u_helper_mod_02_9_content button {
 	background-color: var(--article-color-h);
 	border: 1px solid var(--article-color-h);
 	color: var(--article-color-bg);
 	padding: 5px 15px;
 	width: 100%;
 }
-.d2u_helper_mod_02_4_content .arrow_right:before {
+.d2u_helper_mod_02_9_content .arrow_right:before {
 	content: "\f105";
 	float: right;
 	font-family: FontAwesome;
