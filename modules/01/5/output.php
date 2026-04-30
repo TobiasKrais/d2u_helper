@@ -3,9 +3,9 @@
 $cols = 0 === (int) 'REX_VALUE[20]' ? 8 : (int) 'REX_VALUE[20]'; /** @phpstan-ignore-line */
 $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' me-lg-auto ms-lg-auto ' : ''; /** @phpstan-ignore-line */
 
-$heading = 'REX_VALUE[1]';
-$heading_type = 'REX_VALUE[13]';
-if ('' === $heading_type) { $heading_type = 'b'; } /** @phpstan-ignore-line */
+$heading = (string) 'REX_VALUE[1]'; /** @phpstan-ignore-line */
+$heading_allowed_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'b', 'p'];
+$heading_type = in_array((string) 'REX_VALUE[13]', $heading_allowed_tags, true) ? (string) 'REX_VALUE[13]' : 'b'; /** @phpstan-ignore-line */
 $same_height = 'REX_VALUE[5]' === 'true' ? 'same-height ' : ''; /** @phpstan-ignore-line */
 $show_title = ('REX_VALUE[9]' === 'true'); /** @phpstan-ignore-line */
 
@@ -50,20 +50,21 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
                 if ('REX_MEDIA[1]' !== '') { /** @phpstan-ignore-line */
                     $media = rex_media::get('REX_MEDIA[1]');
                     if ($media instanceof rex_media) {
+                        $title = (string) $media->getValue('title');
                         if ('' !== $link_url) { /** @phpstan-ignore-line */
-                            $html_picture .= '<a href="'. $link_url .'">';
+                            $html_picture .= '<a href="'. rex_escape((string) $link_url, 'html_attr') .'">';
                         }
                         $html_picture .= '<figure>';
                         $html_picture .= '<img src="';
                         if ('' === $picture_type) { /** @phpstan-ignore-line */
-                            $html_picture .= rex_url::media($picture);
+                            $html_picture .= rex_escape(rex_url::media($picture), 'html_attr');
                         } else {
-                            $html_picture .= 'index.php?rex_media_type='. $picture_type .'&rex_media_file='. $picture;
+                            $html_picture .= rex_escape('index.php?rex_media_type='. $picture_type .'&rex_media_file='. $picture, 'html_attr');
                         }
-                        $html_picture .= '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'">';
+                        $html_picture .= '" alt="'. rex_escape($title, 'html_attr') .'" title="'. rex_escape($title, 'html_attr') .'">';
                         if ($show_title && ('' !== $media->getValue('title') || ($media->hasValue('med_title_'. rex_clang::getCurrentId()) && '' !== $media->getValue('med_title_'. rex_clang::getCurrentId())))) { /** @phpstan-ignore-line */
-                            $med_title = ($media->hasValue('med_title_'. rex_clang::getCurrentId()) && '' !== $media->getValue('med_title_'. rex_clang::getCurrentId())) ? $media->getValue('med_title_'. rex_clang::getCurrentId()) : $media->getValue('title');
-                            $html_picture .= '<figcaption class="d2u_figcaption">'. $med_title .'</figcaption>';
+                            $med_title = ($media->hasValue('med_title_'. rex_clang::getCurrentId()) && '' !== $media->getValue('med_title_'. rex_clang::getCurrentId())) ? (string) $media->getValue('med_title_'. rex_clang::getCurrentId()) : $title;
+                            $html_picture .= '<figcaption class="d2u_figcaption">'. rex_escape($med_title) .'</figcaption>';
                         }
                         $html_picture .= '</figure>';
                         if ('' !== $link_url) { /** @phpstan-ignore-line */
@@ -87,9 +88,9 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
 
                 if ('' !== $heading) { /** @phpstan-ignore-line */
                     if ('' !== $link_url) { /** @phpstan-ignore-line */
-                        echo '<a href="'. $link_url .'">';
+                        echo '<a href="'. rex_escape((string) $link_url, 'html_attr') .'">';
                     }
-                    echo '<'. $heading_type .'>'. $heading .'</'. $heading_type .'>';
+                    echo '<'. $heading_type .'>'. rex_escape($heading) .'</'. $heading_type .'>';
                     if ('b' === $heading_type) {
                         echo '<br>';
                     }
@@ -110,8 +111,10 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
 
                 if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
                     $id = random_int(0, getrandmax());
+                    $more = (string) \Sprog\Wildcard::get('d2u_helper_modules_show_more');
+                    $less = (string) \Sprog\Wildcard::get('d2u_helper_modules_show_less');
                     echo '<div class="col-12">';
-                    echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
+                    echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. rex_escape($more) .'</button>';
                     echo '<div id="second_text_'. $id .'" class="hide-text">';
                     echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($text_2);
                     echo '</div>';
@@ -125,7 +128,7 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
                     echo 'if(btn.classList.contains("angle-down")) {'. PHP_EOL;
                     echo 'btn.style.opacity = "0";'. PHP_EOL;
                     echo 'setTimeout(function() {'. PHP_EOL;
-                    echo 'btn.textContent = "'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_less')) .'";'. PHP_EOL;
+                    echo 'btn.textContent = "'. rex_escape($less, 'js') .'";'. PHP_EOL;
                     echo 'btn.classList.remove("angle-down");'. PHP_EOL;
                     echo 'btn.classList.add("angle-up");'. PHP_EOL;
                     echo 'btn.style.opacity = "1";'. PHP_EOL;
@@ -134,7 +137,7 @@ if ('left' === $picture_position) { /** @phpstan-ignore-line */
                     echo 'else {'. PHP_EOL;
                     echo 'btn.style.opacity = "0";'. PHP_EOL;
                     echo 'setTimeout(function() {'. PHP_EOL;
-                    echo 'btn.textContent = "'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_more')) .'";'. PHP_EOL;
+                    echo 'btn.textContent = "'. rex_escape($more, 'js') .'";'. PHP_EOL;
                     echo 'btn.classList.remove("angle-up");'. PHP_EOL;
                     echo 'btn.classList.add("angle-down");'. PHP_EOL;
                     echo 'btn.style.opacity = "1";'. PHP_EOL;

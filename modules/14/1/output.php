@@ -30,12 +30,13 @@ $start = rex_request('start', 'int', 0);
         echo $yform->getForm();
 
         echo '<script>'. PHP_EOL;
-        echo 'jQuery(document).ready(function() {'. PHP_EOL;
-        echo 'jQuery(function() {'. PHP_EOL;
-        echo 'jQuery(\'input[name="search"]\').suggest("index.php?rex-api-call=search_it_autocomplete&rnd=" + Math.random(),'. PHP_EOL;
-        echo '{ onSelect: function(event, ui) { $("#formular").submit(); return false; }'. PHP_EOL;
-        echo '});'. PHP_EOL;
-        echo '});'. PHP_EOL;
+        echo 'document.addEventListener("DOMContentLoaded", function () {'. PHP_EOL;
+        echo '    var input = document.querySelector(\'input[name="search"]\');'. PHP_EOL;
+        echo '    if (!input || typeof window.D2UHelperSearchSuggest === "undefined") { return; }'. PHP_EOL;
+        echo '    window.D2UHelperSearchSuggest.init(input, {'. PHP_EOL;
+        echo '        source: "index.php?rex-api-call=search_it_autocomplete&rnd=" + Math.random(),'. PHP_EOL;
+        echo '        onSelect: function () { if (this.form) { this.form.submit(); } }'. PHP_EOL;
+        echo '    });'. PHP_EOL;
         echo '});'. PHP_EOL;
         echo '</script>'. PHP_EOL;
     } else {
@@ -215,7 +216,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
             foreach (explode(' ', trim($result['simwordsnewsearch'])) as $new_search_word) {
                 $result_simwords = $search_it_sim->search(trim($new_search_word));
                 if ($result_simwords['count'] > 0) {
-                    $simwords_out .= '<li><a href="'. rex_getUrl(rex_article::getCurrentId(), rex_clang::getCurrentId(), ['search' => $new_search_word]) .'">'. $new_search_word .'</a></li>';
+                    $simwords_out .= '<li><a href="'. rex_escape(rex_getUrl(rex_article::getCurrentId(), rex_clang::getCurrentId(), ['search' => $new_search_word]), 'html_attr') .'">'. rex_escape($new_search_word) .'</a></li>';
                     ++$sim_counter;
                     if ($sim_counter >= 10) {
                         break;

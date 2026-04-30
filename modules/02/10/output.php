@@ -19,7 +19,8 @@ if (rex::isFrontend()) {
 <script>
 	function toggle_toc() {
 		var tocList = document.getElementById("toc_list");
-		tocList.style.display = tocList.style.display === "none" ? "" : "none";
+		var isHidden = window.getComputedStyle(tocList).display === "none";
+		tocList.style.display = isHidden ? "block" : "none";
 		document.getElementById("toc_arrow").classList.toggle("icon_down");
 		document.getElementById("toc_arrow").classList.toggle("icon_right");
 	}

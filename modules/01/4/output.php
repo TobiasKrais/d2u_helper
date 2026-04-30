@@ -17,8 +17,10 @@ if ('' !== $text_1) { /** @phpstan-ignore-line */
 }
 if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
     $id = random_int(0, getrandmax());
+    $more = (string) \Sprog\Wildcard::get('d2u_helper_modules_show_more');
+    $less = (string) \Sprog\Wildcard::get('d2u_helper_modules_show_less');
     echo '<div class="wysiwyg_content">';
-    echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
+    echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. rex_escape($more) .'</button>';
     echo '<div id="second_text_'. $id .'" class="hide-text">';
     echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($text_2);
     echo '</div>';
@@ -32,7 +34,7 @@ if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
     echo 'if(btn.classList.contains("angle-down")) {'. PHP_EOL;
     echo 'btn.style.opacity = "0";'. PHP_EOL;
     echo 'setTimeout(function() {'. PHP_EOL;
-    echo 'btn.textContent = "'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_less')) .'";'. PHP_EOL;
+    echo 'btn.textContent = "'. rex_escape($less, 'js') .'";'. PHP_EOL;
     echo 'btn.classList.remove("angle-down");'. PHP_EOL;
     echo 'btn.classList.add("angle-up");'. PHP_EOL;
     echo 'btn.style.opacity = "1";'. PHP_EOL;
@@ -41,7 +43,7 @@ if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
     echo 'else {'. PHP_EOL;
     echo 'btn.style.opacity = "0";'. PHP_EOL;
     echo 'setTimeout(function() {'. PHP_EOL;
-    echo 'btn.textContent = "'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_more')) .'";'. PHP_EOL;
+    echo 'btn.textContent = "'. rex_escape($more, 'js') .'";'. PHP_EOL;
     echo 'btn.classList.remove("angle-up");'. PHP_EOL;
     echo 'btn.classList.add("angle-down");'. PHP_EOL;
     echo 'btn.style.opacity = "1";'. PHP_EOL;

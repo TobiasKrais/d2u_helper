@@ -31,7 +31,7 @@ $ueberschrift = 'REX_VALUE[1]';
 
 // Output
 if ('' !== $ueberschrift) { /** @phpstan-ignore-line */
-    echo '<h2>'. $ueberschrift .'</h2>';
+    echo '<h2>'. rex_escape($ueberschrift) .'</h2>';
 }
 echo '<div class="download-list'. ($show_preview_pictures ? '-pics' : '') .'">'; /** @phpstan-ignore-line */
 echo '<div class="row d-flex">';
@@ -59,9 +59,9 @@ foreach ($documents as $document) {
         }
         if ($has_permission) {
             echo '<div class="'. $downloads_cols .' flex-fill d-flex">';
-            echo '<a href="'. rex_url::media($document) .'" target="_blank" class="element flex-fill">';
+            echo '<a href="'. rex_escape(rex_url::media($document), 'html_attr') .'" target="_blank" class="element flex-fill">';
             if ($show_preview_pictures && !str_contains($rex_document->getType(), 'video') && 'application/octet-stream' !== $rex_document->getType()) { /** @phpstan-ignore-line */
-                echo '<img src="'. rex_media_manager::getUrl('d2u_helper_module_d2u_10-3', $rex_document->getFileName()) .'"><br>';
+                echo '<img src="'. rex_escape(rex_media_manager::getUrl('d2u_helper_module_d2u_10-3', $rex_document->getFileName()), 'html_attr') .'"><br>';
             }
 
             if (!$show_preview_pictures) { /** @phpstan-ignore-line */
@@ -71,7 +71,7 @@ foreach ($documents as $document) {
                     echo '<span class="icon file"></span>&nbsp;&nbsp;';
                 }
             }
-            echo $title .'<br><span>('. $filetype . ($filesize > 0 ? ', '. $filesize .' MB' : '') .')</span>';
+            echo rex_escape($title) .'<br><span>('. rex_escape($filetype) . ($filesize > 0 ? ', '. $filesize .' MB' : '') .')</span>';
             echo '</a>';
             echo '</div>';
         }

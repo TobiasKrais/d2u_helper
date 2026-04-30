@@ -100,7 +100,7 @@ if ($media_video instanceof rex_media) {
             echo '"name": '. json_encode($title, JSON_UNESCAPED_UNICODE) .','. PHP_EOL;
             echo '"description": '. json_encode('' !== $description ? $description : $title, JSON_UNESCAPED_UNICODE) .','. PHP_EOL;
             echo '"uploadDate": "'. date('c', $media_video->getUpdateDate()) . '",'. PHP_EOL;
-            echo '"contentUrl": "'. $server . $media_video->getUrl() .'"'. PHP_EOL;
+            echo '"contentUrl": '. json_encode($server . $media_video->getUrl(), JSON_UNESCAPED_UNICODE) .''. PHP_EOL;
             echo '}'. PHP_EOL;
             echo '</script>'. PHP_EOL;
         }
@@ -117,11 +117,11 @@ if ($media_video instanceof rex_media) {
             echo '{'. PHP_EOL;
             echo '"@context": "https://schema.org",'. PHP_EOL;
             echo '"@type": "VideoObject",'. PHP_EOL;
-            echo '"name": "'. $title . '",'. PHP_EOL;
+            echo '"name": '. json_encode($title, JSON_UNESCAPED_UNICODE) .','. PHP_EOL;
             echo '"description": '. json_encode('' !== $description ? $description : $title, JSON_UNESCAPED_UNICODE) .','. PHP_EOL;
-            echo '"thumbnailUrl": [ "'. $server . $media_preview->getUrl() .'" ],'. PHP_EOL;
+            echo '"thumbnailUrl": [ '. json_encode($server . $media_preview->getUrl(), JSON_UNESCAPED_UNICODE) .' ],'. PHP_EOL;
             echo '"uploadDate": "'. date('c', $media_video->getUpdateDate()) . '",'. PHP_EOL;
-            echo '"contentUrl": "'. $server . $media_video->getUrl() .'"'. PHP_EOL;
+            echo '"contentUrl": '. json_encode($server . $media_video->getUrl(), JSON_UNESCAPED_UNICODE) .''. PHP_EOL;
             echo '}'. PHP_EOL;
             echo '</script>'. PHP_EOL;
         }

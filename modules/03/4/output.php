@@ -12,18 +12,19 @@ $show_title = ('REX_VALUE[2]' === 'true'); /** @phpstan-ignore-line */
 if ('REX_MEDIA[1]' !== '') { /** @phpstan-ignore-line */
     $media = rex_media::get('REX_MEDIA[1]');
     if ($media instanceof rex_media) {
+        $title = (string) $media->getValue('title');
         echo '<div class="col-12 col-sm-'. $cols_sm .' col-md-'. $cols_md .' col-lg-'. $cols_lg . $offset_lg .'">';
         echo '<figure>';
         echo '<img src="';
         if ('' === $picture_type) { /** @phpstan-ignore-line */
-            echo rex_url::media($picture);
+            echo rex_escape(rex_url::media($picture), 'html_attr');
         } else {
-            echo 'index.php?rex_media_type='. $picture_type .'&rex_media_file='. $picture;
+            echo rex_escape('index.php?rex_media_type='. $picture_type .'&rex_media_file='. $picture, 'html_attr');
         }
-        echo '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'" class="module_3_1_image" loading="lazy">';
+        echo '" alt="'. rex_escape($title, 'html_attr') .'" title="'. rex_escape($title, 'html_attr') .'" class="module_3_1_image" loading="lazy">';
         if ($show_title && ('' !== $media->getValue('title') || ($media->hasValue('med_title_'. rex_clang::getCurrentId()) && '' !== $media->getValue('med_title_'. rex_clang::getCurrentId())))) { /** @phpstan-ignore-line */
-            $med_title = ($media->hasValue('med_title_'. rex_clang::getCurrentId()) && '' !== $media->getValue('med_title_'. rex_clang::getCurrentId())) ? $media->getValue('med_title_'. rex_clang::getCurrentId()) : $media->getValue('title');
-            echo '<figcaption class="d2u_figcaption">'. $med_title .'</figcaption>';
+            $med_title = ($media->hasValue('med_title_'. rex_clang::getCurrentId()) && '' !== $media->getValue('med_title_'. rex_clang::getCurrentId())) ? (string) $media->getValue('med_title_'. rex_clang::getCurrentId()) : $title;
+            echo '<figcaption class="d2u_figcaption">'. rex_escape($med_title) .'</figcaption>';
         }
         echo '</figure>';
         echo '</div>';

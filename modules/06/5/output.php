@@ -13,6 +13,8 @@ $youtube_id = isset($matches[1]) ? trim($matches[1]) : '';
 if ('' === $youtube_id && (str_contains('REX_VALUE[1]', 'youtu.be/') || str_contains('REX_VALUE[1]', '/embed/') || str_contains('REX_VALUE[1]', '/shorts/'))) {
     $youtube_id = trim(substr('REX_VALUE[1]', (int) strrpos('REX_VALUE[1]', '/') + 1));
 }
+// Restrict to safe id charset
+$youtube_id = preg_replace('/[^A-Za-z0-9_\-]/', '', $youtube_id) ?? '';
 $youtube_url = 'https://www.youtube-nocookie.com/embed/'. $youtube_id .'?autoplay=1';
 $youtube_previewimage_url = 'https://img.youtube.com/vi/'. $youtube_id .'/hqdefault.jpg';
 $youtube_videoinfo_url = 'https://www.youtube.com/oembed?format=json&url=https%3A//youtube.com/watch%3Fv%3D'. $youtube_id;
@@ -47,7 +49,9 @@ if ('' !== $youtube_id) {
             $video_info_raw = file_get_contents($youtube_videoinfo_url);
             if (false !== $video_info_raw) {
                 $video_info = json_decode($video_info_raw);
-                echo '<h2>'. $video_info->title .'</h2>'; /** @phpstan-ignore-line */
+                if (isset($video_info->title)) {
+                    echo '<h2>'. rex_escape((string) $video_info->title) .'</h2>';
+                }
             }
             echo '</div>';
         }

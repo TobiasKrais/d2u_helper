@@ -50,12 +50,17 @@ $lightbox_id = random_int(0, getrandmax());
 	<div class="row">
 		<?php
             foreach ($pics as $pic) {
+                $pic = (string) $pic;
                 $media = rex_media::get($pic);
                 if ($media instanceof rex_media) {
-                    echo '<a href="index.php?rex_media_type='. $type_detail .'&rex_media_file='. $pic .'" data-d2u-gallery="gallery-'. $lightbox_id .'" class="'. $pics_cols .'"'
-                        .' data-title="'. $media->getValue('title') .'" onclick="event.preventDefault(); d2uLightboxOpen(\'gallery-'. $lightbox_id .'\', this);">';
-                    echo '<img src="'. (1 === $number_pics ? rex_url::media($pic) : 'index.php?rex_media_type='. $type_thumb .'&rex_media_file='. $pic) .'" class="img-fluid gallery-pic-box"' /** @phpstan-ignore-line */
-                        .' alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'" loading="lazy">';
+                    $title = (string) $media->getValue('title');
+                    $detailUrl = 'index.php?rex_media_type='. $type_detail .'&rex_media_file='. $pic;
+                    $thumbUrl = 1 === $number_pics ? rex_url::media($pic) : 'index.php?rex_media_type='. $type_thumb .'&rex_media_file='. $pic; /** @phpstan-ignore-line */
+                    $galleryName = 'gallery-'. (int) $lightbox_id;
+                    echo '<a href="'. rex_escape($detailUrl, 'html_attr') .'" data-d2u-gallery="'. rex_escape($galleryName, 'html_attr') .'" class="'. $pics_cols .'"'
+                        .' data-title="'. rex_escape($title, 'html_attr') .'" onclick="event.preventDefault(); d2uLightboxOpen(\''. rex_escape($galleryName, 'js') .'\', this);">';
+                    echo '<img src="'. rex_escape($thumbUrl, 'html_attr') .'" class="img-fluid gallery-pic-box"'
+                        .' alt="'. rex_escape($title, 'html_attr') .'" title="'. rex_escape($title, 'html_attr') .'" loading="lazy">';
                     echo '</a>';
                 }
             }

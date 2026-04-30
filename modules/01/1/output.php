@@ -17,8 +17,10 @@ if ('' !== $text_1) { /** @phpstan-ignore-line */
 }
 if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
     $id = random_int(0, getrandmax());
+    $more = (string) \Sprog\Wildcard::get('d2u_helper_modules_show_more');
+    $less = (string) \Sprog\Wildcard::get('d2u_helper_modules_show_less');
     echo '<div class="wysiwyg_content">';
-    echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. \Sprog\Wildcard::get('d2u_helper_modules_show_more') .'</button>';
+    echo '<button id="button_'. $id .'" class="text-toggler angle-down" onclick="toggle_text_'. $id .'()">'. rex_escape($more) .'</button>';
     echo '<div id="second_text_'. $id .'" class="hide-text">';
     echo TobiasKrais\D2UHelper\FrontendHelper::prepareEditorField($text_2);
     echo '</div>';
@@ -28,10 +30,10 @@ if ($show_text_2 && '' !== $text_2) { /** @phpstan-ignore-line */
     echo 'function toggle_text_'. $id .'() {'. PHP_EOL;
     echo '$("#second_text_'. $id .'").slideToggle();'. PHP_EOL;
     echo 'if($("#button_'. $id .'").hasClass("angle-down")) {';
-    echo '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_less')) .'").removeClass("angle-down").addClass("angle-up").fadeIn(500); });';
+    echo '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. rex_escape($less, 'js') .'").removeClass("angle-down").addClass("angle-up").fadeIn(500); });';
     echo '}'. PHP_EOL;
     echo 'else {';
-    echo '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. addslashes(\Sprog\Wildcard::get('d2u_helper_modules_show_more')) .'").removeClass("angle-up").addClass("angle-down").fadeIn(500); });';
+    echo '$("#button_'. $id .'").fadeOut(500, function() { $(this).html("'. rex_escape($more, 'js') .'").removeClass("angle-up").addClass("angle-down").fadeIn(500); });';
     echo '}'. PHP_EOL;
     echo '}'. PHP_EOL;
     echo '</script>';

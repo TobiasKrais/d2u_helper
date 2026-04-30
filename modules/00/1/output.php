@@ -24,7 +24,8 @@ if (\rex::isBackend()) {
         echo '</div>';
         echo '</div>';
         echo '</div>';
-        echo '<div class="container-wrapper'. ('REX_VALUE[4]' !== '' ? ' REX_VALUE[4]' : '') .'">'; /** @phpstan-ignore-line */
+        $extraClass = (string) 'REX_VALUE[4]'; /** @phpstan-ignore-line */
+        echo '<div class="container-wrapper'. ('' !== $extraClass ? ' '. rex_escape($extraClass, 'html_attr') : '') .'">';
         echo '<div class="container'. ($container_new && $container_fluid ? '-fluid' : '') .'">';
         echo '<div class="row">';
     }

@@ -30,12 +30,12 @@ if (!function_exists('includePhotoSphereViewerJS')) {
 
 ?>
 <div class="col-12 col-sm-<?= $cols_sm ?> col-md-<?= $cols_md ?> col-lg-<?= $cols_lg . $offset_lg ?>">
-    <div id="viewer_<?= $viewer_id ?>" style="height: 75vh;"></div>
+    <div id="viewer_<?= (int) $viewer_id ?>" style="height: 75vh;"></div>
 
     <script>
-        const viewer_<?= $viewer_id ?> = new PhotoSphereViewer.Viewer({
-            container: document.querySelector('#viewer_<?= $viewer_id ?>'),
-            panorama: '<?= rex_url::media($picture) ?>',
+        const viewer_<?= (int) $viewer_id ?> = new PhotoSphereViewer.Viewer({
+            container: document.querySelector('#viewer_<?= (int) $viewer_id ?>'),
+            panorama: '<?= rex_escape(rex_url::media($picture), 'js') ?>',
             navbar: [
                 'zoom',
                 'move',
