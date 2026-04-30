@@ -32,9 +32,9 @@ abstract class ALangHelper
      */
     private static function getId($key)
     {
-        $select_id_query = 'SELECT id FROM '. rex::getTablePrefix() ."sprog_wildcard WHERE wildcard = '". $key ."' AND id > 0;";
+        $select_id_query = 'SELECT id FROM '. rex::getTablePrefix() .'sprog_wildcard WHERE wildcard = :key AND id > 0;';
         $select_id_sql = rex_sql::factory();
-        $select_id_sql->setQuery($select_id_query);
+        $select_id_sql->setQuery($select_id_query, ['key' => $key]);
         if ($select_id_sql->getRows() > 0) {
             return (int) $select_id_sql->getValue('id');
         }
@@ -68,34 +68,51 @@ abstract class ALangHelper
             return false;
         }
 
-        $select_pid_query = 'SELECT pid FROM '. rex::getTablePrefix() ."sprog_wildcard WHERE wildcard = '". $key ."' AND clang_id = ". $clang_id .';';
+        $clang_id = (int) $clang_id;
+        $login = rex::getUser() instanceof rex_user ? (string) rex::getUser()->getValue('login') : '';
+
+        $select_pid_query = 'SELECT pid FROM '. rex::getTablePrefix() .'sprog_wildcard WHERE wildcard = :key AND clang_id = :clang_id;';
         $select_pid_sql = rex_sql::factory();
-        $select_pid_sql->setQuery($select_pid_query);
+        $select_pid_sql->setQuery($select_pid_query, ['key' => $key, 'clang_id' => $clang_id]);
         if ($select_pid_sql->getRows() > 0) {
             if ($overwrite) {
                 // Update
                 $query = 'UPDATE '. rex::getTablePrefix() .'sprog_wildcard SET '
-                    ."`replace` = '". addslashes($value) ."', "
-                    ."updatedate = '". rex_sql::datetime() ."', "
-                    ."updateuser = '". (rex::getUser() instanceof rex_user ? rex::getUser()->getValue('login') : '') ."' "
-                    .'WHERE pid = '. $select_pid_sql->getValue('pid') .';COMMIT;';
+                    .'`replace` = :value, '
+                    .'updatedate = :updatedate, '
+                    .'updateuser = :updateuser '
+                    .'WHERE pid = :pid;';
                 $sql = rex_sql::factory();
-                $sql->setQuery($query);
+                $sql->setQuery($query, [
+                    'value' => $value,
+                    'updatedate' => rex_sql::datetime(),
+                    'updateuser' => $login,
+                    'pid' => (int) $select_pid_sql->getValue('pid'),
+                ]);
                 return !$sql->hasError();
             }
         } else {
             // Save
             $query = 'INSERT INTO '. rex::getTablePrefix() .'sprog_wildcard SET '
-                .'id = '. self::getId($key) .', '
-                .'clang_id = '. $clang_id .', '
-                ."wildcard = '". $key ."', "
-                ."`replace` = '". addslashes($value) ."', "
-                ."createdate = '". rex_sql::datetime() ."', "
-                ."createuser = '". (rex::getUser() instanceof rex_user ? rex::getUser()->getValue('login') : '') ."', "
-                ."updatedate = '". rex_sql::datetime() ."', "
-                ."updateuser = '". (rex::getUser() instanceof rex_user ? rex::getUser()->getValue('login') : '') ."';";
+                .'id = :id, '
+                .'clang_id = :clang_id, '
+                .'wildcard = :key, '
+                .'`replace` = :value, '
+                .'createdate = :createdate, '
+                .'createuser = :createuser, '
+                .'updatedate = :updatedate, '
+                .'updateuser = :updateuser;';
             $sql = rex_sql::factory();
-            $sql->setQuery($query);
+            $sql->setQuery($query, [
+                'id' => self::getId($key),
+                'clang_id' => $clang_id,
+                'key' => $key,
+                'value' => $value,
+                'createdate' => rex_sql::datetime(),
+                'createuser' => $login,
+                'updatedate' => rex_sql::datetime(),
+                'updateuser' => $login,
+            ]);
             return !$sql->hasError();
         }
 
@@ -109,13 +126,18 @@ abstract class ALangHelper
      */
     public function uninstall($clang_id = 0): void
     {
+        $clang_id = (int) $clang_id;
         foreach (array_keys($this->replacements_english) as $key) {
             if (rex_addon::get('sprog')->isAvailable()) {
                 // Delete
                 $query = 'DELETE FROM '. rex::getTablePrefix() .'sprog_wildcard '
-                    ."WHERE wildcard = '". $key ."'". ($clang_id > 0 ? ' AND clang_id = '. $clang_id : '') .';';
+                    .'WHERE wildcard = :key'. ($clang_id > 0 ? ' AND clang_id = :clang_id' : '') .';';
+                $params = ['key' => $key];
+                if ($clang_id > 0) {
+                    $params['clang_id'] = $clang_id;
+                }
                 $select = rex_sql::factory();
-                $select->setQuery($query);
+                $select->setQuery($query, $params);
             }
         }
     }

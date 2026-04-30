@@ -26,10 +26,13 @@ abstract class ACronJob
         if (rex_addon::get('cronjob')->isAvailable() && self::isInstalled()) {
             $query = 'UPDATE `'. rex::getTablePrefix() .'cronjob` SET '
                 .'`status` = 1, '
-                ."nexttime = '". date('Y-m-d H:i:s', strtotime('+1 min')) ."' "
-                ."WHERE `name` = '". $this->name ."'";
+                .'nexttime = :nexttime '
+                .'WHERE `name` = :name';
             $sql = rex_sql::factory();
-            $sql->setQuery($query);
+            $sql->setQuery($query, [
+                'nexttime' => date('Y-m-d H:i:s', strtotime('+1 min')),
+                'name' => $this->name,
+            ]);
 
             self::setConfig();
 
@@ -47,9 +50,9 @@ abstract class ACronJob
     public function deactivate()
     {
         if (rex_addon::get('cronjob')->isAvailable() && self::isInstalled()) {
-            $query = 'UPDATE `'. rex::getTablePrefix() ."cronjob` SET status = 0 WHERE `name` = '". $this->name ."'";
+            $query = 'UPDATE `'. rex::getTablePrefix() .'cronjob` SET status = 0 WHERE `name` = :name';
             $sql = rex_sql::factory();
-            $sql->setQuery($query);
+            $sql->setQuery($query, ['name' => $this->name]);
             return true;
         }
 
@@ -64,9 +67,9 @@ abstract class ACronJob
     public function delete()
     {
         if (rex_addon::get('cronjob')->isAvailable()) {
-            $query = 'DELETE FROM `'. rex::getTablePrefix() ."cronjob` WHERE `name` = '". $this->name ."'";
+            $query = 'DELETE FROM `'. rex::getTablePrefix() .'cronjob` WHERE `name` = :name';
             $sql = rex_sql::factory();
-            $sql->setQuery($query);
+            $sql->setQuery($query, ['name' => $this->name]);
             return !$sql->hasError();
         }
         return false;
@@ -90,9 +93,9 @@ abstract class ACronJob
     public function isInstalled()
     {
         if (rex_addon::get('cronjob')->isAvailable()) {
-            $query = 'SELECT `name` FROM `'. rex::getTablePrefix() ."cronjob` WHERE `name` = '". $this->name ."'";
+            $query = 'SELECT `name` FROM `'. rex::getTablePrefix() .'cronjob` WHERE `name` = :name';
             $sql = rex_sql::factory();
-            $sql->setQuery($query);
+            $sql->setQuery($query, ['name' => $this->name]);
             if ($sql->getRows() > 0) {
                 return true;
             }
@@ -111,10 +114,20 @@ abstract class ACronJob
     protected function save($description, $php_code, $interval, $activate = true): void
     {
         if (rex_addon::get('cronjob')->isAvailable()) {
-            $query = 'INSERT INTO `'. rex::getTablePrefix() .'cronjob` (`name`, `description`, `type`, `parameters`, `interval`, `nexttime`, `environment`, `execution_moment`, `execution_start`, `status`, `createdate`, `createuser`) VALUES '
-                ."('". $this->name ."', '". $description ."', 'rex_cronjob_phpcode', '{\"rex_cronjob_phpcode_code\":\"". $php_code ."\"}', '". $interval ."', '". date('Y-m-d H:i:s', strtotime('+5 min')) ."', '|frontend|backend|', 0, '1970-01-01 01:00:00', ". ($activate ? '1' : '0') .", CURRENT_TIMESTAMP, '". (rex::getUser() instanceof rex_user ? rex::getUser()->getLogin() : '') ."');";
+            $login = rex::getUser() instanceof rex_user ? (string) rex::getUser()->getLogin() : '';
+            $query = 'INSERT INTO `'. rex::getTablePrefix() .'cronjob` '
+                .'(`name`, `description`, `type`, `parameters`, `interval`, `nexttime`, `environment`, `execution_moment`, `execution_start`, `status`, `createdate`, `createuser`) '
+                .'VALUES (:name, :description, \'rex_cronjob_phpcode\', :parameters, :interval, :nexttime, \'|frontend|backend|\', 0, \'1970-01-01 01:00:00\', :status, CURRENT_TIMESTAMP, :createuser);';
             $sql = rex_sql::factory();
-            $sql->setQuery($query);
+            $sql->setQuery($query, [
+                'name' => $this->name,
+                'description' => $description,
+                'parameters' => json_encode(['rex_cronjob_phpcode_code' => $php_code]),
+                'interval' => $interval,
+                'nexttime' => date('Y-m-d H:i:s', strtotime('+5 min')),
+                'status' => $activate ? 1 : 0,
+                'createuser' => $login,
+            ]);
 
             self::setConfig();
         }
