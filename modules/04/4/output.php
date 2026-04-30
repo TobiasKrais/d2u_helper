@@ -4,13 +4,14 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' me-lg-auto ms-lg-auto ' : ''; /** @ph
 ?>
 <div class="col-sm-<?= $cols . $offset_lg ?>">
 <?php
-    $longitude = 'REX_VALUE[4]' === '' ? 0 : 'REX_VALUE[4]'; /** @phpstan-ignore-line */
-    $latitude = 'REX_VALUE[5]' === '' ? 0 : 'REX_VALUE[5]'; /** @phpstan-ignore-line */
-    $maps_zoom = 'REX_VALUE[3]' === '' ? 15 : 'REX_VALUE[3]'; /** @phpstan-ignore-line */
-    $height = 'REX_VALUE[7]' === '' ? '500' : 'REX_VALUE[7]'; /** @phpstan-ignore-line */
-    $height_unit = 'REX_VALUE[8]' === '' ? 'px' : 'REX_VALUE[8]'; /** @phpstan-ignore-line */
-    $substitute = ["\r\n" => '', "\r" => '', "\n" => '', '"' => "'"];
-    $infotext = 'REX_VALUE[id=2 output=html]';
+    $longitude = 'REX_VALUE[4]' === '' ? 0.0 : (float) 'REX_VALUE[4]'; /** @phpstan-ignore-line */
+    $latitude = 'REX_VALUE[5]' === '' ? 0.0 : (float) 'REX_VALUE[5]'; /** @phpstan-ignore-line */
+    $maps_zoom = 'REX_VALUE[3]' === '' ? 15 : (int) 'REX_VALUE[3]'; /** @phpstan-ignore-line */
+    $height_value = 'REX_VALUE[7]' === '' ? 500 : (int) 'REX_VALUE[7]'; /** @phpstan-ignore-line */
+    $height_unit_raw = 'REX_VALUE[8]' === '' ? 'px' : (string) 'REX_VALUE[8]'; /** @phpstan-ignore-line */
+    $allowed_units = ['px', '%', 'em', 'rem', 'vh', 'vw'];
+    $height_unit = in_array($height_unit_raw, $allowed_units, true) ? $height_unit_raw : 'px';
+    $infotext = (string) 'REX_VALUE[id=2 output=html]';
 
     $map_id = random_int(0, getrandmax());
 
@@ -29,7 +30,7 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' me-lg-auto ms-lg-auto ' : ''; /** @ph
             }
 ?>
 	<script>
-		Geolocation.default.positionColor = '<?= (string) rex_config::get('d2u_helper', 'article_color_h') ?>';
+		Geolocation.default.positionColor = <?= json_encode(\TobiasKrais\D2UHelper\BackendHelper::sanitizeHexColor((string) rex_config::get('d2u_helper', 'article_color_h')), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 
 		// adjust zoom level
 		Geolocation.Tools.Center = class extends Geolocation.Tools.Template{
@@ -108,7 +109,7 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' me-lg-auto ms-lg-auto ' : ''; /** @ph
 			// Geolocation 2.x
 			echo \FriendsOfRedaxo\Geolocation\Mapset::take($mapsetId)
 				->attributes('id', (string) $mapsetId)
-				->attributes('style', 'height: '. $height . $height_unit .';width:100%;')
+				->attributes('style', 'height: '. $height_value . $height_unit .';width:100%;')
 				->dataset('center', [[$latitude, $longitude], $maps_zoom])
 				->dataset('position', [$latitude, $longitude])
 				->dataset('infobox', [[$latitude, $longitude], $infotext])
@@ -118,7 +119,7 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' me-lg-auto ms-lg-auto ' : ''; /** @ph
 			// Geolocation 1.x
 			echo \Geolocation\mapset::take($mapsetId)
 				->attributes('id', (string) $mapsetId)
-				->attributes('style', 'height: '. $height . $height_unit .';width:100%;')
+				->attributes('style', 'height: '. $height_value . $height_unit .';width:100%;')
 				->dataset('center', [[$latitude, $longitude], $maps_zoom])
 				->dataset('position', [$latitude, $longitude])
 				->dataset('infobox', [[$latitude, $longitude], $infotext])
@@ -126,13 +127,13 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' me-lg-auto ms-lg-auto ' : ''; /** @ph
 		}
 
     } elseif (rex_addon::get('osmproxy')->isAvailable()) {
-        $popup_js = '' !== $infotext ? ".bindPopup('". addslashes(strtr($infotext, $substitute)) ."').openPopup()" : ''; /** @phpstan-ignore-line */
+        $popup_js = '' !== $infotext ? '.bindPopup('. json_encode($infotext, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) .').openPopup()' : '';
 
         $leaflet_js_file = 'modules/04-2/leaflet.js';
         echo '<script src="'. rex_url::addonAssets('d2u_helper', $leaflet_js_file) .'?buster='. filemtime(rex_path::addonAssets('d2u_helper', $leaflet_js_file)) .'"></script>' . PHP_EOL;
 
 ?>
-		<div id="map-<?= $map_id ?>" style="width:100%;height: <?= $height . $height_unit ?>"></div>
+		<div id="map-<?= $map_id ?>" style="width:100%;height: <?= rex_escape($height_value . $height_unit, 'html_attr') ?>"></div>
 		<script type="text/javascript" async="async">
 			var map = L.map('map-<?= $map_id ?>').setView([<?= $latitude ?>, <?= $longitude ?>], <?= $maps_zoom ?>);
 			L.tileLayer('/?osmtype=german&z={z}&x={x}&y={y}', {

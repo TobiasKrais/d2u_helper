@@ -100,10 +100,13 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                     }
 
                     $hit_link = !str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . $article_hit->getUrl(['search_highlighter' => $request]) : $article_hit->getUrl(['search_highlighter' => $request]);
+                    $hit_url_plain = !str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . $article_hit->getUrl() : $article_hit->getUrl();
+                    $article_name = (string) $article_hit->getName();
                     echo '<li class="search_it-result search_it-article">';
-                    echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $article_hit->getName() .'">'. $article_hit->getName() .'</a></span><br>';
+                    echo '<span class="search_it-title"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($article_name, 'html_attr') .'">'. rex_escape($article_name) .'</a></span><br>';
+                    // highlightedtext stammt aus search_it und enthaelt zulaessiges <mark>-Markup
                     echo '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
-                    echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $article_hit->getName() .'">'. urldecode(!str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . $article_hit->getUrl() : $article_hit->getUrl()) .'</a></span>';
+                    echo '<span class="search_it-url"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($article_name, 'html_attr') .'">'. rex_escape(urldecode($hit_url_plain)) .'</a></span>';
                     echo '</li>';
                 }
             } elseif ('url' === $hit['type']) {
@@ -129,11 +132,16 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                         $hit_link_unproved = rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id'), 'search_highlighter' => $request]);
                         $hit_link = (!str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . $hit_link_unproved : $hit_link_unproved);
                         if (is_array($url_info)) {
+                            $url_title = (string) ($url_info['title'] ?? '');
+                            $url_image = (string) ($url_info['image'] ?? '');
+                            $url_plain_target = rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]);
+                            $url_plain = !str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . $url_plain_target : $url_plain_target;
                             echo '<li class="search_it-result search_it-article">';
-                            echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. $url_info['title'] .'</a></span><br>';
-                            $image = '' !== $url_info['image'] ? '<span class="search_it-previewimage"><img src="'. $hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_info['image'] .'"></span>' : '';
+                            echo '<span class="search_it-title"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($url_title, 'html_attr') .'">'. rex_escape($url_title) .'</a></span><br>';
+                            $image = '' !== $url_image ? '<span class="search_it-previewimage"><img src="'. rex_escape($hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_image, 'html_attr') .'"></span>' : '';
+                            // highlightedtext stammt aus search_it und enthaelt zulaessiges <mark>-Markup
                             echo $image . '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
-                            echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $url_info['title'] .'">'. urldecode(!str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')]) : rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id')])) .'</a></span>';
+                            echo '<span class="search_it-url"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($url_title, 'html_attr') .'">'. rex_escape(urldecode($url_plain)) .'</a></span>';
                             echo '</li>';
                         }
                     }
@@ -148,12 +156,15 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                     }
                     if ($has_permission) {
                         $hit_link = $server . rex_url::media($media->getFileName());
+                        $media_title = (string) $media->getTitle();
+                        $media_filename = (string) $media->getFileName();
                         echo '<li class="search_it-result search_it-image search_it-flex">';
-                        echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. ('pdf' === pathinfo($hit['filename'], PATHINFO_EXTENSION) ? '<span class="icon pdf"></span>' : '');
-                        echo '&nbsp;&nbsp;'. $media->getTitle() .'</a></span><br>';
-                        $image = 'image' === substr($media->getType(), 0, 5) ? '<span class="search_it-previewimage"><img src="index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $media->getFileName() .'"></span>' : '';
+                        echo '<span class="search_it-title"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($media_title, 'html_attr') .'">'. ('pdf' === pathinfo($hit['filename'], PATHINFO_EXTENSION) ? '<span class="icon pdf"></span>' : '');
+                        echo '&nbsp;&nbsp;'. rex_escape($media_title) .'</a></span><br>';
+                        $image = 'image' === substr($media->getType(), 0, 5) ? '<span class="search_it-previewimage"><img src="'. rex_escape('index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $media_filename, 'html_attr') .'"></span>' : '';
+                        // highlightedtext stammt aus search_it und enthaelt zulaessiges <mark>-Markup
                         echo $image . ($hit['highlightedtext'] ? '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>' : '');
-                        echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. $hit_link .'</a></span>';
+                        echo '<span class="search_it-url"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($media_title, 'html_attr') .'">'. rex_escape($hit_link) .'</a></span>';
                         echo '</li>';
                     }
                 }
@@ -168,11 +179,15 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                         }
                         if ($has_permission) {
                             $hit_link = $server . rex_url::media($media->getFileName());
+                            $media_title = (string) $media->getTitle();
+                            $media_filename = (string) $media->getFileName();
+                            $title_or_name = '' !== $media_title ? $media_title : $media_filename;
                             echo '<li class="search_it-result search_it-image search_it-flex">';
-                            echo '<span class="search_it-title"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. ('' !== $media->getTitle() ? $media->getTitle() : $media->getFileName()) .'</a></span><br>';
-                            $image = 'image' === substr($media->getType(), 0, 5) ? '<span class="search_it-previewimage"><img src="'. $server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $media->getFileName() .'"></span>' : '';
+                            echo '<span class="search_it-title"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($media_title, 'html_attr') .'">'. rex_escape($title_or_name) .'</a></span><br>';
+                            $image = 'image' === substr($media->getType(), 0, 5) ? '<span class="search_it-previewimage"><img src="'. rex_escape($server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $media_filename, 'html_attr') .'"></span>' : '';
+                            // highlightedtext stammt aus search_it und enthaelt zulaessiges <mark>-Markup
                             echo $image . ($hit['highlightedtext'] ? '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>' : '');
-                            echo '<span class="search_it-url"><a href="'. $hit_link .'" title="'. $media->getTitle() .'">'. $hit_link .'</a></span>';
+                            echo '<span class="search_it-url"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($media_title, 'html_attr') .'">'. rex_escape($hit_link) .'</a></span>';
                             echo '</li>';
                         }
                     }

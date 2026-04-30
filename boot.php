@@ -82,10 +82,6 @@ function addD2UHelperTOC(rex_extension_point $ep): void
 
     // is string not empty an can it be HTML
     if(false !== strpos($content, '<')) {
-        // table of contents
-        $toc_html = '<p onClick="toggle_toc()"><span class="fa-icon icon_toc"></span>'. \Sprog\Wildcard::get('d2u_helper_toc') .'<span class="fa-icon h_toggle icon_right" id="toc_arrow"></span></p>'. PHP_EOL;
-        $toc_html .= '<ol id="toc_list"><li>';
-
         // load code in a DOM document
         $dom = new DOMDocument();
         libxml_use_internal_errors(true);
@@ -101,53 +97,90 @@ function addD2UHelperTOC(rex_extension_point $ep): void
             // find all headings in article
             $headings = $xpath->query('//article//h2 | //article//h3 | //article//h4 | //article//h5 | //article//h6');
 
+            // Build TOC structure via DOM API to safely handle special characters in heading text.
+            $toc_root = $dom->createElement('ol');
+            $toc_root->setAttribute('id', 'toc_list');
+
+            // Stack of <ol> elements per nesting level (index = depth, 0 = root)
+            $ol_stack = [$toc_root];
+            // Stack of currently open <li> elements (one per <ol>)
+            $li_stack = [null];
+
             $last_level = 0;
             $highest_level = 2;
-            // add ids to headings
-            if ($headings instanceof DOMNodeList) {
+
+            if ($headings instanceof DOMNodeList && $headings->length > 0) {
                 foreach ($headings as $heading) {
+                    if (!$heading instanceof DOMElement) {
+                        continue;
+                    }
                     $level = (int) $heading->nodeName[1] < $highest_level ? $highest_level : (int) $heading->nodeName[1];
 
                     if (0 === $last_level) {
                         $highest_level = $level;
+                        $last_level = $level;
                     } elseif ($last_level < $level) {
-                        $toc_html .= '<ol><li>';
+                        // nest: append a new <ol> inside the last <li>, then add <li>
+                        $parent_li = end($li_stack);
+                        if (!$parent_li instanceof DOMElement) {
+                            $parent_li = $ol_stack[count($ol_stack) - 1];
+                        }
+                        $new_ol = $dom->createElement('ol');
+                        $parent_li->appendChild($new_ol);
+                        $ol_stack[] = $new_ol;
+                        $li_stack[] = null;
+                        $last_level = $level;
                     } elseif ($last_level > $level) {
-                        while ($last_level > $level) {
-                            $toc_html .= '</li></ol>';
+                        // pop levels
+                        while ($last_level > $level && count($ol_stack) > 1) {
+                            array_pop($ol_stack);
+                            array_pop($li_stack);
                             --$last_level;
                         }
-                        $toc_html .= '</li>'. PHP_EOL .'<li>';
-                    } else {
-                        $toc_html .= '</li>'. PHP_EOL .'<li>';
                     }
-                    $last_level = $level < $highest_level ? $highest_level : $level;
 
+                    // Add anchor to heading
                     $id = 'heading-' . uniqid();
                     $anchor_node = $dom->createElement('a');
                     $anchor_node->setAttribute('name', $id);
                     $anchor_node->setAttribute('class', 'd2u_helper_toc_anchor');
                     $heading->insertBefore($anchor_node, $heading->firstChild);
 
-                    $toc_html .= '<a href="#' . $id . '">' . $heading->nodeValue . '</a>';
-                }
-                while ($last_level >= $highest_level) {
-                    $toc_html .= '</li></ol>';
-                    --$last_level;
+                    // Build <li><a href="#id">heading text</a></li>
+                    $li = $dom->createElement('li');
+                    $a = $dom->createElement('a');
+                    $a->setAttribute('href', '#' . $id);
+                    $a->appendChild($dom->createTextNode((string) $heading->nodeValue));
+                    $li->appendChild($a);
+
+                    $current_ol = $ol_stack[count($ol_stack) - 1];
+                    $current_ol->appendChild($li);
+                    $li_stack[count($li_stack) - 1] = $li;
                 }
             }
 
-            // Element gefunden
-            $toc_node = $dom->createDocumentFragment();
-            $toc_node->appendXML($toc_html);
-            if ($toc_element->item(0) instanceof DOMNode) {
-                $toc_element->item(0)->appendChild($toc_node);
+            // Build header paragraph with toggle
+            $intro = $dom->createElement('p');
+            $intro->setAttribute('onClick', 'toggle_toc()');
+            $icon_left = $dom->createElement('span');
+            $icon_left->setAttribute('class', 'fa-icon icon_toc');
+            $intro->appendChild($icon_left);
+            $intro->appendChild($dom->createTextNode((string) \Sprog\Wildcard::get('d2u_helper_toc')));
+            $icon_right = $dom->createElement('span');
+            $icon_right->setAttribute('class', 'fa-icon h_toggle icon_right');
+            $icon_right->setAttribute('id', 'toc_arrow');
+            $intro->appendChild($icon_right);
+
+            $toc_target = $toc_element->item(0);
+            if ($toc_target instanceof DOMNode) {
+                $toc_target->appendChild($intro);
+                $toc_target->appendChild($toc_root);
             }
 
             // update content
             $content = $dom->saveHTML();
         }
-        
+
         if (false !== $content) {
             $ep->setSubject($content);
         }

@@ -230,16 +230,16 @@ class ModuleManager
             1);
         $modules[] = new Module('04-1',
             'Google Maps Karte (BS4, deprecated)',
-            13);
+            14);
         $modules[] = new Module('04-2',
             'OpenStreetMap Karte (BS4, deprecated)',
-            6);
+            7);
         $modules[] = new Module('04-3',
             'Google Maps Karte (BS5)',
-            1);
+            2);
         $modules[] = new Module('04-4',
             'OpenStreetMap Karte (BS5)',
-            1);
+            2);
         $modules[] = new Module('05-1',
             'Artikelweiterleitung',
             16);
@@ -308,10 +308,10 @@ class ModuleManager
             1);
         $modules[] = new Module('13-1',
             'Lauftext',
-            5);
+            6);
         $modules[] = new Module('14-1',
             'Search It Suchmodul',
-            6);
+            7);
         $modules[] = new Module('15-1',
             'Kategorie mit Liste der Unterkategorien (BS4, deprecated)',
             3);

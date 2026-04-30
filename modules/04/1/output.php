@@ -4,24 +4,26 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
 ?>
 <div class="col-sm-<?= $cols . $offset_lg ?>">
 <?php
-    $longitude = 'REX_VALUE[4]' === '' ? 0 : 'REX_VALUE[4]'; /** @phpstan-ignore-line */
-    $latitude = 'REX_VALUE[5]' === '' ? 0 : 'REX_VALUE[5]'; /** @phpstan-ignore-line */
-    $map_type = 'REX_VALUE[6]' === '' ? 'HYBRID' : 'REX_VALUE[6]'; /** @phpstan-ignore-line */
+    $longitude = 'REX_VALUE[4]' === '' ? 0.0 : (float) 'REX_VALUE[4]'; /** @phpstan-ignore-line */
+    $latitude = 'REX_VALUE[5]' === '' ? 0.0 : (float) 'REX_VALUE[5]'; /** @phpstan-ignore-line */
+    // Map-Type aus fester Whitelist (Google Maps API)
+    $map_type_raw = (string) 'REX_VALUE[6]';
+    $allowed_map_types = ['HYBRID', 'ROADMAP', 'SATELLITE', 'TERRAIN'];
+    $map_type = in_array($map_type_raw, $allowed_map_types, true) ? $map_type_raw : 'HYBRID';
     $maps_zoom = 'REX_VALUE[3]' === '' ? 15 : (int) 'REX_VALUE[3]'; /** @phpstan-ignore-line */
-    $height = 'REX_VALUE[7]' === '' ? '500' : 'REX_VALUE[7]'; /** @phpstan-ignore-line */
-    $height_unit = 'REX_VALUE[8]' === '' ? 'px' : 'REX_VALUE[8]'; /** @phpstan-ignore-line */
-    $height .= $height_unit;
-    $api_key = 'REX_VALUE[11]' === '' ? (string) rex_config::get('d2u_helper', 'maps_key') : 'REX_VALUE[11]'; /** @phpstan-ignore-line */
-    if ('' !== $api_key) { /** @phpstan-ignore-line */
-        $api_key = '?key='. $api_key;
-    }
-    $substitute = ["\r\n" => '', "\r" => '', "\n" => '', '"' => "'"];
-    $infotext = 'REX_VALUE[id=2 output=html]';
-    $infotext = strtr($infotext, $substitute);
+    $height_value = 'REX_VALUE[7]' === '' ? 500 : (int) 'REX_VALUE[7]'; /** @phpstan-ignore-line */
+    $height_unit_raw = 'REX_VALUE[8]' === '' ? 'px' : (string) 'REX_VALUE[8]'; /** @phpstan-ignore-line */
+    $allowed_units = ['px', '%', 'em', 'rem', 'vh', 'vw'];
+    $height_unit = in_array($height_unit_raw, $allowed_units, true) ? $height_unit_raw : 'px';
+    $height = $height_value . $height_unit;
+    $api_key_raw = 'REX_VALUE[11]' === '' ? (string) rex_config::get('d2u_helper', 'maps_key') : (string) 'REX_VALUE[11]'; /** @phpstan-ignore-line */
+    $api_key = '' !== $api_key_raw ? '?key='. rawurlencode($api_key_raw) : '';
+    $address = (string) 'REX_VALUE[1]';
+    $infotext = (string) 'REX_VALUE[id=2 output=html]';
 
     $map_id = random_int(0, getrandmax());
 ?>
-	<div id="map_canvas" style="display: block; width: 100%; height: <?= $height ?>">
+	<div id="map_canvas" style="display: block; width: 100%; height: <?= rex_escape($height, 'html_attr') ?>">
 		<div id="maps-gdpr-hint-<?= $map_id ?>" class="maps-gdpr-hint">
 			<p><?= \Sprog\Wildcard::get('d2u_helper_module_04_gdpr_hint') ?></p>
 			<button type="button" id="map-<?= $map_id ?>" ><?= \Sprog\Wildcard::get('d2u_helper_module_04_load_map') ?></button>
@@ -31,7 +33,7 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
 		// Add event listener to activate map
 		document.getElementById('map-<?= $map_id ?>').addEventListener('click', function() {
 			// Load Google Maps JS and go on
-			$.getScript("https://maps.googleapis.com/maps/api/js<?= $api_key ?>", function(){
+			$.getScript(<?= json_encode('https://maps.googleapis.com/maps/api/js' . $api_key, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>, function(){
 				// Remove hint
 				g = document.getElementById('maps-gdpr-hint-<?= $map_id ?>');
 				g.outerHTML = '';
@@ -45,16 +47,12 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
 
 		var map;
 		var infowindow;
-		var address = [<?php
-            echo '[';
-            // Address for Geocoder
-            echo '"REX_VALUE[1]", ';
-            // Infotext
-            echo '"'. $infotext .'", ';
-            // Latitude and Longitude
-            echo $latitude .', '. $longitude;
-            echo ']';
-        ?>];
+		var address = [[
+			<?= json_encode($address, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>,
+			<?= json_encode($infotext, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>,
+			<?= $latitude ?>,
+			<?= $longitude ?>
+		]];
 		var address_position = 0;
 		var timeout = 100;
 
@@ -68,7 +66,7 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' mr-lg-auto ml-lg-auto ' : ''; /** @ph
 			var myOptions = {
 				zoom: <?= $maps_zoom ?>,
 				center: latlng,
-				mapTypeId: google.maps.MapTypeId.<?= $map_type ?>,
+				mapTypeId: google.maps.MapTypeId[<?= json_encode($map_type, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>],
 			};
 			// create map
 			map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
