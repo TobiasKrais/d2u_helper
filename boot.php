@@ -426,6 +426,49 @@ function sendD2UHelperJS($position = 'head'): void
 }
 
 /**
+ * Reads the configured custom CSS file from the mediapool after validating
+ * the filename to prevent path traversal / local file inclusion.
+ * Only files that exist as proper mediapool entries with a .css extension are loaded.
+ */
+function getD2UHelperCustomCSSContent(): string
+{
+    $d2u_helper = rex_addon::get('d2u_helper');
+    if (!$d2u_helper->hasConfig('custom_css')) {
+        return '';
+    }
+
+    $filename = (string) $d2u_helper->getConfig('custom_css');
+    if ('' === $filename) {
+        return '';
+    }
+
+    // Disallow path traversal: filename must equal basename and contain no separators / null bytes
+    if ($filename !== basename($filename) || false !== strpos($filename, "\0")) {
+        return '';
+    }
+
+    // Must end with .css
+    if (0 !== strcasecmp((string) pathinfo($filename, PATHINFO_EXTENSION), 'css')) {
+        return '';
+    }
+
+    // Must be a real mediapool entry
+    if (null === rex_media::get($filename)) {
+        return '';
+    }
+
+    $path = rex_path::media($filename);
+    $realPath = realpath($path);
+    $mediaRoot = realpath(rex_path::media(''));
+    if (false === $realPath || false === $mediaRoot || 0 !== strpos($realPath, $mediaRoot . DIRECTORY_SEPARATOR)) {
+        return '';
+    }
+
+    $content = file_get_contents($realPath);
+    return false === $content ? '' : $content;
+}
+
+/**
  * Sends CustomCSS file and exits PHP Script.
  */
 function sendD2UHelperCustomCSS(): void
@@ -433,13 +476,9 @@ function sendD2UHelperCustomCSS(): void
     header('Content-Type: text/css; charset=utf-8');
     header('X-Content-Type-Options: nosniff');
     header('Cache-Control: public, max-age=3600, must-revalidate');
-    $css = '';
 
-    // Custom CSS
-    $d2u_helper = rex_addon::get('d2u_helper');
-    if ($d2u_helper->hasConfig('custom_css') && file_exists(rex_path::media((string) $d2u_helper->getConfig('custom_css')))) {
-        $css .= file_get_contents(rex_path::media((string) $d2u_helper->getConfig('custom_css')));
-    }
+    // Custom CSS (validated mediapool file)
+    $css = getD2UHelperCustomCSSContent();
 
     // Apply template settings and compress
     echo \TobiasKrais\D2UHelper\FrontendHelper::prepareCSS($css);
@@ -471,11 +510,8 @@ function sendD2UHelperTemplateCSS($d2u_template_id = ''): void
         }
     }
 
-    // Custom CSS
-    $d2u_helper = rex_addon::get('d2u_helper');
-    if ($d2u_helper->hasConfig('custom_css') && file_exists(rex_path::media((string) $d2u_helper->getConfig('custom_css')))) {
-        $css .= file_get_contents(rex_path::media((string) $d2u_helper->getConfig('custom_css')));
-    }
+    // Custom CSS (validated mediapool file)
+    $css .= getD2UHelperCustomCSSContent();
 
     // Apply template settings and compress
     echo \TobiasKrais\D2UHelper\FrontendHelper::prepareCSS($css);
