@@ -24,8 +24,8 @@ if (!function_exists('d2uHelperLoadVidstackAssets')) {
         }
 
         $loaded = true;
-        echo '<link rel="stylesheet" href="'. rex_url::addonAssets('vidstack', 'vidstack.css') .'">';
-        echo '<link rel="stylesheet" href="'. rex_url::addonAssets('vidstack', 'vidstack_helper.css') .'">';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getBustedUrl(rex_url::addonAssets('vidstack', 'vidstack.css'), rex_path::addonAssets('vidstack', 'vidstack.css')) .'">';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getBustedUrl(rex_url::addonAssets('vidstack', 'vidstack_helper.css'), rex_path::addonAssets('vidstack', 'vidstack_helper.css')) .'">';
         echo '<script src="'. rex_url::addonAssets('vidstack', 'vidstack.js') .'"></script>';
         echo '<script src="'. rex_url::addonAssets('vidstack', 'vidstack_helper.js') .'"></script>';
     }

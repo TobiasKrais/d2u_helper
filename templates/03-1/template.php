@@ -13,11 +13,11 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
         // <head></head>
         echo $fragment->parse('d2u_template_head.php');
 
-        echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '03-1', 'd2u_helper' => 'template.css']) .'">';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getTemplateAssetUrl('03-1', 'template.css') .'">';
 
         $jquery_file = 'jquery.min.js';
         echo '<script src="'. rex_url::coreAssets($jquery_file) .'?buster='. filemtime(rex_path::coreAssets($jquery_file)) .'"></script>';
-        echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.6.2" />';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap4/bootstrap.min.css') .'" />';
 
         echo '<style>.desktop-navi { width: '. (100 / count(rex_category::getRootCategories(true))) .'% !important; }</style>';
     ?>
@@ -40,7 +40,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
                             }
                         }
                         if ($d2u_helper->hasConfig('template_print_header_pic') || '' !== $d2u_helper->getConfig('template_print_header_pic')) {
-                            echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_print_header_pic')) .'" alt="" class="d-none d-print-block">';
+                            echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('template_print_header_pic')) .'" alt="" class="d-none d-print-block">';
                         }
                     ?>
 				</div>
@@ -109,7 +109,7 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 			<?php
                 echo '<div class="col-12 d-none d-print-block">';
                 if ($d2u_helper->hasConfig('template_print_footer_pic') || '' !== $d2u_helper->getConfig('template_print_footer_pic')) {
-                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_print_footer_pic')) .'" alt="">';
+                    echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('template_print_footer_pic')) .'" alt="">';
                 }
                 echo '</div>';
             ?>
@@ -144,6 +144,6 @@ $print = filter_input(INPUT_GET, 'print', FILTER_SANITIZE_SPECIAL_CHARS); // Rem
 	</script>
 	<?= $fragment->parse('d2u_template_cta_box.php');
     ?>
-	<script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.bundle.min.js') ?>?v=4.6.2"></script>
+    <script src="<?= TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap4/bootstrap.bundle.min.js') ?>"></script>
 </body>
 </html>

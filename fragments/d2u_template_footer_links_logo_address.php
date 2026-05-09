@@ -19,7 +19,7 @@
                 echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
                 $media_logo = rex_media::get((string) $d2u_helper->getConfig('footer_logo'));
                 if ($media_logo instanceof rex_media) {
-                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('footer_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
+                    echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('footer_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
                 }
                 echo '</a>';
         }
@@ -84,7 +84,7 @@
                 echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
                 $media_logo = rex_media::get((string) $d2u_helper->getConfig('footer_logo'));
                 if ($media_logo instanceof rex_media) {
-                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('footer_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
+                    echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('footer_logo')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo-footer" loading="lazy">';
                 }
                 echo '</a>';
         }

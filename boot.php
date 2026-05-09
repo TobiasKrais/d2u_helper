@@ -36,6 +36,8 @@ if (rex::isBackend()) {
     rex_extension::register('ART_PRE_DELETED', rex_d2u_helper_article_is_in_use(...));
     rex_extension::register('CLANG_DELETED', rex_d2u_helper_clang_deleted(...));
     rex_extension::register('MEDIA_IS_IN_USE', rex_d2u_helper_media_is_in_use(...));
+    rex_extension::register('MEDIA_UPDATED', rex_d2u_helper_media_updated(...));
+    rex_extension::register('MEDIA_DELETED', rex_d2u_helper_media_updated(...));
 } else {
     rex_extension::register('PACKAGES_INCLUDED', static function ($params) {
         // If CSS or JS is requested
@@ -205,12 +207,12 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep): void
     // Vor dem </head> einfügen
     // Consider module css or menu css
     if (((bool) $addon->getConfig('include_module', false) && '' !== FrontendHelper::getModulesCSS()) || 'none' !== (string) $addon->getConfig('include_menu')) {
-        $insert_head .= '<link rel="stylesheet" type="text/css" href="'. rex_url::frontendController(['d2u_helper' => 'helper.css']) .'" />' . PHP_EOL;
+        $insert_head .= '<link rel="stylesheet" type="text/css" href="'. FrontendHelper::getHelperCSSUrl() .'" />' . PHP_EOL;
     }
 
     // Menu stuff in header
     if ('none' !== (string) $addon->getConfig('include_menu')) {
-        $insert_head .= '<script src="'. rex_url::frontendController(['position' => 'head', 'd2u_helper' => 'helper.js']) .'"></script>' . PHP_EOL;
+        $insert_head .= '<script src="'. FrontendHelper::getHelperJSUrl('head') .'"></script>' . PHP_EOL;
     }
 
     $ep->setSubject(str_replace('</head>', $insert_head .'</head>', $ep->getSubject()));
@@ -218,7 +220,7 @@ function appendToPageD2UHelperFiles(rex_extension_point $ep): void
     // Vor dem </body> einfügen
     // Module stuff in body
     if ((bool) $addon->getConfig('include_module', false) && '' !== FrontendHelper::getModulesJS()) {
-        $insert_body .= '<script src="'. rex_url::frontendController(['position' => 'body', 'd2u_helper' => 'helper.js']) .'"></script>' . PHP_EOL;
+        $insert_body .= '<script src="'. FrontendHelper::getHelperJSUrl('body') .'"></script>' . PHP_EOL;
     }
     $ep->setSubject(str_replace('</body>', $insert_body .'</body>', $ep->getSubject()));
 }
@@ -351,6 +353,26 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep)
 }
 
 /**
+ * Regenerates the custom CSS cache when the configured mediapool CSS changes.
+ * @param rex_extension_point<string> $ep Redaxo extension point
+ */
+function rex_d2u_helper_media_updated(rex_extension_point $ep): void
+{
+    $filename = (string) ($ep->getParams()['filename'] ?? '');
+    if ('' === $filename) {
+        return;
+    }
+
+    $addon = rex_addon::get('d2u_helper');
+    if ((string) $addon->getConfig('custom_css', '') !== $filename) {
+        return;
+    }
+
+    FrontendHelper::deleteCustomCSSCache();
+    FrontendHelper::regenerateCustomCSSCache();
+}
+
+/**
  * Sends CSS file and exits PHP Script. The CSS file consists of module and menu
  * css.
  */
@@ -359,27 +381,7 @@ function sendD2UHelperCSS(): void
     header('Content-Type: text/css; charset=utf-8');
     header('X-Content-Type-Options: nosniff');
     header('Cache-Control: public, max-age=3600, must-revalidate');
-    $d2u_helper = rex_addon::get('d2u_helper');
-    $css = '';
-    // Module CSS
-    if ((bool) $d2u_helper->getConfig('include_module', false)) {
-        $css .= FrontendHelper::getModulesCSS();
-    }
-
-    // Include menu CSS
-    if ('megamenu' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= \TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::getAutoCSS();
-    } elseif ('bs5' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= \TobiasKrais\D2UHelper\FrontendNavigationBS5::getAutoCSS();
-    } elseif ('multilevel' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= \TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getAutoCSS();
-    } elseif ('slicknav' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= \TobiasKrais\D2UHelper\FrontendNavigationSlickNav::getAutoCSS();
-    } elseif ('smartmenu' === (string) $d2u_helper->getConfig('include_menu')) {
-        $css .= \TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::getAutoCSS();
-    }
-
-    echo FrontendHelper::prepareCSS($css);
+    echo FrontendHelper::getHelperCSSContent();
     exit;
 }
 
@@ -392,36 +394,7 @@ function sendD2UHelperJS($position = 'head'): void
     header('Content-Type: application/javascript; charset=utf-8');
     header('X-Content-Type-Options: nosniff');
     header('Cache-Control: public, max-age=3600, must-revalidate');
-    $d2u_helper = rex_addon::get('d2u_helper');
-    $js = '';
-    if ('body' === $position) {
-        // Module JS
-        if ((bool) $d2u_helper->getConfig('include_module', false)) {
-            $js .= \TobiasKrais\D2UHelper\FrontendHelper::getModulesJS();
-        }
-    } elseif ('head' === $position) {
-        // MultiLevel menu JS
-        if ('multilevel' === (string) $d2u_helper->getConfig('include_menu')) {
-            $js .= \TobiasKrais\D2UHelper\FrontendNavigationResponsiveMultiLevel::getAutoJS();
-        }
-        // Slicknav menu JS
-        if ('slicknav' === (string) $d2u_helper->getConfig('include_menu')) {
-            $js .= \TobiasKrais\D2UHelper\FrontendNavigationSlickNav::getAutoJS();
-        }
-        // Smartmenu menu JS
-        if ('smartmenu' === (string) $d2u_helper->getConfig('include_menu')) {
-            $js .= \TobiasKrais\D2UHelper\FrontendNavigationSmartmenu::getAutoJS();
-        }
-        // Mega menu JS
-        if ('megamenu' === (string) $d2u_helper->getConfig('include_menu')) {
-            $js .= \TobiasKrais\D2UHelper\FrontendNavigationMegaMenu::getAutoJS();
-        }
-        // BS5 menu JS
-        if ('bs5' === (string) $d2u_helper->getConfig('include_menu')) {
-            $js .= \TobiasKrais\D2UHelper\FrontendNavigationBS5::getAutoJS();
-        }
-    }
-    echo $js;
+    echo FrontendHelper::getHelperJSContent((string) $position);
     exit;
 }
 
@@ -432,40 +405,7 @@ function sendD2UHelperJS($position = 'head'): void
  */
 function getD2UHelperCustomCSSContent(): string
 {
-    $d2u_helper = rex_addon::get('d2u_helper');
-    if (!$d2u_helper->hasConfig('custom_css')) {
-        return '';
-    }
-
-    $filename = (string) $d2u_helper->getConfig('custom_css');
-    if ('' === $filename) {
-        return '';
-    }
-
-    // Disallow path traversal: filename must equal basename and contain no separators / null bytes
-    if ($filename !== basename($filename) || false !== strpos($filename, "\0")) {
-        return '';
-    }
-
-    // Must end with .css
-    if (0 !== strcasecmp((string) pathinfo($filename, PATHINFO_EXTENSION), 'css')) {
-        return '';
-    }
-
-    // Must be a real mediapool entry
-    if (null === rex_media::get($filename)) {
-        return '';
-    }
-
-    $path = rex_path::media($filename);
-    $realPath = realpath($path);
-    $mediaRoot = realpath(rex_path::media(''));
-    if (false === $realPath || false === $mediaRoot || 0 !== strpos($realPath, $mediaRoot . DIRECTORY_SEPARATOR)) {
-        return '';
-    }
-
-    $content = file_get_contents($realPath);
-    return false === $content ? '' : $content;
+    return FrontendHelper::getCustomCSSContent();
 }
 
 /**
@@ -480,8 +420,7 @@ function sendD2UHelperCustomCSS(): void
     // Custom CSS (validated mediapool file)
     $css = getD2UHelperCustomCSSContent();
 
-    // Apply template settings and compress
-    echo \TobiasKrais\D2UHelper\FrontendHelper::prepareCSS($css);
+    echo $css;
 
     exit;
 }

@@ -23,10 +23,10 @@ $url_id = TobiasKrais\D2UHelper\FrontendHelper::getUrlId();
         // <head></head>
         echo $fragment->parse('d2u_template_head.php');
 
-        echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '02-3', 'd2u_helper' => 'template.css']) .'">';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getTemplateAssetUrl('02-3', 'template.css') .'">';
 
         // Bootstrap 5 CSS (no jQuery needed)
-        echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap5/css/bootstrap.min.css') .'" />';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap5/css/bootstrap.min.css') .'" />';
     ?>
 	<?php $fragment = new rex_fragment(); $fragment->setVar('position', 'head'); echo $fragment->parse('d2u_template_darkmode.php'); ?>
 </head>
@@ -102,7 +102,7 @@ $url_id = TobiasKrais\D2UHelper\FrontendHelper::getUrlId();
 		</div>
 	</footer>
 	<?= $fragment->parse('d2u_template_cta_box.php') ?>
-	<script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
 	<?php $fragment = new rex_fragment(); $fragment->setVar('position', 'body'); echo $fragment->parse('d2u_template_darkmode.php'); ?>
 </body>
 </html>

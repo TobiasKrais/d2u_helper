@@ -20,10 +20,10 @@ $d2u_helper = rex_addon::get('d2u_helper');
         // <head></head>
         echo $fragment->parse('d2u_template_head.php');
 
-        echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '06-2', 'd2u_helper' => 'template.css']) .'">';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getTemplateAssetUrl('06-2', 'template.css') .'">';
 
         // Bootstrap 5 CSS (no jQuery needed)
-        echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap5/css/bootstrap.min.css') .'" />';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap5/css/bootstrap.min.css') .'" />';
     ?>
 	<?php $fragment = new rex_fragment(); $fragment->setVar('position', 'head'); echo $fragment->parse('d2u_template_darkmode.php'); ?>
 </head>
@@ -49,7 +49,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
                                     if ($media_logo instanceof rex_media) {
                                         echo '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
                                         echo '<span class="logo-light">';
-                                        echo '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-top">';
+                                        echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-top">';
                                         echo '</span>';
                                         // Dark mode logo
                                         $dark_logo = (string) $d2u_helper->getConfig('template_logo_dark', '');
@@ -57,7 +57,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
                                             $media_logo_dark = rex_media::get($dark_logo);
                                             if ($media_logo_dark instanceof rex_media) {
                                                 echo '<span class="logo-dark">';
-                                                echo '<img src="'. rex_url::media($dark_logo) .'" alt="'. $media_logo_dark->getTitle() .'" id="logo-top">';
+                                                echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl($dark_logo) .'" alt="'. $media_logo_dark->getTitle() .'" id="logo-top">';
                                                 echo '</span>';
                                             }
                                         }
@@ -146,7 +146,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
                                     if ($media_logo instanceof rex_media) {
                                         echo '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
                                         echo '<span class="logo-light">';
-                                        echo '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-footer">';
+                                        echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-footer">';
                                         echo '</span>';
                                         // Dark mode logo in footer
                                         $dark_logo = (string) $d2u_helper->getConfig('template_logo_dark', '');
@@ -154,7 +154,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
                                             $media_logo_dark = rex_media::get($dark_logo);
                                             if ($media_logo_dark instanceof rex_media) {
                                                 echo '<span class="logo-dark">';
-                                                echo '<img src="'. rex_url::media($dark_logo) .'" alt="'. $media_logo_dark->getTitle() .'" id="logo-footer">';
+                                                echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl($dark_logo) .'" alt="'. $media_logo_dark->getTitle() .'" id="logo-footer">';
                                                 echo '</span>';
                                             }
                                         }
@@ -169,7 +169,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
 		</div>
 	</div>
 	<?= $fragment->parse('d2u_template_cta_box.php') ?>
-	<script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
 	<?php $fragment = new rex_fragment(); $fragment->setVar('position', 'body'); echo $fragment->parse('d2u_template_darkmode.php'); ?>
 </body>
 </html>

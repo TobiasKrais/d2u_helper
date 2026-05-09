@@ -9,11 +9,11 @@
         // <head></head>
         echo $fragment->parse('d2u_template_head.php');
 
-        echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '05-1', 'd2u_helper' => 'template.css']) .'">';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getTemplateAssetUrl('05-1', 'template.css') .'">';
 
         $jquery_file = 'jquery.min.js';
         echo '<script src="'. rex_url::coreAssets($jquery_file) .'?buster='. filemtime(rex_path::coreAssets($jquery_file)) .'"></script>';
-        echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.6.2" />';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap4/bootstrap.min.css') .'" />';
     ?>
 </head>
 
@@ -71,7 +71,7 @@
                                 echo '<a href="'. (\rex_addon::get('yrewrite')->isAvailable() ? \rex_yrewrite::getCurrentDomain()->getUrl() : \rex::getServer()) .'">';
                                 $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
                                 if ($media_logo instanceof rex_media) {
-                                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" id="logo">';
+                                    echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" id="logo">';
                                 }
                                 echo '</a>';
                             }
@@ -87,7 +87,7 @@
                                 }
                                 $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo_2'));
                                 if ($media_logo instanceof rex_media) {
-                                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+                                    echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
                                 }
                                 if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '</a>';
@@ -107,7 +107,7 @@
                     $titelbild = rex_media::get($header_image);
                     if ($titelbild instanceof rex_media) {
                         $header_pic_style = 'background: url('.
-                                ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image) : rex_url::media($header_image)) .') center center; background-size: cover;';
+                            ('' !== $d2u_helper->getConfig('template_header_media_manager_type', '') ? TobiasKrais\D2UHelper\FrontendHelper::getBustedUrl(rex_media_manager::getUrl((string) $d2u_helper->getConfig('template_header_media_manager_type', ''), $header_image), rex_path::media($header_image)) : TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl($header_image)) .') center center; background-size: cover;';
                     }
                 ?>
 				<div class="col-12 col-xl-8" style="<?= $header_pic_style ?>">
@@ -121,7 +121,7 @@
                                 }
                                 $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo_2'));
                                 if ($media_logo instanceof rex_media) {
-                                    echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
+                                    echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('template_logo_2')) .'" alt="'. $media_logo->getTitle() .'" title="'. $media_logo->getTitle() .'" id="logo">';
                                 }
                                 if ('' !== $d2u_helper->getConfig('template_logo_2_link', '')) {
                                     echo '</a>';
@@ -209,6 +209,6 @@
 	</article>
 	<?= $fragment->parse('d2u_template_cta_box.php');
     ?>
-	<script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.bundle.min.js') ?>?v=4.6.2"></script>
+    <script src="<?= TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap4/bootstrap.bundle.min.js') ?>"></script>
 </body>
 </html>

@@ -83,6 +83,9 @@ if (!$invalidCsrf && 'save' === filter_input(INPUT_POST, 'btn_save')) {
 
     // Save settings
     if (rex_config::set('d2u_helper', $settings)) {
+        \TobiasKrais\D2UHelper\FrontendHelper::deleteCustomCSSCache();
+        \TobiasKrais\D2UHelper\FrontendHelper::regenerateCustomCSSCache();
+
         // Install / update language replacements
         if (rex_addon::get('sprog')->isAvailable()) {
             if ($settings['lang_replacements_install']) {

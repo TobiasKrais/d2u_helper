@@ -9,7 +9,7 @@
     if ('' !== (string) $d2u_helper->getConfig('template_logo', '')) {
         $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
         if ($media_logo instanceof rex_media) {
-            $logo_html = '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'?v='. $media_logo->getUpdateDate() .'" alt="'. $media_logo->getTitle() .'" id="logo">';
+            $logo_html = '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" id="logo">';
         }
     }
 
@@ -18,7 +18,7 @@
     if ('' !== (string) $d2u_helper->getConfig('template_logo_dark', '')) {
         $media_logo_dark = rex_media::get((string) $d2u_helper->getConfig('template_logo_dark'));
         if ($media_logo_dark instanceof rex_media) {
-            $logo_dark_html = '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo_dark')) .'?v='. $media_logo_dark->getUpdateDate() .'" alt="'. $media_logo_dark->getTitle() .'" id="logo-dark">';
+            $logo_dark_html = '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('template_logo_dark')) .'" alt="'. $media_logo_dark->getTitle() .'" id="logo-dark">';
         }
     }
 

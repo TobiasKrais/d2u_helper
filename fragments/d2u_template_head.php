@@ -3,8 +3,8 @@
 	<?php
         echo TobiasKrais\D2UHelper\FrontendHelper::getMetaTags();
         if (file_exists(rex_path::media('favicon.ico'))) {
-            echo '	<link rel="apple-touch-icon" href="'. rex_url::media('favicon.ico') .'">'. PHP_EOL;
-            echo '	<link rel="icon" href="'. rex_url::media('favicon.ico') .'">'. PHP_EOL;
+            echo '	<link rel="apple-touch-icon" href="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl('favicon.ico') .'">'. PHP_EOL;
+            echo '	<link rel="icon" href="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl('favicon.ico') .'">'. PHP_EOL;
         }
         $consent_manager_addon = rex_addon::get('consent_manager');
         if ($consent_manager_addon->isAvailable()) {
@@ -19,4 +19,4 @@
             }
         }
         // FontAwesome
-        echo '<link href="'. rex_url::addonAssets('d2u_helper', 'FontAwesome/css/all.min.css') .'" rel="stylesheet" type="text/css" media="all">'. PHP_EOL;
+        echo '<link href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('FontAwesome/css/all.min.css') .'" rel="stylesheet" type="text/css" media="all">'. PHP_EOL;

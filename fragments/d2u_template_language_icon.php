@@ -5,7 +5,7 @@ if (count($clangs) > 1) {
 <button id="lang_chooser_button" data-toggle="modal" data-target="#lang_chooser_modal">
 	<?php
         if ('' !== rex_config::get('d2u_helper', 'header_lang_icon', '')) {
-            echo '<img src="'. rex_url::media((string) rex_config::get('d2u_helper', 'header_lang_icon', '')) .'">';
+            echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) rex_config::get('d2u_helper', 'header_lang_icon', '')) .'">';
         }
 
         // Show language dropdown

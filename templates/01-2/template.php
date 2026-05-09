@@ -18,10 +18,10 @@ $d2u_helper = rex_addon::get('d2u_helper');
         // <head></head>
         echo $fragment->parse('d2u_template_head.php');
 
-        echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '01-2', 'd2u_helper' => 'template.css']) .'">';
+		echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getTemplateAssetUrl('01-2', 'template.css') .'">';
 
         // Bootstrap 5 CSS (no jQuery needed)
-        echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap5/css/bootstrap.min.css') .'" />';
+		echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap5/css/bootstrap.min.css') .'" />';
     ?>
 	<?php $fragment = new rex_fragment(); $fragment->setVar('position', 'head'); echo $fragment->parse('d2u_template_darkmode.php'); ?>
 </head>
@@ -39,7 +39,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
 						<?php
                         $media_logo = rex_media::get((string) $d2u_helper->getConfig('template_logo'));
                         if ($media_logo instanceof rex_media) {
-                            echo '<img src="'. rex_url::media((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" id="logo">';
+							echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl((string) $d2u_helper->getConfig('template_logo')) .'" alt="'. $media_logo->getTitle() .'" id="logo">';
                         }
                         ?>
 					</a>
@@ -116,7 +116,7 @@ $d2u_helper = rex_addon::get('d2u_helper');
 		});
 	</script>
 	<?= $fragment->parse('d2u_template_cta_box.php') ?>
-	<script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
+	<script src="<?= TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap5/js/bootstrap.bundle.min.js') ?>"></script>
 	<?php $fragment = new rex_fragment(); $fragment->setVar('position', 'body'); echo $fragment->parse('d2u_template_darkmode.php'); ?>
 </body>
 </html>

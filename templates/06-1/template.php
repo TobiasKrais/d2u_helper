@@ -7,11 +7,11 @@
         // <head></head>
         echo $fragment->parse('d2u_template_head.php');
 
-        echo '<link rel="stylesheet" href="'. rex_url::frontendController(['template_id' => '06-1', 'd2u_helper' => 'template.css']) .'">';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getTemplateAssetUrl('06-1', 'template.css') .'">';
 
         $jquery_file = 'jquery.min.js';
         echo '<script src="'. rex_url::coreAssets($jquery_file) .'?buster='. filemtime(rex_path::coreAssets($jquery_file)) .'"></script>';
-        echo '<link rel="stylesheet" type="text/css" href="'. rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.min.css') .'?v=4.6.2" />';
+        echo '<link rel="stylesheet" type="text/css" href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap4/bootstrap.min.css') .'" />';
     ?>
 </head>
 
@@ -34,7 +34,7 @@
                                     $media_logo = rex_media::get((string) rex_config::get('d2u_helper', 'template_logo'));
                                     if ($media_logo instanceof rex_media) {
                                         echo '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
-                                        echo '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-top">';
+                                        echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-top">';
                                         echo '</a>';
                                     }
                                 }
@@ -107,7 +107,7 @@
                                     $media_logo = rex_media::get((string) rex_config::get('d2u_helper', 'template_logo'));
                                     if ($media_logo instanceof rex_media) {
                                         echo '<a href="' . rex_getUrl(rex_article::getSiteStartArticleId()) . '">';
-                                        echo '<img src="'. rex_url::media($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-footer">';
+                                        echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl($media_logo->getFileName()) .'" alt="'. $media_logo->getTitle() .'" id="logo-footer">';
                                         echo '</a>';
                                     }
                                 }
@@ -120,6 +120,6 @@
 	</div>
 	<?= $fragment->parse('d2u_template_cta_box.php');
     ?>
-	<script src="<?= rex_addon::get('d2u_helper')->getAssetsUrl('bootstrap4/bootstrap.bundle.min.js') ?>?v=4.6.2"></script>
+    <script src="<?= TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('bootstrap4/bootstrap.bundle.min.js') ?>"></script>
 </body>
 </html>

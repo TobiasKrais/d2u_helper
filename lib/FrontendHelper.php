@@ -10,7 +10,9 @@ use rex_clang;
 use rex_dir;
 use rex_extension;
 use rex_extension_point;
+use rex_file;
 use rex_finder;
+use rex_media;
 use rex_media_manager;
 use rex_path;
 use rex_sql;
@@ -202,6 +204,281 @@ class FrontendHelper
                 ->filesOnly();
             rex_dir::deleteIterator($finder);
         }
+    }
+
+    /**
+     * Returns an addon asset URL with cache buster.
+     */
+    public static function getAddonAssetUrl(string $asset): string
+    {
+        $addon = rex_addon::get('d2u_helper');
+        return self::getBustedUrl($addon->getAssetsUrl($asset), $addon->getAssetsPath($asset));
+    }
+
+    /**
+     * Returns the dynamic helper CSS content.
+     */
+    public static function getHelperCSSContent(): string
+    {
+        $d2u_helper = rex_addon::get('d2u_helper');
+        $css = '';
+
+        if ((bool) $d2u_helper->getConfig('include_module', false)) {
+            $css .= self::getModulesCSS();
+        }
+
+        if ('megamenu' === (string) $d2u_helper->getConfig('include_menu')) {
+            $css .= FrontendNavigationMegaMenu::getAutoCSS();
+        } elseif ('bs5' === (string) $d2u_helper->getConfig('include_menu')) {
+            $css .= FrontendNavigationBS5::getAutoCSS();
+        } elseif ('multilevel' === (string) $d2u_helper->getConfig('include_menu')) {
+            $css .= FrontendNavigationResponsiveMultiLevel::getAutoCSS();
+        } elseif ('slicknav' === (string) $d2u_helper->getConfig('include_menu')) {
+            $css .= FrontendNavigationSlickNav::getAutoCSS();
+        } elseif ('smartmenu' === (string) $d2u_helper->getConfig('include_menu')) {
+            $css .= FrontendNavigationSmartmenu::getAutoCSS();
+        }
+
+        return self::prepareCSS($css);
+    }
+
+    /**
+     * Returns the dynamic helper CSS URL with cache buster.
+     */
+    public static function getHelperCSSUrl(): string
+    {
+        return self::appendBuster(
+            rex_url::frontendController(['d2u_helper' => 'helper.css']),
+            md5(self::getHelperCSSContent())
+        );
+    }
+
+    /**
+     * Returns the dynamic helper JS content.
+     */
+    public static function getHelperJSContent(string $position = 'head'): string
+    {
+        $d2u_helper = rex_addon::get('d2u_helper');
+        $js = '';
+
+        if ('body' === $position) {
+            if ((bool) $d2u_helper->getConfig('include_module', false)) {
+                $js .= self::getModulesJS();
+            }
+        } elseif ('head' === $position) {
+            if ('multilevel' === (string) $d2u_helper->getConfig('include_menu')) {
+                $js .= FrontendNavigationResponsiveMultiLevel::getAutoJS();
+            }
+            if ('slicknav' === (string) $d2u_helper->getConfig('include_menu')) {
+                $js .= FrontendNavigationSlickNav::getAutoJS();
+            }
+            if ('smartmenu' === (string) $d2u_helper->getConfig('include_menu')) {
+                $js .= FrontendNavigationSmartmenu::getAutoJS();
+            }
+            if ('megamenu' === (string) $d2u_helper->getConfig('include_menu')) {
+                $js .= FrontendNavigationMegaMenu::getAutoJS();
+            }
+            if ('bs5' === (string) $d2u_helper->getConfig('include_menu')) {
+                $js .= FrontendNavigationBS5::getAutoJS();
+            }
+        }
+
+        return $js;
+    }
+
+    /**
+     * Returns the dynamic helper JS URL with cache buster.
+     */
+    public static function getHelperJSUrl(string $position = 'head'): string
+    {
+        return self::appendBuster(
+            rex_url::frontendController(['position' => $position, 'd2u_helper' => 'helper.js']),
+            md5(self::getHelperJSContent($position))
+        );
+    }
+
+    /**
+     * Returns a media URL with cache buster.
+     */
+    public static function getMediaUrl(string $filename): string
+    {
+        return self::getBustedUrl(rex_url::media($filename), rex_path::media($filename));
+    }
+
+    /**
+     * Returns the current custom CSS cache file path.
+     */
+    public static function getCustomCSSCachePath(): string
+    {
+        return rex_path::addonCache('d2u_helper', 'custom.css');
+    }
+
+    /**
+     * Deletes the custom CSS cache file.
+     */
+    public static function deleteCustomCSSCache(): void
+    {
+        $cachePath = self::getCustomCSSCachePath();
+        if (file_exists($cachePath)) {
+            rex_file::delete($cachePath);
+        }
+    }
+
+    /**
+     * Returns the current custom CSS file path from addon settings.
+     */
+    public static function getCustomCSSFilePath(): string
+    {
+        $filename = (string) rex_addon::get('d2u_helper')->getConfig('custom_css', '');
+        if ('' === $filename) {
+            return '';
+        }
+
+        if ($filename !== basename($filename) || str_contains($filename, "\0")) {
+            return '';
+        }
+
+        if (0 !== strcasecmp((string) pathinfo($filename, PATHINFO_EXTENSION), 'css')) {
+            return '';
+        }
+
+        if (null === rex_media::get($filename)) {
+            return '';
+        }
+
+        $path = rex_path::media($filename);
+        $realPath = realpath($path);
+        $mediaRoot = realpath(rex_path::media(''));
+        if (false === $realPath || false === $mediaRoot || 0 !== strpos($realPath, $mediaRoot . DIRECTORY_SEPARATOR)) {
+            return '';
+        }
+
+        return $realPath;
+    }
+
+    /**
+     * Returns the source content of the configured custom CSS file.
+     */
+    public static function getCustomCSSSourceContent(): string
+    {
+        $filePath = self::getCustomCSSFilePath();
+        if ('' === $filePath) {
+            return '';
+        }
+
+        $content = file_get_contents($filePath);
+
+        return false === $content ? '' : $content;
+    }
+
+    /**
+     * Returns the prepared custom CSS content from cache.
+     */
+    public static function getCustomCSSContent(): string
+    {
+        $cachePath = self::getCustomCSSCachePath();
+        if (file_exists($cachePath)) {
+            $content = file_get_contents($cachePath);
+
+            return false === $content ? '' : $content;
+        }
+
+        $content = self::prepareCSS(self::getCustomCSSSourceContent());
+
+        if (!is_dir(rex_path::addonCache('d2u_helper'))) {
+            rex_dir::create(rex_path::addonCache('d2u_helper'));
+        }
+
+        file_put_contents($cachePath, $content);
+
+        return $content;
+    }
+
+    /**
+     * Regenerates the custom CSS cache file.
+     */
+    public static function regenerateCustomCSSCache(): string
+    {
+        self::deleteCustomCSSCache();
+
+        return self::getCustomCSSContent();
+    }
+
+    /**
+     * Returns a cache buster for the configured custom CSS file.
+     */
+    public static function getCustomCSSBuster(): string
+    {
+        $filePath = self::getCustomCSSCachePath();
+        if (!file_exists($filePath)) {
+            self::getCustomCSSContent();
+        }
+
+        if ('' === $filePath || !file_exists($filePath)) {
+            return '';
+        }
+
+        return (string) filemtime($filePath);
+    }
+
+    /**
+     * Returns the dynamic custom CSS URL with cache buster.
+     */
+    public static function getCustomCSSUrl(): string
+    {
+        $url = rex_url::frontendController(['d2u_helper' => 'custom.css']);
+        $buster = self::getCustomCSSBuster();
+
+        return '' === $buster ? $url : self::appendBuster($url, $buster);
+    }
+
+    /**
+     * Returns a template asset URL with cache buster.
+     */
+    public static function getTemplateAssetUrl(string $templateId, string $asset): string
+    {
+        $filePath = rex_path::addon('d2u_helper', 'templates/' . $templateId . '/' . $asset);
+        if ('template.css' === $asset) {
+            $stylePath = rex_path::addon('d2u_helper', 'templates/' . $templateId . '/styles.css');
+            $styleBuster = file_exists($stylePath) ? (string) filemtime($stylePath) : '';
+            $customCssBuster = self::getCustomCSSBuster();
+
+            return self::appendBuster(
+                rex_url::frontendController(['template_id' => $templateId, 'd2u_helper' => $asset]),
+                md5($styleBuster . '|' . $customCssBuster)
+            );
+        }
+
+        if ('custom.css' === $asset) {
+            return self::getCustomCSSUrl();
+        }
+
+        return self::getBustedUrl(
+            rex_url::frontendController(['template_id' => $templateId, 'd2u_helper' => $asset]),
+            $filePath
+        );
+    }
+
+    /**
+     * Appends a cache buster based on filemtime to a URL.
+     */
+    public static function getBustedUrl(string $url, string $filePath): string
+    {
+        if (!file_exists($filePath)) {
+            return $url;
+        }
+
+        return self::appendBuster($url, filemtime($filePath));
+    }
+
+    /**
+     * Appends a cache buster to an URL.
+     */
+    public static function appendBuster(string $url, string|int $buster): string
+    {
+        $separator = str_contains($url, '?') ? '&' : '?';
+
+        return $url . $separator . 'buster=' . rawurlencode((string) $buster);
     }
 
     /**
