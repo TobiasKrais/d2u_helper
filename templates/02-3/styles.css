@@ -45,7 +45,7 @@ header.has-image .header-overlay {
     padding: 0.75rem 0;
 }
 #logo, #logo-dark {
-    max-height: 60px;
+    max-height: 100px;
 }
 .logo-light { display: inline; }
 .logo-dark { display: none; }
@@ -181,7 +181,7 @@ nav .navbar-toggler:focus {
 }
 nav .navbar-toggler-icon {
     background: none;
-    background-color: var(--navi-color-bg);
+    background-color: var(--navi-color-font);
     -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center / contain;
     mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center / contain;
 }

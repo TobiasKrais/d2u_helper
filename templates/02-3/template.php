@@ -50,17 +50,17 @@ $url_id = TobiasKrais\D2UHelper\FrontendHelper::getUrlId();
         }
     ?>
 	<header<?= $has_header_image ? ' class="has-image"' : '' ?>>
-		<?php if ($has_header_image && '' !== $header_picture_tag) { ?>
-		<div class="header-image">
-			<?= $header_picture_tag ?>
-		</div>
-		<?php } ?>
 		<div class="header-overlay">
 			<?php
                 // Navigation (Bootstrap 5 version)
                 echo $fragment->parse('d2u_template_bs5_nav.php');
             ?>
 		</div>
+		<?php if ($has_header_image && '' !== $header_picture_tag) { ?>
+		<div class="header-image">
+			<?= $header_picture_tag ?>
+		</div>
+		<?php } ?>
 	</header>
 	<section id="breadcrumbs">
 		<div class="container">

@@ -10,8 +10,11 @@ input:invalid, textarea:invalid {
 input:focus, textarea:focus {
     border-left: 5px solid var(--article-color-h);
 }
+.d2u_helper_module_11_1 .form-group {
+	margin-bottom: 1em;
+}
 .d2u_helper_module_11_1 input, .d2u_helper_module_11_1 select, .d2u_helper_module_11_1 textarea {
-    background-color: white;
+	background-color: var(--article-color-bg);
     border: 1px solid var(--article-color-h);
     width: 100%;
 }

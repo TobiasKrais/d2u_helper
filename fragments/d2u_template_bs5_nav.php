@@ -42,7 +42,8 @@
 				<?php } ?>
 			</a>
             <?php } else { ?>
-            <div></div>
+        <div>
+        </div>
             <?php } ?>
 			<div class="d-flex align-items-center">
 				<?php

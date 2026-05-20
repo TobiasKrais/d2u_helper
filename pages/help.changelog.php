@@ -15,7 +15,7 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.2.2-DEV</p>
+		<p>2.2.2</p>
 		<ul>
 			<li>Bugfix zusätzliche CSS-Datei aus dem Medienpool: Bei <code>MEDIA_UPDATED</code> und <code>MEDIA_DELETED</code> prüft <code>boot.php</code> jetzt, ob die in den Einstellungen hinterlegte Custom-CSS-Datei betroffen ist. Falls ja, wird die gecachte <code>custom.css</code> im Addon-Cache gelöscht und sofort neu aufgebaut. Der Cache-Buster von <code>template.css</code> berücksichtigt diese Cache-Datei ebenfalls, sodass Browser die Styles nach einer Aktualisierung neu laden.</li>
 			<li>Bugfix Templates, Fragmente und Asset-Einbindung: Stylesheets, Skripte und Medien-URLs verwenden jetzt konsistente Cache-Buster. Dynamische Endpunkte wie <code>helper.css</code>, <code>helper.js</code> und <code>template.css</code> erhalten ebenfalls einen Buster; außerdem wurden fehlende <code>type="text/css"</code>-Attribute bei Stylesheet-Links ergänzt.</li>
