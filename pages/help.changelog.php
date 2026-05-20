@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.2.3-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.2.2</p>
 		<ul>
 			<li>Bugfix zusätzliche CSS-Datei aus dem Medienpool: Bei <code>MEDIA_UPDATED</code> und <code>MEDIA_DELETED</code> prüft <code>boot.php</code> jetzt, ob die in den Einstellungen hinterlegte Custom-CSS-Datei betroffen ist. Falls ja, wird die gecachte <code>custom.css</code> im Addon-Cache gelöscht und sofort neu aufgebaut. Der Cache-Buster von <code>template.css</code> berücksichtigt diese Cache-Datei ebenfalls, sodass Browser die Styles nach einer Aktualisierung neu laden.</li>
