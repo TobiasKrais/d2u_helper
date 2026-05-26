@@ -18,6 +18,7 @@
 		<p>2.2.3-DEV</p>
 		<ul>
 			<li>Bugfix Modul 02-6 (Überschrift, BS5): Bereits HTML-kodierte Zeichen im Überschriftentext werden vor der Ausgabe normalisiert und anschließend wie bisher escaped. Dadurch werden Eingaben mit <code>&amp;</code> im Frontend wieder korrekt als <code>&amp;</code>-Zeichen dargestellt statt als sichtbares <code>&amp;amp;</code>.</li>
+			<li>Bugfix: in den Einstellungen verwendete Medienpool Dateien für den Dark Mode werden vor dem Löschen auf Verwendung geprüft.</li>
 		</ul>
 		<p>2.2.2</p>
 		<ul>

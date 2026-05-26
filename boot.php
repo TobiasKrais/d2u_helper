@@ -293,6 +293,47 @@ function rex_d2u_helper_clang_deleted(rex_extension_point $ep)
 }
 
 /**
+ * Checks whether a mediapool file is referenced by d2u_helper settings.
+ */
+function rex_d2u_helper_media_is_used_in_settings(rex_addon $addon, string $filename): bool
+{
+    $media_settings = [
+        'custom_css',
+        'template_header_pic',
+        'template_logo',
+        'template_logo_dark',
+        'template_logo_2',
+        'template_print_header_pic',
+        'template_print_footer_pic',
+        'footer_logo',
+        'header_lang_icon',
+        'template_03_2_header_pic',
+        'template_03_2_footer_pic',
+        'footer_facebook_icon',
+    ];
+
+    foreach ($media_settings as $config_key) {
+        if ($addon->hasConfig($config_key) && (string) $addon->getConfig($config_key) === $filename) {
+            return true;
+        }
+    }
+
+    foreach (rex_clang::getAllIds() as $clang_id) {
+        $config_key = 'template_04_header_slider_pics_clang_'. $clang_id;
+        if (!$addon->hasConfig($config_key)) {
+            continue;
+        }
+
+        $media_filenames = array_filter(array_map('trim', explode(',', (string) $addon->getConfig($config_key))));
+        if (in_array($filename, $media_filenames, true)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
  * Checks if media is used by this addon.
  * @param rex_extension_point<array<string>> $ep Redaxo extension point
  * @return array<string> Warning message as array
@@ -306,25 +347,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep)
     if ('' !== $filename) {
         // Settings
         $addon = rex_addon::get('d2u_helper');
-        $is_in_use = false;
-        if (($addon->hasConfig('template_header_pic') && (string) $addon->getConfig('template_header_pic') === $filename) ||
-                ($addon->hasConfig('template_logo') && (string) $addon->getConfig('template_logo') === $filename) ||
-                ($addon->hasConfig('template_print_header_pic') && (string) $addon->getConfig('template_print_header_pic') === $filename) ||
-                ($addon->hasConfig('template_print_footer_pic') && (string) $addon->getConfig('template_print_footer_pic') === $filename) ||
-                ($addon->hasConfig('footer_logo') && (string) $addon->getConfig('footer_logo') === $filename) ||
-                ($addon->hasConfig('template_03_2_header_pic') && (string) $addon->getConfig('template_03_2_header_pic') === $filename) ||
-                ($addon->hasConfig('template_03_2_footer_pic') && (string) $addon->getConfig('template_03_2_footer_pic') === $filename) ||
-                ($addon->hasConfig('footer_facebook_icon') && (string) $addon->getConfig('footer_facebook_icon') === $filename) ||
-                ($addon->hasConfig('custom_css') && (string) $addon->getConfig('custom_css') === $filename)
-        ) {
-            $is_in_use = true;
-        }
-        foreach (rex_clang::getAllIds() as $clang_id) {
-            if ($addon->hasConfig('template_04_header_slider_pics_clang_'. $clang_id) && str_contains((string) $addon->getConfig('template_04_header_slider_pics_clang_'. $clang_id), $filename)) {
-                $is_in_use = true;
-            }
-        }
-        if ($is_in_use) {
+        if (rex_d2u_helper_media_is_used_in_settings($addon, $filename)) {
             $message = '<a href="javascript:openPage(\'index.php?page=d2u_helper/settings\')">'.
                  rex_i18n::msg('d2u_helper_meta_title') .' '. rex_i18n::msg('d2u_helper_settings') . '</a>';
             if (!in_array($message, $warning, true)) {
