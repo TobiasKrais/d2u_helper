@@ -15,7 +15,7 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.2.3-DEV</p>
+		<p>2.2.3</p>
 		<ul>
 			<li>Security <code>BackendHelper::form_select()</code>: Options-Werte und Options-Texte (z. B. aus der Datenbank stammende Media-Manager-Typ-Namen in den Einstellungen) werden jetzt zentral über <code>rex_escape(..., 'html_attr')</code> bzw. <code>rex_escape()</code> escaped. Dadurch sind alle Aufrufer dieser Hilfsfunktion (auch in weiteren D2U-Addons) vor Stored-XSS in <code>&lt;select&gt;</code>-Listen geschützt.</li>
 			<li>Security <code>boot.php</code> (Medienpool-Verwendungsprüfung): Der in der Warnmeldung verlinkte Template-Name wird jetzt vor der Ausgabe über <code>rex_escape()</code> escaped.</li>
