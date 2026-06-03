@@ -91,9 +91,9 @@ class FrontendNavigationMegaMenu
 
                 if (0 === count($category->getChildren(true)) /* && !$has_machine_submenu */) {
                     // Ohne Untermenü
-                    echo '<a class="nav-link'. (rex_article::getCurrentId() === $category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' current' : '') .'" href="'. $category->getUrl() .'" id="dropdown'. $category->getId() .'">'. $category->getName() .'</a>';
+                    echo '<a class="nav-link'. (rex_article::getCurrentId() === $category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' current' : '') .'" href="'. $category->getUrl() .'" id="dropdown'. $category->getId() .'">'. rex_escape((string) $category->getName()) .'</a>';
                 } else {
-                    echo '<a class="nav-link dropdown-toggle'. (rex_article::getCurrentId() === $category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' current' : '') .'" href="'. $category->getUrl() .'" id="dropdown'. $category->getId() .'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'. $category->getName() .'</a>';
+                    echo '<a class="nav-link dropdown-toggle'. (rex_article::getCurrentId() === $category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' current' : '') .'" href="'. $category->getUrl() .'" id="dropdown'. $category->getId() .'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'. rex_escape((string) $category->getName()) .'</a>';
 
                     echo '<div class="dropdown-menu megamenu" aria-labelledby="dropdown'. $category->getId() .'">';
                     echo '<div class="row">';
@@ -101,10 +101,10 @@ class FrontendNavigationMegaMenu
                     if ('' !== (string) $category->getValue('cat_d2u_helper_icon')) {
                         $lev1_icon_media = rex_media::get((string) $category->getValue('cat_d2u_helper_icon'));
                         if ($lev1_icon_media instanceof rex_media) {
-                            $lev1_icon = '<img src="'. $lev1_icon_media->getUrl() .'" alt="'. $category->getName() .'" title="'. $category->getName() .'" class="megamenu_lev1_icon"> ';
+                            $lev1_icon = '<img src="'. $lev1_icon_media->getUrl() .'" alt="'. rex_escape((string) $category->getName(), 'html_attr') .'" title="'. rex_escape((string) $category->getName(), 'html_attr') .'" class="megamenu_lev1_icon"> ';
                         }
                     }
-                    echo '<div class="col-12"><h4><a href="'. $category->getUrl() .'" title="'. $category->getName() .'">'. $lev1_icon . $category->getName() .'</a></h4></div>';
+                    echo '<div class="col-12"><h4><a href="'. $category->getUrl() .'" title="'. rex_escape((string) $category->getName(), 'html_attr') .'">'. $lev1_icon . rex_escape((string) $category->getName()) .'</a></h4></div>';
 
                     foreach ($category->getChildren(true) as $lev2) {
                         $lev2_start_article = $lev2->getStartArticle();
@@ -114,14 +114,14 @@ class FrontendNavigationMegaMenu
                             if ('' !== $lev2->getValue('cat_d2u_helper_icon')) {
                                 $lev2_icon_media = rex_media::get((string) $lev2->getValue('cat_d2u_helper_icon'));
                                 if ($lev2_icon_media instanceof rex_media) {
-                                    $lev2_icon = '<img src="'. $lev2_icon_media->getUrl() .'" alt="'. $lev2->getName() .'" title="'. $lev2->getName() .'" class="megamenu_lev2_icon"> ';
+                                    $lev2_icon = '<img src="'. $lev2_icon_media->getUrl() .'" alt="'. rex_escape((string) $lev2->getName(), 'html_attr') .'" title="'. rex_escape((string) $lev2->getName(), 'html_attr') .'" class="megamenu_lev2_icon"> ';
                                 }
                             }
-                            echo '<div class="megamenu_itemlist_header"><b><a href="'. $lev2->getUrl() .'" title="'. $lev2->getName() .'">'. $lev2_icon . $lev2->getName() .'</a></b></div>';
+                            echo '<div class="megamenu_itemlist_header"><b><a href="'. $lev2->getUrl() .'" title="'. rex_escape((string) $lev2->getName(), 'html_attr') .'">'. $lev2_icon . rex_escape((string) $lev2->getName()) .'</a></b></div>';
                             foreach ($lev2->getChildren(true) as $lev3) {
                                 $lev3_start_article = $lev3->getStartArticle();
                                 if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($lev3_start_article)) {
-                                    echo '<a class="dropdown-item'. (rex_article::getCurrentId() === $lev3->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev3->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' current' : '') .'" href="'. $lev3->getUrl() .'" title="'. $lev3->getName() .'">'. $lev3->getName() .'</a>';
+                                    echo '<a class="dropdown-item'. (rex_article::getCurrentId() === $lev3->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev3->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' current' : '') .'" href="'. $lev3->getUrl() .'" title="'. rex_escape((string) $lev3->getName(), 'html_attr') .'">'. rex_escape((string) $lev3->getName()) .'</a>';
                                 }
                             }
                             echo '</div>';
@@ -156,12 +156,12 @@ class FrontendNavigationMegaMenu
                 if (0 === count($category->getChildren(true))) {
                     // Without submenu
                     echo '<li class="nav-item">';
-                    echo '<a class="nav-link' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '">' . $category->getName() . '</a>';
+                    echo '<a class="nav-link' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '">' . rex_escape((string) $category->getName()) . '</a>';
                     echo '</li>';
                 } else {
                     // With submenu (megamenu dropdown)
                     echo '<li class="nav-item dropdown megamenu-li">';
-                    echo '<a class="nav-link dropdown-toggle' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '" id="dropdown' . $category->getId() . '" data-bs-toggle="dropdown" aria-expanded="false">' . $category->getName() . '</a>';
+                    echo '<a class="nav-link dropdown-toggle' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '" id="dropdown' . $category->getId() . '" data-bs-toggle="dropdown" aria-expanded="false">' . rex_escape((string) $category->getName()) . '</a>';
 
                     echo '<div class="dropdown-menu megamenu" aria-labelledby="dropdown' . $category->getId() . '">';
                     echo '<div class="row">';
@@ -169,10 +169,10 @@ class FrontendNavigationMegaMenu
                     if ('' !== (string) $category->getValue('cat_d2u_helper_icon')) {
                         $lev1_icon_media = rex_media::get((string) $category->getValue('cat_d2u_helper_icon'));
                         if ($lev1_icon_media instanceof rex_media) {
-                            $lev1_icon = '<img src="' . $lev1_icon_media->getUrl() . '" alt="' . $category->getName() . '" title="' . $category->getName() . '" class="megamenu_lev1_icon"> ';
+                            $lev1_icon = '<img src="' . $lev1_icon_media->getUrl() . '" alt="' . rex_escape((string) $category->getName(), 'html_attr') . '" title="' . rex_escape((string) $category->getName(), 'html_attr') . '" class="megamenu_lev1_icon"> ';
                         }
                     }
-                    echo '<div class="col-12"><h4><a href="' . $category->getUrl() . '" title="' . $category->getName() . '">' . $lev1_icon . $category->getName() . '</a></h4></div>';
+                    echo '<div class="col-12"><h4><a href="' . $category->getUrl() . '" title="' . rex_escape((string) $category->getName(), 'html_attr') . '">' . $lev1_icon . rex_escape((string) $category->getName()) . '</a></h4></div>';
 
                     foreach ($category->getChildren(true) as $lev2) {
                         $lev2_start_article = $lev2->getStartArticle();
@@ -182,14 +182,14 @@ class FrontendNavigationMegaMenu
                             if ('' !== $lev2->getValue('cat_d2u_helper_icon')) {
                                 $lev2_icon_media = rex_media::get((string) $lev2->getValue('cat_d2u_helper_icon'));
                                 if ($lev2_icon_media instanceof rex_media) {
-                                    $lev2_icon = '<img src="' . $lev2_icon_media->getUrl() . '" alt="' . $lev2->getName() . '" title="' . $lev2->getName() . '" class="megamenu_lev2_icon"> ';
+                                    $lev2_icon = '<img src="' . $lev2_icon_media->getUrl() . '" alt="' . rex_escape((string) $lev2->getName(), 'html_attr') . '" title="' . rex_escape((string) $lev2->getName(), 'html_attr') . '" class="megamenu_lev2_icon"> ';
                                 }
                             }
-                            echo '<div class="megamenu_itemlist_header"><b><a href="' . $lev2->getUrl() . '" title="' . $lev2->getName() . '">' . $lev2_icon . $lev2->getName() . '</a></b></div>';
+                            echo '<div class="megamenu_itemlist_header"><b><a href="' . $lev2->getUrl() . '" title="' . rex_escape((string) $lev2->getName(), 'html_attr') . '">' . $lev2_icon . rex_escape((string) $lev2->getName()) . '</a></b></div>';
                             foreach ($lev2->getChildren(true) as $lev3) {
                                 $lev3_start_article = $lev3->getStartArticle();
                                 if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($lev3_start_article)) {
-                                    echo '<a class="dropdown-item' . (rex_article::getCurrentId() === $lev3->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev3->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' active' : '') . '" href="' . $lev3->getUrl() . '" title="' . $lev3->getName() . '">' . $lev3->getName() . '</a>';
+                                    echo '<a class="dropdown-item' . (rex_article::getCurrentId() === $lev3->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev3->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' active' : '') . '" href="' . $lev3->getUrl() . '" title="' . rex_escape((string) $lev3->getName(), 'html_attr') . '">' . rex_escape((string) $lev3->getName()) . '</a>';
                                 }
                             }
                             echo '</div>';

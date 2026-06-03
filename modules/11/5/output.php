@@ -41,7 +41,7 @@ if (rex::isBackend()) {
             } else {
                 $html_picture .= 'index.php?rex_media_type='. $picture_type .'&rex_media_file='. $picture;
             }
-            $html_picture .= '" alt="'. $media->getValue('title') .'" title="'. $media->getValue('title') .'">';
+            $html_picture .= '" alt="'. rex_escape((string) $media->getValue('title'), 'html_attr') .'" title="'. rex_escape((string) $media->getValue('title'), 'html_attr') .'">';
             echo $html_picture;
         }
         echo '</div>';
@@ -49,16 +49,16 @@ if (rex::isBackend()) {
 
     $bg_color = ' style="background-color: '. rex_config::get('d2u_helper', 'article_color_h') .'dd"'; // Add "dd" to generate opacity
     echo '<div class="helper-11-2-title-box-left"'. $bg_color .'>';
-    echo '<h3 class="helper-11-2-title">'. $name .'</h3>';
+    echo '<h3 class="helper-11-2-title">'. rex_escape($name) .'</h3>';
     if ('' !== $phone || '' !== $street || '' !== $city) { /** @phpstan-ignore-line */
         echo '<p class="helper-11-2-teaser">'
-            .('' !== $street ? $street .'<br>' : '') /** @phpstan-ignore-line */
-            .('' !== $city ? $city .'<br>' : '') /** @phpstan-ignore-line */
-            .('' !== $phone ? '<span class="fa-icon fa-phone footer-icon"></span>'. $phone : '') .'<br>' /** @phpstan-ignore-line */
+            .('' !== $street ? rex_escape($street) .'<br>' : '') /** @phpstan-ignore-line */
+            .('' !== $city ? rex_escape($city) .'<br>' : '') /** @phpstan-ignore-line */
+            .('' !== $phone ? '<span class="fa-icon fa-phone footer-icon"></span>'. rex_escape($phone) : '') .'<br>' /** @phpstan-ignore-line */
             .'</p>';
     }
     if ('' !== $email) { /** @phpstan-ignore-line */
-        echo '<p class="helper-11-2-email"><a href="mailto:'. $email .'"><span class="fa-icon fa-envelope footer-icon"></span>'. $email .'</a></p>';
+        echo '<p class="helper-11-2-email"><a href="mailto:'. rex_escape($email, 'html_attr') .'"><span class="fa-icon fa-envelope footer-icon"></span>'. rex_escape($email) .'</a></p>';
     }
     echo '</div>';
 

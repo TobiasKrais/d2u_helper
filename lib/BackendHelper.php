@@ -523,7 +523,7 @@ class BackendHelper
         echo '<dd><div class="input-group">';
         $article = rex_article::get($article_id, $clang_id);
         $article_name = $article instanceof rex_article ? $article->getValue('name') .'['. $article_id .']' : '';
-        echo '<input class="form-control" type="text" name="REX_LINK_NAME[' . $fieldname . ']" value="' . $article_name .'" id="REX_LINK_' . $fieldname . '_NAME" readonly="readonly">';
+        echo '<input class="form-control" type="text" name="REX_LINK_NAME[' . $fieldname . ']" value="' . rex_escape($article_name, 'html_attr') .'" id="REX_LINK_' . $fieldname . '_NAME" readonly="readonly">';
         echo '<input type="hidden" name="REX_INPUT_LINK[' . $fieldname . ']" id="REX_LINK_' . $fieldname . '" value="' . $article_id . '">';
         echo '<span class="input-group-btn">';
         if (!$readonly) {
@@ -554,7 +554,7 @@ class BackendHelper
         foreach ($article_ids as $article_id) {
             $article = rex_article::get($article_id, $clang_id);
             if ($article instanceof rex_article) {
-                echo '<option value="'. $article_id .'">'. $article->getValue('name') .' ['. $article_id .']</option>';
+                echo '<option value="'. $article_id .'">'. rex_escape((string) $article->getValue('name')) .' ['. $article_id .']</option>';
             }
         }
         echo '</select>';
@@ -591,7 +591,7 @@ class BackendHelper
         echo '<dl class="rex-form-group form-group" id="MEDIA_'. $fieldname .'">';
         echo '<dt><label>' . $label_prefix . rex_i18n::msg($message_id) . '</label></dt>';
         echo '<dd><div class="input-group">';
-        echo '<input class="form-control" type="text" name="REX_INPUT_MEDIA[' . $fieldname . ']" value="' . $value . '" id="REX_MEDIA_' . $fieldname . '" readonly="readonly">';
+        echo '<input class="form-control" type="text" name="REX_INPUT_MEDIA[' . $fieldname . ']" value="' . rex_escape($value, 'html_attr') . '" id="REX_MEDIA_' . $fieldname . '" readonly="readonly">';
         echo '<span class="input-group-btn">';
         if (!$readonly) {
             echo self::getMediaManagingButtons($fieldname, false, $filetypes, $category_id);
@@ -617,14 +617,15 @@ class BackendHelper
         echo '<div class="input-group">';
         echo '<ul class="form-control thumbnail-list ui-sortable" id="REX_IMGLIST_'. $fieldnumber .'">';
         for($i = 0; $i < count($values); $i++) {
-            echo '<li data-key="'. $i .'" value="'. $values[$i] .'" data-value="'. $values[$i] .'">';
-            echo '<img class="thumbnail" src="'. rex_media_manager::getUrl('rex_medialistbutton_preview', $values[$i]).'" title="'. $values[$i] .'"></img>';
+            $value_attr = rex_escape($values[$i], 'html_attr');
+            echo '<li data-key="'. $i .'" value="'. $value_attr .'" data-value="'. $value_attr .'">';
+            echo '<img class="thumbnail" src="'. rex_escape(rex_media_manager::getUrl('rex_medialistbutton_preview', $values[$i]), 'html_attr').'" title="'. $value_attr .'"></img>';
             echo '</li>';
         }
         echo '</ul>';
         echo '<select class="form-control" id="REX_MEDIALIST_SELECT_'. $fieldnumber .'" name="REX_MEDIALIST_SELECT['. $fieldnumber .']" size="10">';
         for($i = 0; $i < count($values); $i++) {
-            echo '<option data-key="'. $i .'" value="'. $values[$i] .'" >'. $values[$i] .'</option>';
+            echo '<option data-key="'. $i .'" value="'. rex_escape($values[$i], 'html_attr') .'" >'. rex_escape($values[$i]) .'</option>';
         }
         echo '</select>';
         echo '<input id="REX_MEDIALIST_'. $fieldnumber .'" name="REX_INPUT_MEDIALIST['. $fieldnumber .']" type="hidden" value="'. implode(',', $values).'"></input>';
@@ -657,7 +658,7 @@ class BackendHelper
         echo '<dd><div class="input-group">';
         echo '<select class="form-control" name="REX_MEDIALIST_SELECT[' . $fieldnumber . ']" id="REX_MEDIALIST_SELECT_' . $fieldnumber . '" size="7" style="margin: 0">';
         foreach ($values as $value) {
-            echo '<option value="' . $value . '">' . $value . '</option>';
+            echo '<option value="' . rex_escape($value, 'html_attr') . '">' . rex_escape($value) . '</option>';
         }
         echo '</select>';
         echo '<input type="hidden" name="REX_INPUT_MEDIALIST[' . $fieldnumber . ']" id="REX_MEDIALIST_' . $fieldnumber . '" value="' . implode(',', $values) . '">';
@@ -694,18 +695,18 @@ class BackendHelper
         if ($readonly) {
             // Submit array
             foreach ($selected_values as $selected_value) {
-                echo '<input type="hidden" name="'. $fieldname .'" value="'. $selected_value .'">';
+                echo '<input type="hidden" name="'. rex_escape($fieldname, 'html_attr') .'" value="'. rex_escape((string) $selected_value, 'html_attr') .'">';
             }
             echo '<select class="form-control selectpicker" name="disabled" disabled '. $multiple_attr .'>';
         } else {
-            echo '<select class="form-control selectpicker" name="'. $fieldname . '" '. $multiple_attr .'>';
+            echo '<select class="form-control selectpicker" name="'. rex_escape($fieldname, 'html_attr') . '" '. $multiple_attr .'>';
         }
         foreach ($values as $key => $value) {
             $selected = '';
             if (in_array($key, $selected_values, true)) {
                 $selected = ' selected="selected"';
             }
-            echo '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
+            echo '<option value="' . rex_escape((string) $key, 'html_attr') . '"' . $selected . '>' . rex_escape((string) $value) . '</option>';
         }
         echo '</select>';
         echo '</dl>';

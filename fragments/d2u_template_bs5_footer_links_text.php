@@ -10,7 +10,7 @@
         echo '<div class="d-flex flex-wrap gap-2">';
         foreach ($rex_articles as $rex_article) {
             echo '<div class="footerbox">';
-            echo '<a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a>';
+            echo '<a href="'. $rex_article->getUrl() .'">'. rex_escape((string) $rex_article->getName()) .'</a>';
             echo '</div>';
         }
         if (rex_addon::get('consent_manager')->isAvailable()) {
@@ -22,35 +22,35 @@
         if ('' !== (string) $d2u_helper->getConfig('footer_facebook_link', '')) {
             echo '<div class="footerbox">';
                 echo '<span class="fa-icon fa-facebook footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'"></span> ';
-                echo '<a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'</a>';
+                echo '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_facebook_link')), 'html_attr') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'</a>';
             echo '</div>';
         }
         // Google link
         if ('' !== (string) $d2u_helper->getConfig('footer_google_link', '')) {
             echo '<div class="footerbox">';
                 echo '<span class="fa-icon fa-google footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_google') .'"></span> ';
-                echo '<a href="'. $d2u_helper->getConfig('footer_google_link') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_google') .'</a>';
+                echo '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_google_link')), 'html_attr') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_google') .'</a>';
             echo '</div>';
         }
         // Instagram link
         if ('' !== (string) $d2u_helper->getConfig('footer_instagram_link', '')) {
             echo '<div class="footerbox">';
                 echo '<span class="fa-icon fa-instagram footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_instagram') .'"></span> ';
-                echo '<a href="'. $d2u_helper->getConfig('footer_instagram_link') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_instagram') .'</a>';
+                echo '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_instagram_link')), 'html_attr') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_instagram') .'</a>';
             echo '</div>';
         }
         // LinkedIn link
         if ('' !== (string) $d2u_helper->getConfig('footer_linkedin_link', '')) {
             echo '<div class="footerbox">';
                 echo '<span class="fa-icon fa-linkedin footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_linkedin') .'"></span> ';
-                echo '<a href="'. $d2u_helper->getConfig('footer_linkedin_link') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_linkedin') .'</a>';
+                echo '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_linkedin_link')), 'html_attr') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_linkedin') .'</a>';
             echo '</div>';
         }
         // Youtube link
         if ('' !== (string) $d2u_helper->getConfig('footer_youtube_link', '')) {
             echo '<div class="footerbox">';
                 echo '<span class="fa-icon fa-youtube footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'"></span> ';
-                echo '<a href="'. $d2u_helper->getConfig('footer_youtube_link') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'</a>';
+                echo '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_youtube_link')), 'html_attr') .'" target="_blank" rel="noopener">'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'</a>';
             echo '</div>';
         }
         echo '</div>';

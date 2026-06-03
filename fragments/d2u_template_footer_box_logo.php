@@ -8,35 +8,35 @@
         $social_footer = '';
         // Facebook
         if ('' !== (string) $d2u_helper->getConfig('footer_facebook_link', '')) {
-            $social_footer = '<a href="'. $d2u_helper->getConfig('footer_facebook_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'">'
+            $social_footer = '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_facebook_link')), 'html_attr') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_facebook') .'">'
                 // fontawesome facebook icon
                 .'<span class="fa-icon fa-2x fa-facebook pr-2"></span>'
                 .'</a>';
         }
         // Google
         if ('' !== (string) $d2u_helper->getConfig('footer_google_link', '')) {
-            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_google_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_google') .'">'
+            $social_footer .= '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_google_link')), 'html_attr') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_google') .'">'
                 // fontawesome google icon
                 .'<span class="fa-icon fa-2x fa-google pr-2"></span>'
                 .'</a>';
         }
         // Instagram
         if ('' !== (string) $d2u_helper->getConfig('footer_instagram_link', '')) {
-            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_instagram_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_instagram') .'">'
+            $social_footer .= '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_instagram_link')), 'html_attr') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_instagram') .'">'
                 // fontawesome instagram icon
                 .'<span class="fa-icon fa-2x fa-instagram pr-2"></span>'
                 .'</a>';
         }
         // LinkedIn
         if ('' !== (string) $d2u_helper->getConfig('footer_linkedin_link', '')) {
-            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_linkedin_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_linkedin') .'">'
+            $social_footer .= '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_linkedin_link')), 'html_attr') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_linkedin') .'">'
                 // fontawesome linkedin icon
                 .'<span class="fa-icon fa-2x fa-linkedin pr-2"></span>'
                 .'</a>';
         }
         // Youtube
         if ('' !== (string) $d2u_helper->getConfig('footer_youtube_link', '')) {
-            $social_footer .= '<a href="'. $d2u_helper->getConfig('footer_youtube_link') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'">'
+            $social_footer .= '<a href="'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::sanitizeUrl((string) $d2u_helper->getConfig('footer_youtube_link')), 'html_attr') .'" target="_blank" title="'. \Sprog\Wildcard::get('d2u_helper_social_youtube') .'">'
                 // fontawesome youtube icon
                 .'<span class="fa-icon fa-2x fa-youtube pr-2"></span>'
                 .'</a>';
@@ -52,7 +52,7 @@
         foreach ($rex_articles as $rex_article) {
             echo '<div class="col-md-6 col-lg-4">';
                 echo '<div class="footerbox">';
-                    echo '<a href="'. $rex_article->getUrl() .'">'. $rex_article->getName() .'</a>';
+                    echo '<a href="'. $rex_article->getUrl() .'">'. rex_escape((string) $rex_article->getName()) .'</a>';
                 echo '</div>';
             echo '</div>';
         }
@@ -87,7 +87,7 @@
             // Logo
             if ($media_logo_footer instanceof rex_media) {
                 echo '<a href="'. rex_getUrl(rex_article::getSiteStartArticleId()) .'">';
-                echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl($media_logo_footer->getFileName()) .'" alt="'. $media_logo_footer->getTitle() .'" title="'. $media_logo_footer->getTitle() .'" id="logo-footer" loading="lazy">';
+                echo '<img src="'. TobiasKrais\D2UHelper\FrontendHelper::getMediaUrl($media_logo_footer->getFileName()) .'" alt="'. rex_escape((string) $media_logo_footer->getTitle(), 'html_attr') .'" title="'. rex_escape((string) $media_logo_footer->getTitle(), 'html_attr') .'" id="logo-footer" loading="lazy">';
                 echo '</a>';
             }
 

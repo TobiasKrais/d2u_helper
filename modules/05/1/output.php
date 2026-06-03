@@ -12,7 +12,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
     $link = 'REX_VALUE[2]';
     if ('' !== $link) { /** @phpstan-ignore-line */
         if (\rex::isBackend()) {
-            echo "Weiterleitung zu URL <a href='". $link ."'>". $link .'</a>';
+            echo "Weiterleitung zu URL <a href='". rex_escape($link, 'html_attr') ."'>". rex_escape($link) .'</a>';
         } else {
             $forward_url = $link;
         }
@@ -32,7 +32,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
         if ($machine_id > 0) { /** @phpstan-ignore-line */
             $machine = new Machine($machine_id, rex_clang::getCurrentId());
             if (\rex::isBackend()) {
-                echo "Weiterleitung zu D2U Machinen - Maschine <a href='". $machine->getUrl(true) ."'>". $machine->name .'</a>';
+                echo "Weiterleitung zu D2U Machinen - Maschine <a href='". rex_escape($machine->getUrl(true), 'html_attr') ."'>". rex_escape((string) $machine->name) .'</a>';
             } else {
                 $forward_url = $machine->getUrl(true);
             }
@@ -46,7 +46,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
         if ($industry_sector_id > 0) { /** @phpstan-ignore-line */
             $industry_sector = new IndustrySector($industry_sector_id, rex_clang::getCurrentId());
             if (\rex::isBackend()) {
-                echo "Weiterleitung zu D2U Machinen - Branche <a href='". $industry_sector->getUrl(true) ."'>". $industry_sector->name .'</a>';
+                echo "Weiterleitung zu D2U Machinen - Branche <a href='". rex_escape($industry_sector->getUrl(true), 'html_attr') ."'>". rex_escape((string) $industry_sector->name) .'</a>';
             } else {
                 $forward_url = $industry_sector->getUrl(true);
             }
@@ -60,7 +60,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
         if ($used_machine_id > 0) { /** @phpstan-ignore-line */
             $used_machine = new UsedMachine($used_machine_id, rex_clang::getCurrentId());
             if (\rex::isBackend()) {
-                echo "Weiterleitung zu D2U Machinen - Branche <a href='". $used_machine->getUrl(true) ."'>". $used_machine->name .'</a>';
+                echo "Weiterleitung zu D2U Machinen - Branche <a href='". rex_escape($used_machine->getUrl(true), 'html_attr') ."'>". rex_escape((string) $used_machine->name) .'</a>';
             } else {
                 $forward_url = $used_machine->getUrl(true);
             }
@@ -74,7 +74,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
         if ($property_id > 0) { /** @phpstan-ignore-line */
             $property = new Property($property_id, rex_clang::getCurrentId());
             if (\rex::isBackend()) {
-                echo "Weiterleitung zu D2U Immobilien - Immobilie <a href='". $property->getUrl(true) ."'>". $property->name .'</a>';
+                echo "Weiterleitung zu D2U Immobilien - Immobilie <a href='". rex_escape($property->getUrl(true), 'html_attr') ."'>". rex_escape((string) $property->name) .'</a>';
             } else {
                 $forward_url = $property->getUrl(true);
             }
@@ -88,7 +88,7 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
         if ($category_id > 0) { /** @phpstan-ignore-line */
             $category = new \TobiasKrais\D2UCourses\Category($category_id);
             if (\rex::isBackend()) {
-                echo "Weiterleitung zu D2U Veranstaltungen - Kategorie <a href='". $category->getUrl(true) ."'>". $category->name .'</a>';
+                echo "Weiterleitung zu D2U Veranstaltungen - Kategorie <a href='". rex_escape($category->getUrl(true), 'html_attr') ."'>". rex_escape((string) $category->name) .'</a>';
             } else {
                 if ($category->isOnline()) {
                     $forward_url = $category->getUrl(true);
@@ -105,12 +105,12 @@ if ('link' === $link_type) { /** @phpstan-ignore-line */
     if ($article_id > 0 && rex_article::get($article_id) instanceof rex_article) { /** @phpstan-ignore-line */
         if (\rex::isBackend()) {
             echo "Weiterleitung zu Artikel: <a href='". rex_url::backendPage('content/edit', ['article_id' => $article_id, 'clang' => rex_clang::getCurrentId()]) ."'>"
-                . rex_article::get($article_id)->getValue('name') .' (Artikel ID '. $article_id .')</a>';
+                . rex_escape((string) rex_article::get($article_id)->getValue('name')) .' (Artikel ID '. $article_id .')</a>';
             if ('' !== $params) {
-                echo '<br>Zusätzliche Parameter: '. $params;
+                echo '<br>Zusätzliche Parameter: '. rex_escape($params);
             }
             if ('' !== $anchor) { /** @phpstan-ignore-line */
-                echo '<br>Name Anker: '. $anchor;
+                echo '<br>Name Anker: '. rex_escape($anchor);
             }
         } else {
             $link = rex_getUrl($article_id);

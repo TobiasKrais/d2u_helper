@@ -306,6 +306,41 @@ class FrontendHelper
     }
 
     /**
+     * Sanitizes a user/admin supplied URL for safe use in an href attribute.
+     * Only http(s), protocol-relative (//) and relative URLs are allowed.
+     * Dangerous schemes like javascript:, data: or vbscript: are rejected and
+     * result in an empty string. The returned value still has to be escaped for
+     * attribute output (e.g. via rex_escape(..., 'html_attr')).
+     * @param string $url URL to sanitize
+     * @return string Sanitized URL, or empty string if the scheme is not allowed
+     */
+    public static function sanitizeUrl(string $url): string
+    {
+        $url = trim($url);
+        if ('' === $url) {
+            return '';
+        }
+
+        // Allow protocol-relative and relative URLs (no scheme present).
+        if (str_starts_with($url, '//') || str_starts_with($url, '/') || str_starts_with($url, '#') || str_starts_with($url, '?')) {
+            return $url;
+        }
+
+        // If a scheme is present, only http and https are permitted.
+        if (preg_match('#^([a-z][a-z0-9+.\-]*):#i', $url, $matches)) {
+            $scheme = strtolower($matches[1]);
+            if (in_array($scheme, ['http', 'https'], true)) {
+                return $url;
+            }
+
+            return '';
+        }
+
+        // No scheme and not starting with a path separator: treat as relative URL.
+        return $url;
+    }
+
+    /**
      * Returns the current custom CSS cache file path.
      */
     public static function getCustomCSSCachePath(): string

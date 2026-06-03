@@ -363,7 +363,7 @@ function rex_d2u_helper_media_is_in_use(rex_extension_point $ep)
 
             // Prepare warnings for templates
             for ($i = 0; $i < $sql_template->getRows(); ++$i) {
-                $message = '<a href="javascript:openPage(\''. rex_url::backendPage('templates', ['template_id' => $sql_template->getValue('id'), 'function' => 'edit']) .'\')">'. rex_i18n::msg('header_template') .': '. $sql_template->getValue('name') .'</a>';
+                $message = '<a href="javascript:openPage(\''. rex_url::backendPage('templates', ['template_id' => $sql_template->getValue('id'), 'function' => 'edit']) .'\')">'. rex_i18n::msg('header_template') .': '. rex_escape((string) $sql_template->getValue('name')) .'</a>';
                 if (!in_array($message, $warning, true)) {
                     $warning[] = $message.'<br>';
                 }

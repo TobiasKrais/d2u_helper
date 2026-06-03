@@ -119,7 +119,7 @@
             if ('REX_VALUE[1]' === $feed->getStreamId()) {
                 echo 'selected="selected" ';
             }
-            echo '>'. $feed->getTitle() .'</option>';
+            echo '>'. rex_escape((string) $feed->getTitle()) .'</option>';
         }
         ?>
 		</select>

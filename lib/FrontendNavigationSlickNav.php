@@ -76,7 +76,7 @@ class FrontendNavigationSlickNav
             if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($lev1_start_article)) {
                 if (0 === count($lev1->getChildren(true))) {
                     // Without Redaxo submenu
-                    echo '<li'. (rex_article::getCurrentId() === $lev1->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'" title="'. $lev1->getName() .'">'. $lev1->getName() .'</a></li>';
+                    echo '<li'. (rex_article::getCurrentId() === $lev1->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($lev1->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $lev1->getUrl() .'" title="'. rex_escape((string) $lev1->getName(), 'html_attr') .'">'. rex_escape((string) $lev1->getName()) .'</a></li>';
                 } else {
                     // With submenu
                     self::getSubmenu($lev1);
@@ -95,10 +95,10 @@ class FrontendNavigationSlickNav
      */
     private static function getSubmenu($rex_category): void
     {
-        echo '<li><a href="'. $rex_category->getUrl() .'" title="'. $rex_category->getName() .'">'. $rex_category->getName() .'</a>';
+        echo '<li><a href="'. $rex_category->getUrl() .'" title="'. rex_escape((string) $rex_category->getName(), 'html_attr') .'">'. rex_escape((string) $rex_category->getName()) .'</a>';
         echo '<ul>';
         $cat_name = true === (bool) rex_config::get('d2u_helper', 'submenu_use_articlename', false) && rex_article::get($rex_category->getId()) instanceof rex_article ? rex_article::get($rex_category->getId())->getName() : strtoupper($rex_category->getName());
-        echo '<li'. (rex_article::getCurrentId() === $rex_category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. $cat_name .'">'. $cat_name .'</a></li>';
+        echo '<li'. (rex_article::getCurrentId() === $rex_category->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_category->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_category->getUrl() .'" title="'. rex_escape((string) $cat_name, 'html_attr') .'">'. rex_escape((string) $cat_name) .'</a></li>';
 
         foreach ($rex_category->getChildren(true) as $rex_subcategory) {
             // Check permissions if YCom ist installed
@@ -106,7 +106,7 @@ class FrontendNavigationSlickNav
             if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($subcategory_start_article)) {
                 if (0 === count($rex_subcategory->getChildren(true))) {
                     // Without Redaxo submenu
-                    echo '<li'. (rex_article::getCurrentId() === $rex_subcategory->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. $rex_subcategory->getName() .'">'. $rex_subcategory->getName() .'</a></li>';
+                    echo '<li'. (rex_article::getCurrentId() === $rex_subcategory->getId() || (rex_article::getCurrent() instanceof rex_article && in_array($rex_subcategory->getId(), rex_article::getCurrent()->getPathAsArray(), true)) ? ' class="current"' : '') .'><a href="'. $rex_subcategory->getUrl() .'" title="'. rex_escape((string) $rex_subcategory->getName(), 'html_attr') .'">'. rex_escape((string) $rex_subcategory->getName()) .'</a></li>';
                 } else {
                     // Mit Untermenü
                     self::getSubmenu($rex_subcategory);

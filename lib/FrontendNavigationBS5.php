@@ -73,23 +73,23 @@ class FrontendNavigationBS5
                 if (0 === count($children)) {
                     // Without submenu
                     echo '<li class="nav-item">';
-                    echo '<a class="nav-link' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '">' . $category_name . '</a>';
+                    echo '<a class="nav-link' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '">' . rex_escape((string) $category_name) . '</a>';
                     echo '</li>';
                 } else {
                     // With submenu (dropdown)
                     echo '<li class="nav-item dropdown">';
                     echo '<a class="nav-link dropdown-toggle' . ($is_active ? ' active' : '') . '" href="' . $category->getUrl() . '" role="button" data-bs-toggle="dropdown" aria-expanded="false">';
-                    echo $category_name;
+                    echo rex_escape((string) $category_name);
                     echo '</a>';
                     echo '<ul class="dropdown-menu">';
-                    echo '<li><a class="dropdown-item' . (rex_article::getCurrentId() === $category_start_article?->getId() ? ' active' : '') . '" href="' . $category->getUrl() . '">' . $category_submenu_name . '</a></li>';
+                    echo '<li><a class="dropdown-item' . (rex_article::getCurrentId() === $category_start_article?->getId() ? ' active' : '') . '" href="' . $category->getUrl() . '">' . rex_escape((string) $category_submenu_name) . '</a></li>';
                     foreach ($children as $child) {
                         $child_start_article = $child->getStartArticle();
                         if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($child_start_article)) {
                             $child_active = rex_article::getCurrentId() === $child->getId();
                             // Use article name for submenu if setting is enabled
                             $child_name = $use_articlename && $child_start_article instanceof rex_article ? $child_start_article->getName() : $child->getName();
-                            echo '<li><a class="dropdown-item' . ($child_active ? ' active' : '') . '" href="' . $child->getUrl() . '">' . $child_name . '</a></li>';
+                            echo '<li><a class="dropdown-item' . ($child_active ? ' active' : '') . '" href="' . $child->getUrl() . '">' . rex_escape((string) $child_name) . '</a></li>';
                         }
                     }
                     echo '</ul>';
@@ -132,7 +132,7 @@ class FrontendNavigationBS5
             echo '<ul class="dropdown-menu dropdown-menu-end">';
             foreach ($clangs as $clang) {
                 $lang_url = $alternate_urls[$clang->getId()] ?? \rex_getUrl(rex_article::getCurrentId(), $clang->getId());
-                echo '<li><a class="dropdown-item' . ($clang->getId() === $current_clang->getId() ? ' active' : '') . '" href="' . $lang_url . '">' . $clang->getName() . '</a></li>';
+                echo '<li><a class="dropdown-item' . ($clang->getId() === $current_clang->getId() ? ' active' : '') . '" href="' . rex_escape((string) $lang_url, 'html_attr') . '">' . rex_escape((string) $clang->getName()) . '</a></li>';
             }
             echo '</ul>';
             echo '</li>';
@@ -162,9 +162,9 @@ class FrontendNavigationBS5
         echo '<ul id="langchooser">';
         foreach ($clangs as $rex_clang) {
             $link = $alternate_urls[$rex_clang->getId()] ?? \rex_getUrl(rex_article::getSiteStartArticleId(), $rex_clang->getId());
-            echo '<li><a href="' . $link . '">'
-                . '<img class="lang-chooser-flag" src="' . \rex_url::media((string) $rex_clang->getValue('clang_icon')) . '" loading="lazy" alt="' . $rex_clang->getName() . '">'
-                . '<span class="lang-text">' . $rex_clang->getName() . '</span></a></li>';
+            echo '<li><a href="' . rex_escape((string) $link, 'html_attr') . '">'
+                . '<img class="lang-chooser-flag" src="' . \rex_url::media((string) $rex_clang->getValue('clang_icon')) . '" loading="lazy" alt="' . rex_escape((string) $rex_clang->getName(), 'html_attr') . '">'
+                . '<span class="lang-text">' . rex_escape((string) $rex_clang->getName()) . '</span></a></li>';
         }
         echo '</ul>';
         echo '</div>';

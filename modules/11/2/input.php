@@ -131,7 +131,7 @@
             $result = $sql->setQuery('SELECT name FROM ' . \rex::getTablePrefix() . 'media_manager_type ORDER BY status, name');
             for ($i = 0; $i < $result->getRows(); ++$i) {
                 $name = $result->getValue('name');
-                echo '<option value="'. $name .'" '. ('REX_VALUE[1]' === $name ? 'selected="selected" ' : '') .'>'. $name .'</option>'; /** @phpstan-ignore-line */
+                echo '<option value="'. rex_escape((string) $name, 'html_attr') .'" '. ('REX_VALUE[1]' === $name ? 'selected="selected" ' : '') .'>'. rex_escape((string) $name) .'</option>'; /** @phpstan-ignore-line */
                 $result->next();
             }
         ?>
