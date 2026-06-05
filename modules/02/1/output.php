@@ -8,7 +8,9 @@ $line = 'REX_VALUE[4]' === 'true' ? true : false; /** @phpstan-ignore-line */
 // Whitelist HTML tag for headline (defense-in-depth, input is a select)
 $allowed_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'b', 'p'];
 $tag = in_array((string) 'REX_VALUE[2]', $allowed_tags, true) ? (string) 'REX_VALUE[2]' : 'h2'; /** @phpstan-ignore-line */
-$headline = (string) 'REX_VALUE[1]'; /** @phpstan-ignore-line */
+// Decode pre-existing HTML entities first so headlines stored encoded (e.g. "&amp;")
+// are not double-encoded by the rex_escape() call below.
+$headline = html_entity_decode((string) 'REX_VALUE[1]', ENT_QUOTES | ENT_HTML5, 'UTF-8'); /** @phpstan-ignore-line */
 
 $tagClass = ($center || $line) ? trim(($center ? ' heading-02-1-center' : '') . ($line ? ' heading-02-1-line' : '') . ($center && $line ? ' heading-02-1-line-center' : '')) : '';
 ?>

@@ -182,13 +182,13 @@ class ModuleManager
             2);
         $modules[] = new Module('02-1',
             'Überschrift (BS4, deprecated)',
-            12);
+            13);
         $modules[] = new Module('02-2',
             'Überschrift mit Klapptext (BS4, deprecated)',
-            8);
+            9);
         $modules[] = new Module('02-3',
             'Überschrift mit Untertitel und Textfeld (BS4, deprecated)',
-            10);
+            11);
         $modules[] = new Module('02-4',
             'Überschrift mit Hintergrundbild und 2 Buttons (BS4, deprecated)',
             2);
@@ -200,10 +200,10 @@ class ModuleManager
             2);
         $modules[] = new Module('02-7',
             'Überschrift mit Klapptext (BS5)',
-            2);
+            3);
         $modules[] = new Module('02-8',
             'Überschrift mit Untertitel und Textfeld (BS5)',
-            2);
+            3);
         $modules[] = new Module('02-9',
             'Überschrift mit Hintergrundbild und 2 Buttons (BS5)',
             2);
