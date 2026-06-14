@@ -61,14 +61,14 @@ foreach ($documents as $document) {
             echo '<div class="'. $downloads_cols .' flex-fill d-flex">';
             echo '<a href="'. rex_escape(rex_url::media($document), 'html_attr') .'" target="_blank" class="element flex-fill">';
             if ($show_preview_pictures && !str_contains($rex_document->getType(), 'video') && 'application/octet-stream' !== $rex_document->getType()) { /** @phpstan-ignore-line */
-                echo '<img src="'. rex_escape(rex_media_manager::getUrl('d2u_helper_module_d2u_10-3', $rex_document->getFileName()), 'html_attr') .'"><br>';
+                echo '<img src="'. rex_escape(rex_media_manager::getUrl('d2u_helper_module_d2u_10-3', $rex_document->getFileName()), 'html_attr') .'" alt=""><br>';
             }
 
             if (!$show_preview_pictures) { /** @phpstan-ignore-line */
                 if ('pdf' === strtolower($filetype)) {
-                    echo '<span class="icon pdf"></span>&nbsp;&nbsp;';
+                    echo '<span class="icon pdf" aria-hidden="true"></span>&nbsp;&nbsp;';
                 } else {
-                    echo '<span class="icon file"></span>&nbsp;&nbsp;';
+                    echo '<span class="icon file" aria-hidden="true"></span>&nbsp;&nbsp;';
                 }
             }
             echo rex_escape($title) .'<br><span>('. rex_escape($filetype) . ($filesize > 0 ? ', '. $filesize .' MB' : '') .')</span>';

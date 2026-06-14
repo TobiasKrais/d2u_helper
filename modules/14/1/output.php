@@ -139,7 +139,7 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                             $url_plain = !str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . $url_plain_target : $url_plain_target;
                             echo '<li class="search_it-result search_it-article">';
                             echo '<span class="search_it-title"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($url_title, 'html_attr') .'">'. rex_escape($url_title) .'</a></span><br>';
-                            $image = '' !== $url_image ? '<span class="search_it-previewimage"><img src="'. rex_escape($hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_image, 'html_attr') .'"></span>' : '';
+                            $image = '' !== $url_image ? '<span class="search_it-previewimage"><img src="'. rex_escape($hit_server .'/index.php?rex_media_type='. $media_manager_type .'&rex_media_file='. $url_image, 'html_attr') .'" alt="'. rex_escape($url_title, 'html_attr') .'"></span>' : '';
                             // highlightedtext stammt aus search_it und enthaelt zulaessiges <mark>-Markup
                             echo $image . '<span class="search_it-teaser">'. $hit['highlightedtext'] .'</span><br>';
                             echo '<span class="search_it-url"><a href="'. rex_escape($hit_link, 'html_attr') .'" title="'. rex_escape($url_title, 'html_attr') .'">'. rex_escape(urldecode($url_plain)) .'</a></span>';
