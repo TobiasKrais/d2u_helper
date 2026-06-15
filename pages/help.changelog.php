@@ -15,7 +15,7 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.2.4-DEV</p>
+		<p>2.2.4</p>
 		<ul>
 			<li>Bugfix Backend-Formularfelder (<code>BackendHelper::form_input()</code>, <code>form_input_color_pair()</code> sowie das schreibgeschützte Textarea-Feld): Doppelte Anführungszeichen im gespeicherten Wert wurden bei der Anzeige im Backend fälschlich durch einfache Anführungszeichen ersetzt (z. B. wurde aus <code>"Adler"</code> beim Bearbeiten <code>'Adler'</code>, was beim erneuten Speichern den Wert dauerhaft verfälschte). Die Werte werden jetzt korrekt über <code>rex_escape(..., 'html_attr')</code> ausgegeben. Betrifft alle Addons, die diese Hilfsfunktionen verwenden.</li>
 			<li>Barrierefreiheit: Suchergebnis-Vorschaubilder (Modul 14-1) und Dokument-Vorschaubilder (Modul 10-4) erhalten ein <code>alt</code>-Attribut; dekorative Dateityp-Icons (PDF/Datei) im Download-Modul werden für Screenreader mit <code>aria-hidden="true"</code> ausgeblendet.</li>
