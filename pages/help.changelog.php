@@ -17,6 +17,7 @@
 	<div class="panel-body">
 		<p>2.2.4-DEV</p>
 		<ul>
+			<li>Bugfix Backend-Formularfelder (<code>BackendHelper::form_input()</code>, <code>form_input_color_pair()</code> sowie das schreibgeschützte Textarea-Feld): Doppelte Anführungszeichen im gespeicherten Wert wurden bei der Anzeige im Backend fälschlich durch einfache Anführungszeichen ersetzt (z. B. wurde aus <code>"Adler"</code> beim Bearbeiten <code>'Adler'</code>, was beim erneuten Speichern den Wert dauerhaft verfälschte). Die Werte werden jetzt korrekt über <code>rex_escape(..., 'html_attr')</code> ausgegeben. Betrifft alle Addons, die diese Hilfsfunktionen verwenden.</li>
 			<li>Barrierefreiheit: Suchergebnis-Vorschaubilder (Modul 14-1) und Dokument-Vorschaubilder (Modul 10-4) erhalten ein <code>alt</code>-Attribut; dekorative Dateityp-Icons (PDF/Datei) im Download-Modul werden für Screenreader mit <code>aria-hidden="true"</code> ausgeblendet.</li>
 			<li>Bugfix Überschriften-Module 02-1 (BS4), 02-2/02-3 (BS4) sowie 02-7/02-8 (BS5): Bereits HTML-kodierte Zeichen im Überschriftentext werden vor der Ausgabe normalisiert und anschließend wie bisher escaped. Dadurch werden Eingaben mit <code>&amp;</code> im Frontend wieder korrekt als <code>&amp;</code>-Zeichen dargestellt statt als sichtbares <code>&amp;amp;</code> (analog zum bereits in 2.2.3 korrigierten Modul 02-6).</li>
 		</ul>

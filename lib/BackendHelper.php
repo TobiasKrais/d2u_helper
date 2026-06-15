@@ -437,9 +437,9 @@ class BackendHelper
         $input = '';
         if ('color' === $type) {
             $input .= '<input class="form-control d2u_helper_color_text" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
-                . 'value="' . str_replace('"', "'", (string) $value) . '" id="text-' . $field_id . '" onChange="document.getElementById(\'color-' . $field_id . '\').value = this.value">';
+                . 'value="' . rex_escape((string) $value, 'html_attr') . '" id="text-' . $field_id . '" onChange="document.getElementById(\'color-' . $field_id . '\').value = this.value">';
         }
-        $input .= '<input class="form-control'. ('color' === $type ? ' d2u_helper_color' : '') .'" type="' . $type . '" name="' . $fieldname . '" id="color-' . $field_id . '" value="' . str_replace('"', "'", (string) $value) . '"';
+        $input .= '<input class="form-control'. ('color' === $type ? ' d2u_helper_color' : '') .'" type="' . $type . '" name="' . $fieldname . '" id="color-' . $field_id . '" value="' . rex_escape((string) $value, 'html_attr') . '"';
         if ($required && true !== $readonly) {
             $input .= ' required';
         }
@@ -485,8 +485,8 @@ class BackendHelper
         echo '<tr>';
         echo '<td class="d2u_helper_color_pair_icon_cell"><i class="fa fa-sun-o"></i></td>';
         echo '<td><input class="form-control d2u_helper_color_text" type="text"'. ($allow_empty ? ' name="'. $fieldname_light . '"' : '') .' pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
-            . 'value="' . str_replace('"', "'", (string) $value_light) . '" id="text-' . $field_id_light . '" onChange="document.getElementById(\'color-' . $field_id_light . '\').value = this.value"></td>';
-        echo '<td><input class="form-control d2u_helper_color" type="color"'. ('' !== $fieldname_light_picker ? ' name="' . $fieldname_light_picker . '"' : '') .' id="color-' . $field_id_light . '" value="' . str_replace('"', "'", $picker_value_light) . '"'
+            . 'value="' . rex_escape((string) $value_light, 'html_attr') . '" id="text-' . $field_id_light . '" onChange="document.getElementById(\'color-' . $field_id_light . '\').value = this.value"></td>';
+        echo '<td><input class="form-control d2u_helper_color" type="color"'. ('' !== $fieldname_light_picker ? ' name="' . $fieldname_light_picker . '"' : '') .' id="color-' . $field_id_light . '" value="' . rex_escape((string) $picker_value_light, 'html_attr') . '"'
             . ' onChange="document.getElementById(\'text-' . $field_id_light . '\').value = this.value" /></td>';
         echo '</tr>';
 
@@ -494,8 +494,8 @@ class BackendHelper
         echo '<tr>';
         echo '<td class="d2u_helper_color_pair_icon_cell"><i class="fa fa-moon-o"></i></td>';
         echo '<td><input class="form-control d2u_helper_color_text" type="text"'. ($allow_empty ? ' name="'. $fieldname_dark . '"' : '') .' pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
-            . 'value="' . str_replace('"', "'", (string) $value_dark) . '" id="text-' . $field_id_dark . '" onChange="document.getElementById(\'color-' . $field_id_dark . '\').value = this.value"></td>';
-        echo '<td><input class="form-control d2u_helper_color" type="color"'. ('' !== $fieldname_dark_picker ? ' name="' . $fieldname_dark_picker . '"' : '') .' id="color-' . $field_id_dark . '" value="' . str_replace('"', "'", $picker_value_dark) . '"'
+            . 'value="' . rex_escape((string) $value_dark, 'html_attr') . '" id="text-' . $field_id_dark . '" onChange="document.getElementById(\'color-' . $field_id_dark . '\').value = this.value"></td>';
+        echo '<td><input class="form-control d2u_helper_color" type="color"'. ('' !== $fieldname_dark_picker ? ' name="' . $fieldname_dark_picker . '"' : '') .' id="color-' . $field_id_dark . '" value="' . rex_escape((string) $picker_value_dark, 'html_attr') . '"'
             . ' onChange="document.getElementById(\'text-' . $field_id_dark . '\').value = this.value" /></td>';
         echo '</tr>';
 
@@ -733,7 +733,7 @@ class BackendHelper
         }
         if ($readonly) {
             echo '<dd><div class="form-control" style="height: 100px;overflow-y: scroll">'. $value .'</div>'
-                . '<input type="hidden" name="' . $fieldname . '" value="'. str_replace('"', "'", $value) .'"></dd>';
+                . '<input type="hidden" name="' . $fieldname . '" value="'. rex_escape((string) $value, 'html_attr') .'"></dd>';
         } else {
             echo '<dd><textarea cols="1" rows="' . $rows . '" class="form-control' . $wysiwyg_class . '" name="' . $fieldname . '" data-lang="de"';
             // Required can only be activated if WYSIWYG Editor is not activated
