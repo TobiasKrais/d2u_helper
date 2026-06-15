@@ -15,6 +15,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.2.5-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.2.4</p>
 		<ul>
 			<li>Bugfix Backend-Formularfelder (<code>BackendHelper::form_input()</code>, <code>form_input_color_pair()</code> sowie das schreibgeschützte Textarea-Feld): Doppelte Anführungszeichen im gespeicherten Wert wurden bei der Anzeige im Backend fälschlich durch einfache Anführungszeichen ersetzt (z. B. wurde aus <code>"Adler"</code> beim Bearbeiten <code>'Adler'</code>, was beim erneuten Speichern den Wert dauerhaft verfälschte). Die Werte werden jetzt korrekt über <code>rex_escape(..., 'html_attr')</code> ausgegeben. Betrifft alle Addons, die diese Hilfsfunktionen verwenden.</li>
