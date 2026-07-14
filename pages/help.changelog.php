@@ -17,7 +17,7 @@
 	<div class="panel-body">
 		<p>2.2.5-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Bugfix Modul 17-1 (Google Places Bewertungen, BS5): Die Slider-Indikatoren (Bullets) liegen außerhalb des Bootstrap-Carousels und wurden daher beim Wechsel zur nächsten Rezension nicht mehr aktiv eingefärbt. Eine neue Modul-JS-Datei (<code>js.js</code>, wird über die gebündelte <code>helper.js</code> ausgeliefert) synchronisiert die Klasse <code>active</code> und das <code>aria-current</code>-Attribut jetzt per <code>slid.bs.carousel</code>-Event korrekt auf den passenden Bullet (mehrfach nutzbar über alle <code>.googleplaces-section</code>-Instanzen).</li>
 		</ul>
 		<p>2.2.4</p>
 		<ul>

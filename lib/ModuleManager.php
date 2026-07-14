@@ -326,7 +326,7 @@ class ModuleManager
             1);
         $modules[] = new Module('17-1',
             'Google Places Bewertungen (BS5)',
-            1);
+            2);
         // 20-x reserved for D2U Addresss
         // 21-x reserved for D2U History
         // 22-x reserved for D2U Staff
