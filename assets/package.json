@@ -3,7 +3,7 @@
   "private": true,
   "description": "Vendored frontend libraries bundled with the d2u_helper REDAXO addon. Manifest exists only to let Dependabot report new upstream releases; the committed vendor copies must still be updated manually.",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "6.7.2",
+    "@fortawesome/fontawesome-free": "7.3.1",
     "bootstrap": "5.3.8",
     "bootstrap4": "npm:bootstrap@4.6.2",
     "smartmenus": "1.2.1"
