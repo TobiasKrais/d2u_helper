@@ -1,0 +1,57 @@
+name: Sync vendored assets on Dependabot PRs
+
+# Dependabot only bumps the version in assets/package.json. The committed vendor
+# copies under assets/ are a hand-picked subset and are not managed by npm.
+# This workflow pulls the bumped package(s) and commits the refreshed vendor
+# files back onto the Dependabot PR branch, so the PR contains the real changes.
+
+on:
+  pull_request:
+    paths:
+      - assets/package.json
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Determine bumped packages
+        id: pkgs
+        run: |
+          git fetch --depth=1 origin "$GITHUB_BASE_REF"
+          PKGS=$(git diff "origin/$GITHUB_BASE_REF" -- assets/package.json \
+            | grep -E '^\+[[:space:]]*"' \
+            | sed -E 's/^\+[[:space:]]*"([^"]+)".*/\1/' \
+            | grep -vE '^(name|private|description|dependencies)$' \
+            | tr '\n' ' ')
+          echo "list=$PKGS" >> "$GITHUB_OUTPUT"
+          echo "Changed packages: $PKGS"
+
+      - name: Sync vendored files
+        if: steps.pkgs.outputs.list != ''
+        run: node scripts/sync-vendor.mjs ${{ steps.pkgs.outputs.list }}
+
+      - name: Commit refreshed vendor files
+        if: steps.pkgs.outputs.list != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain assets)" ]; then
+            git add assets
+            git commit -m "chore: sync vendored assets to bumped versions"
+            git push
+          else
+            echo "Vendor files already in sync."
+          fi

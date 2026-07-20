@@ -14,9 +14,9 @@ if (!function_exists('includePhotoSphereViewerJS')) {
      */
     function includePhotoSphereViewerJS(): void
     {
-        $three_js = 'modules/03-3/three.min.js';
+        $three_js = 'photosphereviewer/three.min.js';
         echo '<script src="'. rex_url::addonAssets('d2u_helper', $three_js) .'?buster='. filemtime(rex_path::addonAssets('d2u_helper', $three_js)) .'"></script>' . PHP_EOL;
-        $photosphereviewer_js = 'modules/03-3/photosphereviewer.min.js';
+        $photosphereviewer_js = 'photosphereviewer/photosphereviewer.min.js';
         echo '<script src="'. rex_url::addonAssets('d2u_helper', $photosphereviewer_js) .'?buster='. filemtime(rex_path::addonAssets('d2u_helper', $photosphereviewer_js)) .'"></script>' . PHP_EOL;
 
         $photosphereviewer_css = 'modules/03/3/style.css';

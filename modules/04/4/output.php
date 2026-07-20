@@ -129,7 +129,7 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' me-lg-auto ms-lg-auto ' : ''; /** @ph
     } elseif (rex_addon::get('osmproxy')->isAvailable()) {
         $popup_js = '' !== $infotext ? '.bindPopup('. json_encode($infotext, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) .').openPopup()' : '';
 
-        $leaflet_js_file = 'modules/04-2/leaflet.js';
+        $leaflet_js_file = 'leaflet/leaflet.js';
         echo '<script src="'. rex_url::addonAssets('d2u_helper', $leaflet_js_file) .'?buster='. filemtime(rex_path::addonAssets('d2u_helper', $leaflet_js_file)) .'"></script>' . PHP_EOL;
 
 ?>
@@ -141,8 +141,8 @@ $offset_lg = (int) 'REX_VALUE[17]' > 0 ? ' me-lg-auto ms-lg-auto ' : ''; /** @ph
 			}).addTo(map);
 			map.scrollWheelZoom.disable();
 			var myIcon = L.icon({
-				iconUrl: '<?= rex_url::addonAssets('d2u_helper', 'modules/04-2/marker-icon.png') ?>',
-				shadowUrl: '<?= rex_url::addonAssets('d2u_helper', 'modules/04-2/marker-shadow.png') ?>',
+				iconUrl: '<?= rex_url::addonAssets('d2u_helper', 'leaflet/marker-icon.png') ?>',
+				shadowUrl: '<?= rex_url::addonAssets('d2u_helper', 'leaflet/marker-shadow.png') ?>',
 
 				iconSize:     [25, 41], // size of the icon
 				shadowSize:   [41, 41], // size of the shadow

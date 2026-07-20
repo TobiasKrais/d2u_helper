@@ -23,6 +23,9 @@ updates:
       # bootstrap4 alias stays on the frozen 4.x line, do not bump to 5.x
       - dependency-name: "bootstrap4"
         update-types: ["version-update:semver-major"]
+      # leaflet stays on the 1.x line, inlined module CSS matches 1.x
+      - dependency-name: "leaflet"
+        update-types: ["version-update:semver-major"]
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
