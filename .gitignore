@@ -1,1 +1,5 @@
 .github/copilot-instructions.md
+
+# npm (Dependabot manifest only, no local install expected)
+node_modules/
+assets/node_modules/
