@@ -2,9 +2,10 @@
 	<header class="panel-heading"><div class="panel-title">Vendor Lizenzen</div></header>
 	<div class="panel-body">
 		<ul>
-			<li><a href="https://getbootstrap.com/docs/4.6/getting-started/download/" target="_blank">Bootstrap (4.6.2)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+			<li><a href="https://getbootstrap.com/docs/5.3/getting-started/download/" target="_blank">Bootstrap 5 (5.3.8)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+			<li><a href="https://getbootstrap.com/docs/4.6/getting-started/download/" target="_blank">Bootstrap 4 (4.6.2)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
 			<li><a href="https://github.com/ashleydw/lightbox" target="_blank">Bootstrap (Ekko) Lightbox (5.4.0-rc2)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
-			<li><a href="https://leafletjs.com" target="_blank">Leaflet (1.7.1)</a>: BSD</li>
+			<li><a href="https://leafletjs.com" target="_blank">Leaflet (1.9.4)</a>: BSD</li>
 			<li><a href="https://codepen.io/JakubHonisek/pen/xXaYqg" target="_blank">Megamenu</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
 			<li><a href="https://github.com/FriendsOfREDAXO/mform/tree/master" target="_blank">MForm</a>: <a href="https://github.com/FriendsOfREDAXO/mform/blob/master/LICENSE" target="_blank">MIT</a></li>
 			<li><a href="https://photo-sphere-viewer.js.org/" target="_blank">PhotoSphereViewer (5.1.4)</a> mit Three.js: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
@@ -17,6 +18,8 @@
 	<div class="panel-body">
 		<p>2.2.5-DEV</p>
 		<ul>
+			<li>Bugfix Modul 04-1 (Google Maps Karte, BS4, deprecated): Analog zu Modul 04-3 wird der Datenschutz-Hinweis (<code>.maps-gdpr-hint</code>) jetzt korrekt über der Karte zentriert dargestellt (<code>position: relative</code> auf <code>#map_canvas</code>).</li>
+			<li>Bugfix Modul 04-3 (Google Maps Karte, BS5): Der Datenschutz-Hinweis (<code>.maps-gdpr-hint</code>) wird jetzt korrekt über der Karte zentriert dargestellt. Das absolut positionierte Overlay bezog sich mangels <code>position: relative</code> auf <code>#map_canvas</code> auf einen weiter oben liegenden Vorfahren und wurde daher am Seitenanfang statt über der Karte angezeigt.</li>
 			<li>Vendor-Assets: Die gebündelten Frontend-Bibliotheken werden jetzt über eine <code>assets/package.json</code> und Dependabot auf neue Versionen überwacht (Bootstrap bleibt auf 5.x bzw. 4.x, Leaflet auf 1.x). FontAwesome wurde auf 7.3.1 aktualisiert (nicht mehr benötigte <code>.ttf</code>-Webfonts entfernt). Ein GitHub-Workflow (<code>scripts/sync-vendor.mjs</code>) zieht bei Dependabot-PRs die tatsächlichen Vendor-Dateien nach.</li>
 			<li>Refactoring Vendor-Assets: Leaflet (Module 04-2, 04-4) liegt jetzt unter <code>assets/leaflet/</code>, PhotoSphereViewer/Three.js (Module 03-3, 03-6) unter <code>assets/photosphereviewer/</code> statt in den modulspezifischen <code>assets/modules/*</code>-Ordnern. Die betroffenen Modul-Ausgaben (03-3, 03-6, 04-2, 04-4) wurden entsprechend angepasst. Aus Gründen der Abwärtskompatibilität bleiben die Dateien zusätzlich unter den alten Pfaden (<code>assets/modules/04-2/</code>, <code>assets/modules/03-3/</code>) erhalten (eingefrorene Kopien, werden nicht mehr über Dependabot aktualisiert). <strong>Hinweis für abhängige Addons</strong> (d2u_address, d2u_courses, d2u_immo), die diese Dateien über <code>rex_url::addonAssets('d2u_helper', 'modules/04-2/...')</code> bzw. <code>'modules/03-3/...'</code> einbinden: Die Pfade sollten auf <code>'leaflet/...'</code> bzw. <code>'photosphereviewer/...'</code> umgestellt werden.</li>
 			<li>Bugfix Modul 17-1 (Google Places Bewertungen, BS5): Die Slider-Indikatoren (Bullets) liegen außerhalb des Bootstrap-Carousels und wurden daher beim Wechsel zur nächsten Rezension nicht mehr aktiv eingefärbt. Eine neue Modul-JS-Datei (<code>js.js</code>, wird über die gebündelte <code>helper.js</code> ausgeliefert) synchronisiert die Klasse <code>active</code> und das <code>aria-current</code>-Attribut jetzt per <code>slid.bs.carousel</code>-Event korrekt auf den passenden Bullet (mehrfach nutzbar über alle <code>.googleplaces-section</code>-Instanzen).</li>

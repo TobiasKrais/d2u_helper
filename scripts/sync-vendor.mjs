@@ -26,6 +26,16 @@ const MAP = {
     'smartmenus': 'smartmenus',
 };
 
+// npm package name -> library label as shown in the "Vendor Lizenzen" list of
+// pages/help.changelog.php. Only packages that appear there are listed; their
+// displayed version is kept in sync with assets/package.json.
+const LICENSE_LABELS = {
+    'bootstrap': 'Bootstrap 5',
+    'bootstrap4': 'Bootstrap 4',
+    'leaflet': 'Leaflet',
+    'smartmenus': 'Smartmenus',
+};
+
 /** Recursively list all files under a directory. */
 function listFiles(dir) {
     const out = [];
@@ -55,6 +65,12 @@ const deps = pkg.dependencies || {};
 // to touch only the dependency that Dependabot actually bumped). Without args,
 // every mapped package is synced.
 const filter = process.argv.slice(2);
+
+// Load the "Vendor Lizenzen" changelog once so we can keep the displayed
+// version numbers in sync with the manifest.
+const changelogPath = join(assetsDir, '..', 'pages', 'help.changelog.php');
+let changelog = readFileSync(changelogPath, 'utf8');
+let changelogChanged = false;
 
 let changed = 0;
 
@@ -105,6 +121,25 @@ for (const [name, targetSub] of Object.entries(MAP)) {
     } finally {
         rmSync(tmp, { recursive: true, force: true });
     }
+
+    // Keep the version shown in the "Vendor Lizenzen" list in sync. The version
+    // in the license entry always starts with a digit, so the Ekko-Lightbox
+    // entry ("Bootstrap (Ekko) ...") is not matched.
+    const label = LICENSE_LABELS[name];
+    if (label) {
+        const version = spec.split('@').pop();
+        const re = new RegExp('(' + label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ' \\()\\d[^)]*(\\))');
+        const updated = changelog.replace(re, `$1${version}$2`);
+        if (updated !== changelog) {
+            changelog = updated;
+            changelogChanged = true;
+            console.log(`  license list: ${label} -> ${version}`);
+        }
+    }
+}
+
+if (changelogChanged) {
+    writeFileSync(changelogPath, changelog);
 }
 
 console.log(changed > 0 ? `Done: ${changed} file(s) updated.` : 'Done: vendor files already in sync.');

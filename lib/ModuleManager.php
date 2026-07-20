@@ -230,13 +230,13 @@ class ModuleManager
             3);
         $modules[] = new Module('04-1',
             'Google Maps Karte (BS4, deprecated)',
-            14);
+            15);
         $modules[] = new Module('04-2',
             'OpenStreetMap Karte (BS4, deprecated)',
             8);
         $modules[] = new Module('04-3',
             'Google Maps Karte (BS5)',
-            2);
+            3);
         $modules[] = new Module('04-4',
             'OpenStreetMap Karte (BS5)',
             3);
