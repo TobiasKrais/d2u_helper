@@ -5,6 +5,7 @@
 			<li><a href="https://getbootstrap.com/docs/5.3/getting-started/download/" target="_blank">Bootstrap 5 (5.3.8)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
 			<li><a href="https://getbootstrap.com/docs/4.6/getting-started/download/" target="_blank">Bootstrap 4 (4.6.2)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
 			<li><a href="https://github.com/ashleydw/lightbox" target="_blank">Bootstrap (Ekko) Lightbox (5.4.0-rc2)</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
+			<li><a href="https://fontawesome.com" target="_blank">FontAwesome Free (7.3.1)</a>: <a href="https://fontawesome.com/license/free" target="_blank">Icons CC BY 4.0, Fonts SIL OFL 1.1, Code MIT</a></li>
 			<li><a href="https://leafletjs.com" target="_blank">Leaflet (1.9.4)</a>: BSD</li>
 			<li><a href="https://codepen.io/JakubHonisek/pen/xXaYqg" target="_blank">Megamenu</a>: <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></li>
 			<li><a href="https://github.com/FriendsOfREDAXO/mform/tree/master" target="_blank">MForm</a>: <a href="https://github.com/FriendsOfREDAXO/mform/blob/master/LICENSE" target="_blank">MIT</a></li>

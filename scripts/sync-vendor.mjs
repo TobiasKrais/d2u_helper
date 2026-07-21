@@ -30,6 +30,7 @@ const MAP = {
 // pages/help.changelog.php. Only packages that appear there are listed; their
 // displayed version is kept in sync with assets/package.json.
 const LICENSE_LABELS = {
+    '@fortawesome/fontawesome-free': 'FontAwesome Free',
     'bootstrap': 'Bootstrap 5',
     'bootstrap4': 'Bootstrap 4',
     'leaflet': 'Leaflet',
