@@ -17,6 +17,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.2.6-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.2.5</p>
 		<ul>
 			<li>Bugfix Backend-Feld für mehrere Bilder (<code>BackendHelper::form_imagelistfield()</code>): Das zugehörige Styling (<code>mform_imglist.css</code>) wurde bisher nur geladen, wenn das MForm-Addon nicht installiert war. Neuere MForm-Versionen haben ihr Bildlisten-Widget auf das neue <code>mform-list-widget</code>-Pattern umgestellt, wodurch das mitgelieferte <code>imglist.css</code> das von d2u_helper erzeugte <code>.rex-js-widget-imglist</code>-Markup nicht mehr formatiert. Dadurch wurden die Bilder als unformatierte Aufzählungsliste (List-Bullets) mit unterschiedlichen Größen dargestellt. Das CSS wird jetzt immer geladen; das JavaScript weiterhin nur als Fallback ohne MForm, um doppeltes Event-Binding zu vermeiden.</li>
