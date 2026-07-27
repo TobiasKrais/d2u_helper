@@ -9,8 +9,15 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
     rex_perm::register('d2u_helper[translation_helper]', rex_i18n::msg('d2u_helper_translations_rights'), rex_perm::OPTIONS);
 
     rex_view::addCssFile(rex_url::addonAssets('d2u_helper', 'd2u_helper_backend.css'));
+    // Styling for the image list widget rendered by BackendHelper::form_imagelistfield().
+    // Recent mform versions migrated their imglist widget to the new mform-list-widget
+    // pattern, so their imglist.css no longer styles the legacy .rex-js-widget-imglist
+    // markup that d2u_helper produces. Always load our own CSS so the field keeps showing
+    // uniform thumbnails instead of an unstyled bullet list.
+    rex_view::addCssFile(rex_url::addonAssets('d2u_helper', 'mform_imglist.css'));
     if(!rex_addon::get('mform')->isAvailable()) {
-        rex_view::addCssFile(rex_url::addonAssets('d2u_helper', 'mform_imglist.css'));
+        // When mform is available its imglist.js still initializes legacy widgets;
+        // only ship our own JS as a fallback to avoid double event binding.
         // load JS after mediapool JS to overwrite some of its functions
         rex_extension::register('PACKAGES_INCLUDED', static function () {
             rex_view::addJsFile(rex_url::addonAssets('d2u_helper', 'mform_imglist.js'));

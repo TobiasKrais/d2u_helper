@@ -17,8 +17,9 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.2.5-DEV</p>
+		<p>2.2.5</p>
 		<ul>
+			<li>Bugfix Backend-Feld für mehrere Bilder (<code>BackendHelper::form_imagelistfield()</code>): Das zugehörige Styling (<code>mform_imglist.css</code>) wurde bisher nur geladen, wenn das MForm-Addon nicht installiert war. Neuere MForm-Versionen haben ihr Bildlisten-Widget auf das neue <code>mform-list-widget</code>-Pattern umgestellt, wodurch das mitgelieferte <code>imglist.css</code> das von d2u_helper erzeugte <code>.rex-js-widget-imglist</code>-Markup nicht mehr formatiert. Dadurch wurden die Bilder als unformatierte Aufzählungsliste (List-Bullets) mit unterschiedlichen Größen dargestellt. Das CSS wird jetzt immer geladen; das JavaScript weiterhin nur als Fallback ohne MForm, um doppeltes Event-Binding zu vermeiden.</li>
 			<li>Bugfix Modul 04-1 (Google Maps Karte, BS4, deprecated): Analog zu Modul 04-3 wird der Datenschutz-Hinweis (<code>.maps-gdpr-hint</code>) jetzt korrekt über der Karte zentriert dargestellt (<code>position: relative</code> auf <code>#map_canvas</code>).</li>
 			<li>Bugfix Modul 04-3 (Google Maps Karte, BS5): Der Datenschutz-Hinweis (<code>.maps-gdpr-hint</code>) wird jetzt korrekt über der Karte zentriert dargestellt. Das absolut positionierte Overlay bezog sich mangels <code>position: relative</code> auf <code>#map_canvas</code> auf einen weiter oben liegenden Vorfahren und wurde daher am Seitenanfang statt über der Karte angezeigt.</li>
 			<li>Vendor-Assets: Die gebündelten Frontend-Bibliotheken werden jetzt über eine <code>assets/package.json</code> und Dependabot auf neue Versionen überwacht (Bootstrap bleibt auf 5.x bzw. 4.x, Leaflet auf 1.x). FontAwesome wurde auf 7.3.1 aktualisiert (nicht mehr benötigte <code>.ttf</code>-Webfonts entfernt). Ein GitHub-Workflow (<code>scripts/sync-vendor.mjs</code>) zieht bei Dependabot-PRs die tatsächlichen Vendor-Dateien nach.</li>
