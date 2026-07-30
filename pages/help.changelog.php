@@ -17,6 +17,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.2.7-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.2.6</p>
 		<ul>
 			<li>Neu: Strukturierte Daten (JSON-LD) werden automatisch aus den vorhandenen Einstellungen (Firma, Adresse, Telefon, E-Mail, Logo, Social-Media-Links) als <code>schema.org</code>-Objekt erzeugt (<code>FrontendHelper::generateStructuredData()</code>) und ausschließlich auf der Startseite (Site- bzw. YRewrite-Domain-Startartikel) direkt vor <code>&lt;/head&gt;</code> im <code>&lt;script type="application/ld+json"&gt;</code>-Tag ausgegeben (im Fragment <code>d2u_template_head.php</code>). Der Schema-Typ (<code>@type</code>, Standard <code>Organization</code>) und die Länderkennung der Adresse (<code>addressCountry</code>) sind in den Einstellungen konfigurierbar; die Telefonnummer wird auf ein E.164-nahes Format normalisiert (Leerzeichen/Klammern/<code>(0)</code>-Vorwahl entfernt, führendes <code>+</code> bleibt erhalten). Voraussetzung ist ein gesetzter Firmenname; Social-Links werden über <code>FrontendHelper::sanitizeUrl()</code> geprüft, <code>&lt;</code> im JSON zu <code>\u003C</code> maskiert.</li>
