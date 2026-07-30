@@ -98,6 +98,10 @@ d2u_helper_rights_settings = D2U Helper add-on: instellingen en setup
 
 d2u_helper_settings_analytics = Google Maps-instellingen
 d2u_helper_settings_analytics_maps_key = GoogleMaps API-key (optioneel)
+d2u_helper_settings_structured_data = Gestructureerde data (JSON-LD)
+d2u_helper_settings_structured_data_type = schema.org @type (standaard: Organization)
+d2u_helper_settings_structured_data_country = Landcode voor het adres (bijv. CH, DE)
+d2u_helper_settings_structured_data_notice = Wordt automatisch gegenereerd uit de instellingen (bedrijf, adres, telefoon, e-mail, logo, social media) en alleen op de startpagina in de head-sectie uitgevoerd. Zonder bedrijfsnaam wordt niets uitgevoerd.
 d2u_helper_settings_wiredmetrics_costumerno = WiredMinds LeadLabs tracking-account-ID (optioneel)
 d2u_helper_settings_article = Inhoud / artikel
 d2u_helper_settings_color_darkmode_info = ☽ alleen in Bootstrap 5 templates/modules

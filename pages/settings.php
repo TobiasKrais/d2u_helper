@@ -257,6 +257,7 @@ if (!$invalidCsrf && 'save' === filter_input(INPUT_POST, 'btn_save')) {
                         BackendHelper::form_input('d2u_helper_settings_footer_text_ceo', 'settings[footer_text_ceo]', (string) rex_config::get('d2u_helper', 'footer_text_ceo'), false, false);
                         BackendHelper::form_input('d2u_helper_settings_footer_text_street', 'settings[footer_text_street]', (string) rex_config::get('d2u_helper', 'footer_text_street'), false, false);
                         BackendHelper::form_input('d2u_helper_settings_footer_text_zip_city', 'settings[footer_text_zip_city]', (string) rex_config::get('d2u_helper', 'footer_text_zip_city'), false, false);
+                        BackendHelper::form_input('d2u_helper_settings_structured_data_country', 'settings[structured_data_country]', (string) rex_config::get('d2u_helper', 'structured_data_country', ''), false, false);
                         BackendHelper::form_input('d2u_helper_settings_footer_text_phone', 'settings[footer_text_phone]', (string) rex_config::get('d2u_helper', 'footer_text_phone'), false, false);
                         BackendHelper::form_input('d2u_helper_settings_footer_text_mobile', 'settings[footer_text_mobile]', (string) rex_config::get('d2u_helper', 'footer_text_mobile'), false, false);
                         BackendHelper::form_input('d2u_helper_settings_footer_text_fax', 'settings[footer_text_fax]', (string) rex_config::get('d2u_helper', 'footer_text_fax'), false, false);
@@ -377,6 +378,17 @@ if (!$invalidCsrf && 'save' === filter_input(INPUT_POST, 'btn_save')) {
 								$("dl[id='settings[footer_text_fax]']").show();
 								$("dl[id='settings[footer_text_email]']").show();
 							}
+
+							// Firmen-/Kontaktdaten immer editierbar halten - sie speisen auch die strukturierten Daten (JSON-LD),
+							// unabhaengig von Footer-Typ und CTA-Box.
+							$("dl[id='settings[footer_text_company]']").show();
+							$("dl[id='settings[footer_text_ceo]']").show();
+							$("dl[id='settings[footer_text_street]']").show();
+							$("dl[id='settings[footer_text_zip_city]']").show();
+							$("dl[id='settings[footer_text_phone]']").show();
+							$("dl[id='settings[footer_text_mobile]']").show();
+							$("dl[id='settings[footer_text_fax]']").show();
+							$("dl[id='settings[footer_text_email]']").show();
 						}
 
 						// Hide on document load
@@ -467,6 +479,15 @@ if (!$invalidCsrf && 'save' === filter_input(INPUT_POST, 'btn_save')) {
 				<div class="panel-body-wrapper slide">
 					<?php
                         BackendHelper::form_input('d2u_helper_settings_analytics_maps_key', 'settings[maps_key]', (string) rex_config::get('d2u_helper', 'maps_key'), false, false, 'text');
+                    ?>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend><small><i class="rex-icon rex-icon-code"></i></small> <?= rex_i18n::msg('d2u_helper_settings_structured_data') ?></legend>
+				<div class="panel-body-wrapper slide">
+					<?php
+                        BackendHelper::form_input('d2u_helper_settings_structured_data_type', 'settings[structured_data_type]', (string) rex_config::get('d2u_helper', 'structured_data_type', ''), false, false, 'text');
+                        echo '<p class="rex-note">'. rex_i18n::msg('d2u_helper_settings_structured_data_notice') .'</p>';
                     ?>
 				</div>
 			</fieldset>

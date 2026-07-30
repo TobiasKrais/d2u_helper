@@ -367,7 +367,7 @@ class FrontendHelper
 
         $data = [
             '@context' => 'https://schema.org',
-            '@type' => 'Organization',
+            '@type' => '' !== trim((string) $addon->getConfig('structured_data_type', '')) ? trim((string) $addon->getConfig('structured_data_type', '')) : 'Organization',
             'name' => $company,
         ];
         if ('' !== $base) {
@@ -385,7 +385,14 @@ class FrontendHelper
 
         $phone = trim((string) $addon->getConfig('footer_text_phone', ''));
         if ('' !== $phone) {
-            $data['telephone'] = $phone;
+            // Normalize to E.164-like format: drop the "(0)" trunk prefix and any
+            // spaces/brackets/dashes, keeping a leading "+" (e.g. "+41 (0) 79 275 80 80" -> "+41792758080").
+            $phone_clean = (string) preg_replace('/\(\s*0\s*\)/', '', $phone);
+            $starts_plus = str_starts_with(ltrim($phone_clean), '+');
+            $telephone = ($starts_plus ? '+' : '') . (string) preg_replace('/\D+/', '', $phone_clean);
+            if ('' !== $telephone && '+' !== $telephone) {
+                $data['telephone'] = $telephone;
+            }
         }
         $email = trim((string) $addon->getConfig('footer_text_email', ''));
         if ('' !== $email) {
@@ -395,19 +402,23 @@ class FrontendHelper
         // Postal address (zip/city stored as one combined field, e.g. "8032 Zürich").
         $street = trim((string) $addon->getConfig('footer_text_street', ''));
         $zip_city = trim((string) $addon->getConfig('footer_text_zip_city', ''));
-        if ('' !== $street || '' !== $zip_city) {
-            $address = ['@type' => 'PostalAddress'];
-            if ('' !== $street) {
-                $address['streetAddress'] = $street;
+        $country = trim((string) $addon->getConfig('structured_data_country', ''));
+        $address = ['@type' => 'PostalAddress'];
+        if ('' !== $street) {
+            $address['streetAddress'] = $street;
+        }
+        if ('' !== $zip_city) {
+            if (1 === preg_match('/^\s*(\S+)\s+(.+)$/', $zip_city, $m)) {
+                $address['postalCode'] = $m[1];
+                $address['addressLocality'] = trim($m[2]);
+            } else {
+                $address['addressLocality'] = $zip_city;
             }
-            if ('' !== $zip_city) {
-                if (1 === preg_match('/^\s*(\S+)\s+(.+)$/', $zip_city, $m)) {
-                    $address['postalCode'] = $m[1];
-                    $address['addressLocality'] = trim($m[2]);
-                } else {
-                    $address['addressLocality'] = $zip_city;
-                }
-            }
+        }
+        if ('' !== $country) {
+            $address['addressCountry'] = $country;
+        }
+        if (count($address) > 1) {
             $data['address'] = $address;
         }
 
