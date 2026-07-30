@@ -25,7 +25,9 @@
 		<?php
             if (1 === count($slider_pics)) {
                 $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[0]);
-                echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="" id="background-single-image">';
+                $rex_media_bg = rex_media::get($slider_pics[0]);
+                $bg_alt = $rex_media_bg instanceof rex_media ? $rex_media_bg->getTitle() : '';
+                echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr'] .' alt="'. rex_escape($bg_alt) .'" id="background-single-image">';
             } else {
                 // Slider
                 echo '<div id="headerCarouselbg" class="carousel carousel-fade slide carousel-sync" data-pause="false">';
@@ -54,8 +56,10 @@
         }  // END Only if slider background slider is shown
                     if (1 === count($slider_pics)) {
                         $responsive = TobiasKrais\D2UHelper\FrontendHelper::getResponsiveImageAttributes($media_manager_type, $slider_pics[0]);
+                        $rex_media_single = rex_media::get($slider_pics[0]);
+                        $single_alt = $rex_media_single instanceof rex_media ? $rex_media_single->getTitle() : '';
                         echo '<img src="'. $responsive['src'] .'"'. $responsive['srcset_attr'] . $responsive['sizes_attr']
-                            .' alt="" class="header-slider-pic'. ((bool) rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width') ? ' header-slider-pic-full-width' : '') .'">';
+                            .' alt="'. rex_escape($single_alt) .'" class="header-slider-pic'. ((bool) rex_config::get('d2u_helper', 'template_04_header_slider_pics_full_width') ? ' header-slider-pic-full-width' : '') .'">';
                     } else {
                         // Slider
                         echo '<div id="headerCarousel" class="carousel carousel-fade slide carousel-sync" data-ride="carousel" data-pause="false">';

@@ -18,6 +18,8 @@ use rex_path;
 use rex_sql;
 use rex_url;
 use rex_version;
+use rex_yrewrite;
+use rex_yrewrite_domain;
 use rex_yrewrite_seo;
 
 /**
@@ -338,6 +340,92 @@ class FrontendHelper
 
         // No scheme and not starting with a path separator: treat as relative URL.
         return $url;
+    }
+
+    /**
+     * Builds a schema.org JSON-LD Organization object from the addon settings
+     * (company name, address, phone, email, logo, social profiles). Returns an
+     * empty string when no company name is configured.
+     * @return string JSON-LD string (without surrounding script tag) or ''
+     */
+    public static function generateStructuredData(): string
+    {
+        $addon = rex_addon::get('d2u_helper');
+        $company = trim((string) $addon->getConfig('footer_text_company', ''));
+        if ('' === $company) {
+            return '';
+        }
+
+        // Base URL (yrewrite domain preferred, otherwise REDAXO server setting).
+        $base = rtrim((string) rex::getServer(), '/');
+        if (rex_addon::get('yrewrite')->isAvailable() && class_exists('rex_yrewrite')) {
+            $domain = rex_yrewrite::getCurrentDomain();
+            if ($domain instanceof rex_yrewrite_domain && '' !== $domain->getUrl()) {
+                $base = rtrim($domain->getUrl(), '/');
+            }
+        }
+
+        $data = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => $company,
+        ];
+        if ('' !== $base) {
+            $data['url'] = $base . '/';
+        }
+
+        $logo = trim((string) $addon->getConfig('template_logo', ''));
+        if ('' !== $logo) {
+            $logo_url = rex_url::media($logo);
+            if (1 !== preg_match('#^https?://#i', $logo_url)) {
+                $logo_url = $base . '/' . ltrim($logo_url, '/');
+            }
+            $data['logo'] = $logo_url;
+        }
+
+        $phone = trim((string) $addon->getConfig('footer_text_phone', ''));
+        if ('' !== $phone) {
+            $data['telephone'] = $phone;
+        }
+        $email = trim((string) $addon->getConfig('footer_text_email', ''));
+        if ('' !== $email) {
+            $data['email'] = $email;
+        }
+
+        // Postal address (zip/city stored as one combined field, e.g. "8032 Zürich").
+        $street = trim((string) $addon->getConfig('footer_text_street', ''));
+        $zip_city = trim((string) $addon->getConfig('footer_text_zip_city', ''));
+        if ('' !== $street || '' !== $zip_city) {
+            $address = ['@type' => 'PostalAddress'];
+            if ('' !== $street) {
+                $address['streetAddress'] = $street;
+            }
+            if ('' !== $zip_city) {
+                if (1 === preg_match('/^\s*(\S+)\s+(.+)$/', $zip_city, $m)) {
+                    $address['postalCode'] = $m[1];
+                    $address['addressLocality'] = trim($m[2]);
+                } else {
+                    $address['addressLocality'] = $zip_city;
+                }
+            }
+            $data['address'] = $address;
+        }
+
+        // Social profiles -> sameAs.
+        $same_as = [];
+        foreach (['footer_facebook_link', 'footer_instagram_link', 'footer_linkedin_link', 'footer_youtube_link', 'footer_google_link'] as $social_key) {
+            $social_url = self::sanitizeUrl(trim((string) $addon->getConfig($social_key, '')));
+            if ('' !== $social_url) {
+                $same_as[] = $social_url;
+            }
+        }
+        if (count($same_as) > 0) {
+            $data['sameAs'] = $same_as;
+        }
+
+        $json = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+        return false === $json ? '' : $json;
     }
 
     /**

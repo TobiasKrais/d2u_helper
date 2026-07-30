@@ -20,3 +20,20 @@
         }
         // FontAwesome
         echo '<link href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('FontAwesome/css/all.min.css') .'" rel="stylesheet" type="text/css" media="all">'. PHP_EOL;
+
+        // Structured data (JSON-LD) - auto-generated from settings, only on the homepage
+        $structured_data_start_id = rex_article::getSiteStartArticleId();
+        if (rex_addon::get('yrewrite')->isAvailable() && class_exists('rex_yrewrite')) {
+            $structured_data_domain = rex_yrewrite::getCurrentDomain();
+            if ($structured_data_domain instanceof rex_yrewrite_domain && $structured_data_domain->getStartId() > 0) {
+                $structured_data_start_id = $structured_data_domain->getStartId();
+            }
+        }
+        $structured_data_article = rex_article::getCurrent();
+        if ($structured_data_article instanceof rex_article && $structured_data_article->getId() === $structured_data_start_id) {
+            $structured_data_json = TobiasKrais\D2UHelper\FrontendHelper::generateStructuredData();
+            if ('' !== $structured_data_json) {
+                // Prevent </script> breakout; JSON-LD itself needs no HTML escaping
+                echo '<script type="application/ld+json">'. PHP_EOL . str_replace('<', '\u003C', $structured_data_json) . PHP_EOL .'</script>'. PHP_EOL;
+            }
+        }

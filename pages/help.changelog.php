@@ -19,7 +19,8 @@
 	<div class="panel-body">
 		<p>2.2.6-DEV</p>
 		<ul>
-			<li>...</li>
+			<li>Neu: Strukturierte Daten (JSON-LD) werden automatisch aus den vorhandenen Einstellungen (Firma, Adresse, Telefon, E-Mail, Logo, Social-Media-Links) als <code>schema.org</code>-<code>Organization</code>-Objekt erzeugt (<code>FrontendHelper::generateStructuredData()</code>) und ausschließlich auf der Startseite (Site- bzw. YRewrite-Domain-Startartikel) direkt vor <code>&lt;/head&gt;</code> im <code>&lt;script type="application/ld+json"&gt;</code>-Tag ausgegeben. Voraussetzung ist ein gesetzter Firmenname; Social-Links werden über <code>FrontendHelper::sanitizeUrl()</code> geprüft, <code>&lt;</code> im JSON zu <code>\u003C</code> maskiert.</li>
+			<li>Barrierefreiheit Header-Slider (<code>fragments/d2u_template_header_slider.php</code>): Bei nur einem Header-Bild wurde bisher fest <code>alt=""</code> ausgegeben. Jetzt wird auch im Einzelbild-Fall der Medientitel als <code>alt</code>-Text verwendet (escaped über <code>rex_escape()</code>), analog zur bereits vorhandenen Slider-Variante.</li>
 		</ul>
 		<p>2.2.5</p>
 		<ul>
