@@ -109,31 +109,47 @@ foreach ($sql->getArray() as $result) {
 $sql->setQuery('DELETE FROM `'. rex::getTablePrefix() ."config` WHERE `key` LIKE 'module_%' AND value LIKE '{\"rex_module_id\":%,\"autoupdate\":\"%\"}'");
 
 // Update modules
-if (!class_exists(\TobiasKrais\D2UHelper\FrontendHelper::class)) {
+//
+// During an addon UPDATE, REDAXO extracts the new files into a temporary
+// ".new.d2u_helper" folder and runs this install.php from there (so __DIR__
+// points at the new files) while the OLD addon files are still the ones the
+// class autoloader knows about. A bare class_exists() (autoloading enabled)
+// would therefore autoload the OLD class from the OLD path, the require_once
+// below would be skipped, and ModuleManager::getModules() would return the OLD
+// module definitions - so modules would not update until a manual reinstall.
+// Passing false disables autoloading: the checks only test whether the class is
+// ALREADY declared, and when it is not we load the NEW class straight from the
+// temp update folder.
+if (!class_exists(\TobiasKrais\D2UHelper\FrontendHelper::class, false)) {
     require_once __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'FrontendHelper.php';
 }
-if(!class_exists(\TobiasKrais\D2UHelper\Module::class)) {
+if (!class_exists(\TobiasKrais\D2UHelper\Module::class, false)) {
     require_once __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'Module.php';
 }
-if(!class_exists(\TobiasKrais\D2UHelper\ModuleManager::class)) {
+if (!class_exists(\TobiasKrais\D2UHelper\ModuleManager::class, false)) {
     require_once __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'ModuleManager.php';
 }
 $d2u_module_manager = new \TobiasKrais\D2UHelper\ModuleManager(\TobiasKrais\D2UHelper\ModuleManager::getModules());
 $d2u_module_manager->autoupdate();
 
-// update templates
-if(!class_exists(\TobiasKrais\D2UHelper\TemplateManager::class)) {
+// update templates (same autoloader caveat as the modules above: load the NEW
+// Template/TemplateManager classes from the temp update folder so
+// getD2UHelperTemplates() returns the new template definitions during an update)
+if (!class_exists(\TobiasKrais\D2UHelper\Template::class, false)) {
+    require_once __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'Template.php';
+}
+if (!class_exists(\TobiasKrais\D2UHelper\TemplateManager::class, false)) {
     require_once __DIR__ . DIRECTORY_SEPARATOR .'lib'. DIRECTORY_SEPARATOR .'TemplateManager.php';
 }
 $d2u_template_manager = new \TobiasKrais\D2UHelper\TemplateManager(\TobiasKrais\D2UHelper\TemplateManager::getD2UHelperTemplates());
 $d2u_template_manager->autoupdate();
 
-// update translations
+// update translations (same autoloader caveat)
 if ('true' === $d2u_helper->getConfig('lang_replacements_install', 'false')) {
 
-    if (!class_exists(\TobiasKrais\D2UHelper\LangHelper::class)) {
+    if (!class_exists(\TobiasKrais\D2UHelper\LangHelper::class, false)) {
         // Load class in case addon is deactivated
-        require_once 'lib/LangHelper.php';
+        require_once __DIR__ . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'LangHelper.php';
     }
     \TobiasKrais\D2UHelper\LangHelper::factory()->install();
 }
