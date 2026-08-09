@@ -17,7 +17,7 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
-		<p>2.2.7-DEV</p>
+		<p>2.2.7</p>
 		<ul>
 			<li>Bugfix: Beim Addon-<em>Update</em> wurden Module und Templates nicht aktualisiert (nur ein manuelles Reinstall half). Ursache: In <code>install.php</code> lud <code>class_exists()</code> mit aktiviertem Autoload die alten Klassen aus dem bestehenden Addon-Pfad, wodurch die <code>require_once</code>-Aufrufe aus dem temporären Update-Ordner (<code>.new.d2u_helper</code>) übersprungen wurden und <code>ModuleManager::getModules()</code> bzw. <code>TemplateManager::getD2UHelperTemplates()</code> die alten Definitionen lieferten. Die Prüfungen nutzen jetzt <code>class_exists(..., false)</code> (ohne Autoload) und laden die neuen Klassen (inkl. <code>Template</code>) direkt aus dem Update-Ordner.</li>
 		</ul>
