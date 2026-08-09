@@ -618,8 +618,14 @@ class BackendHelper
         echo '<ul class="form-control thumbnail-list ui-sortable" id="REX_IMGLIST_'. $fieldnumber .'">';
         for($i = 0; $i < count($values); $i++) {
             $value_attr = rex_escape($values[$i], 'html_attr');
+            // SVG cannot be rasterized by the media manager preview effect (GD/Imagick),
+            // which yields a broken image after save. Serve the original file for SVG; it
+            // scales natively to the thumbnail size via CSS.
+            $thumb_src = 'svg' === strtolower((string) pathinfo($values[$i], PATHINFO_EXTENSION))
+                ? rex_url::media($values[$i])
+                : rex_media_manager::getUrl('rex_medialistbutton_preview', $values[$i]);
             echo '<li data-key="'. $i .'" value="'. $value_attr .'" data-value="'. $value_attr .'">';
-            echo '<img class="thumbnail" src="'. rex_escape(rex_media_manager::getUrl('rex_medialistbutton_preview', $values[$i]), 'html_attr').'" title="'. $value_attr .'"></img>';
+            echo '<img class="thumbnail" src="'. rex_escape($thumb_src, 'html_attr').'" title="'. $value_attr .'"></img>';
             echo '</li>';
         }
         echo '</ul>';
