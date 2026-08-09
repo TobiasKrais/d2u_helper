@@ -17,6 +17,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.2.8-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.2.7</p>
 		<ul>
 			<li>Wartung: Interne CI-Dateien im Verzeichnis <code>.github</code> (GitHub Actions, Dependabot) werden nicht mehr mit dem Installer-Paket ausgeliefert.</li>
