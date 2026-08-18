@@ -268,19 +268,35 @@ class BackendHelper
 
     /**
      * Get users choice WYSIWYG Editor class.
+     * @param string|null $tinyProfile Optional TinyMCE profile name. If set and TinyMCE is the
+     * active editor, this profile overrides the configured default profile.
      * @return string WYSIWYG editor classes
      */
-    public static function getWYSIWYGEditorClass()
+    public static function getWYSIWYGEditorClass(?string $tinyProfile = null)
     {
         $wysiwyg_class = '';
         if (str_contains((string) rex_config::get('d2u_helper', 'editor'), 'tinymce') && rex_addon::get('tinymce') instanceof rex_addon && rex_addon::get('tinymce')->isAvailable()) {
-            $wysiwyg_class = ' tiny-editor" data-profile="default';
             $tinymce_profiles = \FriendsOfRedaxo\TinyMCE\Handler\Database::getAllProfiles();
-            if (is_array($tinymce_profiles)) {
+            // Requested profile is only honored if it actually exists, otherwise fall back to default
+            $requestedExists = false;
+            if (null !== $tinyProfile && '' !== $tinyProfile && is_array($tinymce_profiles)) {
                 foreach ($tinymce_profiles as $profile_infos) {
-                    if (rex_config::get('d2u_helper', 'editor') === 'tinymce_'. $profile_infos['name']) {
-                        $wysiwyg_class = ' tiny-editor" data-profile="'. $profile_infos['name'];
+                    if (($profile_infos['name'] ?? null) === $tinyProfile) {
+                        $requestedExists = true;
                         break;
+                    }
+                }
+            }
+            if ($requestedExists) {
+                $wysiwyg_class = ' tiny-editor" data-profile="'. $tinyProfile;
+            } else {
+                $wysiwyg_class = ' tiny-editor" data-profile="default';
+                if (is_array($tinymce_profiles)) {
+                    foreach ($tinymce_profiles as $profile_infos) {
+                        if (rex_config::get('d2u_helper', 'editor') === 'tinymce_'. $profile_infos['name']) {
+                            $wysiwyg_class = ' tiny-editor" data-profile="'. $profile_infos['name'];
+                            break;
+                        }
                     }
                 }
             }
@@ -728,14 +744,15 @@ class BackendHelper
      * $use_wysiwyg is true, $required is automatically false
      * @param bool $readonly true if field should have readonly attribute
      * @param bool $use_wysiwyg Use WYSIWYG Editor
+     * @param string|null $tinyProfile Optional TinyMCE profile name (overrides default when TinyMCE is active)
      */
-    public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = false, $readonly = false, $use_wysiwyg = true): void
+    public static function form_textarea($message_id, $fieldname, $value, $rows = 5, $required = false, $readonly = false, $use_wysiwyg = true, ?string $tinyProfile = null): void
     {
         echo '<dl class="rex-form-group form-group" id="'. $fieldname .'">';
         echo '<dt><label>' . rex_i18n::msg($message_id) . '</label></dt>';
         $wysiwyg_class = ' ';
         if ($use_wysiwyg) {
-            $wysiwyg_class .= self::getWYSIWYGEditorClass();
+            $wysiwyg_class .= self::getWYSIWYGEditorClass($tinyProfile);
         }
         if ($readonly) {
             echo '<dd><div class="form-control" style="height: 100px;overflow-y: scroll">'. $value .'</div>'

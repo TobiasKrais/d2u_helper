@@ -19,6 +19,7 @@
 	<div class="panel-body">
 		<p>2.2.8-DEV</p>
 		<ul>
+			<li>Neu: <code>BackendHelper::getWYSIWYGEditorClass()</code> und <code>BackendHelper::form_textarea()</code> akzeptieren jetzt einen optionalen Parameter <code>$tinyProfile</code>. Ist TinyMCE der aktive Editor, überschreibt das übergebene Profil das konfigurierte Standardprofil (z. B. ein schlankes „simple"-Profil für Überschriften-Felder).</li>
 			<li>Bugfix Backend-Bildlisten-Feld (<code>BackendHelper::form_imagelistfield()</code>): SVG-Dateien wurden nach dem Speichern als defektes Bild angezeigt, weil die Vorschau über den Media-Manager-Effekt <code>rex_medialistbutton_preview</code> lief, der SVG nicht rastern kann. Für SVG wird jetzt die Originaldatei als Vorschau ausgegeben; sie skaliert nativ über CSS auf die Thumbnail-Größe.</li>
 		</ul>
 		<p>2.2.7</p>
