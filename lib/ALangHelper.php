@@ -9,6 +9,14 @@ use rex_sql;
 use rex_sql_table;
 use rex_user;
 use rex_version;
+use Sprog\Enum\SourceType;
+use Sprog\Enum\Status;
+use Sprog\Model\Translation;
+use Sprog\Model\Unit;
+use Sprog\Repository\TranslationRepository;
+use Sprog\Repository\UnitRepository;
+use Sprog\Service\TranslationService;
+use Sprog\Support\ContentHash;
 use Throwable;
 
 /**
@@ -127,36 +135,36 @@ abstract class ALangHelper
     private static function saveValueV2(string $key, string $value, int $clang_id, bool $overwrite): bool
     {
         try {
-            $units = new \Sprog\Repository\UnitRepository();
+            $units = new UnitRepository();
             $unit = $units->findByKey('wildcard', $key);
             if (null === $unit) {
-                $unit = $units->save(new \Sprog\Model\Unit(
+                $unit = $units->save(new Unit(
                     id: null,
                     namespace: 'wildcard',
                     unitKey: $key,
-                    sourceType: \Sprog\Enum\SourceType::Wildcard,
+                    sourceType: SourceType::Wildcard,
                 ));
             }
             $unit_id = (int) $unit->id;
 
-            $translations = new \Sprog\Repository\TranslationRepository();
+            $translations = new TranslationRepository();
             $existing = $translations->findForUnitAndClang($unit_id, $clang_id);
             if (null === $existing || $overwrite) {
                 // v1 wildcards had no status and were always live -> approved.
-                $status = '' === $value ? \Sprog\Enum\Status::Missing : \Sprog\Enum\Status::Approved;
-                $translations->save(new \Sprog\Model\Translation(
+                $status = '' === $value ? Status::Missing : Status::Approved;
+                $translations->save(new Translation(
                     id: null !== $existing ? $existing->id : null,
                     unitId: $unit_id,
                     clangId: $clang_id,
                     value: $value,
-                    valueHash: '' === $value ? null : \Sprog\Support\ContentHash::of($value),
+                    valueHash: '' === $value ? null : ContentHash::of($value),
                     sourceHashAtTranslation: null,
                     status: $status,
                 ));
             }
 
             // Make sure every clang has a (missing) row so the Sprog inbox stays consistent.
-            \Sprog\Service\TranslationService::create()->ensureRowsForUnit($unit);
+            TranslationService::create()->ensureRowsForUnit($unit);
 
             return true;
         } catch (Throwable $e) {
@@ -246,12 +254,12 @@ abstract class ALangHelper
         foreach (array_keys($this->replacements_english) as $key) {
             if ($v2) {
                 try {
-                    $units = new \Sprog\Repository\UnitRepository();
+                    $units = new UnitRepository();
                     $unit = $units->findByKey('wildcard', (string) $key);
                     if (null === $unit || null === $unit->id) {
                         continue;
                     }
-                    $translations = new \Sprog\Repository\TranslationRepository();
+                    $translations = new TranslationRepository();
                     if ($clang_id > 0) {
                         // Only remove the translation of the given language.
                         $translation = $translations->findForUnitAndClang((int) $unit->id, $clang_id);
