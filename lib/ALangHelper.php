@@ -4,8 +4,12 @@ namespace TobiasKrais\D2UHelper;
 
 use rex;
 use rex_addon;
+use rex_logger;
 use rex_sql;
+use rex_sql_table;
 use rex_user;
+use rex_version;
+use Throwable;
 
 /**
  * @api
@@ -55,7 +59,36 @@ abstract class ALangHelper
     abstract public function install(): void;
 
     /**
-     * Save value in sprog wildcard table.
+     * Checks whether the Sprog v1 wildcard table exists.
+     * @return bool true if the sprog_wildcard table exists
+     */
+    protected static function sprogWildcardTableExists(): bool
+    {
+        return rex_sql_table::get(rex::getTablePrefix() . 'sprog_wildcard')->exists();
+    }
+
+    /**
+     * Checks whether Sprog v2 (>= 2.0) with its new unit/translation schema and
+     * repository API is available. Detection is done via the REDAXO addon
+     * availability plus a version check (not by probing internal classes).
+     * @return bool true if Sprog v2 is available
+     */
+    protected static function sprogV2Available(): bool
+    {
+        $sprog = rex_addon::get('sprog');
+        // Sprog 2.x (incl. 2.0.0-beta*) introduced the unit/translation schema
+        // and repository API; 1.x uses the flat sprog_wildcard table.
+        return $sprog->isAvailable()
+            && rex_version::compare((string) $sprog->getVersion(), '2.0.0-beta1', '>=');
+    }
+
+    /**
+     * Save value as a Sprog wildcard.
+     *
+     * Sprog v2 (>= 2.0) uses a new schema (sprog_unit/sprog_translation); the
+     * value is written through its repository API. Sprog v1 uses the flat
+     * sprog_wildcard table. If neither the v2 API nor the v1 table is present,
+     * nothing is written (no tables are created).
      * @param string $key Wildcard key
      * @param string $value Wildcard value
      * @param int $clang_id Wildcard language ID
@@ -69,6 +102,79 @@ abstract class ALangHelper
         }
 
         $clang_id = (int) $clang_id;
+
+        if (self::sprogV2Available()) {
+            return self::saveValueV2((string) $key, (string) $value, $clang_id, (bool) $overwrite);
+        }
+
+        if (self::sprogWildcardTableExists()) {
+            return self::saveValueV1((string) $key, (string) $value, $clang_id, (bool) $overwrite);
+        }
+
+        // Neither Sprog v2 API nor the v1 wildcard table is present: do not
+        // create any table and do not insert anything.
+        return false;
+    }
+
+    /**
+     * Save value in the Sprog v2 unit/translation schema via its repository API.
+     * @param string $key Wildcard key
+     * @param string $value Wildcard value
+     * @param int $clang_id Redaxo language ID
+     * @param bool $overwrite Overwrite an existing translation value
+     * @return bool true if successfully saved
+     */
+    private static function saveValueV2(string $key, string $value, int $clang_id, bool $overwrite): bool
+    {
+        try {
+            $units = new \Sprog\Repository\UnitRepository();
+            $unit = $units->findByKey('wildcard', $key);
+            if (null === $unit) {
+                $unit = $units->save(new \Sprog\Model\Unit(
+                    id: null,
+                    namespace: 'wildcard',
+                    unitKey: $key,
+                    sourceType: \Sprog\Enum\SourceType::Wildcard,
+                ));
+            }
+            $unit_id = (int) $unit->id;
+
+            $translations = new \Sprog\Repository\TranslationRepository();
+            $existing = $translations->findForUnitAndClang($unit_id, $clang_id);
+            if (null === $existing || $overwrite) {
+                // v1 wildcards had no status and were always live -> approved.
+                $status = '' === $value ? \Sprog\Enum\Status::Missing : \Sprog\Enum\Status::Approved;
+                $translations->save(new \Sprog\Model\Translation(
+                    id: null !== $existing ? $existing->id : null,
+                    unitId: $unit_id,
+                    clangId: $clang_id,
+                    value: $value,
+                    valueHash: '' === $value ? null : \Sprog\Support\ContentHash::of($value),
+                    sourceHashAtTranslation: null,
+                    status: $status,
+                ));
+            }
+
+            // Make sure every clang has a (missing) row so the Sprog inbox stays consistent.
+            \Sprog\Service\TranslationService::create()->ensureRowsForUnit($unit);
+
+            return true;
+        } catch (Throwable $e) {
+            rex_logger::logException($e);
+            return false;
+        }
+    }
+
+    /**
+     * Save value in the legacy Sprog v1 sprog_wildcard table.
+     * @param string $key Wildcard key
+     * @param string $value Wildcard value
+     * @param int $clang_id Redaxo language ID
+     * @param bool $overwrite Overwrite value if key already exists
+     * @return bool true if successfully saved
+     */
+    private static function saveValueV1(string $key, string $value, int $clang_id, bool $overwrite): bool
+    {
         $login = rex::getUser() instanceof rex_user ? (string) rex::getUser()->getValue('login') : '';
 
         $select_pid_query = 'SELECT pid FROM '. rex::getTablePrefix() .'sprog_wildcard WHERE wildcard = :key AND clang_id = :clang_id;';
@@ -127,18 +233,51 @@ abstract class ALangHelper
     public function uninstall($clang_id = 0): void
     {
         $clang_id = (int) $clang_id;
+        if (!rex_addon::get('sprog')->isAvailable()) {
+            return;
+        }
+
+        $v2 = self::sprogV2Available();
+        $v1 = !$v2 && self::sprogWildcardTableExists();
+        if (!$v2 && !$v1) {
+            return;
+        }
+
         foreach (array_keys($this->replacements_english) as $key) {
-            if (rex_addon::get('sprog')->isAvailable()) {
-                // Delete
-                $query = 'DELETE FROM '. rex::getTablePrefix() .'sprog_wildcard '
-                    .'WHERE wildcard = :key'. ($clang_id > 0 ? ' AND clang_id = :clang_id' : '') .';';
-                $params = ['key' => $key];
-                if ($clang_id > 0) {
-                    $params['clang_id'] = $clang_id;
+            if ($v2) {
+                try {
+                    $units = new \Sprog\Repository\UnitRepository();
+                    $unit = $units->findByKey('wildcard', (string) $key);
+                    if (null === $unit || null === $unit->id) {
+                        continue;
+                    }
+                    $translations = new \Sprog\Repository\TranslationRepository();
+                    if ($clang_id > 0) {
+                        // Only remove the translation of the given language.
+                        $translation = $translations->findForUnitAndClang((int) $unit->id, $clang_id);
+                        if (null !== $translation && null !== $translation->id) {
+                            $translations->delete((int) $translation->id);
+                        }
+                    } else {
+                        // Remove the whole unit including all its translations.
+                        $translations->deleteByUnit((int) $unit->id);
+                        $units->delete((int) $unit->id);
+                    }
+                } catch (Throwable $e) {
+                    rex_logger::logException($e);
                 }
-                $select = rex_sql::factory();
-                $select->setQuery($query, $params);
+                continue;
             }
+
+            // Sprog v1
+            $query = 'DELETE FROM '. rex::getTablePrefix() .'sprog_wildcard '
+                .'WHERE wildcard = :key'. ($clang_id > 0 ? ' AND clang_id = :clang_id' : '') .';';
+            $params = ['key' => $key];
+            if ($clang_id > 0) {
+                $params['clang_id'] = $clang_id;
+            }
+            $select = rex_sql::factory();
+            $select->setQuery($query, $params);
         }
     }
 }
