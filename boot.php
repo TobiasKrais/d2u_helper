@@ -34,7 +34,7 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
     // change list of allowed mime types for mediapool
     rex_mediapool::setAllowedMimeTypes([
         ...rex_mediapool::getAllowedMimeTypes(),
-        'css' => ['text/plain'],
+        'css' => ['text/css'],
         'ico' => ['image/vnd.microsoft.icon'],
     ]);
 }
