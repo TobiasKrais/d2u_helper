@@ -232,6 +232,35 @@ class BackendHelper
     }
 
     /**
+     * @api
+     * Builds a single translation helper list item (`<li>`) for the translation
+     * helper page. It contains the edit link and, when AI translation is
+     * available, an inline trigger that translates this object via ai_platform.
+     *
+     * The addon stays responsible for WHICH objects are listed and for the edit
+     * URL; the data attributes let the central translation helper JS call the
+     * D2U_HELPER_TRANSLATE_OBJECT extension point for exactly this object.
+     * @param string $addon Addon key that owns the object (e.g. 'd2u_news')
+     * @param string $type Model identifier inside the addon (e.g. 'news')
+     * @param int $id Object id
+     * @param string $name Human readable object name (shown as link text)
+     * @param string $editUrl Backend edit URL for the object
+     * @return string HTML `<li>` element
+     */
+    public static function getTranslationItem(string $addon, string $type, int $id, string $name, string $editUrl): string
+    {
+        $li = '<li class="d2u-translation-item" data-addon="'. rex_escape($addon) .'" data-type="'. rex_escape($type) .'" data-id="'. $id .'">';
+        $li .= '<a href="'. $editUrl .'">'. rex_escape($name) .'</a>';
+        if (AiTranslationHelper::isAvailable()) {
+            $label = rex_i18n::msg('d2u_helper_translations_ai_translate');
+            $li .= ' <a href="#" class="d2u-translate-trigger" title="'. rex_escape($label) .'" aria-label="'. rex_escape($label) .'"><i class="rex-icon fa-language"></i></a>';
+            $li .= ' <span class="d2u-translate-status" aria-live="polite"></span>';
+        }
+        $li .= '</li>';
+        return $li;
+    }
+
+    /**
      * Get available WYSIWYG Editor.
      * @return string[] WYSIWYG editor classes
      */
@@ -464,6 +493,11 @@ class BackendHelper
         }
         if ('color' === $type || 'number' === $type) {
             $input .= ' style="max-width: 150px;"';
+        }
+        if ('color' === $type) {
+            // Only color fields have a mirrored text-<field_id> input to sync to.
+            // number fields do not, so adding this onChange there referenced a
+            // non-existent element and threw a TypeError on every change.
             $input .= ' onChange="document.getElementById(\'text-' . $field_id . '\').value = this.value"';
         }
         if ('date' === $type) {
@@ -501,7 +535,7 @@ class BackendHelper
         echo '<tr>';
         echo '<td class="d2u_helper_color_pair_icon_cell"><i class="fa fa-sun-o"></i></td>';
         echo '<td><input class="form-control d2u_helper_color_text" type="text"'. ($allow_empty ? ' name="'. $fieldname_light . '"' : '') .' pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
-            . 'value="' . rex_escape((string) $value_light, 'html_attr') . '" id="text-' . $field_id_light . '" onChange="document.getElementById(\'color-' . $field_id_light . '\').value = this.value"></td>';
+            . 'value="' . rex_escape((string) $picker_value_light, 'html_attr') . '" id="text-' . $field_id_light . '" onChange="document.getElementById(\'color-' . $field_id_light . '\').value = this.value"></td>';
         echo '<td><input class="form-control d2u_helper_color" type="color"'. ('' !== $fieldname_light_picker ? ' name="' . $fieldname_light_picker . '"' : '') .' id="color-' . $field_id_light . '" value="' . rex_escape((string) $picker_value_light, 'html_attr') . '"'
             . ' onChange="document.getElementById(\'text-' . $field_id_light . '\').value = this.value" /></td>';
         echo '</tr>';
@@ -510,7 +544,7 @@ class BackendHelper
         echo '<tr>';
         echo '<td class="d2u_helper_color_pair_icon_cell"><i class="fa fa-moon-o"></i></td>';
         echo '<td><input class="form-control d2u_helper_color_text" type="text"'. ($allow_empty ? ' name="'. $fieldname_dark . '"' : '') .' pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" '
-            . 'value="' . rex_escape((string) $value_dark, 'html_attr') . '" id="text-' . $field_id_dark . '" onChange="document.getElementById(\'color-' . $field_id_dark . '\').value = this.value"></td>';
+            . 'value="' . rex_escape((string) $picker_value_dark, 'html_attr') . '" id="text-' . $field_id_dark . '" onChange="document.getElementById(\'color-' . $field_id_dark . '\').value = this.value"></td>';
         echo '<td><input class="form-control d2u_helper_color" type="color"'. ('' !== $fieldname_dark_picker ? ' name="' . $fieldname_dark_picker . '"' : '') .' id="color-' . $field_id_dark . '" value="' . rex_escape((string) $picker_value_dark, 'html_attr') . '"'
             . ' onChange="document.getElementById(\'text-' . $field_id_dark . '\').value = this.value" /></td>';
         echo '</tr>';

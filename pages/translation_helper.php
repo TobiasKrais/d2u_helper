@@ -99,6 +99,41 @@ if (1 === count(rex_clang::getAll())) {
      */
     $translation_list = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_TRANSLATION_LIST', params: ['source_clang_id' => $source_clang_id, 'target_clang_id' => $target_clang_id, 'filter_type' => $filter_type]));
 
+    // When AI translation is available and there is at least one object to
+    // translate, offer a "translate all" button and load the helper JS. The
+    // per-object trigger icons are rendered by the addons via
+    // BackendHelper::getTranslationItem().
+    $d2u_ai_available = \TobiasKrais\D2UHelper\AiTranslationHelper::isAvailable();
+    $d2u_has_items = false;
+    if (is_array($translation_list)) {
+        foreach ($translation_list as $translation_list_item) {
+            if (isset($translation_list_item['pages']) && is_array($translation_list_item['pages']) && count($translation_list_item['pages']) > 0) {
+                $d2u_has_items = true;
+                break;
+            }
+        }
+    }
+    if ($d2u_ai_available && $d2u_has_items) {
+        // Load the helper JS via a direct script tag in the body. rex_view::addJsFile()
+        // would be too late here: the backend <head> (with rex_view::getJsFiles()) is
+        // already rendered before this page include runs, so the file would never load.
+        echo '<script src="'. rex_escape(rex_url::addonAssets('d2u_helper', 'translation_helper.js')) .'"></script>';
+        echo '<div id="d2u-translation-config" style="display:none"'
+            . ' data-url="'. rex_escape(rex_url::backendController(['rex-api-call' => 'd2u_helper_translate'])) .'"'
+            . ' data-source-clang-id="'. $source_clang_id .'"'
+            . ' data-target-clang-id="'. $target_clang_id .'"'
+            . ' data-msg-translating="'. rex_escape(rex_i18n::msg('d2u_helper_translations_ai_translating')) .'"'
+            . ' data-msg-error="'. rex_escape(rex_i18n::msg('d2u_helper_translations_ai_error')) .'">'
+            . rex_csrf_token::factory('d2u_helper_translate')->getHiddenField()
+            . '</div>';
+        echo '<p><button type="button" id="d2u-translate-all" class="btn btn-primary"><i class="rex-icon fa-language"></i> '. rex_i18n::msg('d2u_helper_translations_ai_translate_all') .'</button></p>';
+    }
+    elseif (!$d2u_ai_available && $d2u_has_items) {
+        // AI translation is not available (ai_platform missing/inactive or no
+        // default text profile) but there are translations to do: hint the user.
+        echo rex_view::info(rex_i18n::msg('d2u_helper_translations_ai_not_configured'));
+    }
+
     if (is_array($translation_list) && count($translation_list) > 0) {
         foreach ($translation_list as $translation_list_item) {
             if (count($translation_list_item['pages']) > 0) {

@@ -48,6 +48,36 @@ Der Rückgabearray, der zu dem bestehenden Array hinzugefügt werden muss, sieht
 ];
 ```
 
+Für die einzelnen Listeneinträge (`<li>`) sollte statt eigenem Markup die Methode `TobiasKrais\D2UHelper\BackendHelper::getTranslationItem($addon, $type, $id, $name, $editUrl)` genutzt werden. Sie erzeugt den Link zur Bearbeitungsseite und – sofern KI-Übersetzung verfügbar ist – ein Übersetzen-Icon mit den nötigen Datenattributen.
+
+### KI-Übersetzung (`D2U_HELPER_TRANSLATE_OBJECT`)
+
+Ist das Addon [`ai_platform`](https://github.com/FriendsOfREDAXO/ai_platform) installiert und ein Standard-Textprofil konfiguriert (`AiTranslationHelper::isAvailable()`), zeigt die Übersetzungshilfe hinter jedem Eintrag ein Übersetzen-Icon und einen Button „Alle mit KI übersetzen". Beim Klick ruft ein zentraler Backend-Endpunkt (`index.php?rex-api-call=d2u_helper_translate`) den Extension Point `D2U_HELPER_TRANSLATE_OBJECT`. So bleibt die addonspezifische Übersetzungslogik im jeweiligen Addon.
+
+Der Extension Point übergibt die Parameter `addon`, `type`, `id`, `source_clang_id` und `target_clang_id`. Ein Addon registriert einen Handler, prüft ob `addon` sein eigener Schlüssel ist, übersetzt das Objekt und gibt ein Array zurück:
+
+```php
+rex_extension::register('D2U_HELPER_TRANSLATE_OBJECT', static function (rex_extension_point $ep) {
+    $params = $ep->getParams();
+    if ('mein_addon' !== $params['addon']) {
+        return $ep->getSubject(); // nicht zuständig
+    }
+
+    // passendes Objekt anhand von $params['type'] und $params['id'] laden,
+    // Felder mit AiTranslationHelper::translateFields() übersetzen, in der
+    // Zielsprache ($params['target_clang_id']) speichern und
+    // translation_needs_update auf 'no' setzen.
+
+    return [
+        'success' => true,
+        'name' => $uebersetzterName,
+        'message' => '',
+    ];
+});
+```
+
+Zum Übersetzen der einzelnen Felder steht `TobiasKrais\D2UHelper\AiTranslationHelper::translateFields($fields, $sourceClangId, $targetClangId)` bereit. `$fields` ist eine Map `['feldname' => ['value' => 'Text', 'html' => false]]`; alle Felder werden in einem Aufruf übersetzt, HTML bleibt erhalten.
+
 ## Autor
 
 Autor des Addons ist [Tobias Krais](https://github.com/TobiasKrais/)

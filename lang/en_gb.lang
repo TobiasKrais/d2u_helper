@@ -233,5 +233,13 @@ d2u_helper_translations_language = Filter language
 d2u_helper_translations_none = Only one language is installed. Translation helper is not necessary.
 d2u_helper_translations_uptodate_missing = No translations missing.
 d2u_helper_translations_uptodate_update = All translations are up to date.
+d2u_helper_translations_ai_translate = Translate with AI
+d2u_helper_translations_ai_translate_all = Translate all with AI
+d2u_helper_translations_ai_translating = Translating ...
+d2u_helper_translations_ai_error = Translation failed.
+d2u_helper_translations_ai_not_configured = AI translation is not available. Please install the ai_platform addon and configure a default text profile.
+d2u_helper_translations_ai_no_permission = No permission for the translation helper.
+d2u_helper_translations_ai_invalid_request = Invalid translation request.
+d2u_helper_translations_ai_no_handler = No AI translation is available for this object.
 
 d2u_helper_translations_rights = D2U Helper Addon: Translation Helper Plugin

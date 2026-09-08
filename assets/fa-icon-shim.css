@@ -1,0 +1,19 @@
+/*
+ * FontAwesome compatibility shim for the legacy `.fa-icon` base class.
+ *
+ * The legacy `.fa-icon` class only sets the FontAwesome font-family, but not the
+ * `::before { content }` rule that standard FontAwesome name classes rely on
+ * (modern FontAwesome name classes only set the `--fa` custom property; the glyph
+ * is emitted by the base classes `.fa`/`.fas`/`.fa-solid`/`.fa-brands`).
+ *
+ * This shim outputs that glyph for `.fa-icon`, so markup like
+ * `<span class="fa-icon fa-external-link-alt"></span>` renders with any standard
+ * FontAwesome 7 icon, while all existing legacy icons keep working unchanged.
+ */
+.fa-icon {
+    font-family: "FontAwesome";
+}
+
+.fa-icon::before {
+    content: var(--fa);
+}

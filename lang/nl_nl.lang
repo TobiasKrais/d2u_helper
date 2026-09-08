@@ -233,6 +233,12 @@ d2u_helper_translations_filter_update = ... bij te werken vertalingen
 d2u_helper_translations_language = Weer te geven taal
 d2u_helper_translations_none = Er is maar één taal aangemaakt. Een vertaalhulp is niet nodig.
 d2u_helper_translations_uptodate_missing = Er ontbreken geen vertalingen.
-d2u_helper_translations_uptodate_update = Alle aanwezige vertalingen zijn actueel.
-
+d2u_helper_translations_uptodate_update = Alle aanwezige vertalingen zijn actueel.d2u_helper_translations_ai_translate = Vertalen met AI
+d2u_helper_translations_ai_translate_all = Alles vertalen met AI
+d2u_helper_translations_ai_translating = Bezig met vertalen ...
+d2u_helper_translations_ai_error = Vertaling mislukt.
+d2u_helper_translations_ai_not_configured = AI-vertaling is niet beschikbaar. Installeer de ai_platform-addon en configureer een standaard tekstprofiel.
+d2u_helper_translations_ai_no_permission = Geen rechten voor de vertaalhulp.
+d2u_helper_translations_ai_invalid_request = Ongeldige vertaalaanvraag.
+d2u_helper_translations_ai_no_handler = Voor dit object is geen AI-vertaling beschikbaar.
 d2u_helper_translations_rights = D2U Helper add-on: vertaalhulp-plugin

@@ -20,6 +20,8 @@
         }
         // FontAwesome
         echo '<link href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('FontAwesome/css/all.min.css') .'" rel="stylesheet" type="text/css" media="all">'. PHP_EOL;
+        // FontAwesome compatibility shim: lets the legacy `.fa-icon` base class render any standard FontAwesome 7 icon
+        echo '<link href="'. TobiasKrais\D2UHelper\FrontendHelper::getAddonAssetUrl('fa-icon-shim.css') .'" rel="stylesheet" type="text/css" media="all">'. PHP_EOL;
 
         // Structured data (JSON-LD) - auto-generated from settings, only on the homepage
         $structured_data_start_id = rex_article::getSiteStartArticleId();

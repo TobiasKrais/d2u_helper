@@ -234,5 +234,13 @@ d2u_helper_translations_language = Anzuzeigende Sprache
 d2u_helper_translations_none = Es ist nur eine Sprache angelegt. Eine Übersetzungshilfe ist nicht nötig.
 d2u_helper_translations_uptodate_missing = Es fehlen keine Übersetzungen.
 d2u_helper_translations_uptodate_update = Alle vorhandenen Übersetzungen sind aktuell.
+d2u_helper_translations_ai_translate = Mit KI übersetzen
+d2u_helper_translations_ai_translate_all = Alle mit KI übersetzen
+d2u_helper_translations_ai_translating = Übersetze ...
+d2u_helper_translations_ai_error = Übersetzung fehlgeschlagen.
+d2u_helper_translations_ai_not_configured = KI-Übersetzung ist nicht verfügbar. Bitte das Addon ai_platform installieren und ein Standard-Textprofil konfigurieren.
+d2u_helper_translations_ai_no_permission = Keine Berechtigung für die Übersetzungshilfe.
+d2u_helper_translations_ai_invalid_request = Ungültige Übersetzungsanfrage.
+d2u_helper_translations_ai_no_handler = Für dieses Objekt ist keine KI-Übersetzung verfügbar.
 
 d2u_helper_translations_rights = D2U Helper Addon: Übersetzungshilfe Plugin
