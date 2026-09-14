@@ -117,7 +117,11 @@ if (1 === count(rex_clang::getAll())) {
         // Load the helper JS via a direct script tag in the body. rex_view::addJsFile()
         // would be too late here: the backend <head> (with rex_view::getJsFiles()) is
         // already rendered before this page include runs, so the file would never load.
-        echo '<script src="'. rex_escape(rex_url::addonAssets('d2u_helper', 'translation_helper.js')) .'"></script>';
+        // Append a filemtime cache-buster so updated JS is picked up (no version query otherwise).
+        $d2u_th_js_file = rex_path::addonAssets('d2u_helper', 'translation_helper.js');
+        $d2u_th_js_url = rex_url::addonAssets('d2u_helper', 'translation_helper.js');
+        $d2u_th_js_url .= is_file($d2u_th_js_file) ? '?buster='. filemtime($d2u_th_js_file) : '';
+        echo '<script src="'. rex_escape($d2u_th_js_url) .'"></script>';
         echo '<div id="d2u-translation-config" style="display:none"'
             . ' data-url="'. rex_escape(rex_url::backendController(['rex-api-call' => 'd2u_helper_translate'])) .'"'
             . ' data-source-clang-id="'. $source_clang_id .'"'
@@ -142,7 +146,12 @@ if (1 === count(rex_clang::getAll())) {
                 echo '<div class="panel-body">';
                 foreach ($translation_list_item['pages'] as $page) {
                     echo '<fieldset>';
-                    echo '<legend><small><i class="rex-icon '. $page['icon'] .'"></i></small> '.$page['title'] .'</legend>';
+                    echo '<legend><small><i class="rex-icon '. $page['icon'] .'"></i></small> '.$page['title'];
+                    if ($d2u_ai_available) {
+                        // Per-category button: translates only the items inside this fieldset.
+                        echo ' <button type="button" class="btn btn-primary btn-xs d2u-translate-category"><i class="rex-icon fa-language"></i> '. rex_i18n::msg('d2u_helper_translations_ai_translate_category') .'</button>';
+                    }
+                    echo '</legend>';
                     echo '<div class="panel-body-wrapper slide">'. $page['html'] . '</div>';
                     echo '</fieldset>';
                 }

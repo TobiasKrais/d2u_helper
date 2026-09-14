@@ -235,6 +235,7 @@ d2u_helper_translations_none = Er is maar één taal aangemaakt. Een vertaalhulp
 d2u_helper_translations_uptodate_missing = Er ontbreken geen vertalingen.
 d2u_helper_translations_uptodate_update = Alle aanwezige vertalingen zijn actueel.d2u_helper_translations_ai_translate = Vertalen met AI
 d2u_helper_translations_ai_translate_all = Alles vertalen met AI
+d2u_helper_translations_ai_translate_category = Categorie vertalen met AI
 d2u_helper_translations_ai_translating = Bezig met vertalen ...
 d2u_helper_translations_ai_error = Vertaling mislukt.
 d2u_helper_translations_ai_not_configured = AI-vertaling is niet beschikbaar. Installeer de ai_platform-addon en configureer een standaard tekstprofiel.

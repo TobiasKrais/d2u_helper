@@ -144,6 +144,27 @@
                 }
             });
         }
+
+        // Per-category ("Kategorie") translate button: translates only the items
+        // inside the same <fieldset> (category) as the clicked button. Uses the
+        // capture phase + stopPropagation so the click does NOT bubble to the
+        // <legend> toggle (which would otherwise just collapse/expand the category).
+        document.addEventListener('click', function (event) {
+            var catButton = event.target.closest ? event.target.closest('.d2u-translate-category') : null;
+            if (!catButton) {
+                return;
+            }
+            event.preventDefault();
+            event.stopPropagation();
+            var fieldset = catButton.closest('fieldset');
+            if (!fieldset) {
+                return;
+            }
+            var items = Array.prototype.slice.call(fieldset.querySelectorAll('.d2u-translation-item'));
+            if (items.length > 0) {
+                translateAllSequential(items, config, catButton);
+            }
+        }, true);
     }
 
     // The script tag is emitted inside the page body, so the DOM may already be
