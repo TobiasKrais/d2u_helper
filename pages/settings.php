@@ -56,6 +56,7 @@ if (!$invalidCsrf && 'save' === filter_input(INPUT_POST, 'btn_save')) {
 
     // Checkbox also needs special treatment if empty
     $settings['check_media_template'] = array_key_exists('check_media_template', $settings);
+    $settings['slice_translate_button'] = array_key_exists('slice_translate_button', $settings);
     $settings['include_module'] = array_key_exists('include_module', $settings);
     $settings['lang_replacements_install'] = array_key_exists('lang_replacements_install', $settings);
     $settings['lang_wildcard_overwrite'] = array_key_exists('lang_wildcard_overwrite', $settings) ? 'true' : 'false';
@@ -495,6 +496,7 @@ if (!$invalidCsrf && 'save' === filter_input(INPUT_POST, 'btn_save')) {
 				<legend><small><i class="rex-icon rex-icon-language"></i></small> <?= rex_i18n::msg('d2u_helper_settings_lang_replacements') ?></legend>
 				<div class="panel-body-wrapper slide">
 					<?php
+                        BackendHelper::form_checkbox('d2u_helper_settings_slice_translate_button', 'settings[slice_translate_button]', 'true', (bool) rex_config::get('d2u_helper', 'slice_translate_button'));
                         BackendHelper::form_checkbox('d2u_helper_lang_install', 'settings[lang_replacements_install]', 'true', (bool) rex_config::get('d2u_helper', 'lang_replacements_install'));
                         BackendHelper::form_checkbox('d2u_helper_lang_wildcard_overwrite', 'settings[lang_wildcard_overwrite]', 'true', (bool) rex_config::get('d2u_helper', 'lang_wildcard_overwrite'));
                         foreach (rex_clang::getAll() as $rex_clang) {

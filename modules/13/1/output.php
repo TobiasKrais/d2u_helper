@@ -1,4 +1,5 @@
 <?php
+/* d2u_translate: 1:html */
 $seconds = 'REX_VALUE[2]' !== '' ? (int) 'REX_VALUE[2]' : 20; /** @phpstan-ignore-line */
 if ($seconds <= 0) {
     $seconds = 20;

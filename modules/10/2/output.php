@@ -1,4 +1,5 @@
 <?php
+/* d2u_translate: 1:html */
     $picture_type = 'REX_VALUE[3]';
     $same_height = 'REX_VALUE[17]' === 'true' ? ' same-height' : ''; /** @phpstan-ignore-line */
 ?>

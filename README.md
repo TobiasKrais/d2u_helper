@@ -78,6 +78,24 @@ rex_extension::register('D2U_HELPER_TRANSLATE_OBJECT', static function (rex_exte
 
 Zum Übersetzen der einzelnen Felder steht `TobiasKrais\D2UHelper\AiTranslationHelper::translateFields($fields, $sourceClangId, $targetClangId)` bereit. `$fields` ist eine Map `['feldname' => ['value' => 'Text', 'html' => false]]`; alle Felder werden in einem Aufruf übersetzt, HTML bleibt erhalten.
 
+### Slice-Übersetzung im Editor (Modul-Marker)
+
+Zusätzlich zur artikelweisen Übersetzung auf der Unterseite *Redaxo Artikel* kann pro Slice direkt im Content-Editor ein Übersetzen-Button erscheinen. Er wird über die Einstellung *Übersetzungsbutton an Slices im Editor anzeigen* aktiviert (Voraussetzung: `ai_platform`-Standard-Textprofil, aktuelle Sprache ≠ Ausgangssprache).
+
+Der Button erscheint **nur** bei Modulen, die im Modul-Code (Output oder Input) einen Marker tragen. Der Marker deklariert zugleich, welche `value`-Felder Text enthalten und wie sie übersetzt werden:
+
+```php
+/* d2u_translate: 1, 2:html, 5:json(q,a) */
+```
+
+- `1` – ganzes `value1` übersetzen, HTML wird automatisch erkannt
+- `2:text` / `2:html` – Handler explizit festlegen
+- `5:json(q,a)` – `value5` ist (base64-)JSON aus Objekten; **nur** die Werte der Keys `q` und `a` werden übersetzt, Struktur, restliche Keys (z. B. `tags`) und die (base64-)Kodierung bleiben erhalten. Ohne Key-Liste (`5:json`) werden alle String-Blätter übersetzt.
+
+Beim Klick übersetzt d2u_helper die deklarierten Felder aus der Ausgangssprache (`default_lang`, positionsgleicher Quell-Slice) in die aktuelle Sprache – alle Felder in einem gebündelten Aufruf. Die Zuordnung Quell-↔Ziel-Slice erfolgt über Artikel, ctype und Priorität; Status „fehlt/veraltet" über das Vorhandensein bzw. `updatedate`.
+
+Der Marker läuft nichts aus (er wird aus dem Modul-Quelltext gelesen, nicht ausgeführt) und ist damit auch im Output unbedenklich.
+
 ## Autor
 
 Autor des Addons ist [Tobias Krais](https://github.com/TobiasKrais/)

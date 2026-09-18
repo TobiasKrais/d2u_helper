@@ -31,6 +31,33 @@ if (\rex::isBackend() && is_object(\rex::getUser())) {
         $this->setProperty('page', $page);
     }
 
+    // Answer the AI translation endpoint for REDAXO article slices (the
+    // "Redaxo Artikel" tab of the translation helper).
+    rex_extension::register('D2U_HELPER_TRANSLATE_OBJECT', static function (rex_extension_point $ep) {
+        $params = $ep->getParams();
+        if ('d2u_helper' !== ($params['addon'] ?? '') || 'slice_article' !== ($params['type'] ?? '')) {
+            return $ep->getSubject();
+        }
+
+        return \TobiasKrais\D2UHelper\SliceTranslator::translateArticle(
+            (int) ($params['id'] ?? 0),
+            (int) ($params['source_clang_id'] ?? 0),
+            (int) ($params['target_clang_id'] ?? 0),
+        );
+    });
+
+    // In-editor per-slice translation button (opt-in via the addon settings).
+    if (rex_config::get('d2u_helper', 'slice_translate_button', false)) {
+        rex_view::addJsFile(rex_url::addonAssets('d2u_helper', 'slice_translate.js'));
+        rex_view::setJsProperty('d2u_helper_slice_translate', [
+            'url' => rex_url::backendController(['rex-api-call' => 'd2u_helper_slice_translate']),
+            'csrf' => rex_csrf_token::factory('d2u_helper_slice_translate')->getValue(),
+            'label' => rex_i18n::msg('d2u_helper_slice_translate_button'),
+            'translating' => rex_i18n::msg('d2u_helper_translations_ai_translating'),
+            'running' => rex_i18n::msg('d2u_helper_slice_translate_running'),
+        ]);
+    }
+
     // change list of allowed mime types for mediapool
     rex_mediapool::setAllowedMimeTypes([
         ...rex_mediapool::getAllowedMimeTypes(),

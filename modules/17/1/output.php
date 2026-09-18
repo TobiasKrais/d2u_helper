@@ -1,4 +1,5 @@
 <?php
+/* d2u_translate: 2:text */
 
 use FriendsOfRedaxo\GooglePlaces\Place;
 use FriendsOfRedaxo\GooglePlaces\Review;

@@ -38,6 +38,7 @@ if (1 === count(rex_clang::getAll())) {
     $source_clang_id = (int) rex_config::get('d2u_helper', 'default_lang');
     $target_clang_id = is_array(rex_session('d2u_helper_translation')) && array_key_exists('clang_id', rex_session('d2u_helper_translation')) ? (int) rex_session('d2u_helper_translation')['clang_id'] : rex_clang::getStartId();
     $filter_type = is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) ? (string) rex_session('d2u_helper_translation')['filter'] : 'update';
+    $d2u_translation_mode = (($d2u_translation_mode ?? 'addons') === 'articles') ? 'articles' : 'addons';
 ?>
 	<form action="<?= BackendHelper::getCurrentBackendPage([], ['message', 'message_type']) ?>" method="post">
 		<?= $csrfToken->getHiddenField() ?>
@@ -77,27 +78,33 @@ if (1 === count(rex_clang::getAll())) {
 		</div>
 	</form>
 <?php
-    /**
-     * Extension point for translation list.
-     * @param array $subject List of addons and their pages with translation status
-     * @param array $params Parameters
-     * @param int $params['source_clang_id'] Source clang id
-     * @param int $params['target_clang_id'] Target clang id
-     * @param string $params['filter_type'] Filter type
-     * @return array List of addons and their pages with translation status. Example:
-     * [
-     *      [
-     *          'addon_name' => 'addon name',
-     *          'pages' => [
-     *              [
-     *                  'title' => 'addon page title',
-     *                  'icon' => 'FontAwesome page icon',
-     *                  'html' => 'ul html code containing links to the backend pages with the translations'
-     *              ]
-     *      ]
-     * ]
-     */
-    $translation_list = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_TRANSLATION_LIST', params: ['source_clang_id' => $source_clang_id, 'target_clang_id' => $target_clang_id, 'filter_type' => $filter_type]));
+    if ('articles' === $d2u_translation_mode) {
+        // Article-slice subpage: built in the same shape as the
+        // D2U_HELPER_TRANSLATION_LIST result so the rendering below is shared.
+        $translation_list = \TobiasKrais\D2UHelper\SliceTranslator::getTranslationList($source_clang_id, $target_clang_id, $filter_type);
+    } else {
+        /**
+         * Extension point for translation list.
+         * @param array $subject List of addons and their pages with translation status
+         * @param array $params Parameters
+         * @param int $params['source_clang_id'] Source clang id
+         * @param int $params['target_clang_id'] Target clang id
+         * @param string $params['filter_type'] Filter type
+         * @return array List of addons and their pages with translation status. Example:
+         * [
+         *      [
+         *          'addon_name' => 'addon name',
+         *          'pages' => [
+         *              [
+         *                  'title' => 'addon page title',
+         *                  'icon' => 'FontAwesome page icon',
+         *                  'html' => 'ul html code containing links to the backend pages with the translations'
+         *              ]
+         *      ]
+         * ]
+         */
+        $translation_list = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_TRANSLATION_LIST', params: ['source_clang_id' => $source_clang_id, 'target_clang_id' => $target_clang_id, 'filter_type' => $filter_type]));
+    }
 
     // When AI translation is available and there is at least one object to
     // translate, offer a "translate all" button and load the helper JS. The

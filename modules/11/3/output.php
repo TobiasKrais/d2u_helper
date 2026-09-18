@@ -1,4 +1,5 @@
 <?php
+/* d2u_translate: 1:text, 3:html, 6:text */
 $heading = 'REX_VALUE[1]';
 $bg_color = \TobiasKrais\D2UHelper\BackendHelper::sanitizeHexColor('REX_VALUE[2]', '#c41e1e'); /** @phpstan-ignore-line */
 $picture = 'REX_MEDIA[1]';

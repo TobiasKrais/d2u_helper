@@ -164,49 +164,49 @@ class ModuleManager
             11);
         $modules[] = new Module('01-1',
             'Texteditor (BS4, deprecated)',
-            15);
+            16);
         $modules[] = new Module('01-2',
             'Texteditor mit Bild und Überschrift (BS4, deprecated)',
-            20);
+            21);
         $modules[] = new Module('01-3',
             'Texteditor in Alertbox (BS4, deprecated)',
-            3);
+            4);
         $modules[] = new Module('01-4',
             'Texteditor (BS5)',
-            2);
+            3);
         $modules[] = new Module('01-5',
             'Texteditor mit Bild und Überschrift (BS5)',
-            2);
+            3);
         $modules[] = new Module('01-6',
             'Texteditor in Alertbox (BS5)',
-            2);
+            3);
         $modules[] = new Module('02-1',
             'Überschrift (BS4, deprecated)',
-            13);
+            14);
         $modules[] = new Module('02-2',
             'Überschrift mit Klapptext (BS4, deprecated)',
-            9);
+            10);
         $modules[] = new Module('02-3',
             'Überschrift mit Untertitel und Textfeld (BS4, deprecated)',
-            11);
+            12);
         $modules[] = new Module('02-4',
             'Überschrift mit Hintergrundbild und 2 Buttons (BS4, deprecated)',
-            2);
+            3);
         $modules[] = new Module('02-5',
             'Inhaltsverzeichnis der Überschriften (BS4, deprecated)',
             1);
         $modules[] = new Module('02-6',
             'Überschrift (BS5)',
-            2);
+            3);
         $modules[] = new Module('02-7',
             'Überschrift mit Klapptext (BS5)',
-            3);
+            4);
         $modules[] = new Module('02-8',
             'Überschrift mit Untertitel und Textfeld (BS5)',
-            3);
+            4);
         $modules[] = new Module('02-9',
             'Überschrift mit Hintergrundbild und 2 Buttons (BS5)',
-            2);
+            3);
         $modules[] = new Module('02-10',
             'Inhaltsverzeichnis der Überschriften (BS5)',
             2);
@@ -230,16 +230,16 @@ class ModuleManager
             3);
         $modules[] = new Module('04-1',
             'Google Maps Karte (BS4, deprecated)',
-            15);
+            16);
         $modules[] = new Module('04-2',
             'OpenStreetMap Karte (BS4, deprecated)',
-            8);
+            9);
         $modules[] = new Module('04-3',
             'Google Maps Karte (BS5)',
-            3);
+            4);
         $modules[] = new Module('04-4',
             'OpenStreetMap Karte (BS5)',
-            3);
+            4);
         $modules[] = new Module('05-1',
             'Artikelweiterleitung',
             16);
@@ -275,16 +275,16 @@ class ModuleManager
             3);
         $modules[] = new Module('10-1',
             'Box mit Bild und Ueberschrift',
-            5);
+            6);
         $modules[] = new Module('10-2',
             'Box mit Bild und Text',
-            7);
+            8);
         $modules[] = new Module('10-3',
             'Box mit Downloads (BS4, deprecated)',
-            11);
+            12);
         $modules[] = new Module('10-4',
             'Box mit Downloads (BS5)',
-            2);
+            3);
         $modules[] = new Module('11-1',
             'YForm Kontaktformular (DSGVO kompatibel) (BS4, deprecated)',
             14);
@@ -293,7 +293,7 @@ class ModuleManager
             2);
         $modules[] = new Module('11-3',
             'Kontakt-Sektion mit farbigem Hintergrund (BS5)',
-            1);
+            2);
         $modules[] = new Module('11-4',
             'YForm Kontaktformular (DSGVO kompatibel) (BS5)',
             1);
@@ -308,7 +308,7 @@ class ModuleManager
             2);
         $modules[] = new Module('13-1',
             'Lauftext',
-            6);
+            7);
         $modules[] = new Module('14-1',
             'Search It Suchmodul',
             8);
@@ -320,13 +320,13 @@ class ModuleManager
             2);
         $modules[] = new Module('16-1',
             'Link als Button (BS4, deprecated)',
-            1);
+            2);
         $modules[] = new Module('16-2',
             'Link als Button (BS5)',
-            1);
+            2);
         $modules[] = new Module('17-1',
             'Google Places Bewertungen (BS5)',
-            2);
+            3);
         // 20-x reserved for D2U Addresss
         // 21-x reserved for D2U History
         // 22-x reserved for D2U Staff
