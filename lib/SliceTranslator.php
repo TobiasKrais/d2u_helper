@@ -115,11 +115,139 @@ class SliceTranslator
     }
 
     /**
-     * Translate every slice of one article from source to target language.
+     * Rows for the "REDAXO article contents" table: every article that has slices
+     * in the source language, plus all of its ancestor categories so the tree is
+     * visible. Ancestor rows without own content are structural (name only).
+     *
+     * Each content row carries the counts the table columns show:
+     * - noContent: the target language has no slice for this article at all
+     * - missing:   source slices without a positional target counterpart
+     * - stale:     target slices older than their source (need an update)
+     *
+     * @return list<array{id: int, name: string, level: int, hasContent: bool, noContent: bool, missing: int, stale: int}>
+     */
+    public static function getArticleContentRows(int $sourceClang, int $targetClang): array
+    {
+        if ($sourceClang <= 0 || $targetClang <= 0 || $sourceClang === $targetClang) {
+            return [];
+        }
+
+        $table = rex::getTable('article_slice');
+        $rows = rex_sql::factory()->getArray(
+            'SELECT s.article_id AS article_id,
+                    COUNT(*) AS source_count,
+                    SUM(CASE WHEN t.id IS NULL THEN 1 ELSE 0 END) AS missing_count,
+                    SUM(CASE WHEN t.id IS NOT NULL AND s.updatedate > t.updatedate THEN 1 ELSE 0 END) AS stale_count,
+                    SUM(CASE WHEN t.id IS NOT NULL THEN 1 ELSE 0 END) AS target_count
+             FROM ' . $table . ' s
+             LEFT JOIN ' . $table . ' t
+               ON t.article_id = s.article_id
+              AND t.ctype_id = s.ctype_id
+              AND t.priority = s.priority
+              AND t.clang_id = :target
+              AND t.revision = 0
+             WHERE s.clang_id = :source AND s.revision = 0
+             GROUP BY s.article_id',
+            [':source' => $sourceClang, ':target' => $targetClang],
+        );
+
+        $status = [];
+        foreach ($rows as $row) {
+            $status[(int) $row['article_id']] = [
+                'missing' => (int) $row['missing_count'],
+                'stale' => (int) $row['stale_count'],
+                'noContent' => 0 === (int) $row['target_count'],
+            ];
+        }
+
+        if (0 === count($status)) {
+            return [];
+        }
+
+        // Collect the content articles and every ancestor category, so parents are
+        // always shown even when they carry no translatable content themselves.
+        $nodes = [];
+        foreach (array_keys($status) as $id) {
+            $article = rex_article::get($id, $sourceClang);
+            if (!$article instanceof rex_article) {
+                continue;
+            }
+            foreach ($article->getPathAsArray() as $catId) {
+                $catId = (int) $catId;
+                if ($catId > 0 && !isset($nodes[$catId])) {
+                    $cat = rex_article::get($catId, $sourceClang);
+                    if ($cat instanceof rex_article) {
+                        $nodes[$catId] = $cat;
+                    }
+                }
+            }
+            $nodes[$id] = $article;
+        }
+
+        $list = [];
+        foreach ($nodes as $id => $article) {
+            $list[] = [
+                'id' => $id,
+                'name' => $article->getName(),
+                'level' => count($article->getPathAsArray()),
+                'sort' => self::articleSortPath($article, $sourceClang),
+                'hasContent' => isset($status[$id]),
+                'noContent' => $status[$id]['noContent'] ?? false,
+                'missing' => $status[$id]['missing'] ?? 0,
+                'stale' => $status[$id]['stale'] ?? 0,
+            ];
+        }
+
+        usort($list, static function (array $a, array $b): int {
+            $pa = $a['sort'];
+            $pb = $b['sort'];
+            $n = min(count($pa), count($pb));
+            for ($i = 0; $i < $n; ++$i) {
+                if ($pa[$i] !== $pb[$i]) {
+                    return $pa[$i] <=> $pb[$i];
+                }
+            }
+            return count($pa) <=> count($pb);
+        });
+
+        return array_map(static function (array $row): array {
+            unset($row['sort']);
+            return $row;
+        }, $list);
+    }
+
+    /**
+     * Tree-order sort key: the priority+id of every ancestor category in path
+     * order, then the article's own priority+id. An ancestor's key is a prefix of
+     * its descendants', so parents sort directly above their children.
+     *
+     * @return list<int>
+     */
+    private static function articleSortPath(rex_article $article, int $clang): array
+    {
+        $path = [];
+        foreach ($article->getPathAsArray() as $catId) {
+            $cat = rex_article::get((int) $catId, $clang);
+            $path[] = $cat instanceof rex_article ? (int) $cat->getPriority() : 0;
+            $path[] = (int) $catId;
+        }
+        $path[] = (int) $article->getPriority();
+        $path[] = (int) $article->getId();
+
+        return $path;
+    }
+
+    /**
+     * Translate the slices of one article from source to target language.
+     *
+     * Mode selects which source slices are processed:
+     * - 'all':     every source slice (existing target slices are overwritten)
+     * - 'missing': only source slices without a target counterpart yet
+     * - 'stale':   only target slices older than their source (re-translated)
      *
      * @return array{success: bool, name: string, message: string}
      */
-    public static function translateArticle(int $articleId, int $sourceClang, int $targetClang): array
+    public static function translateArticle(int $articleId, int $sourceClang, int $targetClang, string $mode = 'all'): array
     {
         $article = rex_article::get($articleId, $sourceClang);
         $name = $article instanceof rex_article ? $article->getName() : ('#' . $articleId);
@@ -143,7 +271,7 @@ class SliceTranslator
 
         try {
             foreach ($srcSlices as $src) {
-                self::translateSlice($src, $sourceClang, $targetClang);
+                self::translateSlice($src, $sourceClang, $targetClang, $mode);
             }
         } catch (\Throwable $e) {
             rex_logger::logException($e);
@@ -161,9 +289,37 @@ class SliceTranslator
      *
      * @param array<string, mixed> $src Source slice row
      */
-    private static function translateSlice(array $src, int $sourceClang, int $targetClang): void
+    private static function translateSlice(array $src, int $sourceClang, int $targetClang, string $mode = 'all'): void
     {
         $table = rex::getTable('article_slice');
+
+        $existing = rex_sql::factory()->getArray(
+            'SELECT id, updatedate FROM ' . $table . ' WHERE article_id = :a AND clang_id = :c AND ctype_id = :ct AND priority = :p AND revision = 0 LIMIT 1',
+            [
+                ':a' => (int) $src['article_id'],
+                ':c' => $targetClang,
+                ':ct' => (int) $src['ctype_id'],
+                ':p' => (int) $src['priority'],
+            ],
+        );
+        $hasTarget = count($existing) > 0;
+
+        // Skip work (and the AI call) for slices the selected mode does not touch:
+        // 'missing' only creates new target slices; 'stale' only refreshes target
+        // slices whose source has changed since the last translation.
+        if ('missing' === $mode && $hasTarget) {
+            return;
+        }
+        if ('stale' === $mode) {
+            if (!$hasTarget) {
+                return;
+            }
+            $srcUpdated = (string) ($src['updatedate'] ?? '');
+            $tgtUpdated = (string) ($existing[0]['updatedate'] ?? '');
+            if ('' === $srcUpdated || $srcUpdated <= $tgtUpdated) {
+                return;
+            }
+        }
 
         $fields = [];
         for ($i = 1; $i <= self::VALUE_COLUMNS; ++$i) {
@@ -178,16 +334,6 @@ class SliceTranslator
         if (count($fields) > 0) {
             $translated = AiTranslationHelper::translateFields($fields, $sourceClang, $targetClang);
         }
-
-        $existing = rex_sql::factory()->getArray(
-            'SELECT id FROM ' . $table . ' WHERE article_id = :a AND clang_id = :c AND ctype_id = :ct AND priority = :p AND revision = 0 LIMIT 1',
-            [
-                ':a' => (int) $src['article_id'],
-                ':c' => $targetClang,
-                ':ct' => (int) $src['ctype_id'],
-                ':p' => (int) $src['priority'],
-            ],
-        );
 
         $login = rex::getUser() instanceof rex_user ? rex::getUser()->getLogin() : 'd2u_helper';
 

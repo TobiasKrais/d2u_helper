@@ -61,11 +61,13 @@ if (1 === count(rex_clang::getAll())) {
                     }
                     BackendHelper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [$target_clang_id]);
 
-                    $filter_options = [
-                        'update' => rex_i18n::msg('d2u_helper_translations_filter_update'),
-                        'missing' => rex_i18n::msg('d2u_helper_translations_filter_missing'),
-                    ];
-                    BackendHelper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [$filter_type]);
+                    if ('addons' === $d2u_translation_mode) {
+                        $filter_options = [
+                            'update' => rex_i18n::msg('d2u_helper_translations_filter_update'),
+                            'missing' => rex_i18n::msg('d2u_helper_translations_filter_missing'),
+                        ];
+                        BackendHelper::form_select('d2u_helper_translations_filter_select', 'settings[filter]', $filter_options, [$filter_type]);
+                    }
                 ?>
 			</div>
 			<footer class="panel-footer">
@@ -79,9 +81,90 @@ if (1 === count(rex_clang::getAll())) {
 	</form>
 <?php
     if ('articles' === $d2u_translation_mode) {
-        // Article-slice subpage: built in the same shape as the
-        // D2U_HELPER_TRANSLATION_LIST result so the rendering below is shared.
-        $translation_list = \TobiasKrais\D2UHelper\SliceTranslator::getTranslationList($source_clang_id, $target_clang_id, $filter_type);
+        // Per-article action: translate the whole article, or only its missing
+        // blocks. Runs before rendering so the refreshed counts show immediately.
+        if (!$invalidCsrf) {
+            $d2u_action_article = (int) filter_input(INPUT_POST, 'd2u_translate_article', FILTER_VALIDATE_INT);
+            if ($d2u_action_article > 0) {
+                if (!$csrfToken->isValid()) {
+                    echo rex_view::error(rex_i18n::msg('csrf_token_invalid'));
+                } else {
+                    $d2u_mode = (string) filter_input(INPUT_POST, 'd2u_translate_mode');
+                    $d2u_mode = in_array($d2u_mode, ['all', 'missing', 'stale'], true) ? $d2u_mode : 'all';
+                    $d2u_result = \TobiasKrais\D2UHelper\SliceTranslator::translateArticle($d2u_action_article, $source_clang_id, $target_clang_id, $d2u_mode);
+                    echo $d2u_result['success']
+                        ? rex_view::success(rex_i18n::msg('d2u_helper_article_translate_done', rex_escape($d2u_result['name'])))
+                        : rex_view::warning($d2u_result['message']);
+                }
+            }
+        }
+
+        $d2u_rows = \TobiasKrais\D2UHelper\SliceTranslator::getArticleContentRows($source_clang_id, $target_clang_id);
+        $d2u_ai_available = \TobiasKrais\D2UHelper\AiTranslationHelper::isAvailable();
+
+        if (0 === count($d2u_rows)) {
+            echo rex_view::info(rex_i18n::msg('d2u_helper_article_none'));
+        } else {
+            if (!$d2u_ai_available) {
+                echo rex_view::info(rex_i18n::msg('d2u_helper_translations_ai_not_configured'));
+            }
+            $d2u_form_action = rex_escape(BackendHelper::getCurrentBackendPage([], ['message', 'message_type']));
+            echo '<div class="panel panel-edit">';
+            echo '<header class="panel-heading"><div class="panel-title">'. rex_i18n::msg('d2u_helper_translations_tab_articles') .'</div></header>';
+            echo '<div class="table-responsive">';
+            echo '<table class="table table-striped table-hover" style="margin-bottom:0">';
+            echo '<thead><tr>'
+                . '<th>'. rex_i18n::msg('d2u_helper_article_col_name') .'</th>'
+                . '<th class="text-center">'. rex_i18n::msg('d2u_helper_article_col_nocontent') .'</th>'
+                . '<th class="text-center">'. rex_i18n::msg('d2u_helper_article_col_missing') .'</th>'
+                . '<th class="text-center">'. rex_i18n::msg('d2u_helper_article_col_update') .'</th>'
+                . '<th>'. rex_i18n::msg('d2u_helper_article_col_actions') .'</th>'
+                . '</tr></thead><tbody>';
+            foreach ($d2u_rows as $d2u_row) {
+                $d2u_indent = str_repeat('<span style="display:inline-block;width:18px"></span>', (int) $d2u_row['level']);
+                // rex_url::backendPage() already escapes the argument separator, so the
+                // URL must NOT be passed through rex_escape() (that would double-encode &).
+                $d2u_edit_url = rex_url::backendPage('content/edit', ['article_id' => (int) $d2u_row['id'], 'clang' => $target_clang_id, 'mode' => 'edit']);
+                $d2u_link = '<a href="'. $d2u_edit_url .'">'. rex_escape($d2u_row['name']) .'</a>';
+                echo '<tr>';
+                echo '<td>'. $d2u_indent . ($d2u_row['hasContent'] ? $d2u_link : '<span class="text-muted">'. $d2u_link .'</span>') .'</td>';
+                if ($d2u_row['hasContent']) {
+                    echo '<td class="text-center">'. ($d2u_row['noContent'] ? '<span class="label label-danger">'. rex_i18n::msg('d2u_helper_article_state_nocontent') .'</span>' : '<span class="text-muted">–</span>') .'</td>';
+                    echo '<td class="text-center">'. ((int) $d2u_row['missing'] > 0 ? '<span class="label label-warning">'. (int) $d2u_row['missing'] .'</span>' : '<span class="text-muted">–</span>') .'</td>';
+                    echo '<td class="text-center">'. ((int) $d2u_row['stale'] > 0 ? '<span class="label label-info">'. (int) $d2u_row['stale'] .'</span>' : '<span class="text-muted">–</span>') .'</td>';
+                    echo '<td>';
+                    if ($d2u_ai_available) {
+                        echo '<form action="'. $d2u_form_action .'" method="post" style="display:inline-block;margin:0 4px 4px 0">'
+                            . $csrfToken->getHiddenField()
+                            . '<input type="hidden" name="d2u_translate_article" value="'. (int) $d2u_row['id'] .'">'
+                            . '<input type="hidden" name="d2u_translate_mode" value="all">'
+                            . '<button type="submit" class="btn btn-primary btn-xs"><i class="rex-icon fa-language"></i> '. rex_i18n::msg('d2u_helper_article_action_all') .'</button>'
+                            . '</form>';
+                        if ((int) $d2u_row['missing'] > 0) {
+                            echo '<form action="'. $d2u_form_action .'" method="post" style="display:inline-block;margin:0 4px 4px 0">'
+                                . $csrfToken->getHiddenField()
+                                . '<input type="hidden" name="d2u_translate_article" value="'. (int) $d2u_row['id'] .'">'
+                                . '<input type="hidden" name="d2u_translate_mode" value="missing">'
+                                . '<button type="submit" class="btn btn-default btn-xs"><i class="rex-icon fa-plus"></i> '. rex_i18n::msg('d2u_helper_article_action_missing') .'</button>'
+                                . '</form>';
+                        }
+                        if ((int) $d2u_row['stale'] > 0) {
+                            echo '<form action="'. $d2u_form_action .'" method="post" style="display:inline-block;margin:0 4px 4px 0">'
+                                . $csrfToken->getHiddenField()
+                                . '<input type="hidden" name="d2u_translate_article" value="'. (int) $d2u_row['id'] .'">'
+                                . '<input type="hidden" name="d2u_translate_mode" value="stale">'
+                                . '<button type="submit" class="btn btn-default btn-xs"><i class="rex-icon fa-refresh"></i> '. rex_i18n::msg('d2u_helper_article_action_update') .'</button>'
+                                . '</form>';
+                        }
+                    }
+                    echo '</td>';
+                } else {
+                    echo '<td colspan="4"></td>';
+                }
+                echo '</tr>';
+            }
+            echo '</tbody></table></div></div>';
+        }
     } else {
         /**
          * Extension point for translation list.
@@ -106,6 +189,7 @@ if (1 === count(rex_clang::getAll())) {
         $translation_list = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_TRANSLATION_LIST', params: ['source_clang_id' => $source_clang_id, 'target_clang_id' => $target_clang_id, 'filter_type' => $filter_type]));
     }
 
+    if ('addons' === $d2u_translation_mode) {
     // When AI translation is available and there is at least one object to
     // translate, offer a "translate all" button and load the helper JS. The
     // per-object trigger icons are rendered by the addons via
@@ -169,6 +253,7 @@ if (1 === count(rex_clang::getAll())) {
     }
     else {
         echo 'update' === $filter_type ? rex_i18n::msg('d2u_helper_translations_uptodate_update') : rex_i18n::msg('d2u_helper_translations_uptodate_missing');
+    }
     }
 
     echo BackendHelper::getCSS();
