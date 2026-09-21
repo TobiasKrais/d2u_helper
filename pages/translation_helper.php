@@ -311,7 +311,11 @@ if (1 === count(rex_clang::getAll())) {
             . ' data-msg-error="'. rex_escape(rex_i18n::msg('d2u_helper_translations_ai_error')) .'">'
             . rex_csrf_token::factory('d2u_helper_translate')->getHiddenField()
             . '</div>';
-        echo '<p><button type="button" id="d2u-translate-all" class="btn btn-primary"><i class="rex-icon fa-language"></i> '. rex_i18n::msg('d2u_helper_translations_ai_translate_all') .'</button></p>';
+        echo '<p>'
+            . '<button type="button" id="d2u-translate-all" class="btn btn-primary"><i class="rex-icon fa-language"></i> '. rex_i18n::msg('d2u_helper_translations_ai_translate_all') .'</button> '
+            . '<button type="button" id="d2u-translate-missing" class="btn btn-default"><i class="rex-icon fa-plus"></i> '. rex_i18n::msg('d2u_helper_translations_ai_translate_missing') .'</button> '
+            . '<button type="button" id="d2u-translate-update" class="btn btn-default"><i class="rex-icon fa-refresh"></i> '. rex_i18n::msg('d2u_helper_translations_ai_translate_update') .'</button>'
+            . '</p>';
     }
     elseif (!$d2u_ai_available && $d2u_has_items) {
         // AI translation is not available (ai_platform missing/inactive or no
@@ -353,8 +357,8 @@ if (1 === count(rex_clang::getAll())) {
                 echo '<td class="text-nowrap"><i class="rex-icon '. $page['icon'] .'"></i> '. $page['title'] .'</td>';
                 // Each column is its own translate scope so the missing and the
                 // to-update objects can be translated separately.
-                echo '<td class="d2u-translate-category-scope">'. ($d2u_ai_available && '' !== $d2u_mh ? $d2u_catbtn : '') . ('' !== $d2u_mh ? $d2u_mh : '<span class="text-muted">–</span>') .'</td>';
-                echo '<td class="d2u-translate-category-scope">'. ($d2u_ai_available && '' !== $d2u_uh ? $d2u_catbtn : '') . ('' !== $d2u_uh ? $d2u_uh : '<span class="text-muted">–</span>') .'</td>';
+                echo '<td class="d2u-translate-category-scope d2u-scope-missing">'. ($d2u_ai_available && '' !== $d2u_mh ? $d2u_catbtn : '') . ('' !== $d2u_mh ? $d2u_mh : '<span class="text-muted">–</span>') .'</td>';
+                echo '<td class="d2u-translate-category-scope d2u-scope-update">'. ($d2u_ai_available && '' !== $d2u_uh ? $d2u_catbtn : '') . ('' !== $d2u_uh ? $d2u_uh : '<span class="text-muted">–</span>') .'</td>';
                 echo '</tr>';
             }
         }

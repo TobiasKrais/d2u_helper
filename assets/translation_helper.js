@@ -145,6 +145,22 @@
             });
         }
 
+        // Filtered "translate all" variants: only the missing or only the
+        // to-update column (scoped by the cell class on the addon table).
+        [['d2u-translate-missing', '.d2u-scope-missing'], ['d2u-translate-update', '.d2u-scope-update']].forEach(function (pair) {
+            var button = document.getElementById(pair[0]);
+            if (!button) {
+                return;
+            }
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                var items = Array.prototype.slice.call(document.querySelectorAll(pair[1] + ' .d2u-translation-item'));
+                if (items.length > 0) {
+                    translateAllSequential(items, config, button);
+                }
+            });
+        });
+
         // Per-category ("Kategorie") translate button: translates only the items
         // inside the same scope as the clicked button — a table row
         // (.d2u-translate-category-scope) or, in older markup, a <fieldset>. Uses
