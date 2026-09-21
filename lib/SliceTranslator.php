@@ -105,7 +105,7 @@ class SliceTranslator
             $article = rex_article::get($articleId, $sourceClang);
             $articles[] = [
                 'id' => $articleId,
-                'name' => $article instanceof rex_article ? $article->getName() : ('#' . $articleId),
+                'name' => self::displayName($article, $articleId),
             ];
         }
 
@@ -124,7 +124,7 @@ class SliceTranslator
      * - missing:   source slices without a positional target counterpart
      * - stale:     target slices older than their source (need an update)
      *
-     * @return list<array{id: int, name: string, level: int, hasContent: bool, noContent: bool, missing: int, stale: int}>
+     * @return list<array{id: int, name: string, level: int, path: list<int>, hasContent: bool, noContent: bool, missing: int, stale: int, hasChildren: bool, isCategory: bool}>
      */
     public static function getArticleContentRows(int $sourceClang, int $targetClang): array
     {
@@ -172,9 +172,8 @@ class SliceTranslator
             if (!$article instanceof rex_article) {
                 continue;
             }
-            foreach ($article->getPathAsArray() as $catId) {
-                $catId = (int) $catId;
-                if ($catId > 0 && !isset($nodes[$catId])) {
+            foreach (self::ancestorIds($article, $sourceClang) as $catId) {
+                if (!isset($nodes[$catId])) {
                     $cat = rex_article::get($catId, $sourceClang);
                     if ($cat instanceof rex_article) {
                         $nodes[$catId] = $cat;
@@ -186,11 +185,16 @@ class SliceTranslator
 
         $list = [];
         foreach ($nodes as $id => $article) {
+            $ancestors = self::ancestorIds($article, $sourceClang);
             $list[] = [
                 'id' => $id,
-                'name' => $article->getName(),
-                'level' => count($article->getPathAsArray()),
+                // Category start articles show the category name (catname) instead of
+                // the article name, matching the REDAXO structure tree.
+                'name' => self::displayName($article, $id),
+                'level' => count($ancestors),
+                'path' => $ancestors,
                 'sort' => self::articleSortPath($article, $sourceClang),
+                'isCategory' => $article->isStartArticle(),
                 'hasContent' => isset($status[$id]),
                 'noContent' => $status[$id]['noContent'] ?? false,
                 'missing' => $status[$id]['missing'] ?? 0,
@@ -210,10 +214,143 @@ class SliceTranslator
             return count($pa) <=> count($pb);
         });
 
-        return array_map(static function (array $row): array {
+        // A node is a collapsible category when another node lists it as an ancestor.
+        $parentIds = [];
+        foreach ($list as $row) {
+            foreach ($row['path'] as $pid) {
+                $parentIds[$pid] = true;
+            }
+        }
+
+        return array_map(static function (array $row) use ($parentIds): array {
             unset($row['sort']);
+            $row['hasChildren'] = isset($parentIds[(int) $row['id']]);
             return $row;
         }, $list);
+    }
+
+    /**
+     * Slice status of a single article: whether the target has no slices yet,
+     * how many source slices are missing in the target and how many are stale.
+     *
+     * @return array{noContent: bool, missing: int, stale: int}
+     */
+    public static function getArticleContentStatus(int $articleId, int $sourceClang, int $targetClang): array
+    {
+        $default = ['noContent' => false, 'missing' => 0, 'stale' => 0];
+        if ($articleId <= 0 || $sourceClang <= 0 || $targetClang <= 0 || $sourceClang === $targetClang) {
+            return $default;
+        }
+
+        $table = rex::getTable('article_slice');
+        $rows = rex_sql::factory()->getArray(
+            'SELECT COUNT(*) AS source_count,
+                    SUM(CASE WHEN t.id IS NULL THEN 1 ELSE 0 END) AS missing_count,
+                    SUM(CASE WHEN t.id IS NOT NULL AND s.updatedate > t.updatedate THEN 1 ELSE 0 END) AS stale_count,
+                    SUM(CASE WHEN t.id IS NOT NULL THEN 1 ELSE 0 END) AS target_count
+             FROM ' . $table . ' s
+             LEFT JOIN ' . $table . ' t
+               ON t.article_id = s.article_id
+              AND t.ctype_id = s.ctype_id
+              AND t.priority = s.priority
+              AND t.clang_id = :target
+              AND t.revision = 0
+             WHERE s.article_id = :id AND s.clang_id = :source AND s.revision = 0',
+            [':id' => $articleId, ':source' => $sourceClang, ':target' => $targetClang],
+        );
+
+        if (0 === count($rows) || 0 === (int) $rows[0]['source_count']) {
+            return $default;
+        }
+
+        return [
+            'noContent' => 0 === (int) $rows[0]['target_count'],
+            'missing' => (int) $rows[0]['missing_count'],
+            'stale' => (int) $rows[0]['stale_count'],
+        ];
+    }
+
+    /**
+     * Renders the four status pieces of an article row (status icon in the name
+     * cell plus the three action cells) so the page and the AJAX endpoint stay
+     * in sync. Buttons carry both the form name/value and a data attribute, so
+     * they work as a plain submit and via the in-page AJAX handler.
+     *
+     * @param array{noContent: bool, missing: int, stale: int} $status
+     * @return array{icon: string, nocontent: string, missing: string, stale: string}
+     */
+    public static function renderArticleStatusCells(int $articleId, array $status, bool $aiAvailable): array
+    {
+        $btn = static function (string $mode, string $icon, string $label, string $style) use ($articleId): string {
+            $val = $articleId . ':' . $mode;
+            return '<button type="submit" name="d2u_action" value="' . $val . '" data-d2u-article-action="' . $val . '" class="btn ' . $style . ' btn-xs" title="' . rex_escape($label) . '" aria-label="' . rex_escape($label) . '"><i class="rex-icon ' . $icon . '"></i></button>';
+        };
+        $cell = static function (string $badge, string $button): string {
+            return '<div style="display:flex;align-items:center;justify-content:center;gap:8px">' . $badge . $button . '</div>';
+        };
+        $none = '<span class="text-muted">–</span>';
+
+        $noContent = (bool) $status['noContent'];
+        $missing = (int) $status['missing'];
+        $stale = (int) $status['stale'];
+        $done = !$noContent && 0 === $missing && 0 === $stale;
+
+        $icon = $done
+            ? '<i class="rex-icon fa-check text-success" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_state_uptodate')) . '"></i> '
+            : '<i class="rex-icon fa-exclamation-triangle text-warning" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_state_todo')) . '"></i> ';
+
+        return [
+            'icon' => $icon,
+            'nocontent' => $noContent
+                ? $cell('<span class="label label-danger">' . rex_i18n::msg('d2u_helper_article_state_nocontent') . '</span>', $aiAvailable ? $btn('all', 'fa-language', rex_i18n::msg('d2u_helper_article_action_all') . ' – ' . rex_i18n::msg('d2u_helper_article_hint_nocontent'), 'btn-primary') : '')
+                : $none,
+            'missing' => $missing > 0
+                ? $cell('<span class="label label-warning">' . $missing . '</span>', $aiAvailable ? $btn('missing', 'fa-plus', rex_i18n::msg('d2u_helper_article_action_missing') . ' – ' . rex_i18n::msg('d2u_helper_article_hint_missing'), 'btn-default') : '')
+                : $none,
+            'stale' => $stale > 0
+                ? $cell('<span class="label label-info">' . $stale . '</span>', $aiAvailable ? $btn('stale', 'fa-refresh', rex_i18n::msg('d2u_helper_article_action_update') . ' – ' . rex_i18n::msg('d2u_helper_article_hint_update'), 'btn-default') : '')
+                : $none,
+        ];
+    }
+
+    /**
+     * Display name for an article: the category name (catname) for category start
+     * articles, otherwise the article name; a "#<id>" fallback when missing.
+     */
+    private static function displayName(?rex_article $article, int $articleId): string
+    {
+        if (!$article instanceof rex_article) {
+            return '#' . $articleId;
+        }
+        if ($article->isStartArticle() && '' !== (string) $article->getValue('catname')) {
+            return (string) $article->getValue('catname');
+        }
+
+        return (string) $article->getName();
+    }
+
+    /**
+     * Ancestor category ids of an article, root first, excluding the article
+     * itself. Derived from the parent chain, so it never contains the node's own
+     * id (unlike getPathAsArray, whose self-inclusion broke the tree collapse).
+     *
+     * @return list<int>
+     */
+    private static function ancestorIds(rex_article $article, int $clang): array
+    {
+        $path = [];
+        $parentId = (int) $article->getParentId();
+        $guard = 0;
+        while ($parentId > 0 && $guard++ < 100) {
+            $path[] = $parentId;
+            $parent = rex_article::get($parentId, $clang);
+            if (!$parent instanceof rex_article) {
+                break;
+            }
+            $parentId = (int) $parent->getParentId();
+        }
+
+        return array_reverse($path);
     }
 
     /**
@@ -226,10 +363,10 @@ class SliceTranslator
     private static function articleSortPath(rex_article $article, int $clang): array
     {
         $path = [];
-        foreach ($article->getPathAsArray() as $catId) {
-            $cat = rex_article::get((int) $catId, $clang);
+        foreach (self::ancestorIds($article, $clang) as $catId) {
+            $cat = rex_article::get($catId, $clang);
             $path[] = $cat instanceof rex_article ? (int) $cat->getPriority() : 0;
-            $path[] = (int) $catId;
+            $path[] = $catId;
         }
         $path[] = (int) $article->getPriority();
         $path[] = (int) $article->getId();
@@ -250,7 +387,7 @@ class SliceTranslator
     public static function translateArticle(int $articleId, int $sourceClang, int $targetClang, string $mode = 'all'): array
     {
         $article = rex_article::get($articleId, $sourceClang);
-        $name = $article instanceof rex_article ? $article->getName() : ('#' . $articleId);
+        $name = self::displayName($article, $articleId);
 
         if ($articleId <= 0 || $sourceClang <= 0 || $targetClang <= 0 || $sourceClang === $targetClang) {
             return ['success' => false, 'name' => $name, 'message' => rex_i18n::msg('d2u_helper_slice_translation_invalid')];

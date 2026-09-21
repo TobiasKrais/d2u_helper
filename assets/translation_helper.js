@@ -146,8 +146,9 @@
         }
 
         // Per-category ("Kategorie") translate button: translates only the items
-        // inside the same <fieldset> (category) as the clicked button. Uses the
-        // capture phase + stopPropagation so the click does NOT bubble to the
+        // inside the same scope as the clicked button — a table row
+        // (.d2u-translate-category-scope) or, in older markup, a <fieldset>. Uses
+        // the capture phase + stopPropagation so the click does NOT bubble to a
         // <legend> toggle (which would otherwise just collapse/expand the category).
         document.addEventListener('click', function (event) {
             var catButton = event.target.closest ? event.target.closest('.d2u-translate-category') : null;
@@ -156,11 +157,11 @@
             }
             event.preventDefault();
             event.stopPropagation();
-            var fieldset = catButton.closest('fieldset');
-            if (!fieldset) {
+            var scope = catButton.closest('.d2u-translate-category-scope') || catButton.closest('fieldset');
+            if (!scope) {
                 return;
             }
-            var items = Array.prototype.slice.call(fieldset.querySelectorAll('.d2u-translation-item'));
+            var items = Array.prototype.slice.call(scope.querySelectorAll('.d2u-translation-item'));
             if (items.length > 0) {
                 translateAllSequential(items, config, catButton);
             }
