@@ -674,8 +674,16 @@ class FrontendHelper
         $startarticle = rex_article::get(rex_article::getSiteStartArticleId());
         $breadcrumb_start_only = true;
         $breadcrumbs = '';
+        // Track the href of the last appended breadcrumb so a following addon
+        // breadcrumb pointing to the same target (e.g. the url addon already
+        // renamed the current article to the detail name) is not duplicated.
+        $last_href = '';
+        $extract_href = static function (string $html): string {
+            return preg_match('/href="([^"]*)"/', $html, $m) ? $m[1] : '';
+        };
         if ($startarticle instanceof rex_article) {
             $breadcrumbs = '<a href="' . $startarticle->getUrl() . '" title="'. $startarticle->getName() .'"><span class="fa-icon fa-home"></span></a>';
+            $last_href = $startarticle->getUrl();
         }
         $current_article = rex_article::getCurrent();
         if ($current_article instanceof rex_article) {
@@ -686,14 +694,17 @@ class FrontendHelper
                 if ($article instanceof rex_category && $id !== rex_article::getSiteStartArticleId()) {
                     $breadcrumb_start_only = false;
                     $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $article->getUrl() . '">' . $article->getName() . '</a>';
+                    $last_href = $article->getUrl();
                 } elseif ($startarticle instanceof rex_article) {
                     $breadcrumb_start_only = true;
                     $breadcrumbs = '<a href="' . $startarticle->getUrl() . '"><span class="fa-icon fa-home"></span></a>';
+                    $last_href = $startarticle->getUrl();
                 }
             }
             // Articles
             if (!$current_article->isStartArticle() && !$current_article->isSiteStartArticle()) {
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;<a href="' . $current_article->getUrl() . '">' . $current_article->getName() . '</a>';
+                $last_href = $current_article->getUrl();
                 $breadcrumb_start_only = false;
             }
         }
@@ -711,7 +722,15 @@ class FrontendHelper
         $ep_breadcrumbs = rex_extension::registerPoint(new rex_extension_point(name: 'D2U_HELPER_BREADCRUMBS', params: ['url_namespace' => self::getUrlNamespace(), 'url_id' => self::getUrlId()]));
         if(is_array($ep_breadcrumbs)) {
             foreach ($ep_breadcrumbs as $ep_breadcrumb) {
+                // Skip an addon breadcrumb whose link target is identical to the
+                // previous entry (the url addon may already have set the current
+                // article name to the detail record's name -> avoid duplicates).
+                $ep_href = $extract_href($ep_breadcrumb);
+                if ('' !== $ep_href && $ep_href === $last_href) {
+                    continue;
+                }
                 $breadcrumbs .= ' &nbsp;»&nbsp;&nbsp;' . $ep_breadcrumb;
+                $last_href = '' !== $ep_href ? $ep_href : $last_href;
                 $breadcrumb_start_only = false;
             }
         }
