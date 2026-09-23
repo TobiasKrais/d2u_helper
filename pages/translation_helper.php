@@ -37,13 +37,19 @@ if (1 === count(rex_clang::getAll())) {
     $source_clang_id = (int) rex_config::get('d2u_helper', 'default_lang');
     $target_clang_id = is_array(rex_session('d2u_helper_translation')) && array_key_exists('clang_id', rex_session('d2u_helper_translation')) ? (int) rex_session('d2u_helper_translation')['clang_id'] : rex_clang::getStartId();
     $filter_type = is_array(rex_session('d2u_helper_translation')) && array_key_exists('filter', rex_session('d2u_helper_translation')) ? (string) rex_session('d2u_helper_translation')['filter'] : 'update';
-    $d2u_translation_mode = (($d2u_translation_mode ?? 'articles') === 'addons') ? 'addons' : 'articles';
+    $d2u_translation_mode = in_array($d2u_translation_mode ?? 'articles', ['articles', 'addons', 'seo'], true) ? ($d2u_translation_mode ?? 'articles') : 'articles';
 ?>
-	<form action="<?= BackendHelper::getCurrentBackendPage([], ['message', 'message_type']) ?>" method="post">
+	<form action="<?= BackendHelper::getCurrentBackendPage([], ['message', 'message_type']) ?>" method="post" id="d2u-translation-filter-form">
 		<?= $csrfToken->getHiddenField() ?>
+		<input type="hidden" name="btn_save" value="save">
 		<div class="panel panel-edit">
 			<header class="panel-heading"><div class="panel-title"><?= rex_i18n::msg('d2u_helper_translations_filter') ?></div></header>
 			<div class="panel-body">
+				<p class="text-muted" style="margin-bottom:15px;">
+					<b><?= rex_i18n::msg('d2u_helper_translations_source_language') ?>:</b>
+					<?= rex_escape(rex_clang::get($source_clang_id) instanceof rex_clang ? rex_clang::get($source_clang_id)->getName() : (string) $source_clang_id) ?>
+					<br><small><?= rex_i18n::msg('d2u_helper_translations_source_hint') ?></small>
+				</p>
 				<?php
                     // Language selection
                     $lang_options = [];
@@ -61,15 +67,18 @@ if (1 === count(rex_clang::getAll())) {
                     BackendHelper::form_select('d2u_helper_translations_language', 'settings[clang_id]', $lang_options, [$target_clang_id]);
                 ?>
 			</div>
-			<footer class="panel-footer">
-				<div class="rex-form-panel-footer">
-					<div class="btn-toolbar">
-						<button class="btn btn-save rex-form-aligned" type="submit" name="btn_save" value="save"><?= rex_i18n::msg('d2u_helper_translations_apply') ?></button>
-					</div>
-				</div>
-			</footer>
 		</div>
 	</form>
+	<script>
+		(function () {
+			var form = document.getElementById('d2u-translation-filter-form');
+			if (!form) { return; }
+			var sel = form.querySelector('select[name="settings[clang_id]"]');
+			if (sel) {
+				sel.addEventListener('change', function () { form.submit(); });
+			}
+		})();
+	</script>
 <?php
     if ('articles' === $d2u_translation_mode) {
         // Single (one button) and bulk (checkbox selection) actions share one form;
@@ -172,7 +181,7 @@ if (1 === count(rex_clang::getAll())) {
                     echo '<td class="text-center d2u-cell-missing">'. $d2u_cells['missing'] .'</td>';
                     echo '<td class="text-center d2u-cell-stale">'. $d2u_cells['stale'] .'</td>';
                 } else {
-                    // Structural ancestor row: name (+ collapse toggle) only.
+                    // Structural ancestor row: name (+ collapse toggle) and online status.
                     echo '<td></td>';
                     echo '<td>'. $d2u_indent . $d2u_toggle .'<i class="rex-icon rex-icon-category text-muted"></i> <a href="'. $d2u_edit_url .'" class="text-muted">'. $d2u_name .'</a></td>';
                     echo '<td colspan="3"></td>';
@@ -223,6 +232,145 @@ if (1 === count(rex_clang::getAll())) {
             . '<strong>'. rex_i18n::msg('d2u_helper_article_module_setup_title') .'</strong><br>'
             . rex_i18n::msg('d2u_helper_article_module_setup_text', '<code>/* d2u_translate: 1:text, 2:html */</code>')
             . '</small></div></div>';
+    } elseif ('seo' === $d2u_translation_mode) {
+        // Categories & SEO tab: translate/synchronise the page title and the yrewrite
+        // SEO fields (title, description, image) and align the online status.
+        if (!$invalidCsrf) {
+            $d2u_seo_single = (string) filter_input(INPUT_POST, 'd2u_seo_action');
+            $d2u_seo_bulk = (string) filter_input(INPUT_POST, 'd2u_seo_bulk');
+            if (('' !== $d2u_seo_single || '' !== $d2u_seo_bulk) && !$csrfToken->isValid()) {
+                echo rex_view::error(rex_i18n::msg('csrf_token_invalid'));
+            } elseif ('' !== $d2u_seo_single) {
+                [$d2u_sid, $d2u_smode] = array_pad(explode(':', $d2u_seo_single, 2), 2, '');
+                $d2u_sid = (int) $d2u_sid;
+                if ($d2u_sid > 0 && in_array($d2u_smode, ['translate', 'sync', 'align', 'align_status', 'align_image'], true)) {
+                    $d2u_res = match ($d2u_smode) {
+                        'translate' => \TobiasKrais\D2UHelper\SeoTranslator::translateArticleSeo($d2u_sid, $source_clang_id, $target_clang_id),
+                        'align' => \TobiasKrais\D2UHelper\SeoTranslator::alignArticleSeo($d2u_sid, $source_clang_id, $target_clang_id),
+                        'align_status' => \TobiasKrais\D2UHelper\SeoTranslator::alignStatusArticleSeo($d2u_sid, $source_clang_id, $target_clang_id),
+                        'align_image' => \TobiasKrais\D2UHelper\SeoTranslator::alignImageArticleSeo($d2u_sid, $source_clang_id, $target_clang_id),
+                        default => \TobiasKrais\D2UHelper\SeoTranslator::syncArticleSeo($d2u_sid, $source_clang_id, $target_clang_id),
+                    };
+                    echo $d2u_res['success']
+                        ? rex_view::success(rex_i18n::msg('d2u_helper_seo_done', rex_escape($d2u_res['name'])))
+                        : rex_view::warning($d2u_res['message']);
+                }
+            } elseif ('' !== $d2u_seo_bulk && in_array($d2u_seo_bulk, ['translate', 'sync', 'align'], true)) {
+                $d2u_seo_ids = array_values(array_filter(array_map('intval', (array) rex_post('d2u_seo_ids', 'array', [])), static fn (int $v): bool => $v > 0));
+                if (0 === count($d2u_seo_ids)) {
+                    echo rex_view::info(rex_i18n::msg('d2u_helper_article_bulk_none'));
+                } else {
+                    $d2u_seo_ok = 0;
+                    foreach ($d2u_seo_ids as $d2u_bid) {
+                        $d2u_r = match ($d2u_seo_bulk) {
+                            'translate' => \TobiasKrais\D2UHelper\SeoTranslator::translateArticleSeo($d2u_bid, $source_clang_id, $target_clang_id),
+                            'align' => \TobiasKrais\D2UHelper\SeoTranslator::alignArticleSeo($d2u_bid, $source_clang_id, $target_clang_id),
+                            default => \TobiasKrais\D2UHelper\SeoTranslator::syncArticleSeo($d2u_bid, $source_clang_id, $target_clang_id),
+                        };
+                        if ($d2u_r['success']) {
+                            ++$d2u_seo_ok;
+                        }
+                    }
+                    echo rex_view::success(rex_i18n::msg('d2u_helper_seo_bulk_done', $d2u_seo_ok));
+                }
+            }
+        }
+
+        $d2u_seo_rows = \TobiasKrais\D2UHelper\SeoTranslator::getSeoRows($source_clang_id, $target_clang_id);
+        $d2u_ai_available = \TobiasKrais\D2UHelper\AiTranslationHelper::isAvailable();
+        $d2u_seo_fields = \TobiasKrais\D2UHelper\SeoTranslator::seoFields();
+        $d2u_seo_labels = [
+            'title' => rex_i18n::msg('d2u_helper_seo_col_title'),
+            'yrewrite_title' => rex_i18n::msg('d2u_helper_seo_col_yrewrite_title'),
+            'yrewrite_description' => rex_i18n::msg('d2u_helper_seo_col_yrewrite_description'),
+            'yrewrite_image' => rex_i18n::msg('d2u_helper_seo_col_yrewrite_image'),
+        ];
+        // The SEO image is not translated, so it is grouped with the online status
+        // (non-translatable data) on the left; only the text fields are translatable.
+        $d2u_has_image = array_key_exists('yrewrite_image', $d2u_seo_fields);
+        $d2u_seo_text_fields = array_diff_key($d2u_seo_fields, ['yrewrite_image' => true]);
+
+        if (0 === count($d2u_seo_rows)) {
+            echo rex_view::info(rex_i18n::msg('d2u_helper_article_none'));
+        } else {
+            if (!$d2u_ai_available) {
+                echo rex_view::info(rex_i18n::msg('d2u_helper_translations_ai_not_configured'));
+            }
+            $d2u_form_action = rex_escape(BackendHelper::getCurrentBackendPage([], ['message', 'message_type']));
+            $d2u_seo_ajax_csrf = rex_csrf_token::factory('d2u_helper_seo_translate')->getValue();
+
+            echo '<style>#d2u-seo-table thead th{position:sticky;top:0;z-index:2;background-color:#f5f5f5}@media(prefers-color-scheme:dark){#d2u-seo-table thead th{background-color:#2b2b2b}}</style>';
+            echo '<form action="' . $d2u_form_action . '" method="post" id="d2u-seo-table"'
+                . ' data-seo-ajax="1" data-seo-csrf="' . rex_escape($d2u_seo_ajax_csrf) . '" data-target-clang="' . $target_clang_id . '" data-seo-ai="' . ($d2u_ai_available ? '1' : '0') . '"'
+                . ' data-seo-csrf-name="' . rex_escape(rex_csrf_token::PARAM) . '"'
+                . ' data-msg-working="' . rex_escape(rex_i18n::msg('d2u_helper_seo_processing')) . '"'
+                . ' data-msg-error="' . rex_escape(rex_i18n::msg('d2u_helper_translations_ai_error')) . '"'
+                . ' data-msg-none="' . rex_escape(rex_i18n::msg('d2u_helper_article_bulk_none')) . '">';
+            echo $csrfToken->getHiddenField();
+            echo '<div class="panel panel-edit">';
+            echo '<div id="d2u-seo-feedback" class="alert" style="display:none;margin:10px" role="status" aria-live="polite"></div>';
+            echo '<div class="panel-body" style="padding-bottom:0"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:10px">';
+            echo '<strong style="margin-right:4px">' . rex_i18n::msg('d2u_helper_article_bulk_selected') . ':</strong>';
+            if ($d2u_ai_available) {
+                echo '<button type="submit" name="d2u_seo_bulk" value="translate" data-seo-bulk="translate" class="btn btn-xs btn-primary"><i class="rex-icon fa-language"></i> ' . rex_i18n::msg('d2u_helper_seo_action_translate') . '</button>';
+            }
+            echo '<button type="submit" name="d2u_seo_bulk" value="align" data-seo-bulk="align" class="btn btn-xs btn-default"><i class="rex-icon fa-random"></i> ' . rex_i18n::msg('d2u_helper_article_align_status') . '</button>';
+            echo '</div></div>';
+            echo '<div class="table-responsive"><table class="table table-striped table-hover" style="margin-bottom:0">';
+            echo '<thead><tr>';
+            echo '<th style="width:1%"><input type="checkbox" id="d2u-seo-select-all" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_select_all')) . '"></th>';
+            echo '<th>' . rex_i18n::msg('d2u_helper_article_col_name') . '</th>';
+            echo '<th class="text-center">' . rex_i18n::msg('d2u_helper_article_col_online') . '</th>';
+            if ($d2u_has_image) {
+                echo '<th class="text-center">' . rex_escape($d2u_seo_labels['yrewrite_image']) . '</th>';
+            }
+            foreach ($d2u_seo_text_fields as $d2u_fkey => $d2u_fdef) {
+                echo '<th class="text-center">' . rex_escape($d2u_seo_labels[$d2u_fkey] ?? $d2u_fkey) . '</th>';
+            }
+            echo '<th class="text-end">' . rex_i18n::msg('d2u_helper_article_col_actions') . '</th>';
+            echo '</tr></thead><tbody>';
+            foreach ($d2u_seo_rows as $d2u_row) {
+                $d2u_id = (int) $d2u_row['id'];
+                $d2u_cells = \TobiasKrais\D2UHelper\SeoTranslator::renderCells($d2u_row, $d2u_id);
+                $d2u_indent = str_repeat('<span style="display:inline-block;width:18px"></span>', (int) $d2u_row['level']);
+                $d2u_edit_url = rex_url::backendPage('content/edit', ['article_id' => $d2u_id, 'clang' => $target_clang_id, 'mode' => 'edit']);
+                $d2u_name = rex_escape($d2u_row['name']);
+                $d2u_path_attr = rex_escape(implode(',', $d2u_row['path']));
+                $d2u_toggle = !empty($d2u_row['hasChildren'])
+                    ? '<button type="button" class="btn btn-xs btn-default d2u-seo-toggle" data-collapse-id="' . $d2u_id . '" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_toggle')) . '" style="margin-right:4px;padding:0 5px"><i class="rex-icon fa-caret-down"></i></button>'
+                    : '';
+                $d2u_cat_icon = !empty($d2u_row['isCategory']) ? '<i class="rex-icon rex-icon-category text-muted"></i> ' : '';
+                echo '<tr data-article-id="' . $d2u_id . '" data-seo-id="' . $d2u_id . '" data-path="' . $d2u_path_attr . '">';
+                echo '<td><input type="checkbox" class="d2u-seo-check" name="d2u_seo_ids[]" value="' . $d2u_id . '"></td>';
+                echo '<td>' . $d2u_indent . $d2u_toggle . $d2u_cat_icon . '<a href="' . $d2u_edit_url . '">' . $d2u_name . '</a></td>';
+                echo '<td class="text-center" data-seo-cell="online">' . $d2u_cells['online'] . '</td>';
+                if ($d2u_has_image) {
+                    echo '<td class="text-center" data-seo-cell="yrewrite_image">' . ($d2u_cells['yrewrite_image'] ?? '') . '</td>';
+                }
+                foreach ($d2u_seo_text_fields as $d2u_fkey => $d2u_fdef) {
+                    echo '<td class="text-center" data-seo-cell="' . rex_escape($d2u_fkey) . '">' . ($d2u_cells[$d2u_fkey] ?? '') . '</td>';
+                }
+                echo '<td class="text-end text-nowrap">';
+                if ($d2u_ai_available) {
+                    echo '<button type="submit" name="d2u_seo_action" value="' . $d2u_id . ':translate" data-seo-id="' . $d2u_id . '" data-seo-action="translate" class="btn btn-xs btn-primary d2u-seo-ajax" title="' . rex_escape(rex_i18n::msg('d2u_helper_seo_action_translate')) . '"><i class="rex-icon fa-language"></i></button>';
+                }
+                echo '</td>';
+                echo '</tr>';
+            }
+            echo '</tbody></table></div>';
+            echo '<div class="panel-body"><small class="text-muted">' . rex_i18n::msg('d2u_helper_seo_hint') . '</small></div>';
+            echo '</div></form>';
+            // Collapse categories + select-all. Inline is fine in the REDAXO backend.
+            echo '<script>(function(){'
+                . 'var t=document.getElementById("d2u-seo-table");if(!t)return;'
+                . 'var sa=document.getElementById("d2u-seo-select-all");'
+                . 'if(sa)sa.addEventListener("change",function(){t.querySelectorAll(".d2u-seo-check").forEach(function(c){if(!c.closest("tr").hidden)c.checked=sa.checked;});});'
+                . 'var col={};'
+                . 'function apply(){t.querySelectorAll("tbody tr").forEach(function(tr){var own=tr.getAttribute("data-article-id");var p=(tr.getAttribute("data-path")||"").split(",").filter(Boolean);var h=p.some(function(id){return col[id]&&id!==own;});tr.hidden=h;if(h){var c=tr.querySelector(".d2u-seo-check");if(c)c.checked=false;}});}'
+                . 't.querySelectorAll(".d2u-seo-toggle").forEach(function(b){b.addEventListener("click",function(){var id=b.getAttribute("data-collapse-id");col[id]=!col[id];b.querySelector("i").className="rex-icon "+(col[id]?"fa-caret-right":"fa-caret-down");apply();});});'
+                . '})();</script>';
+            echo '<script src="' . rex_escape(rex_url::addonAssets('d2u_helper', 'seo_translate.js')) . '"></script>';
+        }
     } else {
         /**
          * Extension point for translation list.

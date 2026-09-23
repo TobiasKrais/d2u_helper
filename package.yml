@@ -16,6 +16,7 @@ page:
             perm: 'd2u_helper[translation_helper]'
             subpages:
                 articles: { title: 'translate:d2u_helper_translations_tab_articles' }
+                seo: { title: 'translate:d2u_helper_translations_tab_seo' }
                 addons: { title: 'translate:d2u_helper_translations_tab_addons' }
         settings: { title: 'translate:d2u_helper_settings', icon: rex-icon rex-icon-system, perm: 'd2u_helper[settings]' }
         help:

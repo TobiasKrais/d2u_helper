@@ -124,7 +124,7 @@ class SliceTranslator
      * - missing:   source slices without a positional target counterpart
      * - stale:     target slices older than their source (need an update)
      *
-     * @return list<array{id: int, name: string, level: int, path: list<int>, hasContent: bool, noContent: bool, missing: int, stale: int, hasChildren: bool, isCategory: bool}>
+     * @return list<array{id: int, name: string, level: int, path: list<int>, hasContent: bool, noContent: bool, missing: int, stale: int, hasChildren: bool, isCategory: bool, sourceOnline: bool, targetOnline: bool}>
      */
     public static function getArticleContentRows(int $sourceClang, int $targetClang): array
     {
@@ -186,6 +186,7 @@ class SliceTranslator
         $list = [];
         foreach ($nodes as $id => $article) {
             $ancestors = self::ancestorIds($article, $sourceClang);
+            $targetArticle = rex_article::get($id, $targetClang);
             $list[] = [
                 'id' => $id,
                 // Category start articles show the category name (catname) instead of
@@ -195,6 +196,10 @@ class SliceTranslator
                 'path' => $ancestors,
                 'sort' => self::articleSortPath($article, $sourceClang),
                 'isCategory' => $article->isStartArticle(),
+                // Online status of the source and the target language version, so the
+                // list can show the target status and flag a deviation from the source.
+                'sourceOnline' => $article->isOnline(),
+                'targetOnline' => $targetArticle instanceof rex_article && $targetArticle->isOnline(),
                 'hasContent' => isset($status[$id]),
                 'noContent' => $status[$id]['noContent'] ?? false,
                 'missing' => $status[$id]['missing'] ?? 0,
