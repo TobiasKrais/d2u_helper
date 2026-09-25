@@ -144,13 +144,27 @@
         if (busy) {
             return;
         }
+        var skipPdfEl = document.getElementById('d2u-skip-pdf');
+        var skipPdf = skipPdfEl && skipPdfEl.checked;
+        var skippedPdf = 0;
         var ids = Array.prototype.slice.call(form.querySelectorAll('.d2u-row-check'))
             .filter(function (c) { return c.checked && !(c.closest('tr') && c.closest('tr').hidden); })
+            .filter(function (c) {
+                if (skipPdf && c.getAttribute('data-has-pdf') === '1') {
+                    skippedPdf++;
+                    return false;
+                }
+                return true;
+            })
             .map(function (c) { return parseInt(c.value, 10); })
             .filter(function (v) { return v > 0; });
 
         if (0 === ids.length) {
-            setFeedback('<i class="rex-icon fa-info-circle"></i> ' + config.msgBulkNone, 'warning');
+            if (skippedPdf) {
+                setFeedback('<i class="rex-icon fa-info-circle"></i> ' + skippedPdf + ' PDF', 'info');
+            } else {
+                setFeedback('<i class="rex-icon fa-info-circle"></i> ' + config.msgBulkNone, 'warning');
+            }
             return;
         }
 
@@ -174,10 +188,11 @@
                 bulk.button.innerHTML = bulk.buttonHtml;
             }
             bulk.button = null;
+            var pdfNote = skippedPdf ? ' — ' + skippedPdf + ' PDF' : '';
             if (cancelled) {
-                setFeedback('<i class="rex-icon fa-ban text-warning"></i> ' + config.msgCancelled + ' (' + ok + ' / ' + ids.length + ')', 'warning');
+                setFeedback('<i class="rex-icon fa-ban text-warning"></i> ' + config.msgCancelled + ' (' + ok + ' / ' + ids.length + ')' + pdfNote, 'warning');
             } else {
-                setFeedback('<i class="rex-icon fa-check text-success"></i> ' + ok + ' / ' + ids.length + (fail ? ' (' + fail + ' ' + config.msgError + ')' : ''), fail ? 'warning' : 'success');
+                setFeedback('<i class="rex-icon fa-check text-success"></i> ' + ok + ' / ' + ids.length + (fail ? ' (' + fail + ' ' + config.msgError + ')' : '') + pdfNote, fail ? 'warning' : 'success');
             }
         }
 

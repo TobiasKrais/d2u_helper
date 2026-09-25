@@ -101,6 +101,16 @@ if (1 === count(rex_clang::getAll())) {
                 }
             } elseif ('' !== $d2u_bulk_mode && in_array($d2u_bulk_mode, $d2u_valid_modes, true)) {
                 $d2u_ids = array_values(array_filter(array_map('intval', (array) rex_post('d2u_articles', 'array', [])), static fn (int $v): bool => $v > 0));
+                $d2u_skipped_pdf = 0;
+                if (1 === (int) filter_input(INPUT_POST, 'd2u_skip_pdf', FILTER_VALIDATE_INT)) {
+                    $d2u_ids = array_values(array_filter($d2u_ids, static function (int $id) use ($source_clang_id, &$d2u_skipped_pdf): bool {
+                        if (\TobiasKrais\D2UHelper\SliceTranslator::articleHasPdfMedia($id, $source_clang_id)) {
+                            ++$d2u_skipped_pdf;
+                            return false;
+                        }
+                        return true;
+                    }));
+                }
                 if (0 === count($d2u_ids)) {
                     echo rex_view::info(rex_i18n::msg('d2u_helper_article_bulk_none'));
                 } else {
@@ -115,6 +125,9 @@ if (1 === count(rex_clang::getAll())) {
                     }
                     if ($d2u_fail > 0) {
                         echo rex_view::warning(rex_i18n::msg('d2u_helper_article_bulk_failed', $d2u_fail));
+                    }
+                    if ($d2u_skipped_pdf > 0) {
+                        echo rex_view::info(rex_i18n::msg('d2u_helper_article_skip_pdf_done', $d2u_skipped_pdf));
                     }
                 }
             }
@@ -144,6 +157,7 @@ if (1 === count(rex_clang::getAll())) {
                 echo '<button type="submit" name="d2u_bulk" value="all" data-d2u-bulk="all" class="btn btn-xs btn-primary"><i class="rex-icon fa-language"></i> '. rex_i18n::msg('d2u_helper_article_action_all') .'</button>';
                 echo '<button type="submit" name="d2u_bulk" value="missing" data-d2u-bulk="missing" class="btn btn-xs btn-default"><i class="rex-icon fa-plus"></i> '. rex_i18n::msg('d2u_helper_article_action_missing') .'</button>';
                 echo '<button type="submit" name="d2u_bulk" value="stale" data-d2u-bulk="stale" class="btn btn-xs btn-default"><i class="rex-icon fa-refresh"></i> '. rex_i18n::msg('d2u_helper_article_action_update') .'</button>';
+                echo '<label class="checkbox-inline" style="margin-left:10px;margin-bottom:0"><input type="checkbox" name="d2u_skip_pdf" value="1" id="d2u-skip-pdf" checked> '. rex_i18n::msg('d2u_helper_article_skip_pdf') .'</label>';
                 echo '</div>';
                 echo '<div id="d2u-article-feedback" class="alert" style="display:none;margin-bottom:10px" role="status" aria-live="polite"></div>';
                 echo '</div>';
@@ -152,38 +166,70 @@ if (1 === count(rex_clang::getAll())) {
             echo '<thead><tr>'
                 . '<th style="width:1%"><input type="checkbox" id="d2u-select-all" title="'. rex_escape(rex_i18n::msg('d2u_helper_article_select_all')) .'"></th>'
                 . '<th>'. rex_i18n::msg('d2u_helper_article_col_name') .'</th>'
+                . '<th class="text-center">'. rex_i18n::msg('d2u_helper_article_col_status') .'</th>'
+                . '<th class="text-center" title="'. rex_escape(rex_i18n::msg('d2u_helper_article_pdf_media_hint')) .'"><i class="rex-icon fa-file-pdf-o"></i></th>'
                 . '<th class="text-center">'. rex_i18n::msg('d2u_helper_article_col_nocontent') .'</th>'
                 . '<th class="text-center">'. rex_i18n::msg('d2u_helper_article_col_missing') .'</th>'
                 . '<th class="text-center">'. rex_i18n::msg('d2u_helper_article_col_update') .'</th>'
                 . '</tr></thead><tbody>';
+            $d2u_any_pdf = false;
+            foreach ($d2u_rows as $d2u_pdf_probe) {
+                if (!empty($d2u_pdf_probe['hasPdfMedia'])) {
+                    $d2u_any_pdf = true;
+                    break;
+                }
+            }
             foreach ($d2u_rows as $d2u_row) {
                 $d2u_id = (int) $d2u_row['id'];
-                $d2u_indent = str_repeat('<span style="display:inline-block;width:18px"></span>', (int) $d2u_row['level']);
+                // Each level indents by exactly one toggle-slot width so rows with and
+                // without a collapse arrow line up.
+                $d2u_indent = str_repeat('<span style="display:inline-block;width:26px"></span>', (int) $d2u_row['level']);
                 // rex_url::backendPage() already escapes the argument separator, so the
                 // URL must NOT be passed through rex_escape() (that would double-encode &).
                 $d2u_edit_url = rex_url::backendPage('content/edit', ['article_id' => $d2u_id, 'clang' => $target_clang_id, 'mode' => 'edit']);
                 $d2u_name = rex_escape($d2u_row['name']);
                 $d2u_path_attr = rex_escape(implode(',', $d2u_row['path']));
+                // Fixed-width toggle slot: a real button when the node has children,
+                // otherwise an empty spacer of the same width (keeps alignment).
                 $d2u_toggle = !empty($d2u_row['hasChildren'])
-                    ? '<button type="button" class="btn btn-xs btn-default d2u-collapse-toggle" data-collapse-id="'. $d2u_id .'" title="'. rex_escape(rex_i18n::msg('d2u_helper_article_toggle')) .'" style="margin-right:4px;padding:0 5px"><i class="rex-icon fa-caret-down"></i></button>'
-                    : '';
+                    ? '<button type="button" class="btn btn-xs btn-default d2u-collapse-toggle" data-collapse-id="'. $d2u_id .'" title="'. rex_escape(rex_i18n::msg('d2u_helper_article_toggle')) .'" style="width:22px;padding:0;margin-right:4px"><i class="rex-icon fa-caret-down"></i></button>'
+                    : '<span style="display:inline-block;width:26px"></span>';
                 echo '<tr data-article-id="'. $d2u_id .'" data-path="'. $d2u_path_attr .'">';
-                $d2u_cat_icon = !empty($d2u_row['isCategory']) ? '<i class="rex-icon rex-icon-category text-muted"></i> ' : '';
+                // Type icon: folder (category with children), empty folder (leaf
+                // category) or article.
+                if (!empty($d2u_row['isCategory'])) {
+                    $d2u_type_icon = !empty($d2u_row['hasChildren'])
+                        ? '<i class="rex-icon fa-folder text-muted" title="'. rex_escape(rex_i18n::msg('d2u_helper_article_type_category')) .'"></i> '
+                        : '<i class="rex-icon fa-folder-o text-muted" title="'. rex_escape(rex_i18n::msg('d2u_helper_article_type_category_empty')) .'"></i> ';
+                } else {
+                    $d2u_type_icon = '<i class="rex-icon fa-file-o text-muted" title="'. rex_escape(rex_i18n::msg('d2u_helper_article_type_article')) .'"></i> ';
+                }
+                $d2u_pdf_icon = '';
+                if (!empty($d2u_row['hasPdfMedia'])) {
+                    // Jump to the first PDF slice in the source language, where the file
+                    // is guaranteed to exist and can be inspected in context.
+                    $d2u_pdf_url = rex_url::backendPage('content/edit', ['article_id' => $d2u_id, 'clang' => $source_clang_id]) . '#slice' . (int) $d2u_row['pdfSliceId'];
+                    $d2u_pdf_icon = '<a href="' . $d2u_pdf_url . '" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_pdf_media_hint')) . '"><i class="rex-icon fa-file-pdf-o text-warning" style="margin-right:4px"></i></a>';
+                }
                 if ($d2u_row['hasContent']) {
                     $d2u_cells = \TobiasKrais\D2UHelper\SliceTranslator::renderArticleStatusCells($d2u_id, [
                         'noContent' => (bool) $d2u_row['noContent'],
                         'missing' => (int) $d2u_row['missing'],
                         'stale' => (int) $d2u_row['stale'],
                     ], $d2u_ai_available);
-                    echo '<td><input type="checkbox" class="d2u-row-check" name="d2u_articles[]" value="'. $d2u_id .'"></td>';
-                    echo '<td>'. $d2u_indent . $d2u_toggle . $d2u_cat_icon .'<span class="d2u-status-icon">'. $d2u_cells['icon'] .'</span><a href="'. $d2u_edit_url .'">'. $d2u_name .'</a></td>';
+                    echo '<td><input type="checkbox" class="d2u-row-check" name="d2u_articles[]" value="'. $d2u_id .'"'. (!empty($d2u_row['hasPdfMedia']) ? ' data-has-pdf="1"' : '') .'></td>';
+                    echo '<td>'. $d2u_indent . $d2u_toggle . $d2u_type_icon .'<a href="'. $d2u_edit_url .'">'. $d2u_name .'</a></td>';
+                    echo '<td class="text-center"><span class="d2u-status-icon">'. $d2u_cells['icon'] .'</span></td>';
+                    echo '<td class="text-center">'. $d2u_pdf_icon .'</td>';
                     echo '<td class="text-center d2u-cell-nocontent">'. $d2u_cells['nocontent'] .'</td>';
                     echo '<td class="text-center d2u-cell-missing">'. $d2u_cells['missing'] .'</td>';
                     echo '<td class="text-center d2u-cell-stale">'. $d2u_cells['stale'] .'</td>';
                 } else {
                     // Structural ancestor row: name (+ collapse toggle) and online status.
                     echo '<td></td>';
-                    echo '<td>'. $d2u_indent . $d2u_toggle .'<i class="rex-icon rex-icon-category text-muted"></i> <a href="'. $d2u_edit_url .'" class="text-muted">'. $d2u_name .'</a></td>';
+                    echo '<td>'. $d2u_indent . $d2u_toggle . $d2u_type_icon .'<a href="'. $d2u_edit_url .'" class="text-muted">'. $d2u_name .'</a></td>';
+                    echo '<td class="text-center"></td>';
+                    echo '<td class="text-center">'. $d2u_pdf_icon .'</td>';
                     echo '<td colspan="3"></td>';
                 }
                 echo '</tr>';
@@ -194,6 +240,7 @@ if (1 === count(rex_clang::getAll())) {
                 . rex_i18n::msg('d2u_helper_article_hint_nocontent') .'<br>'
                 . rex_i18n::msg('d2u_helper_article_hint_missing') .'<br>'
                 . rex_i18n::msg('d2u_helper_article_hint_update')
+                . ($d2u_any_pdf ? '<br><i class="rex-icon fa-file-pdf-o text-warning"></i> '. rex_i18n::msg('d2u_helper_article_hint_pdf') : '')
                 . '</small></div>';
             echo '</div></form>';
             // Collapse categories + select-all. Inline is fine in the REDAXO backend.
@@ -332,17 +379,23 @@ if (1 === count(rex_clang::getAll())) {
             foreach ($d2u_seo_rows as $d2u_row) {
                 $d2u_id = (int) $d2u_row['id'];
                 $d2u_cells = \TobiasKrais\D2UHelper\SeoTranslator::renderCells($d2u_row, $d2u_id);
-                $d2u_indent = str_repeat('<span style="display:inline-block;width:18px"></span>', (int) $d2u_row['level']);
+                $d2u_indent = str_repeat('<span style="display:inline-block;width:26px"></span>', (int) $d2u_row['level']);
                 $d2u_edit_url = rex_url::backendPage('content/edit', ['article_id' => $d2u_id, 'clang' => $target_clang_id, 'mode' => 'edit']);
                 $d2u_name = rex_escape($d2u_row['name']);
                 $d2u_path_attr = rex_escape(implode(',', $d2u_row['path']));
                 $d2u_toggle = !empty($d2u_row['hasChildren'])
-                    ? '<button type="button" class="btn btn-xs btn-default d2u-seo-toggle" data-collapse-id="' . $d2u_id . '" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_toggle')) . '" style="margin-right:4px;padding:0 5px"><i class="rex-icon fa-caret-down"></i></button>'
-                    : '';
-                $d2u_cat_icon = !empty($d2u_row['isCategory']) ? '<i class="rex-icon rex-icon-category text-muted"></i> ' : '';
+                    ? '<button type="button" class="btn btn-xs btn-default d2u-seo-toggle" data-collapse-id="' . $d2u_id . '" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_toggle')) . '" style="width:22px;padding:0;margin-right:4px"><i class="rex-icon fa-caret-down"></i></button>'
+                    : '<span style="display:inline-block;width:26px"></span>';
+                if (!empty($d2u_row['isCategory'])) {
+                    $d2u_type_icon = !empty($d2u_row['hasChildren'])
+                        ? '<i class="rex-icon fa-folder text-muted" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_type_category')) . '"></i> '
+                        : '<i class="rex-icon fa-folder-o text-muted" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_type_category_empty')) . '"></i> ';
+                } else {
+                    $d2u_type_icon = '<i class="rex-icon fa-file-o text-muted" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_type_article')) . '"></i> ';
+                }
                 echo '<tr data-article-id="' . $d2u_id . '" data-seo-id="' . $d2u_id . '" data-path="' . $d2u_path_attr . '">';
                 echo '<td><input type="checkbox" class="d2u-seo-check" name="d2u_seo_ids[]" value="' . $d2u_id . '"></td>';
-                echo '<td>' . $d2u_indent . $d2u_toggle . $d2u_cat_icon . '<a href="' . $d2u_edit_url . '">' . $d2u_name . '</a></td>';
+                echo '<td>' . $d2u_indent . $d2u_toggle . $d2u_type_icon . '<a href="' . $d2u_edit_url . '">' . $d2u_name . '</a></td>';
                 echo '<td class="text-center" data-seo-cell="online">' . $d2u_cells['online'] . '</td>';
                 if ($d2u_has_image) {
                     echo '<td class="text-center" data-seo-cell="yrewrite_image">' . ($d2u_cells['yrewrite_image'] ?? '') . '</td>';

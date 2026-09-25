@@ -9,6 +9,7 @@ use rex_clang;
 use rex_config;
 use rex_i18n;
 use rex_logger;
+use rex_media;
 use rex_sql;
 use rex_url;
 use rex_user;
@@ -124,7 +125,7 @@ class SliceTranslator
      * - missing:   source slices without a positional target counterpart
      * - stale:     target slices older than their source (need an update)
      *
-     * @return list<array{id: int, name: string, level: int, path: list<int>, hasContent: bool, noContent: bool, missing: int, stale: int, hasChildren: bool, isCategory: bool, sourceOnline: bool, targetOnline: bool}>
+     * @return list<array{id: int, name: string, level: int, path: list<int>, hasContent: bool, noContent: bool, missing: int, stale: int, hasChildren: bool, isCategory: bool, sourceOnline: bool, targetOnline: bool, hasPdfMedia: bool, pdfSliceId: int}>
      */
     public static function getArticleContentRows(int $sourceClang, int $targetClang): array
     {
@@ -150,6 +151,32 @@ class SliceTranslator
              GROUP BY s.article_id',
             [':source' => $sourceClang, ':target' => $targetClang],
         );
+
+        // Source-language article ids whose slices reference a PDF file (media
+        // columns or /media links in HTML values) — used to hint in the list that
+        // a page may carry documents needing a translated version.
+        $pdfCols = [];
+        for ($i = 1; $i <= 10; ++$i) {
+            $pdfCols[] = 'media' . $i;
+            $pdfCols[] = 'medialist' . $i;
+        }
+        for ($i = 1; $i <= 20; ++$i) {
+            $pdfCols[] = 'value' . $i;
+        }
+        $pdfArticleIds = [];
+        $pdfRows = rex_sql::factory()->getArray(
+            'SELECT article_id, id FROM ' . $table . ' WHERE clang_id = :source AND revision = 0 AND '
+                . 'LOWER(CONCAT_WS(\' \', ' . implode(', ', $pdfCols) . ')) LIKE :pdf '
+                . 'ORDER BY article_id, priority, id',
+            [':source' => $sourceClang, ':pdf' => '%.pdf%'],
+        );
+        foreach ($pdfRows as $pdfRow) {
+            $aid = (int) $pdfRow['article_id'];
+            // First (lowest priority/id) PDF slice per article, for the jump link.
+            if (!isset($pdfArticleIds[$aid])) {
+                $pdfArticleIds[$aid] = (int) $pdfRow['id'];
+            }
+        }
 
         $status = [];
         foreach ($rows as $row) {
@@ -204,6 +231,8 @@ class SliceTranslator
                 'noContent' => $status[$id]['noContent'] ?? false,
                 'missing' => $status[$id]['missing'] ?? 0,
                 'stale' => $status[$id]['stale'] ?? 0,
+                'hasPdfMedia' => isset($pdfArticleIds[$id]),
+                'pdfSliceId' => $pdfArticleIds[$id] ?? 0,
             ];
         }
 
@@ -302,7 +331,7 @@ class SliceTranslator
 
         $icon = $done
             ? '<i class="rex-icon fa-check text-success" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_state_uptodate')) . '"></i> '
-            : '<i class="rex-icon fa-exclamation-triangle text-warning" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_state_todo')) . '"></i> ';
+            : '<span class="label label-info" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_state_todo')) . '">&ne;</span> ';
 
         return [
             'icon' => $icon,
@@ -435,8 +464,16 @@ class SliceTranslator
     {
         $table = rex::getTable('article_slice');
 
+        // Media columns are fetched from the target too so a manually set target
+        // PDF (media/medialist referencing a .pdf) is preserved on update instead
+        // of being overwritten by the source — everything else is overwritten.
+        $mediaCols = [];
+        for ($i = 1; $i <= 10; ++$i) {
+            $mediaCols[] = 'media' . $i;
+            $mediaCols[] = 'medialist' . $i;
+        }
         $existing = rex_sql::factory()->getArray(
-            'SELECT id, updatedate FROM ' . $table . ' WHERE article_id = :a AND clang_id = :c AND ctype_id = :ct AND priority = :p AND revision = 0 LIMIT 1',
+            'SELECT id, updatedate, ' . implode(', ', $mediaCols) . ' FROM ' . $table . ' WHERE article_id = :a AND clang_id = :c AND ctype_id = :ct AND priority = :p AND revision = 0 LIMIT 1',
             [
                 ':a' => (int) $src['article_id'],
                 ':c' => $targetClang,
@@ -483,16 +520,34 @@ class SliceTranslator
         $sql->setTable($table);
 
         // Copy all columns from the source except identity and audit fields.
+        // Translatable value columns are overwritten with their translation, and
+        // media references are remapped to the target language where a target-
+        // language file exists (see remapMediaFilename, language-suffix convention).
         foreach ($src as $col => $value) {
             if (in_array($col, ['id', 'clang_id', 'createdate', 'createuser', 'updatedate', 'updateuser'], true)) {
                 continue;
             }
+            $value = (string) $value;
+            if (isset($translated[$col])) {
+                $value = (string) $translated[$col];
+            }
+            if (1 === preg_match('/^media\d+$/', $col)) {
+                // Preserve a manually set target PDF; otherwise remap the source.
+                if ($hasTarget && false !== stripos((string) ($existing[0][$col] ?? ''), '.pdf')) {
+                    $value = (string) $existing[0][$col];
+                } elseif ('' !== trim($value)) {
+                    $value = self::remapMediaFilename(trim($value), $sourceClang, $targetClang);
+                }
+            } elseif (1 === preg_match('/^medialist\d+$/', $col)) {
+                if ($hasTarget && false !== stripos((string) ($existing[0][$col] ?? ''), '.pdf')) {
+                    $value = (string) $existing[0][$col];
+                } else {
+                    $value = self::remapMediaList($value, $sourceClang, $targetClang);
+                }
+            } elseif (1 === preg_match('/^value\d+$/', $col) && '' !== $value) {
+                $value = self::remapMediaUrlsInHtml($value, $sourceClang, $targetClang);
+            }
             $sql->setValue($col, $value);
-        }
-
-        // Overwrite the translatable values with their translations.
-        foreach ($translated as $col => $translatedValue) {
-            $sql->setValue($col, $translatedValue);
         }
 
         $sql->setValue('clang_id', $targetClang);
@@ -507,6 +562,123 @@ class SliceTranslator
             $sql->setValue('createuser', $login);
             $sql->insert();
         }
+    }
+
+    /**
+     * Whether an article's source-language slices reference any PDF file (media
+     * columns or /media links in HTML values). Used by the bulk translate to
+     * optionally skip pages that carry documents.
+     *
+     * @api
+     */
+    public static function articleHasPdfMedia(int $articleId, int $sourceClang): bool
+    {
+        if ($articleId <= 0 || $sourceClang <= 0) {
+            return false;
+        }
+        $cols = [];
+        for ($i = 1; $i <= 10; ++$i) {
+            $cols[] = 'media' . $i;
+            $cols[] = 'medialist' . $i;
+        }
+        for ($i = 1; $i <= 20; ++$i) {
+            $cols[] = 'value' . $i;
+        }
+        $rows = rex_sql::factory()->getArray(
+            'SELECT 1 FROM ' . rex::getTable('article_slice') . ' WHERE article_id = :a AND clang_id = :c AND revision = 0 AND '
+                . 'LOWER(CONCAT_WS(\' \', ' . implode(', ', $cols) . ')) LIKE :pdf LIMIT 1',
+            [':a' => $articleId, ':c' => $sourceClang, ':pdf' => '%.pdf%'],
+        );
+
+        return count($rows) > 0;
+    }
+
+    /**
+     * Remaps a comma-separated media list (medialist columns) to the target
+     * language, entry by entry.
+     */
+    private static function remapMediaList(string $value, int $sourceClang, int $targetClang): string
+    {
+        if ('' === trim($value)) {
+            return $value;
+        }
+        $parts = array_map(static function (string $f) use ($sourceClang, $targetClang): string {
+            $f = trim($f);
+            return '' !== $f ? self::remapMediaFilename($f, $sourceClang, $targetClang) : $f;
+        }, explode(',', $value));
+
+        return implode(',', $parts);
+    }
+
+    /**
+     * Remaps media URLs inside an HTML value ("/media/<filename>") to their
+     * target-language equivalent.
+     */
+    private static function remapMediaUrlsInHtml(string $html, int $sourceClang, int $targetClang): string
+    {
+        return (string) preg_replace_callback('#/media/([^\s"\'<>)]+)#', static function (array $m) use ($sourceClang, $targetClang): string {
+            return '/media/' . self::remapMediaFilename($m[1], $sourceClang, $targetClang);
+        }, $html);
+    }
+
+    /**
+     * Remaps a single media filename to its target-language equivalent using the
+     * language-suffix convention ("flyer_en.pdf" -> "flyer_de.pdf", suffix = the
+     * clang short code). The remap is only applied when the resulting file
+     * actually exists in the media pool; otherwise the original filename is kept.
+     *
+     * @api
+     */
+    public static function remapMediaFilename(string $filename, int $sourceClang, int $targetClang): string
+    {
+        $filename = trim($filename);
+        if ('' === $filename) {
+            return $filename;
+        }
+
+        $candidate = self::mediaSuffixCandidate($filename, $sourceClang, $targetClang);
+        if ('' !== $candidate && rex_media::get($candidate) instanceof rex_media) {
+            return $candidate;
+        }
+
+        return $filename;
+    }
+
+    /**
+     * Builds the language-suffix candidate for a media filename, e.g.
+     * "flyer_en.pdf" -> "flyer_de.pdf". Returns '' when the filename does not
+     * carry the source-language suffix or the languages cannot be resolved.
+     */
+    private static function mediaSuffixCandidate(string $filename, int $sourceClang, int $targetClang): string
+    {
+        $srcCode = self::clangShortCode($sourceClang);
+        $tgtCode = self::clangShortCode($targetClang);
+        if ('' === $srcCode || '' === $tgtCode || $srcCode === $tgtCode) {
+            return '';
+        }
+
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $name = '' !== $ext ? substr($filename, 0, -(strlen($ext) + 1)) : $filename;
+
+        if (1 !== preg_match('/_' . preg_quote($srcCode, '/') . '$/i', $name)) {
+            return '';
+        }
+        $newName = substr($name, 0, -(strlen($srcCode) + 1)) . '_' . $tgtCode;
+
+        return $newName . ('' !== $ext ? '.' . $ext : '');
+    }
+
+    /**
+     * Two-letter lowercase short code of a clang (e.g. "en_gb" -> "en").
+     */
+    private static function clangShortCode(int $clangId): string
+    {
+        $clang = rex_clang::get($clangId);
+        if (!$clang instanceof rex_clang) {
+            return '';
+        }
+
+        return strtolower(substr($clang->getCode(), 0, 2));
     }
 
     /**
