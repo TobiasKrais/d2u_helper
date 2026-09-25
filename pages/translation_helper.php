@@ -358,10 +358,10 @@ if (1 === count(rex_clang::getAll())) {
             echo '<div id="d2u-seo-feedback" class="alert" style="display:none;margin:10px" role="status" aria-live="polite"></div>';
             echo '<div class="panel-body" style="padding-bottom:0"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:10px">';
             echo '<strong style="margin-right:4px">' . rex_i18n::msg('d2u_helper_article_bulk_selected') . ':</strong>';
+            echo '<button type="submit" name="d2u_seo_bulk" value="align" data-seo-bulk="align" class="btn btn-xs btn-default"><i class="rex-icon fa-random"></i> ' . rex_i18n::msg('d2u_helper_seo_action_align') . '</button>';
             if ($d2u_ai_available) {
                 echo '<button type="submit" name="d2u_seo_bulk" value="translate" data-seo-bulk="translate" class="btn btn-xs btn-primary"><i class="rex-icon fa-language"></i> ' . rex_i18n::msg('d2u_helper_seo_action_translate') . '</button>';
             }
-            echo '<button type="submit" name="d2u_seo_bulk" value="align" data-seo-bulk="align" class="btn btn-xs btn-default"><i class="rex-icon fa-random"></i> ' . rex_i18n::msg('d2u_helper_article_align_status') . '</button>';
             echo '</div></div>';
             echo '<div class="table-responsive"><table class="table table-striped table-hover" style="margin-bottom:0">';
             echo '<thead><tr>';

@@ -298,6 +298,7 @@ d2u_helper_seo_col_yrewrite_description = SEO-Beschreibung
 d2u_helper_seo_col_yrewrite_image = SEO-Bild
 d2u_helper_seo_action_translate = Textfelder übersetzen
 d2u_helper_seo_action_sync = Aus Ausgangssprache übernehmen
+d2u_helper_seo_action_align = Status & SEO-Bild angleichen
 d2u_helper_translations_source_language = Ausgangssprache
 d2u_helper_translations_source_hint = Die Ausgangssprache kann in den Einstellungen des Addons geändert werden.
 d2u_helper_seo_state_missing = fehlt

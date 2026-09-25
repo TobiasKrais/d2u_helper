@@ -297,6 +297,7 @@ d2u_helper_seo_col_yrewrite_description = SEO description
 d2u_helper_seo_col_yrewrite_image = SEO image
 d2u_helper_seo_action_translate = Translate text fields
 d2u_helper_seo_action_sync = Copy from source language
+d2u_helper_seo_action_align = Align status & SEO image
 d2u_helper_translations_source_language = Source language
 d2u_helper_translations_source_hint = The source language can be changed in the addon settings.
 d2u_helper_seo_state_missing = missing
