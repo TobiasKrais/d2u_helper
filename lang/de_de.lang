@@ -214,6 +214,7 @@ d2u_helper_settings_width_sm = Normale Smartphones
 d2u_helper_settings_width_md = Tablets
 d2u_helper_settings_width_lg = Computerbildschirme
 d2u_helper_settings_width_xl = Große Computerbildschirme
+d2u_helper_settings_width_xxl = Sehr große Computerbildschirme
 
 d2u_helper_templates_d2u_template_name = D2U Template Name
 d2u_helper_templates_install_d2u_immo = Das Addon D2U Immobilien wird für dieses Template benötigt.

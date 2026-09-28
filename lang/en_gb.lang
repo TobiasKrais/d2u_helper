@@ -213,6 +213,7 @@ d2u_helper_settings_width_sm = Normal mobile devices
 d2u_helper_settings_width_md = Tablets
 d2u_helper_settings_width_lg = Computer screens
 d2u_helper_settings_width_xl = Large computer screens
+d2u_helper_settings_width_xxl = Very large computer screens
 
 d2u_helper_templates_d2u_template_name = D2U template name
 d2u_helper_templates_install_d2u_immo = Addon D2U Immobilien is needed for this template.

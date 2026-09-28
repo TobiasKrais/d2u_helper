@@ -167,6 +167,7 @@ if (!$invalidCsrf && 'save' === filter_input(INPUT_POST, 'btn_save')) {
                             'md' => rex_i18n::msg('d2u_helper_settings_width_md'),
                             'lg' => rex_i18n::msg('d2u_helper_settings_width_lg'),
                             'xl' => rex_i18n::msg('d2u_helper_settings_width_xl'),
+                            'xxl' => rex_i18n::msg('d2u_helper_settings_width_xxl'),
                         ];
                         BackendHelper::form_select('d2u_helper_settings_menu_show', 'settings[include_menu_show]', $width_options, [(string) rex_config::get('d2u_helper', 'include_menu_show')]);
                         BackendHelper::form_checkbox('d2u_helper_settings_submenu_use_articlename', 'settings[submenu_use_articlename]', 'true', (bool) rex_config::get('d2u_helper', 'submenu_use_articlename'));
