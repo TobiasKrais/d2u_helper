@@ -107,12 +107,29 @@ class SliceTranslator
             $articles[] = [
                 'id' => $articleId,
                 'name' => self::displayName($article, $articleId),
+                // Priority path (category priorities/ids down to the article),
+                // so the list follows the REDAXO structure order instead of the
+                // article name.
+                'sort' => $article instanceof rex_article ? self::articleSortPath($article, $sourceClang) : [$articleId],
             ];
         }
 
-        usort($articles, static fn (array $a, array $b): int => strcasecmp($a['name'], $b['name']));
+        usort($articles, static function (array $a, array $b): int {
+            $pa = $a['sort'];
+            $pb = $b['sort'];
+            $n = min(count($pa), count($pb));
+            for ($i = 0; $i < $n; ++$i) {
+                if ($pa[$i] !== $pb[$i]) {
+                    return $pa[$i] <=> $pb[$i];
+                }
+            }
+            return count($pa) <=> count($pb);
+        });
 
-        return $articles;
+        return array_map(static function (array $article): array {
+            unset($article['sort']);
+            return $article;
+        }, $articles);
     }
 
     /**
