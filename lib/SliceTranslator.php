@@ -31,109 +31,6 @@ class SliceTranslator
     private const VALUE_COLUMNS = 20;
 
     /**
-     * Build the translation list for the article-slice tab, in the same shape
-     * the D2U_HELPER_TRANSLATION_LIST extension point returns so the translation
-     * helper renders both tabs with the same code.
-     *
-     * @return list<array{addon_name: string, pages: list<array{title: string, icon: string, html: string}>}>
-     */
-    public static function getTranslationList(int $sourceClang, int $targetClang, string $filterType): array
-    {
-        $articles = self::getArticlesNeedingTranslation($sourceClang, $targetClang, $filterType);
-        if (0 === count($articles)) {
-            return [];
-        }
-
-        $html = '<ul>';
-        foreach ($articles as $article) {
-            $html .= BackendHelper::getTranslationItem(
-                'd2u_helper',
-                'slice_article',
-                $article['id'],
-                $article['name'],
-                rex_url::backendPage('content/edit', ['article_id' => $article['id'], 'clang' => $targetClang, 'mode' => 'edit']),
-            );
-        }
-        $html .= '</ul>';
-
-        return [[
-            'addon_name' => rex_i18n::msg('d2u_helper_translations_articles'),
-            'pages' => [[
-                'title' => rex_i18n::msg('d2u_helper_translations_articles_slices'),
-                'icon' => 'rex-icon rex-icon-article',
-                'html' => $html,
-            ]],
-        ]];
-    }
-
-    /**
-     * List articles whose target-language slices need translation.
-     *
-     * @return list<array{id: int, name: string}>
-     */
-    public static function getArticlesNeedingTranslation(int $sourceClang, int $targetClang, string $filterType): array
-    {
-        if ($sourceClang <= 0 || $targetClang <= 0 || $sourceClang === $targetClang) {
-            return [];
-        }
-
-        $table = rex::getTable('article_slice');
-        $sql = rex_sql::factory();
-        $rows = $sql->getArray(
-            'SELECT s.article_id AS article_id,
-                    MAX(CASE WHEN t.id IS NULL THEN 1 ELSE 0 END) AS has_missing,
-                    MAX(CASE WHEN t.id IS NOT NULL AND s.updatedate > t.updatedate THEN 1 ELSE 0 END) AS has_stale
-             FROM ' . $table . ' s
-             LEFT JOIN ' . $table . ' t
-               ON t.article_id = s.article_id
-              AND t.ctype_id = s.ctype_id
-              AND t.priority = s.priority
-              AND t.clang_id = :target
-              AND t.revision = 0
-             WHERE s.clang_id = :source AND s.revision = 0
-             GROUP BY s.article_id',
-            [':source' => $sourceClang, ':target' => $targetClang],
-        );
-
-        $articles = [];
-        foreach ($rows as $row) {
-            $needs = 'missing' === $filterType
-                ? 1 === (int) $row['has_missing']
-                : 1 === (int) $row['has_stale'];
-            if (!$needs) {
-                continue;
-            }
-            $articleId = (int) $row['article_id'];
-            $article = rex_article::get($articleId, $sourceClang);
-            $articles[] = [
-                'id' => $articleId,
-                'name' => self::displayName($article, $articleId),
-                // Priority path (category priorities/ids down to the article),
-                // so the list follows the REDAXO structure order instead of the
-                // article name.
-                'sort' => $article instanceof rex_article ? self::articleSortPath($article, $sourceClang) : [$articleId],
-            ];
-        }
-
-        usort($articles, static function (array $a, array $b): int {
-            $pa = $a['sort'];
-            $pb = $b['sort'];
-            $n = min(count($pa), count($pb));
-            for ($i = 0; $i < $n; ++$i) {
-                if ($pa[$i] !== $pb[$i]) {
-                    return $pa[$i] <=> $pb[$i];
-                }
-            }
-            return count($pa) <=> count($pb);
-        });
-
-        return array_map(static function (array $article): array {
-            unset($article['sort']);
-            return $article;
-        }, $articles);
-    }
-
-    /**
      * Rows for the "REDAXO article contents" table: every article that has slices
      * in the source language, plus all of its ancestor categories so the tree is
      * visible. Ancestor rows without own content are structural (name only).
@@ -209,27 +106,15 @@ class SliceTranslator
             return [];
         }
 
-        // Determine which categories must appear because they are an ancestor of a
-        // content article. Category start articles that carry content themselves
-        // are included through their own id as well.
-        $relevantCatIds = [];
-        foreach (array_keys($status) as $id) {
-            $article = rex_article::get($id, $sourceClang);
-            if (!$article instanceof rex_article) {
-                continue;
-            }
-            foreach (self::ancestorIds($article, $sourceClang) as $catId) {
-                $relevantCatIds[$catId] = true;
-            }
-        }
-
         // Walk the REDAXO structure iteratively so the tree order and the level
         // per node come straight from the structure. Categories are ordered by
         // catpriority, articles within a category by priority — the two live in
         // separate priority spaces, which is why a flat mixed sort key put a
-        // top-level article among the top-level categories.
+        // top-level article among the top-level categories. Every category is
+        // shown (even without own content), so the tree matches the SEO tab;
+        // articles are limited to those that carry translatable slices.
         $list = [];
-        self::appendStructureNodes($list, 0, 0, [], $sourceClang, $targetClang, $status, $relevantCatIds, $pdfArticleIds);
+        self::appendStructureNodes($list, 0, 0, [], $sourceClang, $targetClang, $status, $pdfArticleIds);
 
         // A node is a collapsible category only when the following node sits one
         // level deeper — i.e. it actually has visible children in this tree.
@@ -249,16 +134,15 @@ class SliceTranslator
      * in REDAXO tree order: first the category's own subcategories (by
      * catpriority) — each rendered as a category header (its start article) with
      * its subtree — then the category's non-start articles (by priority) that
-     * carry content. Only categories that contain content somewhere below are
-     * descended into.
+     * carry content. Every category is shown; contentless categories are
+     * structural rows (name only).
      *
      * @param list<array<string, mixed>> $list
      * @param list<int> $path ancestor category ids of $parentCatId, root first
      * @param array<int, array{missing: int, stale: int, noContent: bool}> $status
-     * @param array<int, bool> $relevantCatIds
      * @param array<int, int> $pdfArticleIds
      */
-    private static function appendStructureNodes(array &$list, int $parentCatId, int $level, array $path, int $sourceClang, int $targetClang, array $status, array $relevantCatIds, array $pdfArticleIds): void
+    private static function appendStructureNodes(array &$list, int $parentCatId, int $level, array $path, int $sourceClang, int $targetClang, array $status, array $pdfArticleIds): void
     {
         $categories = 0 === $parentCatId
             ? rex_category::getRootCategories(false, $sourceClang)
@@ -270,10 +154,6 @@ class SliceTranslator
             $catId = (int) $category->getId();
             // In REDAXO a category's id equals its start article's id.
             $startArticleId = $catId;
-            // Skip whole branches that contain no translatable content.
-            if (!isset($relevantCatIds[$catId]) && !isset($status[$startArticleId])) {
-                continue;
-            }
 
             // Category header row = the category's start article.
             $startArticle = rex_article::get($startArticleId, $sourceClang);
@@ -284,7 +164,7 @@ class SliceTranslator
             // Descend into subcategories first, then this category's articles.
             $childPath = $path;
             $childPath[] = $catId;
-            self::appendStructureNodes($list, $catId, $level + 1, $childPath, $sourceClang, $targetClang, $status, $relevantCatIds, $pdfArticleIds);
+            self::appendStructureNodes($list, $catId, $level + 1, $childPath, $sourceClang, $targetClang, $status, $pdfArticleIds);
             self::appendCategoryArticles($list, $catId, $startArticleId, $level + 1, $childPath, $sourceClang, $targetClang, $status, $pdfArticleIds);
         }
 
@@ -456,51 +336,6 @@ class SliceTranslator
         }
 
         return (string) $article->getName();
-    }
-
-    /**
-     * Ancestor category ids of an article, root first, excluding the article
-     * itself. Derived from the parent chain, so it never contains the node's own
-     * id (unlike getPathAsArray, whose self-inclusion broke the tree collapse).
-     *
-     * @return list<int>
-     */
-    private static function ancestorIds(rex_article $article, int $clang): array
-    {
-        $path = [];
-        $parentId = (int) $article->getParentId();
-        $guard = 0;
-        while ($parentId > 0 && $guard++ < 100) {
-            $path[] = $parentId;
-            $parent = rex_article::get($parentId, $clang);
-            if (!$parent instanceof rex_article) {
-                break;
-            }
-            $parentId = (int) $parent->getParentId();
-        }
-
-        return array_reverse($path);
-    }
-
-    /**
-     * Tree-order sort key: the priority+id of every ancestor category in path
-     * order, then the article's own priority+id. An ancestor's key is a prefix of
-     * its descendants', so parents sort directly above their children.
-     *
-     * @return list<int>
-     */
-    private static function articleSortPath(rex_article $article, int $clang): array
-    {
-        $path = [];
-        foreach (self::ancestorIds($article, $clang) as $catId) {
-            $cat = rex_article::get($catId, $clang);
-            $path[] = $cat instanceof rex_article ? (int) $cat->getPriority() : 0;
-            $path[] = $catId;
-        }
-        $path[] = (int) $article->getPriority();
-        $path[] = (int) $article->getId();
-
-        return $path;
     }
 
     /**
