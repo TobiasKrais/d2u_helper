@@ -8,6 +8,7 @@ use rex_api_exception;
 use rex_article;
 use rex_article_cache;
 use rex_article_service;
+use rex_category;
 use rex_clang;
 use rex_i18n;
 use rex_sql;
@@ -80,75 +81,81 @@ class SeoTranslator
             return [];
         }
 
-        $ids = rex_sql::factory()->getArray(
-            'SELECT id FROM ' . rex::getTable('article') . ' WHERE clang_id = :c ORDER BY path, priority, id',
-            [':c' => $sourceClang],
-        );
-
+        // Walk the REDAXO structure iteratively so tree order and level come
+        // straight from the structure: categories by catpriority, articles within
+        // a category by priority — the two live in separate priority spaces, so a
+        // flat "ORDER BY priority, id" would sort sibling categories by id.
         $list = [];
-        foreach ($ids as $row) {
-            $seoRow = self::getSeoRow((int) $row['id'], $sourceClang, $targetClang);
-            if (null !== $seoRow) {
-                $list[$seoRow['id']] = $seoRow;
-            }
-        }
+        self::appendSeoNodes($list, 0, $sourceClang, $targetClang);
 
-        $parentIds = [];
-        foreach ($list as $row) {
-            foreach ($row['path'] as $pid) {
-                $parentIds[$pid] = true;
-            }
-        }
-        foreach ($list as $id => &$row) {
-            $row['hasChildren'] = isset($parentIds[$id]);
+        // A node is a collapsible category only when the next node sits one level
+        // deeper — i.e. it actually has visible children in this tree.
+        $count = count($list);
+        foreach ($list as $i => &$row) {
+            $row['hasChildren'] = $row['isCategory']
+                && $i + 1 < $count
+                && (int) $list[$i + 1]['level'] > (int) $row['level'];
         }
         unset($row);
 
-        // A flat "ORDER BY path" groups every root item together, so child
-        // categories end up after the whole root level instead of directly below
-        // their parent. Re-order depth-first so each node is immediately followed
-        // by its own subtree; siblings keep their priority/id order from the query.
-        $children = [];
-        foreach ($list as $row) {
-            $parent = [] === $row['path'] ? 0 : (int) $row['path'][count($row['path']) - 1];
-            $children[$parent][] = $row['id'];
-        }
-        $ordered = [];
-        $emit = static function (int $parentId) use (&$emit, &$ordered, $children, $list): void {
-            foreach ($children[$parentId] ?? [] as $id) {
-                $ordered[] = $list[$id];
-                $emit($id);
-            }
-        };
-        $emit(0);
+        return $list;
+    }
 
-        // Safety net: append any row not reached from the root (e.g. a broken
-        // parent chain / orphaned category) so nothing silently disappears.
-        if (count($ordered) < count($list)) {
-            $seen = [];
-            foreach ($ordered as $row) {
-                $seen[$row['id']] = true;
+    /**
+     * Recursively append the SEO rows below one category in REDAXO tree order:
+     * each subcategory (by catpriority) rendered as its start-article header with
+     * its subtree, then the category's plain articles (by priority). At the root
+     * level the plain articles come last, after the whole category tree.
+     *
+     * @param list<array<string, mixed>> $list
+     */
+    private static function appendSeoNodes(array &$list, int $parentCatId, int $sourceClang, int $targetClang): void
+    {
+        $categories = 0 === $parentCatId
+            ? rex_category::getRootCategories(false, $sourceClang)
+            : (rex_category::get($parentCatId, $sourceClang) instanceof rex_category
+                ? rex_category::get($parentCatId, $sourceClang)->getChildren(false)
+                : []);
+
+        foreach ($categories as $category) {
+            $catId = (int) $category->getId();
+            // In REDAXO a category's id equals its start article's id.
+            $seoRow = self::getSeoRow($catId, $sourceClang, $targetClang);
+            if (null !== $seoRow) {
+                $list[] = $seoRow;
             }
-            foreach ($list as $id => $row) {
-                if (!isset($seen[$id])) {
-                    $ordered[] = $row;
-                }
-            }
+            self::appendSeoNodes($list, $catId, $sourceClang, $targetClang);
+            self::appendSeoCategoryArticles($list, $catId, $catId, $sourceClang, $targetClang);
         }
 
-        // Plain articles on the root level (no parent category) are pushed to the
-        // very end of the list, after the whole category tree.
-        $tree = [];
-        $rootArticles = [];
-        foreach ($ordered as $row) {
-            if (0 === $row['level'] && !$row['isCategory']) {
-                $rootArticles[] = $row;
-            } else {
-                $tree[] = $row;
+        if (0 === $parentCatId) {
+            self::appendSeoCategoryArticles($list, 0, 0, $sourceClang, $targetClang);
+        }
+    }
+
+    /**
+     * Append the plain (non-start) articles of one category, by priority.
+     *
+     * @param list<array<string, mixed>> $list
+     */
+    private static function appendSeoCategoryArticles(array &$list, int $catId, int $startArticleId, int $sourceClang, int $targetClang): void
+    {
+        $articles = 0 === $catId
+            ? rex_article::getRootArticles(false, $sourceClang)
+            : (rex_category::get($catId, $sourceClang) instanceof rex_category
+                ? rex_category::get($catId, $sourceClang)->getArticles(false)
+                : []);
+
+        foreach ($articles as $article) {
+            $articleId = (int) $article->getId();
+            if ($articleId === $startArticleId) {
+                continue;
+            }
+            $seoRow = self::getSeoRow($articleId, $sourceClang, $targetClang);
+            if (null !== $seoRow) {
+                $list[] = $seoRow;
             }
         }
-
-        return array_merge($tree, $rootArticles);
     }
 
     /**

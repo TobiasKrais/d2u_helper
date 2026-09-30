@@ -5,6 +5,7 @@ namespace TobiasKrais\D2UHelper;
 use rex;
 use rex_article;
 use rex_article_cache;
+use rex_category;
 use rex_clang;
 use rex_config;
 use rex_i18n;
