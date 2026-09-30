@@ -208,76 +208,153 @@ class SliceTranslator
             return [];
         }
 
-        // Collect the content articles and every ancestor category, so parents are
-        // always shown even when they carry no translatable content themselves.
-        $nodes = [];
+        // Determine which categories must appear because they are an ancestor of a
+        // content article. Category start articles that carry content themselves
+        // are included through their own id as well.
+        $relevantCatIds = [];
         foreach (array_keys($status) as $id) {
             $article = rex_article::get($id, $sourceClang);
             if (!$article instanceof rex_article) {
                 continue;
             }
             foreach (self::ancestorIds($article, $sourceClang) as $catId) {
-                if (!isset($nodes[$catId])) {
-                    $cat = rex_article::get($catId, $sourceClang);
-                    if ($cat instanceof rex_article) {
-                        $nodes[$catId] = $cat;
-                    }
-                }
+                $relevantCatIds[$catId] = true;
             }
-            $nodes[$id] = $article;
         }
 
+        // Walk the REDAXO structure iteratively so the tree order and the level
+        // per node come straight from the structure. Categories are ordered by
+        // catpriority, articles within a category by priority — the two live in
+        // separate priority spaces, which is why a flat mixed sort key put a
+        // top-level article among the top-level categories.
         $list = [];
-        foreach ($nodes as $id => $article) {
-            $ancestors = self::ancestorIds($article, $sourceClang);
-            $targetArticle = rex_article::get($id, $targetClang);
-            $list[] = [
-                'id' => $id,
-                // Category start articles show the category name (catname) instead of
-                // the article name, matching the REDAXO structure tree.
-                'name' => self::displayName($article, $id),
-                'level' => count($ancestors),
-                'path' => $ancestors,
-                'sort' => self::articleSortPath($article, $sourceClang),
-                'isCategory' => $article->isStartArticle(),
-                // Online status of the source and the target language version, so the
-                // list can show the target status and flag a deviation from the source.
-                'sourceOnline' => $article->isOnline(),
-                'targetOnline' => $targetArticle instanceof rex_article && $targetArticle->isOnline(),
-                'hasContent' => isset($status[$id]),
-                'noContent' => $status[$id]['noContent'] ?? false,
-                'missing' => $status[$id]['missing'] ?? 0,
-                'stale' => $status[$id]['stale'] ?? 0,
-                'hasPdfMedia' => isset($pdfArticleIds[$id]),
-                'pdfSliceId' => $pdfArticleIds[$id] ?? 0,
-            ];
+        self::appendStructureNodes($list, 0, 0, [], $sourceClang, $targetClang, $status, $relevantCatIds, $pdfArticleIds);
+
+        // A node is a collapsible category only when the following node sits one
+        // level deeper — i.e. it actually has visible children in this tree.
+        $count = count($list);
+        foreach ($list as $i => &$row) {
+            $row['hasChildren'] = $row['isCategory']
+                && $i + 1 < $count
+                && (int) $list[$i + 1]['level'] > (int) $row['level'];
+        }
+        unset($row);
+
+        return $list;
+    }
+
+    /**
+     * Recursively append the translatable structure below one category to $list,
+     * in REDAXO tree order: first the category's own subcategories (by
+     * catpriority) — each rendered as a category header (its start article) with
+     * its subtree — then the category's non-start articles (by priority) that
+     * carry content. Only categories that contain content somewhere below are
+     * descended into.
+     *
+     * @param list<array<string, mixed>> $list
+     * @param list<int> $path ancestor category ids of $parentCatId, root first
+     * @param array<int, array{missing: int, stale: int, noContent: bool}> $status
+     * @param array<int, bool> $relevantCatIds
+     * @param array<int, int> $pdfArticleIds
+     */
+    private static function appendStructureNodes(array &$list, int $parentCatId, int $level, array $path, int $sourceClang, int $targetClang, array $status, array $relevantCatIds, array $pdfArticleIds): void
+    {
+        $categories = 0 === $parentCatId
+            ? rex_category::getRootCategories(false, $sourceClang)
+            : (rex_category::get($parentCatId, $sourceClang) instanceof rex_category
+                ? rex_category::get($parentCatId, $sourceClang)->getChildren(false)
+                : []);
+
+        foreach ($categories as $category) {
+            $catId = (int) $category->getId();
+            // In REDAXO a category's id equals its start article's id.
+            $startArticleId = $catId;
+            // Skip whole branches that contain no translatable content.
+            if (!isset($relevantCatIds[$catId]) && !isset($status[$startArticleId])) {
+                continue;
+            }
+
+            // Category header row = the category's start article.
+            $startArticle = rex_article::get($startArticleId, $sourceClang);
+            if ($startArticle instanceof rex_article) {
+                $list[] = self::buildNodeRow($startArticle, $startArticleId, $level, $path, $sourceClang, $targetClang, $status, $pdfArticleIds, true);
+            }
+
+            // Descend into subcategories first, then this category's articles.
+            $childPath = $path;
+            $childPath[] = $catId;
+            self::appendStructureNodes($list, $catId, $level + 1, $childPath, $sourceClang, $targetClang, $status, $relevantCatIds, $pdfArticleIds);
+            self::appendCategoryArticles($list, $catId, $startArticleId, $level + 1, $childPath, $sourceClang, $targetClang, $status, $pdfArticleIds);
         }
 
-        usort($list, static function (array $a, array $b): int {
-            $pa = $a['sort'];
-            $pb = $b['sort'];
-            $n = min(count($pa), count($pb));
-            for ($i = 0; $i < $n; ++$i) {
-                if ($pa[$i] !== $pb[$i]) {
-                    return $pa[$i] <=> $pb[$i];
-                }
-            }
-            return count($pa) <=> count($pb);
-        });
-
-        // A node is a collapsible category when another node lists it as an ancestor.
-        $parentIds = [];
-        foreach ($list as $row) {
-            foreach ($row['path'] as $pid) {
-                $parentIds[$pid] = true;
-            }
+        // Root-level (parentCatId 0) non-start articles that carry content.
+        if (0 === $parentCatId) {
+            self::appendCategoryArticles($list, 0, 0, 0, [], $sourceClang, $targetClang, $status, $pdfArticleIds);
         }
+    }
 
-        return array_map(static function (array $row) use ($parentIds): array {
-            unset($row['sort']);
-            $row['hasChildren'] = isset($parentIds[(int) $row['id']]);
-            return $row;
-        }, $list);
+    /**
+     * Append the non-start articles of one category (by priority) that carry
+     * content, as article rows.
+     *
+     * @param list<array<string, mixed>> $list
+     * @param list<int> $path ancestor category ids of the article, root first
+     * @param array<int, array{missing: int, stale: int, noContent: bool}> $status
+     * @param array<int, int> $pdfArticleIds
+     */
+    private static function appendCategoryArticles(array &$list, int $catId, int $startArticleId, int $level, array $path, int $sourceClang, int $targetClang, array $status, array $pdfArticleIds): void
+    {
+        $articles = 0 === $catId
+            ? rex_article::getRootArticles(false, $sourceClang)
+            : (rex_category::get($catId, $sourceClang) instanceof rex_category
+                ? rex_category::get($catId, $sourceClang)->getArticles(false)
+                : []);
+
+        foreach ($articles as $article) {
+            $articleId = (int) $article->getId();
+            // The start article is already rendered as the category header.
+            if ($articleId === $startArticleId) {
+                continue;
+            }
+            if (!isset($status[$articleId])) {
+                continue;
+            }
+            $list[] = self::buildNodeRow($article, $articleId, $level, $path, $sourceClang, $targetClang, $status, $pdfArticleIds, false);
+        }
+    }
+
+    /**
+     * Build a single tree row for the "REDAXO article contents" table.
+     *
+     * @param list<int> $path ancestor category ids, root first
+     * @param array<int, array{missing: int, stale: int, noContent: bool}> $status
+     * @param array<int, int> $pdfArticleIds
+     * @return array<string, mixed>
+     */
+    private static function buildNodeRow(rex_article $article, int $id, int $level, array $path, int $sourceClang, int $targetClang, array $status, array $pdfArticleIds, bool $isCategory): array
+    {
+        $targetArticle = rex_article::get($id, $targetClang);
+
+        return [
+            'id' => $id,
+            // Category start articles show the category name (catname) instead of
+            // the article name, matching the REDAXO structure tree.
+            'name' => self::displayName($article, $id),
+            'level' => $level,
+            'path' => $path,
+            'isCategory' => $isCategory,
+            // Online status of the source and the target language version, so the
+            // list can show the target status and flag a deviation from the source.
+            'sourceOnline' => $article->isOnline(),
+            'targetOnline' => $targetArticle instanceof rex_article && $targetArticle->isOnline(),
+            'hasContent' => isset($status[$id]),
+            'noContent' => $status[$id]['noContent'] ?? false,
+            'missing' => $status[$id]['missing'] ?? 0,
+            'stale' => $status[$id]['stale'] ?? 0,
+            'hasChildren' => $isCategory,
+            'hasPdfMedia' => isset($pdfArticleIds[$id]),
+            'pdfSliceId' => $pdfArticleIds[$id] ?? 0,
+        ];
     }
 
     /**
