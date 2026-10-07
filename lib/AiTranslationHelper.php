@@ -62,29 +62,26 @@ class AiTranslationHelper
         $sourceLang = $sourceClang instanceof rex_clang ? $sourceClang->getName() : (string) $sourceClangId;
         $targetLang = $targetClang instanceof rex_clang ? $targetClang->getName() : (string) $targetClangId;
 
-        $payload = [];
-        $htmlKeys = [];
+        // Transport is a marker format (###key### on its own line, then the value),
+        // deliberately NOT JSON: slice values are HTML containing double quotes and
+        // newlines, which a model regularly fails to escape inside a JSON string,
+        // producing an unparseable response. With markers the HTML passes through
+        // verbatim and only the lightweight section markers have to survive.
+        $parts = [];
         foreach ($fields as $key => $field) {
-            $payload[$key] = (string) $field['value'];
-            if (isset($field['html']) && true === $field['html']) {
-                $htmlKeys[] = $key;
-            }
+            $parts[] = '###' . $key . '###' . "\n" . (string) $field['value'];
         }
 
         $system = 'You are a professional translator for website content. '
-            . 'Translate each JSON string value from '. $sourceLang .' to '. $targetLang .'. '
-            . 'Return ONLY a valid JSON object with exactly the same keys and the translated values. '
-            . 'No markdown, no code fences, no explanation. Do not add or remove keys. '
-            . 'The response MUST be valid JSON: escape newlines inside string values as \n, '
-            . 'tabs as \t and double quotes as \\". '
+            . 'The input is split into sections; each section starts with a marker line of the '
+            . 'exact form ###key### on its own line, followed by that section\'s content. '
+            . 'Translate ONLY the content of each section from '. $sourceLang .' to '. $targetLang .'. '
+            . 'Return every section in the same order, each introduced by its unchanged ###key### '
+            . 'marker line. Output nothing else: no explanation, no code fences, no extra markers. '
             . 'Preserve any HTML tags, attributes and entities exactly and translate only the '
             . 'human readable text between the tags. Keep placeholders such as %s, %d or {name} unchanged.';
-        if (count($htmlKeys) > 0) {
-            $system .= ' The following keys contain HTML markup: '. implode(', ', $htmlKeys) .'.';
-        }
 
-        $prompt = 'Translate the values in this JSON object:'. "\n"
-            . (string) json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $prompt = implode("\n", $parts);
 
         try {
             $service = \FriendsOfRedaxo\AiPlatform\Service::getInstance();
@@ -93,53 +90,59 @@ class AiTranslationHelper
             throw new rex_exception('AI translation request failed: '. $e->getMessage(), $e);
         }
 
-        $translated = self::decodeJsonObject($response);
-        if (null === $translated) {
-            // Fallback fuer Slices mit genau EINEM uebersetzbaren Feld (z. B. der
-            // einfache Texteditor, Modul 010): Das Modell liefert dann oft entweder nur
-            // den uebersetzten Text ODER ein leicht kaputtes JSON-Objekt {"f1":"..."}
-            // mit echten Zeilenumbruechen im String (= ungueltiges JSON, decode scheitert).
+        $parsed = self::parseMarkedSections($response);
+
+        $result = [];
+        $anyFound = false;
+        foreach ($fields as $key => $field) {
+            if (array_key_exists($key, $parsed)) {
+                $result[$key] = $parsed[$key];
+                $anyFound = true;
+            } else {
+                // Section missing from the response: keep the source value as fallback.
+                $result[$key] = (string) $field['value'];
+            }
+        }
+
+        if (!$anyFound) {
+            // Single field: the model may have returned just the translated text with
+            // no marker at all. Use the whole (fence-stripped) response then.
             if (1 === count($fields)) {
                 $onlyKey = (string) array_key_first($fields);
                 $plain = self::stripResponseWrapping($response);
-                // Kaputtes {"key":"..."}: Wert per Regex loesen und JSON-Escapes aufloesen.
-                if (1 === preg_match('/^\s*\{\s*"' . preg_quote($onlyKey, '/') . '"\s*:\s*"(.*)"\s*\}\s*$/s', $plain, $m)) {
-                    return [$onlyKey => self::unescapeJsonString($m[1])];
-                }
-                // Reiner Text ohne JSON-Huelle: direkt als Wert verwenden.
-                if ('' !== trim($plain) && !str_starts_with(trim($plain), '{')) {
+                if ('' !== trim($plain)) {
                     return [$onlyKey => $plain];
                 }
             }
             throw new rex_exception('AI translation returned an invalid response.');
         }
 
-        $result = [];
-        foreach ($fields as $key => $field) {
-            $result[$key] = array_key_exists($key, $translated)
-                ? (string) $translated[$key]
-                : (string) $field['value'];
-        }
         return $result;
     }
 
     /**
-     * Resolve the common JSON string escape sequences in a raw value that was
-     * pulled out of a broken JSON object (model emitted literal newlines, so
-     * json_decode could not be used).
-     * @param string $value Raw escaped value
-     * @return string Unescaped value
+     * Parse a marker-delimited translation response (###key### on its own line,
+     * followed by that section's content) into a key => content map. Tolerant of a
+     * varying number of hashes and surrounding whitespace on the marker line.
+     * @param string $response Raw model response
+     * @return array<string, string> Section key => translated content
      */
-    private static function unescapeJsonString(string $value): string
+    private static function parseMarkedSections(string $response): array
     {
-        return strtr($value, [
-            '\\n' => "\n",
-            '\\r' => "\r",
-            '\\t' => "\t",
-            '\\"' => '"',
-            '\\/' => '/',
-            '\\\\' => '\\',
-        ]);
+        $response = self::stripResponseWrapping($response);
+        $out = [];
+        if (0 === preg_match_all('/^[ \t]*#{2,}[ \t]*([A-Za-z0-9_]+)[ \t]*#{2,}[ \t]*$/m', $response, $m, PREG_OFFSET_CAPTURE)) {
+            return $out;
+        }
+        $count = count($m[0]);
+        for ($i = 0; $i < $count; ++$i) {
+            $key = (string) $m[1][$i][0];
+            $start = (int) $m[0][$i][1] + strlen((string) $m[0][$i][0]);
+            $end = ($i + 1 < $count) ? (int) $m[0][$i + 1][1] : strlen($response);
+            $value = substr($response, $start, $end - $start);
+            $out[$key] = trim($value, "\r\n");
+        }
+        return $out;
     }
 
     /**
@@ -156,88 +159,5 @@ class AiTranslationHelper
             $response = trim($response);
         }
         return $response;
-    }
-
-    /**
-     * Decode a JSON object from a model response, tolerating code fences and
-     * surrounding text.
-     * @param string $response Raw model response
-     * @return array<string,mixed>|null Decoded object or null on failure
-     */
-    private static function decodeJsonObject(string $response): ?array
-    {
-        $response = trim($response);
-        if (str_starts_with($response, '```')) {
-            $response = (string) preg_replace('/^```[a-zA-Z]*\s*/', '', $response);
-            $response = (string) preg_replace('/\s*```$/', '', $response);
-            $response = trim($response);
-        }
-
-        $start = strpos($response, '{');
-        $end = strrpos($response, '}');
-        if (false === $start || false === $end || $end <= $start) {
-            return null;
-        }
-
-        $json = substr($response, $start, $end - $start + 1);
-        $data = json_decode($json, true);
-        if (!is_array($data)) {
-            // Haeufigster Modell-Fehler: rohe Zeilenumbrueche/Tabs innerhalb der
-            // String-Werte (z. B. im HTML) -> ungueltiges JSON. Reparieren und erneut
-            // dekodieren, bevor aufgegeben wird.
-            $data = json_decode(self::repairJson($json), true);
-        }
-        return is_array($data) ? $data : null;
-    }
-
-    /**
-     * Escape raw control characters (newline, carriage return, tab) that appear
-     * INSIDE JSON string values, which the model sometimes emits unescaped and
-     * which make the whole response invalid JSON. Structure outside strings is
-     * left untouched. Byte-safe for UTF-8 (the handled characters are all ASCII
-     * and never occur as UTF-8 continuation bytes).
-     * @param string $json Possibly broken JSON string
-     * @return string Repaired JSON string
-     */
-    private static function repairJson(string $json): string
-    {
-        $out = '';
-        $inString = false;
-        $escaped = false;
-        $len = strlen($json);
-        for ($i = 0; $i < $len; ++$i) {
-            $ch = $json[$i];
-            if ($escaped) {
-                $out .= $ch;
-                $escaped = false;
-                continue;
-            }
-            if ('\\' === $ch) {
-                $out .= $ch;
-                $escaped = true;
-                continue;
-            }
-            if ('"' === $ch) {
-                $inString = !$inString;
-                $out .= $ch;
-                continue;
-            }
-            if ($inString) {
-                if ("\n" === $ch) {
-                    $out .= '\\n';
-                    continue;
-                }
-                if ("\r" === $ch) {
-                    $out .= '\\r';
-                    continue;
-                }
-                if ("\t" === $ch) {
-                    $out .= '\\t';
-                    continue;
-                }
-            }
-            $out .= $ch;
-        }
-        return $out;
     }
 }
