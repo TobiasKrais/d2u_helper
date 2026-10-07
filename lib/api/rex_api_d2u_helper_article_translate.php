@@ -62,7 +62,7 @@ class rex_api_d2u_helper_article_translate extends rex_api_function
 
         $status = SliceTranslator::getArticleContentStatus($articleId, $sourceClang, $targetClang);
         $cells = SliceTranslator::renderArticleStatusCells($articleId, $status, true);
-        $done = !$status['noContent'] && 0 === $status['missing'] && 0 === $status['stale'];
+        $done = !$status['noContent'] && 0 === $status['missing'] && 0 === $status['stale'] && 0 === ($status['extra'] ?? 0);
 
         $sendJson([
             'success' => (bool) ($result['success'] ?? false),

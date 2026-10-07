@@ -216,6 +216,7 @@ if (1 === count(rex_clang::getAll())) {
                         'noContent' => (bool) $d2u_row['noContent'],
                         'missing' => (int) $d2u_row['missing'],
                         'stale' => (int) $d2u_row['stale'],
+                        'extra' => (int) ($d2u_row['extra'] ?? 0),
                     ], $d2u_ai_available);
                     echo '<td><input type="checkbox" class="d2u-row-check" name="d2u_articles[]" value="'. $d2u_id .'"'. (!empty($d2u_row['hasPdfMedia']) ? ' data-has-pdf="1"' : '') .'></td>';
                     echo '<td>'. $d2u_indent . $d2u_toggle . $d2u_type_icon .'<a href="'. $d2u_edit_url .'">'. $d2u_name .'</a></td>';
@@ -239,7 +240,8 @@ if (1 === count(rex_clang::getAll())) {
                 . '<strong>'. rex_i18n::msg('d2u_helper_article_hint_intro') .'</strong><br>'
                 . rex_i18n::msg('d2u_helper_article_hint_nocontent') .'<br>'
                 . rex_i18n::msg('d2u_helper_article_hint_missing') .'<br>'
-                . rex_i18n::msg('d2u_helper_article_hint_update')
+                . rex_i18n::msg('d2u_helper_article_hint_update') .'<br>'
+                . rex_i18n::msg('d2u_helper_article_hint_extra')
                 . ($d2u_any_pdf ? '<br><i class="rex-icon fa-file-pdf-o text-warning"></i> '. rex_i18n::msg('d2u_helper_article_hint_pdf') : '')
                 . '</small></div>';
             echo '</div></form>';

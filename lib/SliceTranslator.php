@@ -150,7 +150,7 @@ class SliceTranslator
      *
      * @param list<array<string, mixed>> $list
      * @param list<int> $path ancestor category ids of $parentCatId, root first
-     * @param array<int, array{missing: int, stale: int, noContent: bool}> $status
+     * @param array<int, array{missing: int, stale: int, noContent: bool, extra?: int}> $status
      * @param array<int, int> $pdfArticleIds
      */
     private static function appendStructureNodes(array &$list, int $parentCatId, int $level, array $path, int $sourceClang, int $targetClang, array $status, array $pdfArticleIds): void
@@ -191,7 +191,7 @@ class SliceTranslator
      *
      * @param list<array<string, mixed>> $list
      * @param list<int> $path ancestor category ids of the article, root first
-     * @param array<int, array{missing: int, stale: int, noContent: bool}> $status
+     * @param array<int, array{missing: int, stale: int, noContent: bool, extra?: int}> $status
      * @param array<int, int> $pdfArticleIds
      */
     private static function appendCategoryArticles(array &$list, int $catId, int $startArticleId, int $level, array $path, int $sourceClang, int $targetClang, array $status, array $pdfArticleIds): void
@@ -219,7 +219,7 @@ class SliceTranslator
      * Build a single tree row for the "REDAXO article contents" table.
      *
      * @param list<int> $path ancestor category ids, root first
-     * @param array<int, array{missing: int, stale: int, noContent: bool}> $status
+     * @param array<int, array{missing: int, stale: int, noContent: bool, extra?: int}> $status
      * @param array<int, int> $pdfArticleIds
      * @return array<string, mixed>
      */
@@ -243,6 +243,7 @@ class SliceTranslator
             'noContent' => $status[$id]['noContent'] ?? false,
             'missing' => $status[$id]['missing'] ?? 0,
             'stale' => $status[$id]['stale'] ?? 0,
+            'extra' => $status[$id]['extra'] ?? 0,
             'hasChildren' => $isCategory,
             'hasPdfMedia' => isset($pdfArticleIds[$id]),
             'pdfSliceId' => $pdfArticleIds[$id] ?? 0,
@@ -253,11 +254,11 @@ class SliceTranslator
      * Slice status of a single article: whether the target has no slices yet,
      * how many source slices are missing in the target and how many are stale.
      *
-     * @return array{noContent: bool, missing: int, stale: int}
+     * @return array{noContent: bool, missing: int, stale: int, extra: int}
      */
     public static function getArticleContentStatus(int $articleId, int $sourceClang, int $targetClang): array
     {
-        $default = ['noContent' => false, 'missing' => 0, 'stale' => 0];
+        $default = ['noContent' => false, 'missing' => 0, 'stale' => 0, 'extra' => 0];
         if ($articleId <= 0 || $sourceClang <= 0 || $targetClang <= 0 || $sourceClang === $targetClang) {
             return $default;
         }
@@ -286,7 +287,7 @@ class SliceTranslator
      * in sync. Buttons carry both the form name/value and a data attribute, so
      * they work as a plain submit and via the in-page AJAX handler.
      *
-     * @param array{noContent: bool, missing: int, stale: int} $status
+     * @param array{noContent: bool, missing: int, stale: int, extra?: int} $status
      * @return array{icon: string, nocontent: string, missing: string, stale: string}
      */
     public static function renderArticleStatusCells(int $articleId, array $status, bool $aiAvailable): array
@@ -303,11 +304,19 @@ class SliceTranslator
         $noContent = (bool) $status['noContent'];
         $missing = (int) $status['missing'];
         $stale = (int) $status['stale'];
-        $done = !$noContent && 0 === $missing && 0 === $stale;
+        $extra = (int) ($status['extra'] ?? 0);
+        $done = !$noContent && 0 === $missing && 0 === $stale && 0 === $extra;
 
         $icon = $done
             ? '<i class="rex-icon fa-check text-success" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_state_uptodate')) . '"></i> '
             : '<span class="label label-info" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_state_todo')) . '">&ne;</span> ';
+
+        // Extra (orphan) target blocks whose source was removed: a warning badge so
+        // the article flags "there is still something to review" even when nothing is
+        // missing or stale. The blocks sit at the end of the target article for review.
+        if ($extra > 0) {
+            $icon .= '<span class="label label-warning" title="' . rex_escape(rex_i18n::msg('d2u_helper_article_state_extra')) . '">+' . $extra . '</span> ';
+        }
 
         return [
             'icon' => $icon,
@@ -568,7 +577,7 @@ class SliceTranslator
      *
      * @param list<array<string, mixed>> $srcSlices
      * @param list<array<string, mixed>> $tgtSlices
-     * @return array{noContent: bool, missing: int, stale: int}
+     * @return array{noContent: bool, missing: int, stale: int, extra: int}
      */
     private static function countArticleStatus(array $srcSlices, array $tgtSlices): array
     {
@@ -592,6 +601,9 @@ class SliceTranslator
             'noContent' => 0 === count($tgtSlices),
             'missing' => $missing,
             'stale' => $stale,
+            // Orphan target slices: a translated block whose source block was removed.
+            // Surfaced so the article does not look "done" while leftovers remain.
+            'extra' => count($align['orphans']),
         ];
     }
 
