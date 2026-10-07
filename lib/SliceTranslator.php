@@ -370,6 +370,17 @@ class SliceTranslator
             return ['success' => false, 'name' => $name, 'message' => rex_i18n::msg('d2u_helper_slice_translation_no_source')];
         }
 
+        // "Komplett kopieren und uebersetzen": Zielsprache komplett neu aufbauen —
+        // alle vorhandenen Ziel-Slices zuerst loeschen, danach jeden Quell-Slice frisch
+        // kopieren und uebersetzen. So bleiben keine Reste zurueck und es entstehen keine
+        // Prioritaets-Kollisionen aus einem frueheren Uebersetzungsstand.
+        if ('all' === $mode) {
+            rex_sql::factory()->setQuery(
+                'DELETE FROM ' . $table . ' WHERE article_id = :a AND clang_id = :c AND revision = 0',
+                [':a' => $articleId, ':c' => $targetClang],
+            );
+        }
+
         try {
             foreach ($srcSlices as $src) {
                 self::translateSlice($src, $sourceClang, $targetClang, $mode);
@@ -430,18 +441,46 @@ class SliceTranslator
             }
         }
 
-        $fields = [];
-        for ($i = 1; $i <= self::VALUE_COLUMNS; ++$i) {
-            $value = (string) ($src['value' . $i] ?? '');
-            $isHtml = self::classifyValue($value);
-            if (null !== $isHtml) {
-                $fields['value' . $i] = ['value' => $value, 'html' => $isHtml];
-            }
-        }
-
+        // Prefer the module's d2u_translate marker so only the declared text fields are
+        // translated and configuration values (toggles, positions, colours like
+        // "true"/"right"/"grey") are copied verbatim instead of being sent to the AI.
+        // A present marker is authoritative even when it lists no field: the module then
+        // declares "nothing translatable here", which switches OFF the heuristic
+        // auto-detection (otherwise an anchor name or a connection key would be
+        // translated). Only modules without any marker fall back to auto-detection.
+        $moduleId = (int) ($src['module_id'] ?? 0);
+        $specs = self::getModuleMarkerFields($moduleId);
         $translated = [];
-        if (count($fields) > 0) {
-            $translated = AiTranslationHelper::translateFields($fields, $sourceClang, $targetClang);
+        if (self::moduleHasTranslateMarker($moduleId)) {
+            [$batch, $plan] = self::buildMarkerBatch($src, $specs);
+            $translatedBatch = [];
+            if (count($batch) > 0) {
+                try {
+                    $translatedBatch = AiTranslationHelper::translateFields($batch, $sourceClang, $targetClang);
+                } catch (\Throwable $e) {
+                    rex_logger::logException($e);
+                }
+            }
+            $translated = self::rebuildMarkerWrites($plan, $translatedBatch);
+        } else {
+            $fields = [];
+            for ($i = 1; $i <= self::VALUE_COLUMNS; ++$i) {
+                $value = (string) ($src['value' . $i] ?? '');
+                $isHtml = self::classifyValue($value);
+                if (null !== $isHtml) {
+                    $fields['value' . $i] = ['value' => $value, 'html' => $isHtml];
+                }
+            }
+            if (count($fields) > 0) {
+                try {
+                    $translated = AiTranslationHelper::translateFields($fields, $sourceClang, $targetClang);
+                } catch (\Throwable $e) {
+                    // AI-Fehler bei diesem Slice (z. B. Timeout/Rate-Limit): Slice wird trotzdem
+                    // (unuebersetzt) kopiert, damit der Durchlauf nicht nach dem ersten Fehler
+                    // abbricht und die uebrigen Slices erhalten bleiben.
+                    rex_logger::logException($e);
+                }
+            }
         }
 
         $login = rex::getUser() instanceof rex_user ? rex::getUser()->getLogin() : 'd2u_helper';
@@ -612,6 +651,33 @@ class SliceTranslator
     }
 
     /**
+     * Whether a module declares a `d2u_translate` marker at all, regardless of
+     * whether it lists any field. A present-but-empty marker (`/* d2u_translate: *&#47;`)
+     * is a deliberate "nothing to translate" declaration that must switch off the
+     * heuristic auto-detection in the article translation.
+     */
+    public static function moduleHasTranslateMarker(int $moduleId): bool
+    {
+        static $cache = [];
+        if (array_key_exists($moduleId, $cache)) {
+            return $cache[$moduleId];
+        }
+
+        $has = false;
+        if ($moduleId > 0) {
+            $sql = rex_sql::factory();
+            $sql->setQuery('SELECT output, input FROM ' . rex::getTable('module') . ' WHERE id = ?', [$moduleId]);
+            if ($sql->getRows() > 0) {
+                $source = (string) $sql->getValue('output') . "\n" . (string) $sql->getValue('input');
+                $has = 1 === preg_match('#/\*\s*d2u_translate\s*:#i', $source);
+            }
+        }
+
+        $cache[$moduleId] = $has;
+        return $has;
+    }
+
+    /**
      * Field-to-handler map a module declares via a
      * `/* d2u_translate: 1, 2:html, 5:json(q,a) *&#47;` marker in its output or
      * input source. The marker is read from the module source, so it runs nothing.
@@ -743,6 +809,54 @@ class SliceTranslator
         // Build one batched payload for all declared fields plus a plan to rebuild
         // each value column from the response — so structured (JSON/FAQ) fields keep
         // their keys and structure and everything goes out in a single request.
+        [$batch, $plan] = self::buildMarkerBatch($source, $specs);
+
+        if (0 === count($batch)) {
+            return ['success' => true, 'message' => ''];
+        }
+
+        try {
+            $translated = AiTranslationHelper::translateFields($batch, $sourceClang, $targetClang);
+        } catch (\Throwable $e) {
+            rex_logger::logException($e);
+            return ['success' => false, 'message' => rex_i18n::msg('d2u_helper_translations_ai_error')];
+        }
+
+        $writes = self::rebuildMarkerWrites($plan, $translated);
+
+        if (0 === count($writes)) {
+            return ['success' => true, 'message' => ''];
+        }
+
+        $login = rex::getUser() instanceof rex_user ? rex::getUser()->getLogin() : 'd2u_helper';
+        $sql = rex_sql::factory();
+        $sql->setTable($table);
+        $sql->setWhere(['id' => $sliceId]);
+        foreach ($writes as $col => $value) {
+            $sql->setValue($col, $value);
+        }
+        $sql->setRawValue('updatedate', 'NOW()');
+        $sql->setValue('updateuser', $login);
+        $sql->update();
+
+        rex_article_cache::delete((int) $target['article_id']);
+
+        return ['success' => true, 'message' => ''];
+    }
+
+    /**
+     * Build the batched AI payload and a rebuild plan from a slice's source row and
+     * the module's declared d2u_translate field specs. Plain fields become one batch
+     * entry; JSON/FAQ fields contribute one entry per translatable string so their
+     * structure and (base64) encoding survive. Shared by the in-editor button and the
+     * article translation so both treat markers identically.
+     *
+     * @param array<string, mixed> $source Source slice row
+     * @param array<int, array{handler: string, keys: list<string>}> $specs Marker specs keyed by value number
+     * @return array{0: array<string, array{value: string, html: bool}>, 1: list<array<string, mixed>>} [batch, plan]
+     */
+    private static function buildMarkerBatch(array $source, array $specs): array
+    {
         $batch = [];
         $plan = [];
         foreach ($specs as $number => $spec) {
@@ -772,17 +886,20 @@ class SliceTranslator
             }
         }
 
-        if (0 === count($batch)) {
-            return ['success' => true, 'message' => ''];
-        }
+        return [$batch, $plan];
+    }
 
-        try {
-            $translated = AiTranslationHelper::translateFields($batch, $sourceClang, $targetClang);
-        } catch (\Throwable $e) {
-            rex_logger::logException($e);
-            return ['success' => false, 'message' => rex_i18n::msg('d2u_helper_translations_ai_error')];
-        }
-
+    /**
+     * Rebuild the translated value columns from a plan (see buildMarkerBatch) and the
+     * model's translation map. JSON fields are reassembled (and re-encoded/base64) so
+     * only the declared keys change; plain fields take their single translated value.
+     *
+     * @param list<array<string, mixed>> $plan Rebuild plan
+     * @param array<string, string> $translated Translation map keyed by batch key
+     * @return array<string, string> Map of value column => translated value
+     */
+    private static function rebuildMarkerWrites(array $plan, array $translated): array
+    {
         $writes = [];
         foreach ($plan as $item) {
             if ('json' === $item['type']) {
@@ -802,24 +919,7 @@ class SliceTranslator
             }
         }
 
-        if (0 === count($writes)) {
-            return ['success' => true, 'message' => ''];
-        }
-
-        $login = rex::getUser() instanceof rex_user ? rex::getUser()->getLogin() : 'd2u_helper';
-        $sql = rex_sql::factory();
-        $sql->setTable($table);
-        $sql->setWhere(['id' => $sliceId]);
-        foreach ($writes as $col => $value) {
-            $sql->setValue($col, $value);
-        }
-        $sql->setRawValue('updatedate', 'NOW()');
-        $sql->setValue('updateuser', $login);
-        $sql->update();
-
-        rex_article_cache::delete((int) $target['article_id']);
-
-        return ['success' => true, 'message' => ''];
+        return $writes;
     }
 
     /**
