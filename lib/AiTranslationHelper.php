@@ -112,7 +112,15 @@ class AiTranslationHelper
         $anyFound = false;
         foreach ($toTranslate as $key => $field) {
             if (array_key_exists($key, $parsed)) {
-                $result[$key] = $parsed[$key];
+                $value = $parsed[$key];
+                // Plain-text fields must not carry HTML entities; a model occasionally
+                // returns e.g. &#039; for an apostrophe, which would be double-encoded by
+                // rex_escape() on output. Decode once for text fields; HTML fields keep
+                // their entities.
+                if (!(isset($field['html']) && true === $field['html'])) {
+                    $value = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                }
+                $result[$key] = $value;
                 $anyFound = true;
             } else {
                 // Section missing from the response: keep the source value as fallback.
@@ -128,6 +136,10 @@ class AiTranslationHelper
                 $onlyKey = (string) array_key_first($toTranslate);
                 $plain = self::stripResponseWrapping($response);
                 if ('' !== trim($plain)) {
+                    $onlyField = $toTranslate[$onlyKey];
+                    if (!(isset($onlyField['html']) && true === $onlyField['html'])) {
+                        $plain = html_entity_decode($plain, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    }
                     $result[$onlyKey] = $plain;
                     return $result;
                 }
