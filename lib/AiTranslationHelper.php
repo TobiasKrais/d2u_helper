@@ -62,13 +62,30 @@ class AiTranslationHelper
         $sourceLang = $sourceClang instanceof rex_clang ? $sourceClang->getName() : (string) $sourceClangId;
         $targetLang = $targetClang instanceof rex_clang ? $targetClang->getName() : (string) $targetClangId;
 
+        // Empty values need no translation — skip them. An empty ###section### can make
+        // the model drop the markers entirely (seen with title-only records whose teaser
+        // is empty), so they are never sent; their place in the result is kept as-is.
+        $result = [];
+        $toTranslate = [];
+        foreach ($fields as $key => $field) {
+            $value = (string) $field['value'];
+            if ('' === trim($value)) {
+                $result[$key] = $value;
+            } else {
+                $toTranslate[$key] = $field;
+            }
+        }
+        if (0 === count($toTranslate)) {
+            return $result;
+        }
+
         // Transport is a marker format (###key### on its own line, then the value),
         // deliberately NOT JSON: slice values are HTML containing double quotes and
         // newlines, which a model regularly fails to escape inside a JSON string,
         // producing an unparseable response. With markers the HTML passes through
         // verbatim and only the lightweight section markers have to survive.
         $parts = [];
-        foreach ($fields as $key => $field) {
+        foreach ($toTranslate as $key => $field) {
             $parts[] = '###' . $key . '###' . "\n" . (string) $field['value'];
         }
 
@@ -92,9 +109,8 @@ class AiTranslationHelper
 
         $parsed = self::parseMarkedSections($response);
 
-        $result = [];
         $anyFound = false;
-        foreach ($fields as $key => $field) {
+        foreach ($toTranslate as $key => $field) {
             if (array_key_exists($key, $parsed)) {
                 $result[$key] = $parsed[$key];
                 $anyFound = true;
@@ -105,15 +121,20 @@ class AiTranslationHelper
         }
 
         if (!$anyFound) {
-            // Single field: the model may have returned just the translated text with
-            // no marker at all. Use the whole (fence-stripped) response then.
-            if (1 === count($fields)) {
-                $onlyKey = (string) array_key_first($fields);
+            // Only one section to translate: the model may have returned just the
+            // translated text with no marker at all. Use the whole (fence-stripped)
+            // response then.
+            if (1 === count($toTranslate)) {
+                $onlyKey = (string) array_key_first($toTranslate);
                 $plain = self::stripResponseWrapping($response);
                 if ('' !== trim($plain)) {
-                    return [$onlyKey => $plain];
+                    $result[$onlyKey] = $plain;
+                    return $result;
                 }
             }
+            // Log the raw response (truncated) so an unparseable case can be diagnosed
+            // without re-running — the caller usually only surfaces a generic message.
+            \rex_logger::logError(E_WARNING, 'd2u_helper translation: unparseable AI response: ' . mb_substr(trim($response), 0, 1500), __FILE__, __LINE__);
             throw new rex_exception('AI translation returned an invalid response.');
         }
 
