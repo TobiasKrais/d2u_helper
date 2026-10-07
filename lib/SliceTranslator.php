@@ -20,11 +20,15 @@ use rex_user;
  * language, storing real, editable slices per clang. Plugs into the d2u_helper
  * translation helper as the "Redaxo Artikel" tab.
  *
- * Status detection and the source<->target correspondence are positional: a
- * target slice belongs to a source slice when they share article, ctype and
- * priority. "missing" means the target slice does not exist yet; "update" (stale)
- * means the source slice was changed after the target slice was last written
- * (compared via updatedate). No extra tracking table is used.
+ * The source<->target correspondence is built per ctype by an order-preserving
+ * match on module id (longest common subsequence), not by priority alone: a
+ * target slice belongs to a source slice when they are the same module at the
+ * same position in the matched sequence. This keeps inserting, removing or
+ * reordering source blocks from mapping a changed/new source slice onto an
+ * unrelated target slice (which overwrote it). "missing" means a source slice
+ * has no target counterpart; "update" (stale) means a matched source slice was
+ * changed after its target was last written (compared via updatedate). No
+ * tracking table is used; the alignment is recomputed each run.
  */
 class SliceTranslator
 {
@@ -49,22 +53,24 @@ class SliceTranslator
         }
 
         $table = rex::getTable('article_slice');
-        $rows = rex_sql::factory()->getArray(
-            'SELECT s.article_id AS article_id,
-                    COUNT(*) AS source_count,
-                    SUM(CASE WHEN t.id IS NULL THEN 1 ELSE 0 END) AS missing_count,
-                    SUM(CASE WHEN t.id IS NOT NULL AND s.updatedate > t.updatedate THEN 1 ELSE 0 END) AS stale_count,
-                    SUM(CASE WHEN t.id IS NOT NULL THEN 1 ELSE 0 END) AS target_count
-             FROM ' . $table . ' s
-             LEFT JOIN ' . $table . ' t
-               ON t.article_id = s.article_id
-              AND t.ctype_id = s.ctype_id
-              AND t.priority = s.priority
-              AND t.clang_id = :target
-              AND t.revision = 0
-             WHERE s.clang_id = :source AND s.revision = 0
-             GROUP BY s.article_id',
-            [':source' => $sourceClang, ':target' => $targetClang],
+
+        // Load the source and target slices of every article in these two languages
+        // once, then align each article in PHP (by module, order-preserving) to get
+        // the missing/stale/noContent counts — the same alignment the translation
+        // uses, so the badges match what a translate run will do. A pure priority
+        // join miscounts as soon as a source block is inserted or removed.
+        $srcAll = rex_sql::factory()->getArray(
+            'SELECT article_id, id, module_id, ctype_id, priority, updatedate FROM ' . $table
+                . ' WHERE clang_id = :c AND revision = 0 ORDER BY article_id, ctype_id, priority',
+            [':c' => $sourceClang],
+        );
+        if (0 === count($srcAll)) {
+            return [];
+        }
+        $tgtAll = rex_sql::factory()->getArray(
+            'SELECT article_id, id, module_id, ctype_id, priority, updatedate FROM ' . $table
+                . ' WHERE clang_id = :c AND revision = 0 ORDER BY article_id, ctype_id, priority',
+            [':c' => $targetClang],
         );
 
         // Source-language article ids whose slices reference a PDF file (media
@@ -93,13 +99,18 @@ class SliceTranslator
             }
         }
 
+        $srcByArticle = [];
+        foreach ($srcAll as $row) {
+            $srcByArticle[(int) $row['article_id']][] = $row;
+        }
+        $tgtByArticle = [];
+        foreach ($tgtAll as $row) {
+            $tgtByArticle[(int) $row['article_id']][] = $row;
+        }
+
         $status = [];
-        foreach ($rows as $row) {
-            $status[(int) $row['article_id']] = [
-                'missing' => (int) $row['missing_count'],
-                'stale' => (int) $row['stale_count'],
-                'noContent' => 0 === (int) $row['target_count'],
-            ];
+        foreach ($srcByArticle as $aid => $articleSrcSlices) {
+            $status[$aid] = self::countArticleStatus($articleSrcSlices, $tgtByArticle[$aid] ?? []);
         }
 
         if (0 === count($status)) {
@@ -252,31 +263,21 @@ class SliceTranslator
         }
 
         $table = rex::getTable('article_slice');
-        $rows = rex_sql::factory()->getArray(
-            'SELECT COUNT(*) AS source_count,
-                    SUM(CASE WHEN t.id IS NULL THEN 1 ELSE 0 END) AS missing_count,
-                    SUM(CASE WHEN t.id IS NOT NULL AND s.updatedate > t.updatedate THEN 1 ELSE 0 END) AS stale_count,
-                    SUM(CASE WHEN t.id IS NOT NULL THEN 1 ELSE 0 END) AS target_count
-             FROM ' . $table . ' s
-             LEFT JOIN ' . $table . ' t
-               ON t.article_id = s.article_id
-              AND t.ctype_id = s.ctype_id
-              AND t.priority = s.priority
-              AND t.clang_id = :target
-              AND t.revision = 0
-             WHERE s.article_id = :id AND s.clang_id = :source AND s.revision = 0',
-            [':id' => $articleId, ':source' => $sourceClang, ':target' => $targetClang],
+        $srcSlices = rex_sql::factory()->getArray(
+            'SELECT id, module_id, ctype_id, priority, updatedate FROM ' . $table
+                . ' WHERE article_id = :a AND clang_id = :c AND revision = 0 ORDER BY ctype_id, priority',
+            [':a' => $articleId, ':c' => $sourceClang],
         );
-
-        if (0 === count($rows) || 0 === (int) $rows[0]['source_count']) {
+        if (0 === count($srcSlices)) {
             return $default;
         }
+        $tgtSlices = rex_sql::factory()->getArray(
+            'SELECT id, module_id, ctype_id, priority, updatedate FROM ' . $table
+                . ' WHERE article_id = :a AND clang_id = :c AND revision = 0 ORDER BY ctype_id, priority',
+            [':a' => $articleId, ':c' => $targetClang],
+        );
 
-        return [
-            'noContent' => 0 === (int) $rows[0]['target_count'],
-            'missing' => (int) $rows[0]['missing_count'],
-            'stale' => (int) $rows[0]['stale_count'],
-        ];
+        return self::countArticleStatus($srcSlices, $tgtSlices);
     }
 
     /**
@@ -370,25 +371,83 @@ class SliceTranslator
             return ['success' => false, 'name' => $name, 'message' => rex_i18n::msg('d2u_helper_slice_translation_no_source')];
         }
 
-        // "Komplett kopieren und uebersetzen": Zielsprache komplett neu aufbauen —
-        // alle vorhandenen Ziel-Slices zuerst loeschen, danach jeden Quell-Slice frisch
-        // kopieren und uebersetzen. So bleiben keine Reste zurueck und es entstehen keine
-        // Prioritaets-Kollisionen aus einem frueheren Uebersetzungsstand.
+        // "Komplett kopieren und uebersetzen" (mode 'all'): rebuild the target
+        // language from scratch — delete every existing target slice first, then
+        // copy+translate each source slice fresh. No leftovers, no priority
+        // collisions, orphans of a previous translation gone.
         if ('all' === $mode) {
             rex_sql::factory()->setQuery(
                 'DELETE FROM ' . $table . ' WHERE article_id = :a AND clang_id = :c AND revision = 0',
                 [':a' => $articleId, ':c' => $targetClang],
             );
+            try {
+                foreach ($srcSlices as $src) {
+                    self::writeTargetSlice($src, $sourceClang, $targetClang, null, (int) $src['priority']);
+                }
+            } catch (\Throwable $e) {
+                rex_logger::logException($e);
+                return ['success' => false, 'name' => $name, 'message' => rex_i18n::msg('d2u_helper_translations_ai_error')];
+            }
+
+            rex_article_cache::delete($articleId);
+
+            return ['success' => true, 'name' => $name, 'message' => ''];
         }
 
+        // 'missing' / 'stale': align the target slice list to the source by module
+        // (order-preserving) so inserted, removed or reordered source blocks map to
+        // the correct target slice — or to "new" — instead of overwriting an
+        // unrelated target slice that merely shares a priority.
+        $tgtSlices = rex_sql::factory()->getArray(
+            'SELECT * FROM ' . $table . ' WHERE article_id = :a AND clang_id = :c AND revision = 0 ORDER BY ctype_id, priority',
+            [':a' => $articleId, ':c' => $targetClang],
+        );
+        $align = self::alignSlices($srcSlices, $tgtSlices);
+
         try {
-            foreach ($srcSlices as $src) {
-                self::translateSlice($src, $sourceClang, $targetClang, $mode);
+            foreach ($srcSlices as $i => $src) {
+                $targetRow = $align['pairs'][$i];
+                $priority = (int) $src['priority'];
+
+                if (null === $targetRow) {
+                    // A source slice without a target counterpart is new: create and
+                    // translate it. Both 'missing' and 'stale' add it so the target
+                    // keeps mirroring the source structure.
+                    self::writeTargetSlice($src, $sourceClang, $targetClang, null, $priority);
+                    continue;
+                }
+
+                if ('missing' === $mode) {
+                    // Already translated: keep its text, only realign its position.
+                    self::repositionTargetSlice((int) $targetRow['id'], (int) $src['ctype_id'], $priority);
+                    continue;
+                }
+
+                // 'stale': re-translate only when the source changed after the target
+                // was last written; otherwise keep the translation and realign.
+                $srcUpdated = (string) ($src['updatedate'] ?? '');
+                $tgtUpdated = (string) ($targetRow['updatedate'] ?? '');
+                if ('' !== $srcUpdated && $srcUpdated > $tgtUpdated) {
+                    self::writeTargetSlice($src, $sourceClang, $targetClang, $targetRow, $priority);
+                } else {
+                    self::repositionTargetSlice((int) $targetRow['id'], (int) $src['ctype_id'], $priority);
+                }
             }
         } catch (\Throwable $e) {
             rex_logger::logException($e);
             return ['success' => false, 'name' => $name, 'message' => rex_i18n::msg('d2u_helper_translations_ai_error')];
         }
+
+        // Orphan target slices (their source block was removed) are not deleted —
+        // only 'all' wipes the target. They are pushed below the mirrored source
+        // order so they never collide with a source priority and the editor can
+        // review and remove them.
+        foreach (array_values($align['orphans']) as $offset => $orphan) {
+            self::repositionTargetSlice((int) $orphan['id'], (int) $orphan['ctype_id'], 100000 + $offset);
+        }
+
+        // Renumber the target priorities gapless per ctype so the list stays ordered.
+        self::organizeTargetPriorities($articleId, $targetClang);
 
         rex_article_cache::delete($articleId);
 
@@ -396,50 +455,200 @@ class SliceTranslator
     }
 
     /**
-     * Rebuild the target slice from its source counterpart, translating the
-     * translatable value fields and copying everything else unchanged.
+     * Order-preserving correspondence between a source and a target slice list,
+     * matched per ctype by a longest common subsequence of their module ids. This
+     * replaces the old priority-only match so inserting, removing or reordering
+     * source blocks no longer maps a changed/new source slice onto an unrelated
+     * target slice.
      *
-     * @param array<string, mixed> $src Source slice row
+     * @param list<array<string, mixed>> $srcSlices Ordered by ctype_id, priority
+     * @param list<array<string, mixed>> $tgtSlices Ordered by ctype_id, priority
+     * @return array{pairs: array<int, array<string, mixed>|null>, orphans: list<array<string, mixed>>}
+     *   pairs: source index => matched target row (or null for a new slice);
+     *   orphans: target rows with no matching source slice.
      */
-    private static function translateSlice(array $src, int $sourceClang, int $targetClang, string $mode = 'all'): void
+    private static function alignSlices(array $srcSlices, array $tgtSlices): array
     {
-        $table = rex::getTable('article_slice');
-
-        // Media columns are fetched from the target too so a manually set target
-        // PDF (media/medialist referencing a .pdf) is preserved on update instead
-        // of being overwritten by the source — everything else is overwritten.
-        $mediaCols = [];
-        for ($i = 1; $i <= 10; ++$i) {
-            $mediaCols[] = 'media' . $i;
-            $mediaCols[] = 'medialist' . $i;
+        $pairs = [];
+        for ($i = 0, $c = count($srcSlices); $i < $c; ++$i) {
+            $pairs[$i] = null;
         }
-        $existing = rex_sql::factory()->getArray(
-            'SELECT id, updatedate, ' . implode(', ', $mediaCols) . ' FROM ' . $table . ' WHERE article_id = :a AND clang_id = :c AND ctype_id = :ct AND priority = :p AND revision = 0 LIMIT 1',
-            [
-                ':a' => (int) $src['article_id'],
-                ':c' => $targetClang,
-                ':ct' => (int) $src['ctype_id'],
-                ':p' => (int) $src['priority'],
-            ],
-        );
-        $hasTarget = count($existing) > 0;
+        $matchedTgt = [];
 
-        // Skip work (and the AI call) for slices the selected mode does not touch:
-        // 'missing' only creates new target slices; 'stale' only refreshes target
-        // slices whose source has changed since the last translation.
-        if ('missing' === $mode && $hasTarget) {
-            return;
+        $srcByCtype = [];
+        foreach ($srcSlices as $i => $s) {
+            $srcByCtype[(int) $s['ctype_id']][] = $i;
         }
-        if ('stale' === $mode) {
-            if (!$hasTarget) {
-                return;
+        $tgtByCtype = [];
+        foreach ($tgtSlices as $j => $t) {
+            $tgtByCtype[(int) $t['ctype_id']][] = $j;
+        }
+
+        foreach ($srcByCtype as $ctype => $srcIdx) {
+            $tgtIdx = $tgtByCtype[$ctype] ?? [];
+            $a = [];
+            foreach ($srcIdx as $i) {
+                $a[] = (int) $srcSlices[$i]['module_id'];
+            }
+            $b = [];
+            foreach ($tgtIdx as $j) {
+                $b[] = (int) $tgtSlices[$j]['module_id'];
+            }
+            foreach (self::lcsPairs($a, $b) as [$ai, $bi]) {
+                $srcSliceIndex = $srcIdx[$ai];
+                $tgtSliceIndex = $tgtIdx[$bi];
+                $pairs[$srcSliceIndex] = $tgtSlices[$tgtSliceIndex];
+                $matchedTgt[$tgtSliceIndex] = true;
+            }
+        }
+
+        $orphans = [];
+        foreach ($tgtSlices as $j => $t) {
+            if (!isset($matchedTgt[$j])) {
+                $orphans[] = $t;
+            }
+        }
+
+        return ['pairs' => $pairs, 'orphans' => $orphans];
+    }
+
+    /**
+     * Longest common subsequence of two integer sequences, returned as the list of
+     * matched index pairs [indexInA, indexInB] in order. Used to align module-id
+     * sequences of source and target slices.
+     *
+     * @param list<int> $a
+     * @param list<int> $b
+     * @return list<array{0: int, 1: int}>
+     */
+    private static function lcsPairs(array $a, array $b): array
+    {
+        $n = count($a);
+        $m = count($b);
+        if (0 === $n || 0 === $m) {
+            return [];
+        }
+
+        $dp = [];
+        for ($i = 0; $i <= $n; ++$i) {
+            $dp[$i] = array_fill(0, $m + 1, 0);
+        }
+        for ($i = $n - 1; $i >= 0; --$i) {
+            for ($j = $m - 1; $j >= 0; --$j) {
+                if ($a[$i] === $b[$j]) {
+                    $dp[$i][$j] = $dp[$i + 1][$j + 1] + 1;
+                } else {
+                    $dp[$i][$j] = max($dp[$i + 1][$j], $dp[$i][$j + 1]);
+                }
+            }
+        }
+
+        $pairs = [];
+        $i = 0;
+        $j = 0;
+        while ($i < $n && $j < $m) {
+            if ($a[$i] === $b[$j]) {
+                $pairs[] = [$i, $j];
+                ++$i;
+                ++$j;
+            } elseif ($dp[$i + 1][$j] >= $dp[$i][$j + 1]) {
+                ++$i;
+            } else {
+                ++$j;
+            }
+        }
+
+        return $pairs;
+    }
+
+    /**
+     * Missing/stale/noContent counts for one article from its already-loaded source
+     * and target slice lists, using the same module alignment as the translation so
+     * the badges match what a translate run will actually do.
+     *
+     * @param list<array<string, mixed>> $srcSlices
+     * @param list<array<string, mixed>> $tgtSlices
+     * @return array{noContent: bool, missing: int, stale: int}
+     */
+    private static function countArticleStatus(array $srcSlices, array $tgtSlices): array
+    {
+        $align = self::alignSlices($srcSlices, $tgtSlices);
+        $missing = 0;
+        $stale = 0;
+        foreach ($srcSlices as $i => $src) {
+            $targetRow = $align['pairs'][$i];
+            if (null === $targetRow) {
+                ++$missing;
+                continue;
             }
             $srcUpdated = (string) ($src['updatedate'] ?? '');
-            $tgtUpdated = (string) ($existing[0]['updatedate'] ?? '');
-            if ('' === $srcUpdated || $srcUpdated <= $tgtUpdated) {
-                return;
+            $tgtUpdated = (string) ($targetRow['updatedate'] ?? '');
+            if ('' !== $srcUpdated && $srcUpdated > $tgtUpdated) {
+                ++$stale;
             }
         }
+
+        return [
+            'noContent' => 0 === count($tgtSlices),
+            'missing' => $missing,
+            'stale' => $stale,
+        ];
+    }
+
+    /**
+     * Move a target slice to a new ctype/priority without touching its content or
+     * updatedate — used to realign an existing translation to the source order.
+     */
+    private static function repositionTargetSlice(int $sliceId, int $ctypeId, int $priority): void
+    {
+        $sql = rex_sql::factory();
+        $sql->setTable(rex::getTable('article_slice'));
+        $sql->setWhere(['id' => $sliceId]);
+        $sql->setValue('ctype_id', $ctypeId);
+        $sql->setValue('priority', $priority);
+        $sql->update();
+    }
+
+    /**
+     * Renumber a target language's slices of one article gapless per ctype,
+     * following the current priority order (which mirrors the source after an
+     * aligned translation, with orphans last).
+     */
+    private static function organizeTargetPriorities(int $articleId, int $targetClang): void
+    {
+        $table = rex::getTable('article_slice');
+        $rows = rex_sql::factory()->getArray(
+            'SELECT id, ctype_id FROM ' . $table
+                . ' WHERE article_id = :a AND clang_id = :c AND revision = 0 ORDER BY ctype_id, priority, id',
+            [':a' => $articleId, ':c' => $targetClang],
+        );
+
+        $counters = [];
+        foreach ($rows as $row) {
+            $ctype = (int) $row['ctype_id'];
+            $counters[$ctype] = ($counters[$ctype] ?? 0) + 1;
+            $sql = rex_sql::factory();
+            $sql->setTable($table);
+            $sql->setWhere(['id' => (int) $row['id']]);
+            $sql->setValue('priority', $counters[$ctype]);
+            $sql->update();
+        }
+    }
+
+    /**
+     * Create or overwrite one target slice from its source counterpart: translate
+     * the declared/translatable value fields, copy everything else, remap media
+     * references to the target language and preserve a manually set target PDF. The
+     * target slice to overwrite (or null to insert a new one) and the priority to
+     * store are decided by the caller's alignment — not by a priority lookup.
+     *
+     * @param array<string, mixed>      $src       Source slice row (SELECT *)
+     * @param array<string, mixed>|null $targetRow Existing target slice row to overwrite, or null to insert
+     */
+    private static function writeTargetSlice(array $src, int $sourceClang, int $targetClang, ?array $targetRow, int $priority): void
+    {
+        $table = rex::getTable('article_slice');
+        $hasTarget = null !== $targetRow;
 
         // Prefer the module's d2u_translate marker so only the declared text fields are
         // translated and configuration values (toggles, positions, colours like
@@ -488,12 +697,12 @@ class SliceTranslator
         $sql = rex_sql::factory();
         $sql->setTable($table);
 
-        // Copy all columns from the source except identity and audit fields.
-        // Translatable value columns are overwritten with their translation, and
-        // media references are remapped to the target language where a target-
-        // language file exists (see remapMediaFilename, language-suffix convention).
+        // Copy all columns from the source except identity, audit and priority (the
+        // priority is set explicitly from the alignment). Translatable value columns
+        // are overwritten with their translation, and media references are remapped to
+        // the target language where a target-language file exists.
         foreach ($src as $col => $value) {
-            if (in_array($col, ['id', 'clang_id', 'createdate', 'createuser', 'updatedate', 'updateuser'], true)) {
+            if (in_array($col, ['id', 'clang_id', 'createdate', 'createuser', 'updatedate', 'updateuser', 'priority'], true)) {
                 continue;
             }
             $value = (string) $value;
@@ -502,14 +711,14 @@ class SliceTranslator
             }
             if (1 === preg_match('/^media\d+$/', $col)) {
                 // Preserve a manually set target PDF; otherwise remap the source.
-                if ($hasTarget && false !== stripos((string) ($existing[0][$col] ?? ''), '.pdf')) {
-                    $value = (string) $existing[0][$col];
+                if ($hasTarget && false !== stripos((string) ($targetRow[$col] ?? ''), '.pdf')) {
+                    $value = (string) $targetRow[$col];
                 } elseif ('' !== trim($value)) {
                     $value = self::remapMediaFilename(trim($value), $sourceClang, $targetClang);
                 }
             } elseif (1 === preg_match('/^medialist\d+$/', $col)) {
-                if ($hasTarget && false !== stripos((string) ($existing[0][$col] ?? ''), '.pdf')) {
-                    $value = (string) $existing[0][$col];
+                if ($hasTarget && false !== stripos((string) ($targetRow[$col] ?? ''), '.pdf')) {
+                    $value = (string) $targetRow[$col];
                 } else {
                     $value = self::remapMediaList($value, $sourceClang, $targetClang);
                 }
@@ -520,11 +729,12 @@ class SliceTranslator
         }
 
         $sql->setValue('clang_id', $targetClang);
+        $sql->setValue('priority', $priority);
         $sql->setRawValue('updatedate', 'NOW()');
         $sql->setValue('updateuser', $login);
 
-        if (count($existing) > 0) {
-            $sql->setWhere(['id' => (int) $existing[0]['id']]);
+        if ($hasTarget) {
+            $sql->setWhere(['id' => (int) $targetRow['id']]);
             $sql->update();
         } else {
             $sql->setRawValue('createdate', 'NOW()');
