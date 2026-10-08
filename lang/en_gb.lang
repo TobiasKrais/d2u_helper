@@ -244,6 +244,7 @@ d2u_helper_translations_ai_translate_missing = Translate only missing with AI
 d2u_helper_translations_ai_translate_update = Translate only to-update with AI
 d2u_helper_translations_ai_translating = Translating ...
 d2u_helper_translations_ai_error = Translation failed: the AI response was invalid or incomplete. Please try again – if it keeps happening, choose a different or more capable AI profile.
+d2u_helper_translations_no_source = No source text in the source language – nothing to translate.
 d2u_helper_translations_ai_not_configured = AI translation is not available. Please install the ai_platform addon and configure a default text profile.
 d2u_helper_translations_ai_no_permission = No permission for the translation helper.
 d2u_helper_translations_ai_invalid_request = Invalid translation request.

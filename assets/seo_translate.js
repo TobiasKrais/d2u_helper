@@ -74,12 +74,45 @@
             credentials: 'same-origin',
             body: body.toString()
         }).then(function (response) {
-            return response.json().catch(function () {
-                return { success: false, message: config.msgError };
+            return response.text().then(function (text) {
+                var data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    data = { success: false, message: config.msgError, debug: 'Non-JSON response (HTTP ' + response.status + '): ' + text.slice(0, 2000) };
+                }
+                data._httpStatus = response.status;
+                data._raw = text.slice(0, 4000);
+                logDebug(articleId, action, data);
+                return data;
             });
-        }).catch(function () {
-            return { success: false, message: config.msgError };
+        }).catch(function (err) {
+            var data = { success: false, message: config.msgError, debug: 'Fetch failed: ' + (err && err.message ? err.message : String(err)) };
+            logDebug(articleId, action, data);
+            return data;
         });
+    }
+
+    // Detailed console output so a failing translation can be traced to its cause
+    // (the backend puts the real exception/raw AI response into data.debug).
+    function logDebug(articleId, action, data) {
+        var failed = !(data && data.success);
+        var label = 'd2u_helper SEO ' + action + ' #' + articleId + (failed ? ' \u2717 FAILED' : ' \u2713 ok');
+        /* eslint-disable no-console */
+        if (console && console.groupCollapsed) {
+            (failed ? console.group : console.groupCollapsed).call(console, label);
+            console.log('endpoint:', config.url);
+            console.log('article_id:', articleId, 'action:', action, 'target_clang:', config.targetClang);
+            console.log('http status:', data && data._httpStatus);
+            console.log('success:', data && data.success);
+            console.log('message:', data && data.message);
+            if (data && data.debug) { console.error('debug:', data.debug); }
+            if (data && data._raw) { console.log('raw response:', data._raw); }
+            console.groupEnd();
+        } else if (console && console.log) {
+            console.log(label, data);
+        }
+        /* eslint-enable no-console */
     }
 
     function handleSingle(button) {
@@ -106,7 +139,11 @@
                 updateRow(id, data);
                 setFeedback('<i class="rex-icon fa-check text-success"></i> ' + (data.name ? data.name : ''), 'success');
             } else {
-                setFeedback('<i class="rex-icon fa-exclamation-triangle text-danger"></i> ' + ((data && data.message) ? data.message : config.msgError), 'danger');
+                var errMsg = (data && data.message) ? data.message : config.msgError;
+                if (data && data.debug) {
+                    errMsg += ' <small class="text-muted d2u-seo-debug">' + String(data.debug).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }) + '</small>';
+                }
+                setFeedback('<i class="rex-icon fa-exclamation-triangle text-danger"></i> ' + errMsg, 'danger');
             }
         });
     }

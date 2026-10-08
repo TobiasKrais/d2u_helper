@@ -245,6 +245,7 @@ d2u_helper_translations_ai_translate_missing = Nur fehlende mit KI übersetzen
 d2u_helper_translations_ai_translate_update = Nur zu aktualisierende mit KI übersetzen
 d2u_helper_translations_ai_translating = Übersetze ...
 d2u_helper_translations_ai_error = Übersetzung fehlgeschlagen: Die KI-Antwort war ungültig oder unvollständig. Bitte erneut versuchen – tritt der Fehler weiter auf, ein anderes bzw. leistungsfähigeres KI-Profil wählen.
+d2u_helper_translations_no_source = Kein Quelltext in der Ausgangssprache vorhanden – nichts zu übersetzen.
 d2u_helper_translations_ai_not_configured = KI-Übersetzung ist nicht verfügbar. Bitte das Addon ai_platform installieren und ein Standard-Textprofil konfigurieren.
 d2u_helper_translations_ai_no_permission = Keine Berechtigung für die Übersetzungshilfe.
 d2u_helper_translations_ai_invalid_request = Ungültige Übersetzungsanfrage.

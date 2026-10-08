@@ -352,7 +352,8 @@ class SeoTranslator
         try {
             $translated = AiTranslationHelper::translateFields($payload, $sourceClang, $targetClang);
         } catch (\Throwable $e) {
-            return ['success' => false, 'name' => $name, 'message' => rex_i18n::msg('d2u_helper_translations_ai_error')];
+            \rex_logger::logException($e);
+            return ['success' => false, 'name' => $name, 'message' => rex_i18n::msg('d2u_helper_translations_ai_error'), 'debug' => get_class($e) . ': ' . $e->getMessage()];
         }
 
         foreach ($translated as $key => $value) {

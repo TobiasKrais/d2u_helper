@@ -147,7 +147,7 @@ class AiTranslationHelper
             // Log the raw response (truncated) so an unparseable case can be diagnosed
             // without re-running — the caller usually only surfaces a generic message.
             \rex_logger::logError(E_WARNING, 'd2u_helper translation: unparseable AI response: ' . mb_substr(trim($response), 0, 1500), __FILE__, __LINE__);
-            throw new rex_exception('AI translation returned an invalid response.');
+            throw new rex_exception('AI translation returned an invalid response. Raw: ' . mb_substr(trim($response), 0, 500));
         }
 
         return $result;

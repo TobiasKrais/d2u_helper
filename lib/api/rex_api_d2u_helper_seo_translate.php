@@ -73,6 +73,7 @@ class rex_api_d2u_helper_seo_translate extends rex_api_function
             'success' => (bool) ($result['success'] ?? false),
             'name' => (string) ($result['name'] ?? ''),
             'message' => (string) ($result['message'] ?? ''),
+            'debug' => (string) ($result['debug'] ?? ''),
             'cells' => $cells,
         ], ($result['success'] ?? false) ? 200 : 400);
 

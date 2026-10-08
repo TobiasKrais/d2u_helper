@@ -65,8 +65,17 @@
                 body: body.toString()
             })
                 .then(function (response) {
-                    return response.json().catch(function () {
-                        return { success: false, message: config.msgError };
+                    return response.text().then(function (text) {
+                        var data;
+                        try {
+                            data = JSON.parse(text);
+                        } catch (e) {
+                            data = { success: false, message: config.msgError, debug: 'Non-JSON response (HTTP ' + response.status + '): ' + text.slice(0, 2000) };
+                        }
+                        data._httpStatus = response.status;
+                        data._raw = text.slice(0, 4000);
+                        logDebug(addon, type, id, data);
+                        return data;
                     });
                 })
                 .then(function (data) {
@@ -84,15 +93,39 @@
                         resolve(true);
                     } else {
                         var message = (data && data.message) ? data.message : config.msgError;
+                        if (data && data.debug) {
+                            message += ' <small class="text-muted d2u-translate-debug">' + String(data.debug).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }) + '</small>';
+                        }
                         setStatus(item, '<i class="rex-icon fa-exclamation-triangle text-danger"></i> ' + message, 'text-danger');
                         resolve(false);
                     }
                 })
-                .catch(function () {
+                .catch(function (err) {
+                    logDebug(addon, type, id, { success: false, debug: 'Fetch failed: ' + (err && err.message ? err.message : String(err)) });
                     setStatus(item, '<i class="rex-icon fa-exclamation-triangle text-danger"></i> ' + config.msgError, 'text-danger');
                     resolve(false);
                 });
         });
+    }
+
+    // Detailed console output so a failing translation can be traced to its cause
+    // (the handling addon puts the real exception into data.debug).
+    function logDebug(addon, type, id, data) {
+        var failed = !(data && data.success);
+        var label = 'd2u_helper translate ' + addon + '/' + type + ' #' + id + (failed ? ' \u2717 FAILED' : ' \u2713 ok');
+        /* eslint-disable no-console */
+        if (console && console.groupCollapsed) {
+            (failed ? console.group : console.groupCollapsed).call(console, label);
+            console.log('http status:', data && data._httpStatus);
+            console.log('success:', data && data.success);
+            console.log('message:', data && data.message);
+            if (data && data.debug) { console.error('debug:', data.debug); }
+            if (data && data._raw) { console.log('raw response:', data._raw); }
+            console.groupEnd();
+        } else if (console && console.log) {
+            console.log(label, data);
+        }
+        /* eslint-enable no-console */
     }
 
     function translateAllSequential(items, config, button) {
