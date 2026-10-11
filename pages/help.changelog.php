@@ -17,6 +17,10 @@
 	</div>
 	<header class="panel-heading"><div class="panel-title">D2U Helper Changelog</div></header>
 	<div class="panel-body">
+		<p>2.3.1-DEV</p>
+		<ul>
+			<li>...</li>
+		</ul>
 		<p>2.3.0</p>
 		<ul>
 			<li>Neu: Übersetzungshilfe komplett überarbeitet mit drei Tabs: <strong>„Redaxo Artikel Inhalte"</strong> (Artikel-Slices als Baum-Tabelle mit Status je Artikel; Einzel- und Sammelübersetzung per KI/AJAX ohne Neuladen; einzelne Slices direkt im Content-Editor übersetzbar), <strong>„Kategorien &amp; SEO"</strong> (Seitentitel sowie – bei installiertem <code>yrewrite</code> – SEO-Titel/-Beschreibung/-Bild und den Online-Status je Sprache übersetzen bzw. angleichen, per AJAX) und <strong>„D2U Addons"</strong> (fehlende/zu aktualisierende Addon-Objekte). KI-Übersetzung über das Addon <code>ai_platform</code>. Medien-Referenzen werden beim Übersetzen automatisch auf die Zielsprache umgebogen (Sprach-Suffix, z.&nbsp;B. <code>flyer_en.pdf</code> → <code>flyer_de.pdf</code>); ein im Ziel gesetztes PDF bleibt beim Aktualisieren erhalten. Seiten mit PDF-Medien werden markiert (Sprunglink zum PDF-Slice) und beim Sammel-Übersetzen standardmäßig übersprungen. Baum-Darstellung mit Ordner-/Artikel-Symbolen und ebenengleicher Einrückung.</li>
@@ -27,6 +31,7 @@
 			<li>Bugfix Breadcrumbs: Ein Addon-Breadcrumb (Extension Point <code>D2U_HELPER_BREADCRUMBS</code>, z.&nbsp;B. aus d2u_references) wird nicht mehr doppelt angezeigt, wenn das <code>url</code>-Addon den aktuellen Artikel bereits auf den Detail-Datensatz umbenannt hat. <code>getBreadcrumbs()</code> überspringt jetzt ein Addon-Breadcrumb, dessen Link-Ziel identisch zum vorherigen Eintrag ist.</li>
 			<li>Bugfix Backend-Bildlisten-Feld (<code>BackendHelper::form_imagelistfield()</code>): SVG-Dateien wurden nach dem Speichern als defektes Bild angezeigt, weil die Vorschau über den Media-Manager-Effekt <code>rex_medialistbutton_preview</code> lief, der SVG nicht rastern kann. Für SVG wird jetzt die Originaldatei als Vorschau ausgegeben; sie skaliert nativ über CSS auf die Thumbnail-Größe.</li>
 			<li>Bugfix Zahlen-Eingabefeld (<code>BackendHelper::form_input()</code> mit <code>type="number"</code>, z. B. das Prioritätsfeld): Bei jeder Änderung wurde ein <code>onChange</code> ausgelöst, das ein nur für Farbfelder existierendes <code>text-</code>-Eingabefeld ansprach. Ergebnis war ein <code>TypeError: document.getElementById(...) is null</code>. Das <code>onChange</code> wird jetzt ausschließlich für Farbfelder gesetzt.</li>
+		</ul>
 		<p>2.2.7</p>
 		<ul>
 			<li>Wartung: Interne CI-Dateien im Verzeichnis <code>.github</code> (GitHub Actions, Dependabot) werden nicht mehr mit dem Installer-Paket ausgeliefert.</li>
