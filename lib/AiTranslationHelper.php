@@ -98,6 +98,20 @@ class AiTranslationHelper
             . 'Preserve any HTML tags, attributes and entities exactly and translate only the '
             . 'human readable text between the tags. Keep placeholders such as %s, %d or {name} unchanged.';
 
+        // Append the default text profile's own system prompt (project context / glossary) so
+        // domain-specific terminology is honoured, e.g. translating "Coping" as "Ausklinken" in a
+        // steel-processing context. Passing our own system prompt to generateText() would otherwise
+        // make ai_platform ignore the profile prompt entirely, so it is merged in here.
+        try {
+            $profile = \FriendsOfRedaxo\AiPlatform\Service::getInstance()->getDefaultProfile('text');
+            $profileSystemPrompt = trim((string) ($profile['system_prompt'] ?? ''));
+            if ('' !== $profileSystemPrompt) {
+                $system .= "\n\nAdditional project context and terminology (follow strictly):\n" . $profileSystemPrompt;
+            }
+        } catch (\Throwable $e) {
+            // No usable profile prompt available; translate without the extra context.
+        }
+
         $prompt = implode("\n", $parts);
 
         try {

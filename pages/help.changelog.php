@@ -19,6 +19,7 @@
 	<div class="panel-body">
 		<p>2.3.1-DEV</p>
 		<ul>
+			<li>Neu: Die KI-Übersetzungshilfe hängt den System-Prompt des Standard-Textprofils (ai_platform) an ihren eigenen Übersetzungs-Prompt an. So lassen sich projektspezifischer Kontext und Fachterminologie (Glossar) direkt im Profil pflegen, z. B. „Coping → Ausklinken" im Stahlbearbeitungs-Kontext. Ist kein Profil-Prompt gesetzt, bleibt das Verhalten unverändert.</li>
 			<li>...</li>
 		</ul>
 		<p>2.3.0</p>
