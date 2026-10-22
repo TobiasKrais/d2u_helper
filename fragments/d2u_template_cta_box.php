@@ -60,10 +60,10 @@ if ($show_cta_box) {
 		<?php
             echo '<li><span class="cta_box_toggler fa-icon fa-right footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_consent_manager_text_toggle_details') .'"></span><span class="cta_box_content">'. \Sprog\Wildcard::get('d2u_helper_template_cta_box') .'</span></li>';
             if ('' !== (string) $d2u_helper->getConfig('footer_text_phone', '')) {
-                echo '<li><span class="cta_box_toggler fa-icon fa-phone footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_module_form_phone').'"></span><span class="cta_box_content"><a href="tel:'. rex_escape((string) $d2u_helper->getConfig('footer_text_phone'), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_phone')) .'</a></span></li>';
+                echo '<li><span class="cta_box_toggler fa-icon fa-phone footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_module_form_phone').'"></span><span class="cta_box_content"><a href="tel:'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::telNumber((string) $d2u_helper->getConfig('footer_text_phone')), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_phone')) .'</a></span></li>';
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_text_mobile', '')) {
-                echo '<li><span class="cta_box_toggler fa-icon fa-mobile-alt footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_module_form_phone').'"></span><span class="cta_box_content"><a href="tel:'. rex_escape((string) $d2u_helper->getConfig('footer_text_mobile'), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_mobile')) .'</a></span></li>';
+                echo '<li><span class="cta_box_toggler fa-icon fa-mobile-alt footer-icon" title="'. Sprog\Wildcard::get('d2u_helper_module_form_phone').'"></span><span class="cta_box_content"><a href="tel:'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::telNumber((string) $d2u_helper->getConfig('footer_text_mobile')), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_mobile')) .'</a></span></li>';
             }
             if ('' !== (string) $d2u_helper->getConfig('footer_text_fax', '')) {
                 echo '<li><span class="cta_box_toggler fa-icon fa-fax footer-icon"></span><span class="cta_box_content">'. rex_escape((string) $d2u_helper->getConfig('footer_text_fax')) .'</span></li>';

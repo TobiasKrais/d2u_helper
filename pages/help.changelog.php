@@ -20,7 +20,8 @@
 		<p>2.3.1-DEV</p>
 		<ul>
 			<li>Neu: Die KI-Übersetzungshilfe hängt den System-Prompt des Standard-Textprofils (ai_platform) an ihren eigenen Übersetzungs-Prompt an. So lassen sich projektspezifischer Kontext und Fachterminologie (Glossar) direkt im Profil pflegen, z. B. „Coping → Ausklinken" im Stahlbearbeitungs-Kontext. Ist kein Profil-Prompt gesetzt, bleibt das Verhalten unverändert.</li>
-			<li>...</li>
+			<li>Bugfix Footer-/CTA-Fragmente: <code>tel:</code>-Links der Telefon- und Mobilnummern enthielten den rohen Einstellungswert inkl. Leerzeichen, Klammern und Schrägstrichen und waren damit teils nicht wählbar. Neue Methode <code>FrontendHelper::telNumber()</code> entfernt für das <code>href</code> alles außer Ziffern und einem führenden <code>+</code> (angezeigte Nummer bleibt unverändert formatiert). Betrifft alle sechs Footer-Fragmente (BS5 und Legacy) sowie die CTA-Box.</li>
+			<li>Bugfix niederländische Sprachdatei: <code>d2u_helper_article_action_all</code> enthielt die literale Escape-Sequenz <code>\u00eb</code> statt des Zeichens „ë" („Alles kopiëren en vertalen").</li>
 		</ul>
 		<p>2.3.0</p>
 		<ul>

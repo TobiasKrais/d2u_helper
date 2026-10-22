@@ -42,10 +42,10 @@
             echo '<div class="footer-address">';
                 echo '<div class="footer-title">'. \Sprog\Wildcard::get('d2u_helper_module_14_search_template_contact') .'</div>';
                 if ('' !== (string) $d2u_helper->getConfig('footer_text_phone', '')) {
-                    echo '<span class="fa-icon fa-phone footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span><a href="tel:'. rex_escape((string) $d2u_helper->getConfig('footer_text_phone'), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_phone')) .'</a><br>';
+                    echo '<span class="fa-icon fa-phone footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span><a href="tel:'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::telNumber((string) $d2u_helper->getConfig('footer_text_phone')), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_phone')) .'</a><br>';
                 }
                 if ('' !== (string) $d2u_helper->getConfig('footer_text_mobile', '')) {
-                    echo '<span class="fa-icon fa-mobile-alt footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span><a href="tel:'. rex_escape((string) $d2u_helper->getConfig('footer_text_mobile'), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_mobile')) .'</a><br>';
+                    echo '<span class="fa-icon fa-mobile-alt footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span><a href="tel:'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::telNumber((string) $d2u_helper->getConfig('footer_text_mobile')), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_mobile')) .'</a><br>';
                 }
                 if ('' !== (string) $d2u_helper->getConfig('footer_text_fax', '')) {
                     echo '<span class="fa-icon fa-fax footer-icon"></span>'. rex_escape((string) $d2u_helper->getConfig('footer_text_fax')) .'<br>';

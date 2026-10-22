@@ -36,6 +36,22 @@ class FrontendHelper
     private static string $url_namespace = '';
 
     /**
+     * Sanitizes a phone number for a tel: link: keeps digits and a single
+     * leading plus, strips spaces, slashes, parentheses, dashes and other
+     * characters so the resulting tel: href is dialable.
+     * @api
+     * @param string $phone raw phone number as entered in the settings
+     * @return string sanitized number, e.g. "+49721123456"
+     */
+    public static function telNumber(string $phone): string
+    {
+        $cleaned = preg_replace('/[^0-9+]/', '', $phone) ?? '';
+        $hasPlus = str_starts_with($cleaned, '+');
+
+        return ($hasPlus ? '+' : '') . str_replace('+', '', $cleaned);
+    }
+
+    /**
      * Generate CSS custom properties (:root block) from addon settings.
      * @return string CSS :root block with custom properties
      */

@@ -24,10 +24,10 @@
         echo '<div class="col-12">';
         echo '<ul id="footer-contact" class="list-unstyled d-md-flex justify-content-center gap-3 text-center mb-2">';
         if ('' !== (string) $d2u_helper->getConfig('footer_text_phone', '')) {
-            echo '<li><span class="fa-icon fa-phone footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span> <a href="tel:'. rex_escape((string) $d2u_helper->getConfig('footer_text_phone'), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_phone')) .'</a></li>';
+            echo '<li><span class="fa-icon fa-phone footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span> <a href="tel:'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::telNumber((string) $d2u_helper->getConfig('footer_text_phone')), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_phone')) .'</a></li>';
         }
         if ('' !== (string) $d2u_helper->getConfig('footer_text_mobile', '')) {
-            echo '<li><span class="fa-icon fa-mobile-screen-button footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span> <a href="tel:'. rex_escape((string) $d2u_helper->getConfig('footer_text_mobile'), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_mobile')) .'</a></li>';
+            echo '<li><span class="fa-icon fa-mobile-screen-button footer-icon" title="'. \Sprog\Wildcard::get('d2u_helper_module_form_phone') .'"></span> <a href="tel:'. rex_escape(\TobiasKrais\D2UHelper\FrontendHelper::telNumber((string) $d2u_helper->getConfig('footer_text_mobile')), 'html_attr') .'">'. rex_escape((string) $d2u_helper->getConfig('footer_text_mobile')) .'</a></li>';
         }
         if ('' !== (string) $d2u_helper->getConfig('footer_text_fax', '')) {
             echo '<li><span class="fa-icon fa-fax footer-icon"></span> '. rex_escape((string) $d2u_helper->getConfig('footer_text_fax')) .'</li>';
