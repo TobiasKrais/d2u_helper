@@ -327,6 +327,9 @@ class ModuleManager
         $modules[] = new Module('17-1',
             'Google Places Bewertungen (BS5)',
             3);
+        $modules[] = new Module('18-1',
+            'Strukturierte Daten (schema.org JSON-LD)',
+            1);
         // 20-x reserved for D2U Addresss
         // 21-x reserved for D2U History
         // 22-x reserved for D2U Staff
