@@ -91,13 +91,15 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
             if ('article' === $hit['type']) {
                 // article hits
                 $article_hit = rex_article::get($hit['fid']);
-                // Check article permission if YCom is used
-                if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($article_hit)) {
+                // Check article exists and permission if YCom is used
+                if ($article_hit && (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($article_hit))) {
                     // get yrewrite article domain
                     $hit_server = $server;
                     if (rex_addon::get('yrewrite')->isAvailable()) {
                         $hit_domain = rex_yrewrite::getDomainByArticleId($hit['fid'], $hit['clang']);
-                        $hit_server = rtrim($hit_domain->getUrl(), '/');
+                        if ($hit_domain) {
+                            $hit_server = rtrim($hit_domain->getUrl(), '/');
+                        }
                     }
 
                     $hit_link = !str_contains($article_hit->getUrl(), $hit_server) ? $hit_server . $article_hit->getUrl(['search_highlighter' => $request]) : $article_hit->getUrl(['search_highlighter' => $request]);
@@ -118,8 +120,8 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                 // Check in case URL IDs changed
                 if ($url_sql->getRows() > 0) {
                     $article_hit = rex_article::get((int) $url_sql->getValue('article_id'));
-                    // Check article permission if YCom is used
-                    if (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($article_hit)) {
+                    // Check article exists and permission if YCom is used
+                    if ($article_hit && (false === rex_addon::get('ycom')->isAvailable() || rex_ycom_auth::articleIsPermitted($article_hit))) {
                         $url_info = json_decode((string) $url_sql->getValue('seo'), true);
                         $url_profile = \Url\Profile::get((int) $url_sql->getValue('profile_id'));
 
@@ -127,7 +129,9 @@ if (((rex_addon::get('yform_spam_protection')->isAvailable() && 0 === count($yfo
                         $hit_server = $server;
                         if (rex_addon::get('yrewrite')->isAvailable()) {
                             $hit_domain = rex_yrewrite::getDomainByArticleId($url_sql->getValue('article_id'), $url_sql->getValue('clang_id'));
-                            $hit_server = rtrim($hit_domain->getUrl(), '/');
+                            if ($hit_domain) {
+                                $hit_server = rtrim($hit_domain->getUrl(), '/');
+                            }
                         }
 
                         $hit_link_unproved = rex_getUrl((int) $url_sql->getValue('article_id'), (int) $url_sql->getValue('clang_id'), [$url_profile->getNamespace() => $url_sql->getValue('data_id'), 'search_highlighter' => $request]);
