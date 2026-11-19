@@ -311,7 +311,7 @@ class ModuleManager
             7);
         $modules[] = new Module('14-1',
             'Search It Suchmodul',
-            8);
+            9);
         $modules[] = new Module('15-1',
             'Kategorie mit Liste der Unterkategorien (BS4, deprecated)',
             4);
